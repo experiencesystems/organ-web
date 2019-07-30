@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Meu Aplicativo ASP.NET</title>
@@ -9,21 +9,19 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <!--https://stackoverflow.com/questions/48550955/mvc-bootstrap-navbar-not-working-after-running-nuget-updates-->
+    <div class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                @Html.ActionLink("Nome do aplicativo", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Nome do aplicativo", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })}
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Início", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Sobre", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contato", "Contact", "Home")</li>
+            <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                <ul class="nav navbar-nav mr-auto">
+                    <li class="nav-item">@Html.ActionLink("Início", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Semente", "Index", "Semente", new { area = "Sistema" }, new { @class = "nav-link" })</li>
                 </ul>
             </div>
         </div>
