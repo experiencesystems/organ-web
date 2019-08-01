@@ -11,10 +11,10 @@ namespace OrganWeb.Areas.Sistema.Models.Semente
     public class Semente
     {
         [Key]
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         [Required(ErrorMessage = "O nome é obrigatório.")]
-        public String Nome { get; set; }
+        public String NOME { get; set; }
 
         /*
         [Display(Name = "Tipo de solo")]
@@ -31,7 +31,7 @@ namespace OrganWeb.Areas.Sistema.Models.Semente
         */
 
         [Display(Name = "Descrição")]
-        public String Descricao { get; set; }
+        public String DESCRICAO { get; set; }
 
         //public int CategoriaId { get; set; }
         //public virtual Categoria Categoria { get; set; }

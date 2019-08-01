@@ -3,35 +3,36 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using OrganWeb.Models;
 
 namespace OrganWeb.Areas.Sistema.Models.Semente
 {
     public class SementeRepository : ISementeRepository
     {
-        private dborganwebEntities _context;
+        private BancoContext _context;
 
-        public SementeRepository(dborganwebEntities sementeContext)
+        public SementeRepository(BancoContext sementeContext)
         {
             this._context = sementeContext;
         }
 
         public void DeleteSemente(int sementeID)
         {
-            tbsemente semente = _context.Sementes.Find(sementeID);
+            Semente semente = _context.Sementes.Find(sementeID);
             _context.Sementes.Remove(semente);
         }
 
-        public tbsemente GetSementeByID(int sementeId)
+        public Semente GetSementeByID(int sementeId)
         {
             return _context.Sementes.Find(sementeId);
         }
 
-        public IEnumerable<tbsemente> GetSementes()
+        public IEnumerable<Semente> GetSementes()
         {
             return _context.Sementes.ToList();
         }
 
-        public void InsertSemente(tbsemente semente)
+        public void InsertSemente(Semente semente)
         {
             _context.Sementes.Add(semente);
         }
@@ -41,7 +42,7 @@ namespace OrganWeb.Areas.Sistema.Models.Semente
             _context.SaveChanges();
         }
 
-        public void UpdateSemente(tbsemente semente)
+        public void UpdateSemente(Semente semente)
         {
             _context.Entry(semente).State = EntityState.Modified;
         }

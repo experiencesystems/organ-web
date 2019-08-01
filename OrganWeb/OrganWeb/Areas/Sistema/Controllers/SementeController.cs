@@ -6,13 +6,14 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using OrganWeb;
+using OrganWeb.Models;
+using OrganWeb.Areas.Sistema.Models.Semente;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
     public class SementeController : Controller
     {
-        private dborganwebEntities db = new dborganwebEntities();
+        private BancoContext db = new BancoContext();
 
         // GET: Sistema/Semente
         public ActionResult Index()
@@ -27,12 +28,12 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbsemente tbsemente = db.Sementes.Find(id);
-            if (tbsemente == null)
+            Semente semente = db.Sementes.Find(id);
+            if (semente == null)
             {
                 return HttpNotFound();
             }
-            return View(tbsemente);
+            return View(semente);
         }
 
         // GET: Sistema/Semente/Create
@@ -46,16 +47,16 @@ namespace OrganWeb.Areas.Sistema.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,NOME,DESCRICAO")] tbsemente tbsemente)
+        public ActionResult Create([Bind(Include = "ID,NOME,DESCRICAO")] Semente semente)
         {
             if (ModelState.IsValid)
             {
-                db.Sementes.Add(tbsemente);
+                db.Sementes.Add(semente);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(tbsemente);
+            return View(semente);
         }
 
         // GET: Sistema/Semente/Edit/5
@@ -65,12 +66,12 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbsemente tbsemente = db.Sementes.Find(id);
-            if (tbsemente == null)
+            Semente semente = db.Sementes.Find(id);
+            if (semente == null)
             {
                 return HttpNotFound();
             }
-            return View(tbsemente);
+            return View(semente);
         }
 
         // POST: Sistema/Semente/Edit/5
@@ -78,15 +79,15 @@ namespace OrganWeb.Areas.Sistema.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,NOME,DESCRICAO")] tbsemente tbsemente)
+        public ActionResult Edit([Bind(Include = "ID,NOME,DESCRICAO")] Semente semente)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tbsemente).State = EntityState.Modified;
+                db.Entry(semente).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(tbsemente);
+            return View(semente);
         }
 
         // GET: Sistema/Semente/Delete/5
@@ -96,12 +97,12 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tbsemente tbsemente = db.Sementes.Find(id);
-            if (tbsemente == null)
+            Semente semente = db.Sementes.Find(id);
+            if (semente == null)
             {
                 return HttpNotFound();
             }
-            return View(tbsemente);
+            return View(semente);
         }
 
         // POST: Sistema/Semente/Delete/5
@@ -109,8 +110,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            tbsemente tbsemente = db.Sementes.Find(id);
-            db.Sementes.Remove(tbsemente);
+            Semente Semente = db.Sementes.Find(id);
+            db.Sementes.Remove(Semente);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

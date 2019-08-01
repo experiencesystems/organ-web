@@ -7,8 +7,62 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="NOME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="DESCRICAO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbcategoriasemente" Relationship="dborganwebModel.FK_SEMENTE" FromRole="tbsemente" ToRole="tbcategoriasemente" />
   </EntityType>
   <EntityContainer Name="dborganwebEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="tbsemente" EntityType="Self.tbsemente" />
+    <EntitySet Name="tbcategoria" EntityType="dborganwebModel.tbcategoria" />
+    <EntitySet Name="tbcategoriasemente" EntityType="dborganwebModel.tbcategoriasemente" />
+    <AssociationSet Name="FK_CATEGORIA" Association="dborganwebModel.FK_CATEGORIA">
+      <End Role="tbcategoria" EntitySet="tbcategoria" />
+      <End Role="tbcategoriasemente" EntitySet="tbcategoriasemente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SEMENTE" Association="dborganwebModel.FK_SEMENTE">
+      <End Role="tbsemente" EntitySet="tbsemente" />
+      <End Role="tbcategoriasemente" EntitySet="tbcategoriasemente" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="tbcategoria">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="NOME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="COR" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbcategoriasemente" Relationship="dborganwebModel.FK_CATEGORIA" FromRole="tbcategoria" ToRole="tbcategoriasemente" />
+  </EntityType>
+  <EntityType Name="tbcategoriasemente">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="ID_SEMENTE" Type="Int32" />
+    <Property Name="ID_CATEGORIA" Type="Int32" />
+    <NavigationProperty Name="tbcategoria" Relationship="dborganwebModel.FK_CATEGORIA" FromRole="tbcategoriasemente" ToRole="tbcategoria" />
+    <NavigationProperty Name="tbsemente" Relationship="dborganwebModel.FK_SEMENTE" FromRole="tbcategoriasemente" ToRole="tbsemente" />
+  </EntityType>
+  <Association Name="FK_CATEGORIA">
+    <End Type="dborganwebModel.tbcategoria" Role="tbcategoria" Multiplicity="1" />
+    <End Type="dborganwebModel.tbcategoriasemente" Role="tbcategoriasemente" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tbcategoria">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbcategoriasemente">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SEMENTE">
+    <End Type="dborganwebModel.tbsemente" Role="tbsemente" Multiplicity="1" />
+    <End Type="dborganwebModel.tbcategoriasemente" Role="tbcategoriasemente" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tbsemente">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tbcategoriasemente">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

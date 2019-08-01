@@ -10,5 +10,23 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tbcategoria">
+      <EntityTypeMapping TypeName="dborganwebModel.tbcategoria">
+        <MappingFragment StoreEntitySet="tbcategoria">
+          <ScalarProperty Name="COR" ColumnName="COR" />
+          <ScalarProperty Name="NOME" ColumnName="NOME" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbcategoriasemente">
+      <EntityTypeMapping TypeName="dborganwebModel.tbcategoriasemente">
+        <MappingFragment StoreEntitySet="tbcategoriasemente">
+          <ScalarProperty Name="ID_CATEGORIA" ColumnName="ID_CATEGORIA" />
+          <ScalarProperty Name="ID_SEMENTE" ColumnName="ID_SEMENTE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

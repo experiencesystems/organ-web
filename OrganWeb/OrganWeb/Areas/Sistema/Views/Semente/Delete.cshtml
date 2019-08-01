@@ -1,4 +1,4 @@
-﻿@model OrganWeb.tbsemente
+﻿@model OrganWeb.Areas.Sistema.Models.Semente.Semente
 
 @{
     ViewBag.Title = "Delete";
@@ -30,7 +30,8 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

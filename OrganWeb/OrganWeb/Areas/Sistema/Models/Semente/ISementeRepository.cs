@@ -8,11 +8,11 @@ namespace OrganWeb.Areas.Sistema.Models.Semente
 {
     interface ISementeRepository : IDisposable
     {
-        IEnumerable<tbsemente> GetSementes();
-        tbsemente GetSementeByID(int sementeId);
-        void InsertSemente(tbsemente semente);
+        IEnumerable<Semente> GetSementes();
+        Semente GetSementeByID(int sementeId);
+        void InsertSemente(Semente semente);
         void DeleteSemente(int sementeID);
-        void UpdateSemente(tbsemente semente);
+        void UpdateSemente(Semente semente);
         void Save();
     }
 }
