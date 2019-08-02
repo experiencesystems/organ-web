@@ -94,8 +94,6 @@ C:\Users\milen\Desktop\OrganWeb\OrganWeb\obj\Debug\OrganWeb.csproj.CopyComplete
 C:\Users\milen\Desktop\OrganWeb\OrganWeb\obj\Debug\OrganWeb.dll
 C:\Users\milen\Desktop\OrganWeb\OrganWeb\obj\Debug\OrganWeb.pdb
 C:\Users\milen\Desktop\OrganWeb\OrganWeb\bin\MySql.Fabric.Plugin.dll
-C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.csprojAssemblyReference.cache
-C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.csproj.CoreCompileInputs.cache
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\OrganWeb.dll.config
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\OrganWeb.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\OrganWeb.pdb
@@ -188,6 +186,8 @@ C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\pt-br\Sys
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\pt-br\System.Web.WebPages.Deployment.resources.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\pt-br\System.Web.WebPages.Razor.resources.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\pt-br\System.Web.Optimization.resources.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.csproj.CoreCompileInputs.cache
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.csproj.CopyComplete
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.pdb
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.csprojAssemblyReference.cache

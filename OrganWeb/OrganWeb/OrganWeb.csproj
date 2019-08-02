@@ -139,9 +139,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Sistema\Controllers\SementeController.cs" />
-    <Compile Include="Areas\Sistema\Models\Semente\ISementeRepository.cs" />
-    <Compile Include="Areas\Sistema\Models\Semente\Semente.cs" />
-    <Compile Include="Areas\Sistema\Models\Semente\SementeRepository.cs" />
+    <Compile Include="Areas\Sistema\Models\Categoria.cs" />
+    <Compile Include="Areas\Sistema\Models\Sementec\ISementeRepository.cs" />
+    <Compile Include="Areas\Sistema\Models\Sementec\Semente.cs" />
+    <Compile Include="Areas\Sistema\Models\Sementec\SementeRepository.cs" />
     <Compile Include="Areas\Sistema\SistemaAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">

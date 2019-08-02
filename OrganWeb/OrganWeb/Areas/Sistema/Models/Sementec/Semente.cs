@@ -5,16 +5,26 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace OrganWeb.Areas.Sistema.Models.Semente
+namespace OrganWeb.Areas.Sistema.Models.Sementec
 {
     [Table("Semente")]
     public class Semente
     {
         [Key]
-        public int ID { get; set; }
+        public Int32 ID { get; set; }
 
-        [Required(ErrorMessage = "O nome é obrigatório.")]
+        [Display(Name = "Nome")]
+        [Required(ErrorMessage = "O nome é obrigatório.", AllowEmptyStrings = false)]
         public String NOME { get; set; }
+                
+        [Display(Name = "Descrição")]
+        public String DESCRICAO { get; set; }
+
+        [Display(Name = "Categoria")]
+        public Int32 ID_CATEGORIA { get; set; }
+
+        [ForeignKey("ID_CATEGORIA")]
+        public virtual Categoria Categoria { get; set; }
 
         /*
         [Display(Name = "Tipo de solo")]
@@ -30,11 +40,6 @@ namespace OrganWeb.Areas.Sistema.Models.Semente
         public double Acidez { get; set; }
         */
 
-        [Display(Name = "Descrição")]
-        public String DESCRICAO { get; set; }
-
-        //public int CategoriaId { get; set; }
-        //public virtual Categoria Categoria { get; set; }
         //http://www.macoratti.net/18/03/mvc5_cadprod1.htm
     }
 }

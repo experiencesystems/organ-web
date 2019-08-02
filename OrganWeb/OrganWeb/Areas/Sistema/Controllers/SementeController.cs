@@ -6,8 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using OrganWeb.Areas.Sistema.Models.Sementec;
 using OrganWeb.Models;
-using OrganWeb.Areas.Sistema.Models.Semente;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
@@ -18,7 +18,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
         // GET: Sistema/Semente
         public ActionResult Index()
         {
-            return View(db.Sementes.ToList());
+            var sementes = db.Sementes.Include(s => s.Categoria);
+            return View(sementes.ToList());
         }
 
         // GET: Sistema/Semente/Details/5
@@ -39,6 +40,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         // GET: Sistema/Semente/Create
         public ActionResult Create()
         {
+            ViewBag.ID_CATEGORIA = new SelectList(db.Categorias, "ID", "NOME");
             return View();
         }
 
@@ -47,7 +49,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,NOME,DESCRICAO")] Semente semente)
+        public ActionResult Create([Bind(Include = "ID,NOME,DESCRICAO,ID_CATEGORIA")] Semente semente)
         {
             if (ModelState.IsValid)
             {
@@ -56,6 +58,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.ID_CATEGORIA = new SelectList(db.Categorias, "ID", "NOME", semente.ID_CATEGORIA);
             return View(semente);
         }
 
@@ -71,6 +74,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ID_CATEGORIA = new SelectList(db.Categorias, "ID", "NOME", semente.ID_CATEGORIA);
             return View(semente);
         }
 
@@ -79,7 +83,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,NOME,DESCRICAO")] Semente semente)
+        public ActionResult Edit([Bind(Include = "ID,NOME,DESCRICAO,ID_CATEGORIA")] Semente semente)
         {
             if (ModelState.IsValid)
             {
@@ -87,6 +91,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.ID_CATEGORIA = new SelectList(db.Categorias, "ID", "NOME", semente.ID_CATEGORIA);
             return View(semente);
         }
 
@@ -110,8 +115,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Semente Semente = db.Sementes.Find(id);
-            db.Sementes.Remove(Semente);
+            Semente semente = db.Sementes.Find(id);
+            db.Sementes.Remove(semente);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

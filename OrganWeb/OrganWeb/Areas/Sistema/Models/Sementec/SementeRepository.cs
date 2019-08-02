@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using OrganWeb.Models;
 
-namespace OrganWeb.Areas.Sistema.Models.Semente
+namespace OrganWeb.Areas.Sistema.Models.Sementec
 {
     public class SementeRepository : ISementeRepository
     {
@@ -22,14 +22,14 @@ namespace OrganWeb.Areas.Sistema.Models.Semente
             _context.Sementes.Remove(semente);
         }
 
-        public Semente GetSementeByID(int sementeId)
+        public Semente GetSementeByID(int? sementeId)
         {
             return _context.Sementes.Find(sementeId);
         }
 
         public IEnumerable<Semente> GetSementes()
         {
-            return _context.Sementes.ToList();
+            return _context.Sementes.Include(s => s.Categoria).ToList();
         }
 
         public void InsertSemente(Semente semente)
