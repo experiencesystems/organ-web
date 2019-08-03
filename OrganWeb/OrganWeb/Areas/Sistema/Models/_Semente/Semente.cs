@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace OrganWeb.Areas.Sistema.Models.Sementec
+namespace OrganWeb.Areas.Sistema.Models._Semente
 {
     [Table("Semente")]
     public class Semente

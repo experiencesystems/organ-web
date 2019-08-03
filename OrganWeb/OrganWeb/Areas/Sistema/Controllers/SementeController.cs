@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using OrganWeb.Areas.Sistema.Models.Sementec;
+using OrganWeb.Areas.Sistema.Models._Semente;
 using OrganWeb.Models;
 
 namespace OrganWeb.Areas.Sistema.Controllers

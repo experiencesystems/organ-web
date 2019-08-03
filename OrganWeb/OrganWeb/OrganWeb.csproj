@@ -140,9 +140,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Sistema\Controllers\SementeController.cs" />
     <Compile Include="Areas\Sistema\Models\Categoria.cs" />
-    <Compile Include="Areas\Sistema\Models\Sementec\ISementeRepository.cs" />
-    <Compile Include="Areas\Sistema\Models\Sementec\Semente.cs" />
-    <Compile Include="Areas\Sistema\Models\Sementec\SementeRepository.cs" />
+    <Compile Include="Areas\Sistema\Models\IRepository.cs" />
+    <Compile Include="Areas\Sistema\Models\_Doenca\Doenca.cs" />
+    <Compile Include="Areas\Sistema\Models\_Doenca\DoencaRepository.cs" />
+    <Compile Include="Areas\Sistema\Models\_Praga\Praga.cs" />
+    <Compile Include="Areas\Sistema\Models\_Praga\PragaRepository.cs" />
+    <Compile Include="Areas\Sistema\Models\_Semente\Semente.cs" />
+    <Compile Include="Areas\Sistema\Models\_Semente\SementeRepository.cs" />
     <Compile Include="Areas\Sistema\SistemaAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">

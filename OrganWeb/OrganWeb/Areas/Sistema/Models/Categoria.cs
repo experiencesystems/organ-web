@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using OrganWeb.Areas.Sistema.Models.Sementec;
+using OrganWeb.Areas.Sistema.Models._Semente;
 
 namespace OrganWeb.Areas.Sistema.Models
 {
@@ -10,14 +10,14 @@ namespace OrganWeb.Areas.Sistema.Models
     public class Categoria
     {
         [Key]
-        public int ID { get; set; }
+        public int id_praga { get; set; }
 
         [Display(Name = "Categoria")]
-        public String NOME { get; set; }
+        public String nome { get; set; }
 
         [Display(Name = "Cor")]
-        public String COR { get; set; }
-
+        public String cor { get; set; }
+        
         public List<Semente> Sementes { get; set; }
     }
 }
