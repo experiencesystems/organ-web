@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace OrganWeb.Areas.Sistema.Models._Praga
+namespace OrganWeb.Areas.Sistema.Models
 {
     public class Praga
     {

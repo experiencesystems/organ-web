@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace OrganWeb.Areas.Sistema.Models._Semente
+namespace OrganWeb.Areas.Sistema.Models
 {
     [Table("Semente")]
     public class Semente
@@ -23,6 +23,7 @@ namespace OrganWeb.Areas.Sistema.Models._Semente
         [Display(Name = "Categoria")]
         public Int32 ID_CATEGORIA { get; set; }
 
+        [Display(Name = "Categoria")]
         [ForeignKey("ID_CATEGORIA")]
         public virtual Categoria Categoria { get; set; }
 

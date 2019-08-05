@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OrganWeb.Areas.Sistema.Models._Semente.Semente>
+﻿@model IEnumerable<OrganWeb.Areas.Sistema.Models.Semente>
 
 @{
     ViewBag.Title = "Index";
@@ -13,7 +13,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Categoria.NOME)
+            @Html.DisplayNameFor(model => model.Categoria.Nome)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.NOME)
@@ -27,7 +27,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Categoria.NOME)
+            @Html.DisplayFor(modelItem => item.Categoria.Nome)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.NOME)

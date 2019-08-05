@@ -1,4 +1,4 @@
-﻿@model OrganWeb.Areas.Sistema.Models._Semente.Semente
+﻿@model OrganWeb.Areas.Sistema.Models.Semente
 
 @{
     ViewBag.Title = "Edit";
@@ -6,6 +6,7 @@
 }
 
 <h2>Edit</h2>
+
 
 @using (Html.BeginForm())
 {
@@ -52,3 +53,7 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
