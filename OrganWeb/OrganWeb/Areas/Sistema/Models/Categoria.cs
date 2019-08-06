@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using OrganWeb.Models;
 
 namespace OrganWeb.Areas.Sistema.Models
 {
     [Table("Categoria")]
-    public class Categoria
+    public class Categoria : Repository<Categoria>
     {
         [Key]
-        public int ID { get; set; }
+        public int CategoriaID { get; set; }
 
         [Display(Name = "Categoria")]
         public String Nome { get; set; }

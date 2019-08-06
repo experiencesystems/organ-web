@@ -16,10 +16,10 @@
             @Html.DisplayNameFor(model => model.Categoria.Nome)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NOME)
+            @Html.DisplayNameFor(model => model.Nome)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DESCRICAO)
+            @Html.DisplayNameFor(model => model.Descricao)
         </th>
         <th></th>
     </tr>
@@ -30,15 +30,15 @@
             @Html.DisplayFor(modelItem => item.Categoria.Nome)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.NOME)
+            @Html.DisplayFor(modelItem => item.Nome)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DESCRICAO)
+            @Html.DisplayFor(modelItem => item.Descricao)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.SementeID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SementeID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SementeID })
         </td>
     </tr>
 }

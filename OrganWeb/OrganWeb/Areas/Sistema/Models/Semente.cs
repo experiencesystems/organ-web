@@ -4,27 +4,28 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using OrganWeb.Models;
 
 namespace OrganWeb.Areas.Sistema.Models
 {
     [Table("Semente")]
-    public class Semente
+    public class Semente : Repository<Semente>
     {
         [Key]
-        public Int32 ID { get; set; }
+        public Int32 SementeID { get; set; }
 
         [Display(Name = "Nome")]
         [Required(ErrorMessage = "O nome é obrigatório.", AllowEmptyStrings = false)]
-        public String NOME { get; set; }
+        public String Nome { get; set; }
                 
         [Display(Name = "Descrição")]
-        public String DESCRICAO { get; set; }
+        public String Descricao { get; set; }
 
         [Display(Name = "Categoria")]
-        public Int32 ID_CATEGORIA { get; set; }
+        public Int32 CategoriaID { get; set; }
 
         [Display(Name = "Categoria")]
-        [ForeignKey("ID_CATEGORIA")]
+        [ForeignKey("CategoriaID")]
         public virtual Categoria Categoria { get; set; }
 
         /*

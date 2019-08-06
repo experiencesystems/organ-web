@@ -3,24 +3,25 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using OrganWeb.Models;
 
 namespace OrganWeb.Areas.Sistema.Models
 {
-    public class Praga
+    public class Praga : Repository<Praga>
     {
         [Key]
         [Display(Name = "ID")]
-        public int id_praga { get; set; }
+        public int PragaID { get; set; }
 
         [Display(Name = "Nome popular")]
         [Required(ErrorMessage = "O nome é obrigatório.", AllowEmptyStrings = false)]
-        public String nomepopular { get; set; }
+        public String NomePopular { get; set; }
 
         [Display(Name = "Nome científico")]
         [Required(ErrorMessage = "O nome é obrigatório.", AllowEmptyStrings = false)]
-        public String nomecientifico { get; set; }
+        public String NomeCientifico { get; set; }
 
         [Display(Name = "Descrição")]
-        public String descricao { get; set; }
+        public String Descricao { get; set; }
     }
 }

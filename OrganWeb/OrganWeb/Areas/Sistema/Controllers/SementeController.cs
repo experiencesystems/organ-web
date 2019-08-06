@@ -40,7 +40,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         // GET: Sistema/Semente/Create
         public ActionResult Create()
         {
-            ViewBag.ID_CATEGORIA = new SelectList(db.Categorias, "ID", "Nome");
+            ViewBag.ID_CATEGORIA = new SelectList(db.Categorias, "SementeID", "Nome");
             return View();
         }
 
@@ -49,7 +49,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,NOME,DESCRICAO,ID_CATEGORIA")] Semente semente)
+        public ActionResult Create([Bind(Include = "SementeID,Nome,Descricao,CategoriaID")] Semente semente)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +58,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_CATEGORIA = new SelectList(db.Categorias, "ID", "Nome", semente.ID_CATEGORIA);
+            ViewBag.ID_CATEGORIA = new SelectList(db.Categorias, "SementeID", "Nome", semente.CategoriaID);
             return View(semente);
         }
 
@@ -74,7 +74,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_CATEGORIA = new SelectList(db.Categorias, "ID", "Nome", semente.ID_CATEGORIA);
+            ViewBag.ID_CATEGORIA = new SelectList(db.Categorias, "SementeID", "Nome", semente.CategoriaID);
             return View(semente);
         }
 
@@ -83,7 +83,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,NOME,DESCRICAO,ID_CATEGORIA")] Semente semente)
+        public ActionResult Edit([Bind(Include = "SementeID,Nome,Descricao,CategoriaID")] Semente semente)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_CATEGORIA = new SelectList(db.Categorias, "ID", "Nome", semente.ID_CATEGORIA);
+            ViewBag.ID_CATEGORIA = new SelectList(db.Categorias, "SementeID", "Nome", semente.CategoriaID);
             return View(semente);
         }
 
