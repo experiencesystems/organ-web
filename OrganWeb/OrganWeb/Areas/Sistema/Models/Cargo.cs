@@ -19,6 +19,6 @@ namespace OrganWeb.Areas.Sistema.Models
         [Required(ErrorMessage = "O nome é obrigatório.", AllowEmptyStrings = false)]
         public string Nome { get; set; }
 
-        //Funcionario - n
+        public virtual List<Funcionario> Funcionarios { get; set; }
     }
 }

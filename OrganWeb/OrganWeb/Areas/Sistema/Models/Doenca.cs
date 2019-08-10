@@ -15,8 +15,9 @@ namespace OrganWeb.Areas.Sistema.Models
         public string Nome { get; set; }
         public string Sintomas { get; set; }
         public string Tratamento { get; set; }
-
         [Display(Name = "Descrição")]
         public string Descricao { get; set; }
+
+        public List<Controle> Controles { get; set; }
     }
 }

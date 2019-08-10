@@ -13,6 +13,8 @@ namespace OrganWeb.Areas.Sistema.Models
         public int EspecificacaoID { get; set; }
         public string Descricao { get; set; }
 
+        public List<Estadio> Estadios { get; set; }
+        //public List<Cultura> Culturas { get; set; }
         //Estadio = n
         //Cultura = n
     }

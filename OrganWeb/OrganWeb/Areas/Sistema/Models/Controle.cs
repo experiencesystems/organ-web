@@ -21,6 +21,12 @@ namespace OrganWeb.Areas.Sistema.Models
         public decimal Eficiencia { get; set; }
         public int NumLiberacoes { get; set; }
 
+        public Estadio Estadio { get; set; }
+        public List<Praga> Pragas { get; set; }
+        //public List<Maquina> Maquinas { get; set; }
+        //public List<Area> Areas { get; set; }
+        //public List<Item> Itens { get; set; }
+
         //Estádio - 1-n
         //Praga - n-n
         //Maquina - n-n
