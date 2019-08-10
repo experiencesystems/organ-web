@@ -16,6 +16,8 @@ namespace OrganWeb.Areas.Sistema.Models
         [Display(Name = "Descrição")]
         public string Descricao { get; set; }
 
+        public List<Funcionario> Funcionarios { get; set; }
+        public List<Tarefa> Tarefas { get; set; }
         //Funcionario = n-n
         //Tarefa = n-n
     }

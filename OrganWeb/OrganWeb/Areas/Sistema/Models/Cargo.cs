@@ -14,6 +14,6 @@ namespace OrganWeb.Areas.Sistema.Models
         public int Nivel { get; set; }
         public string Nome { get; set; }
 
-        //Funcionario - n
+        public virtual List<Funcionario> Funcionarios { get; set; }
     }
 }
