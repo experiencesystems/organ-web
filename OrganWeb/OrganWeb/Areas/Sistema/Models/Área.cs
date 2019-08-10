@@ -7,17 +7,23 @@ using OrganWeb.Models;
 
 namespace OrganWeb.Areas.Sistema.Models
 {
-    public class Cargo : Repository<Cargo>
+    public class Área : Repository<Área>
     {
         [Key]
-        public int IDCargo { get; set; }
-
-        [Display(Name = "Nível")]
-        public int Nivel { get; set; }
+        public int IDArea { get; set; }
 
         [Display(Name = "Nome")]
         [Required(ErrorMessage = "O nome é obrigatório.", AllowEmptyStrings = false)]
         public string Nome { get; set; }
+
+        public int IDSolo { get; set; } //fk
+
+        public bool Disponibilidade { get; set; } // ???
+
+        public int IDFazenda { get; set; } //fk
+
+        
+
 
         //Funcionario - n
     }
