@@ -13,20 +13,18 @@ namespace OrganWeb.Areas.Sistema.Models
     {
         [Key]
         public Int32 SementeID { get; set; }
-
-        [Display(Name = "Nome")]
+        
         [Required(ErrorMessage = "O nome é obrigatório.", AllowEmptyStrings = false)]
         public String Nome { get; set; }
                 
         [Display(Name = "Descrição")]
+        [MaxLength(500, ErrorMessage = "Esse campo deve ter 500 caracteres ou menos"), MinLength(10, ErrorMessage = "Esse campo deve ter no mínimo 10 caracteres")]
         public String Descricao { get; set; }
-
-        [Display(Name = "Categoria")]
-        public Int32 CategoriaID { get; set; }
-
-        [Display(Name = "Categoria")]
-        [ForeignKey("CategoriaID")]
-        public virtual Categoria Categoria { get; set; }
+        
+        [ForeignKey("Categoria")]
+        public int CategoriaID { get; set; }
+        
+        public Categoria Categoria { get; set; }
 
         /*
         [Display(Name = "Tipo de solo")]

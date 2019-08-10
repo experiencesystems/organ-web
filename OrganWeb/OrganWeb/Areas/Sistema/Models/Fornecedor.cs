@@ -25,6 +25,8 @@ namespace OrganWeb.Areas.Sistema.Models
         //TODO: Verificar se Status é FK
         public int Status { get; set; }
 
+        public List<Compra> Compras { get; set; }
+        public List<Telefone> Telefones { get; set; }
         //Compra - 1-n
         //Telefone - 1-n
     }

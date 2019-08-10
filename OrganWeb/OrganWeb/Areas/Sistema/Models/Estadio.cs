@@ -15,6 +15,8 @@ namespace OrganWeb.Areas.Sistema.Models
         public double Tempo { get; set; }
         public string Descricao { get; set; }
 
+        public List<Especificacao> Especificacoes { get; set; }
+        public List<Controle> Controles { get; set; }
         //Especificacao - n
         //Controle - n
     }

@@ -40,7 +40,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         // GET: Sistema/Semente/Create
         public ActionResult Create()
         {
-            ViewBag.ID_CATEGORIA = new SelectList(db.Categorias, "SementeID", "Nome");
+            ViewBag.CategoriaID = new SelectList(db.Categorias, "CategoriaID", "Nome");
             return View();
         }
 
@@ -58,7 +58,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_CATEGORIA = new SelectList(db.Categorias, "SementeID", "Nome", semente.CategoriaID);
+            ViewBag.CategoriaID = new SelectList(db.Categorias, "CategoriaID", "Nome", semente.CategoriaID);
             return View(semente);
         }
 
@@ -74,7 +74,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_CATEGORIA = new SelectList(db.Categorias, "SementeID", "Nome", semente.CategoriaID);
+            ViewBag.CategoriaID = new SelectList(db.Categorias, "CategoriaID", "Nome", semente.CategoriaID);
             return View(semente);
         }
 
@@ -91,7 +91,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_CATEGORIA = new SelectList(db.Categorias, "SementeID", "Nome", semente.CategoriaID);
+            ViewBag.CategoriaID = new SelectList(db.Categorias, "CategoriaID", "Nome", semente.CategoriaID);
             return View(semente);
         }
 
