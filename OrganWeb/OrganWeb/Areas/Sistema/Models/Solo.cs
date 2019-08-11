@@ -7,18 +7,26 @@ using OrganWeb.Models;
 
 namespace OrganWeb.Areas.Sistema.Models
 {
-    public class Cargo : Repository<Cargo>
+    public class Solo : Repository<Solo>
     {
         [Key]
-        public int IDCargo { get; set; }
-
-        [Display(Name = "Nível")]
-        public int Nivel { get; set; }
+        public int IDSolo{ get; set; }
 
         [Display(Name = "Nome")]
         [Required(ErrorMessage = "O nome é obrigatório.", AllowEmptyStrings = false)]
         public string Nome { get; set; }
 
-        public virtual List<Funcionario> Funcionarios { get; set; }
+
+        [Display(Name = "Tipo do Solo")]
+        public string TipoSolo { get; set; }
+
+
+
+        [Display(Name = "Incidência Solar")]
+        public double InciSol { get; set; }
+
+
+        [Display(Name = "Incidência do Vento")]
+        public double InciVen { get; set; }
     }
 }
