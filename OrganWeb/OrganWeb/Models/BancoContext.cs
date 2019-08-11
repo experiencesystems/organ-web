@@ -17,6 +17,7 @@ namespace OrganWeb.Models
         public virtual DbSet<Categoria> Categorias { get; set; }
         public virtual DbSet<Praga> Pragas { get; set; }
         public virtual DbSet<Doenca> Doencas { get; set; }
+        public virtual DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
