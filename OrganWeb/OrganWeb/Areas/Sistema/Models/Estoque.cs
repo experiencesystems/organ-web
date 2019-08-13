@@ -15,5 +15,7 @@ namespace OrganWeb.Areas.Sistema.Models
         public double Quantidade { get; set; }
 
         public string UnidadeMedida { get; set; }
+
+        //TODO: Verificar FKs Estoque
     }
 }

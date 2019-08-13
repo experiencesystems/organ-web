@@ -19,14 +19,13 @@ namespace OrganWeb.Areas.Sistema.Models
 
         [Display(Name = "Tipo do Solo")]
         public string TipoSolo { get; set; }
-
-
+       
 
         [Display(Name = "Incidência Solar")]
-        public double InciSol { get; set; }
+        public double IncSolar { get; set; }
 
 
         [Display(Name = "Incidência do Vento")]
-        public double InciVen { get; set; }
+        public double IncVento { get; set; }
     }
 }

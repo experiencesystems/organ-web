@@ -20,8 +20,6 @@ namespace OrganWeb.Areas.Sistema.Models
 
         public int IDPagamento { get; set; }
 
-
-
-
+        //TODO: Verificar FKs Despesa
     }
 }

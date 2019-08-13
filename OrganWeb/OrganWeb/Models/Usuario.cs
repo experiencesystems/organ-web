@@ -7,18 +7,18 @@ using System.Web;
 
 namespace OrganWeb.Models
 {
-    [Table("Users")]
+    [Table("tbUsuario")]
     public partial class Usuario
     {
         [Key]
-        public int UserID { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string EmailID { get; set; }
-        public Nullable<System.DateTime> DateOfBirth { get; set; }
-        public string Password { get; set; }
-        public bool IsEmailVerified { get; set; }
-        public System.Guid ActivationCode { get; set; }
+        public int ID { get; set; }
+        public string Senha { get; set; }
+        public string Email { get; set; }
+        public bool Confirmacao { get; set; }
+        public bool Assinatura { get; set; }
+        public bool CliOrFunc { get; set; }
+        public DateTime DataCadastro { get; set; }
+        public System.Guid CodigoAtivacao { get; set; }
     }
 
     /*public class Usuario

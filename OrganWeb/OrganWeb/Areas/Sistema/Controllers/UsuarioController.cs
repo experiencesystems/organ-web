@@ -29,10 +29,10 @@ namespace OrganWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                 usuario = new Usuario { FirstName = model.FirstName, LastName = model.LastName, EmailID = model.EmailID, DateOfBirth = model.DateOfBirth, Password = model.Password };
+                usuario = new Usuario { Email = model.Email, DataCadastro = DateTime.Today, Senha = model.Senha, Confirmacao = false, Assinatura = false, CliOrFunc = true };
 
                 #region //verificar se o email existe
-                if (VerificarEmail(usuario.EmailID))
+                if (VerificarEmail(usuario.Email))
                 {
                     ModelState.AddModelError("EmailExistente", "Email já foi cadastrado.");
                     return View(model);
@@ -40,14 +40,13 @@ namespace OrganWeb.Controllers
                 #endregion
 
                 #region gera código de ativação
-                usuario.ActivationCode = Guid.NewGuid();
+                usuario.CodigoAtivacao = Guid.NewGuid();
                 #endregion
 
                 #region hashing
-                usuario.Password = Criptografia.Hash(usuario.Password);
+                usuario.Senha = Criptografia.Hash(usuario.Senha);
                 //usuario.ConfirmPassword = Criptografia.Hash(usuario.ConfirmPassword);
                 #endregion
-                usuario.IsEmailVerified = false;
 
                 #region salva no banco
                 using (BancoContext db = new BancoContext())
@@ -73,10 +72,10 @@ namespace OrganWeb.Controllers
             {
                 db.Configuration.ValidateOnSaveEnabled = false;
 
-                var v = db.Usuarios.Where(a => a.ActivationCode == new Guid(id)).FirstOrDefault();
+                var v = db.Usuarios.Where(a => a.CodigoAtivacao == new Guid(id)).FirstOrDefault();
                 if (v != null)
                 {
-                    v.IsEmailVerified = true;
+                    v.Confirmacao = true;
                     db.SaveChanges();
                     Status = true;
                 }
@@ -96,19 +95,20 @@ namespace OrganWeb.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel login, string ReturnUrl)
         {
             string mensagem;
             using (BancoContext db = new BancoContext())
             {
-                var v = db.Usuarios.Where(a => a.EmailID == login.EmailID).FirstOrDefault();
+                var v = db.Usuarios.Where(a => a.Email == login.Email).FirstOrDefault();
                 if (v != null)
                 {
-                    if (string.Compare(Criptografia.Hash(login.Password), v.Password) == 0)
+                    if (string.Compare(Criptografia.Hash(login.Senha), v.Senha) == 0)
                     {
                         int timeout = login.RememberMe ? 525600 : 20;
-                        var ticket = new FormsAuthenticationTicket(login.EmailID, login.RememberMe, timeout);
+                        var ticket = new FormsAuthenticationTicket(login.Email, login.RememberMe, timeout);
                         string encrypted = FormsAuthentication.Encrypt(ticket);
                         var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted)
                         {
@@ -149,23 +149,23 @@ namespace OrganWeb.Controllers
         }
 
         [NonAction]
-        public bool VerificarEmail(string emailID)
+        public bool VerificarEmail(string email)
         {
             using (BancoContext db = new BancoContext())
             {
-                var v = db.Usuarios.Where(a => a.EmailID == emailID).FirstOrDefault();
+                var v = db.Usuarios.Where(a => a.Email == email).FirstOrDefault();
                 return v != null;
             }
         }
 
         [NonAction]
-        public void EnviarEmailVerificacao(string emailID, string activationCode)
+        public void EnviarEmailVerificacao(string email, string activationCode)
         {
             var verifyUrl = "/Usuario/VerificarConta/" + activationCode;
             var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
 
             var fromEmail = new MailAddress("sameeranihathe@gmail.com", "sameera sampath");
-            var toEmail = new MailAddress(emailID);
+            var toEmail = new MailAddress(email);
             var fromemailPassword = "kanchana143";
 
             string body = "<br/> <br/> Sua conta foi criada com sucesso. Por favor, clique no link abaixo para verificar sua conta." +

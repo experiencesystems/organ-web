@@ -7,7 +7,7 @@ using OrganWeb.Models;
 
 namespace OrganWeb.Areas.Sistema.Models
 {
-    public class Localizacao: Repository<Localizacao>
+    public class Localizacao : Repository<Localizacao>
     {
         [Key]
         public int CEP { get; set; }
@@ -18,15 +18,14 @@ namespace OrganWeb.Areas.Sistema.Models
 
         public string Bairro { get; set; }
 
-        public int Complemento { get; set; }
+        public string Complemento { get; set; }
 
         public string Cidade { get; set; } 
 
         public string UF { get; set; }
 
-        public string Coordenada { get; set; } //?????????????
+        public string Coordenada { get; set; }
 
-
-
+        //TODO: Verificar FKs Localização
     }
 }

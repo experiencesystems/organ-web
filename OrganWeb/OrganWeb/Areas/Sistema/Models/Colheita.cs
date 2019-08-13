@@ -12,13 +12,11 @@ namespace OrganWeb.Areas.Sistema.Models
         [Key]
         public int IDColheita { get; set; }
 
-
-
         public DateTime Data { get; set; }
         public double Quantidade { get; set; }
         public int CodEstoque { get; set; }
         public double QtdPerdas { get; set; }
 
-
+        //TODO: Verificar FKs Colheita
     }
 }

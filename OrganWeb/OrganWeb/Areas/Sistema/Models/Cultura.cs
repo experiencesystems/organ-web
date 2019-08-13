@@ -12,11 +12,9 @@ namespace OrganWeb.Areas.Sistema.Models
         [Key]
         public int IDCultura { get; set; }
 
-
         [Display(Name = "Nome da Cultura")]
         public string NomeCultura{ get; set; } 
      
-
-        //Funcionario - n
+        //TODO: Verificar FKs Cultura 
     }
 }
