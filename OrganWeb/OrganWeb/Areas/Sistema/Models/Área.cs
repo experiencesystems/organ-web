@@ -22,9 +22,7 @@ namespace OrganWeb.Areas.Sistema.Models
 
         public int IDFazenda { get; set; } //fk
 
-        
-
-
+        //TODO: Preencher FKs Area
         //Funcionario - n
     }
 }

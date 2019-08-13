@@ -20,13 +20,12 @@ namespace OrganWeb.Areas.Sistema.Models
 
         public double  ValorInicial { get; set; }
 
-        public double VidaUtil { get; set; } //?
+        public double VidaUtil { get; set; }
 
         public double ValorAno { get; set; }
 
         public double ValorMes { get; set; }
 
-
-
+        //TODO: Verificar FKs Máquina
     }
 }

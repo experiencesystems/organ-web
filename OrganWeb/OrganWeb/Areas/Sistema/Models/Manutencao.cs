@@ -9,9 +9,6 @@ namespace OrganWeb.Areas.Sistema.Models
 {
     public class Manutencao : Repository<Manutencao>
     {
-      //vaziatb
-
-
-
+      //TODO: Preencher classe Manutenção
     }
 }

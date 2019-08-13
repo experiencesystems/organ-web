@@ -9,11 +9,7 @@ namespace OrganWeb.Areas.Sistema.Models
 {
     public class Item : Repository<Item>
     {
-
-        public string vazia { get; set; }
-
+        //TODO: Preencher classe Item
     }
 }
-
-       //ta vazia pq n achei a tabela :)
 

@@ -20,8 +20,6 @@ namespace OrganWeb.Areas.Sistema.Models
 
         public string Resultado { get; set; }
 
-
-
-
+        //TODO: Verificar FKs Monitoramento
     }
 }
