@@ -9,9 +9,18 @@ namespace OrganWeb.Areas.Sistema.Models
 {
     public class Eventos : Repository<Eventos>
     {
-   
-        //vazio
+        public int IDEvento { get; set; }
 
+        public DateTime Data { get; set; }
 
+        public string Tipo { get; set; }
+
+        public string Nome { get; set; }
+
+        public string Descricao { get; set; }
+
+        //FK
+
+        public int IDCategoria { get; set; }
     }
 }
