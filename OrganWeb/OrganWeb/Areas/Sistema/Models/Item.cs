@@ -9,7 +9,16 @@ namespace OrganWeb.Areas.Sistema.Models
 {
     public class Item : Repository<Item>
     {
-        //TODO: Preencher classe Item
+        public int IDItem { get; set; }
+        public string Nome { get; set; }
+        public string Descricao { get; set; }
+        public double ValorUnit { get; set; }
+
+
+
+        //FK
+        public int IDEstoque { get; set; }
+        public int IDCategoria { get; set; }
     }
 }
 
