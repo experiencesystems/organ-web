@@ -6,18 +6,19 @@ using System.Linq;
 using System.Web;
 using System.Configuration;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace OrganWeb.Models
 {
-    public class BancoContext : DbContext
+    public class BancoContext : IdentityDbContext<ApplicationUser>
     {
-        public BancoContext() : base("name=BancoContext") { }
+        public BancoContext() : base("name=BancoContext", throwIfV1Schema: false) { }
 
         public virtual DbSet<Semente> Sementes { get; set; }
         public virtual DbSet<Categoria> Categorias { get; set; }
-        public virtual DbSet<Praga> Pragas { get; set; }
-        public virtual DbSet<Doenca> Doencas { get; set; }
-        public virtual DbSet<Usuario> Usuarios { get; set; }
+        //public virtual DbSet<Praga> Pragas { get; set; }
+        //public virtual DbSet<Doenca> Doencas { get; set; }
+        public virtual DbSet<User> Usuarios { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
