@@ -22,8 +22,15 @@ namespace OrganWeb
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/fontawesome").Include(
+                      "~/Scripts/fontawesome.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/modal").Include(
+                      "~/Scripts/modal.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/font-awesome.css",
                       "~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/csslog").Include(
