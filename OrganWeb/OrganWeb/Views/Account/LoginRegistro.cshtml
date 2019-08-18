@@ -1,0 +1,95 @@
+﻿@model OrganWeb.Models.LoginRegisterViewModel
+@{
+    Layout = "~/Views/Shared/_LoginStart.cshtml";
+    ViewBag.Title = "Registro";
+}
+
+@*https://stackoverflow.com/questions/42813679/asp-net-mvc-renderaction-login-and-register-views*@
+
+<div class="form-container sign-in-container">
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <hr />
+        <h1>Entre no Organ</h1>
+        <div class="social-container">
+            <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+            <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <span>ou use sua conta</span>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Login.Email, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.Login.Email) } })
+                @Html.ValidationMessageFor(model => model.Login.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.Login.Password, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.Login.Password) } })
+                @Html.ValidationMessageFor(model => model.Login.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-3">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Login.RememberMe)
+                </div>
+            </div>
+            @Html.LabelFor(model => model.Login.RememberMe, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit">Entrar</button>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="form-container sign-up-container">
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <h1>Registro</h1>
+        <div class="social-container">
+            <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+            <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <span>ou use sua conta para registrar-se</span>
+        <div class="form-group row">
+            <div class="col-sm-8">
+                @Html.EditorFor(model => model.Registro.Email, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.Registro.Email) } })
+                @Html.ValidationMessageFor(model => model.Registro.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Registro.Password, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.Registro.Password) } })
+                @Html.ValidationMessageFor(model => model.Registro.Password, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Registro.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", placeholder = Html.DisplayNameFor(model => model.Registro.ConfirmPassword) } })
+                @Html.ValidationMessageFor(model => model.Registro.ConfirmPassword, "", new { @class = "text-danger" })
+                @*if (string.IsNullOrEmpty(Model.Registro.ConfirmPassword))
+                    {
+                        @Html.ValidationMessageFor(model => model.Registro.ConfirmPassword, "", new { @class = "text-danger" })
+                    }*@
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit">Registrar</button>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

@@ -109,4 +109,10 @@ namespace OrganWeb.Models
         [Display(Name = "E-mail")]
         public string Email { get; set; }
     }
+
+    public class LoginRegisterViewModel
+    {
+        public RegisterViewModel Registro { get; set; }
+        public LoginViewModel Login { get; set; }
+    }
 }
