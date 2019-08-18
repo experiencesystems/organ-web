@@ -58,7 +58,7 @@ namespace OrganWeb.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            return View("LoginRegistro", new LoginRegisterViewModel());
         }
 
         //
@@ -70,7 +70,7 @@ namespace OrganWeb.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View("LoginRegistro", new LoginRegisterViewModel());
             }
 
             // Isso não conta falhas de login em relação ao bloqueio de conta
@@ -87,7 +87,7 @@ namespace OrganWeb.Controllers
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Tentativa de login inválida.");
-                    return View(model);
+                    return View("LoginRegistro", new LoginRegisterViewModel());
             }
         }
 
@@ -139,7 +139,7 @@ namespace OrganWeb.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            return View("LoginRegistro", new LoginRegisterViewModel());
         }
 
         //
@@ -169,7 +169,7 @@ namespace OrganWeb.Controllers
             }
 
             // Se chegamos até aqui e houver alguma falha, exiba novamente o formulário
-            return View(model);
+            return View("LoginRegistro", new LoginRegisterViewModel());
         }
 
         //
