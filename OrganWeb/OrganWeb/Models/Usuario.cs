@@ -8,6 +8,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using OrganWeb.Areas.Sistema.Models;
 
 namespace OrganWeb.Models
 {
@@ -16,15 +17,18 @@ namespace OrganWeb.Models
         public virtual User User { get; set; }
     }
 
-    //[Table("tbUsuario")]
+    [Table("tbUsuario")]
     public class User
     {
         [Key]
-        public int ID { get; set; }
+        public int Id { get; set; }
         public bool Confirmacao { get; set; }
         public bool Assinatura { get; set; }
         public bool CliOrFunc { get; set; }
         public DateTime DataCadastro { get; set; }
+
+        public ApplicationUser ApplicationUser { get; set; }
+        public Funcionario Funcionario { get; set; }
     }
 
     public class ApplicationUser : IdentityUser

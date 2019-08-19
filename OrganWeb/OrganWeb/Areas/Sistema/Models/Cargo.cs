@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using OrganWeb.Models;
 
 namespace OrganWeb.Areas.Sistema.Models
 {
+    [Table("tbCargo")]
     public class Cargo : Repository<Cargo>
     {
         [Key]
-        public int IDCargo { get; set; }
+        public int Id { get; set; }
 
         [Display(Name = "Nível")]
         public int Nivel { get; set; }

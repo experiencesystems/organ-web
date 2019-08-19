@@ -178,6 +178,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Sistema\Controllers\FazendaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\SementeController.cs" />
     <Compile Include="Areas\Sistema\Models\Cargo.cs" />
     <Compile Include="Areas\Sistema\Models\Categoria.cs" />
@@ -271,6 +272,11 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="Areas\Sistema\Views\Fazenda\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Fazenda\Delete.cshtml" />
+    <Content Include="Areas\Sistema\Views\Fazenda\Details.cshtml" />
+    <Content Include="Areas\Sistema\Views\Fazenda\Edit.cshtml" />
+    <Content Include="Areas\Sistema\Views\Fazenda\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
