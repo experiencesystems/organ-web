@@ -17,9 +17,14 @@ namespace OrganWeb.Models
 
         public virtual DbSet<Semente> Sementes { get; set; }
         public virtual DbSet<Categoria> Categorias { get; set; }
-        //public virtual DbSet<Praga> Pragas { get; set; }
-        //public virtual DbSet<Doenca> Doencas { get; set; }
+        public virtual DbSet<Localizacao> Localizacaos { get; set; }
+        public virtual DbSet<Fazenda> Fazendas { get; set; }
+        public virtual DbSet<Funcionario> Funcionarios { get; set; }
+        public virtual DbSet<Cargo> Cargos { get; set; }
         public virtual DbSet<User> Usuarios { get; set; }
+        public virtual DbSet<Tarefa> Tarefas { get; set; }
+        public virtual DbSet<Equipe> Equipes { get; set; }
+        public virtual DbSet<Telefone> Telefones { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -27,6 +32,30 @@ namespace OrganWeb.Models
             .HasRequired(c => c.Categoria)
             .WithMany(b => b.Sementes)
             .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Cargo>()
+                .Property(t => t.Nome)
+                .HasColumnName("Cargo");
+
+            modelBuilder.Entity<Funcionario>()
+                .HasMany(f => f.Telefones)
+                .WithMany(t => t.Funcionarios)
+                .Map(ft =>
+                     {
+                        ft.MapLeftKey("IdFunc");
+                        ft.MapRightKey("IdTel");
+                        ft.ToTable("tbFuncionarioTelefone");
+                    });
+
+            modelBuilder.Entity<Funcionario>()
+                .HasMany(f => f.Equipes)
+                .WithMany(e => e.Funcionarios)
+                .Map(fe =>
+                {
+                    fe.MapLeftKey("IdEquipe");
+                    fe.MapRightKey("IdFunc");
+                    fe.ToTable("tbEquipeFuncionario");
+                });
 
             //TODO: Properties ApplicationUser
             /*modelBuilder.Entity<ApplicationUser>()

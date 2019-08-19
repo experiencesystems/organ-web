@@ -53,12 +53,11 @@ namespace OrganWeb.Controllers
         }
 
         //
-        // GET: /Account/Login
+        // GET: /Account/LoginRegistro
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public ActionResult LoginRegistro(LoginRegisterViewModel model)
         {
-            ViewBag.ReturnUrl = returnUrl;
-            return View("LoginRegistro", new LoginRegisterViewModel());
+            return View(new LoginRegisterViewModel { Login = new LoginViewModel(), Registro = new RegisterViewModel()});
         }
 
         //
@@ -68,27 +67,25 @@ namespace OrganWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("LoginRegistro", new LoginRegisterViewModel());
-            }
-
             // Isso não conta falhas de login em relação ao bloqueio de conta
             // Para permitir que falhas de senha acionem o bloqueio da conta, altere para shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Tentativa de login inválida.");
-                    return View("LoginRegistro", new LoginRegisterViewModel());
+            if (ModelState.IsValid) {
+                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+                switch (result)
+                {
+                    case SignInStatus.Success:
+                        return RedirectToLocal(returnUrl);
+                    case SignInStatus.LockedOut:
+                        return View("Lockout");
+                    case SignInStatus.RequiresVerification:
+                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    case SignInStatus.Failure:
+                    default:
+                        ModelState.AddModelError("", "Tentativa de login inválida.");
+                        return View("LoginRegistro", model);
+                }
             }
+            return View("LoginRegistro", model);
         }
 
         //
@@ -135,14 +132,6 @@ namespace OrganWeb.Controllers
         }
 
         //
-        // GET: /Account/Register
-        [AllowAnonymous]
-        public ActionResult Register()
-        {
-            return View("LoginRegistro", new LoginRegisterViewModel());
-        }
-
-        //
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -169,7 +158,7 @@ namespace OrganWeb.Controllers
             }
 
             // Se chegamos até aqui e houver alguma falha, exiba novamente o formulário
-            return View("LoginRegistro", new LoginRegisterViewModel());
+            return View("LoginRegistro", model);
         }
 
         //
