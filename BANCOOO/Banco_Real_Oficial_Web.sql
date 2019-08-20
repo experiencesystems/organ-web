@@ -105,7 +105,7 @@ create table tbFazenda(
 );
 
 create table tbCargo(
-	Id int,
+	Id int auto_increment,
      constraint PKCargo primary key (Id),
      
 	Nivel varchar(50) not null,
@@ -113,7 +113,7 @@ create table tbCargo(
 );
 
 create table tbFuncionario(
-	Id int,
+	Id int auto_increment,
      constraint PKFuncionario primary key (Id),
 	Nome varchar(100) not null,
      Sobrenome varchar(100) not null,
@@ -144,7 +144,7 @@ create index  IXIdFuncionario on tbFuncionario (Id);
 create index  IXIdUsuario on tbFuncionario (IdUsuario);
 
 create table tbTelefone(
-	Id int,
+	Id int auto_increment,
      constraint PKTelefone primary key (Id),
 	
     DDD numeric(2) not null,
@@ -166,7 +166,7 @@ create index  IXIdFuncionario on tbFuncionarioTelefone (IdFunc);
 create index  IXIdTelefone on tbFuncionarioTelefone (IdTel);
 
 create table tbTarefa(
-	Id int not null,
+	Id int auto_increment,
 	 constraint PKTarefa primary key(Id),
 	
     Titulo varchar(100) not null,
@@ -178,7 +178,7 @@ create table tbTarefa(
 );
 
 create table tbMonitoramento(
-	Id int,
+	Id int auto_increment,
      constraint PKMonitoramento primary key(Id),
      
 	Titulo varchar(50) not null,
@@ -197,7 +197,7 @@ create table tbMonitoramentoTarefa(
 );
 
 create table tbEquipe(
-	Id int,
+	Id int auto_increment,
      constraint PKEquipe primary key (Id),
 	
     Nome varchar(50) not null
@@ -218,7 +218,7 @@ create table tbEquipeFuncionario(
 create index IXFuncionario on tbEquipeFuncionario (IdFunc);
 
 create table tbTarefaFuncionario(
-	IdTarefa int,
+	IdTarefa int auto_increment,
      constraint FKTarefaFunc foreign key (IdTarefa) references tbTarefa (Id),
 	
     IdFunc int,
@@ -294,7 +294,7 @@ END$$
 DELIMITER ;
 
 create table tbCategoria(
-	Id int,
+	Id int auto_increment,
      constraint PKCategoria primary key(Id), 
      
 	Nome varchar(30) not null,
@@ -304,7 +304,7 @@ create table tbCategoria(
 );
 
 create table tbEvento(
-	Id int,
+	Id int auto_increment,
 	  constraint PKEvento primary key (Id),
       
 	`Data/Hora` datetime not null,
@@ -316,7 +316,7 @@ create table tbEvento(
 );
 
 create table tbFornecedor(
-	Id int,
+	Id int auto_increment,
      constraint PKCultura primary key(Id),
      
 	Nome varchar(75) not null,
@@ -343,7 +343,7 @@ create table tbFornecedorTelefone(
 );
 
 create table tbItem(
-	Id int,
+	Id int auto_increment,
 	 constraint PKItem primary key (Id),
 	 
 	Nome varchar(75) not null,
@@ -360,7 +360,7 @@ create table tbItem(
 );
 
 create table tbSemente(
-	Id int,
+	Id int auto_increment,
      constraint PKSemente primary key (Id),
      
 	Nome varchar(50) not null,
@@ -376,7 +376,7 @@ create table tbSemente(
 );
 
 create table tbCultura(
-	Id int,
+	Id int auto_increment,
      constraint PKCultura primary key(Id),
 
 	Nome varchar(50) not null,
@@ -384,7 +384,7 @@ create table tbCultura(
 );
 
 create table tbPlantio(
-	Id int,
+	Id int auto_increment,
      constraint PKPlantio primary key (Id),
      
 	Nome varchar(75) not null,
@@ -404,7 +404,7 @@ create table tbPlantio(
 );
 
 create table tbEstadio(
-	Id int,
+	Id int auto_increment,
      constraint PKEstadio primary key (Id),
 	Nome varchar(75) not null,
 	Tempo varchar(75) not null, -- QUE MERDA É ESSA
@@ -414,7 +414,7 @@ create table tbEstadio(
 );
 
 create table tbSolo(
-	Id int,
+	Id int auto_increment,
      constraint PKSolo primary key(Id),
      
 	Nome varchar(75),
@@ -425,7 +425,7 @@ create table tbSolo(
 );
 
 create table tbArea(
-	Id int,
+	Id int auto_increment,
      constraint PKArea primary key(Id),
      
 	Nome varchar(75) not null,
@@ -446,7 +446,7 @@ create table tbAreaPlantio(
 );
 
 create table tbMaquina(
-	Id int,
+	Id int auto_increment,
      constraint PKMaquina primary key (Id),
      
 	Nome varchar(75) not null,	
@@ -462,7 +462,7 @@ create table tbMaquina(
 );
 
 create table tbManutenção(
-	Id int,
+	Id int auto_increment,
      constraint PKManuntencao primary key (Id),
      
 	Nome varchar(75) not null,
@@ -480,7 +480,7 @@ create table tbManutencaoMaquina(
 );
 
 create table tbPraga(
-	Id int,
+	Id int auto_increment,
      constraint PKPraga primary key (Id),
 	NomePopular varchar(50) not null,
 	NomeCientifico varchar(75) default 'Nome Científico não especificado',
@@ -488,7 +488,7 @@ create table tbPraga(
 );
 
 create table tbDoença(
-	Id int,
+	Id int auto_increment,
      constraint PKDoenca primary key (Id),
 	Nome varchar(50) not null,
 	Sintomas varchar(300) not null,
@@ -497,7 +497,7 @@ create table tbDoença(
 );
 
 create table tbControle(
-	Id int,
+	Id int auto_increment,
      constraint PKControle primary key (Id),
 	`Status` boolean not null,
 	Tipo varchar(75) not null,
@@ -557,7 +557,7 @@ create table tbControleItem(
 );
 
 create table tbPagamento(
-	Id int,
+	Id int auto_increment,
      constraint PKPagamento primary key (Id),
 	Valor decimal(7,2) not null,
 	Parcelas int not null,
@@ -565,7 +565,7 @@ create table tbPagamento(
 );
 
 create table tbDespesa(
-	Id int,
+	Id int auto_increment,
      constraint PKDespesa primary key (Id),
 	Nome varchar(50) not null default 'Sem Nome',
 	Descricao varchar(300),
