@@ -25,80 +25,94 @@ namespace OrganWeb.Models
         public virtual DbSet<Tarefa> Tarefas { get; set; }
         public virtual DbSet<Equipe> Equipes { get; set; }
         public virtual DbSet<Telefone> Telefones { get; set; }
+        public virtual DbSet<FuncionarioTelefone> FuncionarioTelefones { get; set; }
+        public virtual DbSet<Monitoramento> Monitoramentos { get; set; }
+        public virtual DbSet<MonitoramentoTarefa> MonitoramentoTarefas { get; set; }
+        public virtual DbSet<EquipeFuncionario> EquipeFuncionarios { get; set; }
+        public virtual DbSet<Estoque> Estoques { get; set; }
+        public virtual DbSet<HistoricoEstoque> HistoricoEstoques { get; set; }
+        public virtual DbSet<Evento> Eventos { get; set; }
+        public virtual DbSet<Fornecedor> Fornecedors { get; set; }
+        public virtual DbSet<FornecedorTelefone> FornecedorTelefones { get; set; }
+        public virtual DbSet<Item> Items { get; set; }
+        public virtual DbSet<Cultura> Culturas { get; set; }
+        public virtual DbSet<Plantio> Plantios { get; set; }
+        public virtual DbSet<Estadio> Estadios { get; set; }
+        public virtual DbSet<Area> Areas { get; set; }
+        public virtual DbSet<AreaPlantio> AreaPlantios { get; set; }
+        public virtual DbSet<Maquina> Maquinas { get; set; }
+        public virtual DbSet<Manutencao> Manutencaos { get; set; }
+        public virtual DbSet<ManutencaoMaquina> ManutencaoMaquinas { get; set; }
+        public virtual DbSet<Praga> Pragas { get; set; }
+        public virtual DbSet<Doenca> Doencas { get; set; }
+        public virtual DbSet<Controle> Controles { get; set; }
+        public virtual DbSet<ControlePraga> ControlePragas { get; set; }
+        public virtual DbSet<ControleDoenca> ControleDoencas { get; set; }
+        public virtual DbSet<ControleMaquina> ControleMaquinas { get; set; }
+        public virtual DbSet<ControleArea> ControleAreas { get; set; }
+        public virtual DbSet<ControleItem> ControleItems { get; set; }
+        public virtual DbSet<Pagamento> Pagamentos { get; set; }
+        public virtual DbSet<Despesa> Despesas { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Semente>()
-            .HasRequired(c => c.Categoria)
-            .WithMany(b => b.Sementes)
-            .WillCascadeOnDelete(false);
+            base.OnModelCreating(modelBuilder);
+
+            // ****** CHAVES CONCATENADAS ***** //
+
+            modelBuilder.Entity<Localizacao>().HasKey(t => new { t.CEP, t.Numero });
+
+            modelBuilder.Entity<TarefaFuncionario>().HasKey(t => new { t.IdTarefa, t.IdFunc });
+
+            // ****** MAPEAMENTO NOMES ***** //
 
             modelBuilder.Entity<Cargo>()
                 .Property(t => t.Nome)
                 .HasColumnName("Cargo");
 
-            modelBuilder.Entity<Funcionario>()
-                .HasMany(f => f.Telefones)
-                .WithMany(t => t.Funcionarios)
-                .Map(ft =>
-                     {
-                        ft.MapLeftKey("IdFunc");
-                        ft.MapRightKey("IdTel");
-                        ft.ToTable("tbFuncionarioTelefone");
-                    });
+            modelBuilder.Entity<User>()
+                .Property(t => t.CliOrFunc)
+                .HasColumnName("CLI/FUNC");
 
             modelBuilder.Entity<Funcionario>()
-                .HasMany(f => f.Equipes)
-                .WithMany(e => e.Funcionarios)
-                .Map(fe =>
-                {
-                    fe.MapLeftKey("IdEquipe");
-                    fe.MapRightKey("IdFunc");
-                    fe.ToTable("tbEquipeFuncionario");
-                });
+                .Property(t => t.MesAno)
+                .HasColumnName("MES/ANO");
 
-            //TODO: Properties ApplicationUser
-            /*modelBuilder.Entity<ApplicationUser>()
-                .ToTable(tableName: "tbUsuario")
-                .Property(e => e.EmailConfirmed).HasColumnName("Confirmacao");
+            modelBuilder.Entity<Categoria>()
+                .Property(t => t.EventoItem)
+                .HasColumnName("EVENTO/ITEM");
 
-            modelConfiguration.Entity<IdentityUserClaim<int>>()
-                .Has(e =>
-                {
-                    e.ToTable("tbUsuarioClaims");
-                    e.Property(en => en.UserId).HasColumnName("IdUsuario");
-                    e.Property(en => en.ClaimType).HasColumnName("TipoClaim");
-                    e.Property(en => en.ClaimValue).HasColumnName("ValorClaim");
-                }
-                );
+            modelBuilder.Entity<Evento>()
+                .Property(t => t.DataHora)
+                .HasColumnName("Data/Hora");
+
+            modelBuilder.Entity<Semente>()
+                .Property(t => t.IncSolar)
+                .HasColumnName("Incidência Solar Ideal");
+
+            modelBuilder.Entity<Semente>()
+                .Property(t => t.IncVento)
+                .HasColumnName("Incidência Vento Ideal");
+
+            modelBuilder.Entity<Plantio>()
+                .Property(t => t.QntHectare)
+                .HasColumnName("KG/HA de Semente");
+
+            // ****** RELAÇÕES ***** //
+
+            modelBuilder.Entity<Funcionario>()
+                .HasRequired(u => u.User)
+                .WithRequiredDependent(u => u.Funcionario)
+                .Map(u => u.MapKey("IdUsuario"));
+
+            modelBuilder.Entity<Funcionario>()
+            .HasRequired(f => f.Cargo)
+            .WithMany(c => c.Funcionarios)
+            .HasForeignKey(f => f.IdCargo);
             
-            modelConfiguration.Entity<IdentityUserLogin<int>>()
-                .Has(e =>
-                {
-                    e.ToTable("tbLogin");
-                    e.Property(en => en.UserId).HasColumnName("IdUsuario");
-                }
-                );
-
-            modelConfiguration.Entity<IdentityUserRole<int>>()
-                .Has(e =>
-                {
-                    e.ToTable("tbTipoUsuario");
-                    e.Property(en => en.UserId).HasColumnName("IdUsuario");
-                    e.Property(en => en.RoleId).HasColumnName("IdTipo");
-                }
-                );
-
-            modelConfiguration.Entity<IdentityRole<int, IdentityUserRole<int>>>()
-                .Has(e =>
-                {
-                    e.ToTable("tbTipo");
-                    e.Property(en => en.Id).HasColumnName("Id");
-                    e.Property(en => en.Name).HasColumnName("Nome");
-                }
-                );*/
-
-            base.OnModelCreating(modelBuilder);
+            /*modelBuilder.Entity<Fazenda>()
+            .HasRequired(f => f.Localizacao)
+            .WithRequiredDependent(l => l.Fazenda);*/
         }
 
         public static BancoContext Create()

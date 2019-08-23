@@ -14,11 +14,13 @@ namespace OrganWeb.Areas.Sistema.Models
         [Key]
         public int Id { get; set; }
 
+        //TODO: Nível varchar
         [Display(Name = "Nível")]
         public int Nivel { get; set; }
 
         [Display(Name = "Nome")]
         [Required(ErrorMessage = "O nome é obrigatório.", AllowEmptyStrings = false)]
+        [StringLength(50, MinimumLength = 3)]
         public string Nome { get; set; }
 
         public virtual List<Funcionario> Funcionarios { get; set; }

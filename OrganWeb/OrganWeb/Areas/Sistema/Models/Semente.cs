@@ -8,37 +8,46 @@ using OrganWeb.Models;
 
 namespace OrganWeb.Areas.Sistema.Models
 {
-    [Table("Semente")]
+    [Table("tbSemente")]
     public class Semente : Repository<Semente>
     {
         [Key]
-        public Int32 SementeID { get; set; }
+        public int SementeID { get; set; }
         
         [Required(ErrorMessage = "O nome é obrigatório.", AllowEmptyStrings = false)]
-        public String Nome { get; set; }
-                
-        [Display(Name = "Descrição")]
-        [MaxLength(500, ErrorMessage = "Esse campo deve ter 500 caracteres ou menos"), MinLength(10, ErrorMessage = "Esse campo deve ter no mínimo 10 caracteres")]
-        public String Descricao { get; set; }
-        
-        [ForeignKey("Categoria")]
-        public int CategoriaID { get; set; }
-        
-        public Categoria Categoria { get; set; }
+        [StringLength(50, MinimumLength = 3)]
+        public string Nome { get; set; }
 
-        /*
-        [Display(Name = "Tipo de solo")]
-        public String TipoSolo { get; set; }
+        [Required]
+        [StringLength(75, MinimumLength = 5)]
+        [Display(Name = "Solo ideal")]
+        public string SoloIdeal { get; set; }
 
-        [Display(Name = "Incidência solar")]
+        [Required]
+        [Display(Name = "Incidência solar ideal")]
+        [Range(0.01, 999.99)]
         public double IncSolar { get; set; }
 
-        [Display(Name = "Incidência do vento")]
+        [Required]
+        [Display(Name = "Incidência vento ideal")]
+        [Range(0.01, 999.99)]
         public double IncVento { get; set; }
 
-        [Display(Name = "Acidez")]
+        [Required]
+        [Range(0.01, 999.99)]
         public double Acidez { get; set; }
-        */
+
+        [Required]
+        [ForeignKey("Estoque")]
+        public int IdEstoque { get; set; }
+
+        [Required]
+        [ForeignKey("Fornecedor")]
+        public int IdFornecedor { get; set; }
+
+        public virtual Categoria Categoria { get; set; }
+        public virtual Estoque Estoque { get; set; }
+        public virtual Fornecedor Fornecedor { get; set; }
 
         //http://www.macoratti.net/18/03/mvc5_cadprod1.htm
     }

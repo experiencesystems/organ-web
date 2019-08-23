@@ -182,7 +182,7 @@ create table tbMonitoramento(
      constraint PKMonitoramento primary key(Id),
      
 	Titulo varchar(50) not null,
-	Observação varchar(300),
+	Observacao varchar(300),
 	`Status` boolean not null,
 	Resultado varchar(50) not null
 );
@@ -329,7 +329,7 @@ create table tbFornecedor(
 	`Status` boolean not null,
 	CEP char(8) not null,
     Numero int not null,
-     constraint FKFuncLocalizacao foreign key (CEP, Numero) references tbLocalizacao(CEP, Numero) on delete cascade
+     constraint FKFornLocalizacao foreign key (CEP, Numero) references tbLocalizacao(CEP, Numero) on delete cascade
 );
 
 create table tbFornecedorTelefone(
@@ -392,7 +392,7 @@ create table tbPlantio(
 	 constraint FKPlantioCultura foreign key (IdCultura) references tbCultura(Id) on delete no action, 
 	Tipo varchar(75), -- QUE MERDA É ESSA
 	Densidade decimal(7,2) not null,
-	DataCriação datetime not null default current_timestamp(),
+	DataCriacao datetime not null default current_timestamp(),
 	DataInício date not null,
 	DataColheita date not null,
 	IdSemente int not null,
@@ -461,7 +461,7 @@ create table tbMaquina(
      constraint FKMaquinaFornecedor foreign key (Montadora) references tbFornecedor(Id) on delete no action
 );
 
-create table tbManutenção(
+create table tbManutencao(
 	Id int auto_increment,
      constraint PKManuntencao primary key (Id),
      
@@ -474,7 +474,7 @@ create table tbManutencaoMaquina(
 	IdMaquina int not null,
      constraint FKMaquinaManuntencao foreign key (IdMaquina) references tbMaquina(Id) on delete cascade,
 	IdManuntencao int not null,
-     constraint FKManuntencaoMaquina foreign key (IdManuntencao) references tbManuntencao(Id) on delete cascade,
+     constraint FKManuntencaoMaquina foreign key (IdManuntencao) references tbManutencao(Id) on delete cascade,
      
      constraint PKManuntencaoMaquina primary key (IdMaquina, IdManuntencao)
 );
@@ -487,7 +487,7 @@ create table tbPraga(
 	Descricao varchar(300)
 );
 
-create table tbDoença(
+create table tbDoenca(
 	Id int auto_increment,
      constraint PKDoenca primary key (Id),
 	Nome varchar(50) not null,

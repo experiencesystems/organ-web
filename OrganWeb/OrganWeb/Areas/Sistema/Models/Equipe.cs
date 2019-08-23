@@ -13,11 +13,29 @@ namespace OrganWeb.Areas.Sistema.Models
     {
         [Key]
         public int Id { get; set; }
-        public string Nome { get; set; }
 
-        public List<Funcionario> Funcionarios { get; set; }
-        public List<Tarefa> Tarefas { get; set; }
-        //Funcionario = n-n
-        //Tarefa = n-n
+        [Required]
+        [StringLength(50, MinimumLength = 3)]
+        public string Nome { get; set; }
+    }
+
+    [Table("tbEquipeFuncionario")]
+    public class EquipeFuncionario
+    {
+        [Key]
+        [Column(Order = 1)]
+        [ForeignKey("Equipe")]
+        public int IdEquipe { get; set; }
+
+        [Key]
+        [Column(Order = 2)]
+        [ForeignKey("Funcionario")]
+        public int IdFunc { get; set; }
+
+        [Required]
+        public bool LiderOrNao { get; set; }
+
+        public virtual Funcionario Funcionario { get; set; }
+        public virtual Equipe Equipe { get; set; }
     }
 }
