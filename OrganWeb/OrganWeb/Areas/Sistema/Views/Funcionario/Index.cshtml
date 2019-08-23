@@ -1,0 +1,100 @@
+﻿@model IEnumerable<OrganWeb.Areas.Sistema.Models.Funcionario>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Cargo.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Localizacao.Endereco)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CPF)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RG)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataNascimento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Salario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GrauInstrucao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataContratacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoContratacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PeriodoContratacao)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cargo.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Localizacao.Endereco)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CPF)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RG)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataNascimento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Salario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GrauInstrucao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataContratacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoContratacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PeriodoContratacao)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

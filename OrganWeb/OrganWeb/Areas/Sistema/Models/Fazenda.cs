@@ -14,17 +14,30 @@ namespace OrganWeb.Areas.Sistema.Models
     {
         [Key]
         public int Id { get; set; }
+
+        [Required]
+        [Range(0.01, 999.99)]
+        [Display(Name = "Área")]
         public decimal Area { get; set; }
+
+        [Required]
+        [Range(0.01, 999.99)]
+        [Display(Name = "Perímetro")]
         public decimal Perimetro { get; set; }
 
-        [ForeignKey("Localizacao"), Column(Order = 0)]
-        public char CEP { get; set; }
-        [ForeignKey("Localizacao"), Column(Order = 0)]
-        public int Numero { get; set; }
-        
+        [Required]
         public DbGeometry Coordenadas { get; set; }
 
+        [Required]
+        [ForeignKey("Localizacao")] 
+        [Column(Order = 1)]
+        public string CEP { get; set; }
+
+        [Required]
+        [ForeignKey("Localizacao")]
+        [Column(Order = 2)]
+        public int Numero { get; set; }
+        
         public virtual Localizacao Localizacao { get; set; }
-        //Localização - 1-1
     }
 }

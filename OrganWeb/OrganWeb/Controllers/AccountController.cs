@@ -22,7 +22,7 @@ namespace OrganWeb.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -34,9 +34,9 @@ namespace OrganWeb.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -57,7 +57,7 @@ namespace OrganWeb.Controllers
         [AllowAnonymous]
         public ActionResult LoginRegistro(LoginRegisterViewModel model)
         {
-            return View(new LoginRegisterViewModel { Login = new LoginViewModel(), Registro = new RegisterViewModel()});
+            return View(new LoginRegisterViewModel { Login = new LoginViewModel(), Registro = new RegisterViewModel() });
         }
 
         //
@@ -65,12 +65,11 @@ namespace OrganWeb.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public async Task<ActionResult> Login(LoginRegisterViewModel model, string returnUrl)
         {
-            // Isso não conta falhas de login em relação ao bloqueio de conta
-            // Para permitir que falhas de senha acionem o bloqueio da conta, altere para shouldLockout: true
-            if (ModelState.IsValid) {
-                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            if (ModelState.IsValid)
+            {
+                var result = await SignInManager.PasswordSignInAsync(model.Login.Email, model.Login.Password, model.Login.RememberMe, shouldLockout: false);
                 switch (result)
                 {
                     case SignInStatus.Success:
@@ -78,14 +77,14 @@ namespace OrganWeb.Controllers
                     case SignInStatus.LockedOut:
                         return View("Lockout");
                     case SignInStatus.RequiresVerification:
-                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.Login.RememberMe });
                     case SignInStatus.Failure:
                     default:
                         ModelState.AddModelError("", "Tentativa de login inválida.");
                         return View("LoginRegistro", model);
                 }
             }
-            return View("LoginRegistro", model);
+            return View("LoginRegistro", new LoginRegisterViewModel { Login = new LoginViewModel(), Registro = new RegisterViewModel() });
         }
 
         //
@@ -117,7 +116,7 @@ namespace OrganWeb.Controllers
             // Se um usuário inserir códigos incorretos para uma quantidade especificada de tempo, então a conta de usuário 
             // será bloqueado por um período especificado de tempo. 
             // Você pode configurar os ajustes de bloqueio da conta em IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -136,16 +135,27 @@ namespace OrganWeb.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(LoginRegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var user = new ApplicationUser { UserName = model.Registro.Email, Email = model.Registro.Email };
+
+                //usuario.Assinatura = false;
+                //usuario.CliOrFunc = false;
+                //usuario.Confirmacao = false;
+                //usuario.DataCadastro = DateTime.Today;
+
+                var result = await UserManager.CreateAsync(user, model.Registro.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    using (BancoContext db = new BancoContext())
+                    {
+                        //db.Usuarios.Add(usuario);
+                        db.Users.Add(user);
+                        db.SaveChanges();
+                    }
                     // Para obter mais informações sobre como habilitar a confirmação da conta e redefinição de senha, visite https://go.microsoft.com/fwlink/?LinkID=320771
                     // Enviar um email com este link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -158,7 +168,7 @@ namespace OrganWeb.Controllers
             }
 
             // Se chegamos até aqui e houver alguma falha, exiba novamente o formulário
-            return View("LoginRegistro", model);
+            return View("LoginRegistro", new LoginRegisterViewModel { Login = new LoginViewModel(), Registro = new RegisterViewModel() });
         }
 
         //

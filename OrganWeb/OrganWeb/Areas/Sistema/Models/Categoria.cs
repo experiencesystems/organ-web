@@ -6,18 +6,19 @@ using OrganWeb.Models;
 
 namespace OrganWeb.Areas.Sistema.Models
 {
-    [Table("Categoria")]
+    [Table("tbCategoria")]
     public class Categoria : Repository<Categoria>
     {
         [Key]
-        public int CategoriaID { get; set; }
+        public int Id { get; set; }
 
+        [Required]
         [Display(Name = "Categoria")]
         public String Nome { get; set; }
 
-        [Display(Name = "Cor")]
-        public String Cor { get; set; }
-        
+        [Required]
+        public bool EventoItem { get; set; }
+
         public List<Semente> Sementes { get; set; }
     }
 }
