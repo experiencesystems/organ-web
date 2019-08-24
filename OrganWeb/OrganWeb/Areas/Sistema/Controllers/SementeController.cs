@@ -18,7 +18,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
         // GET: Sistema/Semente
         public ActionResult Index()
         {
-            var sementes = db.Sementes.Include(s => s.Categoria);
+            var sementes = db.Sementes.Include(s => s.Estoque).Include(s => s.Fornecedor);
+            var sql = sementes.ToString();
             return View(sementes.ToList());
         }
 
@@ -40,7 +41,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
         // GET: Sistema/Semente/Create
         public ActionResult Create()
         {
-            ViewBag.CategoriaID = new SelectList(db.Categorias, "CategoriaID", "Nome");
+            ViewBag.IdEstoque = new SelectList(db.Estoques, "Id", "UnidadeMedida");
+            ViewBag.IdFornecedor = new SelectList(db.Fornecedors, "Id", "Nome");
             return View();
         }
 
@@ -49,7 +51,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SementeID,Nome,Descricao,CategoriaID")] Semente semente)
+        public ActionResult Create([Bind(Include = "SementeID,Nome,SoloIdeal,IncSolar,IncVento,Acidez,IdEstoque,IdFornecedor")] Semente semente)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +60,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoriaID = new SelectList(db.Categorias, "CategoriaID", "Nome", semente.CategoriaID);
+            ViewBag.IdEstoque = new SelectList(db.Estoques, "Id", "UnidadeMedida", semente.IdEstoque);
+            ViewBag.IdFornecedor = new SelectList(db.Fornecedors, "Id", "Nome", semente.IdFornecedor);
             return View(semente);
         }
 
@@ -74,7 +77,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoriaID = new SelectList(db.Categorias, "CategoriaID", "Nome", semente.CategoriaID);
+            ViewBag.IdEstoque = new SelectList(db.Estoques, "Id", "UnidadeMedida", semente.IdEstoque);
+            ViewBag.IdFornecedor = new SelectList(db.Fornecedors, "Id", "Nome", semente.IdFornecedor);
             return View(semente);
         }
 
@@ -83,7 +87,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SementeID,Nome,Descricao,CategoriaID")] Semente semente)
+        public ActionResult Edit([Bind(Include = "SementeID,Nome,SoloIdeal,IncSolar,IncVento,Acidez,IdEstoque,IdFornecedor")] Semente semente)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +95,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoriaID = new SelectList(db.Categorias, "CategoriaID", "Nome", semente.CategoriaID);
+            ViewBag.IdEstoque = new SelectList(db.Estoques, "Id", "UnidadeMedida", semente.IdEstoque);
+            ViewBag.IdFornecedor = new SelectList(db.Fornecedors, "Id", "Nome", semente.IdFornecedor);
             return View(semente);
         }
 

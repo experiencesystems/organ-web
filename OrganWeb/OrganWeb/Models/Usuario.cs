@@ -12,7 +12,7 @@ using OrganWeb.Areas.Sistema.Models;
 
 namespace OrganWeb.Models
 {
-    public class Usuario : IdentityUser
+    /*public class Usuario : IdentityUser
     {
         public virtual User User { get; set; }
     }
@@ -20,8 +20,9 @@ namespace OrganWeb.Models
     [Table("tbDadosUsuario")]
     public class User
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
         public DateTime DataCadastro { get; set; }
 
         [Required]
@@ -39,10 +40,19 @@ namespace OrganWeb.Models
 
         public virtual ApplicationUser ApplicationUser { get; set; }
         public virtual Funcionario Funcionario { get; set; }
-    }
+    }*/
 
     public class ApplicationUser : IdentityUser
     {
+        [Required]
+        public DateTime DataCadastro { get; set; }
+        [Required]
+        public bool Confirmacao { get; set; }
+        [Required]
+        public bool Assinatura { get; set; }
+        [Required]
+        public bool CliOrFunc { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Observe que o authenticationType deve corresponder àquele definido em CookieAuthenticationOptions.AuthenticationType

@@ -26,6 +26,11 @@ CREATE index  `IX_RoleId` on `AspNetUserRoles` (`RoleId`);
 
 create table `AspNetUsers` (
 	`Id` nvarchar(128)  not null ,
+	DataCadastro datetime default current_timestamp(),
+    Confirmacao bool not null,
+	Ativacao bool not null default true,
+    Assinatura bool not null,
+	`CLI/FUNC` bool not null,
 	`Email` nvarchar(256) ,
 	`EmailConfirmed` bool not null ,
 	`PasswordHash` longtext,
@@ -66,7 +71,7 @@ alter table `AspNetUserRoles` add constraint `FK_AspNetUserRoles_AspNetUsers_Use
 alter table `AspNetUserClaims` add constraint `FK_AspNetUserClaims_AspNetUsers_UserId`  foreign key (`UserId`) references `AspNetUsers` ( `Id`)  on update cascade on delete cascade; 
 alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_UserId`  foreign key (`UserId`) references `AspNetUsers` ( `Id`)  on update cascade on delete cascade;
 
-create table tbDadosUsuario(
+/*create table tbDadosUsuario(
 	Id int auto_increment, 
      constraint PKUsuario primary key(Id),
 	DataCadastro datetime default current_timestamp(),
@@ -78,7 +83,7 @@ create table tbDadosUsuario(
 	
     IdUsuario nvarchar(128)  not null,
      constraint FKDadosUsuario foreign key(IdUsuario) references `AspNetUsers`(`Id`)
-);
+);*/
 
 create table tbLocalizacao(
 	CEP char(8),
@@ -116,8 +121,8 @@ create table tbFuncionario(
 	Id int auto_increment,
      constraint PKFuncionario primary key (Id),
 	Nome varchar(100) not null,
-     Sobrenome varchar(100) not null,
-    CPF numeric(11) not null,
+    Sobrenome varchar(100) not null,
+    CPF varchar(11) not null,
      constraint UQCPF unique (CPF),
 	
     RG varchar(9) not null,
@@ -136,9 +141,21 @@ create table tbFuncionario(
     Numero int not null,
      constraint FKFuncLocalizacao foreign key (CEP, Numero) references tbLocalizacao(CEP, Numero) on delete cascade,
      
-	IdUsuario int not null,
-     constraint FKFuncUsuario foreign key (IdUsuario) references tbDadosUsuario(Id) on delete cascade
+	IdUsuario nvarchar(128) not null,
+     constraint FKFuncUsuario foreign key (IdUsuario) references AspNetUsers(Id) on delete cascade
 );
+
+insert into tbLocalizacao values ('05234000', 12, 'Rua Gonçales', 'Vila Mariana', 'APTO 23', 'Sao Paulo', 'SP');
+insert into tbCargo (Nivel, Cargo) values ('Alto', 'Administrador');
+
+SELECT`Extent1`.`Numero`, `Extent1`.`Id`,`Extent1`.`Nome`,`Extent1`.`Sobrenome`, `Extent1`.`CPF`,`Extent1`.`RG`, `Extent1`.`DataNascimento`, `Extent1`.`Email`, `Extent1`.`Salario`, `Extent1`.`GrauInstrucao`, `Extent1`.`DataContratacao`, `Extent1`.`TipoContratacao`, `Extent1`.`PeriodoContratacao`, `Extent1`.`MES/ANO`, `Extent1`.`IdCargo`, `Extent1`.`CEP`,`Extent1`.`IdUsuario`,`Extent2`.`Id` AS `Id1`, `Extent2`.`Nivel`, `Extent2`.`Cargo`, `Extent3`.`CEP` AS `CEP1`,`Extent3`.`Numero` AS `Numero1`, `Extent3`.`Endereco`, `Extent3`.`Bairro`, `Extent3`.`Complemento`,`Extent3`.`Cidade`, `Extent3`.`UF`,`Extent4`.`Id` AS `Id2`, `Extent4`.`DataCadastro`, `Extent4`.`Confirmacao`, `Extent4`.`Assinatura`,`Extent4`.`CLI/FUNC`, `Extent4`.`Email` AS `Email1`, `Extent4`.`EmailConfirmed`, `Extent4`.`PasswordHash`, `Extent4`.`SecurityStamp`, `Extent4`.`PhoneNumber`, `Extent4`.`PhoneNumberConfirmed`, `Extent4`.`TwoFactorEnabled`,`Extent4`.`LockoutEndDateUtc`,`Extent4`.`LockoutEnabled`, `Extent4`.`AccessFailedCount`,`Extent4`.`UserName`FROM `tbFuncionario` AS `Extent1` INNER JOIN `tbCargo` AS `Extent2` ON `Extent1`.`IdCargo` = `Extent2`.`Id` INNER JOIN `tbLocalizacao` AS `Extent3` ON (`Extent1`.`Numero` = `Extent3`.`Numero`) AND (`Extent1`.`CEP` = `Extent3`.`CEP`) INNER JOIN `AspNetUsers` AS `Extent4` ON `Extent1`.`IdUsuario` = `Extent4`.`Id`;
+SELECT`Extent1`.`IdCargo`,`Extent1`.`Sobrenome`, `Extent2`.`Cargo`FROM `tbFuncionario` AS `Extent1` INNER JOIN `tbCargo` AS `Extent2` ON `Extent1`.`IdCargo` = `Extent2`.`Id`;
+
+insert into tbFuncionario (Nome, Sobrenome, CPF, RG, DataNascimento, Email, Salario, GrauInstrucao, DataContratacao,
+ TipoContratacao, PeriodoContratacao, `MES/ANO`, IdCargo, CEP, Numero, IdUsuario) values (
+ 'Gilberto', 'Ramos', '26633622255', '356252527', '2008-7-04', 'gilberto@ramos.com', 122.30, 'Alto', '2018-7-04',
+ 'Temporaria', 1, true, 1, '05234000', 12, 'e9e38eb8-d416-4bf0-830b-db10bdf5cdb2'
+ );
 
 create index  IXIdFuncionario on tbFuncionario (Id);
 create index  IXIdUsuario on tbFuncionario (IdUsuario);

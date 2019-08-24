@@ -15,12 +15,9 @@ namespace OrganWeb.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(2)]
-        [MinLength(2)]
         public int DDD { get; set; }
 
         [Required]
-        [MaxLength(9)]
         public Int64 Numero { get; set; }
 
         [StringLength(30, MinimumLength = 3)]

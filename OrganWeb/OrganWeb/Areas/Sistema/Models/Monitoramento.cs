@@ -8,7 +8,7 @@ using OrganWeb.Models;
 
 namespace OrganWeb.Areas.Sistema.Models
 {
-    [Table("tbMonitoramentoTarefa")]
+    [Table("tbMonitoramento")]
     public class Monitoramento : Repository<Monitoramento>
     {
         [Key]

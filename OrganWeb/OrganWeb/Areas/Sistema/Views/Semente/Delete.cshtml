@@ -13,11 +13,19 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Categoria.Nome)
+            @Html.DisplayNameFor(model => model.Estoque.UnidadeMedida)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Categoria.Nome)
+            @Html.DisplayFor(model => model.Estoque.UnidadeMedida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fornecedor.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fornecedor.Nome)
         </dd>
 
         <dt>
@@ -29,11 +37,35 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Descricao)
+            @Html.DisplayNameFor(model => model.SoloIdeal)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Descricao)
+            @Html.DisplayFor(model => model.SoloIdeal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncSolar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncSolar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncVento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IncVento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Acidez)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Acidez)
         </dd>
 
     </dl>

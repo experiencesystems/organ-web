@@ -27,6 +27,8 @@ namespace OrganWeb.Areas.Sistema.Models
 
         [Required]
         public DbGeometry Coordenadas { get; set; }
+
+        public virtual Solo Solo { get; set; }
     }
 
     [Table("tbAreaPlantio")]

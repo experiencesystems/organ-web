@@ -39,7 +39,6 @@ namespace OrganWeb.Areas.Sistema.Models
         [StringLength(2, MinimumLength = 2)]
         public string UF { get; set; }
 
-        //public virtual Funcionario Funcionario { get; set; }
         //public virtual Fazenda Fazenda { get; set; }
     }
 }

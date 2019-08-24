@@ -5,96 +5,190 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="main-body">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title box-title">Funcionários</h6>
+                    <div class="card-header-right">
+                        <ul class="list-unstyled card-option">
+                            <li><i class="ti-minus minimize-card"></i></li>
+                            <li><i class="icon-refresh"></i></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-content">
+                        <div class="card-content">
+                            <!-- Modal novo plantio-->
+                            <button type="button" class="btn btn-info waves-effect" data-toggle="modal" data-target="#Modal-lightbox">Novo funcionário</button>
+                            <div class="modal fade" id="Modal-lightbox" tabindex="-1" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Cargo.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Localizacao.Endereco)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CPF)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RG)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DataNascimento)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Salario)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GrauInstrucao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DataContratacao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TipoContratacao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PeriodoContratacao)
-        </th>
-        <th></th>
-    </tr>
+                                            <h6 class="card-title box-title"><i class="icofont icofont-plant"></i>Criar plantios</h6>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cargo.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Localizacao.Endereco)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CPF)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RG)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DataNascimento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Salario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GrauInstrucao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DataContratacao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TipoContratacao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PeriodoContratacao)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+                                            <form id="main" method="post" action="#" novalidate="">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-8 col-form">Nome:</label>
+                                                    <label class="col-sm-2 col-form">Cor:</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control" name="nome" id="nome" placeholder="Ex.: Plantio de soja">
+                                                        <span class="messages"></span>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <input type="color" class="form-control">
+                                                        <span class="messages"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-sm">Cultura:</label>
+                                                    <div class="col-sm-12">
+                                                        <select class="form-control" id="sel1">
+                                                            <option>Soja</option>
+                                                            <option>Milho</option>
+                                                            <option>Tomate</option>
+                                                            <option>Limão</option>
+                                                        </select>
+                                                        <span class="messages"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-sm">Áreas:</label>
+                                                    <div class="col-sm-12">
+                                                        <select class="form-control" id="sel1">
+                                                            <option>Talhão 1</option>
+                                                            <option>Talhão 2</option>
+                                                            <option>Talhão 3</option>
+                                                            <option>Talhão 4</option>
+                                                        </select>
+                                                        <span class="messages"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-6 col-form-label">Tipo de plantio:</label>
+                                                    <div class="col-sm-12">
+                                                        <select class="form-control" id="sel1">
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                            <option>4</option>
+                                                        </select>
+                                                        <span class="messages"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-6 col-form-label">Período inicial:</label>
+                                                    <label class="col-sm-6 col-form-label">Período final:</label>
+                                                    <div class="col-sm-6">
+                                                        <div class="input-group date">
+                                                            <span class="input-group-addon" id="basic-addon2"><i class="icofont icofont-ui-calendar"></i></span>
+                                                            <input type="date" class="form-control" name="name" id="name" placeholder="Período inicial">
+                                                        </div>
+                                                        <span class="messages"></span>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="input-group date">
+                                                            <span class="input-group-addon" id="basic-addon2"><i class="icofont icofont-ui-calendar"></i></span>
+                                                            <input type="date" class="form-control" name="name" id="name" placeholder="Período inicial">
+                                                        </div>
+                                                        <span class="messages"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-10 col-form-label">Plantio personalizado: <i class="icofont icofont-question-circle"></i></label>
+                                                    <div class="col-sm-12">
+                                                        <select class="form-control" id="sel1">
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                            <option>4</option>
+                                                        </select>
+                                                        <span class="messages"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-7"></label>
+                                                    <div class="col-sm-10">
+                                                        <button type="submit" class="btn btn-success m-b-0">Adicionar</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table">
+                            <thead class="thead-title">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">@Html.DisplayNameFor(model => model.Nome)</th>
+                                    <th scope="col">@Html.DisplayNameFor(model => model.Cargo.Nome)</th>
+                                    <th scope="col">@Html.DisplayNameFor(model => model.Email)</th>
+                                    <th scope="col">@Html.DisplayNameFor(model => model.Salario)</th>
+                                    <th scope="col">@Html.DisplayNameFor(model => model.TipoContratacao)</th>
+                                    <th scope="col">@Html.DisplayNameFor(model => model.PeriodoContratacao)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                <tr>
+                                    <th scope="row"></th>
+                                    <td>@Html.DisplayFor(modelItem => item.Nome) @Html.DisplayFor(modelItem => item.Sobrenome)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Cargo.Nome)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                    <td>R$ @Html.DisplayFor(modelItem => item.Salario)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.TipoContratacao)</td>
 
-</table>
+                                    @if (item.MesAno)
+                                    {
+                                    <td>@Html.DisplayFor(modelItem => item.PeriodoContratacao) mês</td>
+                                    }
+                                    else
+                                    {
+                                    <td>@Html.DisplayFor(modelItem => item.PeriodoContratacao) ano</td>
+                                    }
+
+                                </tr>
+                                }
+                                <!--
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>@*Html.DisplayFor(modelItem => item.Cargo.Nome)*@</td>
+                                        <td>Otto</td>
+                                        <td>mdo</td>
+                                    </tr>
+                                    <tr class="table-list">
+                                        <th scope="row">2</th>
+                                        <td>Jacob</td>
+                                        <td>Thornton</td>
+                                        <td>fat</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>twitter</td>
+                                    </tr>
+
+                                        <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+            </td>
+                                    -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

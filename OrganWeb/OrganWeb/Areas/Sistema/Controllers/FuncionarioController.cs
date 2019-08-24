@@ -18,8 +18,16 @@ namespace OrganWeb.Areas.Sistema.Controllers
         // GET: Sistema/Funcionario
         public ActionResult Index()
         {
-            var funcionarios = db.Funcionarios.Include(f => f.Cargo);
-            return View(funcionarios.ToList());
+            try
+            {
+                var funcionarios = db.Funcionarios
+                    .Include(f => f.Cargo)
+                    .ToList();
+
+                return View(funcionarios);
+            }
+            catch (FormatException) { }
+            return View();
         }
 
         // GET: Sistema/Funcionario/Details/5
@@ -41,6 +49,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
         public ActionResult Create()
         {
             ViewBag.IdCargo = new SelectList(db.Cargos, "Id", "Nome");
+            ViewBag.CEP = new SelectList(db.Localizacaos, "CEP", "Endereco");
+            ViewBag.IdUsuario = new SelectList(db.Users, "Id", "Email");
             return View();
         }
 
@@ -49,18 +59,18 @@ namespace OrganWeb.Areas.Sistema.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,CPF,RG,DataNascimento,Email,Salario,GrauInstrucao,DataContratacao,TipoContratacao,PeriodoContratacao,IdCargo")] Funcionario funcionario, Localizacao localizacao)
+        public ActionResult Create([Bind(Include = "Id,Nome,Sobrenome,CPF,RG,DataNascimento,Email,Salario,GrauInstrucao,DataContratacao,TipoContratacao,PeriodoContratacao,MesAno,IdCargo,CEP,Numero,IdUsuario")] Funcionario funcionario)
         {
             if (ModelState.IsValid)
             {
-                funcionario.User.Id = 1;
                 db.Funcionarios.Add(funcionario);
-                db.Localizacaos.Add(localizacao);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.IdCargo = new SelectList(db.Cargos, "Id", "Nome", funcionario.IdCargo);
+            ViewBag.CEP = new SelectList(db.Localizacaos, "CEP", "Endereco", funcionario.CEP);
+            ViewBag.IdUsuario = new SelectList(db.Users, "Id", "Email", funcionario.IdUsuario);
             return View(funcionario);
         }
 
@@ -77,6 +87,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 return HttpNotFound();
             }
             ViewBag.IdCargo = new SelectList(db.Cargos, "Id", "Nome", funcionario.IdCargo);
+            ViewBag.CEP = new SelectList(db.Localizacaos, "CEP", "Endereco", funcionario.CEP);
+            ViewBag.IdUsuario = new SelectList(db.Users, "Id", "Email", funcionario.IdUsuario);
             return View(funcionario);
         }
 
@@ -85,7 +97,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome,CPF,RG,DataNascimento,Email,Salario,GrauInstrucao,DataContratacao,TipoContratacao,PeriodoContratacao,IdCargo")] Funcionario funcionario)
+        public ActionResult Edit([Bind(Include = "Id,Nome,Sobrenome,CPF,RG,DataNascimento,Email,Salario,GrauInstrucao,DataContratacao,TipoContratacao,PeriodoContratacao,MesAno,IdCargo,CEP,Numero,IdUsuario")] Funcionario funcionario)
         {
             if (ModelState.IsValid)
             {
@@ -94,6 +106,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.IdCargo = new SelectList(db.Cargos, "Id", "Nome", funcionario.IdCargo);
+            ViewBag.CEP = new SelectList(db.Localizacaos, "CEP", "Endereco", funcionario.CEP);
+            ViewBag.IdUsuario = new SelectList(db.Users, "Id", "Email", funcionario.IdUsuario);
             return View(funcionario);
         }
 
