@@ -139,23 +139,32 @@ namespace OrganWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Registro.Email, Email = model.Registro.Email };
-
-                //usuario.Assinatura = false;
-                //usuario.CliOrFunc = false;
-                //usuario.Confirmacao = false;
-                //usuario.DataCadastro = DateTime.Today;
+                var user = new ApplicationUser
+                {
+                    UserName = model.Registro.Email,
+                    Email = model.Registro.Email,
+                    Assinatura = false,
+                    CliOrFunc = false,
+                    Confirmacao = false,
+                    DataCadastro = DateTime.Today
+                };
 
                 var result = await UserManager.CreateAsync(user, model.Registro.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                    using (BancoContext db = new BancoContext())
+
+                    try
                     {
-                        //db.Usuarios.Add(usuario);
+                        var db = new BancoContext();
                         db.Users.Add(user);
                         db.SaveChanges();
                     }
+                    catch (Exception)
+                    {
+
+                    }
+
                     // Para obter mais informações sobre como habilitar a confirmação da conta e redefinição de senha, visite https://go.microsoft.com/fwlink/?LinkID=320771
                     // Enviar um email com este link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

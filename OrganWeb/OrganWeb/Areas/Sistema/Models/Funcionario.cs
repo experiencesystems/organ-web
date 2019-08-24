@@ -24,7 +24,7 @@ namespace OrganWeb.Areas.Sistema.Models
 
         [Required]
         //[RegularExpression("/^\\d{3}\\d{3}\\d{3}\\d{2}$/", ErrorMessage = "Verifique o CPF.")]
-        public Int64 CPF { get; set; }
+        public string CPF { get; set; }
 
         [Required]
         [StringLength(9, MinimumLength = 9)]
@@ -42,7 +42,7 @@ namespace OrganWeb.Areas.Sistema.Models
         [Required]
         [Range(0.01, 99999.99)]
         [Display(Name = "Salário")]
-        public decimal Salario { get; set; }
+        public double Salario { get; set; }
 
         [Required]
         [StringLength(50, MinimumLength = 2)]
@@ -51,16 +51,16 @@ namespace OrganWeb.Areas.Sistema.Models
 
         [Required]
         [DataType(DataType.Date)]
-        [Display(Name = "Data de contratação")]
+        [Display(Name = "Data da contratação")]
         public DateTime DataContratacao { get; set; }
 
         [Required]
         [StringLength(50, MinimumLength = 2)]
-        [Display(Name = "Tipo de contratação")]
+        [Display(Name = "Contratação")]
         public string TipoContratacao { get; set; }
 
         [Required]
-        [Display(Name = "Período de contratação")]
+        [Display(Name = "Período")]
         public int PeriodoContratacao { get; set; }
 
         //TODO: checkbox p mes ou ano e dependendo do q estiver checado registra
@@ -68,6 +68,7 @@ namespace OrganWeb.Areas.Sistema.Models
         public bool MesAno { get; set; }
 
         [Required]
+        [ForeignKey("Cargo")]
         [Display(Name = "Cargo")]
         public int IdCargo { get; set; }
 
@@ -86,13 +87,10 @@ namespace OrganWeb.Areas.Sistema.Models
         [Required]
         [ForeignKey("User")]
         [Display(Name = "Usuário")]
-        public int IdUsuario { get; set; }
+        public string IdUsuario { get; set; }
 
-        //public virtual List<Tarefa> Tarefas { get; set; }
-        //public virtual List<Equipe> Equipes { get; set; }
-        
         public virtual Cargo Cargo { get; set; }
-        public virtual User User { get; set; }
+        public virtual ApplicationUser User { get; set; }
         public virtual Localizacao Localizacao { get; set; }
     }
 

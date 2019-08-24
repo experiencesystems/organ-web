@@ -18,7 +18,5 @@ namespace OrganWeb.Areas.Sistema.Models
 
         [Required]
         public bool EventoItem { get; set; }
-
-        public List<Semente> Sementes { get; set; }
     }
 }

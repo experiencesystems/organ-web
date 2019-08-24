@@ -46,12 +46,7 @@ namespace OrganWeb.Areas.Sistema.Models
         [Column(Order = 2)]
         public int Numero { get; set; }
 
-        public virtual List<Compra> Compras { get; set; }
-        public virtual List<Telefone> Telefones { get; set; }
-
         public virtual Localizacao Localizacao { get; set; }
-        //Compra - 1-n
-        //Telefone - 1-n
     }
 
     [Table("tbFornecedorTelefone")]

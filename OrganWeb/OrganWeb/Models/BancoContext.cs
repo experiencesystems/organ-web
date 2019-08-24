@@ -21,7 +21,7 @@ namespace OrganWeb.Models
         public virtual DbSet<Fazenda> Fazendas { get; set; }
         public virtual DbSet<Funcionario> Funcionarios { get; set; }
         public virtual DbSet<Cargo> Cargos { get; set; }
-        public virtual DbSet<User> Usuarios { get; set; }
+        //public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Tarefa> Tarefas { get; set; }
         public virtual DbSet<Equipe> Equipes { get; set; }
         public virtual DbSet<Telefone> Telefones { get; set; }
@@ -70,7 +70,7 @@ namespace OrganWeb.Models
                 .Property(t => t.Nome)
                 .HasColumnName("Cargo");
 
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<ApplicationUser>()
                 .Property(t => t.CliOrFunc)
                 .HasColumnName("CLI/FUNC");
 
@@ -100,17 +100,17 @@ namespace OrganWeb.Models
 
             // ****** RELAÇÕES ***** //
 
-            modelBuilder.Entity<Funcionario>()
-                .HasRequired(u => u.User)
-                .WithRequiredDependent(u => u.Funcionario)
-                .Map(u => u.MapKey("IdUsuario"));
+            //modelBuilder.Entity<Funcionario>()
+            //.HasRequired(u => u.User)
+            //.WithRequiredDependent(u => u.Funcionario)
+            //.Map(u => u.MapKey("IdUsuario"));
 
-            modelBuilder.Entity<Funcionario>()
+            /*modelBuilder.Entity<Funcionario>()
             .HasRequired(f => f.Cargo)
             .WithMany(c => c.Funcionarios)
             .HasForeignKey(f => f.IdCargo);
             
-            /*modelBuilder.Entity<Fazenda>()
+            modelBuilder.Entity<Fazenda>()
             .HasRequired(f => f.Localizacao)
             .WithRequiredDependent(l => l.Fazenda);*/
         }

@@ -183,7 +183,6 @@
     <Compile Include="Areas\Sistema\Models\Cargo.cs" />
     <Compile Include="Areas\Sistema\Models\Categoria.cs" />
     <Compile Include="Areas\Sistema\Models\Colheita.cs" />
-    <Compile Include="Areas\Sistema\Models\Compra.cs" />
     <Compile Include="Areas\Sistema\Models\Controle.cs" />
     <Compile Include="Areas\Sistema\Models\Cultura.cs" />
     <Compile Include="Areas\Sistema\Models\Despesa.cs" />
@@ -261,22 +260,22 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
-    <Content Include="Areas\Sistema\Views\Semente\Create.cshtml" />
-    <Content Include="Areas\Sistema\Views\Semente\Delete.cshtml" />
-    <Content Include="Areas\Sistema\Views\Semente\Details.cshtml" />
-    <Content Include="Areas\Sistema\Views\Semente\Edit.cshtml" />
-    <Content Include="Areas\Sistema\Views\Semente\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\web.config" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="Areas\Sistema\Views\Funcionario\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Funcionario\Delete.cshtml" />
     <Content Include="Areas\Sistema\Views\Funcionario\Details.cshtml" />
     <Content Include="Areas\Sistema\Views\Funcionario\Edit.cshtml" />
     <Content Include="Areas\Sistema\Views\Funcionario\Index.cshtml" />
-    <Content Include="Areas\Sistema\Views\Funcionario\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Semente\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Semente\Delete.cshtml" />
+    <Content Include="Areas\Sistema\Views\Semente\Details.cshtml" />
+    <Content Include="Areas\Sistema\Views\Semente\Edit.cshtml" />
+    <Content Include="Areas\Sistema\Views\Semente\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -345,6 +344,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Sistema\Views\Funcionarios\" />
     <Folder Include="Areas\Sistema\Views\Shared\" />
     <Folder Include="Areas\Sistema\Views\Usuario\" />
   </ItemGroup>

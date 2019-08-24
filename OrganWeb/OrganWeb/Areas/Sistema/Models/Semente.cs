@@ -12,7 +12,7 @@ namespace OrganWeb.Areas.Sistema.Models
     public class Semente : Repository<Semente>
     {
         [Key]
-        public int SementeID { get; set; }
+        public int Id { get; set; }
         
         [Required(ErrorMessage = "O nome é obrigatório.", AllowEmptyStrings = false)]
         [StringLength(50, MinimumLength = 3)]
@@ -45,7 +45,7 @@ namespace OrganWeb.Areas.Sistema.Models
         [ForeignKey("Fornecedor")]
         public int IdFornecedor { get; set; }
 
-        public virtual Categoria Categoria { get; set; }
+        //public virtual Categoria Categoria { get; set; }
         public virtual Estoque Estoque { get; set; }
         public virtual Fornecedor Fornecedor { get; set; }
 
