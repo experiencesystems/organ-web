@@ -23,6 +23,7 @@ namespace OrganWeb.Areas.Sistema.Models
 
         [Required]
         [Range(0.01, 99999.99)]
+        [Display(Name = "Valor unitário")]
         public double ValorUnit { get; set; }
         
         [Required]

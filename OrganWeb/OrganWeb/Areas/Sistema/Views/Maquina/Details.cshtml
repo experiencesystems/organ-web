@@ -1,0 +1,83 @@
+﻿@model OrganWeb.Areas.Sistema.Models.Maquina
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Maquina</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Fornecedor.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fornecedor.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataCadastro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataCadastro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorCadastro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorCadastro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VidaUtil)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VidaUtil)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepreciacaoAno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepreciacaoAno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepreciacaoMes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepreciacaoMes)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

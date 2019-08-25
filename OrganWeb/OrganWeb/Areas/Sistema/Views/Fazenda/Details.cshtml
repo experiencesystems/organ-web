@@ -1,0 +1,51 @@
+﻿@model OrganWeb.Areas.Sistema.Models.Fazenda
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Fazenda</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Localizacao.Endereco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Localizacao.Endereco)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Area)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Area)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Perimetro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Perimetro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Coordenadas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Coordenadas)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
