@@ -1,0 +1,67 @@
+﻿@model OrganWeb.Areas.Sistema.Models.Controle
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Controle</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Estadio.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estadio.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Eficiencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Eficiencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroLiberacoes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroLiberacoes)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

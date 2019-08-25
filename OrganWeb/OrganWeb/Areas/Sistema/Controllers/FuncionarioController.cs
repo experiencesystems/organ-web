@@ -18,7 +18,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
         // GET: Sistema/Funcionario
         public ActionResult Index()
         {
-            try
             {
                 var funcionarios = db.Funcionarios
                     .Include(f => f.Cargo)
@@ -26,8 +25,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
                 return View(funcionarios);
             }
-            catch (FormatException) { }
-            return View();
         }
 
         // GET: Sistema/Funcionario/Details/5

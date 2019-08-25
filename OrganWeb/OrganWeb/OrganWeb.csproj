@@ -178,7 +178,14 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Sistema\Controllers\ControleController.cs" />
+    <Compile Include="Areas\Sistema\Controllers\EstoqueController.cs" />
+    <Compile Include="Areas\Sistema\Controllers\FazendaController.cs" />
+    <Compile Include="Areas\Sistema\Controllers\FornecedorController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FuncionarioController.cs" />
+    <Compile Include="Areas\Sistema\Controllers\ItemController.cs" />
+    <Compile Include="Areas\Sistema\Controllers\MaquinaController.cs" />
+    <Compile Include="Areas\Sistema\Controllers\PragaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\SementeController.cs" />
     <Compile Include="Areas\Sistema\Models\Cargo.cs" />
     <Compile Include="Areas\Sistema\Models\Categoria.cs" />
@@ -276,6 +283,41 @@
     <Content Include="Areas\Sistema\Views\Semente\Details.cshtml" />
     <Content Include="Areas\Sistema\Views\Semente\Edit.cshtml" />
     <Content Include="Areas\Sistema\Views\Semente\Index.cshtml" />
+    <Content Include="Areas\Sistema\Views\Item\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Item\Delete.cshtml" />
+    <Content Include="Areas\Sistema\Views\Item\Details.cshtml" />
+    <Content Include="Areas\Sistema\Views\Item\Edit.cshtml" />
+    <Content Include="Areas\Sistema\Views\Item\Index.cshtml" />
+    <Content Include="Areas\Sistema\Views\Fornecedor\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Fornecedor\Delete.cshtml" />
+    <Content Include="Areas\Sistema\Views\Fornecedor\Details.cshtml" />
+    <Content Include="Areas\Sistema\Views\Fornecedor\Edit.cshtml" />
+    <Content Include="Areas\Sistema\Views\Fornecedor\Index.cshtml" />
+    <Content Include="Areas\Sistema\Views\Estoque\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Estoque\Delete.cshtml" />
+    <Content Include="Areas\Sistema\Views\Estoque\Details.cshtml" />
+    <Content Include="Areas\Sistema\Views\Estoque\Edit.cshtml" />
+    <Content Include="Areas\Sistema\Views\Estoque\Index.cshtml" />
+    <Content Include="Areas\Sistema\Views\Fazenda\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Fazenda\Delete.cshtml" />
+    <Content Include="Areas\Sistema\Views\Fazenda\Details.cshtml" />
+    <Content Include="Areas\Sistema\Views\Fazenda\Edit.cshtml" />
+    <Content Include="Areas\Sistema\Views\Fazenda\Index.cshtml" />
+    <Content Include="Areas\Sistema\Views\Maquina\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Maquina\Delete.cshtml" />
+    <Content Include="Areas\Sistema\Views\Maquina\Details.cshtml" />
+    <Content Include="Areas\Sistema\Views\Maquina\Edit.cshtml" />
+    <Content Include="Areas\Sistema\Views\Maquina\Index.cshtml" />
+    <Content Include="Areas\Sistema\Views\Praga\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Praga\Delete.cshtml" />
+    <Content Include="Areas\Sistema\Views\Praga\Details.cshtml" />
+    <Content Include="Areas\Sistema\Views\Praga\Edit.cshtml" />
+    <Content Include="Areas\Sistema\Views\Praga\Index.cshtml" />
+    <Content Include="Areas\Sistema\Views\Controle\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Controle\Delete.cshtml" />
+    <Content Include="Areas\Sistema\Views\Controle\Details.cshtml" />
+    <Content Include="Areas\Sistema\Views\Controle\Edit.cshtml" />
+    <Content Include="Areas\Sistema\Views\Controle\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -344,7 +386,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Sistema\Views\Funcionarios\" />
     <Folder Include="Areas\Sistema\Views\Shared\" />
     <Folder Include="Areas\Sistema\Views\Usuario\" />
   </ItemGroup>
