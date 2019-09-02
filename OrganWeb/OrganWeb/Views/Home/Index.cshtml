@@ -2,7 +2,7 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="main-body">    
+<div class="main-body">
     <div class="row">
         <!--Tarefas-->
         <div class="col-md-4">
@@ -36,11 +36,6 @@
                                         <li>
                                             <label>
                                                 <input type="checkbox"><i class="check-box"></i><span>Colher morangos</span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input type="checkbox"><i class="check-box"></i><span>Plantar batata</span>
                                             </label>
                                         </li>
                                         <li>
@@ -112,7 +107,7 @@
         </div>
         <!--Fim das Tabelas-->
         <!--Progresso dos plantios-->
-        <div class="col-md-6">
+        <div class="col-xl-6 col-md-12">
             <div class="card">
                 <div class="card-header">
                     <h6 class="card-title box-title">Progresso dos plantios</h6>
@@ -126,111 +121,268 @@
                 <div class="card-body">
                     <div class="card-content">
                         <!-- Modal novo plantio-->
-                            <button type="button" class="btn btn-info waves-effect" data-toggle="modal" data-target="#Modal-lightbox">Abra e verás</button>
-                            <div class="modal fade" id="Modal-lightbox" tabindex="-1" role="dialog">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
+                        <button type="button" class="btn btn-info waves-effect" data-toggle="modal" data-target="#Modal-lightbox">Abra e verás</button>
+                        <div class="modal fade" id="Modal-lightbox" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
 
-                                            <h6 class="card-title box-title"><i class="icofont icofont-plant"></i>Criar plantios</h6>
+                                        <h6 class="card-title box-title"><i class="icofont icofont-plant"></i>Criar plantios</h6>
 
-                                            <form id="main" method="post" action="#" novalidate="">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-8 col-form">Nome:</label>
-                                                    <label class="col-sm-2 col-form">Cor:</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="text" class="form-control" name="nome" id="nome" placeholder="Ex.: Plantio de soja">
-                                                        <span class="messages"></span>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <input type="color" class="form-control">
-                                                        <span class="messages"></span>
-                                                    </div>
+                                        <form id="main" method="post" action="#" novalidate="">
+                                            <div class="form-group row">
+                                                <label class="col-sm-8 col-form">Nome:</label>
+                                                <label class="col-sm-2 col-form">Cor:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Ex.: Plantio de soja">
+                                                    <span class="messages"></span>
                                                 </div>
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-sm">Cultura:</label>
-                                                    <div class="col-sm-12">
-                                                        <select class="form-control" id="sel1">
-                                                            <option>Soja</option>
-                                                            <option>Milho</option>
-                                                            <option>Tomate</option>
-                                                            <option>Limão</option>
-                                                        </select>
-                                                        <span class="messages"></span>
-                                                    </div>
+                                                <div class="col-sm-4">
+                                                    <input type="color" class="form-control">
+                                                    <span class="messages"></span>
                                                 </div>
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3 col-form-sm">Áreas:</label>
-                                                    <div class="col-sm-12">
-                                                        <select class="form-control" id="sel1">
-                                                            <option>Talhão 1</option>
-                                                            <option>Talhão 2</option>
-                                                            <option>Talhão 3</option>
-                                                            <option>Talhão 4</option>
-                                                        </select>
-                                                        <span class="messages"></span>
-                                                    </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-sm">Cultura:</label>
+                                                <div class="col-sm-12">
+                                                    <select class="form-control" id="sel1">
+                                                        <option>Soja</option>
+                                                        <option>Milho</option>
+                                                        <option>Tomate</option>
+                                                        <option>Limão</option>
+                                                    </select>
+                                                    <span class="messages"></span>
                                                 </div>
-                                                <div class="form-group row">
-                                                    <label class="col-sm-6 col-form-label">Tipo de plantio:</label>
-                                                    <div class="col-sm-12">
-                                                        <select class="form-control" id="sel1">
-                                                            <option>1</option>
-                                                            <option>2</option>
-                                                            <option>3</option>
-                                                            <option>4</option>
-                                                        </select>
-                                                        <span class="messages"></span>
-                                                    </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-sm">Áreas:</label>
+                                                <div class="col-sm-12">
+                                                    <select class="form-control" id="sel1">
+                                                        <option>Talhão 1</option>
+                                                        <option>Talhão 2</option>
+                                                        <option>Talhão 3</option>
+                                                        <option>Talhão 4</option>
+                                                    </select>
+                                                    <span class="messages"></span>
                                                 </div>
-                                                <div class="form-group row">
-                                                    <label class="col-sm-6 col-form-label">Período inicial:</label>
-                                                    <label class="col-sm-6 col-form-label">Período final:</label>
-                                                    <div class="col-sm-6">
-                                                        <div class="input-group date">
-                                                            <span class="input-group-addon" id="basic-addon2"><i class="icofont icofont-ui-calendar"></i></span>
-                                                            <input type="date" class="form-control" name="name" id="name" placeholder="Período inicial">
-                                                        </div>
-                                                        <span class="messages"></span>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="input-group date">
-                                                            <span class="input-group-addon" id="basic-addon2"><i class="icofont icofont-ui-calendar"></i></span>
-                                                            <input type="date" class="form-control" name="name" id="name" placeholder="Período inicial">
-                                                        </div>
-                                                        <span class="messages"></span>
-                                                    </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-6 col-form-label">Tipo de plantio:</label>
+                                                <div class="col-sm-12">
+                                                    <select class="form-control" id="sel1">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                    </select>
+                                                    <span class="messages"></span>
                                                 </div>
-                                                <div class="form-group row">
-                                                    <label class="col-sm-10 col-form-label">Plantio personalizado: <i class="icofont icofont-question-circle"></i></label>
-                                                    <div class="col-sm-12">
-                                                        <select class="form-control" id="sel1">
-                                                            <option>1</option>
-                                                            <option>2</option>
-                                                            <option>3</option>
-                                                            <option>4</option>
-                                                        </select>
-                                                        <span class="messages"></span>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-6 col-form-label">Período inicial:</label>
+                                                <label class="col-sm-6 col-form-label">Período final:</label>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group date">
+                                                        <span class="input-group-addon" id="basic-addon2"><i class="icofont icofont-ui-calendar"></i></span>
+                                                        <input type="date" class="form-control" name="name" id="name" placeholder="Período inicial">
                                                     </div>
+                                                    <span class="messages"></span>
                                                 </div>
-                                                <div class="form-group row">
-                                                    <label class="col-sm-7"></label>
-                                                    <div class="col-sm-10">
-                                                        <button type="submit" class="btn btn-success m-b-0">Adicionar</button>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group date">
+                                                        <span class="input-group-addon" id="basic-addon2"><i class="icofont icofont-ui-calendar"></i></span>
+                                                        <input type="date" class="form-control" name="name" id="name" placeholder="Período inicial">
                                                     </div>
+                                                    <span class="messages"></span>
                                                 </div>
-                                            </form>
-                                        </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-10 col-form-label">Plantio personalizado: <i class="icofont icofont-question-circle"></i></label>
+                                                <div class="col-sm-12">
+                                                    <select class="form-control" id="sel1">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                    </select>
+                                                    <span class="messages"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-7"></label>
+                                                <div class="col-sm-10">
+                                                    <button type="submit" class="btn btn-success m-b-0">Adicionar</button>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div> <!-- /.card-body -->
+                </div><!-- /.card -->
+            </div> <!--Fim progresso dos plantios-->
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title box-title">Formulário</h6>
+                    <div class="card-header-right">
+                        <ul class="list-unstyled card-option">
+                            <li><i class="ti-minus minimize-card"></i></li>
+                            <li><i class="icon-refresh"></i></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-content">
+                        <form class="forms-sample">
+                            <div class="form-group">
+                                <label for="exampleInputName1">Name</label>
+                                <input type="text" class="form-control" id="exampleInputName1" placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail3">Email address</label>
+                                <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword4">Password</label>
+                                <input type="password" class="form-control" id="exampleInputPassword4" placeholder="Password">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label" for="input-name">Name</label>
+                                <select class="form-control" id="exampleSelectGender">
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleTextarea1">Textarea</label>
+                                <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                            <button class="btn btn-light">Cancel</button>
+                        </form>
+                    </div>
+                </div> <!-- /.card-body -->
+            </div><!-- /.card -->
+
+        </div>
+        <!--Input-->
+        <div class="col-xl-6 col-md-10">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title box-title">Mapa</h6>
+                    <div class="card-header-right">
+                        <ul class="list-unstyled card-option">
+                            <li><i class="ti-minus minimize-card"></i></li>
+                            <li><i class="icon-refresh"></i></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-content">
+                        <div id="map" style="width: 100%; height: 600px; border: 1px solid #ccc"></div>
                     </div> <!-- /.card-body -->
                 </div><!-- /.card -->
             </div>
-        </div> <!--Fim progresso dos plantios-->
 
+        </div>
+        <!--fim Input-->
     </div>
 </div> <!--Fim right side-->
+
+<script>
+    var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib }),
+        map = new L.Map('map', { center: new L.LatLng(-23.5489, -46.6388), zoom: 15 }),
+        drawnItems = L.featureGroup().addTo(map);
+
+    L.control.layers({
+        "osm": osm.addTo(map),
+        "google": L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
+            attribution: 'google'
+        })
+    }, { 'drawlayer': drawnItems }, { position: 'topright', collapsed: false }).addTo(map);
+
+    map.addControl(new L.Control.Draw({
+        edit: {
+            featureGroup: drawnItems,
+            poly: {
+                allowIntersection: false
+            }
+        },
+        draw: {
+            polygon: {
+                allowIntersection: false,
+                showArea: true
+            }
+        }
+    }));
+
+    // Truncate value based on number of decimals
+    var _round = function (num, len) {
+        return Math.round(num * (Math.pow(10, len))) / (Math.pow(10, len));
+    };
+    // Helper method to format LatLng object (x.xxxxxx, y.yyyyyy)
+    var strLatLng = function (latlng) {
+        return "(" + _round(latlng.lat, 6) + ", " + _round(latlng.lng, 6) + ")";
+    };
+
+    // Generate popup content based on layer type
+    // - Returns HTML string, or null if unknown object
+    var getPopupContent = function (layer) {
+        // Marker - add lat/long
+        if (layer instanceof L.Marker || layer instanceof L.CircleMarker) {
+            return strLatLng(layer.getLatLng());
+            // Circle - lat/long, radius
+        } else if (layer instanceof L.Circle) {
+            var center = layer.getLatLng(),
+                radius = layer.getRadius();
+            return "Center: " + strLatLng(center) + "<br />"
+                + "Radius: " + _round(radius, 2) + " m";
+            // Rectangle/Polygon - area
+        } else if (layer instanceof L.Polygon) {
+            var latlngs = layer._defaultShape ? layer._defaultShape() : layer.getLatLngs(),
+                area = L.GeometryUtil.geodesicArea(latlngs);
+            return "Area: " + L.GeometryUtil.readableArea(area, true);
+            // Polyline - distance
+        } else if (layer instanceof L.Polyline) {
+            var latlngs = layer._defaultShape ? layer._defaultShape() : layer.getLatLngs(),
+                distance = 0;
+            if (latlngs.length < 2) {
+                return "Distance: N/A";
+            } else {
+                for (var i = 0; i < latlngs.length - 1; i++) {
+                    distance += latlngs[i].distanceTo(latlngs[i + 1]);
+                }
+                return "Distance: " + _round(distance, 2) + " m";
+            }
+        }
+        return null;
+    };
+
+    // Object created - bind popup to layer, add to feature group
+    map.on(L.Draw.Event.CREATED, function (event) {
+        var layer = event.layer;
+        var content = getPopupContent(layer);
+        if (content !== null) {
+            layer.bindPopup(content);
+        }
+        drawnItems.addLayer(layer);
+    });
+
+    // Object(s) edited - update popups
+    map.on(L.Draw.Event.EDITED, function (event) {
+        var layers = event.layers,
+            content = null;
+        layers.eachLayer(function (layer) {
+            content = getPopupContent(layer);
+            if (content !== null) {
+                layer.setPopupContent(content);
+            }
+        });
+    });
+</script>
