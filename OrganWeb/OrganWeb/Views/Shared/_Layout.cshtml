@@ -8,127 +8,328 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/fontawesome")
+    @Scripts.Render("~/bundles/mapa")
 </head>
 <body>
     <!--https://stackoverflow.com/questions/48550955/mvc-bootstrap-navbar-not-working-after-running-nuget-updates-->
     <!--Menu Lateral-->
-    <aside id="left-panel" class="left-panel">
-        <nav class="navbar navbar-expand-sm navbar-default">
-            <div id="main-menu" class="main-menu collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="menu-title">Fazenda</li>
-                    <li class="active">
-                        @Html.ActionLink("Início", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="menu-icon fab fa-envira"></i>Insumos</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li>@*Html.ActionLink("Semente", "Index", "Semente", new { area = "Sistema" }, new { @class = "nav-link" })*@</li>
-                            <li><a href="#">Item 2</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-seedling"></i>Plantios</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><a href="#">Item 1</a></li>
-                            <li><a href="#">Item 2</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fas fa-tractor"></i>Máquinas</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><a href="#">Item 1</a></li>
-                            <li><a href="#">Item 2</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fas fa-layer-group"></i>Áreas</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><a href="#">Item 1</a></li>
-                            <li><a href="#">Item 2</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-title">E-commerce</li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fas fa-apple-alt"></i>Produtos</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><a href="#">Item 1</a></li>
-                            <li><a href="#">Item 2</a></li>
-                            <li><a href="#">Item 3</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fas fa-shopping-bag"></i>Pedidos</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><a href="#">Item 1</a></li>
-                            <li><a href="#">Item 2</a></li>
-                            <li><a href="#">Item 3</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fas fa-cart-arrow-down"></i>Vendas</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><a href="#">Item 1</a></li>
-                            <li><a href="#">Item 2</a></li>
-                            <li><a href="#">Item 3</a></li>
-                        </ul>
+    <div class="container-scroller">
+
+        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+            <div class="navbar-brand-wrapper d-flex justify-content-center">
+                <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
+                    <a class="navbar-brand brand-logo" href="index.html"><img src="~/Imagens/logo.png" alt="logo" /></a>
+                    <a class="navbar-brand brand-logo-mini" href="index.html"><img src="~/Imagens/icone.png" alt="logo" /></a>
+                    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                        <span>
+                            <i class="fa fa-bars"></i>
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+                <ul class="navbar-nav mr-lg-4 w-100">
+                    <li class="nav-item nav-search d-none d-lg-block w-100">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="search">
+                                    <i class="mdi mdi-magnify"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Pesquisar" aria-label="search" aria-describedby="search">
+                        </div>
                     </li>
                 </ul>
+                <ul class="navbar-nav navbar-nav-right">
+                    <li class="nav-item nav-profile dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+                            <img src="~/Imagens/admin.jpg" alt="profile" />
+                            <span class="nav-profile-name">Grande Butera</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                            
+                                <!--<i class="text-primary"></i>-->
+                                @Html.ActionLink("Login", "LoginRegistro", "Account", routeValues: null, htmlAttributes: new { @class = "dropdown-item" })
+                            
+                        </div>
+                    </li>
+                </ul>
+                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                    <i class="fa fa-bars"></i>
+                </button>
             </div>
         </nav>
-    </aside>
-    <!--Fim Menu Lateral-->
-    <!--Lado direito-->
-    <div id="right-panel" class="right-panel">
-        <!-- Header-->
-        <header id="header" class="header">
-            <div class="top-left">
-                <div class="navbar-header">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    @Html.ActionLink("Organ", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
-            </div>
-            <div class="top-right">
-                <div class="header-menu">
-                    
-                    <div class="header-left">
-                        @Html.Partial("_LoginPartial")
-                    </div>
-                </div>
-            </div>
-        </header>
-        <!-- Fim Header -->
-        <!--<div class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
-        <div class="container">
-            <div class="navbar-header">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                @Html.ActionLink("Organ", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })}
-            </div>
-            <div class="navbar-collapse collapse" id="navbarSupportedContent">
-                <ul class="nav navbar-nav mr-auto">
-                    <li class="nav-item"></li>
-                </ul>
-            </div>
-        </div>
-        </div>-->
-        <div class="main-body">
 
-            <div class="container body-content">
-                @RenderBody()
-                <hr />
-                <footer>
-                    <p>&copy; @DateTime.Now.Year - Meu Aplicativo ASP.NET</p>
-                </footer>
+        <div class="container-fluid page-body-wrapper">
+
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="far fa-window-maximize menu-icon"></i>
+                            <span class="menu-title">Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#insumo" aria-expanded="false" aria-controls="insumo">
+                            <i class="menu-icon fab fa-envira"></i>
+                            <span class="menu-title">Insumo</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="insumo">
+                            <ul class="nav flex-column sub-menu">
+                                <li>@Html.ActionLink("Semente", "Index", "Semente", new { area = "Sistema" }, new { @class = "" })</li>
+                                <li><a href="#">Item 2</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#plantio" aria-expanded="false" aria-controls="auth">
+                            <i class="menu-icon fa fa-seedling"></i>
+                            <span class="menu-title">Plantio</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="plantio">
+                            <ul class="nav flex-column sub-menu">
+                                <li><a href="#">Item 2</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#equipe" aria-expanded="false" aria-controls="auth">
+                            <i class="menu-icon fa fa-users"></i>
+                            <span class="menu-title">Equipe</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="equipe">
+                            <ul class="nav flex-column sub-menu">
+                                <li><a href="#">Item 2</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#fazenda" aria-expanded="false" aria-controls="auth">
+                            <i class="menu-icon fas fa-tree"></i>
+                            <span class="menu-title">Fazenda</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="fazenda">
+                            <ul class="nav flex-column sub-menu">
+                                <li><a href="#">Item 2</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#item" aria-expanded="false" aria-controls="auth">
+                            <i class="menu-icon fas fa-list"></i>
+                            <span class="menu-title">Item</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="item">
+                            <ul class="nav flex-column sub-menu">
+                                <li><a href="#">Item 2</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#maquinas" aria-expanded="false" aria-controls="auth">
+                            <i class="menu-icon fas fa-tractor"></i>
+                            <span class="menu-title">Máquinas</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="maquinas">
+                            <ul class="nav flex-column sub-menu">
+                                <li><a href="#">Item 2</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-cart-arrow-down menu-icon"></i>
+                            <span class="menu-title">Venda</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-shopping-basket menu-icon"></i>
+                            <span class="menu-title">Compra</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-bug menu-icon"></i>
+                            <span class="menu-title">Praga</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#fornecedor" aria-expanded="false" aria-controls="auth">
+                            <i class="menu-icon fas fa-boxes"></i>
+                            <span class="menu-title">Fornecedor</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="fornecedor">
+                            <ul class="nav flex-column sub-menu">
+                                <li><a href="#">Item 2</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#estoque" aria-expanded="false" aria-controls="auth">
+                            <i class="menu-icon fas fa-warehouse"></i>
+                            <span class="menu-title">Estoque</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="estoque">
+                            <ul class="nav flex-column sub-menu">
+                                <li><a href="#">Item 2</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#funcionario" aria-expanded="false" aria-controls="auth">
+                            <i class="menu-icon fas fa-user"></i>
+                            <span class="menu-title">Funcionário</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="funcionario">
+                            <ul class="nav flex-column sub-menu">
+                                <li><a href="#">Item 2</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#colheita" aria-expanded="false" aria-controls="auth">
+                            <i class="menu-icon fas fa-hands"></i>
+                            <span class="menu-title">Colheita</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="colheita">
+                            <ul class="nav flex-column sub-menu">
+                                <li><a href="#">Item 2</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#manutencao" aria-expanded="false" aria-controls="auth">
+                            <i class="menu-icon fas fa-campground"></i>
+                            <span class="menu-title">Manutenção</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="manutencao">
+                            <ul class="nav flex-column sub-menu">
+                                <li><a href="#">Item 2</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#semente" aria-expanded="false" aria-controls="auth">
+                            <i class="menu-icon fas fa-tablets"></i>
+                            <span class="menu-title">Semente</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="semente">
+                            <ul class="nav flex-column sub-menu">
+                                <li><a href="#">Item 2</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#monitoramento" aria-expanded="false" aria-controls="auth">
+                            <i class="menu-icon fas fa-video"></i>
+                            <span class="menu-title">Monitoramento</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="monitoramento">
+                            <ul class="nav flex-column sub-menu">
+                                <li><a href="#">Item 2</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#pagamento" aria-expanded="false" aria-controls="auth">
+                            <i class="menu-icon fas fa-money-check-alt"></i>
+                            <span class="menu-title">Pagamento</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="pagamento">
+                            <ul class="nav flex-column sub-menu">
+                                <li><a href="#">Item 2</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#doenca" aria-expanded="false" aria-controls="auth">
+                            <i class="menu-icon fas fa-capsules"></i>
+                            <span class="menu-title">Doença</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="doenca">
+                            <ul class="nav flex-column sub-menu">
+                                <li><a href="#">Item 2</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#area" aria-expanded="false" aria-controls="auth">
+                            <i class="menu-icon fas fa-layer-group"></i>
+                            <span class="menu-title">Áreas</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="area">
+                            <ul class="nav flex-column sub-menu">
+                                <li><a href="#">Item 2</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#despesa" aria-expanded="false" aria-controls="auth">
+                            <i class="menu-icon fas fa-file-invoice-dollar"></i>
+                            <span class="menu-title">Despesa</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="despesa">
+                            <ul class="nav flex-column sub-menu">
+                                <li><a href="#">Item 2</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                </ul>
+            </nav>
+
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    @RenderBody()
+                </div>
             </div>
         </div>
-    </div> <!--Fim lado direito-->
+    </div>
+    <!--</div>--> <!--Fim lado direito-->
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/menu")
     @RenderSection("scripts", required: false)
+
 </body>
 </html>
