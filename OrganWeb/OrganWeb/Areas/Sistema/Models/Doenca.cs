@@ -15,9 +15,6 @@ namespace OrganWeb.Areas.Sistema.Models
         public int Id { get; set; }
 
         [Required]
-        public bool Status { get; set; }
-
-        [Required]
         [StringLength(50, MinimumLength = 5)]
         public string Nome { get; set; }
 

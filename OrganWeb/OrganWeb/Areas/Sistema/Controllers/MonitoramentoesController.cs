@@ -11,117 +11,107 @@ using OrganWeb.Models;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
-    public class SementeController : Controller
+    public class MonitoramentoesController : Controller
     {
         private BancoContext db = new BancoContext();
-
-        // GET: Sistema/Semente
+        //only gerado blz tem q customizar e os caraio
+        // GET: Sistema/Monitoramentoes
         public ActionResult Index()
         {
-            var sementes = db.Sementes.Include(s => s.Estoque).Include(s => s.Fornecedor);
-            var sql = sementes.ToString();
-            return View(sementes.ToList());
+            return View(db.Monitoramentos.ToList());
         }
 
-        // GET: Sistema/Semente/Details/5
+        // GET: Sistema/Monitoramentoes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Semente semente = db.Sementes.Find(id);
-            if (semente == null)
+            Monitoramento monitoramento = db.Monitoramentos.Find(id);
+            if (monitoramento == null)
             {
                 return HttpNotFound();
             }
-            return View(semente);
+            return View(monitoramento);
         }
 
-        // GET: Sistema/Semente/Create
+        // GET: Sistema/Monitoramentoes/Create
         public ActionResult Create()
         {
-            ViewBag.IdEstoque = new SelectList(db.Estoques, "Id", "UnidadeMedida");
-            ViewBag.IdFornecedor = new SelectList(db.Fornecedors, "Id", "Nome");
             return View();
         }
 
-        // POST: Sistema/Semente/Create
+        // POST: Sistema/Monitoramentoes/Create
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SementeID,Nome,SoloIdeal,IncSolar,IncVento,Acidez,IdEstoque,IdFornecedor")] Semente semente)
+        public ActionResult Create([Bind(Include = "Id,Titulo,Observacao,Status,Resultado")] Monitoramento monitoramento)
         {
             if (ModelState.IsValid)
             {
-                db.Sementes.Add(semente);
+                db.Monitoramentos.Add(monitoramento);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdEstoque = new SelectList(db.Estoques, "Id", "UnidadeMedida", semente.IdEstoque);
-            ViewBag.IdFornecedor = new SelectList(db.Fornecedors, "Id", "Nome", semente.IdFornecedor);
-            return View(semente);
+            return View(monitoramento);
         }
 
-        // GET: Sistema/Semente/Edit/5
+        // GET: Sistema/Monitoramentoes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Semente semente = db.Sementes.Find(id);
-            if (semente == null)
+            Monitoramento monitoramento = db.Monitoramentos.Find(id);
+            if (monitoramento == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.IdEstoque = new SelectList(db.Estoques, "Id", "UnidadeMedida", semente.IdEstoque);
-            ViewBag.IdFornecedor = new SelectList(db.Fornecedors, "Id", "Nome", semente.IdFornecedor);
-            return View(semente);
+            return View(monitoramento);
         }
 
-        // POST: Sistema/Semente/Edit/5
+        // POST: Sistema/Monitoramentoes/Edit/5
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SementeID,Nome,SoloIdeal,IncSolar,IncVento,Acidez,IdEstoque,IdFornecedor")] Semente semente)
+        public ActionResult Edit([Bind(Include = "Id,Titulo,Observacao,Status,Resultado")] Monitoramento monitoramento)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(semente).State = EntityState.Modified;
+                db.Entry(monitoramento).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IdEstoque = new SelectList(db.Estoques, "Id", "UnidadeMedida", semente.IdEstoque);
-            ViewBag.IdFornecedor = new SelectList(db.Fornecedors, "Id", "Nome", semente.IdFornecedor);
-            return View(semente);
+            return View(monitoramento);
         }
 
-        // GET: Sistema/Semente/Delete/5
+        // GET: Sistema/Monitoramentoes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Semente semente = db.Sementes.Find(id);
-            if (semente == null)
+            Monitoramento monitoramento = db.Monitoramentos.Find(id);
+            if (monitoramento == null)
             {
                 return HttpNotFound();
             }
-            return View(semente);
+            return View(monitoramento);
         }
 
-        // POST: Sistema/Semente/Delete/5
+        // POST: Sistema/Monitoramentoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Semente semente = db.Sementes.Find(id);
-            db.Sementes.Remove(semente);
+            Monitoramento monitoramento = db.Monitoramentos.Find(id);
+            db.Monitoramentos.Remove(monitoramento);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

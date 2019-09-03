@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OrganWeb.Areas.Sistema.Models.Estoque>
+﻿@model IEnumerable<OrganWeb.Areas.Sistema.Models.Manutencao>
 
 @{
     ViewBag.Title = "Index";
@@ -13,10 +13,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Quantidade)
+            @Html.DisplayNameFor(model => model.Nome)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UnidadeMedida)
+            @Html.DisplayNameFor(model => model.DataManutencao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Detalhes)
         </th>
         <th></th>
     </tr>
@@ -24,10 +27,13 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Quantidade)
+            @Html.DisplayFor(modelItem => item.Nome)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UnidadeMedida)
+            @Html.DisplayFor(modelItem => item.DataManutencao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Detalhes)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
