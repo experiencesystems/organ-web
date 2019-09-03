@@ -45,9 +45,13 @@ namespace OrganWeb.Areas.Sistema.Models
         [ForeignKey("Fornecedor")]
         public int IdFornecedor { get; set; }
 
-        //public virtual Categoria Categoria { get; set; }
+        [Required]
+        [ForeignKey("Categoria")]
+        public int IdCategoria { get; set; }
+
         public virtual Estoque Estoque { get; set; }
         public virtual Fornecedor Fornecedor { get; set; }
+        public virtual Categoria Categoria { get; set; }
 
         //http://www.macoratti.net/18/03/mvc5_cadprod1.htm
     }

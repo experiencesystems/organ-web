@@ -11,107 +11,109 @@ using OrganWeb.Models;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
-    public class EstoqueController : Controller
+    public class DoencasController : Controller
     {
         private BancoContext db = new BancoContext();
 
-        // GET: Sistema/Estoque
+
+        //ta so gerado
+        // GET: Sistema/Doencas
         public ActionResult Index()
         {
-            return View(db.Estoques.ToList());
+            return View(db.Doencas.ToList());
         }
 
-        // GET: Sistema/Estoque/Details/5
+        // GET: Sistema/Doencas/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Estoque estoque = db.Estoques.Find(id);
-            if (estoque == null)
+            Doenca doenca = db.Doencas.Find(id);
+            if (doenca == null)
             {
                 return HttpNotFound();
             }
-            return View(estoque);
+            return View(doenca);
         }
 
-        // GET: Sistema/Estoque/Create
+        // GET: Sistema/Doencas/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Sistema/Estoque/Create
+        // POST: Sistema/Doencas/Create
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Quantidade,UnidadeMedida")] Estoque estoque)
+        public ActionResult Create([Bind(Include = "Id,Status,Nome,Sintomas,Tratamento,Descricao")] Doenca doenca)
         {
             if (ModelState.IsValid)
             {
-                db.Estoques.Add(estoque);
+                db.Doencas.Add(doenca);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(estoque);
+            return View(doenca);
         }
 
-        // GET: Sistema/Estoque/Edit/5
+        // GET: Sistema/Doencas/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Estoque estoque = db.Estoques.Find(id);
-            if (estoque == null)
+            Doenca doenca = db.Doencas.Find(id);
+            if (doenca == null)
             {
                 return HttpNotFound();
             }
-            return View(estoque);
+            return View(doenca);
         }
 
-        // POST: Sistema/Estoque/Edit/5
+        // POST: Sistema/Doencas/Edit/5
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Quantidade,UnidadeMedida")] Estoque estoque)
+        public ActionResult Edit([Bind(Include = "Id,Status,Nome,Sintomas,Tratamento,Descricao")] Doenca doenca)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(estoque).State = EntityState.Modified;
+                db.Entry(doenca).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(estoque);
+            return View(doenca);
         }
 
-        // GET: Sistema/Estoque/Delete/5
+        // GET: Sistema/Doencas/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Estoque estoque = db.Estoques.Find(id);
-            if (estoque == null)
+            Doenca doenca = db.Doencas.Find(id);
+            if (doenca == null)
             {
                 return HttpNotFound();
             }
-            return View(estoque);
+            return View(doenca);
         }
 
-        // POST: Sistema/Estoque/Delete/5
+        // POST: Sistema/Doencas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Estoque estoque = db.Estoques.Find(id);
-            db.Estoques.Remove(estoque);
+            Doenca doenca = db.Doencas.Find(id);
+            db.Doencas.Remove(doenca);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

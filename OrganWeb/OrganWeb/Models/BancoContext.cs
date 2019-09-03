@@ -21,7 +21,7 @@ namespace OrganWeb.Models
         public virtual DbSet<Fazenda> Fazendas { get; set; }
         public virtual DbSet<Funcionario> Funcionarios { get; set; }
         public virtual DbSet<Cargo> Cargos { get; set; }
-        //public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<VwItems> VwItems { get; set; }
         public virtual DbSet<Tarefa> Tarefas { get; set; }
         public virtual DbSet<Equipe> Equipes { get; set; }
         public virtual DbSet<Telefone> Telefones { get; set; }
@@ -31,7 +31,6 @@ namespace OrganWeb.Models
         public virtual DbSet<EquipeFuncionario> EquipeFuncionarios { get; set; }
         public virtual DbSet<Estoque> Estoques { get; set; }
         public virtual DbSet<HistoricoEstoque> HistoricoEstoques { get; set; }
-        public virtual DbSet<Evento> Eventos { get; set; }
         public virtual DbSet<Fornecedor> Fornecedors { get; set; }
         public virtual DbSet<FornecedorTelefone> FornecedorTelefones { get; set; }
         public virtual DbSet<Item> Items { get; set; }
@@ -82,10 +81,6 @@ namespace OrganWeb.Models
                 .Property(t => t.EventoItem)
                 .HasColumnName("EVENTO/ITEM");
 
-            modelBuilder.Entity<Evento>()
-                .Property(t => t.DataHora)
-                .HasColumnName("Data/Hora");
-
             modelBuilder.Entity<Semente>()
                 .Property(t => t.IncSolar)
                 .HasColumnName("Incidência Solar Ideal");
@@ -97,6 +92,14 @@ namespace OrganWeb.Models
             modelBuilder.Entity<Plantio>()
                 .Property(t => t.QntHectare)
                 .HasColumnName("KG/HA de Semente");
+
+            modelBuilder.Entity<VwItems>()
+                .Property(t => t.UnidadeMedida)
+                .HasColumnName("Unidade de medida");
+
+            modelBuilder.Entity<Doenca>()
+                .Property(t => t.Descricao)
+                .HasColumnName("Descrição");
 
             // ****** RELAÇÕES ***** //
 

@@ -4,25 +4,17 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
-using OrganWeb.Models;
 
 namespace OrganWeb.Areas.Sistema.Models
 {
-    [Table("tbEstoque")]
-    public class Estoque : Repository<Estoque>
+    public class VwItems
     {
         [Key]
         public int Id { get; set; }
-
-        [Required]
-        [Range(0.01, 99999.99)]
+        public string Item { get; set; }
         public double Quantidade { get; set; }
-
-        [Required]
-        [StringLength(15, MinimumLength = 1)]
+        [Display(Name = "Unidade de medida")]
         public string UnidadeMedida { get; set; }
-
-        public virtual List<Semente> Sementes { get; set; }
-        public virtual List<Item> Items { get; set; }
+        public string Categoria { get; set; }
     }
 }

@@ -16,6 +16,7 @@ namespace OrganWeb.Areas.Sistema.Models
 
         [Required]
         [StringLength(75, MinimumLength = 3)]
+        [Display(Name = "Fornecedor")]
         public string Nome { get; set; }
 
         [Required]
