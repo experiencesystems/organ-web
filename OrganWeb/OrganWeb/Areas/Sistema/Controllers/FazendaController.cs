@@ -16,10 +16,22 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private BancoContext db = new BancoContext();
 
         // GET: Sistema/Fazenda
+        //[Authorize(Roles = "Administrador")]
         public ActionResult Index()
         {
-            var fazendas = db.Fazendas.Include(f => f.Localizacao);
-            return View(fazendas.ToList());
+            //https://stackoverflow.com/questions/11241341/mvc-entity-framework-select-data-from-multiple-models
+            //https://stackoverflow.com/questions/37298612/display-data-for-two-tables-to-layout-page-mvc-5
+
+            var fazenda = new ViewFazenda
+            {
+                Funcionario = db.Funcionarios
+                    .Include(f => f.Cargo)
+                    .ToList()
+            };
+
+            //var fazendas = db.Fazendas.Include(f => f.Localizacao).ToList();
+
+            return View(fazenda);
         }
 
         // GET: Sistema/Fazenda/Details/5
