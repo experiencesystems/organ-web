@@ -14,7 +14,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private BancoContext db = new BancoContext();
 
         // GET: Sistema/Estoque
-        public ActionResult Index()
+        public ActionResult View()
         {
             var estoque = new ViewEstoque
             {

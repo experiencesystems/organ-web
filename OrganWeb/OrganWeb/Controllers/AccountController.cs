@@ -73,20 +73,28 @@ namespace OrganWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = UserManager.FindByEmail(model.Login.Email);
-                var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Login.Password, model.Login.RememberMe, shouldLockout: false);
-                switch (result)
+                try
                 {
-                    case SignInStatus.Success:
-                        return RedirectToLocal(returnUrl);
-                    case SignInStatus.LockedOut:
-                        return View("Lockout");
-                    case SignInStatus.RequiresVerification:
-                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.Login.RememberMe });
-                    case SignInStatus.Failure:
-                    default:
-                        ModelState.AddModelError("", "Tentativa de login inválida.");
-                        return View("LoginRegistro", model);
+                    var user = UserManager.FindByEmail(model.Login.Email);
+                    var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Login.Password, model.Login.RememberMe, shouldLockout: false);
+                    switch (result)
+                    {
+                        case SignInStatus.Success:
+                            return RedirectToLocal(returnUrl);
+                        case SignInStatus.LockedOut:
+                            return View("Lockout");
+                        case SignInStatus.RequiresVerification:
+                            return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.Login.RememberMe });
+                        case SignInStatus.Failure:
+                        default:
+                            ModelState.AddModelError("", "Tentativa de login inválida.");
+                            return View("LoginRegistro", model);
+                    }
+                }
+                catch
+                {
+                    ModelState.AddModelError("", "Tentativa de login inválida.");
+                    return View("LoginRegistro", model);
                 }
             }
             return View("LoginRegistro", new LoginRegisterViewModel { Login = new LoginViewModel(), Registro = new RegisterViewModel() });
@@ -165,9 +173,10 @@ namespace OrganWeb.Controllers
                         db.Users.Add(user);
                         db.SaveChanges();
                     }
-                    catch (Exception)
+                    catch
                     {
-
+                        ModelState.AddModelError("", "Tentativa de registro inválida.");
+                        return View("LoginRegistro", model);
                     }
 
                     // Para obter mais informações sobre como habilitar a confirmação da conta e redefinição de senha, visite https://go.microsoft.com/fwlink/?LinkID=320771
