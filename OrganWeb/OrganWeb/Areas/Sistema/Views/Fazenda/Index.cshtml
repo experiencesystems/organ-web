@@ -1,7 +1,7 @@
 ﻿@model OrganWeb.Areas.Sistema.Models.ViewFazenda
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Fazenda";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -21,18 +21,23 @@
                             </ul>
                         </div>
                     </div>
+                    <div class="card-body">
+                        <div class="card-content">
+                            <button type="button" class="btn btn-info waves-effect" data-toggle="modal" data-target="#Modal-lightbox">Novo funcionário</button>
+                            @Html.Partial("_NovoFuncionario")
+                        </div>
                         <table class="table">
                             <thead class="thead-title">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Nome</th>
-                                        <th scope="col">Cargo</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Salário</th>
-                                        <th scope="col">Tipo de contratação</th>
-                                        <th scope="col">Período</th>
-                                    </tr>
-                                </thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Cargo</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Salário</th>
+                                    <th scope="col">Tipo de contratação</th>
+                                    <th scope="col">Período</th>
+                                </tr>
+                            </thead>
                             <tbody>
                                 @foreach (var item in Model.Funcionario)
                                 {
@@ -58,6 +63,31 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title box-title">Fazenda</h6>
+                    <div class="card-header-right">
+                        <ul class="list-unstyled card-option">
+                            <li><i class="ti-minus minimize-card"></i></li>
+                            <li><i class="icon-refresh"></i></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-content">
+                        @foreach (var item in Model.Fazenda)
+                        {
+                            @Html.DisplayFor(modelItem => item.Id)
+                        }
+                    </div>
+                </div>
             </div>
         </div>
     </div>
