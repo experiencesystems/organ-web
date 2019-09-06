@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -62,6 +63,9 @@ namespace OrganWeb.Controllers
 
         //
         // POST: /Account/Login
+        //https://stackoverflow.com/questions/27498840/how-to-login-using-email-in-identity-2
+        //https://techbrij.com/asp-net-core-identity-login-email-username
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -69,7 +73,8 @@ namespace OrganWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await SignInManager.PasswordSignInAsync(model.Login.Email, model.Login.Password, model.Login.RememberMe, shouldLockout: false);
+                var user = UserManager.FindByEmail(model.Login.Email);
+                var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Login.Password, model.Login.RememberMe, shouldLockout: false);
                 switch (result)
                 {
                     case SignInStatus.Success:
@@ -141,7 +146,7 @@ namespace OrganWeb.Controllers
             {
                 var user = new ApplicationUser
                 {
-                    UserName = model.Registro.Email,
+                    UserName = model.Registro.UserName,
                     Email = model.Registro.Email,
                     Assinatura = false,
                     CliOrFunc = false,
