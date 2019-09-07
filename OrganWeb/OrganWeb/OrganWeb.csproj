@@ -329,7 +329,8 @@
     <Content Include="Areas\Sistema\Views\Doencas\Edit.cshtml" />
     <Content Include="Areas\Sistema\Views\Doencas\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Fazenda\_NovoFuncionario.cshtml" />
-    <Content Include="Areas\Sistema\Views\Estoque\View.cshtml" />
+    <Content Include="Areas\Sistema\Views\Estoque\Index.cshtml" />
+    <Content Include="Areas\Sistema\Views\Estoque\_NovoItem.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -411,6 +412,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Sistema\Views\Controles\" />
     <Folder Include="Areas\Sistema\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
