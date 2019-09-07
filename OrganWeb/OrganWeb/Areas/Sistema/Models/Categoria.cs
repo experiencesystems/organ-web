@@ -14,9 +14,6 @@ namespace OrganWeb.Areas.Sistema.Models
 
         [Required]
         [Display(Name = "Categoria")]
-        public String Nome { get; set; }
-
-        [Required]
-        public bool EventoItem { get; set; }
+        public string Nome { get; set; }
     }
 }

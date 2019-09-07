@@ -106,12 +106,17 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#estoque" aria-expanded="false" aria-controls="auth">
                             <i class="menu-icon fas fa-warehouse"></i>
-                            <span class="menu-title">@Html.ActionLink("Estoque", "View", "Estoque", new { area = "Sistema" }, new { @class = "" })</span>
+                            <span class="menu-title">@Html.ActionLink("Estoque", "Index", "Estoque", new { area = "Sistema" }, new { @class = "" })</span>
                             <i class="menu-arrow"></i>
                         </a>
                         <div class="collapse" id="estoque">
                             <ul class="nav flex-column sub-menu">
                                 <li><a href="#">@Html.ActionLink("Item", "Index", "VwItems", new { area = "Sistema" }, new { @class = "" })</a></li>
+                            </ul>
+                        </div>
+                        <div class="collapse" id="estoque">
+                            <ul class="nav flex-column sub-menu">
+                                <li><a href="#">@Html.ActionLink("Sementes", "Index", "Semente", new { area = "Sistema" }, new { @class = "" })</a></li>
                             </ul>
                         </div>
                     </li>

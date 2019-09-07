@@ -19,6 +19,7 @@ namespace OrganWeb.Areas.Sistema.Models
         public string Nome { get; set; }
 
         [StringLength(300, MinimumLength = 10)]
+        [Display(Name = "Descrição")]
         public string Descricao { get; set; }
 
         [Required]

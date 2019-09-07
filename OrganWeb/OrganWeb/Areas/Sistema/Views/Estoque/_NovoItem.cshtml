@@ -1,0 +1,83 @@
+﻿@model OrganWeb.Areas.Sistema.Models.Item
+
+<div class="modal fade" id="Modal-lightbox" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <h6 class="card-title box-title"><i class="icofont icofont-plant"></i>Novo item</h6>
+
+                @using (Html.BeginForm("_NovoItem", "Estoque", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken();
+                    <div class="form-group row">
+                        <label class="col-sm-8 col-form">@Html.LabelFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })</label>
+                        <div class="col-sm-8">
+                            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nome" } })
+                            @Html.ValidationMessageFor(modelItem => modelItem.Nome, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-8 col-form">@Html.LabelFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control" } })</label>
+                        <div class="col-sm-8">
+                            @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control", @placeholder = "Descrição" } })
+                            @Html.ValidationMessageFor(modelItem => modelItem.Descricao, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-8 col-form">@Html.LabelFor(model => model.ValorUnit, new { htmlAttributes = new { @class = "form-control" } })</label>
+                        <div class="col-sm-8">
+                            @Html.EditorFor(model => model.ValorUnit, new { htmlAttributes = new { @class = "form-control", @placeholder = "Valor unitário" } })
+                            @Html.ValidationMessageFor(modelItem => modelItem.ValorUnit, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-8 col-form">@Html.LabelFor(model => model.Estoque.Quantidade, new { htmlAttributes = new { @class = "form-control" } })</label>
+                        <div class="col-sm-8">
+                            @Html.EditorFor(model => model.Estoque.Quantidade, new { htmlAttributes = new { @class = "form-control", @placeholder = "Quantidade" } })
+                            @Html.ValidationMessageFor(modelItem => modelItem.Estoque.Quantidade, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-8 col-form">@Html.LabelFor(model => model.Estoque.UnidadeMedida, new { htmlAttributes = new { @class = "form-control" } })</label>
+                        <div class="col-sm-8">
+                            @Html.EditorFor(model => model.Estoque.UnidadeMedida, new { htmlAttributes = new { @class = "form-control", @placeholder = "Unidade de medida" } })
+                            @Html.ValidationMessageFor(modelItem => modelItem.Estoque.UnidadeMedida, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        @Html.EditorFor(model => model.IdFornecedor, new { htmlAttributes = new { @class = "form-control", @placeholder = "Fornecedor" } })
+                        @Html.ValidationMessageFor(modelItem => modelItem.IdFornecedor, "", new { @class = "text-danger" })
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button">Novo</button>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        @Html.EditorFor(model => model.IdCategoria, new { htmlAttributes = new { @class = "form-control", @placeholder = "Categoria" } })
+                        @Html.ValidationMessageFor(modelItem => modelItem.IdCategoria, "", new { @class = "text-danger" })
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button">Novo</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-7"></label>
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-success m-b-0">Adicionar</button>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -84,7 +84,7 @@ namespace OrganWeb.Controllers
                         case SignInStatus.LockedOut:
                             return View("Lockout");
                         case SignInStatus.RequiresVerification:
-                            return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.Login.RememberMe });
+                            return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, model.Login.RememberMe });
                         case SignInStatus.Failure:
                         default:
                             ModelState.AddModelError("", "Tentativa de login inválida.");

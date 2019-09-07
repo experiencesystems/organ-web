@@ -26,13 +26,10 @@ namespace OrganWeb.Areas.Sistema.Controllers
             var fazenda = new ViewFazenda
             {
                 Funcionario = db.Funcionarios
-                    .Include(f => f.Cargo)
-                    .ToList(),
-                Fazenda = db.Fazendas.Include(f => f.Localizacao).ToList()
+                    .Include(f => f.Cargo).Take(15).OrderBy(f => f.Id)
+                    .AsQueryable(),
+                Fazenda = db.Fazendas.Include(f => f.Localizacao).AsQueryable()
             };
-
-            //var fazendas = db.Fazendas.Include(f => f.Localizacao).ToList();
-
             return View(fazenda);
         }
 

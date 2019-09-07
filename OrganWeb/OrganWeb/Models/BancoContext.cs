@@ -11,6 +11,7 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace OrganWeb.Models
 {
+    [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class BancoContext : IdentityDbContext<ApplicationUser>
     {
         public BancoContext() : base("name=BancoContext", throwIfV1Schema: false) { }
@@ -76,10 +77,6 @@ namespace OrganWeb.Models
             modelBuilder.Entity<Funcionario>()
                 .Property(t => t.MesAno)
                 .HasColumnName("MES/ANO");
-
-            modelBuilder.Entity<Categoria>()
-                .Property(t => t.EventoItem)
-                .HasColumnName("EVENTO/ITEM");
 
             modelBuilder.Entity<Semente>()
                 .Property(t => t.IncSolar)
