@@ -26,10 +26,11 @@ namespace OrganWeb.Areas.Sistema.Controllers
         }
 
         //https://stackoverflow.com/questions/6287015/create-controller-for-partial-view-in-asp-net-mvc
-        
+
+        [ChildActionOnly]
         public ActionResult _NovoItem()
         {
-            return View();
+            return PartialView();
         }
 
         [HttpPost]
@@ -50,7 +51,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(item);
+            return Json(item, JsonRequestBehavior.AllowGet);
         }
     }
 }
