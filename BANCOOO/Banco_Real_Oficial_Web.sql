@@ -109,6 +109,9 @@ create table tbFazenda(
      constraint FKFazendaLocalizacao foreign key (CEP, Numero) references tbLocalizacao(CEP, Numero) on delete cascade
 );
 
+insert into tbLocalizacao values ('05234001', 12, 'Rua Gonçales', 'Vila Mariana', 'APTO 23', 'Sao Paulo', 'SP');
+insert into tbFazenda (Area, Perimetro, Coordenadas, CEP, Numero) values (13.00, 26.00, ST_GeomFromText('POINT(1 1)'), '05234001', 12);
+
 create table tbCargo(
 	Id int auto_increment,
      constraint PKCargo primary key (Id),
@@ -148,14 +151,24 @@ create table tbFuncionario(
 insert into tbLocalizacao values ('05234000', 12, 'Rua Gonçales', 'Vila Mariana', 'APTO 23', 'Sao Paulo', 'SP');
 insert into tbCargo (Nivel, Cargo) values ('Alto', 'Administrador');
 
+-- select*from AspNetUsers;
+-- select*from tbFazenda;
+
+
+
+-- UPDATE AspNetUsers set UserName = 'juxax@provmail.net' where UserName = 'Milena';
+
+/* insert into tbFuncionario (Nome, Sobrenome, CPF, RG, DataNascimento, Email, Salario, GrauInstrucao, DataContratacao,
+TipoContratacao, PeriodoContratacao, `MES/ANO`, IdCargo, CEP, Numero, IdUsuario) values (
+ 'Gilberto', 'Ramos', '26633622255', '356252527', '2008-7-04', 'gilberto@ramos.com', 122.30, 'Alto', '2018-7-04',
+'Temporaria', 1, true, 1, '05234000', 12, '175d624d-af57-4636-ac2e-a05445b8ed00'
+ );*/
+
 SELECT`Extent1`.`Numero`, `Extent1`.`Id`,`Extent1`.`Nome`,`Extent1`.`Sobrenome`, `Extent1`.`CPF`,`Extent1`.`RG`, `Extent1`.`DataNascimento`, `Extent1`.`Email`, `Extent1`.`Salario`, `Extent1`.`GrauInstrucao`, `Extent1`.`DataContratacao`, `Extent1`.`TipoContratacao`, `Extent1`.`PeriodoContratacao`, `Extent1`.`MES/ANO`, `Extent1`.`IdCargo`, `Extent1`.`CEP`,`Extent1`.`IdUsuario`,`Extent2`.`Id` AS `Id1`, `Extent2`.`Nivel`, `Extent2`.`Cargo`, `Extent3`.`CEP` AS `CEP1`,`Extent3`.`Numero` AS `Numero1`, `Extent3`.`Endereco`, `Extent3`.`Bairro`, `Extent3`.`Complemento`,`Extent3`.`Cidade`, `Extent3`.`UF`,`Extent4`.`Id` AS `Id2`, `Extent4`.`DataCadastro`, `Extent4`.`Confirmacao`, `Extent4`.`Assinatura`,`Extent4`.`CLI/FUNC`, `Extent4`.`Email` AS `Email1`, `Extent4`.`EmailConfirmed`, `Extent4`.`PasswordHash`, `Extent4`.`SecurityStamp`, `Extent4`.`PhoneNumber`, `Extent4`.`PhoneNumberConfirmed`, `Extent4`.`TwoFactorEnabled`,`Extent4`.`LockoutEndDateUtc`,`Extent4`.`LockoutEnabled`, `Extent4`.`AccessFailedCount`,`Extent4`.`UserName`FROM `tbFuncionario` AS `Extent1` INNER JOIN `tbCargo` AS `Extent2` ON `Extent1`.`IdCargo` = `Extent2`.`Id` INNER JOIN `tbLocalizacao` AS `Extent3` ON (`Extent1`.`Numero` = `Extent3`.`Numero`) AND (`Extent1`.`CEP` = `Extent3`.`CEP`) INNER JOIN `AspNetUsers` AS `Extent4` ON `Extent1`.`IdUsuario` = `Extent4`.`Id`;
 SELECT`Extent1`.`IdCargo`,`Extent1`.`Sobrenome`, `Extent2`.`Cargo`FROM `tbFuncionario` AS `Extent1` INNER JOIN `tbCargo` AS `Extent2` ON `Extent1`.`IdCargo` = `Extent2`.`Id`;
 
-insert into tbFuncionario (Nome, Sobrenome, CPF, RG, DataNascimento, Email, Salario, GrauInstrucao, DataContratacao,
- TipoContratacao, PeriodoContratacao, `MES/ANO`, IdCargo, CEP, Numero, IdUsuario) values (
- 'Gilberto', 'Ramos', '26633622255', '356252527', '2008-7-04', 'gilberto@ramos.com', 122.30, 'Alto', '2018-7-04',
- 'Temporaria', 1, true, 1, '05234000', 12, 'e9e38eb8-d416-4bf0-830b-db10bdf5cdb2'
- );
+
+SELECT`Extent1`.`Numero`, `Extent1`.`Id`, `Extent1`.`Nome`, `Extent1`.`Sobrenome`,`Extent1`.`CPF`,`Extent1`.`RG`,`Extent1`.`DataNascimento`, `Extent1`.`Email`, `Extent1`.`Salario`, `Extent1`.`GrauInstrucao`, `Extent1`.`DataContratacao`, `Extent1`.`TipoContratacao`, `Extent1`.`PeriodoContratacao`, `Extent1`.`MES/ANO`, `Extent1`.`IdCargo`, `Extent1`.`CEP`, `Extent1`.`IdUsuario`,`Extent2`.`Id` AS `Id1`, `Extent2`.`Nivel`, `Extent2`.`Cargo`, `Extent3`.`CEP` AS `CEP1`, `Extent3`.`Numero` AS `Numero1`, `Extent3`.`Endereco`, `Extent3`.`Bairro`, `Extent3`.`Complemento`, `Extent3`.`Cidade`, `Extent3`.`UF`FROM `tbFuncionario` AS `Extent1` INNER JOIN `tbCargo` AS `Extent2` ON `Extent1`.`IdCargo` = `Extent2`.`Id` INNER JOIN `tbLocalizacao` AS `Extent3` ON (`Extent1`.`Numero` = `Extent3`.`Numero`) AND (`Extent1`.`CEP` = `Extent3`.`CEP`);
 
 create index  IXIdFuncionario on tbFuncionario (Id);
 create index  IXIdUsuario on tbFuncionario (IdUsuario);
@@ -315,9 +328,7 @@ create table tbCategoria(
      constraint PKCategoria primary key(Id), 
      
 	Nome varchar(30) not null,
-     constraint UQNome unique (Nome),  
-     
-	`EVENTO/ITEM` boolean not null
+     constraint UQNome unique (Nome)
 );
 
 create table tbEvento(
@@ -376,6 +387,19 @@ create table tbItem(
      constraint FKItemForn foreign key (IdFornecedor) references tbFornecedor(Id) on delete no action
 );
 
+select * from aspnetusers;
+select * from tbestoque;
+select * from tblocalizacao;
+select * from tbcategoria;
+select * from tbFornecedor;
+select * from tbitem;
+
+insert into tbfornecedor(Nome, CNPJ, RazaoSocial, Site, Email, `Status`, CEP, Numero) values ('Fornecedor 1', 12345678912345, 'Razão de viver', 'www.kiko.com', 'kikao@gmail.com', 
+true, '05234001', 12);
+insert into tbcategoria(nome) values ('Valioso');
+insert into tbestoque (quantidade, unidademedida) values (34, 'un');
+insert into tbitem (nome, descricao, valorunit, idestoque, idcategoria, idfornecedor) values ('Item 1', 'Legal', 56.98, 1, 1, 2);
+
 create table tbSemente(
 	Id int auto_increment,
      constraint PKSemente primary key (Id),
@@ -385,6 +409,9 @@ create table tbSemente(
 	`Incidência Solar Ideal` decimal(5,2) not null default 0,
     `Incidência Vento Ideal` decimal(5,2) not null default 0,
 	Acidez decimal(5,2) not null default 0,
+    IdCategoria int not null,
+     constraint FKSementeCategoria foreign key (IdCategoria) references tbCategoria(Id) on delete no action,
+     
 	IdEstoque int not null,
      constraint FKSementeEstoque foreign key (IdEstoque) references tbEstoque(Id) on delete no action,
      
@@ -591,3 +618,16 @@ create table tbDespesa(
 	IdPagamento int not null,
      constraint FKDespesaPagamento foreign key (IdPagamento) references tbPagamento(Id) on delete no action
 );
+
+create view VwItems as
+(SELECT S.Id, S.Nome `Item`, E.Quantidade, E.UnidadeMedida `Unidade de Medida`, C.Nome `Categoria`
+FROM tbEstoque E
+INNER JOIN tbSemente S ON E.Id = S.IdEstoque
+INNER JOIN tbCategoria C ON C.Id = S.IdCategoria)
+UNION
+(SELECT I.Id, I.Nome, E.Quantidade, E.UnidadeMedida, C.Nome
+FROM tbEstoque E
+INNER JOIN tbItem I ON E.Id = I.IdEstoque
+INNER JOIN tbCategoria C ON C.Id = I.IdCategoria);
+
+select * from VwItems;

@@ -1,6 +1,6 @@
 ﻿@model OrganWeb.Areas.Sistema.Models.Item
 
-<div class="modal fade" id="Modal-lightbox" tabindex="-1" role="dialog">
+<div class="modal fade" id="Modal-lightbox" tabindex="-1" role="dialog" data-backdrop="static">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -13,6 +13,7 @@
                 @using (Html.BeginForm("_NovoItem", "Estoque", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken();
+                    @Html.ValidationSummary(true)
                     <div class="form-group row">
                         <label class="col-sm-8 col-form">@Html.LabelFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })</label>
                         <div class="col-sm-8">
