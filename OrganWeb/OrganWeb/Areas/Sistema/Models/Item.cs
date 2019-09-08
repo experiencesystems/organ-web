@@ -42,6 +42,9 @@ namespace OrganWeb.Areas.Sistema.Models
         public virtual Estoque Estoque { get; set; }
         public virtual Categoria Categoria { get; set; }
         public virtual Fornecedor Fornecedor { get; set; }
+
+        public IEnumerable<Fornecedor> Fornecedors { get; set; }
+        public IEnumerable<Categoria> Categorias { get; set; }
     }
 }
 
