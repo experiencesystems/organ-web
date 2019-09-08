@@ -27,31 +27,45 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         //https://stackoverflow.com/questions/6287015/create-controller-for-partial-view-in-asp-net-mvc
 
-        [ChildActionOnly]
-        public ActionResult _NovoItem()
+        public PartialViewResult _NovoItem()
         {
-            return PartialView();
+            Item item = new Item
+            {
+                Categorias = db.Categorias.ToList(),
+                Fornecedors = db.Fornecedors.ToList()
+            };
+
+            return PartialView(item);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult _NovoItem(Item item)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var estoque = new Estoque
+                if (ModelState.IsValid)
                 {
-                    Quantidade = item.Estoque.Quantidade,
-                    UnidadeMedida = item.Estoque.UnidadeMedida
-                };
-                db.Estoques.Add(estoque);
+                    var estoque = new Estoque
+                    {
+                        Quantidade = item.Estoque.Quantidade,
+                        UnidadeMedida = item.Estoque.UnidadeMedida
+                    };
+                    db.Estoques.Add(estoque);
 
-                item.IdEstoque = estoque.Id;
-                db.Items.Add(item);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                    item.IdEstoque = estoque.Id;
+                    db.Items.Add(item);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                item.Fornecedors = db.Fornecedors.ToList();
+                item.Categorias = db.Categorias.ToList();
+                return PartialView("_NovoItem", item);
             }
-            return Json(item, JsonRequestBehavior.AllowGet);
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
