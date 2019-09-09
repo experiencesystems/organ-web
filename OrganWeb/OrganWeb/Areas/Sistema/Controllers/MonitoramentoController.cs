@@ -11,10 +11,10 @@ using OrganWeb.Models;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
-    public class MonitoramentoesController : Controller
+    public class MonitoramentoController : Controller
     {
         private BancoContext db = new BancoContext();
-        //only gerado blz tem q customizar e os caraio
+        //only gerado blz tem q customizar 
         // GET: Sistema/Monitoramentoes
         public ActionResult Index()
         {
