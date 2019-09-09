@@ -35,37 +35,29 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 Fornecedors = db.Fornecedors.ToList()
             };
 
-            return PartialView(item);
+            return PartialView("_NovoItem", item);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult _NovoItem(Item item)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                var estoque = new Estoque
                 {
-                    var estoque = new Estoque
-                    {
-                        Quantidade = item.Estoque.Quantidade,
-                        UnidadeMedida = item.Estoque.UnidadeMedida
-                    };
-                    db.Estoques.Add(estoque);
+                    Quantidade = item.Estoque.Quantidade,
+                    UnidadeMedida = item.Estoque.UnidadeMedida
+                };
+                db.Estoques.Add(estoque);
 
-                    item.IdEstoque = estoque.Id;
-                    db.Items.Add(item);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                item.Fornecedors = db.Fornecedors.ToList();
-                item.Categorias = db.Categorias.ToList();
-                return PartialView("_NovoItem", item);
+                item.IdEstoque = estoque.Id;
+                db.Items.Add(item);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            item.Fornecedors = db.Fornecedors.ToList();
+            item.Categorias = db.Categorias.ToList();
+            return PartialView("_NovoItem", item);
         }
     }
 }
