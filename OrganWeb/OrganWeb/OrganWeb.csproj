@@ -228,7 +228,7 @@
     <Compile Include="Areas\Sistema\Controllers\ItemController.cs" />
     <Compile Include="Areas\Sistema\Controllers\ManutencaoController.cs" />
     <Compile Include="Areas\Sistema\Controllers\MaquinaController.cs" />
-    <Compile Include="Areas\Sistema\Controllers\MonitoramentoesController.cs" />
+    <Compile Include="Areas\Sistema\Controllers\MonitoramentoController.cs" />
     <Compile Include="Areas\Sistema\Controllers\PragaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\TarefaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\VwItemsController.cs" />
