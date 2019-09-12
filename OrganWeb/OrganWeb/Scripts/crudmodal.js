@@ -1,11 +1,19 @@
 ﻿$(function () {
     var placeholderElement = $('#modal-placeholder');
 
+
     $('button[data-toggle="ajax-modal"]').click(function (event) {
         var url = $(this).data('url');
+
+
+        $('#add-item').modal({
+            show: true
+        });
+
         $.get(url).done(function (data) {
             placeholderElement.html(data);
-            //placeholderElement.find('.modal').modal('show');
+            placeholderElement.hide();
+            placeholderElement.html('button[data-toggle="ajax-modal"]');
         });
     });
 
