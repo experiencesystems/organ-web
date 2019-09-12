@@ -52,21 +52,23 @@
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/Home/Index">
                             <i class="far fa-window-maximize menu-icon"></i>
-                            <span class="menu-title">@Html.ActionLink("Dashboard", "Index", "Home", new { area = "" }, new { @class = "" })</span>
+                            <span class="menu-title">Dashboard</span>
                         </a>
                     </li>
 
+
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#plantio" aria-expanded="false" aria-controls="auth">
+                        <a class="nav-link" data-toggle="collapse" href="#insumo" aria-expanded="false" aria-controls="insumo">
                             <i class="menu-icon fa fa-seedling"></i>
-                            <span class="menu-title">@Html.ActionLink("Plantio", "Index", "Plantio", new { area = "Sistema" }, new { @class = "" })</span>
+                            <span class="menu-title">Plantio e colheita</span>
                             <i class="menu-arrow"></i>
                         </a>
-                        <div class="collapse" id="plantio">
+                        <div class="collapse" id="insumo">
                             <ul class="nav flex-column sub-menu">
                                 <li><a href="#">@Html.ActionLink("Colheita", "Index", "Colheita", new { area = "Sistema" }, new { @class = "" })</a></li>
+                                <li><a href="#">@Html.ActionLink("Plantio", "Index", "Plantio", new { area = "Sistema" }, new { @class = "" })</a></li>
                             </ul>
                         </div>
                     </li>
@@ -80,58 +82,59 @@
                         <div class="collapse" id="controle">
                             <ul class="nav flex-column sub-menu">
                                 <li><a href="#">@Html.ActionLink("Praga", "Index", "Praga", new { area = "Sistema" }, new { @class = "" })</a></li>
-                                <li><a href="#">@Html.ActionLink("Doenca", "Index", "Doenca", new { area = "Sistema" }, new { @class = "" })</a></li>
+                                <li><a href="#">@Html.ActionLink("Doenca", "Index", "Doencas", new { area = "Sistema" }, new { @class = "" })</a></li>
                             </ul>
                         </div>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#tarefa" aria-expanded="false" aria-controls="auth">
-                            <i class="menu-icon fa fa-seedling"></i>
-                            <span class="menu-title">@Html.ActionLink("Tarefas", "Index", "Tarefa", new { area = "Sistema" }, new { @class = "" })</span>
+                            <i class="menu-icon fa fa-users"></i>
+                            <span class="menu-title">Tarefa e equipe</span>
                             <i class="menu-arrow"></i>
                         </a>
-                        <div class="collapse" id="controle">
+                        <div class="collapse" id="tarefa">
                             <ul class="nav flex-column sub-menu">
+                                <li><a href="#">@Html.ActionLink("Tarefas", "Index", "Tarefa", new { area = "Sistema" }, new { @class = "" })</a></li>
                                 <li><a href="#">@Html.ActionLink("Equipes", "Index", "Equipe", new { area = "Sistema" }, new { @class = "" })</a></li>
                             </ul>
                         </div>
                     </li>
 
+
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#monitoramento" aria-expanded="false" aria-controls="auth">
+                        <a class="nav-link" data-toggle="collapse" href="/Sistema/Monitoramento" aria-expanded="false" aria-controls="auth">
                             <i class="menu-icon fas fa-video"></i>
-                            <span class="menu-title">@Html.ActionLink("Monitoramentos", "Index", "Monitoramento", new { area = "Sistema" }, new { @class = "" })</span>
+                            <span class="menu-title">Monitoramento</span>
                             <i class="menu-arrow"></i>
                         </a>
                     </li>
 
+
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#estoque" aria-expanded="false" aria-controls="auth">
                             <i class="menu-icon fas fa-warehouse"></i>
-                            <span class="menu-title">@Html.ActionLink("Estoque", "Index", "Estoque", new { area = "Sistema" }, new { @class = "" })</span>
+                            <span class="menu-title">Estoque</span>
                             <i class="menu-arrow"></i>
                         </a>
                         <div class="collapse" id="estoque">
                             <ul class="nav flex-column sub-menu">
-                                <li><a href="#">@Html.ActionLink("Item", "Index", "VwItems", new { area = "Sistema" }, new { @class = "" })</a></li>
-                            </ul>
-                        </div>
-                        <div class="collapse" id="estoque">
-                            <ul class="nav flex-column sub-menu">
                                 <li><a href="#">@Html.ActionLink("Sementes", "Index", "Semente", new { area = "Sistema" }, new { @class = "" })</a></li>
+                                <li><a href="#">@Html.ActionLink("Item", "Index", "VwItems", new { area = "Sistema" }, new { @class = "" })</a></li>
+                                <li><a href="#">@Html.ActionLink("Estoque", "Index", "Estoque", new { area = "Sistema" }, new { @class = "" })</a></li>
                             </ul>
                         </div>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#financeiro" aria-expanded="false" aria-controls="auth">
-                            <i class="menu-icon fas fa-warehouse"></i>
-                            <span class="menu-title">@Html.ActionLink("Financeiro", "Index", "Financeiro", new { area = "Sistema" }, new { @class = "" })</span>
+                            <i class="menu-icon fas fa-money-check-alt"></i>
+                            <span class="menu-title">Finanças</span>
                             <i class="menu-arrow"></i>
                         </a>
                         <div class="collapse" id="financeiro">
                             <ul class="nav flex-column sub-menu">
+                                <li><a href="#">@Html.ActionLink("Financeiro", "Index", "Financeiro", new { area = "Sistema" }, new { @class = "" })</a></li>
                                 <li><a href="#">@Html.ActionLink("Compras", "Index", "Compra", new { area = "Sistema" }, new { @class = "" })</a></li>
                                 <li><a href="#">@Html.ActionLink("Fornecedor", "Index", "Fornecedor", new { area = "Sistema" }, new { @class = "" })</a></li>
                                 <li><a href="#">@Html.ActionLink("Despesas", "Index", "Despesa", new { area = "Sistema" }, new { @class = "" })</a></li>
@@ -141,12 +144,13 @@
 
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#fazenda" aria-expanded="false" aria-controls="auth">
-                            <i class="menu-icon fas fa-tree"></i>
-                            <span class="menu-title">@Html.ActionLink("Fazenda", "Index", "Fazenda", new { area = "Sistema" }, new { @class = "" })</span>
+                            <i class="menu-icon fas fa-layer-group"></i>
+                            <span class="menu-title">Administrativo</span>
                             <i class="menu-arrow"></i>
                         </a>
                         <div class="collapse" id="fazenda">
                             <ul class="nav flex-column sub-menu">
+                                <li><a href="#">@Html.ActionLink("Fazenda", "Index", "Fazenda", new { area = "Sistema" }, new { @class = "" })</a></li>
                                 <li><a href="#">@Html.ActionLink("Funcionário", "Index", "Funcionario", new { area = "Sistema" }, new { @class = "" })</a></li>
                                 <li><a href="#">@Html.ActionLink("Áreas", "Index", "Area", new { area = "Sistema" }, new { @class = "" })</a></li>
                             </ul>
@@ -156,20 +160,21 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#maquinas" aria-expanded="false" aria-controls="auth">
                             <i class="menu-icon fas fa-tractor"></i>
-                            <span class="menu-title">@Html.ActionLink("Máquinas", "Index", "Maquina", new { area = "Sistema" }, new { @class = "" })</span>
+                            <span class="menu-title">Ferramentas</span>
                             <i class="menu-arrow"></i>
                         </a>
                         <div class="collapse" id="maquinas">
                             <ul class="nav flex-column sub-menu">
+                                <li><a href="#">@Html.ActionLink("Máquinas", "Index", "Maquina", new { area = "Sistema" }, new { @class = "" })</a></li>
                                 <li><a href="#">@Html.ActionLink("Manutenção", "Index", "Manutencao", new { area = "Sistema" }, new { @class = "" })</a></li>
                             </ul>
                         </div>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#maquinas" aria-expanded="false" aria-controls="auth">
-                            <i class="menu-icon fas fa-tractor"></i>
-                            <span class="menu-title">@Html.ActionLink("E-commerce", "Index", "Venda", new { area = "Sistema" }, new { @class = "" })</span>
+                        <a class="nav-link" data-toggle="collapse" href="/Vendas/Index" aria-expanded="false" aria-controls="auth">
+                            <i class="menu-icon fas fa-cart-arrow-down"></i>
+                            <span class="menu-title">E-commerce</span>
                             <i class="menu-arrow"></i>
                         </a>
                     </li>
