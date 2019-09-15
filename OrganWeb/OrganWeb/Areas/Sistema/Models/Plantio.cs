@@ -37,7 +37,7 @@ namespace OrganWeb.Areas.Sistema.Models
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Data de início")]
-        public DateTime DataInicio { get; set; }
+        public DateTime DataInício { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
@@ -65,5 +65,7 @@ namespace OrganWeb.Areas.Sistema.Models
 
         public virtual Cultura Cultura { get; set; }
         public virtual Semente Semente { get; set; }
+        [NotMapped]
+        public double Porcentagem { get; set; }
     }
 }

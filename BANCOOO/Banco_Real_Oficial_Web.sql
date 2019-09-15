@@ -154,6 +154,7 @@ insert into tbCargo (Nivel, Cargo) values ('Alto', 'Administrador');
 -- select*from AspNetUsers;
 -- select*from tbFazenda;
 
+select*from tbLocalizacao;
 
 
 -- UPDATE AspNetUsers set UserName = 'juxax@provmail.net' where UserName = 'Milena';
@@ -161,7 +162,7 @@ insert into tbCargo (Nivel, Cargo) values ('Alto', 'Administrador');
 /* insert into tbFuncionario (Nome, Sobrenome, CPF, RG, DataNascimento, Email, Salario, GrauInstrucao, DataContratacao,
 TipoContratacao, PeriodoContratacao, `MES/ANO`, IdCargo, CEP, Numero, IdUsuario) values (
  'Gilberto', 'Ramos', '26633622255', '356252527', '2008-7-04', 'gilberto@ramos.com', 122.30, 'Alto', '2018-7-04',
-'Temporaria', 1, true, 1, '05234000', 12, '175d624d-af57-4636-ac2e-a05445b8ed00'
+'Temporaria', 1, true, 1, '05234000', 12, 'b6fa0643-8ca4-4ecf-bb0b-0bb3fd1659f7'
  );*/
 
 SELECT`Extent1`.`Numero`, `Extent1`.`Id`,`Extent1`.`Nome`,`Extent1`.`Sobrenome`, `Extent1`.`CPF`,`Extent1`.`RG`, `Extent1`.`DataNascimento`, `Extent1`.`Email`, `Extent1`.`Salario`, `Extent1`.`GrauInstrucao`, `Extent1`.`DataContratacao`, `Extent1`.`TipoContratacao`, `Extent1`.`PeriodoContratacao`, `Extent1`.`MES/ANO`, `Extent1`.`IdCargo`, `Extent1`.`CEP`,`Extent1`.`IdUsuario`,`Extent2`.`Id` AS `Id1`, `Extent2`.`Nivel`, `Extent2`.`Cargo`, `Extent3`.`CEP` AS `CEP1`,`Extent3`.`Numero` AS `Numero1`, `Extent3`.`Endereco`, `Extent3`.`Bairro`, `Extent3`.`Complemento`,`Extent3`.`Cidade`, `Extent3`.`UF`,`Extent4`.`Id` AS `Id2`, `Extent4`.`DataCadastro`, `Extent4`.`Confirmacao`, `Extent4`.`Assinatura`,`Extent4`.`CLI/FUNC`, `Extent4`.`Email` AS `Email1`, `Extent4`.`EmailConfirmed`, `Extent4`.`PasswordHash`, `Extent4`.`SecurityStamp`, `Extent4`.`PhoneNumber`, `Extent4`.`PhoneNumberConfirmed`, `Extent4`.`TwoFactorEnabled`,`Extent4`.`LockoutEndDateUtc`,`Extent4`.`LockoutEnabled`, `Extent4`.`AccessFailedCount`,`Extent4`.`UserName`FROM `tbFuncionario` AS `Extent1` INNER JOIN `tbCargo` AS `Extent2` ON `Extent1`.`IdCargo` = `Extent2`.`Id` INNER JOIN `tbLocalizacao` AS `Extent3` ON (`Extent1`.`Numero` = `Extent3`.`Numero`) AND (`Extent1`.`CEP` = `Extent3`.`CEP`) INNER JOIN `AspNetUsers` AS `Extent4` ON `Extent1`.`IdUsuario` = `Extent4`.`Id`;
@@ -446,6 +447,20 @@ create table tbPlantio(
 	Epoca varchar(30) not null,
 	`KG/HA de Semente` decimal(6,2) not null
 );
+
+/*
+insert into tbPlantio(Nome, IdCultura, Tipo, Densidade, DataInício, DataColheita, IdSemente, QtdSemUsada, Epoca, `KG/HA de Semente`)
+values ("Plantio de Soja", 1, "Plantio direto", 10.0, '2019-05-08 00:00:00', '2019-08-08 00:00:00', 1, 35.0, "Verão", 12.0);
+
+select*from tbCultura;
+insert into tbCultura(Nome, Descricao) values ("Soja", "Divertida e ecológica");
+select*from tbSemente;
+insert into tbSemente(Nome, SoloIdeal, `Incidência Solar Ideal`, `Incidência Vento Ideal`, Acidez, IdCategoria, IdEstoque, IdFornecedor)
+values("Soja", "Argiloso", 12.0, 13.0, 14.0, 1, 8, 2);
+select *from tbFornecedor; -- 2
+select *from tbCategoria; -- 1
+select *from tbEstoque; -- 8
+*/
 
 create table tbEstadio(
 	Id int auto_increment,
