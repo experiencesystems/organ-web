@@ -46,12 +46,6 @@ namespace OrganWeb
               namespaces: new[] { "OrganWeb.Controllers" }
          );
             routes.MapRoute(
-             name: "Estoque",
-             url: "Estoque/",
-             defaults: new { controller = "Estoque", action = "Index", id = UrlParameter.Optional },
-              namespaces: new[] { "OrganWeb.Controllers" }
-         );
-            routes.MapRoute(
              name: "Fazenda",
              url: "Fazenda/",
              defaults: new { controller = "Fazenda", action = "Index", id = UrlParameter.Optional },

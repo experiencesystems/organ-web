@@ -220,17 +220,12 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Sistema\Controllers\ControleController.cs" />
     <Compile Include="Areas\Sistema\Controllers\DoencasController.cs" />
-    <Compile Include="Areas\Sistema\Controllers\EquipesController.cs" />
     <Compile Include="Areas\Sistema\Controllers\EstoqueController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FazendaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FornecedorController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FuncionarioController.cs" />
     <Compile Include="Areas\Sistema\Controllers\ItemController.cs" />
-    <Compile Include="Areas\Sistema\Controllers\ManutencaoController.cs" />
-    <Compile Include="Areas\Sistema\Controllers\MaquinaController.cs" />
-    <Compile Include="Areas\Sistema\Controllers\MonitoramentoController.cs" />
-    <Compile Include="Areas\Sistema\Controllers\PragaController.cs" />
-    <Compile Include="Areas\Sistema\Controllers\TarefaController.cs" />
+    <Compile Include="Areas\Sistema\Controllers\PlantioController.cs" />
     <Compile Include="Areas\Sistema\Controllers\VwItemsController.cs" />
     <Compile Include="Areas\Sistema\Models\Cargo.cs" />
     <Compile Include="Areas\Sistema\Models\Categoria.cs" />
@@ -307,6 +302,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Scripts\calcularProgresso.js" />
     <Content Include="Scripts\crudmodal.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
@@ -332,6 +328,7 @@
     <Content Include="Areas\Sistema\Views\Fazenda\_NovoFuncionario.cshtml" />
     <Content Include="Areas\Sistema\Views\Estoque\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Estoque\_NovoItem.cshtml" />
+    <Content Include="Areas\Sistema\Views\Plantio\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -352,6 +349,7 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\progressCircle.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -380,8 +378,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
