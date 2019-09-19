@@ -1,0 +1,48 @@
+﻿@model List<OrganWeb.Areas.Sistema.Models.ManutencaoMaquina>
+@{
+    ViewBag.Title = "Manutenção";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Manutenção</h2>
+
+<div class="main-body">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title box-title">Manutenções recentes</h6>
+                    <div class="card-header-right">
+                        <ul class="list-unstyled card-option">
+                            <li><i class="ti-minus minimize-card"></i></li>
+                            <li><i class="icon-refresh"></i></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-content">
+                        <div class="card bg-light mb-3" style="max-width: 18rem;">
+                            @foreach (var item in Model)
+                            {
+                                <div class="card-header">
+                                    Manutenção da @Html.DisplayFor(model => item.Maquina.Nome) -
+                                    @Html.ActionLink("Detalhes", "Detalhes", new { id = item.Id })
+                                </div>
+                                <div class="modal-footer">
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<environment include="Development">
+    <script src="~/Scripts/progressCircle.js" asp-append-version="true" defer></script>
+</environment>
+
+<environment exclude="Development">
+    <script src="~/js/progressCircle.min.js" asp-append-version="true" defer></script>
+</environment>
