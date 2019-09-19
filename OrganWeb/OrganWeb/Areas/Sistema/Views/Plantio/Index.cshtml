@@ -1,4 +1,4 @@
-﻿@model List<OrganWeb.Areas.Sistema.Models.Plantio>
+﻿@model OrganWeb.Areas.Sistema.Models.ViewModels.ViewPlantio
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -20,7 +20,7 @@
                 <div class="card-body">
                     <div class="card-content">
                         <div class="card bg-light mb-3" style="max-width: 18rem;">
-                            @foreach (var item in Model)
+                            @foreach (var item in Model.Plantios)
                             {
                                 <div class="card-header">
                                     Plantio de @Html.DisplayFor(model => item.Semente.Nome) -

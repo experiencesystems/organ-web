@@ -6,18 +6,22 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using OrganWeb.Areas.Sistema.Models.ViewModels;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
     public class PlantioController : Controller
     {
         private Plantio plantio = new Plantio();
-        private Semente semente = new Semente();
+        private BancoContext db = new BancoContext();
 
         // GET: Sistema/Plantio
         public ActionResult Index()
         {
-            var select = plantio.GetPlantios();
+            var select = new ViewPlantio
+            {
+                Plantios = plantio.GetPlantios()
+            };
             return View(select);
         }
         

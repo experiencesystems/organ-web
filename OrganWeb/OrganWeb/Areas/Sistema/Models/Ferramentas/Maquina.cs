@@ -46,7 +46,7 @@ namespace OrganWeb.Areas.Sistema.Models.Ferramentas
         [Required]
         [Range(0.01, 99.99)]
         [Display(Name = "Depreciação por mês")]
-        public double DepreciacaoMes { get; set; }
+        public double DepreciacaoMensal { get; set; }
 
         //TODO: Verificar montadora
         [Required]

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using OrganWeb.Models;
+using OrganWeb.Areas.Sistema.Models.zRepositories;
 
 namespace OrganWeb.Areas.Sistema.Models.Ferramentas
 {
@@ -21,14 +22,14 @@ namespace OrganWeb.Areas.Sistema.Models.Ferramentas
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Data de manutenção")]
-        public DateTime DataManutencao { get; set; }
+        public DateTime DataManuntencao { get; set; }
 
         [StringLength(300, MinimumLength = 10)]
         public string Detalhes { get; set; }
     }
 
     [Table("tbManutencaoMaquina")]
-    public class ManutencaoMaquina : Repository<ManutencaoMaquina>
+    public class ManutencaoMaquina : MaquinaManutencaoRepository
     {
         [Key]
         [Column(Order = 1)]
@@ -38,7 +39,7 @@ namespace OrganWeb.Areas.Sistema.Models.Ferramentas
         [Key]
         [Column(Order = 2)]
         [ForeignKey("Manutencao")]
-        public int IdManutencao { get; set; }
+        public int IdManuntencao { get; set; }
 
         public virtual Maquina Maquina { get; set; }
         public virtual Manutencao Manutencao { get; set; }
