@@ -22,7 +22,10 @@
                         <div class="card bg-light mb-3" style="max-width: 18rem;">
                             @foreach (var item in Model)
                             {
-                                <div class="card-header">@Html.DisplayFor(model => item.Semente.Nome)</div>
+                                <div class="card-header">
+                                    Plantio de @Html.DisplayFor(model => item.Semente.Nome) -
+                                    @Html.ActionLink("Detalhes", "Detalhes", new { id = item.Id })
+                                </div>
                                 <div class="card-body">
                                     <h5 class="card-title">Talhão</h5>
                                     <div class="progress mx-auto" data-value='@Html.DisplayFor(model => item.Porcentagem)'>

@@ -5,6 +5,8 @@ using System.Web;
 using OrganWeb.Areas.Sistema.Models;
 using System.Web.Mvc;
 using OrganWeb.Models;
+using OrganWeb.Areas.Sistema.Models.Estoque;
+using OrganWeb.Areas.Sistema.Models.ViewModels;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {

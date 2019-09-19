@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using OrganWeb.Areas.Sistema.Models;
-using System.Linq;
-using System.Web;
-using System.Configuration;
-using System.ComponentModel.DataAnnotations.Schema;
+using OrganWeb.Areas.Sistema.Models.Funcionarios;
+using OrganWeb.Areas.Sistema.Models.Safras;
+using OrganWeb.Areas.Sistema.Models.Estoque;
+using OrganWeb.Areas.Sistema.Models.Administrativo;
+using OrganWeb.Areas.Sistema.Models.ViewModels;
+using OrganWeb.Areas.Sistema.Models.Ferramentas;
+using OrganWeb.Areas.Sistema.Models.Controles;
+using OrganWeb.Areas.Sistema.Models.Financas;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System.Data.Entity.ModelConfiguration;
 
 namespace OrganWeb.Models
 {
@@ -27,17 +28,13 @@ namespace OrganWeb.Models
         public virtual DbSet<Equipe> Equipes { get; set; }
         public virtual DbSet<Telefone> Telefones { get; set; }
         public virtual DbSet<FuncionarioTelefone> FuncionarioTelefones { get; set; }
-        public virtual DbSet<Monitoramento> Monitoramentos { get; set; }
-        public virtual DbSet<MonitoramentoTarefa> MonitoramentoTarefas { get; set; }
         public virtual DbSet<EquipeFuncionario> EquipeFuncionarios { get; set; }
         public virtual DbSet<Estoque> Estoques { get; set; }
         public virtual DbSet<HistoricoEstoque> HistoricoEstoques { get; set; }
         public virtual DbSet<Fornecedor> Fornecedors { get; set; }
         public virtual DbSet<FornecedorTelefone> FornecedorTelefones { get; set; }
         public virtual DbSet<Item> Items { get; set; }
-        public virtual DbSet<Cultura> Culturas { get; set; }
         public virtual DbSet<Plantio> Plantios { get; set; }
-        public virtual DbSet<Estadio> Estadios { get; set; }
         public virtual DbSet<Area> Areas { get; set; }
         public virtual DbSet<AreaPlantio> AreaPlantios { get; set; }
         public virtual DbSet<Maquina> Maquinas { get; set; }
