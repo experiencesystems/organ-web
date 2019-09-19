@@ -1,4 +1,4 @@
-﻿@model OrganWeb.Areas.Sistema.Models.Safras.Plantio
+﻿@model OrganWeb.Areas.Sistema.Models.Ferramentas.ManutencaoMaquina
 @{
     ViewBag.Title = "Detalhes";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -22,9 +22,7 @@
                 <div class="card-body">
                     <div class="card-content">
                         <div class="card bg-light mb-3" style="max-width: 18rem;">
-                            <div class="card-header">@Html.DisplayFor(model => model.Nome)</div>
-                            <div class="card-body">Iniciado em: @Html.DisplayFor(model => model.DataInício)</div>
-                            <div class="card-body">Termina em: @Html.DisplayFor(model => model.DataColheita)</div>
+                            <div class="card-header">@Html.DisplayFor(model => model.Manutencao.Nome)</div>
                             <div class="modal-footer"></div>
                         </div>
                     </div>

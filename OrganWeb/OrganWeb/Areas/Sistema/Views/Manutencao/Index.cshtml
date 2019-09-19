@@ -1,10 +1,8 @@
-﻿@model List<OrganWeb.Areas.Sistema.Models.ManutencaoMaquina>
+﻿@model OrganWeb.Areas.Sistema.Models.ViewModels.ViewManutencao
 @{
     ViewBag.Title = "Manutenção";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Manutenção</h2>
 
 <div class="main-body">
     <div class="row">
@@ -22,11 +20,15 @@
                 <div class="card-body">
                     <div class="card-content">
                         <div class="card bg-light mb-3" style="max-width: 18rem;">
-                            @foreach (var item in Model)
+                            @foreach (var item in Model.ManutencaoMaquinas)
                             {
                                 <div class="card-header">
                                     Manutenção da @Html.DisplayFor(model => item.Maquina.Nome) -
-                                    @Html.ActionLink("Detalhes", "Detalhes", new { id = item.Id })
+                                    @Html.ActionLink("Detalhes", "Detalhes", new { id = item.IdManuntencao, id2 = item.IdMaquina })
+                                </div>
+                                <div class="card-body">
+                                    Data: @Html.DisplayFor(model => item.Manutencao.DataManuntencao)
+                                          @Html.DisplayFor(model => item.Manutencao.Detalhes)
                                 </div>
                                 <div class="modal-footer">
                                 </div>

@@ -241,6 +241,9 @@
     <Compile Include="Areas\Sistema\Models\Funcionarios\Funcionario.cs" />
     <Compile Include="Areas\Sistema\Models\Estoque\HistoricoEstoque.cs" />
     <Compile Include="Areas\Sistema\Models\Estoque\Item.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewModels\ViewFinanceiro.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewModels\ViewManutencao.cs" />
+    <Compile Include="Areas\Sistema\Models\zRepositories\MaquinaManutencaoRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\PlantioRepository.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewEstoque.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewPlantio.cs" />
@@ -330,6 +333,7 @@
     <Content Include="Areas\Sistema\Views\Plantio\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Plantio\Detalhes.cshtml" />
     <Content Include="Areas\Sistema\Views\Manutencao\Index.cshtml" />
+    <Content Include="Areas\Sistema\Views\Manutencao\Detalhes.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
