@@ -1,108 +1,13 @@
-use sys;
-drop database if exists dbOrgan;
-create database dbOrgan;
-use dbOrgan;
 
--- EU COLOQUEI UM MONTE DE TITULO OBRIGATÓRIO, SE TIVER ALGUM QUE NÃO SEJA, PODE MUDAR
 
-create table `AspNetRoles`(
-	`Id` nvarchar(128)  not null ,
-	`Name` nvarchar(256)  not null ,
-	primary key (`Id`)) 
-	engine=InnoDb 
-	auto_increment=0;
-    
-CREATE UNIQUE index  `RoleNameIndex` on `AspNetRoles` (`Name`);
 
-create table `AspNetUserRoles` (
-	`UserId` nvarchar(128)  not null ,
-	`RoleId` nvarchar(128)  not null ,
-	primary key ( `UserId`,`RoleId`) )	
-	engine=InnoDb auto_increment=0;
- 
-CREATE index  `IX_UserId` on `AspNetUserRoles` (`UserId`);
-
-CREATE index  `IX_RoleId` on `AspNetUserRoles` (`RoleId`);
-
-create table `AspNetUsers` (
-	`Id` nvarchar(128)  not null ,
-	DataCadastro datetime default current_timestamp(),
-    Confirmacao bool not null,
-	Ativacao bool not null default true,
-    Assinatura bool not null,
-	`CLI/FUNC` bool not null,
-	`Email` nvarchar(256) ,
-	`EmailConfirmed` bool not null ,
-	`PasswordHash` longtext,
-	`SecurityStamp` longtext,
-	`PhoneNumber` longtext,
-	`PhoneNumberConfirmed` bool not null ,
-	`TwoFactorEnabled` bool not null ,
-	`LockoutEndDateUtc` datetime,
-	`LockoutEnabled` bool not null ,
-	`AccessFailedCount` int not null ,
-	`UserName` nvarchar(256)  not null ,
-	primary key ( `Id`) )
-	engine=InnoDb auto_increment=0;
-    
-CREATE UNIQUE index  `UserNameIndex` on `AspNetUsers` (`UserName`);
-
-create table `AspNetUserClaims` (
-	`Id` int not null  auto_increment ,
-	`UserId` nvarchar(128)  not null ,
-	`ClaimType` longtext,
-	`ClaimValue` longtext,
-	primary key ( `Id`) ) 
-	engine=InnoDb auto_increment=0;
-    
-CREATE index  `IX_UserId` on `AspNetUserClaims` (`UserId`);
-
-create table `AspNetUserLogins` (
-	`LoginProvider` nvarchar(128)  not null ,
-	`ProviderKey` nvarchar(128)  not null ,
-	`UserId` nvarchar(128)  not null ,
-	primary key ( `LoginProvider`,`ProviderKey`,`UserId`) ) 
-	engine=InnoDb auto_increment=0;
-
-CREATE index  `IX_UserId` on `AspNetUserLogins` (`UserId`);
-
-alter table `AspNetUserRoles` add constraint `FK_AspNetUserRoles_AspNetRoles_RoleId`  foreign key (`RoleId`) references `AspNetRoles` ( `Id`)  on update cascade on delete cascade;
-alter table `AspNetUserRoles` add constraint `FK_AspNetUserRoles_AspNetUsers_UserId`  foreign key (`UserId`) references `AspNetUsers` ( `Id`)  on update cascade on delete cascade;
-alter table `AspNetUserClaims` add constraint `FK_AspNetUserClaims_AspNetUsers_UserId`  foreign key (`UserId`) references `AspNetUsers` ( `Id`)  on update cascade on delete cascade; 
-alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_UserId`  foreign key (`UserId`) references `AspNetUsers` ( `Id`)  on update cascade on delete cascade;
-
-/*create table tbDadosUsuario(
-	Id int auto_increment, 
-     constraint PKUsuario primary key(Id),
-	DataCadastro datetime default current_timestamp(),
-    Confirmacao bool not null,
-	Ativacao bool not null default true,
-    Assinatura bool not null,
-	`CLI/FUNC` bool not null,
-     -- true Cli, false Func
-	
-    IdUsuario nvarchar(128)  not null,
-     constraint FKDadosUsuario foreign key(IdUsuario) references `AspNetUsers`(`Id`)
-);*/
-
-create table tbLocalizacao(
-	CEP char(8),
-    Numero int,
-    Endereco varchar(150) not null,
-    Bairro varchar(100) not null,
-    Complemento varchar(100) not null,
-    Cidade varchar(50) not null,
-    UF char(2) not null,
-    
-     constraint PKLocalizacao primary key (CEP, Numero)
-);
-
+/*
 create table tbFazenda(
 	Id int auto_increment,
      constraint PKFazenda primary key (Id),
 	
     Area decimal(5,2) not null,
-    Perimetro decimal(5,2) not null,
+    Perimetro double(5,2) not null,
     Coordenadas geometry not null,
     CEP char(8) not null,
     Numero int not null,
@@ -162,7 +67,7 @@ insert into tbCargo (Nivel, Cargo) values ('Alto', 'Administrador');
 TipoContratacao, PeriodoContratacao, `MES/ANO`, IdCargo, CEP, Numero, IdUsuario) values (
  'Gilberto', 'Ramos', '26633622255', '356252527', '2008-7-04', 'gilberto@ramos.com', 122.30, 'Alto', '2018-7-04',
 'Temporaria', 1, true, 1, '05234000', 12, '175d624d-af57-4636-ac2e-a05445b8ed00'
- );*/
+ );
 
 SELECT`Extent1`.`Numero`, `Extent1`.`Id`,`Extent1`.`Nome`,`Extent1`.`Sobrenome`, `Extent1`.`CPF`,`Extent1`.`RG`, `Extent1`.`DataNascimento`, `Extent1`.`Email`, `Extent1`.`Salario`, `Extent1`.`GrauInstrucao`, `Extent1`.`DataContratacao`, `Extent1`.`TipoContratacao`, `Extent1`.`PeriodoContratacao`, `Extent1`.`MES/ANO`, `Extent1`.`IdCargo`, `Extent1`.`CEP`,`Extent1`.`IdUsuario`,`Extent2`.`Id` AS `Id1`, `Extent2`.`Nivel`, `Extent2`.`Cargo`, `Extent3`.`CEP` AS `CEP1`,`Extent3`.`Numero` AS `Numero1`, `Extent3`.`Endereco`, `Extent3`.`Bairro`, `Extent3`.`Complemento`,`Extent3`.`Cidade`, `Extent3`.`UF`,`Extent4`.`Id` AS `Id2`, `Extent4`.`DataCadastro`, `Extent4`.`Confirmacao`, `Extent4`.`Assinatura`,`Extent4`.`CLI/FUNC`, `Extent4`.`Email` AS `Email1`, `Extent4`.`EmailConfirmed`, `Extent4`.`PasswordHash`, `Extent4`.`SecurityStamp`, `Extent4`.`PhoneNumber`, `Extent4`.`PhoneNumberConfirmed`, `Extent4`.`TwoFactorEnabled`,`Extent4`.`LockoutEndDateUtc`,`Extent4`.`LockoutEnabled`, `Extent4`.`AccessFailedCount`,`Extent4`.`UserName`FROM `tbFuncionario` AS `Extent1` INNER JOIN `tbCargo` AS `Extent2` ON `Extent1`.`IdCargo` = `Extent2`.`Id` INNER JOIN `tbLocalizacao` AS `Extent3` ON (`Extent1`.`Numero` = `Extent3`.`Numero`) AND (`Extent1`.`CEP` = `Extent3`.`CEP`) INNER JOIN `AspNetUsers` AS `Extent4` ON `Extent1`.`IdUsuario` = `Extent4`.`Id`;
 SELECT`Extent1`.`IdCargo`,`Extent1`.`Sobrenome`, `Extent2`.`Cargo`FROM `tbFuncionario` AS `Extent1` INNER JOIN `tbCargo` AS `Extent2` ON `Extent1`.`IdCargo` = `Extent2`.`Id`;
@@ -306,7 +211,7 @@ BEGIN
 END$$
 
 ( -- PROCEDURE VERIFICAR QUANTIDADE
-CREATE PROCEDURE spVerificaQuantidade (IN qtd DECIMAL(7,2))
+CREATE PROCEDURE spVerificaQuantidade (IN qtd decimal(7,2))
 BEGIN
     IF qtd < 0 THEN
         SIGNAL SQLSTATE '45000'
@@ -631,3 +536,5 @@ INNER JOIN tbItem I ON E.Id = I.IdEstoque
 INNER JOIN tbCategoria C ON C.Id = I.IdCategoria);
 
 select * from VwItems;
+
+*/
