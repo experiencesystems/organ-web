@@ -334,6 +334,7 @@
     <Content Include="Areas\Sistema\Views\Plantio\Detalhes.cshtml" />
     <Content Include="Areas\Sistema\Views\Manutencao\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Manutencao\Detalhes.cshtml" />
+    <Content Include="Areas\Sistema\Views\Plantio\_NovoPlantio.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

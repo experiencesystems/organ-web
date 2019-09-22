@@ -46,7 +46,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 //Semente = semente.GetAll()   
             };
 
-            return PartialView("_NovoItem", plantio);
+            return PartialView("_NovoPlantio", plantio);
         }
     }
 }
