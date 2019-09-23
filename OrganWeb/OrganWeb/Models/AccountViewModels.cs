@@ -49,8 +49,8 @@ namespace OrganWeb.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
         [EmailAddress]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Required]
@@ -68,6 +68,10 @@ namespace OrganWeb.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Usuário")]
+        public string UserName { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "O/A {0} deve ter no mínimo {2} caracteres.", MinimumLength = 6)]

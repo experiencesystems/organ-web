@@ -9,7 +9,7 @@ namespace OrganWeb.Models
 {
     public class Repository<T> : IDisposable where T : class
     {
-        private BancoContext _context;
+        public BancoContext _context;
 
         protected DbSet<T> DbSet { get; set; }
 
@@ -28,10 +28,15 @@ namespace OrganWeb.Models
         {
             DbSet.Remove(DbSet.Find(id));
         }
-        
+
         public List<T> GetAll()
         {
             return DbSet.ToList();
+        }
+
+        public List<T> GetFew()
+        {
+            return DbSet.Take(10).ToList();
         }
 
         public T GetByID(int? id)

@@ -1,0 +1,33 @@
+﻿@model OrganWeb.Areas.Sistema.Models.Ferramentas.ManutencaoMaquina
+@{
+    ViewBag.Title = "Detalhes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalhes</h2>
+
+<div class="main-body">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title box-title">Plantios</h6>
+                    <div class="card-header-right">
+                        <ul class="list-unstyled card-option">
+                            <li><i class="ti-minus minimize-card"></i></li>
+                            <li><i class="icon-refresh"></i></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-content">
+                        <div class="card bg-light mb-3" style="max-width: 18rem;">
+                            <div class="card-header">@Html.DisplayFor(model => model.Manutencao.Nome)</div>
+                            <div class="modal-footer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

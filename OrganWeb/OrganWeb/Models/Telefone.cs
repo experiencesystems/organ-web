@@ -13,10 +13,14 @@ namespace OrganWeb.Models
     {
         [Key]
         public int Id { get; set; }
-        public int DDD { get; set; }
-        public Int64 Numero { get; set; }
-        public string Tipo { get; set; }
 
-        public virtual List<Funcionario> Funcionarios { get; set; }
+        [Required]
+        public int DDD { get; set; }
+
+        [Required]
+        public Int64 Numero { get; set; }
+
+        [StringLength(30, MinimumLength = 3)]
+        public string Tipo { get; set; }
     }
 }

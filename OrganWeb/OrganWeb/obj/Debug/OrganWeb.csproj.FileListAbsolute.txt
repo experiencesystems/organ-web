@@ -128,6 +128,109 @@ C:\Users\milen\Desktop\OrganWeb\OrganWeb\bin\pt-br\Microsoft.AspNet.Identity.Ent
 C:\Users\milen\Desktop\OrganWeb\OrganWeb\obj\Debug\OrganWeb.csproj.CopyComplete
 C:\Users\milen\Desktop\OrganWeb\OrganWeb\obj\Debug\OrganWeb.dll
 C:\Users\milen\Desktop\OrganWeb\OrganWeb\obj\Debug\OrganWeb.pdb
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\SqlServerTypes\x64\msvcr120.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\SqlServerTypes\x64\SqlServerSpatial140.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\SqlServerTypes\x86\msvcr120.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\SqlServerTypes\x86\SqlServerSpatial140.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Antlr3.Runtime.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\EntityFramework.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\EntityFramework.SqlServer.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.CSharp.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.Owin.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.Owin.Security.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.SqlServer.Types.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Newtonsoft.Json.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Owin.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.ComponentModel.DataAnnotations.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Configuration.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Data.DataSetExtensions.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Data.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Drawing.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.EnterpriseServices.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Net.Http.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Net.Http.WebRequest.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Web.Abstractions.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Web.ApplicationServices.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Web.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Web.DynamicData.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Web.Entity.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Web.Extensions.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Web.Helpers.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Web.Mvc.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Web.Optimization.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Web.Razor.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Web.Routing.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Web.Services.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Web.WebPages.Deployment.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Web.WebPages.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Web.WebPages.Razor.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Xml.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Xml.Linq.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\WebGrease.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.Owin.xml
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.Owin.Security.xml
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\MySql.Data.xml
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\MySql.Data.Entity.EF6.xml
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\MySql.Web.xml
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Newtonsoft.Json.xml
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Web.Helpers.xml
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Web.Mvc.xml
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Web.Razor.xml
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Web.WebPages.xml
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Web.WebPages.Deployment.xml
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Web.WebPages.Razor.xml
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\System.Web.Optimization.xml
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Antlr3.Runtime.pdb
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\EntityFramework.xml
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\EntityFramework.SqlServer.xml
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\pt-br\Microsoft.Owin.resources.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\pt-br\Microsoft.Owin.Host.SystemWeb.resources.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\pt-br\Microsoft.Owin.Security.resources.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\pt-br\Microsoft.Owin.Security.Facebook.resources.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\pt-br\Microsoft.Owin.Security.Google.resources.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\pt-br\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\pt-br\Microsoft.Owin.Security.Twitter.resources.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\pt-br\System.Web.Helpers.resources.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\pt-br\System.Web.Mvc.resources.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\pt-br\System.Web.Razor.resources.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\pt-br\System.Web.WebPages.resources.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\pt-br\System.Web.WebPages.Deployment.resources.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\pt-br\System.Web.WebPages.Razor.resources.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\pt-br\System.Web.Optimization.resources.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\pt-br\Microsoft.AspNet.Identity.Owin.resources.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\bin\pt-br\Microsoft.AspNet.Identity.EntityFramework.resources.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.csprojAssemblyReference.cache
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.csproj.CoreCompileInputs.cache
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.csproj.CopyComplete
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.dll
+C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.pdb
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.csproj.CoreCompileInputs.cache
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\SqlServerTypes\x64\msvcr120.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\SqlServerTypes\x64\SqlServerSpatial140.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\SqlServerTypes\x86\msvcr120.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\SqlServerTypes\x86\SqlServerSpatial140.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\OrganWeb.dll.config
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\OrganWeb.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\OrganWeb.pdb
@@ -187,6 +290,7 @@ C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft.AspNet.Identity.Owin.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft.CSharp.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft.Owin.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft.Owin.Host.SystemWeb.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft.Owin.Security.dll
@@ -195,19 +299,39 @@ C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft.Owin.Security.OAuth.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft.SqlServer.Types.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\MySql.Data.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\MySql.Data.Entity.EF6.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\MySql.Web.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Newtonsoft.Json.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Owin.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.ComponentModel.DataAnnotations.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Configuration.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Data.DataSetExtensions.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Data.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Drawing.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.EnterpriseServices.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Net.Http.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Net.Http.WebRequest.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Web.Abstractions.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Web.ApplicationServices.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Web.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Web.DynamicData.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Web.Entity.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Web.Extensions.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Web.Helpers.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Web.Mvc.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Web.Optimization.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Web.Razor.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Web.Routing.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Web.Services.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Web.WebPages.Deployment.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Web.WebPages.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Web.WebPages.Razor.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Xml.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Xml.Linq.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\WebGrease.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft.Owin.xml
@@ -252,7 +376,6 @@ C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\pt-br\Sys
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\pt-br\Microsoft.AspNet.Identity.Core.resources.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\pt-br\Microsoft.AspNet.Identity.Owin.resources.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\pt-br\Microsoft.AspNet.Identity.EntityFramework.resources.dll
-C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.csproj.CoreCompileInputs.cache
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.csproj.CopyComplete
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.pdb
