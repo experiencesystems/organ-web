@@ -55,6 +55,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult _NovaManutencao(ManutencaoMaquina manutencaom)
         {
             if (ModelState.IsValid)
