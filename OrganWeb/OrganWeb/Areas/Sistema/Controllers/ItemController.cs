@@ -43,7 +43,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         {
             ViewBag.IdCategoria = new SelectList(db.Categorias, "Id", "Nome");
             ViewBag.IdEstoque = new SelectList(db.Estoques, "Id", "UnidadeMedida");
-            ViewBag.IdFornecedor = new SelectList(db.Fornecedors, "Id", "Nome");
+            ViewBag.IdFornecedor = new SelectList(db.Sementes, "Id", "Nome");
             return View();
         }
 
@@ -63,7 +63,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
             ViewBag.IdCategoria = new SelectList(db.Categorias, "Id", "Nome", item.IdCategoria);
             ViewBag.IdEstoque = new SelectList(db.Estoques, "Id", "UnidadeMedida", item.IdEstoque);
-            ViewBag.IdFornecedor = new SelectList(db.Fornecedors, "Id", "Nome", item.IdFornecedor);
+            ViewBag.IdFornecedor = new SelectList(db.Sementes, "Id", "Nome", item.IdFornecedor);
             return View(item);
         }
 
@@ -81,7 +81,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
             }
             ViewBag.IdCategoria = new SelectList(db.Categorias, "Id", "Nome", item.IdCategoria);
             ViewBag.IdEstoque = new SelectList(db.Estoques, "Id", "UnidadeMedida", item.IdEstoque);
-            ViewBag.IdFornecedor = new SelectList(db.Fornecedors, "Id", "Nome", item.IdFornecedor);
+            ViewBag.IdFornecedor = new SelectList(db.Sementes, "Id", "Nome", item.IdFornecedor);
             return View(item);
         }
 
@@ -100,7 +100,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
             }
             ViewBag.IdCategoria = new SelectList(db.Categorias, "Id", "Nome", item.IdCategoria);
             ViewBag.IdEstoque = new SelectList(db.Estoques, "Id", "UnidadeMedida", item.IdEstoque);
-            ViewBag.IdFornecedor = new SelectList(db.Fornecedors, "Id", "Nome", item.IdFornecedor);
+            ViewBag.IdFornecedor = new SelectList(db.Sementes, "Id", "Nome", item.IdFornecedor);
             return View(item);
         }
 
