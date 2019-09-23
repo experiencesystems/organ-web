@@ -5,6 +5,8 @@ using System.Web;
 using OrganWeb.Areas.Sistema.Models;
 using System.Web.Mvc;
 using OrganWeb.Models;
+using OrganWeb.Areas.Sistema.Models.Estoque;
+using OrganWeb.Areas.Sistema.Models.ViewModels;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
@@ -12,14 +14,16 @@ namespace OrganWeb.Areas.Sistema.Controllers
     public class EstoqueController : Controller
     {
         private BancoContext db = new BancoContext();
+        private VwItems vwitems = new VwItems();
+        private Item item = new Item();
 
         // GET: Sistema/Estoque
-        public ActionResult Index(Item item)
+        public ActionResult Index()
         {
             var viewestoque = new ViewEstoque
             {
-                VwItems = db.VwItems.Take(15).AsQueryable(),
-                Items = db.Items
+                VwItems = vwitems.GetFew(),
+                Items = item.GetFew()
             };
 
             return View(viewestoque);
