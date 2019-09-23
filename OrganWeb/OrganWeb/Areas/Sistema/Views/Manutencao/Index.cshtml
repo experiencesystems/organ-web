@@ -1,0 +1,99 @@
+﻿@model OrganWeb.Areas.Sistema.Models.ViewModels.ViewManutencao
+@{
+    ViewBag.Title = "Manutenção";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-body">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title box-title">Manutenções recentes</h6>
+                    <div class="card-header-right">
+                        <ul class="list-unstyled card-option">
+                            <li><i class="ti-minus minimize-card"></i></li>
+                            <li><i class="icon-refresh"></i></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-content">
+                        <div class="card bg-light mb-3" style="max-width: 18rem;">
+                            @foreach (var item in Model.ManutencaoMaquinas)
+                            {
+                                <div class="card-header">
+                                    Manutenção da @Html.DisplayFor(model => item.Maquina.Nome) -
+                                    @Html.ActionLink("Detalhes", "Detalhes", new { id = item.IdManuntencao, id2 = item.IdMaquina })
+                                </div>
+                                <div class="card-body">
+                                    Data: @Html.DisplayFor(model => item.Manutencao.DataManuntencao)
+                                    @Html.DisplayFor(model => item.Manutencao.Detalhes)
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary edit" data-url="@Url.Action("Editar", "Manutencao", new { id = item.IdManuntencao, id2 = item.IdMaquina })">Editar</button>
+                                    <button type="button" class="btn btn-danger delete" data-url="@Url.Action("Excluir", "Manutencao", new { id = item.IdManuntencao, id2 = item.IdMaquina })">Excluir</button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card border-success mb-3" style="max-width: 18rem;">
+                        <div class="card-body text-success">
+                            <h5 class="card-title">Nova manutenção</h5>
+                            <p class="card-text">
+                                <div class="teste"></div>
+                                <button type="button" class="btn btn-info waves-effect" data-toggle="ajax-modal" data-target="#add-item">Nova manutenção</button>
+                                @{Html.RenderAction("_NovaManutencao", "Manutencao");}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" data-backdrop="static" />
+
+<environment include="Development">
+    <script src="~/Scripts/crudmodal.js" asp-append-version="true" defer></script>
+</environment>
+
+<environment exclude="Development">
+    <script src="~/js/crudmodal.min.js" asp-append-version="true" defer></script>
+</environment>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"
+        integrity="sha256-F6h55Qw6sweK+t7SiOJX+2bpSAa3b/fnlrVCJvmEj1A="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.9/jquery.validate.unobtrusive.min.js"
+        integrity="sha256-paoxpct33kY9fpQlvgC8IokjGq8iqYaVFawgFPg8oz0="
+        crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+@section scripts{
+
+    <script>
+        $(function () {
+
+            $(".edit").click(function () {
+                var url = $(this).data('url');
+                $("#modal").load(url, function () {
+                    $("#modal").modal("show");
+                })
+            });
+
+            $(".delete").click(function () {
+                var url = $(this).data('url');
+                $("#modal").load(url, function () {
+                    $("#modal").modal("show");
+                })
+            });
+
+        })
+    </script>
+}
