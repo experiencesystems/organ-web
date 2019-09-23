@@ -4,10 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using OrganWeb.Models;
 
 namespace OrganWeb.Areas.Sistema.Models.ViewModels
 {
-    public class VwItems
+    public class VwItems : Repository<VwItems>
     {
         [Key]
         public int Id { get; set; }

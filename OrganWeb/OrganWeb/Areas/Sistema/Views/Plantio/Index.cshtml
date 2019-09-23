@@ -46,14 +46,18 @@
                             }
                         </div>
                     </div>
-                    <!--<div class="card-content">
+                    <div class="card-content">
                         <div class="card border-success mb-3" style="max-width: 18rem;">
                             <div class="card-body text-success">
                                 <h5 class="card-title">Novo plantio</h5>
-                                <p class="card-text"></p>
+                                <p class="card-text">
+                                    <div class="teste"></div>
+                                    <button type="button" class="btn btn-info waves-effect" data-toggle="ajax-modal" data-target="#add-item">Novo plantio</button>
+                                    @{Html.RenderAction("_NovoPlantio", "Plantio");}
+                                </p>
                             </div>
                         </div>
-                    </div>-->
+                    </div>
                 </div>
             </div>
         </div>
@@ -62,8 +66,17 @@
 
 <environment include="Development">
     <script src="~/Scripts/progressCircle.js" asp-append-version="true" defer></script>
+    <script src="~/Scripts/crudmodal.js" asp-append-version="true" defer></script>
 </environment>
 
 <environment exclude="Development">
     <script src="~/js/progressCircle.min.js" asp-append-version="true" defer></script>
+    <script src="~/js/crudmodal.min.js" asp-append-version="true" defer></script>
 </environment>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"
+        integrity="sha256-F6h55Qw6sweK+t7SiOJX+2bpSAa3b/fnlrVCJvmEj1A="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.9/jquery.validate.unobtrusive.min.js"
+        integrity="sha256-paoxpct33kY9fpQlvgC8IokjGq8iqYaVFawgFPg8oz0="
+        crossorigin="anonymous"></script>

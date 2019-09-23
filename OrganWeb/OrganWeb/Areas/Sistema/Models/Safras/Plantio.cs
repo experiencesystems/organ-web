@@ -61,6 +61,8 @@ namespace OrganWeb.Areas.Sistema.Models.Safras
         
         public virtual Semente Semente { get; set; }
 
+        public IEnumerable<Semente> Sementes { get; set; }
+
         [NotMapped]
         public double Porcentagem { get; set; }
     }

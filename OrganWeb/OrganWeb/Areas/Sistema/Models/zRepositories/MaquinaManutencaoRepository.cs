@@ -13,5 +13,10 @@ namespace OrganWeb.Areas.Sistema.Models.zRepositories
         {
             return DbSet.Find(man, maq);
         }
+
+        public void Delete(int id, int id2)
+        {
+            DbSet.Remove(DbSet.Find(id, id2));
+        }
     }
 }

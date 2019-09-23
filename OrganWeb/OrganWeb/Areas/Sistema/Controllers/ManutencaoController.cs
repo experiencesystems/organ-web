@@ -8,12 +8,15 @@ using System.Web.Mvc;
 using OrganWeb.Areas.Sistema.Models.Ferramentas;
 using OrganWeb.Areas.Sistema.Models.ViewModels;
 using System.Net;
+using System.Data.Entity;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
     public class ManutencaoController : Controller
     {
-        private  ManutencaoMaquina manumaq = new ManutencaoMaquina();
+        private ManutencaoMaquina manumaq = new ManutencaoMaquina();
+        private Maquina maquina = new Maquina();
+        private Manutencao manutencao = new Manutencao();
         private readonly BancoContext db = new BancoContext();
 
         // GET: Sistema/Manutencao
@@ -38,6 +41,94 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 return HttpNotFound();
             }
             return View(manumaq);
+        }
+
+        [HttpGet]
+        public ActionResult _NovaManutencao()
+        {
+            var manutencaom = new ManutencaoMaquina
+            {
+                Maquinas = maquina.GetAll()
+            };
+
+            return View(manutencaom);
+        }
+
+        [HttpPost]
+        public ActionResult _NovaManutencao(ManutencaoMaquina manutencaom)
+        {
+            if (ModelState.IsValid)
+            {
+                manutencao = new Manutencao
+                {
+                    Nome = manutencaom.Manutencao.Nome,
+                    DataManuntencao = manutencaom.Manutencao.DataManuntencao,
+                    Detalhes = manutencaom.Manutencao.Detalhes
+                };
+                manutencao.Add(manutencao);
+                manutencaom.IdManuntencao = manutencao.Id;
+                manutencaom.Add(manutencaom);
+                manutencaom.Save();
+                return RedirectToAction("Index");
+            }
+            manutencaom.Maquinas = maquina.GetAll();
+            return View(manutencaom);
+        }
+
+        public ActionResult Editar(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            manutencao = manutencao.GetByID(id);
+            if (manutencao == null)
+            {
+                return HttpNotFound();
+            }
+            return View(manutencao);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Editar(Manutencao manutencao)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(manutencao).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(manutencao);
+        }
+
+        //http://www.macoratti.net/18/06/mvc5_vmodal2.htm
+        //https://cursos.alura.com.br/forum/topico-implementacao-de-alteracao-de-produto-41440
+
+        public ActionResult Excluir(int? id, int? id2)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            manutencao = manutencao.GetByID(id);
+            if (manutencao == null)
+            {
+                return HttpNotFound();
+            }
+            return View(manutencao);
+        }
+        
+        [HttpPost, ActionName("Excluir")]
+        [ValidateAntiForgeryToken]
+        public ActionResult ExcluirConfirmado(int id, int id2)
+        {
+            manutencao = manutencao.GetByID(id);
+            manumaq = manumaq.GetByID(id, id2);
+            manutencao.Delete(id);
+            manumaq.Delete(id, id2);
+            manutencao.Save();
+            return RedirectToAction("Index");
         }
     }
 }
