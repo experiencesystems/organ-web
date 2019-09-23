@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -22,7 +23,7 @@ namespace OrganWeb.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -34,9 +35,9 @@ namespace OrganWeb.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -57,35 +58,46 @@ namespace OrganWeb.Controllers
         [AllowAnonymous]
         public ActionResult LoginRegistro(LoginRegisterViewModel model)
         {
-            return View(new LoginRegisterViewModel { Login = new LoginViewModel(), Registro = new RegisterViewModel()});
+            return View(new LoginRegisterViewModel { Login = new LoginViewModel(), Registro = new RegisterViewModel() });
         }
 
         //
         // POST: /Account/Login
+        //https://stackoverflow.com/questions/27498840/how-to-login-using-email-in-identity-2
+        //https://techbrij.com/asp-net-core-identity-login-email-username
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public async Task<ActionResult> Login(LoginRegisterViewModel model, string returnUrl)
         {
-            // Isso não conta falhas de login em relação ao bloqueio de conta
-            // Para permitir que falhas de senha acionem o bloqueio da conta, altere para shouldLockout: true
-            if (ModelState.IsValid) {
-                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-                switch (result)
+            if (ModelState.IsValid)
+            {
+                try
                 {
-                    case SignInStatus.Success:
-                        return RedirectToLocal(returnUrl);
-                    case SignInStatus.LockedOut:
-                        return View("Lockout");
-                    case SignInStatus.RequiresVerification:
-                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                    case SignInStatus.Failure:
-                    default:
-                        ModelState.AddModelError("", "Tentativa de login inválida.");
-                        return View("LoginRegistro", model);
+                    var user = UserManager.FindByEmail(model.Login.Email);
+                    var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Login.Password, model.Login.RememberMe, shouldLockout: false);
+                    switch (result)
+                    {
+                        case SignInStatus.Success:
+                            return RedirectToLocal(returnUrl);
+                        case SignInStatus.LockedOut:
+                            return View("Lockout");
+                        case SignInStatus.RequiresVerification:
+                            return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, model.Login.RememberMe });
+                        case SignInStatus.Failure:
+                        default:
+                            ModelState.AddModelError("", "Tentativa de login inválida.");
+                            return View("LoginRegistro", model);
+                    }
+                }
+                catch
+                {
+                    ModelState.AddModelError("", "Tentativa de login inválida.");
+                    return View("LoginRegistro", model);
                 }
             }
-            return View("LoginRegistro", model);
+            return View("LoginRegistro", new LoginRegisterViewModel { Login = new LoginViewModel(), Registro = new RegisterViewModel() });
         }
 
         //
@@ -117,7 +129,7 @@ namespace OrganWeb.Controllers
             // Se um usuário inserir códigos incorretos para uma quantidade especificada de tempo, então a conta de usuário 
             // será bloqueado por um período especificado de tempo. 
             // Você pode configurar os ajustes de bloqueio da conta em IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -136,16 +148,37 @@ namespace OrganWeb.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(LoginRegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var user = new ApplicationUser
+                {
+                    UserName = model.Registro.UserName,
+                    Email = model.Registro.Email,
+                    Assinatura = false,
+                    CliOrFunc = false,
+                    Confirmacao = false,
+                    DataCadastro = DateTime.Today
+                };
+
+                var result = await UserManager.CreateAsync(user, model.Registro.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    try
+                    {
+                        var db = new BancoContext();
+                        db.Users.Add(user);
+                        db.SaveChanges();
+                    }
+                    catch
+                    {
+                        ModelState.AddModelError("", "Tentativa de registro inválida.");
+                        return View("LoginRegistro", model);
+                    }
+
                     // Para obter mais informações sobre como habilitar a confirmação da conta e redefinição de senha, visite https://go.microsoft.com/fwlink/?LinkID=320771
                     // Enviar um email com este link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -158,7 +191,7 @@ namespace OrganWeb.Controllers
             }
 
             // Se chegamos até aqui e houver alguma falha, exiba novamente o formulário
-            return View("LoginRegistro", model);
+            return View("LoginRegistro", new LoginRegisterViewModel { Login = new LoginViewModel(), Registro = new RegisterViewModel() });
         }
 
         //
