@@ -1,0 +1,39 @@
+﻿@model OrganWeb.Areas.Sistema.Models.Safras.Plantio
+
+<div id="modal-placeholder"></div>
+<div class="modal fade" id="add-item" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="card-title box-title"><i class="icofont icofont-plant"></i>Novo plantio</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="_NovoPlantio">
+                    <input name="IsValid" type="hidden" value="@ViewData.ModelState.IsValid.ToString()" />
+                    <div class="form-group row">
+                        <label class="col-sm-8 col-form">@Html.LabelFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })</label>
+                        <div class="col-sm-8">
+                            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nome" } })
+                            @Html.ValidationMessageFor(modelItem => modelItem.Nome, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        @Html.DropDownListFor(model => model.IdSemente, new SelectList(Model.Sementes, "Id", "Nome", Model.IdSemente), "Selecionar semente")
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button">Novo</button>
+                        </div>
+                        @Html.ValidationMessageFor(modelItem => modelItem.IdSemente, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success m-b-0" data-save="ajax-modal">Adicionar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

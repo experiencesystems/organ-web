@@ -1,52 +1,183 @@
-﻿@model IEnumerable<OrganWeb.Areas.Sistema.Models.Doenca>
+﻿@model IEnumerable<OrganWeb.Areas.Sistema.Models.Controles.Doenca>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.semanticui.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.0.5/dist/jBox.all.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css" rel="stylesheet"/>
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.material.min.css" rel="stylesheet"/>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sintomas)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tratamento)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descricao)
-        </th>
-        <th></th>
-    </tr>
+<div class="main-body">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+            <div class="card-header">
+                <h6 class="card-title box-title">Itens</h6>
+                <div class="card-header-right">
+                    <ul class="list-unstyled card-option">
+                        <li><i class="ti-minus minimize-card"></i></li>
+                        <li><i class="icon-refresh"></i></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="card-content">
+                    
+                    <div class="tablecontainer">
+                        <div class="overlay"></div>
+                        <a class="popup btn btn-add" href="/Sistema/Doencas/Create" style="margin-bottom:20px; margin-top:20px;">+ Nova doença</a>
+                        <table class="table" id="myDatatable">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sintomas)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tratamento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descricao)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+                            <thead class="thead-title">
+                                <tr>
+                                    <th>Nome</th>
+                                    <th scope="col">Sintomas</th>
+                                    <th scope="col">Tratamento</th>
+                                    <th scope="col">Descrição</th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="tr-shadow">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Nome)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Sintomas)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Tratamento)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Descricao)
+                                        </td>
+                                        <td>
+
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Details", "Details", new { id = item.Id })
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                        </td>
+                                    </tr>
+                                    <tr class="spacer"></tr>
+                                }
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+
+
+@section Scripts {
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.0.5/dist/jBox.all.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.semanticui.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+    <script>
+        var Popup;
+        $(document).ready(function () {
+            var oTable = $('#myDatatable').DataTable({
+                "ajax": {
+                    "url": '/Sistema/Doencas/GetList',
+                    "type": "get",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "Nome", "autoWidth": true },
+                    { "data": "Sintomas", "autoWidth": true },
+                    { "data": "Tratamento", "autoWidth": true },
+                    { "data": "Descricao", "autoWidth": true },
+                    {
+                        "data": "Edit", "width": "50px", "render": function (data) {
+                            return '<a class="popup" href="/Sistema/Doencas/Edit' + data + '"><i class="item far fa-edit" style="color: #5e5e5f"></i></a>';
+                        }
+                    },
+                    {
+                        "data": "Edit", "width": "50px", "render": function (data) {
+                            return '<a class="popup" href="/Sistema/Doencas/Details' + data + '"><i class="item fas fa-info-circle" style="color: #5e5e5f"></i></a>';
+                        }
+                    },
+                    {
+                        "data": "Edit", "width": "50px", "render": function (data) {
+                            return '<a class="popup" href="/Sistema/Doencas/Delete' + data + '"><i class="item far fa-trash-alt" style="color: #5e5e5f"></i></a>';
+                        }
+                    },
+                ]
+            })
+
+            $('.tablecontainer').on('click', 'a.popup', function (e) {
+                //alert('affa');
+                e.preventDefault();
+                OpenPopup($(this).attr('href'));
+
+            })
+            function OpenPopup(pageUrl) {
+                var $pageContent = $('<div/>');
+                $pageContent.load(pageUrl, function () {
+                    $('#popupForm', $pageContent).removeData('validator');
+                    $('#popupForm', $pageContent).removeData('unobtrusiveValidation');
+                    $.validator.unobtrusive.parse('form');
+                });
+
+                $dialog = $('<div class="popupWindow" style="overflow:auto"></div>')
+                    .html($pageContent)
+                    .dialog({
+                        draggable: false,
+                        autoOpen: false,
+                        resizable: false,
+                        model: true,
+                        title: 'Popup Dialog',
+                        height: 550,
+                        width: 600,
+                        close: function () {
+                            $('.overlay').hide(),
+                                $dialog.dialog('destroy').remove();
+                        }
+                    })
+
+                $('.popupWindow').on('submit', '#popupForm', function (e) {
+                    var url = $('#popupForm')[0].action;
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: $('#popupForm').serialize(),
+                        success: function (data) {
+                            if (data.status) {
+                                $dialog.dialog('close');
+                                oTable.ajax.reload();
+                            }
+                        }
+                    })
+
+                    e.preventDefault();
+                })
+                $dialog.dialog('open');
+            }
+        })
+    </script>
 }
 
-</table>
+
+

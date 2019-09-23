@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using OrganWeb.Areas.Sistema.Models;
 using OrganWeb.Models;
+using OrganWeb.Areas.Sistema.Models.ViewModels;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {

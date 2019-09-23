@@ -1,4 +1,4 @@
-﻿@model OrganWeb.Areas.Sistema.Models.ViewEstoque
+﻿@model OrganWeb.Areas.Sistema.Models.ViewModels.ViewEstoque
 @{
     ViewBag.Title = "Estoque";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -23,7 +23,7 @@
                     <div class="card-content">
                         <div class="card-content">
                             <div class="teste"></div>
-                            <button type="button" class="btn btn-info waves-effect" data-toggle="ajax-modal" data-target="#Modal-lightbox">Novo item</button>
+                            <button type="button" class="btn btn-info waves-effect" data-toggle="ajax-modal" data-target="#add-item">Novo item</button>
                             @{Html.RenderAction("_NovoItem", "Estoque");}
                         </div>
                         <table class="table">
