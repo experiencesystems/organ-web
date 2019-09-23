@@ -23,14 +23,14 @@ namespace OrganWeb.Areas.Sistema.Controllers
             //https://stackoverflow.com/questions/11241341/mvc-entity-framework-select-data-from-multiple-models
             //https://stackoverflow.com/questions/37298612/display-data-for-two-tables-to-layout-page-mvc-5
 
-            var fazenda = new ViewFazenda
+            /*var fazenda = new ViewFazenda
             {
                 Funcionario = db.Funcionarios
                     .Include(f => f.Cargo).Take(15).OrderBy(f => f.Id)
                     .AsQueryable(),
                 Fazenda = db.Fazendas.Include(f => f.Localizacao).AsQueryable()
-            };
-            return View(fazenda);
+            };*/
+            return View();
         }
 
         public partial class _Default : System.Web.UI.Page

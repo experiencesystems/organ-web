@@ -9,9 +9,7 @@ namespace OrganWeb
 {
     public class RouteConfig
     {
-        public static void RegisterRoutes(RouteCollection routes)
-
-           
+        public static void RegisterRoutes(RouteCollection routes)           
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
@@ -37,12 +35,6 @@ namespace OrganWeb
              url: "Controle/",
              defaults: new { controller = "Controle", action = "Index", id = UrlParameter.Optional }
              ,
-              namespaces: new[] { "OrganWeb.Controllers" }
-         );
-            routes.MapRoute(
-             name: "Estoque",
-             url: "Estoque/",
-             defaults: new { controller = "Estoque", action = "Index", id = UrlParameter.Optional },
               namespaces: new[] { "OrganWeb.Controllers" }
          );
             routes.MapRoute(
@@ -105,14 +97,16 @@ namespace OrganWeb
             defaults: new { controller = "Tarefa", action = "Index", id = UrlParameter.Optional },
              namespaces: new[] { "OrganWeb.Controllers" }
         );
-
-            //nao sei se era p por esse mas coloquei 
-
-
             routes.MapRoute(
             name: "VwItems",
             url: "VwItems/",
             defaults: new { controller = "VwItems", action = "Index", id = UrlParameter.Optional },
+             namespaces: new[] { "OrganWeb.Controllers" }
+        );
+            routes.MapRoute(
+            name: "Login",
+            url: "LoginRegistro/",
+            defaults: new { controller = "Account", action = "LoginRegistro", id = UrlParameter.Optional },
              namespaces: new[] { "OrganWeb.Controllers" }
         );
         }
