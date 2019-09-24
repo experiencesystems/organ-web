@@ -82,7 +82,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-           manumaq = db.ManutencaoMaquinas.Include("Maquina").Include("Manutencao").Where(a => a.IdManuntencao == id && a.IdMaquina == id2).FirstOrDefault();
+            manumaq = manumaq.GetByID(id, id2);
             if (manumaq == null)
             {
                 return HttpNotFound();

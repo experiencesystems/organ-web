@@ -39,23 +39,22 @@
 $(function () {
     var placeholderElement = $('#modal-placeholder');
 
-    $('button[class="btn btn-primary edit"]').click(function (event) {
+    $('.edit').click(function (event) {
         var url = $(this).data('url');
-
-
-        $('#modal').modal({
-            show: true
-        });
+        $("#newmodal").load(url, function () {
+            $("#newmodal").modal("show", "static");
+        })
 
         $.get(url).done(function (data) {
             placeholderElement.html(data);
             placeholderElement.hide();
-            placeholderElement.html('button[class="btn btn-primary edit"]');
+            placeholderElement.html('button[data-toggle="newmodal"]');
         });
     });
 
-    placeholderElement.on('click', '[data-save="modal-edit"]', function (event) {
+    placeholderElement.on('click', '[data-save="newmodal"]', function (event) {
         event.preventDefault();
+        alert("S.O.S.");
 
         var form = $(this).parents('.modal-dialog').find('form');
         var actionUrl = form.attr('action');

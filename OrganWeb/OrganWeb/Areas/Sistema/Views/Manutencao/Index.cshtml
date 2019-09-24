@@ -23,7 +23,7 @@
                             @foreach (var item in Model.ManutencaoMaquinas)
                             {
                                 <div class="card-header">
-                                    Manutenção da @Html.DisplayFor(model => item.Maquina.Nome) -
+                                    Manutenção de @Html.DisplayFor(model => item.Maquina.Nome) -
                                     @Html.ActionLink("Detalhes", "Detalhes", new { id = item.IdManuntencao, id2 = item.IdMaquina })
                                 </div>
                                 <div class="card-body">
@@ -31,7 +31,9 @@
                                     @Html.DisplayFor(model => item.Manutencao.Detalhes)
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary edit" data-url="@Url.Action("Editar", "Manutencao", new { id = item.IdManuntencao, id2 = item.IdMaquina })">Editar</button>
+                                    <button type="button" class="btn btn-primary edit" data-toggle="newmodal" data-url="@Url.Action("Editar", "Manutencao", new { id = item.IdManuntencao, id2 = item.IdMaquina })">Editar</button>
+                                    @*@<button type="button" class="btn btn-primary edit" data-toggle="edit-modal" data-target="#edit-item">Editar</button>
+                                        @{Html.RenderAction("Editar", "Manutencao", new { id = item.IdManuntencao, id2 = item.IdMaquina });}*@
                                     <button type="button" class="btn btn-danger delete" data-url="@Url.Action("Excluir", "Manutencao", new { id = item.IdManuntencao, id2 = item.IdMaquina })">Excluir</button>
                                 </div>
                             }
@@ -55,7 +57,7 @@
     </div>
 </div>
 <div id="modal-placeholder"></div>
-<div class="modal fade" id="modal" tabindex="-1" role="dialog" data-backdrop="static" />
+<div class="modal fade" id="newmodal" tabindex="-1" role="dialog" data-backdrop="static" />
 
 <environment include="Development">
     <script src="~/Scripts/crudmodal.js" asp-append-version="true" defer></script>
@@ -81,17 +83,19 @@
     <script>
         $(function () {
 
-            $(".edit").click(function () {
+            /*$(".edit").click(function () {
                 var url = $(this).data('url');
+
                 $("#modal").load(url, function () {
                     $("#modal").modal("show");
                 })
-            });
+            });*/
 
             $(".delete").click(function () {
                 var url = $(this).data('url');
-                $("#modal").load(url, function () {
-                    $("#modal").modal("show");
+
+                $("#newmodal").load(url, function () {
+                    $("#newmodal").modal("show");
                 })
             });
 
