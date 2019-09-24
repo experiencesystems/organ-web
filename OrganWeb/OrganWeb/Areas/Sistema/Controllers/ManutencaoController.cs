@@ -76,31 +76,37 @@ namespace OrganWeb.Areas.Sistema.Controllers
             return View(manutencaom);
         }
 
-        public ActionResult Editar(int? id)
+        public ActionResult Editar(int? id, int? id2)
         {
-            if (id == null)
+            if (id == null || id2 == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            manutencao = manutencao.GetByID(id);
-            if (manutencao == null)
+           manumaq = db.ManutencaoMaquinas.Include("Maquina").Include("Manutencao").Where(a => a.IdManuntencao == id && a.IdMaquina == id2).FirstOrDefault();
+            if (manumaq == null)
             {
                 return HttpNotFound();
             }
-            return View(manutencao);
+            return View(manumaq);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar(Manutencao manutencao)
+        public ActionResult Editar(ManutencaoMaquina manumaq)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(manutencao).State = EntityState.Modified;
-                db.SaveChanges();
+                manutencao = new Manutencao
+                {
+                    Nome = manumaq.Manutencao.Nome,
+                    DataManuntencao = manumaq.Manutencao.DataManuntencao,
+                    Detalhes = manumaq.Manutencao.Detalhes
+                };
+                manutencao.Update(manutencao);
+                manutencao.Save();
                 return RedirectToAction("Index");
             }
-            return View(manutencao);
+            return View(manumaq);
         }
 
         //http://www.macoratti.net/18/06/mvc5_vmodal2.htm
