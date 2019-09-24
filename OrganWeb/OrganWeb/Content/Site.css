@@ -201,17 +201,14 @@ select.form-control, .dataTables_wrapper select {
 }
 
 @media (max-width: 991px) {
-<<<<<<< HEAD
     .main-panel {
         margin-left: 0;
         width: 100%;
     }
-=======
   .main-panel {
 	margin-left: 0;
 	width: 100%;
   }
->>>>>>> 27c72ace8a619c2be67ab2e56d97aea009aadff0
 }
 
 .content-wrapper {
@@ -223,15 +220,12 @@ select.form-control, .dataTables_wrapper select {
 }
 
 @media (max-width: 767px) {
-<<<<<<< HEAD
     .content-wrapper {
         padding: 1.5rem 1.5rem;
     }
-=======
   .content-wrapper {
 	padding: 1.5rem 1.5rem;
   }
->>>>>>> 27c72ace8a619c2be67ab2e56d97aea009aadff0
 }
 
 /* Sidebar */
@@ -446,7 +440,6 @@ select.form-control, .dataTables_wrapper select {
 
 /* style for off-canvas menu*/
 @media screen and (max-width: 991px) {
-<<<<<<< HEAD
     .sidebar-offcanvas {
         position: fixed;
         max-height: calc(100vh - 60px);
@@ -462,7 +455,6 @@ select.form-control, .dataTables_wrapper select {
         .sidebar-offcanvas.active {
             right: 0;
         }
-=======
   .sidebar-offcanvas {
 	position: fixed;
 	max-height: calc(100vh - 60px);
@@ -477,7 +469,6 @@ select.form-control, .dataTables_wrapper select {
   .sidebar-offcanvas.active {
 	right: 0;
   }
->>>>>>> 27c72ace8a619c2be67ab2e56d97aea009aadff0
 }
 
 /* Navbar */
@@ -518,17 +509,14 @@ select.form-control, .dataTables_wrapper select {
                 }
 
 @media (max-width: 991px) {
-<<<<<<< HEAD
     .navbar .navbar-brand-wrapper .navbar-brand-inner-wrapper .navbar-brand.brand-logo-mini {
         display: inline-block;
         width: 1.875rem;
     }
-=======
   .navbar .navbar-brand-wrapper .navbar-brand-inner-wrapper .navbar-brand.brand-logo-mini {
 	display: inline-block;
 	width: 1.875rem;
   }
->>>>>>> 27c72ace8a619c2be67ab2e56d97aea009aadff0
 }
 
 .navbar .navbar-brand-wrapper .navbar-brand-inner-wrapper .navbar-brand:active, .navbar .navbar-brand-wrapper .navbar-brand-inner-wrapper .navbar-brand:focus, .navbar .navbar-brand-wrapper .navbar-brand-inner-wrapper .navbar-brand:hover {
@@ -551,15 +539,12 @@ select.form-control, .dataTables_wrapper select {
 }
 
 @media (max-width: 991px) {
-<<<<<<< HEAD
     .navbar .navbar-brand-wrapper .navbar-brand-inner-wrapper .navbar-toggler:not(.navbar-toggler-right) {
         display: none;
     }
-=======
   .navbar .navbar-brand-wrapper .navbar-brand-inner-wrapper .navbar-toggler:not(.navbar-toggler-right) {
 	display: none;
   }
->>>>>>> 27c72ace8a619c2be67ab2e56d97aea009aadff0
 }
 
 .navbar .navbar-brand-wrapper .navbar-brand-inner-wrapper .brand-logo-mini {
@@ -588,19 +573,16 @@ select.form-control, .dataTables_wrapper select {
 }
 
 @media (max-width: 991px) {
-<<<<<<< HEAD
     .navbar .navbar-menu-wrapper {
         width: calc(100% - 55px);
         padding-left: 15px;
         padding-right: 15px;
     }
-=======
   .navbar .navbar-menu-wrapper {
 	width: calc(100% - 55px);
 	padding-left: 15px;
 	padding-right: 15px;
   }
->>>>>>> 27c72ace8a619c2be67ab2e56d97aea009aadff0
 }
 
 .navbar .navbar-menu-wrapper .navbar-toggler {
@@ -611,29 +593,23 @@ select.form-control, .dataTables_wrapper select {
 }
 
 @media (max-width: 991px) {
-<<<<<<< HEAD
     .navbar .navbar-menu-wrapper .navbar-toggler:not(.navbar-toggler-right) {
         display: none;
     }
-=======
   .navbar .navbar-menu-wrapper .navbar-toggler:not(.navbar-toggler-right) {
 	display: none;
   }
->>>>>>> 27c72ace8a619c2be67ab2e56d97aea009aadff0
 }
 
 @media (max-width: 991px) {
-<<<<<<< HEAD
     .navbar .navbar-menu-wrapper .navbar-toggler.navbar-toggler-right {
         padding-left: 15px;
         padding-right: 11px;
     }
-=======
   .navbar .navbar-menu-wrapper .navbar-toggler.navbar-toggler-right {
 	padding-left: 15px;
 	padding-right: 11px;
   }
->>>>>>> 27c72ace8a619c2be67ab2e56d97aea009aadff0
 }
 
 .navbar .navbar-menu-wrapper .navbar-nav .nav-item {
@@ -715,17 +691,14 @@ select.form-control, .dataTables_wrapper select {
     }
 
 @media (max-width: 768px) {
-<<<<<<< HEAD
     .navbar .navbar-menu-wrapper .navbar-nav .nav-item.nav-profile {
         margin-left: .5rem;
         margin-right: .5rem;
     }
-=======
   .navbar .navbar-menu-wrapper .navbar-nav .nav-item.nav-profile {
 	margin-left: .5rem;
 	margin-right: .5rem;
   }
->>>>>>> 27c72ace8a619c2be67ab2e56d97aea009aadff0
 }
 
 .navbar .navbar-menu-wrapper .navbar-nav .nav-item.nav-profile .nav-link img {
@@ -742,15 +715,12 @@ select.form-control, .dataTables_wrapper select {
 }
 
 @media (max-width: 767px) {
-<<<<<<< HEAD
     .navbar .navbar-menu-wrapper .navbar-nav .nav-item.nav-profile .nav-link .nav-profile-name {
         display: none;
     }
-=======
   .navbar .navbar-menu-wrapper .navbar-nav .nav-item.nav-profile .nav-link .nav-profile-name {
 	display: none;
   }
->>>>>>> 27c72ace8a619c2be67ab2e56d97aea009aadff0
 }
 
 .navbar .navbar-menu-wrapper .navbar-nav .nav-item.nav-profile .nav-link::after {
@@ -868,7 +838,6 @@ select.form-control, .dataTables_wrapper select {
   display: none;
 }*/
 @media (min-width: 992px) {
-<<<<<<< HEAD
     .navbar .navbar-menu-wrapper .navbar-nav.navbar-nav-right {
         margin-left: auto;
     }
@@ -900,7 +869,6 @@ select.form-control, .dataTables_wrapper select {
         display: flex;
         margin-top: 0.5rem;
     }
-=======
   .navbar .navbar-menu-wrapper .navbar-nav.navbar-nav-right {
 	margin-left: auto;
   }
@@ -927,11 +895,9 @@ select.form-control, .dataTables_wrapper select {
 	display: flex;
 	margin-top: 0.5rem;
   }
->>>>>>> 27c72ace8a619c2be67ab2e56d97aea009aadff0
 }
 
 @media (max-width: 480px) {
-<<<<<<< HEAD
     .navbar .navbar-brand-wrapper {
         width: 55px;
     }
@@ -1081,7 +1047,6 @@ select.form-control, .dataTables_wrapper select {
     .sidebar-icon-only .main-panel {
         width: calc(100% - 70px);
     }
-=======
   .navbar .navbar-brand-wrapper {
 	width: 55px;
   }
@@ -1205,7 +1170,7 @@ select.form-control, .dataTables_wrapper select {
   .sidebar-icon-only .main-panel {
 	width: calc(100% - 70px);
   }
->>>>>>> 27c72ace8a619c2be67ab2e56d97aea009aadff0
+
 }
 
 .rtl {
@@ -1241,7 +1206,6 @@ select.form-control, .dataTables_wrapper select {
 	border: none;
 	margin-bottom: 30px;
 }
-<<<<<<< HEAD
 
     .card .card-footer {
         background-color: #fff;
@@ -1517,7 +1481,6 @@ select.form-control, .dataTables_wrapper select {
         font-size: 14px;
     }
 
-=======
 .card .card-footer {
 	background-color: #fff;
 	border-top: none;
@@ -1700,7 +1663,7 @@ select.form-control, .dataTables_wrapper select {
   height: 60px;
   margin-top: 20px;
   font-size: 14px; }
->>>>>>> 27c72ace8a619c2be67ab2e56d97aea009aadff0
+
 .transition {
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
@@ -1766,7 +1729,6 @@ select.form-control, .dataTables_wrapper select {
     border-radius: 0;
 }
 /*Fim Tarefas*/
-<<<<<<< HEAD
 
 /*Bom dia, Natalya. Aqui estão as barras circulares de progresso que eu copiei e colei desse link https://jsfiddle.net/bootstrapious/3xnomecr*/
 
@@ -1838,7 +1800,6 @@ select.form-control, .dataTables_wrapper select {
         top: 0;
         left: 0;
     }
-=======
 /*Modal*/
 .popupWindow {
     background: #fdfdfd;
@@ -1993,4 +1954,3 @@ table.dataTable thead th,table.dataTable tfoot th{font-weight:bold}
     text-align: left;
     line-height: 1.5;
 }
->>>>>>> 27c72ace8a619c2be67ab2e56d97aea009aadff0
