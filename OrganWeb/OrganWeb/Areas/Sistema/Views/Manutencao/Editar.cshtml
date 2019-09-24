@@ -1,16 +1,16 @@
 ﻿@model OrganWeb.Areas.Sistema.Models.Ferramentas.ManutencaoMaquina
 
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-        @using (Html.BeginForm())
-        {
+@using (Html.BeginForm("Editar", "Manutencao", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
             <div class="modal-header">
                 <h6 class="card-title box-title"><i class="icofont icofont-plant"></i>Editar</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            @Html.AntiForgeryToken()
             <div class="modal-body">
                 <input name="IsValid" type="hidden" value="@ViewData.ModelState.IsValid.ToString()" />
                 <div class="form-horizontal">
@@ -19,7 +19,7 @@
                     @Html.HiddenFor(model => model.IdManuntencao)
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.Maquina.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <label class="control-label col-md-2">Máquina:</label>
                         <div class="col-md-10">
                             @Html.DisplayFor(model => model.Maquina.Nome)
                         </div>
@@ -53,14 +53,14 @@
             <div class="modal-footer">
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Save" data-save="modal-edit" class="btn btn-default" />
+                        <input type="submit" value="Save" data-save="newmodal" class="btn btn-default" />
                         <input type="button" value="Cancelar" class="btn btn-danger" data-dismiss="modal" />
                     </div>
                 </div>
             </div><!-- /.modal-content -->
-        }
-    </div><!-- /.modal-dialog -->
-</div>
+        </div><!-- /.modal-dialog -->
+    </div>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
