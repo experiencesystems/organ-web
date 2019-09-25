@@ -19,3 +19,9 @@ status bool
 areapraga add status bool
 
 
+API TRANSPORTE frete.net
+
+ECOMERCIO
+VENDA - ENDERECO
+
+
