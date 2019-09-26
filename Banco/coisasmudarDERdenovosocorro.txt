@@ -1,0 +1,27 @@
+ADD IE Pessoa Juridica
+
+Colocar fotinha - fisica, produto
+
+PRANTIO
+tirar epoca
+sistema (plantio) int
+tipo plantio (safrinha e os cacete) int
+
+
+vai pra areaprantio : densidade int
+
+colheita add qtdtotal
+
+controle numliberacoes int
+eficiencia double
+status bool
+
+areapraga add status bool
+
+
+API TRANSPORTE frete.net
+
+ECOMERCIO
+VENDA - ENDERECO
+
+
