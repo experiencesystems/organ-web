@@ -380,3 +380,6 @@ C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\Org
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.pdb
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.csprojAssemblyReference.cache
+C:\Users\acer\Source\Repos\Organ Web\OrganWeb\OrganWeb\bin\MySql.Data.dll
+C:\Users\acer\Source\Repos\Organ Web\OrganWeb\OrganWeb\bin\MySql.Data.Entity.EF6.dll
+C:\Users\acer\Source\Repos\Organ Web\OrganWeb\OrganWeb\bin\MySql.Web.dll

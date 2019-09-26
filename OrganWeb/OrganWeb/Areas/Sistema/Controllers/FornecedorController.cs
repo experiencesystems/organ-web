@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using OrganWeb.Areas.Sistema.Models.ViewModels;
 using OrganWeb.Areas.Sistema.Models;
 using OrganWeb.Models;
 using OrganWeb.Areas.Sistema.Models.Estoque;
@@ -14,6 +15,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
 {
     public class FornecedorController : Controller
     {
+        private Fornecedor fornec = new Fornecedor();
         private BancoContext db = new BancoContext();
 
         // GET: Sistema/Fornecedor
@@ -21,6 +23,16 @@ namespace OrganWeb.Areas.Sistema.Controllers
         {
             var fornecedors = db.Fornecedors.Include(f => f.Localizacao);
             return View(fornecedors.ToList());
+        }
+
+
+        public ActionResult Fornecedores()
+        {
+            var select = new ViewFornecedor
+            {
+                    Fornecedors = fornec.GetFew()
+            };
+            return View(select);
         }
 
         // GET: Sistema/Fornecedor/Details/5
