@@ -25,7 +25,16 @@ namespace OrganWeb.Areas.Sistema.Controllers
             };
             return View(select);
         }
-        
+
+        public ActionResult Sementes()
+        {
+            var select = new ViewSementes
+            {
+                Semente = semente.GetFew()
+            };
+            return View(select);
+        }
+
         public ActionResult Detalhes(int? id)
         {
             if (id == null)
