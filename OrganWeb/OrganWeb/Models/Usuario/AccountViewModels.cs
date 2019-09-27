@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace OrganWeb.Models
+namespace OrganWeb.Models.Usuario
 {
     public class ExternalLoginConfirmationViewModel
     {

@@ -1,11 +1,12 @@
-﻿using System;
+﻿using OrganWeb.Models.Banco;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace OrganWeb.Models
+namespace OrganWeb.Models.Financeiro
 {
     [Table("tbPagamento")]
     public class Pagamento : Repository<Pagamento>

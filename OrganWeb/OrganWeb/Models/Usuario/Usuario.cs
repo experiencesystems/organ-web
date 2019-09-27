@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Web;
 using OrganWeb.Areas.Sistema.Models;
 
-namespace OrganWeb.Models
+namespace OrganWeb.Models.Usuario
 {
     /*public class Usuario : IdentityUser
     {
