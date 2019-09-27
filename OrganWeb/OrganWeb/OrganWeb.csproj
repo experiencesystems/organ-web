@@ -218,6 +218,15 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Ecommerce\Controllers\LojaController.cs" />
+    <Compile Include="Areas\Ecommerce\EcommerceAreaRegistration.cs" />
+    <Compile Include="Areas\Ecommerce\Models\Anuncio.cs" />
+    <Compile Include="Areas\Ecommerce\Models\Avaliacao.cs" />
+    <Compile Include="Areas\Ecommerce\Models\Carrinho.cs" />
+    <Compile Include="Areas\Ecommerce\Models\ItensAnuncio.cs" />
+    <Compile Include="Areas\Ecommerce\Models\Pedido.cs" />
+    <Compile Include="Areas\Ecommerce\Models\VendaAnuncio.cs" />
+    <Compile Include="Areas\Ecommerce\Models\Wishlist.cs" />
     <Compile Include="Areas\Sistema\Controllers\DoencasController.cs" />
     <Compile Include="Areas\Sistema\Controllers\EstoqueController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FazendaController.cs" />
@@ -385,6 +394,9 @@
     <Content Include="Areas\Sistema\Views\Manutencao\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Estoque\Fornecedores.cshtml" />
     <Content Include="Areas\Sistema\Views\Plantio\Sementes.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\web.config" />
+    <Content Include="Areas\Ecommerce\Views\Loja\Detalhes.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\Loja\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -469,6 +481,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Ecommerce\Views\Shared\" />
     <Folder Include="Areas\Sistema\Views\Controles\" />
     <Folder Include="Areas\Sistema\Views\Shared\" />
   </ItemGroup>
