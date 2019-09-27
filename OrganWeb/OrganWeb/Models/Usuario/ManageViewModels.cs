@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace OrganWeb.Models
+namespace OrganWeb.Models.Usuario
 {
     public class IndexViewModel
     {

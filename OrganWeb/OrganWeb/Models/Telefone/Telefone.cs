@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace OrganWeb.Models
+namespace OrganWeb.Models.Telefone
 {
     [Table("tbTelefone")]
     public class Telefone : Repository<Telefone>
@@ -15,12 +15,17 @@ namespace OrganWeb.Models
         public int Id { get; set; }
 
         [Required]
-        public int DDD { get; set; }
+        public int Numero { get; set; }
+        
+        [Required]
+        [ForeignKey("TipoTel")]
+        public int IdTipo { get; set; }
 
         [Required]
-        public Int64 Numero { get; set; }
+        [ForeignKey("DDD")]
+        public int IdDDD { get; set; }
 
-        [StringLength(30, MinimumLength = 3)]
-        public string Tipo { get; set; }
+        public virtual TipoTel TipoTel { get; set; }
+        public virtual DDD DDD { get; set; }
     }
 }

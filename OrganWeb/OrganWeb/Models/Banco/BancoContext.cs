@@ -9,8 +9,10 @@ using OrganWeb.Areas.Sistema.Models.Ferramentas;
 using OrganWeb.Areas.Sistema.Models.Controles;
 using OrganWeb.Areas.Sistema.Models.Financas;
 using Microsoft.AspNet.Identity.EntityFramework;
+using OrganWeb.Models.Endereco;
+using OrganWeb.Models.Telefone;
 
-namespace OrganWeb.Models
+namespace OrganWeb.Models.Banco
 {
     [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class BancoContext : IdentityDbContext<ApplicationUser>
@@ -19,7 +21,6 @@ namespace OrganWeb.Models
 
         public virtual DbSet<Semente> Sementes { get; set; }
         public virtual DbSet<Categoria> Categorias { get; set; }
-        public virtual DbSet<Localizacao> Localizacaos { get; set; }
         public virtual DbSet<Fazenda> Fazendas { get; set; }
         public virtual DbSet<Funcionario> Funcionarios { get; set; }
         public virtual DbSet<Cargo> Cargos { get; set; }
@@ -50,15 +51,14 @@ namespace OrganWeb.Models
         public virtual DbSet<ControleItem> ControleItems { get; set; }
         public virtual DbSet<Pagamento> Pagamentos { get; set; }
         public virtual DbSet<Despesa> Despesas { get; set; }
+        public virtual DbSet<Logradouro> Logradouros { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             // ****** CHAVES CONCATENADAS ***** //
-
-            modelBuilder.Entity<Localizacao>().HasKey(t => new { t.CEP, t.Numero });
-
+            
             modelBuilder.Entity<TarefaFuncionario>().HasKey(t => new { t.IdTarefa, t.IdFunc });
 
             // ****** MAPEAMENTO NOMES ***** //
@@ -94,6 +94,26 @@ namespace OrganWeb.Models
             modelBuilder.Entity<Doenca>()
                 .Property(t => t.Descricao)
                 .HasColumnName("Descrição");
+
+            modelBuilder.Entity<Logradouro>()
+                .Property(t => t.Nome)
+                .HasColumnName("Logradouro");
+
+            modelBuilder.Entity<Bairro>()
+                .Property(t => t.Nome)
+                .HasColumnName("Bairro");
+
+            modelBuilder.Entity<Cidade>()
+                .Property(t => t.Nome)
+                .HasColumnName("Cidade");
+
+            modelBuilder.Entity<Estado>()
+                .Property(t => t.Nome)
+                .HasColumnName("Estado");
+
+            modelBuilder.Entity<DDD>()
+                .Property(t => t.Valor)
+                .HasColumnName("DDD");
 
             // ****** RELAÇÕES ***** //
 

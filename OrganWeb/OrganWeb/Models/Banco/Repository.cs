@@ -5,7 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace OrganWeb.Models
+namespace OrganWeb.Models.Banco
 {
     public class Repository<T> : IDisposable where T : class
     {
