@@ -157,7 +157,6 @@ UserName: Milena*/
     );
     alter table tbPessoa add constraint FKPessoaEndereco foreign key(CEP) references tbEndereco(CEP);
     
-    select * from tbEndereco;
     insert into tbPessoa (Nome, Email, NumeroEndereco, CompEndereco, CEP) values("Mileninha GamePlays", 'milenamonteiro@gmail.com', 12, "AP. 24 Bloco B", 00000000),
 																				("Systems Experience", 'moreexpsystems@gmail.com', 13, null, 11111111);
     
@@ -299,6 +298,8 @@ UserName: Milena*/
     create table if not exists tbMaquina(
 		IdEstoque int not null,
          constraint PKMaquina primary key(IdEstoque),
+		Nome varchar(30) not null,
+        Tipo int not null,
 		Montadora varchar(75),
         `Desc` varchar(300),
         VidaUtil int,
@@ -311,9 +312,9 @@ UserName: Milena*/
     
     insert into tbEstoque(Qtd, UM, ValorUnit) values(2, 3, 5000.00),
 													(1, 3, 10000.00); -- Id 5 e 6
-	insert into tbMaquina(IdEstoque, Montadora, VidaUtil, ValorInicial, DeprMes, DeprAno) values(5, 'MaquinasBoas', 5, 7000.00, 10.00, 120.00),
-																								(6, 'MaquinasRuins e Caras', 1, 20000.00, 500.00, 6000.00);
- 
+	insert into tbMaquina(IdEstoque, Nome, Tipo, Montadora, VidaUtil, ValorInicial, DeprMes, DeprAno) values(5,'TratorX', 1, 'MaquinasBoas', 5, 7000.00, 10.00, 120.00),
+																											(6,'ColhedeiraY', 2, 'MaquinasRuins e Caras', 1, 20000.00, 500.00, 6000.00);
+
 	create table if not exists tbManutencao(
 		Id int auto_increment,
 		 constraint PKManutencao primary key(Id),
