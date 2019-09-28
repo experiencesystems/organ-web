@@ -1,23 +1,23 @@
 ﻿
-@model OrganWeb.Areas.Sistema.Models.ViewModels.ViewSementes
+@model OrganWeb.Areas.Sistema.Models.ViewModels.ViewPragaDoenca
 @{
-    ViewBag.Title = "Sementes";
+    ViewBag.Title = "Pragas e Doenças";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<style >
-.modal-conteudo {
-    width: 350px;
-    height: 200px;
-    background: #FFF;
-    z-index: 1100;
-    border-radius: 3px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    display: none;
-}
+<style>
+    .modal-conteudo {
+        width: 350px;
+        height: 200px;
+        background: #FFF;
+        z-index: 1100;
+        border-radius: 3px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        display: none;
+    }
 </style>
 
 <div class="main-body">
@@ -25,7 +25,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h6 class="card-title box-title">Sementes</h6>
+                    <h6 class="card-title box-title">Pragas e Doenças</h6>
                     <div class="card-header-right">
                         <ul class="list-unstyled card-option">
                             <li><i class="ti-minus minimize-card"></i></li>
@@ -41,60 +41,60 @@
                                 <thead class="thead-title">
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Nome</th>
-                                        <th scope="col">SoloIdeal</th>
-                                        <th scope="col">IncidenciaSolar</th>
-                                        <th scope="col">IncidenciaVento</th>
-                                        <th scope="col">Acidez</th>
-                                        <th scope="col">IdEstoque</th>
-                                        <th scope="col">IdFornecedor</th>
-                                        <th scope="col">IdCategoria</th>
+                                        <th scope="col">NomePopular</th>
+                                        <th scope="col">NomeCientifico</th>
+                                        <th scope="col">Descricao</th>
+                                        <th scope="col">Sintomas</th>
+                                        <th scope="col">Tratamento</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Eficiencia</th>
+
 
 
 
                                     </tr>
                                 </thead>
                                 @**<tbody>
-                                        @foreach (var item in Model.Semente)
-                                        {
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td>@Html.DisplayFor(modelItem => item.Nome)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.SoloIdeal)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.IncSolar)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.IncVento)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.Acidez)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.IdEstoque)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.IdFornecedor)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.IdCategoria)</td>
+            @foreach (var item in Model.PragaDoenca)
+            {
+                <tr>
+                    <th scope="row"></th>
+                    <td>@Html.DisplayFor(modelItem => item.NomePopular)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NomeCientifico)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Sintomas)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Tratamento)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Eficiencia)</td>
 
 
 
 
 
-                                            </tr>
-                                        }
-                                    </tbody>*@
-@*tabela p teste do modal*@
+
+                </tr>
+            }
+        </tbody>*@
+
                                 <tbody>
 
                                     <tr class="linha">
                                         <th scope="row"></th>
                                         <td>Praga1</td>
-                                        <td>Solo</td>
-                                        <td>Incidencia</td>
-                                        <td>Vento</td>
-                                        <td>Acidez</td>
-                                        <td>Estoque</td>
-                                        <td>Fornecedor</td>
-                                        <td>Categoria</td>
+                                        <td>dodoi</td>
+                                        <td>dodoizitos</td>
+                                        <td>mt dodoi slc</td>
+                                        <td>machucada tadinha</td>
+                                        <td>uiui</td>
+                                        <td>aiaia</td>
+                                      
                                     </tr>
 
                                 </tbody>
 
 
 
-                        </div>
+</div>
                     </div>
                 </div>
                 <div class="card-content">
@@ -110,7 +110,7 @@
     </div>
 </div>
 <div id="modal-placeholder"></div>
-<div class="modal-conteudo">teste teste  teste </div>
+<div class="modal-conteudo"></div>
 <div class="modal fade" id="newmodal" tabindex="-1" role="dialog" data-backdrop="static" />
 
 <environment include="Development">
@@ -163,4 +163,5 @@
         })
     </script>
 }
+
 

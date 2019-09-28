@@ -36,7 +36,9 @@ namespace OrganWeb.Models
 
         public List<T> GetFew()
         {
-            return DbSet.Take(10).ToList();
+            List<T> lista = new List<T>();
+            
+            return lista; // DbSet.Take(10).ToList();
         }
 
         public T GetByID(int? id)
