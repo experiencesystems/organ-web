@@ -7,12 +7,18 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using OrganWeb.Areas.Sistema.Models.Controles;
+using OrganWeb.Areas.Sistema.Models.ViewModels;
 using OrganWeb.Models;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
+
     public class DoencasController : Controller
     {
+       private Praga praga = new Praga();
+        private Doenca doenca = new Doenca();
+        private Controle controle = new Controle();
+        //aki tem q mudar qd juntar os dois no banco
         private BancoContext db = new BancoContext();
 
 
@@ -21,6 +27,18 @@ namespace OrganWeb.Areas.Sistema.Controllers
         public ActionResult Index()
         {
             return View(db.Doencas.ToList());
+        }
+
+
+        public ActionResult PragaDoenca()
+        {
+            var select = new ViewPragaDoenca
+            {
+                Pragas = praga.GetFew(),
+                Doencas = doenca.GetFew(),
+                Controles = controle.GetFew()
+            };
+            return View(select);
         }
 
         // GET: Sistema/Doencas/Details/5
