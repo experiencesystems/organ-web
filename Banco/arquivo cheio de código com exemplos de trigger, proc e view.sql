@@ -1,6 +1,3 @@
-
-
-
 /*
 create table tbFazenda(
 	Id int auto_increment,
