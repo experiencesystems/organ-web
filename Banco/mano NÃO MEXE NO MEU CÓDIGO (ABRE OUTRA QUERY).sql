@@ -159,9 +159,8 @@ UserName: Milena*/
 	alter table `AspNetUsers` add constraint FKAspNetUsersPessoa foreign key(IdPessoa) references tbPessoa(Id); 
     
     insert into tbPessoa (Nome, Email, NumeroEndereco, CompEndereco, CEP) values("Mileninha GamePlays", 'milenamonteiro@gmail.com', 12, "AP. 24 Bloco B", "00000000"),
-																				("Systems Experience", 'moreexpsystems@gmail.com', 13, null, "11111111"),
-                                                                                ("Systems Experience2", 'moreexpsystems@gmail.com', 13, null, "11111111");
-                                                                                
+																				("Systems Experience", 'moreexpsystems@gmail.com', 13, null, "11111111");
+    
     insert into `AspNetUsers` (Id, Confirmacao, Assinatura, Email, EmailConfirmed,
     PasswordHash, SecurityStamp, UserName, IdPessoa) values('02719894-e4a9-46c8-999e-ba942abd5f8f', 0, 0,  'milenamonteiro@gmail.com', 0,
 												 'ABecbdkGhzyTR1/t+F8FpUnN+AHXhiXYu4qPCVc4SroxOyzj3p0R+TnWK0p1o6q3Rw==',
@@ -259,16 +258,6 @@ UserName: Milena*/
     insert into tbEstoque(Qtd, UM, ValorUnit) values(5, 1, 2.50);
     insert into tbSemente(IdEstoque, Nome) values(1, "Semente de Soja");
     
-    create table tbSolo(
-		Id int auto_increment,
-		 constraint PKSolo primary key(Id),
-		Nome varchar(50) not null,
-        Tipo int not null,
-        IncSolar decimal(5,2) not null default 0.00,
-        IncVento decimal(5,2) not null default 0.00,
-        Acidez decimal(5,2) not null default 0.00
-    );
-    
                          -- ------------------------------- Insumo ------------------------------------ 
     create table if not exists tbInsumo(		
         IdEstoque int not null,
@@ -335,7 +324,7 @@ UserName: Milena*/
     );
     alter table tbMaquinaManutencao add constraint FKMaquinaManutencao foreign key(IdMaquina) references tbMaquina(IdEstoque),
 									add constraint FKManutencaoMaquina foreign key(IdManutencao) references tbManutencao(Id);
-
+    
     insert into tbMaquinaManutencao value(5,1);    
 -- ======================================================================================================================= 
   
@@ -508,16 +497,96 @@ UserName: Milena*/
     
 	insert into tbDespesaFunc value(1, 1);
                                
-                         -- ------------------------------- Views ------------------------------------ 
 
-    
-    
-
- -- tbItem I ON E.Id = I.IdEstoque
 -- =============================================================================================================================== 
 
 -- =================================================================== PESSOA ============================================   
 -- ======================================================================================================================= 
+
+-- =================================================================== PLANTIO ============================================
+	create table if not exists tbPlantio(
+		Id int auto_increment,
+         constraint PKPlantio primary key(Id),
+		Nome varchar(50) not null,
+        Sistema int not null,
+        DataColheita date not null,
+        DataInicio date not null,
+        TipoPlantio int not null
+    );
+    
+    insert into tbPlantio(Nome, Sistema, DataColheita, DataInicio, TipoPlantio) values('Plantio de Soja', 1, '01/01/01', '01/01/01', 1);
+    
+	create table if not exists tbSolo(
+		Id int auto_increment,
+		 constraint PKSolo primary key(Id),
+		Nome varchar(50) not null,
+        Tipo int not null,
+        IncSolar decimal(5,2) not null default 0.00,
+        IncVento decimal(5,2) not null default 0.00,
+        Acidez decimal(5,2) not null default 0.00
+    );
+    
+    insert into tbSolo(Nome, Tipo) values('Arenoso', 1), ('Vermelho', 1);
+    
+    create table if not exists tbArea(
+		Id int auto_increment,
+         constraint PKArea primary key(Id),
+		Nome varchar(30) not null,
+        Disp int not null default 1,
+        Tamanho int not null default 1,
+        IdSolo int not null
+    );
+    alter table tbArea add constraint FKAreaSolo foreign key(IdSolo) references tbSolo(Id);
+    
+    insert into tbArea(Nome,  IdSolo) values('Area1', 1), ('Area2', 1), ('Area3', 2);
+    
+    create table if not exists tbAreaPlantio(
+		Densidade int not null,
+        IdPlantio int not null,
+        IdArea int not null,
+         constraint PKAreaPlantio primary key(IdPlantio, IdArea)
+    );
+    alter table tbAreaPlantio add constraint FKAreaPlantioPlantio foreign key(IdPlantio) references tbPlantio(Id),
+									 add constraint FKAreaPlantioArea foreign key(IdArea) references tbArea(Id);
+                                     
+	insert into tbAreaPlantio values(100, 1, 1), (50, 1, 2);
+    
+    create table if not exists tbItensPlantio(
+		QtdUsada double not null,
+        IdPlantio int not null,
+        IdEstoque int not null,
+         constraint PKItensPlantio primary key(IdPlantio, IdEstoque)
+    );
+    alter table tbItensPlantio add constraint FKItensPlantioPlantio foreign key(IdPlantio) references tbPlantio(Id),
+							   add constraint FKItensPlantioEstoque foreign key(IdEstoque) references tbEstoque(Id);
+    
+    insert into tbItensPlantio values(1, 1, 1 );
+	
+    create table if not exists tbProduto(
+		IdEstoque int not null,
+         constraint PKProduto primary key(IdEstoque),
+		Nome varchar(50) not null,
+        `Desc` varchar(300)
+    );
+    alter table tbProduto add constraint FKProdutoEstoque foreign key(IdEstoque) references tbEstoque(Id);
+    
+    insert into tbEstoque(Qtd, UM, ValorUnit) values(3, 3, 3);
+    insert into tbProduto(IdEstoque, Nome) value(7, 'Soja');
+    
+    create table if not exists tbColheita(
+		`Data` date not null,
+        QtdPerdas double not null default 0,
+        QtdTotal double not null,
+        IdPlantio int not null,
+        IdProd int not null,
+         constraint PKColheita primary key(IdPlantio, IdProd)
+    );
+    alter table tbColheita add constraint FKColheitaPlantio foreign key(IdPlantio) references tbPlantio(Id),
+						   add constraint FKColheitaProd foreign key(IdProd) references tbProduto(IdEstoque);
+	
+    insert into tbColheita values('01/01/01',  1, 4, 1, 1);
+    
+-- ======================================================================================================================== 
 
 
 
