@@ -1,4 +1,4 @@
-﻿using OrganWeb.Areas.Sistema.Models.Estoque;
+﻿using OrganWeb.Areas.Sistema.Models.Armazenamento;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

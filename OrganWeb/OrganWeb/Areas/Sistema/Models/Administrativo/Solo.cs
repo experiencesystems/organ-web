@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using OrganWeb.Models;
+using OrganWeb.Models.Banco;
 
 namespace OrganWeb.Areas.Sistema.Models.Administrativo
 {
@@ -12,27 +13,24 @@ namespace OrganWeb.Areas.Sistema.Models.Administrativo
     public class Solo : Repository<Solo>
     {
         [Key]
-        public int IDSolo{ get; set; }
+        public int Id { get; set; }
 
-        [StringLength(75, MinimumLength = 3)]
+        [Required]
+        [StringLength(50, MinimumLength = 3)]
         public string Nome { get; set; }
 
         [Required]
         [Display(Name = "Tipo de Solo")]
-        [StringLength(50, MinimumLength = 3)]
-        public string Tipo { get; set; }
+        public int Tipo { get; set; }
        
-        [Required]
         [Range(0.01, 999.99)]
         [Display(Name = "Incidência Solar")]
         public double IncSolar { get; set; }
-
-        [Required]
+        
         [Range(0.01, 999.99)]
         [Display(Name = "Incidência do Vento")]
         public double IncVento { get; set; }
-
-        [Required]
+        
         [Range(0.01, 999.99)]
         public double Acidez { get; set; }
     }

@@ -6,19 +6,16 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using OrganWeb.Areas.Sistema.Models.Controles;
 using OrganWeb.Models;
+using OrganWeb.Models.Banco;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
     public class DoencasController : Controller
     {
-        private BancoContext db = new BancoContext();
-
-
         //ta so gerado
         // GET: Sistema/Doencas
-        public ActionResult Index()
+        /*public ActionResult Index()
         {
             return View(db.Doencas.ToList());
         }
@@ -125,6 +122,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }*/
     }
 }

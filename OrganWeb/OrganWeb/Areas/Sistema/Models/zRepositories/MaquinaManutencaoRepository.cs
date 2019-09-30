@@ -4,14 +4,15 @@ using System.Linq;
 using System.Web;
 using OrganWeb.Models;
 using OrganWeb.Areas.Sistema.Models.Ferramentas;
+using OrganWeb.Models.Banco;
 
 namespace OrganWeb.Areas.Sistema.Models.zRepositories
 {
-    public class MaquinaManutencaoRepository : Repository<ManutencaoMaquina>
+    public class MaquinaManutencaoRepository : Repository<MaquinaManutencao>
     {
-        public ManutencaoMaquina GetByID(int? man, int? maq)
+        public MaquinaManutencao GetByID(int? man, int? maq)
         {
-            return DbSet.Include("Maquina").Include("Manutencao").Where(a => a.IdManuntencao == man && a.IdMaquina == maq).FirstOrDefault();
+            return DbSet.Include("Maquina").Include("Manutencao").Where(a => a.IdManutencao == man && a.IdMaquina == maq).FirstOrDefault();
         }
 
         public void Delete(int id, int id2)

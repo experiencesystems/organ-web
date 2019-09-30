@@ -8,7 +8,7 @@ using OrganWeb.Models;
 
 namespace OrganWeb.Areas.Sistema.Models.ViewModels
 {
-    public class VwItems : Repository<VwItems>
+    /*public class VwItems : Repository<VwItems>
     {
         [Key]
         public int Id { get; set; }
@@ -17,5 +17,5 @@ namespace OrganWeb.Areas.Sistema.Models.ViewModels
         [Display(Name = "Unidade de medida")]
         public string UnidadeMedida { get; set; }
         public string Categoria { get; set; }
-    }
+    }*/
 }

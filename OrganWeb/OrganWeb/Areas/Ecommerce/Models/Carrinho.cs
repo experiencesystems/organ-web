@@ -1,4 +1,5 @@
 ﻿using OrganWeb.Models;
+using OrganWeb.Models.Usuario;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

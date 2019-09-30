@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using OrganWeb.Models;
+using OrganWeb.Models.Banco;
 
 namespace OrganWeb.Areas.Sistema.Models.Financas
 {
@@ -15,10 +16,10 @@ namespace OrganWeb.Areas.Sistema.Models.Financas
         public int Id { get; set; }
 
         [Required]
-        public DateTime Data { get; set; }
+        [Display(Name = "Valor pago")]
+        public double ValorPago { get; set; }
 
-        [Required]
-        [Range(0.01, 99999.99)]
-        public double Valor { get; set; }
+        //TODO: [Required] Data despesa
+        public DateTime Data { get; set; }
     }
 }
