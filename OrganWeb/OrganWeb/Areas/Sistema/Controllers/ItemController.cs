@@ -8,19 +8,17 @@ using System.Web;
 using System.Web.Mvc;
 using OrganWeb.Areas.Sistema.Models;
 using OrganWeb.Models;
-using OrganWeb.Areas.Sistema.Models.Estoque;
+using OrganWeb.Areas.Sistema.Models.Armazenamento;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
     public class ItemController : Controller
     {
-        private BancoContext db = new BancoContext();
-
-        // GET: Sistema/Item
+        /*// GET: Sistema/Item
         public ActionResult Index()
         {
             var items = db.Items.Include(i => i.Categoria).Include(i => i.Estoque).Include(i => i.Fornecedor);
-            return View(items.ToList());
+            return View();
         }
 
         // GET: Sistema/Item/Details/5
@@ -137,6 +135,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }*/
     }
 }

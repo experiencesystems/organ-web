@@ -9,7 +9,7 @@ namespace OrganWeb.Areas.Sistema.Models.ViewModels
     public class ViewManutencao
     {
         public IEnumerable<Manutencao> Manutencaos { get; set; }
-        public IEnumerable<ManutencaoMaquina> ManutencaoMaquinas { get; set; }
+        public IEnumerable<MaquinaManutencao> ManutencaoMaquinas { get; set; }
         public IEnumerable<Maquina> Maquinas { get; set; }
     }
 }
