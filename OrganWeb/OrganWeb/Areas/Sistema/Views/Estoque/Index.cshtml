@@ -4,6 +4,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.semanticui.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+
 <h2>Estoque</h2>
 
 <div class="main-body">
@@ -11,7 +15,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h6 class="card-title box-title">Itens</h6>
+                    <h6 class="card-title box-title">Estoque</h6>
                     <div class="card-header-right">
                         <ul class="list-unstyled card-option">
                             <li><i class="ti-minus minimize-card"></i></li>
@@ -22,31 +26,32 @@
                 <div class="card-body">
                     <div class="card-content">
                         <div class="card-content">
-                            <div class="teste"></div>
-                            <button type="button" class="btn btn-info waves-effect" data-toggle="ajax-modal" data-target="#add-item">Novo item</button>
-                            @{Html.RenderAction("_NovoItem", "Estoque");}
-                        </div>
-                        <table class="table">
-                            <thead class="thead-title">
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Item</th>
-                                    <th scope="col">Quantidade</th>
-                                    <th scope="col">Categoria</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.VwItems)
-                                {
+                            <div class="tablecontainer">
+                                <div class="teste"></div>
+                                <a class="popup btn btn-add" href="/Sistema/Estoque/_NovoItem" style="margin-bottom:20px; margin-top:20px;">+ Novo Item</a>
+                            </div>
+                            <table class="table">
+                                <thead class="thead-title">
                                     <tr>
-                                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Item)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Quantidade) @Html.DisplayFor(modelItem => item.UnidadeMedida)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Categoria)</td>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Item</th>
+                                        <th scope="col">Quantidade</th>
+                                        <th scope="col">Categoria</th>
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.VwItems)
+                                    {
+                                        <tr>
+                                            <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Item)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Quantidade) @Html.DisplayFor(modelItem => item.UnidadeMedida)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Categoria)</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -54,17 +59,64 @@
     </div>
 </div>
 
-<environment include="Development">
-    <script src="~/Scripts/crudmodal.js" asp-append-version="true" defer></script>
-</environment>
+@section Scripts {
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.0.5/dist/jBox.all.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.semanticui.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
 
-<environment exclude="Development">
-    <script src="~/js/crudmodal.min.js" asp-append-version="true" defer></script>
-</environment>
+    <script>
+        var Popup;
+        $(document).ready(function () {
+            $('.tablecontainer').on('click', 'a.popup', function (e) {
+                e.preventDefault();
+                OpenPopup($(this).attr('href'));
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"
-        integrity="sha256-F6h55Qw6sweK+t7SiOJX+2bpSAa3b/fnlrVCJvmEj1A="
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.9/jquery.validate.unobtrusive.min.js"
-        integrity="sha256-paoxpct33kY9fpQlvgC8IokjGq8iqYaVFawgFPg8oz0="
-        crossorigin="anonymous"></script>
+            })
+            function OpenPopup(pageUrl) {
+                var $pageContent = $('<div/>');
+                $pageContent.load(pageUrl, function () {
+                    $('#popupForm', $pageContent).removeData('validator');
+                    $('#popupForm', $pageContent).removeData('unobtrusiveValidation');
+                    $.validator.unobtrusive.parse('form');
+                });
+
+                $dialog = $('<div class="popupWindow" style="overflow:auto"></div>')
+                    .html($pageContent)
+                    .dialog({
+                        draggable: false,
+                        autoOpen: false,
+                        resizable: false,
+                        modal: true,
+                        height: 600,
+                        width: 630,
+                        close: function () {
+                            $('.overlay').hide(),
+                                $dialog.dialog('destroy').remove();
+                        }
+                    })
+
+                $('.popupWindow').on('submit', '#popupForm', function (e) {
+                    var url = $('#popupForm')[0].action;
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: $('#popupForm').serialize(),
+                        success: function (data) {
+                            if (data.status) {
+                                $dialog.dialog('close');
+                                oTable.ajax.reload();
+                            }
+                        }
+                    })
+
+                    e.preventDefault();
+                })
+                $dialog.dialog('open');
+            }
+        })
+    </script>
+}

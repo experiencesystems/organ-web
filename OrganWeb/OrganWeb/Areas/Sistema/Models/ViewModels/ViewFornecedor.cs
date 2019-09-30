@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using OrganWeb.Areas.Sistema.Models.Estoque;
+using OrganWeb.Areas.Sistema.Models.Armazenamento;
 
 namespace OrganWeb.Areas.Sistema.Models.ViewModels
 {
@@ -10,6 +10,5 @@ namespace OrganWeb.Areas.Sistema.Models.ViewModels
     {
  
         public IEnumerable<Fornecedor> Fornecedors { get; set; }
-        public IEnumerable<FornecedorTelefone> FornecedorTelefone { get; set; }
     }
 }

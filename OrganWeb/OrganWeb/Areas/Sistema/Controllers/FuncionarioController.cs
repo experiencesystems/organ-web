@@ -8,15 +8,13 @@ using System.Web;
 using System.Web.Mvc;
 using OrganWeb.Areas.Sistema.Models;
 using OrganWeb.Areas.Sistema.Models.Funcionarios;
-using OrganWeb.Areas.Sistema.Models.ViewModels;
 using OrganWeb.Models;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
     public class FuncionarioController : Controller
     {
-        private BancoContext db = new BancoContext();
-        private Funcionario funci = new Funcionario();
+        /*private BancoContext db = new BancoContext();
 
         // GET: Sistema/Funcionario
         public ActionResult Index()
@@ -29,14 +27,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 return View(funcionarios);
             }
         }
-        public ActionResult Funcionario()
-        {
-            var select = new ViewFuncionario
-            {
-                Funcionario = funci.GetFew()
-            };
-            return View(select);
-        }
+
         // GET: Sistema/Funcionario/Details/5
         public ActionResult Details(int? id)
         {
@@ -151,6 +142,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }*/
     }
 }

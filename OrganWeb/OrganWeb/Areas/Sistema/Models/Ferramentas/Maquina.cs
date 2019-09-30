@@ -5,7 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using OrganWeb.Models;
-using OrganWeb.Areas.Sistema.Models.Estoque;
+using OrganWeb.Areas.Sistema.Models.Armazenamento;
+using OrganWeb.Models.Banco;
 
 namespace OrganWeb.Areas.Sistema.Models.Ferramentas
 {
@@ -13,46 +14,34 @@ namespace OrganWeb.Areas.Sistema.Models.Ferramentas
     public class Maquina : Repository<Maquina>
     {
         [Key]
-        public int Id { get; set; }
+        [ForeignKey("Estoque")]
+        public int IdEstoque { get; set; }
 
         [Required]
-        [StringLength(75, MinimumLength = 3)]
+        [StringLength(30, MinimumLength = 2)]
         public string Nome { get; set; }
 
-        [StringLength(300, MinimumLength = 10)]
         [Display(Name = "Descrição")]
-        public string Descricao { get; set; }
+        [StringLength(300, MinimumLength = 10)]
+        public string Desc { get; set; }
+        
+        [Display(Name = "Vida útil")]
+        public int VidaUtil { get; set; }
 
         [Required]
+        [Display(Name = "Valor inicial")]
+        public double ValorInicial { get; set; }
+        
+        [Display(Name = "Depreciação por mês")]
+        public double DeprMes { get; set; }
+        
+        [Display(Name = "Depreciação por ano")]
+        public double DeprAno { get; set; }
+        
         [DataType(DataType.DateTime)]
         [Display(Name = "Data de cadastro")]
         public DateTime DataCadastro { get; set; }
-
-        [Required]
-        [Range(0.01, 99999.99)]
-        [Display(Name = "Valor na data do cadastro")]
-        public double ValorCadastro { get; set; }
-
-        [Required]
-        [Range(0.01, 99.99)]
-        [Display(Name = "Vida útil")]
-        public double VidaUtil { get; set; }
-
-        [Required]
-        [Range(0.01, 99.99)]
-        [Display(Name = "Depreciação por ano")]
-        public double DepreciacaoAno { get; set; }
-
-        [Required]
-        [Range(0.01, 99.99)]
-        [Display(Name = "Depreciação por mês")]
-        public double DepreciacaoMensal { get; set; }
-
-        //TODO: Verificar montadora
-        [Required]
-        [ForeignKey("Fornecedor")]
-        public int Montadora { get; set; }
-
-        public virtual Fornecedor Fornecedor { get; set; }
+        
+        public virtual Estoque Estoque { get; set; }
     }
 }

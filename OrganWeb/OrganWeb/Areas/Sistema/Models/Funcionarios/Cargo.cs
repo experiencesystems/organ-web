@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using OrganWeb.Models;
+using OrganWeb.Models.Banco;
 
 namespace OrganWeb.Areas.Sistema.Models.Funcionarios
 {
@@ -13,14 +14,13 @@ namespace OrganWeb.Areas.Sistema.Models.Funcionarios
     {
         [Key]
         public int Id { get; set; }
-
-        //TODO: Nível varchar
+        
         [Display(Name = "Nível")]
-        public string Nivel { get; set; }
+        public int Nivel { get; set; }
 
         [Display(Name = "Cargo")]
         [Required(ErrorMessage = "O nome é obrigatório.", AllowEmptyStrings = false)]
-        [StringLength(50, MinimumLength = 3)]
+        [StringLength(75, MinimumLength = 3)]
         public string Nome { get; set; }
     }
 }

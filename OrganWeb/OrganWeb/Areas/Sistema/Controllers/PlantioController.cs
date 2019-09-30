@@ -12,7 +12,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
 {
     public class PlantioController : Controller
     {
-        private Plantio plantio = new Plantio();
+        /*private Plantio plantio = new Plantio();
         private Semente semente = new Semente();
         private BancoContext db = new BancoContext();
 
@@ -72,6 +72,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
             }
             plantio.Sementes = semente.GetAll();
             return PartialView("_NovoPlantio", plantio);
-        }
+        }*/
     }
 }
