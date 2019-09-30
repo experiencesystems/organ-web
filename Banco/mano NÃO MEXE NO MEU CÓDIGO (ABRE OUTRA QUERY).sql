@@ -237,10 +237,10 @@ use dbOrgan;
 		IdEstoque int not null,
          constraint PKSemente primary key(IdEstoque),
 		Nome varchar(50) not null,
-        Solo varchar(50) not null default "Não Registrado",
-        IncSol decimal(5,2) not null default 0.00,
-        IncVento decimal(5,2) not null default 0.00,
-        Acidez decimal(5,2) not null default 0.00        
+        Solo varchar(50),
+        IncSol decimal(5,2),
+        IncVento decimal(5,2),
+        Acidez decimal(5,2)       
     );
     alter table tbSemente add constraint FKSementeEstoque foreign key(IdEstoque) references tbEstoque(Id);
     
