@@ -8,7 +8,7 @@ using System.Web;
 namespace OrganWeb.Models.Financeiro
 {
     [Table("tbDadosBancarios")]
-    public class DadosBancarios
+    public class DadosBancario
     {
         [Key]
         public int Id { get; set; }

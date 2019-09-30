@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using OrganWeb.Models.Usuario;
 
 namespace OrganWeb.Areas.Ecommerce.Models
 {

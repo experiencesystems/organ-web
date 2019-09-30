@@ -13,16 +13,14 @@ namespace OrganWeb.Models.Financeiro
     {
         [Key]
         public int Id { get; set; }
+        
+        [Display(Name = "Quantidade de parcelas")]
+        public int QtdParcelas { get; set; }
 
         [Required]
-        [Range(0.01, 99999.99)]
-        public double Valor { get; set; }
+        public double VlParcela { get; set; }
 
         [Required]
-        public int Parcelas { get; set; }
-
-        [Required]
-        [StringLength(50, MinimumLength = 5)]
-        public string TipoPagamento { get; set; }
+        public int Tipo { get; set; }
     }
 }

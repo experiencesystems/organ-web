@@ -12,36 +12,6 @@ using OrganWeb.Areas.Sistema.Models;
 
 namespace OrganWeb.Models.Usuario
 {
-    /*public class Usuario : IdentityUser
-    {
-        public virtual User User { get; set; }
-    }
-
-    [Table("tbDadosUsuario")]
-    public class User
-    {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
-        public DateTime DataCadastro { get; set; }
-
-        [Required]
-        public bool Confirmacao { get; set; }
-
-        [Required]
-        public bool Assinatura { get; set; }
-
-        [Required]
-        public bool CliOrFunc { get; set; }
-
-        [Required]
-        [ForeignKey("ApplicationUser")]
-        public string IdUsuario { get; set; }
-
-        public virtual ApplicationUser ApplicationUser { get; set; }
-        public virtual Funcionario Funcionario { get; set; }
-    }*/
-
     public class ApplicationUser : IdentityUser
     {
         [Required]

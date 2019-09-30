@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using OrganWeb.Models;
+using OrganWeb.Models.Banco;
+using OrganWeb.Models.Usuario;
 
 namespace OrganWeb
 {

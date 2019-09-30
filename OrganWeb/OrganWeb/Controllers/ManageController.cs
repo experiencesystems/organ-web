@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using OrganWeb.Models;
+using OrganWeb.Models.Usuario;
 
 namespace OrganWeb.Controllers
 {

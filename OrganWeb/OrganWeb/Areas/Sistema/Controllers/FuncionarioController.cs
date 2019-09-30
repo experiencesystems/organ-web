@@ -14,7 +14,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
 {
     public class FuncionarioController : Controller
     {
-        private BancoContext db = new BancoContext();
+        /*private BancoContext db = new BancoContext();
 
         // GET: Sistema/Funcionario
         public ActionResult Index()
@@ -142,6 +142,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }*/
     }
 }
