@@ -229,7 +229,6 @@ C:\Users\acer\source\repos\Organ Web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.pdb
 C:\Users\acer\Source\Repos\Organ Web\OrganWeb\OrganWeb\bin\MySql.Data.dll
 C:\Users\acer\Source\Repos\Organ Web\OrganWeb\OrganWeb\bin\MySql.Data.Entity.EF6.dll
 C:\Users\acer\Source\Repos\Organ Web\OrganWeb\OrganWeb\bin\MySql.Web.dll
-C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.csproj.CoreCompileInputs.cache
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\SqlServerTypes\x64\msvcr120.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\SqlServerTypes\x64\SqlServerSpatial140.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\SqlServerTypes\x86\msvcr120.dll
@@ -379,6 +378,8 @@ C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\pt-br\Sys
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\pt-br\Microsoft.AspNet.Identity.Core.resources.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\pt-br\Microsoft.AspNet.Identity.Owin.resources.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\pt-br\Microsoft.AspNet.Identity.EntityFramework.resources.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.csprojAssemblyReference.cache
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.csproj.CoreCompileInputs.cache
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.csproj.CopyComplete
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.pdb

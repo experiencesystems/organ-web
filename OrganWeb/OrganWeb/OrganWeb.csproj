@@ -355,6 +355,10 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Imagens\admin.jpg" />
+    <Content Include="Imagens\icon2.ico" />
+    <Content Include="Imagens\icone.png" />
+    <Content Include="Imagens\logo.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
