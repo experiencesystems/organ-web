@@ -1,4 +1,4 @@
-﻿@model OrganWeb.Areas.Sistema.Models.Ferramentas.ManutencaoMaquina
+﻿@model OrganWeb.Areas.Sistema.Models.Ferramentas.MaquinaManutencao
 
 @using (Html.BeginForm("_NovaManutencao", "Manutencao", FormMethod.Post))
 {
@@ -25,12 +25,12 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-6 col-form-label">@Html.LabelFor(model => model.Manutencao.DataManuntencao, new { htmlAttributes = new { @class = "form-control" } })</label>
+                    <label class="col-sm-6 col-form-label">@Html.LabelFor(model => model.Manutencao.Data, new { htmlAttributes = new { @class = "form-control" } })</label>
                     <div class="col-sm-6">
                         <div class="input-group date">
                             <span class="input-group-addon" id="basic-addon2"><i class="icofont icofont-ui-calendar"></i></span>
-                            @Html.EditorFor(model => model.Manutencao.DataManuntencao, new { htmlAttributes = new { @class = "form-control", @placeholder = "Data" } })
-                            @Html.ValidationMessageFor(modelItem => modelItem.Manutencao.DataManuntencao, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.Manutencao.Data, new { htmlAttributes = new { @class = "form-control", @placeholder = "Data" } })
+                            @Html.ValidationMessageFor(modelItem => modelItem.Manutencao.Data, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="input-group mb-3">
-                    @Html.DropDownListFor(model => model.IdMaquina, new SelectList(Model.Maquinas, "Id", "Nome", Model.IdMaquina), "Selecionar máquina")
+                    @Html.DropDownListFor(model => model.IdMaquina, new SelectList(Model.Maquinas, "IdEstoque", "Nome", Model.IdMaquina), "Selecionar máquina")
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="button">Novo</button>
                     </div>

@@ -36,9 +36,7 @@ namespace OrganWeb.Models.Banco
 
         public List<T> GetFew()
         {
-            List<T> lista = new List<T>();
-            
-            return lista; // DbSet.Take(10).ToList();
+            return DbSet.Take(10).ToList();
         }
 
         public T GetByID(int? id)

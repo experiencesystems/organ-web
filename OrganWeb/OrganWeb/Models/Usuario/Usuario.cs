@@ -21,7 +21,10 @@ namespace OrganWeb.Models.Usuario
         [Required]
         public bool Assinatura { get; set; }
         [Required]
-        public bool CliOrFunc { get; set; }
+        [ForeignKey("Pessoa")]
+        public int IdPessoa { get; set; }
+
+        public virtual Pessoa.Pessoa Pessoa { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

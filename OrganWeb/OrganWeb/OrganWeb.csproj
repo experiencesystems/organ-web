@@ -280,7 +280,6 @@
     <Compile Include="Models\Financeiro\DadosBancario.cs" />
     <Compile Include="Models\Pessoa\PessoaFisica.cs" />
     <Compile Include="Models\Pessoa\PessoaJuridica.cs" />
-    <Compile Include="Models\Pessoa\PessoaUsuario.cs" />
     <Compile Include="Models\Usuario\AccountViewModels.cs" />
     <Compile Include="Models\Banco\BancoContext.cs" />
     <Compile Include="Models\Endereco\Bairro.cs" />
