@@ -4,7 +4,7 @@ create database dbOrgan;
 use dbOrgan;
 
 -- =================================================================== USUÁRIO ============================================     
-   create table if not exists `AspNetUsers` (
+   create table if not exists tbUsuario (
 		`Id` nvarchar(128)  not null ,
 			DataCadastro datetime default current_timestamp(),
 			Confirmacao bool not null,
@@ -19,17 +19,6 @@ use dbOrgan;
 		`UserName` varchar(50)  not null ,-- !
 	      constraint PKAspNetUsers primary key ( `Id`)
 	);
-               
-	/*Id: 02719894-e4a9-46c8-999e-ba942abd5f8f
-Confirmacao: 0
-Ativacao: 1
-Assinatura: 0
-CLI/FUNC: 0
-Email: milenamonteiro@gmail.com
-EmailConfirmed: 0
-PasswordHash: ABecbdkGhzyTR1/t+F8FpUnN+AHXhiXYu4qPCVc4SroxOyzj3p0R+TnWK0p1o6q3Rw==
-SecurityStamp: e7aac8f8-7c92-44fb-9850-5f0fb0024c9a
-UserName: Milena*/
 -- =======================================================================================================================
 
 -- =================================================================== ENDEREÇO ==========================================
@@ -156,12 +145,12 @@ UserName: Milena*/
     );
     alter table tbPessoa add constraint FKPessoaEndereco foreign key(CEP) references tbEndereco(CEP);
     
-	alter table `AspNetUsers` add constraint FKAspNetUsersPessoa foreign key(IdPessoa) references tbPessoa(Id); 
+	alter table tbUsuario add constraint FKAspNetUsersPessoa foreign key(IdPessoa) references tbPessoa(Id); 
     
     insert into tbPessoa (Nome, Email, NumeroEndereco, CompEndereco, CEP) values("Mileninha GamePlays", 'milenamonteiro@gmail.com', 12, "AP. 24 Bloco B", "00000000"),
 																				("Systems Experience", 'moreexpsystems@gmail.com', 13, null, "11111111");
     
-    insert into `AspNetUsers` (Id, Confirmacao, Assinatura, Email, EmailConfirmed,
+    insert into tbUsuario (Id, Confirmacao, Assinatura, Email, EmailConfirmed,
     PasswordHash, SecurityStamp, UserName, IdPessoa) values('02719894-e4a9-46c8-999e-ba942abd5f8f', 0, 0,  'milenamonteiro@gmail.com', 0,
 												 'ABecbdkGhzyTR1/t+F8FpUnN+AHXhiXYu4qPCVc4SroxOyzj3p0R+TnWK0p1o6q3Rw==',
                                                  'e7aac8f8-7c92-44fb-9850-5f0fb0024c9a', 'Mirena', 1),
@@ -223,7 +212,7 @@ UserName: Milena*/
     
 -- =======================================================================================================================   
   
--- =================================================================== Estoque ============================================  
+-- =================================================================== ESTOQUE ============================================  
 	create table if not exists tbEstoque(
 		Id int auto_increment,
          constraint PKEstoque primary key(Id),
@@ -416,7 +405,6 @@ UserName: Milena*/
 	insert into tbItensVendidos(IdVenda, IdEstoque, QtdVendida) values(1, 1, 1);
 -- ======================================================================================================================= 
  
- 
 -- =================================================================== FUNCIONARIO ============================================  
 	create table if not exists tbFuncionario(
 		Id int auto_increment,
@@ -462,7 +450,7 @@ UserName: Milena*/
 		Id int auto_increment,
          constraint PKDespesa primary key(Id),
 		ValorPago double not null,
-        `Data` date
+        `Data` date not null
     );
     
     insert into tbDespesa(ValorPago, `Data`) values(1000.00, '01/01/01'),
@@ -499,9 +487,6 @@ UserName: Milena*/
                                
 
 -- =============================================================================================================================== 
-
--- =================================================================== PESSOA ============================================   
--- ======================================================================================================================= 
 
 -- =================================================================== PLANTIO ============================================
 	create table if not exists tbPlantio(
@@ -587,6 +572,98 @@ UserName: Milena*/
     insert into tbColheita values('01/01/01',  1, 4, 1, 1);
     
 -- ======================================================================================================================== 
+
+-- =================================================================== TAREFA ============================================
+	create table tbTarefa(
+		Id int auto_increment,
+         constraint PKTarefa primary key(Id),
+		Titulo varchar(30) not null default 'Sem Título',
+        `Desc` varchar(300),
+        `Status` bool not null default true,
+        DataEmissao datetime default current_timestamp,
+        Prioridade int not null,
+        DataFim date not null,
+        DataInicio date not null,
+        Relatorio varchar(100)
+    );
+    
+    create table tbTarefaFuncionario(
+		IdFunc int not null,
+        IdTarefa int not null,
+         constraint PKTarefaFuncionario primary key(IdFunc, IdTarefa)
+    ); 
+    alter table tbTarefaFuncionario add constraint FKFuncionarioTarefa foreign key(IdFunc) references tbFuncionario(Id),
+									add constraint FKTarefaFuncionario foreign key(IdTarefa) references tbTarefa(Id);
+	
+    create table tbTarefaEquipe(
+		IdTarefa int not null,
+        IdEquipe int not null,
+         constraint PKTarefaEquipe primary key(IdEquipe, IdTarefa)
+    );
+    alter table tbTarefaEquipe add constraint FKTarefaEquipe foreign key(IdTarefa) references tbTarefa(Id),
+							   add constraint FKEquipeTaerfa foreign key(IdEquipe) references tbEquipe(Id);
+	
+    create table tbAreaTarefa(
+		IdTarefa int not null,
+        IdArea int not null,
+         constraint PKTarefaArea primary key(IdArea, IdTarefa)
+    );
+    alter table tbAreaTarefa add constraint FKTarefaArea foreign key(IdTarefa) references tbTarefa(Id),
+							   add constraint FKAreaTarefa foreign key(IdArea) references tbArea(Id);
+	
+    create table tbItensTarefa(
+		QtdUsada double not null,
+        IdTarefa int not null,
+        IdEstoque int not null,
+         constraint PKItensTarefa primary key(IdEstoque, IdTarefa)
+    );
+    alter table tbItensTarefa add constraint FKItensTarefaTarefa foreign key(IdTarefa) references tbTarefa(Id),
+							  add constraint FKItensTarefaEstoque foreign key(IdEstoque) references tbEstoque(Id);
+-- ======================================================================================================================= 
+
+-- =================================================================== CONTROLE ============================================ 
+	create table tbControle(
+		Id int auto_increment,
+			constraint PKControle primary key(Id),
+		`Status` bool not null default true,
+        `Desc` varchar(300),
+        Efic decimal(5,2) not null,
+        NumLiberacoes int not null
+    );
+    
+    create table tbItensControle(
+		QtdUsada double not null,
+        IdControle int not null,
+        IdEstoque int not null,
+         constraint PKItensControle primary key(IdControle, IdEstoque)
+    );
+    alter table tbItensControle add constraint FKItensControleControle foreign key(IdControle) references tbControle(Id),
+								add constraint FKItensControleEstoque foreign key(IdEstoque) references tbEstoque(Id);
+    
+    create table tbPragaOrDoenca(
+		Id int auto_increment,
+         constraint PKPD primary key(Id),
+		Nome varchar(30) not null,
+        `P/D` bool not null
+    );
+    
+	create table tbControlePD(
+		IdControle int not null,
+        IdPD int not null,
+         constraint PKControlePD primary key(IdControle, IdPD)
+    );
+    alter table tbControlePD add constraint FKControlePD foreign key(IdControle) references tbControle(Id),
+							 add constraint FKPDControle foreign key(IdPD) references tbProgaOrDoenca(Id);
+	
+    create table tbAreaPD(
+		`Status` bool not null,
+        IdArea int not null,
+        IdPd int not null,
+         constraint PKAreaPD primary key(IdArea, IdPD)
+    );
+    alter table tbAreaPD add constraint FKAreaPD foreign key(IdArea) references tbArea(Id),
+						 add constraint FKPDArea foreign key(IdPd) references tbPragaOrDoenca(Id);
+-- ========================================================================================================================= 
 
 
 
