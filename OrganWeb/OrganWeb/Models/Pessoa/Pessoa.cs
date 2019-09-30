@@ -29,9 +29,9 @@ namespace OrganWeb.Models.Pessoa
         public string CompEndereco { get; set; }
 
         [Required]
-        [ForeignKey("Logradouro")]
+        [ForeignKey("Endereco")]
         public string CEP { get; set; }
 
-        public virtual Logradouro Logradouro { get; set; }
+        public virtual Endereco.Endereco Endereco { get; set; }
     }
 }

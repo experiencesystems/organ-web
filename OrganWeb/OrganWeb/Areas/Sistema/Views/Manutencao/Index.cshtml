@@ -20,21 +20,21 @@
                 <div class="card-body">
                     <div class="card-content">
                         <div class="card bg-light mb-3" style="max-width: 18rem;">
-                            @foreach (var item in Model.ManutencaoMaquinas)
+                            @foreach (var item in Model.MaquinaManutencaos)
                             {
                                 <div class="card-header">
                                     Manutenção de @Html.DisplayFor(model => item.Maquina.Nome) -
-                                    @Html.ActionLink("Detalhes", "Detalhes", new { id = item.IdManuntencao, id2 = item.IdMaquina })
+                                    @Html.ActionLink("Detalhes", "Detalhes", new { id = item.IdManutencao, id2 = item.IdMaquina })
                                 </div>
                                 <div class="card-body">
-                                    Data: @Html.DisplayFor(model => item.Manutencao.DataManuntencao)
+                                    Data: @Html.DisplayFor(model => item.Manutencao.Data)
                                     @Html.DisplayFor(model => item.Manutencao.Detalhes)
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary edit" data-toggle="newmodal" data-url="@Url.Action("Editar", "Manutencao", new { id = item.IdManuntencao, id2 = item.IdMaquina })">Editar</button>
+                                    <button type="button" class="btn btn-primary edit" data-toggle="newmodal" data-url="@Url.Action("Editar", "Manutencao", new { id = item.IdManutencao, id2 = item.IdMaquina })">Editar</button>
                                     @*@<button type="button" class="btn btn-primary edit" data-toggle="edit-modal" data-target="#edit-item">Editar</button>
                                         @{Html.RenderAction("Editar", "Manutencao", new { id = item.IdManuntencao, id2 = item.IdMaquina });}*@
-                                    <button type="button" class="btn btn-danger delete" data-url="@Url.Action("Excluir", "Manutencao", new { id = item.IdManuntencao, id2 = item.IdMaquina })">Excluir</button>
+                                    <button type="button" class="btn btn-danger delete" data-url="@Url.Action("Excluir", "Manutencao", new { id = item.IdManutencao, id2 = item.IdMaquina })">Excluir</button>
                                 </div>
                             }
                         </div>

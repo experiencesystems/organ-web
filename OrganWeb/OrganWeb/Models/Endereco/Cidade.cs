@@ -19,7 +19,7 @@ namespace OrganWeb.Models.Endereco
 
         [Required]
         [ForeignKey("Estado")]
-        public Int16 IdEstado { get; set; }
+        public int IdEstado { get; set; }
 
         public virtual Estado Estado { get; set; }
     }

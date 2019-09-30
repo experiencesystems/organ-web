@@ -25,7 +25,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         {
             var select = new ViewManutencao
             {
-                ManutencaoMaquinas = manumaq.GetFew()
+                MaquinaManutencaos = manumaq.GetFew()
             };
             return View(select);
         }

@@ -20,7 +20,6 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
         public double Qtd { get; set; }
 
         [Required]
-        [StringLength(15, MinimumLength = 1)]
         public int UM { get; set; }
 
         [Required]

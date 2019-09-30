@@ -19,10 +19,7 @@ namespace OrganWeb.Models.Banco
     public class BancoContext : IdentityDbContext<ApplicationUser>
     {
         public BancoContext() : base("name=BancoContext", throwIfV1Schema: false) { }
-
-        // USUÁRIO
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-
+        
         // ENDEREÇO
         public DbSet<Endereco.Endereco> Enderecos { get; set; }
         public DbSet<Logradouro> Logradouros { get; set; }
@@ -39,7 +36,6 @@ namespace OrganWeb.Models.Banco
         public DbSet<Pessoa.Pessoa> Pessoas { get; set; }
         public DbSet<PessoaFisica> PessoaFisicas { get; set; }
         public DbSet<PessoaJuridica> PessoaJuridicas { get; set; }
-        public DbSet<PessoaUsuario> PessoaUsuarios { get; set; }
         public DbSet<TelefonePessoa> TelefonePessoas { get; set; }
 
         // FINANCEIRO
@@ -90,10 +86,6 @@ namespace OrganWeb.Models.Banco
                 .Property(t => t.Nome)
                 .HasColumnName("Categoria");
 
-            modelBuilder.Entity<ApplicationUser>()
-                .Property(t => t.CliOrFunc)
-                .HasColumnName("CLI/FUNC");
-
             modelBuilder.Entity<Logradouro>()
                 .Property(t => t.Nome)
                 .HasColumnName("Logradouro");
@@ -113,6 +105,16 @@ namespace OrganWeb.Models.Banco
             modelBuilder.Entity<DDD>()
                 .Property(t => t.Valor)
                 .HasColumnName("DDD");
+
+            modelBuilder.Entity<ApplicationUser>()
+                .Ignore(t => t.PhoneNumber)
+                .Ignore(t => t.PhoneNumberConfirmed)
+                .Ignore(t => t.LockoutEndDateUtc)
+                .Ignore(t => t.LockoutEnabled)
+                .Ignore(t => t.AccessFailedCount)
+                .Ignore(t => t.TwoFactorEnabled);
+            
+            modelBuilder.Ignore<IdentityUserClaim>();
 
             // RELAÇÕES
 

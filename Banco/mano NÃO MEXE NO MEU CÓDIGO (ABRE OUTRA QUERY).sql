@@ -159,8 +159,9 @@ UserName: Milena*/
 	alter table `AspNetUsers` add constraint FKAspNetUsersPessoa foreign key(IdPessoa) references tbPessoa(Id); 
     
     insert into tbPessoa (Nome, Email, NumeroEndereco, CompEndereco, CEP) values("Mileninha GamePlays", 'milenamonteiro@gmail.com', 12, "AP. 24 Bloco B", "00000000"),
-																				("Systems Experience", 'moreexpsystems@gmail.com', 13, null, "11111111");
-    
+																				("Systems Experience", 'moreexpsystems@gmail.com', 13, null, "11111111"),
+                                                                                ("Systems Experience2", 'moreexpsystems@gmail.com', 13, null, "11111111");
+                                                                                
     insert into `AspNetUsers` (Id, Confirmacao, Assinatura, Email, EmailConfirmed,
     PasswordHash, SecurityStamp, UserName, IdPessoa) values('02719894-e4a9-46c8-999e-ba942abd5f8f', 0, 0,  'milenamonteiro@gmail.com', 0,
 												 'ABecbdkGhzyTR1/t+F8FpUnN+AHXhiXYu4qPCVc4SroxOyzj3p0R+TnWK0p1o6q3Rw==',
@@ -334,7 +335,7 @@ UserName: Milena*/
     );
     alter table tbMaquinaManutencao add constraint FKMaquinaManutencao foreign key(IdMaquina) references tbMaquina(IdEstoque),
 									add constraint FKManutencaoMaquina foreign key(IdManutencao) references tbManutencao(Id);
-    
+
     insert into tbMaquinaManutencao value(5,1);    
 -- ======================================================================================================================= 
   
