@@ -54,16 +54,26 @@ use dbOrgan;
             (E.Qtd * E.ValorUnit),
             M.Tipo
 	FROM tbMaquina M
-	INNER JOIN tbEstoque E ON M.IdEstoque = E.Id);
+	INNER JOIN tbEstoque E ON M.IdEstoque = E.Id)
+    UNION
+	(SELECT P.IdEstoque,
+			P.Nome,
+            E.Qtd,
+            E.UM,
+            E.ValorUnit,
+            (E.Qtd * E.ValorUnit),
+            'Produto'
+	FROM tbProduto P
+	INNER JOIN tbEstoque E ON P.IdEstoque = E.Id);
 	
     drop view if exists vwFluxoDeCaixa;
     create view vwFluxoDeCaixa as
-    select IFNULL(S.`Saída`,0), IFNULL(V.ValorTotal,0) `Entrada`, Sal.Saldo, monthname(S.`Data`) `MÊS` from VwVenda V, VwSaida S, VwSaldo Sal where month(S.`Data`) = month(V.D) group by `MÊS`;
+    select IFNULL(S.`Saída`,0) `Saída`, IFNULL(V.ValorTotal,0) `Entrada`, Sal.Saldo, monthname(S.`Data`) `MÊS` from VwVenda V, VwSaida S, VwSaldo Sal where month(S.`Data`) = month(V.D) group by `MÊS`;
     
     
 -- MUDAR VALOR DOS NOMES DAS DATAS PRA PORTUGUES    SET lc_time_names = 'pt_BR';
 
     
-   select * from VwItems; 
+
     
 -- =============================================================================================================================== 
