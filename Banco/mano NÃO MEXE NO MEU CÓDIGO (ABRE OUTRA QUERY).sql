@@ -19,8 +19,7 @@ use dbOrgan;
 		`UserName` varchar(50)  not null ,-- !
 	      constraint PKAspNetUsers primary key ( `Id`)
 	);
-        
-	alter table `AspNetUsers` add constraint FKAspeNetUsersPessoa foreign key(IdPessoa) references tbPessoa(Id);        
+               
 	/*Id: 02719894-e4a9-46c8-999e-ba942abd5f8f
 Confirmacao: 0
 Ativacao: 1
@@ -115,7 +114,7 @@ UserName: Milena*/
 		 constraint PKTelefone primary key(Id),
 		Numero numeric(9),
 		IdTipo int not null,
-		IdDDD int not null
+		IdDDD  numeric(2) not null
 	);
     
     create table if not exists tbTipoTel(
@@ -138,7 +137,7 @@ UserName: Milena*/
                                  (86), (87), (88), (89), (91), (92), (93), (94), (95), (96), (97), (98), (99); 
     
     alter table tbTelefone add constraint FKTelefoneTipo foreign key(IdTipo) references tbTipoTel(Id),
-						   add constraint FKTelefoneDDD foreign key(IdDDD) references tbDDD(Id);
+						   add constraint FKTelefoneDDD foreign key(IdDDD) references tbDDD(DDD);
                            
 	insert into tbTelefone(Numero, IdTipo, IdDDD) values(989896912, (select Id from tbTipoTel where Tipo = "Celular"), (select DDD from tbDDD where DDD = 11)),
 														(989896913, (select Id from tbTipoTel where Tipo = "Celular"), (select DDD from tbDDD where DDD = 11)),
@@ -157,8 +156,10 @@ UserName: Milena*/
     );
     alter table tbPessoa add constraint FKPessoaEndereco foreign key(CEP) references tbEndereco(CEP);
     
-    insert into tbPessoa (Nome, Email, NumeroEndereco, CompEndereco, CEP) values("Mileninha GamePlays", 'milenamonteiro@gmail.com', 12, "AP. 24 Bloco B", 00000000),
-																				("Systems Experience", 'moreexpsystems@gmail.com', 13, null, 11111111);
+	alter table `AspNetUsers` add constraint FKAspNetUsersPessoa foreign key(IdPessoa) references tbPessoa(Id); 
+    
+    insert into tbPessoa (Nome, Email, NumeroEndereco, CompEndereco, CEP) values("Mileninha GamePlays", 'milenamonteiro@gmail.com', 12, "AP. 24 Bloco B", "00000000"),
+																				("Systems Experience", 'moreexpsystems@gmail.com', 13, null, "11111111");
     
     insert into `AspNetUsers` (Id, Confirmacao, Assinatura, Email, EmailConfirmed,
     PasswordHash, SecurityStamp, UserName, IdPessoa) values('02719894-e4a9-46c8-999e-ba942abd5f8f', 0, 0,  'milenamonteiro@gmail.com', 0,
@@ -282,7 +283,7 @@ UserName: Milena*/
          constraint PKCategoria primary key(Id),
 		Categoria varchar(30) not null
     );
-    alter table tbInsumo add constraint FKInsumoCategoria foreign key(IdCategoria) references tbCategoriaInsumo(Id);
+    alter table tbInsumo add constraint FKInsumoCategoria foreign key(IdCategoria) references tbCategoria(Id);
     
     
     insert into tbEstoque(Qtd, UM, ValorUnit) values(1, 2, 0.50), -- UM 2- L, 1 - Kg, 3 - Unidade
@@ -334,7 +335,7 @@ UserName: Milena*/
     alter table tbMaquinaManutencao add constraint FKMaquinaManutencao foreign key(IdMaquina) references tbMaquina(IdEstoque),
 									add constraint FKManutencaoMaquina foreign key(IdManutencao) references tbManutencao(Id);
     
-    insert into tbMaquinaManutencao value(2,1);    
+    insert into tbMaquinaManutencao value(5,1);    
 -- ======================================================================================================================= 
   
 -- ========================================================== COMPRA ==============================================  
@@ -378,7 +379,7 @@ UserName: Milena*/
         QtdProd double not null
     );
     alter table tbItensComprados add constraint FKItensCompraEstoque foreign key(IdCompra) references tbCompra(Id),
-							     add constraint FKItensEstoqueCompra foreign key(IdEstoque) references tbEstoque(IdEstoque);
+							     add constraint FKItensEstoqueCompra foreign key(IdEstoque) references tbEstoque(Id);
                                  
 	insert into tbItensComprados(IdCompra, IdEstoque, QtdProd) values(1, 1, (select Qtd from tbEstoque where Id = 1)),
 																	 (1, 2, (select Qtd from tbEstoque where Id = 2)),
@@ -407,7 +408,7 @@ UserName: Milena*/
         IdPagamento int not null
     );
     alter table tbVenda add constraint FKVendaCliente foreign key(IdCliente) references tbCliente(Id),
-						add constraint FKCompraPgmt foreign key(IdPagamento) references tbPagamento(Id);
+						add constraint FKVendaPgmt foreign key(IdPagamento) references tbPagamento(Id);
     
     
     insert into tbVenda(`Data`, IdCliente, IdPagamento) value('01/01/01', 1, 1);
@@ -420,7 +421,7 @@ UserName: Milena*/
         QtdVendida double not null
     );
     alter table tbItensVendidos add constraint FKItensVendaEstoque foreign key(IdVenda) references tbVenda(Id),
-								add constraint FKItensEstoqueVenda foreign key(IdEstoque) references tbEstoque(IdEstoque);
+								add constraint FKItensEstoqueVenda foreign key(IdEstoque) references tbEstoque(Id);
                                 
 	insert into tbItensVendidos(IdVenda, IdEstoque, QtdVendida) values(1, 1, 1);
 -- ======================================================================================================================= 
