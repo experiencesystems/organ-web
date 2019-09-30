@@ -9,23 +9,21 @@ using System.Web.Mvc;
 using OrganWeb.Areas.Sistema.Models.ViewModels;
 using OrganWeb.Areas.Sistema.Models;
 using OrganWeb.Models;
-using OrganWeb.Areas.Sistema.Models.Estoque;
+using OrganWeb.Areas.Sistema.Models.Armazenamento;
+using OrganWeb.Models.Banco;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
     public class FornecedorController : Controller
     {
         private Fornecedor fornec = new Fornecedor();
-        private BancoContext db = new BancoContext();
 
         // GET: Sistema/Fornecedor
         public ActionResult Index()
         {
-            var fornecedors = db.Fornecedors.Include(f => f.Localizacao);
-            return View(fornecedors.ToList());
+            return View(fornec.GetFew());
         }
-
-
+        
         public ActionResult Fornecedores()
         {
             var select = new ViewFornecedor
@@ -42,18 +40,18 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Fornecedor fornecedor = db.Fornecedors.Find(id);
-            if (fornecedor == null)
+            fornec = fornec.GetByID(id);
+            if (fornec == null)
             {
                 return HttpNotFound();
             }
-            return View(fornecedor);
+            return View(fornec);
         }
 
         // GET: Sistema/Fornecedor/Create
         public ActionResult Create()
         {
-            ViewBag.CEP = new SelectList(db.Localizacaos, "CEP", "Endereco");
+            //ViewBag.CEP = new SelectList(db.Localizacaos, "CEP", "Endereco");
             return View();
         }
 
@@ -66,12 +64,12 @@ namespace OrganWeb.Areas.Sistema.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Fornecedors.Add(fornecedor);
-                db.SaveChanges();
+                fornec.Add(fornecedor);
+                fornec.Save();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CEP = new SelectList(db.Localizacaos, "CEP", "Endereco", fornecedor.CEP);
+            //ViewBag.CEP = new SelectList(db.Localizacaos, "CEP", "Endereco", fornecedor.CEP);
             return View(fornecedor);
         }
 
@@ -82,13 +80,13 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Fornecedor fornecedor = db.Fornecedors.Find(id);
-            if (fornecedor == null)
+            fornec = fornec.GetByID(id);
+            if (fornec == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CEP = new SelectList(db.Localizacaos, "CEP", "Endereco", fornecedor.CEP);
-            return View(fornecedor);
+            //ViewBag.CEP = new SelectList(db.Localizacaos, "CEP", "Endereco", fornecedor.CEP);
+            return View(fornec);
         }
 
         // POST: Sistema/Fornecedor/Edit/5
@@ -100,11 +98,11 @@ namespace OrganWeb.Areas.Sistema.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(fornecedor).State = EntityState.Modified;
-                db.SaveChanges();
+                //db.Entry(fornecedor).State = EntityState.Modified;
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CEP = new SelectList(db.Localizacaos, "CEP", "Endereco", fornecedor.CEP);
+            //ViewBag.CEP = new SelectList(db.Localizacaos, "CEP", "Endereco", fornecedor.CEP);
             return View(fornecedor);
         }
 
@@ -115,12 +113,12 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Fornecedor fornecedor = db.Fornecedors.Find(id);
-            if (fornecedor == null)
+            fornec = fornec.GetByID(id);
+            if (fornec == null)
             {
                 return HttpNotFound();
             }
-            return View(fornecedor);
+            return View(fornec);
         }
 
         // POST: Sistema/Fornecedor/Delete/5
@@ -128,19 +126,10 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Fornecedor fornecedor = db.Fornecedors.Find(id);
-            db.Fornecedors.Remove(fornecedor);
-            db.SaveChanges();
+            //Fornecedor fornecedor = db.Fornecedors.Find(id);
+            //db.Fornecedors.Remove(fornecedor);
+            //db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

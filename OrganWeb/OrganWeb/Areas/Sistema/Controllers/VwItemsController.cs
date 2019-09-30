@@ -14,7 +14,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
 {
     public class VwItemsController : Controller
     {
-        private BancoContext db = new BancoContext();
+        /*private BancoContext db = new BancoContext();
 
         // GET: Sistema/VwItems
         public ActionResult Index()
@@ -124,6 +124,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }*/
     }
 }

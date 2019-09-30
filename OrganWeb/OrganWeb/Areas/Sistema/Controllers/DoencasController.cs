@@ -6,21 +6,20 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using OrganWeb.Areas.Sistema.Models.Controles;
 using OrganWeb.Areas.Sistema.Models.ViewModels;
 using OrganWeb.Models;
+using OrganWeb.Models.Banco;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
 
     public class DoencasController : Controller
-    {
+    {/*
        private Praga praga = new Praga();
         private Doenca doenca = new Doenca();
         private Controle controle = new Controle();
         //aki tem q mudar qd juntar os dois no banco
         private BancoContext db = new BancoContext();
-
 
         //ta so gerado
         // GET: Sistema/Doencas
@@ -143,6 +142,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }*/
     }
 }
