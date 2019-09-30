@@ -9,12 +9,13 @@ using OrganWeb.Areas.Sistema.Models.Ferramentas;
 using OrganWeb.Areas.Sistema.Models.ViewModels;
 using System.Net;
 using System.Data.Entity;
+using OrganWeb.Models.Banco;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
     public class ManutencaoController : Controller
     {
-        private ManutencaoMaquina manumaq = new ManutencaoMaquina();
+        private MaquinaManutencao manumaq = new MaquinaManutencao();
         private Maquina maquina = new Maquina();
         private Manutencao manutencao = new Manutencao();
         private readonly BancoContext db = new BancoContext();
@@ -24,7 +25,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         {
             var select = new ViewManutencao
             {
-                ManutencaoMaquinas = manumaq.GetFew()
+                MaquinaManutencaos = manumaq.GetFew()
             };
             return View(select);
         }
@@ -55,7 +56,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [HttpGet]
         public ActionResult _NovaManutencao()
         {
-            var manutencaom = new ManutencaoMaquina
+            var manutencaom = new MaquinaManutencao
             {
                 Maquinas = maquina.GetAll()
             };
@@ -65,18 +66,18 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult _NovaManutencao(ManutencaoMaquina manutencaom)
+        public ActionResult _NovaManutencao(MaquinaManutencao manutencaom)
         {
             if (ModelState.IsValid)
             {
                 manutencao = new Manutencao
                 {
                     Nome = manutencaom.Manutencao.Nome,
-                    DataManuntencao = manutencaom.Manutencao.DataManuntencao,
+                    Data = manutencaom.Manutencao.Data,
                     Detalhes = manutencaom.Manutencao.Detalhes
                 };
                 manutencao.Add(manutencao);
-                manutencaom.IdManuntencao = manutencao.Id;
+                manutencaom.IdManutencao = manutencao.Id;
                 manutencaom.Add(manutencaom);
                 manutencaom.Save();
                 return RedirectToAction("Index");
@@ -101,14 +102,14 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar(ManutencaoMaquina manumaq)
+        public ActionResult Editar(MaquinaManutencao manumaq)
         {
             if (ModelState.IsValid)
             {
                 manutencao = new Manutencao
                 {
                     Nome = manumaq.Manutencao.Nome,
-                    DataManuntencao = manumaq.Manutencao.DataManuntencao,
+                    Data = manumaq.Manutencao.Data,
                     Detalhes = manumaq.Manutencao.Detalhes
                 };
                 manutencao.Update(manutencao);

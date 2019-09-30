@@ -520,18 +520,7 @@ create table tbDespesa(
 	IdPagamento int not null,
      constraint FKDespesaPagamento foreign key (IdPagamento) references tbPagamento(Id) on delete no action
 );
-
-create view VwItems as
-(SELECT S.Id, S.Nome `Item`, E.Quantidade, E.UnidadeMedida `Unidade de Medida`, C.Nome `Categoria`
-FROM tbEstoque E
-INNER JOIN tbSemente S ON E.Id = S.IdEstoque
-INNER JOIN tbCategoria C ON C.Id = S.IdCategoria)
-UNION
-(SELECT I.Id, I.Nome, E.Quantidade, E.UnidadeMedida, C.Nome
-FROM tbEstoque E
-INNER JOIN tbItem I ON E.Id = I.IdEstoque
-INNER JOIN tbCategoria C ON C.Id = I.IdCategoria);
-
-select * from VwItems;
-
 */
+select * from VwItems; 
+
+

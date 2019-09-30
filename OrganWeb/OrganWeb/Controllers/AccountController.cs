@@ -10,6 +10,10 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using OrganWeb.Models;
+using OrganWeb.Models.Banco;
+using OrganWeb.Models.Endereco;
+using OrganWeb.Models.Pessoa;
+using OrganWeb.Models.Usuario;
 
 namespace OrganWeb.Controllers
 {
@@ -157,9 +161,9 @@ namespace OrganWeb.Controllers
                     UserName = model.Registro.UserName,
                     Email = model.Registro.Email,
                     Assinatura = false,
-                    CliOrFunc = false,
                     Confirmacao = false,
-                    DataCadastro = DateTime.Today
+                    DataCadastro = DateTime.Today,
+                    IdPessoa = 3
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Registro.Password);

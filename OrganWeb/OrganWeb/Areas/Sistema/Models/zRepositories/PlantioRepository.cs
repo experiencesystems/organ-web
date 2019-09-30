@@ -4,12 +4,15 @@ using System.Linq;
 using System.Web;
 using OrganWeb.Models;
 using OrganWeb.Areas.Sistema.Models.Safras;
+using OrganWeb.Models.Banco;
 
 namespace OrganWeb.Areas.Sistema.Models
 {
-    public class PlantioRepository : Repository<Plantio>
+    public class PlantioRepository 
     {
-        public List<Plantio> GetPlantios()
+        /*
+         * : Repository<Plantio>
+         * public List<Plantio> GetPlantios()
         {
             var select = _context.Plantios
                         .ToList()
@@ -48,7 +51,7 @@ namespace OrganWeb.Areas.Sistema.Models
             {
                 return progresso;
             }
-        }
+        }*/
     }
 }
 
