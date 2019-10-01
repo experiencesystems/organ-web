@@ -12,14 +12,21 @@ using OrganWeb.Models.Telefone;
 using OrganWeb.Models.Pessoa;
 using OrganWeb.Models.Usuario;
 using OrganWeb.Models.Financeiro;
+using Microsoft.AspNet.Identity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace OrganWeb.Models.Banco
 {
     [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class BancoContext : IdentityDbContext<ApplicationUser>
     {
-        public BancoContext() : base("name=BancoContext", throwIfV1Schema: false) { }
-        
+        public BancoContext() : base("name=BancoContext", throwIfV1Schema: false)
+        {
+            Database.SetInitializer<BancoContext>(null);
+            Configuration.ProxyCreationEnabled = false;
+            Configuration.LazyLoadingEnabled = false;
+        }
+
         // ENDEREÇO
         public DbSet<Endereco.Endereco> Enderecos { get; set; }
         public DbSet<Logradouro> Logradouros { get; set; }
@@ -75,7 +82,7 @@ namespace OrganWeb.Models.Banco
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            
+
             // MAPEAMENTO DOS NOMES
 
             modelBuilder.Entity<Cargo>()
@@ -107,14 +114,13 @@ namespace OrganWeb.Models.Banco
                 .HasColumnName("DDD");
 
             modelBuilder.Entity<ApplicationUser>()
+                .ToTable("tbUsuario")
                 .Ignore(t => t.PhoneNumber)
                 .Ignore(t => t.PhoneNumberConfirmed)
                 .Ignore(t => t.LockoutEndDateUtc)
                 .Ignore(t => t.LockoutEnabled)
                 .Ignore(t => t.AccessFailedCount)
                 .Ignore(t => t.TwoFactorEnabled);
-            
-            modelBuilder.Ignore<IdentityUserClaim>();
 
             // RELAÇÕES
 
