@@ -23,7 +23,7 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
         public double QtdAntiga { get; set; }
 
         [Required]
-        public DateTime DtAlteracao { get; set; }
+        public DateTime DataAlteracao { get; set; }
 
         [Required]
         [StringLength(300, MinimumLength = 3)]

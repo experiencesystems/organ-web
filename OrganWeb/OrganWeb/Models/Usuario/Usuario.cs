@@ -24,6 +24,16 @@ namespace OrganWeb.Models.Usuario
         [ForeignKey("Pessoa")]
         public int IdPessoa { get; set; }
 
+        /*
+        public virtual bool PhoneNumberConfirmed { get; set; }
+        public virtual bool TwoFactorEnabled { get; set; }
+        public virtual DateTime? LockoutEndDateUtc { get; set; }
+        public virtual bool LockoutEnabled { get; set; }
+        public virtual int AccessFailedCount { get; set; }
+        public virtual ICollection<TRole> Roles { get; }
+        public virtual ICollection<TClaim> Claims { get; }
+        public virtual ICollection<TLogin> Logins { get; }*/
+
         public virtual Pessoa.Pessoa Pessoa { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

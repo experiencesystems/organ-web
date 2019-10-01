@@ -163,7 +163,7 @@ namespace OrganWeb.Controllers
                     Assinatura = false,
                     Confirmacao = false,
                     DataCadastro = DateTime.Today,
-                    IdPessoa = 3
+                    IdPessoa = 5
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Registro.Password);
