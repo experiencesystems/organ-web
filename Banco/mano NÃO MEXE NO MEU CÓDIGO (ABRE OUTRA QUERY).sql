@@ -4,8 +4,7 @@ create database dbOrgan;
 use dbOrgan;
 
 -- =================================================================== USUÁRIO ============================================     
-   
-   create table `AspNetRoles`(
+ create table `AspNetRoles`(
 	`Id` nvarchar(128)  not null ,
 	`Name` nvarchar(256)  not null ,
 	primary key (`Id`)) 
@@ -62,6 +61,7 @@ alter table `AspNetUserRoles` add constraint `FK_AspNetUserRoles_AspNetRoles_Rol
 alter table `AspNetUserRoles` add constraint `FK_AspNetUserRoles_AspNetUsers_UserId`  foreign key (`UserId`) references tbUsuario ( `Id`)  on update cascade on delete cascade;
 alter table `AspNetUserClaims` add constraint `FK_AspNetUserClaims_AspNetUsers_UserId`  foreign key (`UserId`) references tbUsuario ( `Id`)  on update cascade on delete cascade; 
 alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_UserId`  foreign key (`UserId`) references tbUsuario ( `Id`)  on update cascade on delete cascade;
+
 -- =======================================================================================================================
 
 -- =================================================================== ENDEREÇO ==========================================

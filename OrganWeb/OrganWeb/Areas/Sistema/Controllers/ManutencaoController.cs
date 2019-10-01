@@ -30,6 +30,15 @@ namespace OrganWeb.Areas.Sistema.Controllers
             return View(select);
         }
 
+        public ActionResult Maquinas()
+        {
+            var select = new ViewMaquina
+            {
+                Maquina = maquina.GetFew()
+            };
+            return View(select);
+        }
+
         public ActionResult Detalhes(int? id, int? id2)
         {
             if (id == null)

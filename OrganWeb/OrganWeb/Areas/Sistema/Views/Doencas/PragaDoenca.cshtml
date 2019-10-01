@@ -55,26 +55,26 @@
                                     </tr>
                                 </thead>
                                 @**<tbody>
-            @foreach (var item in Model.PragaDoenca)
-            {
-                <tr>
-                    <th scope="row"></th>
-                    <td>@Html.DisplayFor(modelItem => item.NomePopular)</td>
-                    <td>@Html.DisplayFor(modelItem => item.NomeCientifico)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Sintomas)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Tratamento)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Eficiencia)</td>
+                                        @foreach (var item in Model.PragaDoenca)
+                                        {
+                                            <tr>
+                                                <th scope="row"></th>
+                                                <td>@Html.DisplayFor(modelItem => item.NomePopular)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.NomeCientifico)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.Sintomas)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.Tratamento)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.Eficiencia)</td>
 
 
 
 
 
 
-                </tr>
-            }
-        </tbody>*@
+                                            </tr>
+                                        }
+                                    </tbody>*@
 
                                 <tbody>
 
@@ -87,14 +87,14 @@
                                         <td>machucada tadinha</td>
                                         <td>uiui</td>
                                         <td>aiaia</td>
-                                      
+
                                     </tr>
 
                                 </tbody>
 
 
 
-</div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-content">
@@ -132,14 +132,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 
+
+@* jQuery('.linha').on('click', function () {
+        var html = $(this).html();
+        jQuery('.card-header').append(html);
+    });*@
 @section scripts{
 
     <script>
+
         jQuery('.linha').on('click', function () {
-            var html = $(this).html();
-            jQuery('.card-header').append(html);
-        });
-        jQuery('.card-header').on('click', function () {
             $("#newmodal").modal("show");
             $(".modal-conteudo").modal("show");
 
