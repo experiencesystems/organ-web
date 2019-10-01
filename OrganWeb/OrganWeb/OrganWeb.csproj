@@ -235,8 +235,15 @@
     <Compile Include="Areas\Sistema\Controllers\ManutencaoController.cs" />
     <Compile Include="Areas\Sistema\Controllers\PlantioController.cs" />
     <Compile Include="Areas\Sistema\Controllers\VwItemsController.cs" />
+    <Compile Include="Areas\Sistema\Models\Administrativo\Area.cs" />
     <Compile Include="Areas\Sistema\Models\Administrativo\Cliente.cs" />
     <Compile Include="Areas\Sistema\Models\Armazenamento\Insumo.cs" />
+    <Compile Include="Areas\Sistema\Models\Armazenamento\Produto.cs" />
+    <Compile Include="Areas\Sistema\Models\Controles\Controle.cs" />
+    <Compile Include="Areas\Sistema\Models\Controles\ItensControle.cs" />
+    <Compile Include="Areas\Sistema\Models\Praga_e_Doenca\AreaPD.cs" />
+    <Compile Include="Areas\Sistema\Models\Praga_e_Doenca\ControlePD.cs" />
+    <Compile Include="Areas\Sistema\Models\Praga_e_Doenca\PragaOrDoenca.cs" />
     <Compile Include="Areas\Sistema\Models\Ferramentas\MaquinaManutencao.cs" />
     <Compile Include="Areas\Sistema\Models\Financas\Conta.cs" />
     <Compile Include="Areas\Sistema\Models\Financas\DespesaAdm.cs" />
@@ -253,6 +260,15 @@
     <Compile Include="Areas\Sistema\Models\Armazenamento\Fornecedor.cs" />
     <Compile Include="Areas\Sistema\Models\Funcionarios\Funcionario.cs" />
     <Compile Include="Areas\Sistema\Models\Armazenamento\HistoricoEstoque.cs" />
+    <Compile Include="Areas\Sistema\Models\Tarefas\AreaTarefa.cs" />
+    <Compile Include="Areas\Sistema\Models\Tarefas\ItensTarefa.cs" />
+    <Compile Include="Areas\Sistema\Models\Tarefas\Tarefa.cs" />
+    <Compile Include="Areas\Sistema\Models\Tarefas\TarefaEquipe.cs" />
+    <Compile Include="Areas\Sistema\Models\Tarefas\TarefaFuncionario.cs" />
+    <Compile Include="Areas\Sistema\Models\Safras\AreaPlantio.cs" />
+    <Compile Include="Areas\Sistema\Models\Safras\Colheita.cs" />
+    <Compile Include="Areas\Sistema\Models\Safras\ItensPlantio.cs" />
+    <Compile Include="Areas\Sistema\Models\Safras\Plantio.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewMaquina.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewPragaDoenca.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewSementes.cs" />
@@ -260,11 +276,16 @@
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewFuncionario.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewFinanceiro.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewManutencao.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewsBanco\VwCompra.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewsBanco\VwFluxoDeCaixa.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewsBanco\VwSaida.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewsBanco\VwSaldo.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewsBanco\VwVenda.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\MaquinaManutencaoRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\PlantioRepository.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewEstoque.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewPlantio.cs" />
-    <Compile Include="Areas\Sistema\Models\ViewModels\VwItems.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewsBanco\VwItems.cs" />
     <Compile Include="Areas\Sistema\Models\Financas\Compra.cs" />
     <Compile Include="Areas\Sistema\Models\Ferramentas\Manutencao.cs" />
     <Compile Include="Areas\Sistema\Models\Ferramentas\Maquina.cs" />
@@ -413,6 +434,8 @@
     <Content Include="Areas\Ecommerce\Views\web.config" />
     <Content Include="Areas\Ecommerce\Views\Loja\Detalhes.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Loja\Index.cshtml" />
+    <Content Include="Areas\Sistema\Views\Manutencao\Maquinas.cshtml" />
+    <Content Include="Areas\Sistema\Views\Funcionario\Funcionario.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -477,7 +500,6 @@
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
@@ -496,7 +518,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Ecommerce\Views\Shared\" />
-    <Folder Include="Areas\Sistema\Models\Controles\" />
     <Folder Include="Areas\Sistema\Views\Controles\" />
     <Folder Include="Areas\Sistema\Views\Shared\" />
   </ItemGroup>

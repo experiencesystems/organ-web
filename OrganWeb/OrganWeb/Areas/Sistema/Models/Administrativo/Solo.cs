@@ -23,14 +23,17 @@ namespace OrganWeb.Areas.Sistema.Models.Administrativo
         [Display(Name = "Tipo de Solo")]
         public int Tipo { get; set; }
        
+        [Required]
         [Range(0.01, 999.99)]
         [Display(Name = "Incidência Solar")]
         public double IncSolar { get; set; }
         
+        [Required]
         [Range(0.01, 999.99)]
         [Display(Name = "Incidência do Vento")]
         public double IncVento { get; set; }
         
+        [Required]
         [Range(0.01, 999.99)]
         public double Acidez { get; set; }
     }

@@ -73,6 +73,7 @@ use dbOrgan;
     
 -- MUDAR VALOR DOS NOMES DAS DATAS PRA PORTUGUES    SET lc_time_names = 'pt_BR';
 
+select * from VwCompra;
     
 
     

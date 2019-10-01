@@ -33,9 +33,9 @@ namespace OrganWeb.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -93,36 +93,6 @@ namespace OrganWeb.Controllers
                 message = ManageMessageId.Error;
             }
             return RedirectToAction("ManageLogins", new { Message = message });
-        }
-
-        //
-        // POST: /Manage/EnableTwoFactorAuthentication
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EnableTwoFactorAuthentication()
-        {
-            await UserManager.SetTwoFactorEnabledAsync(User.Identity.GetUserId(), true);
-            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            if (user != null)
-            {
-                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-            }
-            return RedirectToAction("Index", "Manage");
-        }
-
-        //
-        // POST: /Manage/DisableTwoFactorAuthentication
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DisableTwoFactorAuthentication()
-        {
-            await UserManager.SetTwoFactorEnabledAsync(User.Identity.GetUserId(), false);
-            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            if (user != null)
-            {
-                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-            }
-            return RedirectToAction("Index", "Manage");
         }
 
         //
@@ -245,7 +215,7 @@ namespace OrganWeb.Controllers
             base.Dispose(disposing);
         }
 
-#region Auxiliadores
+        #region Auxiliadores
         // Usado para proteção XSRF ao adicionar logins externos
         private const string XsrfKey = "XsrfId";
 
@@ -275,14 +245,27 @@ namespace OrganWeb.Controllers
             return false;
         }
 
+        private bool HasPhoneNumber()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            if (user != null)
+            {
+                return user.PhoneNumber != null;
+            }
+            return false;
+        }
+
         public enum ManageMessageId
         {
+            AddPhoneSuccess,
             ChangePasswordSuccess,
+            SetTwoFactorSuccess,
             SetPasswordSuccess,
             RemoveLoginSuccess,
+            RemovePhoneSuccess,
             Error
         }
 
-#endregion
+        #endregion
     }
 }
