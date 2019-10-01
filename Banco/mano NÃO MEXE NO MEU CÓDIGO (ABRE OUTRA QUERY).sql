@@ -612,7 +612,7 @@ alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_U
     alter table tbColheita add constraint FKColheitaPlantio foreign key(IdPlantio) references tbPlantio(Id),
 						   add constraint FKColheitaProd foreign key(IdProd) references tbProduto(IdEstoque);
 	
-    insert into tbColheita values('01/01/01',  1, 4, 1, 1);
+    insert into tbColheita values('01/01/01',  1, 4, 1, 7);
     
 -- ======================================================================================================================== 
 
@@ -696,7 +696,7 @@ alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_U
          constraint PKControlePD primary key(IdControle, IdPD)
     );
     alter table tbControlePD add constraint FKControlePD foreign key(IdControle) references tbControle(Id),
-							 add constraint FKPDControle foreign key(IdPD) references tbProgaOrDoenca(Id);
+							 add constraint FKPDControle foreign key(IdPD) references tbPragaOrDoenca(Id);
 	
     create table tbAreaPD(
 		`Status` bool not null,
