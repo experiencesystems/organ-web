@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrganWeb.Models.Banco;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,7 +9,7 @@ using System.Web;
 namespace OrganWeb.Areas.Sistema.Models.Controles
 {
     [Table("tbControle")]
-    public class Controle
+    public class Controle : Repository<Controle>
     {
         [Key]
         public int Id { get; set; }
