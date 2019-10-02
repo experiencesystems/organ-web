@@ -21,11 +21,11 @@ namespace OrganWeb.Areas.Sistema.Models.Safras
         [Display(Name = "Quantidade total")]
         public double QtdTotal { get; set; }
 
-        [Required]
+        [Key, Column(Order = 1)]
         [ForeignKey("Plantio")]
         public int IdPlantio { get; set; }
 
-        [Required]
+        [Key, Column(Order = 2)]
         [ForeignKey("Produto")]
         public int IdProd { get; set; }
 
