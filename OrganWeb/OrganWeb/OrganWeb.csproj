@@ -269,7 +269,9 @@
     <Compile Include="Areas\Sistema\Models\Safras\Colheita.cs" />
     <Compile Include="Areas\Sistema\Models\Safras\ItensPlantio.cs" />
     <Compile Include="Areas\Sistema\Models\Safras\Plantio.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewModels\ViewEquipe.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewMaquina.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewModels\ViewMonitoramento.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewPragaDoenca.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewSementes.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewFornecedor.cs" />
@@ -436,6 +438,8 @@
     <Content Include="Areas\Ecommerce\Views\Loja\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Manutencao\Maquinas.cshtml" />
     <Content Include="Areas\Sistema\Views\Funcionario\Funcionario.cshtml" />
+    <Content Include="Areas\Sistema\Views\Funcionario\Equipe.cshtml" />
+    <Content Include="Areas\Sistema\Views\Funcionario\NovaEquipe.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

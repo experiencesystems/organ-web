@@ -8,12 +8,17 @@ using System.Web;
 using System.Web.Mvc;
 using OrganWeb.Areas.Sistema.Models;
 using OrganWeb.Areas.Sistema.Models.Funcionarios;
+using OrganWeb.Areas.Sistema.Models.Funcionarios;
+using OrganWeb.Areas.Sistema.Models.ViewModels;
 using OrganWeb.Models;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
     public class FuncionarioController : Controller
     {
+        private Equipe equip = new Equipe();
+        private ViewEquipe equipos = new ViewEquipe();
+
         /*private BancoContext db = new BancoContext();
 
         // GET: Sistema/Funcionario
@@ -143,5 +148,18 @@ namespace OrganWeb.Areas.Sistema.Controllers
             }
             base.Dispose(disposing);
         }*/
+        public ActionResult Equipe()
+        {
+            var select = new ViewEquipe
+            {
+                Equipes = equip.GetFew()
+            };
+            return View(select);
+        }
+        public ActionResult NovaEquipe()
+        {
+           //n sei q eu boto aki migos
+            return View();
+        }
     }
 }
