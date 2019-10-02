@@ -33,9 +33,9 @@ namespace OrganWeb.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -215,7 +215,7 @@ namespace OrganWeb.Controllers
             base.Dispose(disposing);
         }
 
-#region Auxiliadores
+        #region Auxiliadores
         // Usado para proteção XSRF ao adicionar logins externos
         private const string XsrfKey = "XsrfId";
 
@@ -266,6 +266,6 @@ namespace OrganWeb.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }
