@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using OrganWeb.Models.Endereco;
+using OrganWeb.Models.Telefone;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+using CompareAttribute = System.ComponentModel.DataAnnotations.CompareAttribute;
 
 namespace OrganWeb.Models.Usuario
 {
@@ -83,6 +87,45 @@ namespace OrganWeb.Models.Usuario
         [Display(Name = "Confirmar Senha")]
         [Compare("Password", ErrorMessage = "A senha e a senha de confirmação não correspondem.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Nome completo")]
+        public string Nome { get; set; }
+
+        [Required]
+        public int DDD { get; set; }
+
+        [Required]
+        public int Telefone { get; set; }
+
+        [Required]
+        [Display(Name = "Tipo do telefone (Casa, Trabalho, etc.)")]
+        public string TipoTelefone { get; set; }
+
+        [Required]
+        [StringLength(8, MinimumLength = 8)]
+        public string CEP { get; set; }
+
+        [Required]
+        public string Rua { get; set; }
+
+        [Required]
+        [Display(Name = "Número")]
+        public int Numero { get; set; }
+        
+        public string Complemento { get; set; }
+
+        [Required]
+        public string Bairro { get; set; }
+
+        [Required]
+        public string Cidade { get; set; }
+
+        [Required]
+        public int Estado { get; set; }
+
+        public IEnumerable<Estado> Estados { get; set; }
+        public IEnumerable<DDD> DDDs { get; set; }
     }
 
     public class ResetPasswordViewModel
