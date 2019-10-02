@@ -24,6 +24,8 @@ namespace OrganWeb.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private DDD ddd = new DDD();
+        private Estado estado = new Estado();
 
         public AccountController()
         {
@@ -73,8 +75,6 @@ namespace OrganWeb.Controllers
         [AllowAnonymous]
         public ActionResult Registro()
         {
-            var ddd = new DDD();
-            var estado = new Estado();
             var selectestados = new RegisterViewModel
             {
                 Estados = estado.GetAll(),
@@ -276,10 +276,14 @@ namespace OrganWeb.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
+                model.DDDs = ddd.GetAll();
+                model.Estados = estado.GetAll();
                 AddErrors(result);
             }
 
             // Se chegamos até aqui e houver alguma falha, exiba novamente o formulário
+            model.DDDs = ddd.GetAll();
+            model.Estados = estado.GetAll();
             return View(model);
         }
 

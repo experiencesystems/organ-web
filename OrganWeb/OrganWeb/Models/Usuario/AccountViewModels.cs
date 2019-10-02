@@ -90,6 +90,7 @@ namespace OrganWeb.Models.Usuario
 
         [Required]
         [Display(Name = "Nome completo")]
+        [StringLength(100, MinimumLength = 5)]
         public string Nome { get; set; }
 
         [Required]
@@ -100,6 +101,7 @@ namespace OrganWeb.Models.Usuario
 
         [Required]
         [Display(Name = "Tipo do telefone (Casa, Trabalho, etc.)")]
+        [StringLength(20, MinimumLength = 2)]
         public string TipoTelefone { get; set; }
 
         [Required]
@@ -107,18 +109,22 @@ namespace OrganWeb.Models.Usuario
         public string CEP { get; set; }
 
         [Required]
+        [StringLength(50, MinimumLength = 5)]
         public string Rua { get; set; }
 
         [Required]
         [Display(Name = "Número")]
         public int Numero { get; set; }
-        
+
+        [StringLength(30, MinimumLength = 2)]
         public string Complemento { get; set; }
 
         [Required]
+        [StringLength(30, MinimumLength = 5)]
         public string Bairro { get; set; }
 
         [Required]
+        [StringLength(30, MinimumLength = 5)]
         public string Cidade { get; set; }
 
         [Required]
