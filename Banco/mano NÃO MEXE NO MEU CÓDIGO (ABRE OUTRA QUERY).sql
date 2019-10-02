@@ -571,12 +571,12 @@ use dbOrgan;
     alter table tbColheita add constraint FKColheitaPlantio foreign key(IdPlantio) references tbPlantio(Id),
 						   add constraint FKColheitaProd foreign key(IdProd) references tbProduto(IdEstoque);
 	
-    insert into tbColheita values('01/01/01',  1, 4, 1, 1);
+    insert into tbColheita values('01/01/01',  1, 4, 1, 7);
     
 -- ======================================================================================================================== 
 
 -- =================================================================== TAREFA ============================================
-	create table tbTarefa(
+	create table if not exists tbTarefa(
 		Id int auto_increment,
          constraint PKTarefa primary key(Id),
 		Titulo varchar(30) not null default 'Sem Título',
@@ -589,7 +589,7 @@ use dbOrgan;
         Relatorio varchar(100)
     );
     
-    create table tbTarefaFuncionario(
+    create table if not exists tbTarefaFuncionario(
 		IdFunc int not null,
         IdTarefa int not null,
          constraint PKTarefaFuncionario primary key(IdFunc, IdTarefa)
@@ -597,7 +597,7 @@ use dbOrgan;
     alter table tbTarefaFuncionario add constraint FKFuncionarioTarefa foreign key(IdFunc) references tbFuncionario(Id),
 									add constraint FKTarefaFuncionario foreign key(IdTarefa) references tbTarefa(Id);
 	
-    create table tbTarefaEquipe(
+    create table if not exists tbTarefaEquipe(
 		IdTarefa int not null,
         IdEquipe int not null,
          constraint PKTarefaEquipe primary key(IdEquipe, IdTarefa)
@@ -605,7 +605,7 @@ use dbOrgan;
     alter table tbTarefaEquipe add constraint FKTarefaEquipe foreign key(IdTarefa) references tbTarefa(Id),
 							   add constraint FKEquipeTaerfa foreign key(IdEquipe) references tbEquipe(Id);
 	
-    create table tbAreaTarefa(
+    create table if not exists tbAreaTarefa(
 		IdTarefa int not null,
         IdArea int not null,
          constraint PKTarefaArea primary key(IdArea, IdTarefa)
@@ -613,7 +613,7 @@ use dbOrgan;
     alter table tbAreaTarefa add constraint FKTarefaArea foreign key(IdTarefa) references tbTarefa(Id),
 							   add constraint FKAreaTarefa foreign key(IdArea) references tbArea(Id);
 	
-    create table tbItensTarefa(
+    create table if not exists tbItensTarefa(
 		QtdUsada double not null,
         IdTarefa int not null,
         IdEstoque int not null,
@@ -624,7 +624,7 @@ use dbOrgan;
 -- ======================================================================================================================= 
 
 -- =================================================================== CONTROLE ============================================ 
-	create table tbControle(
+	create table if not exists tbControle(
 		Id int auto_increment,
 			constraint PKControle primary key(Id),
 		`Status` bool not null default true,
@@ -633,7 +633,7 @@ use dbOrgan;
         NumLiberacoes int not null
     );
     
-    create table tbItensControle(
+    create table if not exists tbItensControle(
 		QtdUsada double not null,
         IdControle int not null,
         IdEstoque int not null,
@@ -642,22 +642,22 @@ use dbOrgan;
     alter table tbItensControle add constraint FKItensControleControle foreign key(IdControle) references tbControle(Id),
 								add constraint FKItensControleEstoque foreign key(IdEstoque) references tbEstoque(Id);
     
-    create table tbPragaOrDoenca(
+    create table if not exists tbPragaOrDoenca(
 		Id int auto_increment,
          constraint PKPD primary key(Id),
 		Nome varchar(30) not null,
         `P/D` bool not null
     );
     
-	create table tbControlePD(
+	create table if not exists tbControlePD(
 		IdControle int not null,
         IdPD int not null,
          constraint PKControlePD primary key(IdControle, IdPD)
     );
     alter table tbControlePD add constraint FKControlePD foreign key(IdControle) references tbControle(Id),
-							 add constraint FKPDControle foreign key(IdPD) references tbProgaOrDoenca(Id);
+							 add constraint FKPDControle foreign key(IdPD) references tbPragaOrDoenca(Id);
 	
-    create table tbAreaPD(
+    create table if not exists tbAreaPD(
 		`Status` bool not null,
         IdArea int not null,
         IdPd int not null,
