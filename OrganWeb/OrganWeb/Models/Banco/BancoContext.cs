@@ -112,7 +112,7 @@ namespace OrganWeb.Models.Banco
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            
+
             // MAPEAMENTO DOS NOMES
 
             modelBuilder.Entity<Cargo>()
