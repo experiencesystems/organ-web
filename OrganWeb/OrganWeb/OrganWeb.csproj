@@ -514,6 +514,8 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Account\LoginRegistro.cshtml" />
     <Content Include="Views\Shared\_LoginStart.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Registro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
