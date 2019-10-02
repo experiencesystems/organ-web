@@ -42,58 +42,17 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">NomePopular</th>
-                                        <th scope="col">NomeCientifico</th>
-                                        <th scope="col">Descricao</th>
-                                        <th scope="col">Sintomas</th>
-                                        <th scope="col">Tratamento</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Eficiencia</th>
-
-
-
-
                                     </tr>
                                 </thead>
-                                @**<tbody>
-                                        @foreach (var item in Model.PragaDoenca)
-                                        {
-                                            <tr>
-                                                <th scope="row"></th>
-                                                <td>@Html.DisplayFor(modelItem => item.NomePopular)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.NomeCientifico)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.Sintomas)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.Tratamento)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.Eficiencia)</td>
-
-
-
-
-
-
-                                            </tr>
-                                        }
-                                    </tbody>*@
-
                                 <tbody>
-
-                                    <tr class="linha">
-                                        <th scope="row"></th>
-                                        <td>Praga1</td>
-                                        <td>dodoi</td>
-                                        <td>dodoizitos</td>
-                                        <td>mt dodoi slc</td>
-                                        <td>machucada tadinha</td>
-                                        <td>uiui</td>
-                                        <td>aiaia</td>
-
-                                    </tr>
-
+                                    @foreach (var item in Model.PragaOrDoencas)
+                                    {
+                                        <tr class="linha">
+                                            <th scope="row"></th>
+                                            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                                        </tr>
+                                    }
                                 </tbody>
-
-
-
                         </div>
                     </div>
                 </div>
