@@ -219,7 +219,17 @@ use dbOrgan;
     select * from vwItems; 
 -- =============================================================================================================================== 
 
--- =================================================================== MANUTENÇÃO ===============================================
+-- =================================================================== MANUTENÇÃO ================================================
+create view vwQtdMa as
+select count(IdMaquina) `Quantidade de Manutenções`,sum(ma.ValorPago) `Custo Total` from tbMaquinaManutencao mm inner join tbManutencao ma on ma.Id = mm.IdManutencao;
+
+select M.Nome `Máquina`, M.Tipo `Tipo de Máquina`, Ma.Nome `Manutenção`, Ma.`Data` `Data da Manutenção`, Ma.ValorPago `Valor da Manutenção`
+ from tbMaquina M 
+ inner join tbMaquinaManutencao mm 
+	on mm.IdMaquina = M.IdEstoque
+ inner join tbManutencao Ma 
+	on Ma.Id = mm.IdManutencao;
+select * from tbManutencao;
 -- =============================================================================================================================== 
 
 -- =================================================================== PROC ESTOQUE ===============================================
