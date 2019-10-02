@@ -21,9 +21,11 @@ namespace OrganWeb.Models.Financeiro
         public int Banco { get; set; }
 
         [Required]
+        [Display(Name = "Número do cartão")]
         public Int64 NumCartao { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
         public DateTime Validade { get; set; }
 
         [Required]

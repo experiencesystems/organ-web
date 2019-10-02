@@ -83,6 +83,27 @@ namespace OrganWeb.Controllers
             return View(selectestados);
         }
 
+        private List<SelectListItem> bancossl = new List<SelectListItem>()
+            {
+            new SelectListItem() { Text = "VISA", Value = "1" },
+            new SelectListItem() { Text = "MasterCard", Value = "2" },
+            new SelectListItem() { Text = "AMEX", Value = "3" },
+            new SelectListItem() { Text = "elo", Value = "4" },
+            new SelectListItem() { Text = "Hipercard", Value = "5" }
+            };
+
+        //
+        // GET: /Account/Assinatura
+        [AllowAnonymous]
+        public ActionResult Assinatura()
+        {
+            var assist = new AssinaturaViewModel
+            {
+                Bancos = bancossl
+            };
+            return View(assist);
+        }
+
         //
         // POST: /Account/Login
         //https://stackoverflow.com/questions/27498840/how-to-login-using-email-in-identity-2
@@ -166,6 +187,19 @@ namespace OrganWeb.Controllers
         }
 
         //
+        // POST: /Account/Assinatura
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Assinatura(AssinaturaViewModel model)
+        {
+            if (ModelState.IsValid)
+            { }
+            model.Bancos = bancossl;
+            return View(model);
+        }
+
+        //
         // POST: /Account/Registro
         [HttpPost]
         [AllowAnonymous]
@@ -238,7 +272,7 @@ namespace OrganWeb.Controllers
                     IdDDD = model.DDD,
                     IdTipo = tipotel.Id
                 };
-                
+
                 db.Telefones.Add(telefone);
                 db.SaveChanges();
 
