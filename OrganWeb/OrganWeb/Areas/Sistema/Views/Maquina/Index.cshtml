@@ -1,31 +1,17 @@
 ﻿
-@model OrganWeb.Areas.Sistema.Models.ViewModels.ViewPragaDoenca
+@model OrganWeb.Areas.Sistema.Models.ViewModels.ViewMaquina
 @{
-    ViewBag.Title = "Pragas e Doenças";
+    ViewBag.Title = "Máquinas";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<style>
-    .modal-conteudo {
-        width: 350px;
-        height: 200px;
-        background: #FFF;
-        z-index: 1100;
-        border-radius: 3px;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        -webkit-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-        display: none;
-    }
-</style>
+
 
 <div class="main-body">
     <div class="row">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h6 class="card-title box-title">Pragas e Doenças</h6>
+                    <h6 class="card-title box-title">Máquinas</h6>
                     <div class="card-header-right">
                         <ul class="list-unstyled card-option">
                             <li><i class="ti-minus minimize-card"></i></li>
@@ -35,59 +21,62 @@
                 </div>
                 <div class="card-body">
                     <div class="card-content">
-                        <div class="card bg-light mb-3" style="max-width: 18rem;">
+                     
 
                             <table class="table">
                                 <thead class="thead-title">
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">NomePopular</th>
-                                        <th scope="col">NomeCientifico</th>
+                                        <th scope="col">Nome</th>
                                         <th scope="col">Descricao</th>
-                                        <th scope="col">Sintomas</th>
-                                        <th scope="col">Tratamento</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Eficiencia</th>
-
-
+                                        <th scope="col">DataCadastro</th>
+                                        <th scope="col">ValorCadastro</th>
+                                        <th scope="col">VidaUtil</th>
+                                        <th scope="col">DepreciacaoAno</th>
+                                        <th scope="col">DepreciacaoMensal</th>
+                                        <th scope="col">Montadora</th>
+                                        <th scope="col">Fornecedor</th>
 
 
                                     </tr>
                                 </thead>
-                                @**<tbody>
-            @foreach (var item in Model.PragaDoenca)
-            {
-                <tr>
-                    <th scope="row"></th>
-                    <td>@Html.DisplayFor(modelItem => item.NomePopular)</td>
-                    <td>@Html.DisplayFor(modelItem => item.NomeCientifico)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Sintomas)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Tratamento)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Eficiencia)</td>
+                                <tbody>
+                                    @* @foreach (var item in Model.Maquina)
+        {
+            <tr>
+                <th scope="row"></th>
+                <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
+                <td>@Html.DisplayFor(modelItem => item.DataCadastro)</td>
+                <td>@Html.DisplayFor(modelItem => item.ValorCadastro)</td>
+                <td>@Html.DisplayFor(modelItem => item.VidaUtil)</td>
+                <td>@Html.DisplayFor(modelItem => item.DepreciacaoAno)</td>
+                <td>@Html.DisplayFor(modelItem => item.DepreciacaoMensal)</td>
+                <td>@Html.DisplayFor(modelItem => item.Montadora)</td>
+                <td>@Html.DisplayFor(modelItem => item.Fornecedor)</td>
 
 
 
 
 
-
-                </tr>
-            }
-        </tbody>*@
-
+            </tr>
+        }
+                                    *@
+                                </tbody>
+                                @*tabela p teste, quando tiver o banco, descomente a outra e apague esta*@
                                 <tbody>
 
                                     <tr class="linha">
                                         <th scope="row"></th>
                                         <td>Praga1</td>
-                                        <td>dodoi</td>
-                                        <td>dodoizitos</td>
-                                        <td>mt dodoi slc</td>
-                                        <td>machucada tadinha</td>
-                                        <td>uiui</td>
-                                        <td>aiaia</td>
-                                      
+                                        <td>Solo</td>
+                                        <td>Incidencia</td>
+                                        <td>Vento</td>
+                                        <td>Acidez</td>
+                                        <td>Estoque</td>
+                                        <td>Fornecedor</td>
+                                        <td>Categoria</td>
+                                        <td>Categoria</td>
                                     </tr>
 
                                 </tbody>
@@ -97,9 +86,7 @@
 </div>
                     </div>
                 </div>
-                <div class="card-content">
-                    <div class="card border-success mb-3" style="max-width: 18rem;">
-                        <div class="card-body text-success">
+              
 
                             </p>
                         </div>
@@ -110,7 +97,6 @@
     </div>
 </div>
 <div id="modal-placeholder"></div>
-<div class="modal-conteudo"></div>
 <div class="modal fade" id="newmodal" tabindex="-1" role="dialog" data-backdrop="static" />
 
 <environment include="Development">
@@ -135,17 +121,17 @@
 @section scripts{
 
     <script>
-        jQuery('.linha').on('click', function () {
-            var html = $(this).html();
-            jQuery('.card-header').append(html);
-        });
-        jQuery('.card-header').on('click', function () {
-            $("#newmodal").modal("show");
-            $(".modal-conteudo").modal("show");
+     //   jQuery('.linha').on('click', function () {
+     //       var html = $(this).html();
+     //       jQuery('.card-header').append(html);
+    //    });
+       // jQuery('.card-header').on('click', function () {
+      //      $("#newmodal").modal("show");
+       //     $(".modal-conteudo").modal("show");
 
-            var html = $(this).html();
-            jQuery('.modal-conteudo').append(html);
-        });
+       //     var html = $(this).html();
+       //     jQuery('.modal-conteudo').append(html);
+     //   });
 
         $(function () {
 
@@ -163,5 +149,4 @@
         })
     </script>
 }
-
 
