@@ -17,12 +17,14 @@ namespace OrganWeb.Areas.Sistema.Models.Safras
 
         [Key, Column(Order = 2)]
         [ForeignKey("Area")]
-        public int IdArea { get; set; }
+        public Guid IdArea { get; set; }
 
         [Required]
         public int Densidade { get; set; }
 
         public virtual Plantio Plantio { get; set; }
         public virtual Area Area { get; set; }
+
+        public IEnumerable<Area> Areas { get; set; }
     }
 }

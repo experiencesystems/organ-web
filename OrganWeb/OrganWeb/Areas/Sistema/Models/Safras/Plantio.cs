@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrganWeb.Areas.Sistema.Models.Administrativo;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,7 +9,7 @@ using System.Web;
 namespace OrganWeb.Areas.Sistema.Models.Safras
 {
     [Table("tbPlantio")]
-    public class Plantio
+    public class Plantio : PlantioRepository
     {
         [Key]
         public int Id { get; set; }
@@ -30,5 +31,10 @@ namespace OrganWeb.Areas.Sistema.Models.Safras
 
         [Required]
         public int TipoPlantio { get; set; }
+
+        [NotMapped]
+        public double Porcentagem { get; set; }
+
+        public IEnumerable<Area> Areas { get; set; }
     }
 }

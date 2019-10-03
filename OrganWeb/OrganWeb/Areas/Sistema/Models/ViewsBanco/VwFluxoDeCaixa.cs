@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrganWeb.Models.Banco;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Web;
 
 namespace OrganWeb.Areas.Sistema.Models.ViewsBanco
 {
-    public class VwFluxoDeCaixa
+    public class VwFluxoDeCaixa : Repository<VwFluxoDeCaixa>
     {
         [Key]
         public double Saída { get; set; }

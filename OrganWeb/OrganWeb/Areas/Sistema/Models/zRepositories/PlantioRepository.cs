@@ -8,11 +8,9 @@ using OrganWeb.Models.Banco;
 
 namespace OrganWeb.Areas.Sistema.Models
 {
-    public class PlantioRepository 
-    {
-        /*
-         * : Repository<Plantio>
-         * public List<Plantio> GetPlantios()
+    public class PlantioRepository : Repository<Plantio>
+    { 
+         public List<Plantio> GetPlantios()
         {
             var select = _context.Plantios
                         .ToList()
@@ -20,10 +18,11 @@ namespace OrganWeb.Areas.Sistema.Models
                         {
                             Porcentagem = ProgressoPlantio(p),
                             Id = p.Id,
-                            Semente = new Semente
-                            {
-                                Nome = p.Semente.Nome
-                            }
+                            Nome = p.Nome,
+                            Sistema = p.Sistema,
+                            TipoPlantio = p.TipoPlantio,
+                            DataInicio = p.DataInicio,
+                            DataColheita = p.DataColheita
                         })
                         .ToList();
             return select;
@@ -32,26 +31,32 @@ namespace OrganWeb.Areas.Sistema.Models
         public double ProgressoPlantio(Plantio plantio)
         {
             DateTime hoje = DateTime.Today;
+            try
+            {
+                //agora - começo
+                TimeSpan agoracomeco = (hoje.Subtract(plantio.DataInicio));
+                int diasAgoracomeco = agoracomeco.Days;
 
-            //agora - começo
-            TimeSpan agoracomeco = (hoje.Subtract(plantio.DataInício));
-            int diasAgoracomeco = agoracomeco.Days;
+                //fim - começo
+                TimeSpan fimcomeco = (plantio.DataColheita.Subtract(plantio.DataInicio));
+                int diasFimcomeco = fimcomeco.Days;
 
-            //fim - começo
-            TimeSpan fimcomeco = (plantio.DataColheita.Subtract(plantio.DataInício));
-            int diasFimcomeco = fimcomeco.Days;
+                int progresso = ((100 * diasAgoracomeco) / diasFimcomeco);
 
-            int progresso = ((100 * diasAgoracomeco) / diasFimcomeco);
-
-            if (progresso > 100)
+                if (progresso > 100)
+                {
+                    return 100;
+                }
+                else
+                {
+                    return progresso;
+                }
+            }
+            catch
             {
                 return 100;
             }
-            else
-            {
-                return progresso;
-            }
-        }*/
+        }
     }
 }
 
