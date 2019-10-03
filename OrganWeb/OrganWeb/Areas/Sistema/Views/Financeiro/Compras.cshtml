@@ -1,0 +1,49 @@
+﻿@model OrganWeb.Areas.Sistema.Models.ViewModels.ViewFinanceiro
+
+@{
+    ViewBag.Title = "Compras";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-body">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title box-title">Compras</h6>
+                    <div class="card-header-right">
+                        <ul class="list-unstyled card-option">
+                            <li><i class="ti-minus minimize-card"></i></li>
+                            <li><i class="icon-refresh"></i></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-content">
+                    </div>
+                    <table class="table">
+                        <thead class="thead-title">
+                            <tr>
+                                <th scope="col">Saída</th>
+                                <th scope="col">Entrada</th>
+                                <th scope="col">Saldo</th>
+                                <th scope="col">Mês</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.VwFluxoDeCaixas)
+                            {
+                                <tr>
+                                    <td>R$ @Html.DisplayFor(modelItem => item.Saída)</td>
+                                    <td>R$ @Html.DisplayFor(modelItem => item.Entrada)</td>
+                                    <td>R$ @Html.DisplayFor(modelItem => item.Saldo)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Mês)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

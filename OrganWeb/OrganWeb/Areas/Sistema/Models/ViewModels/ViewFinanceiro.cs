@@ -16,6 +16,7 @@ namespace OrganWeb.Areas.Sistema.Models.ViewModels
         public IEnumerable<DespesaFunc> DespesaFuncs { get; set; }
         public IEnumerable<VwCompra> VwCompras { get; set; }
         public IEnumerable<VwSaldo> VwSaldos { get; set; }
+        public IEnumerable<VwCompra> VwCompras { get; set; }
         public IEnumerable<VwFluxoDeCaixa> VwFluxoDeCaixas { get; set; }
     }
 }

@@ -588,7 +588,8 @@ use dbOrgan;
         DataInicio date not null,
         Relatorio varchar(100)
     );
-    
+    insert into tbTarefa(Titulo, `Status`, Prioridade, DataFim, DataInicio) values('Colher Soja', true, 1, '01-01-01', '01-01-01'),
+																				  ('Plantar Soja', true, 1, '01-01-01', '01-01-01');
     create table if not exists tbTarefaFuncionario(
 		IdFunc int not null,
         IdTarefa int not null,
@@ -596,7 +597,9 @@ use dbOrgan;
     ); 
     alter table tbTarefaFuncionario add constraint FKFuncionarioTarefa foreign key(IdFunc) references tbFuncionario(Id),
 									add constraint FKTarefaFuncionario foreign key(IdTarefa) references tbTarefa(Id);
-	
+                                    
+	insert into tbTarefaFuncionario value(1,1);
+    
     create table if not exists tbTarefaEquipe(
 		IdTarefa int not null,
         IdEquipe int not null,
@@ -604,7 +607,9 @@ use dbOrgan;
     );
     alter table tbTarefaEquipe add constraint FKTarefaEquipe foreign key(IdTarefa) references tbTarefa(Id),
 							   add constraint FKEquipeTaerfa foreign key(IdEquipe) references tbEquipe(Id);
-	
+                               
+	insert into tbTarefaEquipe value(2,1);
+    
     create table if not exists tbAreaTarefa(
 		IdTarefa int not null,
         IdArea int not null,
@@ -613,6 +618,9 @@ use dbOrgan;
     alter table tbAreaTarefa add constraint FKTarefaArea foreign key(IdTarefa) references tbTarefa(Id),
 							   add constraint FKAreaTarefa foreign key(IdArea) references tbArea(Id);
 	
+	insert into tbAreaTarefa value(1, 1),
+								  (2, 1);
+    
     create table if not exists tbItensTarefa(
 		QtdUsada double not null,
         IdTarefa int not null,
@@ -621,6 +629,9 @@ use dbOrgan;
     );
     alter table tbItensTarefa add constraint FKItensTarefaTarefa foreign key(IdTarefa) references tbTarefa(Id),
 							  add constraint FKItensTarefaEstoque foreign key(IdEstoque) references tbEstoque(Id);
+                              
+insert into tbItensTarefa value(1, 1, 6),
+							   (0.5, 2, 1);
 -- ======================================================================================================================= 
 
 -- =================================================================== CONTROLE ============================================ 
@@ -633,6 +644,9 @@ use dbOrgan;
         NumLiberacoes int not null
     );
     
+    insert into tbControle(`Status`, Efic, NumLiberacoes) values(true, 100, 2),
+																(true, 50, 3);
+    
     create table if not exists tbItensControle(
 		QtdUsada double not null,
         IdControle int not null,
@@ -641,6 +655,9 @@ use dbOrgan;
     );
     alter table tbItensControle add constraint FKItensControleControle foreign key(IdControle) references tbControle(Id),
 								add constraint FKItensControleEstoque foreign key(IdEstoque) references tbEstoque(Id);
+                                
+	insert into tbItensControle values(0.25, 1, 4),
+									  (0.25, 2, 4);
     
     create table if not exists tbPragaOrDoenca(
 		Id int auto_increment,
@@ -648,6 +665,9 @@ use dbOrgan;
 		Nome varchar(30) not null,
         `P/D` bool not null
     );
+    
+    insert into tbPragaOrDoenca(Nome, `P/D`) values('Praga do Mal', true),
+												   ('Doença Nem Tão do Mal', false);
     
 	create table if not exists tbControlePD(
 		IdControle int not null,
@@ -657,6 +677,9 @@ use dbOrgan;
     alter table tbControlePD add constraint FKControlePD foreign key(IdControle) references tbControle(Id),
 							 add constraint FKPDControle foreign key(IdPD) references tbPragaOrDoenca(Id);
 	
+    insert into tbControlePD values(1, 1),
+								   (2,2);
+    
     create table if not exists tbAreaPD(
 		`Status` bool not null,
         IdArea int not null,
@@ -665,10 +688,8 @@ use dbOrgan;
     );
     alter table tbAreaPD add constraint FKAreaPD foreign key(IdArea) references tbArea(Id),
 						 add constraint FKPDArea foreign key(IdPd) references tbPragaOrDoenca(Id);
+                         
+	insert into tbAreaPD values(true, 2, 1),
+							   (true, 3, 2);
 -- ========================================================================================================================= 
-
-
-
-
-
 
