@@ -20,42 +20,43 @@
                 <div class="card-body">
                     <div class="card-content">
                         <div class="card bg-light mb-3" style="max-width: 18rem;">
-                            @foreach (var item in Model.Plantios)
-                            {
-                                <div class="card-header">
-                                    Plantio de @Html.DisplayFor(model => item.Semente.Nome) -
-                                    @Html.ActionLink("Detalhes", "Detalhes", new { id = item.Id })
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Talhão</h5>
-                                    <div class="progress mx-auto" data-value='@Html.DisplayFor(model => item.Porcentagem)'>
-                                        <span class="progress-left">
-                                            <span class="progress-bar border-primary"></span>
-                                        </span>
-                                        <span class="progress-right">
-                                            <span class="progress-bar border-primary"></span>
-                                        </span>
-                                        <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
-                                            <div class="h2 font-weight-bold">@Html.DisplayFor(model => item.Porcentagem)<sup class="small">%</sup></div>
+                            <div class="tablecontainer">
+                                @foreach (var item in Model.Plantios)
+                                {
+                                    <div class="card-header">
+                                        @Html.DisplayFor(model => item.Nome) -
+                                        @Html.ActionLink("Detalhes", "Detalhes", new { id = item.Id })
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Talhão</h5>
+                                        <div class="progress mx-auto" data-value='@Html.DisplayFor(model => item.Porcentagem)'>
+                                            <span class="progress-left">
+                                                <span class="progress-bar border-primary"></span>
+                                            </span>
+                                            <span class="progress-right">
+                                                <span class="progress-bar border-primary"></span>
+                                            </span>
+                                            <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                                                <div class="h2 font-weight-bold">@Html.DisplayFor(model => item.Porcentagem)<sup class="small">%</sup></div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-success m-b-0" data-save="ajax-modal">Colher</button>
-                                </div>
-                            }
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-success m-b-0" data-save="ajax-modal">Colher</button>
+                                    </div>
+                                }
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-content">
-                        <div class="card border-success mb-3" style="max-width: 18rem;">
-                            <div class="card-body text-success">
-                                <h5 class="card-title">Novo plantio</h5>
-                                <p class="card-text">
-                                    <div class="teste"></div>
-                                    <button type="button" class="btn btn-info waves-effect" data-toggle="ajax-modal" data-target="#add-item">Novo plantio</button>
-                                    @{Html.RenderAction("_NovoPlantio", "Plantio");}
-                                </p>
+                        <div class="card-content">
+                            <div class="card border-success mb-3" style="max-width: 18rem;">
+                                <div class="card-body text-success">
+                                    <h5 class="card-title">Novo plantio</h5>
+                                    <p class="card-text">
+                                        <div class="overlay"></div>
+                                        <a class="popup btn btn-add" href="/Sistema/Plantio/Create" style="margin-bottom:20px; margin-top:20px;">Novo plantio</a>
+                                    </p>
 
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -65,19 +66,74 @@
     </div>
 </div>
 
+<!-- ========== NÃO TIRA O PROGRESSCIRCLE.JS ======== -->
 <environment include="Development">
     <script src="~/Scripts/progressCircle.js" asp-append-version="true" defer></script>
-    <script src="~/Scripts/crudmodal.js" asp-append-version="true" defer></script>
 </environment>
 
 <environment exclude="Development">
     <script src="~/js/progressCircle.min.js" asp-append-version="true" defer></script>
-    <script src="~/js/crudmodal.min.js" asp-append-version="true" defer></script>
 </environment>
+<!-- ========== NÃO TIRA O PROGRESSCIRCLE.JS ======== -->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"
-        integrity="sha256-F6h55Qw6sweK+t7SiOJX+2bpSAa3b/fnlrVCJvmEj1A="
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.9/jquery.validate.unobtrusive.min.js"
-        integrity="sha256-paoxpct33kY9fpQlvgC8IokjGq8iqYaVFawgFPg8oz0="
-        crossorigin="anonymous"></script>
+@section Scripts {
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.0.5/dist/jBox.all.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.semanticui.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+    <script>
+        var Popup;
+        $(document).ready(function () {
+            $('.tablecontainer').on('click', 'a.popup', function (e) {
+                e.preventDefault();
+                OpenPopup($(this).attr('href'));
+
+            })
+            function OpenPopup(pageUrl) {
+                var $pageContent = $('<div/>');
+                $pageContent.load(pageUrl, function () {
+                    $('#popupForm', $pageContent).removeData('validator');
+                    $('#popupForm', $pageContent).removeData('unobtrusiveValidation');
+                    $.validator.unobtrusive.parse('form');
+                });
+
+                $dialog = $('<div class="popupWindow" style="overflow:auto"></div>')
+                    .html($pageContent)
+                    .dialog({
+                        draggable: false,
+                        autoOpen: false,
+                        resizable: false,
+                        modal: true,
+                        height: 550,
+                        width: 600,
+                        close: function () {
+                            $('.overlay').hide(),
+                                $dialog.dialog('destroy').remove();
+                        }
+                    })
+
+                $('.popupWindow').on('submit', '#popupForm', function (e) {
+                    var url = $('#popupForm')[0].action;
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: $('#popupForm').serialize(),
+                        success: function (data) {
+                            if (data.status) {
+                                $dialog.dialog('close');
+                                oTable.ajax.reload();
+                            }
+                        }
+                    })
+
+                    e.preventDefault();
+                })
+                $dialog.dialog('open');
+            }
+        })
+    </script>
+}
