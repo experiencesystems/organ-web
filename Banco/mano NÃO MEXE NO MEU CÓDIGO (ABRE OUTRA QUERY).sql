@@ -4,24 +4,6 @@ create database dbOrgan;
 use dbOrgan;
 
 -- =================================================================== USUÁRIO ============================================     
- create table `AspNetRoles`(
-	`Id` nvarchar(128)  not null ,
-	`Name` nvarchar(256)  not null ,
-	primary key (`Id`)) 
-	engine=InnoDb 
-	auto_increment=0;
-    
-CREATE UNIQUE index  `RoleNameIndex` on `AspNetRoles` (`Name`);
-
-create table `AspNetUserRoles` (
-	`UserId` nvarchar(128)  not null ,
-	`RoleId` nvarchar(128)  not null ,
-	primary key ( `UserId`,`RoleId`) )	
-	engine=InnoDb auto_increment=0;
- 
-CREATE index  `IX_UserId` on `AspNetUserRoles` (`UserId`);
-CREATE index  `IX_RoleId` on `AspNetUserRoles` (`RoleId`);
-   
    create table if not exists tbUsuario (
 		`Id` nvarchar(128)  not null ,
 			DataCadastro datetime default current_timestamp(),
@@ -37,31 +19,6 @@ CREATE index  `IX_RoleId` on `AspNetUserRoles` (`RoleId`);
 		`UserName` varchar(50)  not null ,-- !
 	      constraint PKAspNetUsers primary key ( `Id`)
 	);
-    
-    create table `AspNetUserClaims` (
-	`Id` int not null  auto_increment ,
-	`UserId` nvarchar(128)  not null ,
-	`ClaimType` longtext,
-	`ClaimValue` longtext,
-	primary key ( `Id`) ) 
-	engine=InnoDb auto_increment=0;
-    
-CREATE index  `IX_UserId` on `AspNetUserClaims` (`UserId`);
-
-create table `AspNetUserLogins` (
-	`LoginProvider` nvarchar(128)  not null ,
-	`ProviderKey` nvarchar(128)  not null ,
-	`UserId` nvarchar(128)  not null ,
-	primary key ( `LoginProvider`,`ProviderKey`,`UserId`) ) 
-	engine=InnoDb auto_increment=0;
-
-CREATE index  `IX_UserId` on `AspNetUserLogins` (`UserId`);
-
-alter table `AspNetUserRoles` add constraint `FK_AspNetUserRoles_AspNetRoles_RoleId`  foreign key (`RoleId`) references `AspNetRoles` ( `Id`)  on update cascade on delete cascade;
-alter table `AspNetUserRoles` add constraint `FK_AspNetUserRoles_AspNetUsers_UserId`  foreign key (`UserId`) references tbUsuario ( `Id`)  on update cascade on delete cascade;
-alter table `AspNetUserClaims` add constraint `FK_AspNetUserClaims_AspNetUsers_UserId`  foreign key (`UserId`) references tbUsuario ( `Id`)  on update cascade on delete cascade; 
-alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_UserId`  foreign key (`UserId`) references tbUsuario ( `Id`)  on update cascade on delete cascade;
-
 -- =======================================================================================================================
 
 -- =================================================================== ENDEREÇO ==========================================
@@ -280,10 +237,10 @@ alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_U
 		IdEstoque int not null,
          constraint PKSemente primary key(IdEstoque),
 		Nome varchar(50) not null,
-        Solo varchar(50) not null default "Não Registrado",
-        IncSol decimal(5,2) not null default 0.00,
-        IncVento decimal(5,2) not null default 0.00,
-        Acidez decimal(5,2) not null default 0.00        
+        Solo varchar(50),
+        IncSol decimal(5,2),
+        IncVento decimal(5,2),
+        Acidez decimal(5,2)       
     );
     alter table tbSemente add constraint FKSementeEstoque foreign key(IdEstoque) references tbEstoque(Id);
     
@@ -476,6 +433,7 @@ alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_U
 		`Desc` varchar(300),
         Nome varchar(30) not null
 	);
+    insert into tbEquipe(Nome) value("Equipe do Carinha que Planta");
     
     create table if not exists tbFuncEquipe(
 		IdFunc int not null,
@@ -485,6 +443,7 @@ alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_U
     );
     alter table tbFuncEquipe add constraint FKFuncEquipe foreign key(IdFunc) references tbFuncionario(Id),
 							 add constraint FKEquipeFunc foreign key(IdEquipe) references tbEquipe(Id);
+    insert into tbFuncEquipe value(1,1,true);
 -- ======================================================================================================================= 
 
 
@@ -617,7 +576,7 @@ alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_U
 -- ======================================================================================================================== 
 
 -- =================================================================== TAREFA ============================================
-	create table tbTarefa(
+	create table if not exists tbTarefa(
 		Id int auto_increment,
          constraint PKTarefa primary key(Id),
 		Titulo varchar(30) not null default 'Sem Título',
@@ -629,24 +588,29 @@ alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_U
         DataInicio date not null,
         Relatorio varchar(100)
     );
-    
-    create table tbTarefaFuncionario(
+    insert into tbTarefa(Titulo, `Status`, Prioridade, DataFim, DataInicio) values('Colher Soja', true, 1, '01-01-01', '01-01-01'),
+																				  ('Plantar Soja', true, 1, '01-01-01', '01-01-01');
+    create table if not exists tbTarefaFuncionario(
 		IdFunc int not null,
         IdTarefa int not null,
          constraint PKTarefaFuncionario primary key(IdFunc, IdTarefa)
     ); 
     alter table tbTarefaFuncionario add constraint FKFuncionarioTarefa foreign key(IdFunc) references tbFuncionario(Id),
 									add constraint FKTarefaFuncionario foreign key(IdTarefa) references tbTarefa(Id);
-	
-    create table tbTarefaEquipe(
+                                    
+	insert into tbTarefaFuncionario value(1,1);
+    
+    create table if not exists tbTarefaEquipe(
 		IdTarefa int not null,
         IdEquipe int not null,
          constraint PKTarefaEquipe primary key(IdEquipe, IdTarefa)
     );
     alter table tbTarefaEquipe add constraint FKTarefaEquipe foreign key(IdTarefa) references tbTarefa(Id),
 							   add constraint FKEquipeTaerfa foreign key(IdEquipe) references tbEquipe(Id);
-	
-    create table tbAreaTarefa(
+                               
+	insert into tbTarefaEquipe value(2,1);
+    
+    create table if not exists tbAreaTarefa(
 		IdTarefa int not null,
         IdArea int not null,
          constraint PKTarefaArea primary key(IdArea, IdTarefa)
@@ -654,7 +618,10 @@ alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_U
     alter table tbAreaTarefa add constraint FKTarefaArea foreign key(IdTarefa) references tbTarefa(Id),
 							   add constraint FKAreaTarefa foreign key(IdArea) references tbArea(Id);
 	
-    create table tbItensTarefa(
+	insert into tbAreaTarefa value(1, 1),
+								  (2, 1);
+    
+    create table if not exists tbItensTarefa(
 		QtdUsada double not null,
         IdTarefa int not null,
         IdEstoque int not null,
@@ -662,10 +629,13 @@ alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_U
     );
     alter table tbItensTarefa add constraint FKItensTarefaTarefa foreign key(IdTarefa) references tbTarefa(Id),
 							  add constraint FKItensTarefaEstoque foreign key(IdEstoque) references tbEstoque(Id);
+                              
+insert into tbItensTarefa value(1, 1, 6),
+							   (0.5, 2, 1);
 -- ======================================================================================================================= 
 
 -- =================================================================== CONTROLE ============================================ 
-	create table tbControle(
+	create table if not exists tbControle(
 		Id int auto_increment,
 			constraint PKControle primary key(Id),
 		`Status` bool not null default true,
@@ -674,7 +644,10 @@ alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_U
         NumLiberacoes int not null
     );
     
-    create table tbItensControle(
+    insert into tbControle(`Status`, Efic, NumLiberacoes) values(true, 100, 2),
+																(true, 50, 3);
+    
+    create table if not exists tbItensControle(
 		QtdUsada double not null,
         IdControle int not null,
         IdEstoque int not null,
@@ -682,15 +655,21 @@ alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_U
     );
     alter table tbItensControle add constraint FKItensControleControle foreign key(IdControle) references tbControle(Id),
 								add constraint FKItensControleEstoque foreign key(IdEstoque) references tbEstoque(Id);
+                                
+	insert into tbItensControle values(0.25, 1, 4),
+									  (0.25, 2, 4);
     
-    create table tbPragaOrDoenca(
+    create table if not exists tbPragaOrDoenca(
 		Id int auto_increment,
          constraint PKPD primary key(Id),
 		Nome varchar(30) not null,
         `P/D` bool not null
     );
     
-	create table tbControlePD(
+    insert into tbPragaOrDoenca(Nome, `P/D`) values('Praga do Mal', true),
+												   ('Doença Nem Tão do Mal', false);
+    
+	create table if not exists tbControlePD(
 		IdControle int not null,
         IdPD int not null,
          constraint PKControlePD primary key(IdControle, IdPD)
@@ -698,7 +677,10 @@ alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_U
     alter table tbControlePD add constraint FKControlePD foreign key(IdControle) references tbControle(Id),
 							 add constraint FKPDControle foreign key(IdPD) references tbPragaOrDoenca(Id);
 	
-    create table tbAreaPD(
+    insert into tbControlePD values(1, 1),
+								   (2,2);
+    
+    create table if not exists tbAreaPD(
 		`Status` bool not null,
         IdArea int not null,
         IdPd int not null,
@@ -706,12 +688,8 @@ alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_U
     );
     alter table tbAreaPD add constraint FKAreaPD foreign key(IdArea) references tbArea(Id),
 						 add constraint FKPDArea foreign key(IdPd) references tbPragaOrDoenca(Id);
+                         
+	insert into tbAreaPD values(true, 2, 1),
+							   (true, 3, 2);
 -- ========================================================================================================================= 
-
-
-
-
-
-
-
 

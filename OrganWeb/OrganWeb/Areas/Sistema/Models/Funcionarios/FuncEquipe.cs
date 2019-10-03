@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrganWeb.Models.Banco;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,7 +9,7 @@ using System.Web;
 namespace OrganWeb.Areas.Sistema.Models.Funcionarios
 {
     [Table("tbFuncEquipe")]
-    public class FuncEquipe
+    public class FuncEquipe : Repository<FuncEquipe>
     {
         [Key, Column(Order = 1)]
         [ForeignKey("Funcionario")]

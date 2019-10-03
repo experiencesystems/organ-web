@@ -1,4 +1,5 @@
 ﻿using OrganWeb.Areas.Sistema.Models.Administrativo;
+using OrganWeb.Models.Banco;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +10,7 @@ using System.Web;
 namespace OrganWeb.Areas.Sistema.Models.Safras
 {
     [Table("tbAreaPlantio")]
-    public class AreaPlantio
+    public class AreaPlantio : Repository<AreaPlantio>
     {
         [Key, Column(Order = 1)]
         [ForeignKey("Plantio")]
@@ -24,5 +25,7 @@ namespace OrganWeb.Areas.Sistema.Models.Safras
 
         public virtual Plantio Plantio { get; set; }
         public virtual Area Area { get; set; }
+
+        public IEnumerable<Area> Areas { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrganWeb.Models.Banco;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,7 +10,7 @@ using System.Web;
 namespace OrganWeb.Areas.Sistema.Models.Administrativo
 {
     [Table("tbArea")]
-    public class Area
+    public class Area : Repository<Area>
     {
         [Key]
         public int Id { get; set; }
