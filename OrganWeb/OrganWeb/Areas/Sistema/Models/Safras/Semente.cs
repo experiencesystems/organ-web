@@ -27,14 +27,14 @@ namespace OrganWeb.Areas.Sistema.Models.Safras
         
         [Display(Name = "Incidência solar ideal")]
         [Range(0.01, 999.99)]
-        public double IncSol { get; set; }
+        public decimal? IncSol { get; set; }
         
         [Display(Name = "Incidência vento ideal")]
         [Range(0.01, 999.99)]
-        public double IncVento { get; set; }
+        public decimal? IncVento { get; set; }
         
         [Range(0.01, 999.99)]
-        public double Acidez { get; set; }
+        public decimal? Acidez { get; set; }
 
         public virtual Estoque Estoque { get; set; }
 
