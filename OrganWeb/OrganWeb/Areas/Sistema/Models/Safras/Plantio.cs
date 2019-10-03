@@ -34,7 +34,5 @@ namespace OrganWeb.Areas.Sistema.Models.Safras
 
         [NotMapped]
         public double Porcentagem { get; set; }
-
-        public IEnumerable<Area> Areas { get; set; }
     }
 }

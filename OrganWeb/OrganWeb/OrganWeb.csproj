@@ -272,6 +272,7 @@
     <Compile Include="Areas\Sistema\Models\Safras\Colheita.cs" />
     <Compile Include="Areas\Sistema\Models\Safras\ItensPlantio.cs" />
     <Compile Include="Areas\Sistema\Models\Safras\Plantio.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewModels\CreatePlantioViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewEquipe.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewMaquina.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewMonitoramento.cs" />
@@ -429,7 +430,6 @@
     <Content Include="Areas\Sistema\Views\Plantio\Detalhes.cshtml" />
     <Content Include="Areas\Sistema\Views\Manutencao\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Manutencao\Detalhes.cshtml" />
-    <Content Include="Areas\Sistema\Views\Plantio\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Manutencao\_NovaManutencao.cshtml" />
     <Content Include="Areas\Sistema\Views\Manutencao\Excluir.cshtml" />
     <Content Include="Areas\Sistema\Views\Manutencao\Editar.cshtml" />
@@ -444,6 +444,7 @@
     <Content Include="Areas\Sistema\Views\Funcionario\Equipe.cshtml" />
     <Content Include="Areas\Sistema\Views\Funcionario\NovaEquipe.cshtml" />
     <Content Include="Areas\Sistema\Views\Financeiro\Compras.cshtml" />
+    <Content Include="Areas\Sistema\Views\Plantio\Create.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
