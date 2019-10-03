@@ -1,0 +1,30 @@
+﻿@model OrganWeb.Areas.Sistema.Models.Safras.AreaPlantio
+
+@using (Html.BeginForm("Create", "Plantio", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+
+        <div class="form-group row">
+            <label class="col-sm-8 col-form">@Html.LabelFor(model => model.Plantio.Nome, new { htmlAttributes = new { @class = "form-control" } })</label>
+            <div class="col-sm-8">
+                @Html.EditorFor(model => model.Plantio.Nome, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nome" } })
+                @Html.ValidationMessageFor(modelItem => modelItem.Plantio.Nome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                @Html.DropDownList("IdArea", (MultiSelectList)ViewBag.Areas, new { multiple = "multiple" })
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-success m-b-0" data-save="ajax-modal">Adicionar</button>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

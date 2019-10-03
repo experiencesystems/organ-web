@@ -7,13 +7,16 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using OrganWeb.Areas.Sistema.Models.ViewModels;
+using OrganWeb.Models.Banco;
+using OrganWeb.Areas.Sistema.Models.Administrativo;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
     public class PlantioController : Controller
     {
-        /*private Plantio plantio = new Plantio();
-        private Semente semente = new Semente();
+        private Plantio plantio = new Plantio();
+        private AreaPlantio areap = new AreaPlantio();
+        private Area area = new Area();
         private BancoContext db = new BancoContext();
 
         // GET: Sistema/Plantio
@@ -22,15 +25,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
             var select = new ViewPlantio
             {
                 Plantios = plantio.GetPlantios()
-            };
-            return View(select);
-        }
-
-        public ActionResult Sementes()
-        {
-            var select = new ViewSementes
-            {
-                Semente = semente.GetFew()
             };
             return View(select);
         }
@@ -49,29 +43,33 @@ namespace OrganWeb.Areas.Sistema.Controllers
             return View(plantio);
         }
 
-        public PartialViewResult _NovoPlantio()
+        public ActionResult Create()
         {
-            Plantio plantio = new Plantio
+            var view = new AreaPlantio
             {
-                Sementes = semente.GetAll()   
+                Areas = db.Areas.Where(a => a.Disp == 1).ToList()  
             };
-
-            //TODO: Falta receber os talhões
-
-            return PartialView("_NovoPlantio", plantio);
+            ViewBag.Areas = new MultiSelectList(view.Areas, "Id", "Nome");
+            return View(view);
         }
 
         [HttpPost]
-        public ActionResult _NovoPlantio(Plantio plantio)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Plantio plantio)
         {
             if (ModelState.IsValid)
             {
+                var areass = new AreaPlantio
+                {
+                    IdArea = Guid.NewGuid()
+                };
+
                 plantio.Add(plantio);
                 plantio.Save();
                 return RedirectToAction("Index");
             }
-            plantio.Sementes = semente.GetAll();
-            return PartialView("_NovoPlantio", plantio);
-        }*/
+            plantio.Areas = area.GetAll();
+            return View(plantio);
+        }
     }
 }
