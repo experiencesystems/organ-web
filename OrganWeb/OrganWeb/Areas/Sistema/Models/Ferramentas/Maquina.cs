@@ -21,6 +21,9 @@ namespace OrganWeb.Areas.Sistema.Models.Ferramentas
         [StringLength(30, MinimumLength = 2)]
         public string Nome { get; set; }
 
+        [Required]
+        public int Tipo { get; set; }
+
         [Display(Name = "Descrição")]
         [StringLength(300, MinimumLength = 10)]
         public string Desc { get; set; }

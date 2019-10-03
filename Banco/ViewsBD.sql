@@ -2,14 +2,16 @@ use dbOrgan;
 -- =================================================================== FLUXO DE CAIXA ============================================  
 	drop view if exists vwCompra;
     create view vwCompra as(
-    select C.Id 'Compra', C.`Data`, E.Id 'Estoque', SUM(((IC.QtdProd * E.ValorUnit) - ((IC.QtdProd * E.ValorUnit) * IC.DescontoProd)) - (((IC.QtdProd * E.ValorUnit) - ((IC.QtdProd * E.ValorUnit) * IC.DescontoProd)) * C.Desconto)) ValorTotal
+    select C.Id 'Compra', DATE_FORMAT(C.`Data`, '%d/%m/%Y') `Data`, E.Id 'Estoque',
+    SUM(((IC.QtdProd * E.ValorUnit) - ((IC.QtdProd * E.ValorUnit) * IC.DescontoProd)) - 
+    (((IC.QtdProd * E.ValorUnit) - ((IC.QtdProd * E.ValorUnit) * IC.DescontoProd)) * C.Desconto)) `Valor Total`
 		from tbItensComprados IC INNER JOIN tbEstoque E on IC.IdEstoque = E.Id
 								 INNER JOIN tbCompra C on IC.IdCompra = C.Id
     );                             
 	
     drop view if exists vwSaida;
-    create View vwSaida as select Co.`Data`, (SUM(M.ValorPago) + SUM(D.ValorPago)  + SUM(Co.ValorTotal)) `Saída` from tbManutencao M, tbDespesa D, vwCompra Co;
-	
+	create View vwSaida as select Co.`Data`, (SUM(M.ValorPago) + SUM(D.ValorPago)  + SUM(Co.ValorTotal)) `Saída` from tbManutencao M, tbDespesa D, vwCompra Co;
+
 	drop view if exists vwVenda;
 	create view vwVenda as(
     select V.Id 'IdVenda',V.`Data` `D`, (DATE_FORMAT(V.`Data`, '%d/%m/%Y')) `Data`, E.Id 'IdEstoque',
@@ -218,9 +220,22 @@ use dbOrgan;
     DELIMITER ;
     select * from vwItems; 
 -- =============================================================================================================================== 
+-- =================================================================== MANUTENÇÃO ================================================
+drop view if exists vwQtdMa;
+create view vwQtdMa as
+select count(IdMaquina) `Quantidade de Manutenções`,sum(ma.ValorPago) `Custo Total` from tbMaquinaManutencao mm inner join tbManutencao ma on ma.Id = mm.IdManutencao;
 
--- =================================================================== MANUTENÇÃO ===============================================
+drop view if exists vwManutencao;
+create view vwManutencao as
+select M.Nome `Máquina`, M.Tipo `Tipo de Máquina`, Ma.Nome `Manutenção`, (DATE_FORMAT(MA.`Data`, '%d/%m/%Y')) `Data da Manutenção`, Ma.ValorPago `Valor da Manutenção`
+ from tbMaquina M 
+ inner join tbMaquinaManutencao mm 
+	on mm.IdMaquina = M.IdEstoque
+ inner join tbManutencao Ma 
+	on Ma.Id = mm.IdManutencao;
 -- =============================================================================================================================== 
+select * from tbCompra;
+select `Data`, `Valor Total` from vwCompra;
 
 -- =================================================================== PROC ESTOQUE ===============================================
 -- =============================================================================================================================== 

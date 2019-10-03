@@ -7,12 +7,16 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using OrganWeb.Areas.Sistema.Models.ViewModels;
+using OrganWeb.Models.Banco;
+using OrganWeb.Areas.Sistema.Models.Administrativo;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
     public class PlantioController : Controller
     {
-        /*private Plantio plantio = new Plantio();
+        private Plantio plantio = new Plantio();
+        private AreaPlantio areap = new AreaPlantio();
+        private Area area = new Area();
         private Semente semente = new Semente();
         private BancoContext db = new BancoContext();
 
@@ -22,15 +26,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
             var select = new ViewPlantio
             {
                 Plantios = plantio.GetPlantios()
-            };
-            return View(select);
-        }
-
-        public ActionResult Sementes()
-        {
-            var select = new ViewSementes
-            {
-                Semente = semente.GetFew()
             };
             return View(select);
         }
@@ -49,29 +44,77 @@ namespace OrganWeb.Areas.Sistema.Controllers
             return View(plantio);
         }
 
-        public PartialViewResult _NovoPlantio()
-        {
-            Plantio plantio = new Plantio
+        private List<SelectListItem> sistemas = new List<SelectListItem>()
             {
-                Sementes = semente.GetAll()   
+            new SelectListItem() { Text = "Convencional", Value = "1" },
+            new SelectListItem() { Text = "Mínimo", Value = "2" },
+            new SelectListItem() { Text = "Plantio direto", Value = "3" },
+            new SelectListItem() { Text = "Sobre-semeadura", Value = "4" }
             };
 
-            //TODO: Falta receber os talhões
-
-            return PartialView("_NovoPlantio", plantio);
+        private List<SelectListItem> periodo = new List<SelectListItem>()
+            {
+            new SelectListItem() { Text = "Safra", Value = "1" },
+            new SelectListItem() { Text = "Entressafra (safrinha)", Value = "2" }
+            };
+        
+        public ActionResult Create()
+        {
+            var view = new CreatePlantioViewModel
+            {
+                Areas = db.Areas.Where(a => a.Disp == 1).ToList(),  //TODO: Repositório Areas
+                Sementes = semente.GetAll(),
+                Sistemas = sistemas,
+                Periodos = periodo
+            };
+            ViewBag.Areas = new MultiSelectList(view.Areas, "Id", "Nome");
+            ViewBag.Sementes = new SelectList(view.Sementes, "IdEstoque", "Nome");
+            return View(view);
         }
 
         [HttpPost]
-        public ActionResult _NovoPlantio(Plantio plantio)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(CreatePlantioViewModel plantio, int[] IdArea, int Sistema, int Tipo)
         {
             if (ModelState.IsValid)
             {
-                plantio.Add(plantio);
-                plantio.Save();
+                var pl = new Plantio
+                {
+                    Nome = plantio.Nome,
+                    DataInicio = plantio.Inicio,
+                    DataColheita = plantio.Colheita,
+                    Sistema = plantio.Sistema,
+                    TipoPlantio = plantio.Tipo
+                };
+                pl.Add(pl);
+                pl.Save();
+
+                foreach (var item in IdArea)
+                {
+                   areap.Add(new AreaPlantio { IdArea = item, IdPlantio = pl.Id, Densidade = plantio.Densidade });
+                   areap.Save();
+                }
+
+                var itemplantio = new ItensPlantio
+                {
+                   IdEstoque = plantio.IdEstoque,
+                   IdPlantio = pl.Id,
+                   QtdUsada = plantio.Quantidade
+                };
+                itemplantio.Add(itemplantio);
+                itemplantio.Save();
+
                 return RedirectToAction("Index");
             }
+
+            // Enviando listas da combobox caso o formulário não seja preenchido corretamente
+            plantio.Areas = db.Areas.Where(a => a.Disp == 1).ToList();
             plantio.Sementes = semente.GetAll();
-            return PartialView("_NovoPlantio", plantio);
-        }*/
+            plantio.Sistemas = sistemas;
+            plantio.Periodos = periodo;
+            ViewBag.Areas = new MultiSelectList(plantio.Areas, "Id", "Nome");
+            ViewBag.Sementes = new SelectList(plantio.Sementes, "IdEstoque", "Nome");
+            return View(plantio);
+        }
     }
 }

@@ -392,7 +392,6 @@ C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft.Owin.xml
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft.Owin.Host.SystemWeb.xml
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft.Owin.Security.xml
-C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft.Owin.Security.Cookies.xml
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft.Owin.Security.Facebook.xml
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft.Owin.Security.MicrosoftAccount.xml

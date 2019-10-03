@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using OrganWeb.Areas.Sistema.Models.Controles;
+using OrganWeb.Areas.Sistema.Models.Praga_e_Doenca;
 using OrganWeb.Areas.Sistema.Models.ViewModels;
 using OrganWeb.Models;
 using OrganWeb.Models.Banco;
@@ -14,32 +16,31 @@ namespace OrganWeb.Areas.Sistema.Controllers
 {
 
     public class DoencasController : Controller
-    {/*
-       private Praga praga = new Praga();
-        private Doenca doenca = new Doenca();
+    {
         private Controle controle = new Controle();
+        private ControlePD controlepd = new ControlePD();
+        private PragaOrDoenca pd = new PragaOrDoenca();
         //aki tem q mudar qd juntar os dois no banco
         private BancoContext db = new BancoContext();
-
+        /**/
         //ta so gerado
         // GET: Sistema/Doencas
+        /*
         public ActionResult Index()
         {
             return View(db.Doencas.ToList());
         }
-
-
+        */
         public ActionResult PragaDoenca()
         {
             var select = new ViewPragaDoenca
             {
-                Pragas = praga.GetFew(),
-                Doencas = doenca.GetFew(),
+                PragaOrDoencas = pd.GetFew(),
                 Controles = controle.GetFew()
             };
             return View(select);
         }
-
+        /*
         // GET: Sistema/Doencas/Details/5
         public ActionResult Details(int? id)
         {
