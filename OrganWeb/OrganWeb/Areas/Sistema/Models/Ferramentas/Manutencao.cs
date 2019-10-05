@@ -28,6 +28,7 @@ namespace OrganWeb.Areas.Sistema.Models.Ferramentas
         public DateTime Data { get; set; }
 
         [Required]
+        [Display(Name = "Valor pago")]
         public double ValorPago { get; set; }
     }
 }

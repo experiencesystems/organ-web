@@ -430,7 +430,7 @@
     <Content Include="Areas\Sistema\Views\Plantio\Detalhes.cshtml" />
     <Content Include="Areas\Sistema\Views\Manutencao\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Manutencao\Detalhes.cshtml" />
-    <Content Include="Areas\Sistema\Views\Manutencao\_NovaManutencao.cshtml" />
+    <Content Include="Areas\Sistema\Views\Manutencao\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Manutencao\Excluir.cshtml" />
     <Content Include="Areas\Sistema\Views\Manutencao\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Estoque\Fornecedores.cshtml" />
