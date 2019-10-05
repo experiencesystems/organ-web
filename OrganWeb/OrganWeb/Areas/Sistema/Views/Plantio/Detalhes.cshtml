@@ -11,7 +11,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h6 class="card-title box-title">Plantios</h6>
+                    <h6 class="card-title box-title">Plantio</h6>
                     <div class="card-header-right">
                         <ul class="list-unstyled card-option">
                             <li><i class="ti-minus minimize-card"></i></li>
@@ -23,8 +23,10 @@
                     <div class="card-content">
                         <div class="card bg-light mb-3" style="max-width: 18rem;">
                             <div class="card-header">@Html.DisplayFor(model => model.Nome)</div>
-                            <div class="card-body">Iniciado em: @Html.DisplayFor(model => model.DataInicio)</div>
-                            <div class="card-body">Termina em: @Html.DisplayFor(model => model.DataColheita)</div>
+                            <div class="card-body">
+                                Iniciado em: @Html.DisplayFor(model => model.DataInicio)
+                                <br />Termina em: @Html.DisplayFor(model => model.DataColheita)
+                            </div>
                             <div class="modal-footer"></div>
                         </div>
                     </div>
