@@ -1,36 +1,32 @@
-﻿@model OrganWeb.Areas.Sistema.Models.Ferramentas.Manutencao
+﻿@model OrganWeb.Areas.Sistema.Models.Ferramentas.MaquinaManutencao
 
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h6 class="card-title box-title"><i class="icofont icofont-plant"></i>Tem certeza que deseja deletar esse item?</h6>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <hr />
-            <dl class="dl-horizontal">
-                <dt>@Html.DisplayNameFor(model => model.Nome)</dt>
-                <dd>@Html.DisplayFor(model => model.Nome)</dd>
+<h3>Tem certeza que deseja deletar esse registro?</h3>
+<div>
+    <h4>Manutenção</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.Manutencao.Nome)</dt>
+        <dd>@Html.DisplayFor(model => model.Manutencao.Nome)</dd>
 
-                <dt>@Html.DisplayNameFor(model => model.DataManuntencao)</dt>
-                <dd>@Html.DisplayFor(model => model.DataManuntencao)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Manutencao.Data)</dt>
+        <dd>@Html.DisplayFor(model => model.Manutencao.Data)</dd>
 
-                <dt>@Html.DisplayNameFor(model => model.Detalhes)</dt>
-                <dd>@Html.DisplayFor(model => model.Detalhes)</dd>
-            </dl>
-            <div class="modal-footer">
-                @using (Html.BeginForm())
-                {
-                    @Html.AntiForgeryToken()
+        <dt>@Html.DisplayNameFor(model => model.Manutencao.Detalhes)</dt>
+        <dd>@Html.DisplayFor(model => model.Manutencao.Detalhes)</dd>
 
-                    <div class="form-actions no-color">
-                        <input type="submit" value="Excluir" class="btn btn-default" />
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                    </div>
-                }
-            </div>
-        </div>
-    </div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
+        <dt>@Html.DisplayNameFor(model => model.Manutencao.ValorPago)</dt>
+        <dd>R$ @Html.DisplayFor(model => model.Manutencao.ValorPago)</dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        @Html.HiddenFor(model => model.IdManutencao)
+        @Html.HiddenFor(model => model.IdMaquina)
+        <input type="submit" value="Excluir" class="btn btn-default" />
+        &nbsp;@Html.ActionLink("Cancelar", "Index")
+    </div>
+    }
+</div>
