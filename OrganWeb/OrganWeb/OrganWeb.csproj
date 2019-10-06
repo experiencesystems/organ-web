@@ -227,6 +227,7 @@
     <Compile Include="Areas\Ecommerce\Models\Pedido.cs" />
     <Compile Include="Areas\Ecommerce\Models\VendaAnuncio.cs" />
     <Compile Include="Areas\Ecommerce\Models\Wishlist.cs" />
+    <Compile Include="Areas\Sistema\Controllers\CompraController.cs" />
     <Compile Include="Areas\Sistema\Controllers\DoencasController.cs" />
     <Compile Include="Areas\Sistema\Controllers\EstoqueController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FinanceiroController.cs" />
@@ -272,6 +273,7 @@
     <Compile Include="Areas\Sistema\Models\Safras\Colheita.cs" />
     <Compile Include="Areas\Sistema\Models\Safras\ItensPlantio.cs" />
     <Compile Include="Areas\Sistema\Models\Safras\Plantio.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewModels\CreateCompraViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\CreatePlantioViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewEquipe.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewMaquina.cs" />
@@ -446,7 +448,7 @@
     <Content Include="Areas\Sistema\Views\Funcionario\Funcionario.cshtml" />
     <Content Include="Areas\Sistema\Views\Funcionario\Equipe.cshtml" />
     <Content Include="Areas\Sistema\Views\Funcionario\NovaEquipe.cshtml" />
-    <Content Include="Areas\Sistema\Views\Financeiro\Compras.cshtml" />
+    <Content Include="Areas\Sistema\Views\Financeiro\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Plantio\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Plantio\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Plantio\Excluir.cshtml" />
@@ -535,6 +537,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Ecommerce\Views\Shared\" />
+    <Folder Include="Areas\Sistema\Views\Compra\" />
     <Folder Include="Areas\Sistema\Views\Controles\" />
     <Folder Include="Areas\Sistema\Views\Shared\" />
   </ItemGroup>

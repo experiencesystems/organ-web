@@ -151,6 +151,10 @@ namespace OrganWeb.Models.Banco
                 .Property(t => t.PD)
                 .HasColumnName("P/D");
 
+            modelBuilder.Entity<VwCompra>()
+                .Property(t => t.ValorTotal)
+                .HasColumnName("Valor Total");
+
             modelBuilder.Entity<VwItems>()
                 .Property(t => t.ValorUnit)
                 .HasColumnName("Valor Unitário (R$)");
