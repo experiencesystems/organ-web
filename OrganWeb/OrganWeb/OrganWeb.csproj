@@ -287,6 +287,9 @@
     <Compile Include="Areas\Sistema\Models\ViewsBanco\VwSaida.cs" />
     <Compile Include="Areas\Sistema\Models\ViewsBanco\VwSaldo.cs" />
     <Compile Include="Areas\Sistema\Models\ViewsBanco\VwVenda.cs" />
+    <Compile Include="Areas\Sistema\Models\zRepositories\AreaPlantioRepository.cs" />
+    <Compile Include="Areas\Sistema\Models\zRepositories\AreaRepository.cs" />
+    <Compile Include="Areas\Sistema\Models\zRepositories\ItensPlantioRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\MaquinaManutencaoRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\PlantioRepository.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewEstoque.cs" />
@@ -445,6 +448,8 @@
     <Content Include="Areas\Sistema\Views\Funcionario\NovaEquipe.cshtml" />
     <Content Include="Areas\Sistema\Views\Financeiro\Compras.cshtml" />
     <Content Include="Areas\Sistema\Views\Plantio\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Plantio\Editar.cshtml" />
+    <Content Include="Areas\Sistema\Views\Plantio\Excluir.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

@@ -24,10 +24,14 @@
                         <div class="card bg-light mb-3" style="max-width: 18rem;">
                             <div class="card-header">@Html.DisplayFor(model => model.Nome)</div>
                             <div class="card-body">
-                                Iniciado em: @Html.DisplayFor(model => model.DataInicio)
-                                <br />Termina em: @Html.DisplayFor(model => model.DataColheita)
+                                Iniciado em: @Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.DataInicio))
+                                <br />Termina em: @Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.DataColheita))
+                                <br />Sistema: @ViewBag.Sistema
+                                <br />Período: @ViewBag.Periodo
                             </div>
-                            <div class="modal-footer"></div>
+                            <div class="modal-footer">
+                                <a class="popup btn btn-primary" href="@Url.Action("Editar", "Plantio", new { id = Model.Id })" style="margin-bottom:20px; margin-top:20px;">Editar</a><a class="popup btn btn-danger" href="@Url.Action("Excluir", "Plantio", new { id = Model.Id })" style="margin-bottom:20px; margin-top:20px;">Excluir</a>
+                            </div>
                         </div>
                     </div>
                 </div>

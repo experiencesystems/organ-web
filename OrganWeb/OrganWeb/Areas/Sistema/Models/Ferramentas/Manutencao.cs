@@ -23,7 +23,7 @@ namespace OrganWeb.Areas.Sistema.Models.Ferramentas
         public string Detalhes { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
+        [DataType(DataType.Date, ErrorMessage = "Data em formato inválido"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data de manutenção")]
         public DateTime Data { get; set; }
 

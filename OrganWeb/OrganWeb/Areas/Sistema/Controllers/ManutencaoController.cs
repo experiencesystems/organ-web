@@ -32,7 +32,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         public ActionResult Detalhes(int? id, int? id2)
         {
-            if (id == null)
+            if (id == null || id2 == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -105,7 +105,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         {
             if (ModelState.IsValid)
             {
-                var manutencao = new Manutencao
+                manutencao = new Manutencao
                 {
                     Id = manumaq.IdManutencao,
                     Nome = manumaq.Manutencao.Nome,
@@ -125,7 +125,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         public ActionResult Excluir(int? id, int? id2)
         {
-            if (id == null)
+            if (id == null || id2 == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }

@@ -15,7 +15,7 @@
         <dd>@Html.DisplayFor(model => model.Maquina.Nome)</dd>
 
         <dt>@Html.DisplayNameFor(model => model.Manutencao.Data)</dt>
-        <dd>@Html.DisplayFor(model => model.Manutencao.Data)</dd>
+        <dd>@Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.Manutencao.Data))</dd>
 
         <dt>@Html.DisplayNameFor(model => model.Manutencao.Detalhes)</dt>
         <dd>@Html.DisplayFor(model => model.Manutencao.Detalhes)</dd>

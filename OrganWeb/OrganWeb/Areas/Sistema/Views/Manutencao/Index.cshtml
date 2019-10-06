@@ -27,7 +27,7 @@
                                     @Html.ActionLink("Detalhes", "Detalhes", new { id = item.IdManutencao, id2 = item.IdMaquina })
                                 </div>
                                 <div class="card-body">
-                                    Data: @Html.DisplayFor(model => item.Manutencao.Data)
+                                    Data: @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Manutencao.Data))
                                     @Html.DisplayFor(model => item.Manutencao.Detalhes)
                                 </div>
                                 <div class="modal-footer">

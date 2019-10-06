@@ -16,16 +16,16 @@ namespace OrganWeb.Areas.Sistema.Controllers
     {
         private Plantio plantio = new Plantio();
         private AreaPlantio areap = new AreaPlantio();
+        private ItensPlantio itensp = new ItensPlantio();
         private Area area = new Area();
         private Semente semente = new Semente();
-        private BancoContext db = new BancoContext();
 
         // GET: Sistema/Plantio
         public ActionResult Index()
         {
             var select = new ViewPlantio
             {
-                Plantios = plantio.GetPlantios()
+                Plantios = plantio.GetPlantiosIncompletos()
             };
             return View(select);
         }
@@ -41,31 +41,49 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Sistema = plantio.Sistemas.Where(x => x.Value == plantio.Sistema.ToString()).First().Text;
+            ViewBag.Periodo = plantio.Periodos.Where(x => x.Value == plantio.TipoPlantio.ToString()).First().Text;
+            return View(plantio);
+        }
+        
+        public ActionResult Editar(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            plantio = plantio.GetByID(id);
+            if (plantio == null)
+            {
+                return HttpNotFound();
+            }
             return View(plantio);
         }
 
-        private List<SelectListItem> sistemas = new List<SelectListItem>()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Editar(Plantio plantio)
+        {
+            if (plantio.DataInicio > plantio.DataColheita)
             {
-            new SelectListItem() { Text = "Convencional", Value = "1" },
-            new SelectListItem() { Text = "Mínimo", Value = "2" },
-            new SelectListItem() { Text = "Plantio direto", Value = "3" },
-            new SelectListItem() { Text = "Sobre-semeadura", Value = "4" }
-            };
+                ModelState.AddModelError("", "Insira uma data de início anterior a da colheita.");
+                return View(plantio);
+            }
+            else if (ModelState.IsValid)
+            {
+                plantio.Update(plantio);
+                plantio.Save();
+                return RedirectToAction("Index");
+            }
+            return View(plantio);
+        }
 
-        private List<SelectListItem> periodo = new List<SelectListItem>()
-            {
-            new SelectListItem() { Text = "Safra", Value = "1" },
-            new SelectListItem() { Text = "Entressafra (safrinha)", Value = "2" }
-            };
-        
         public ActionResult Create()
         {
             var view = new CreatePlantioViewModel
             {
-                Areas = db.Areas.Where(a => a.Disp == 1).ToList(),  //TODO: Repositório Areas
-                Sementes = semente.GetAll(),
-                Sistemas = sistemas,
-                Periodos = periodo
+                Areas = area.AreasDisponiveis(),
+                Sementes = semente.GetAll()
             };
             ViewBag.Areas = new MultiSelectList(view.Areas, "Id", "Nome");
             ViewBag.Sementes = new SelectList(view.Sementes, "IdEstoque", "Nome");
@@ -76,7 +94,12 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreatePlantioViewModel plantio, int[] IdArea, int Sistema, int Tipo)
         {
-            if (ModelState.IsValid)
+            if (plantio.Inicio > plantio.Colheita)
+            {
+                ModelState.AddModelError("", "Insira uma data de início anterior a da colheita.");
+                return View(plantio);
+            }
+            else if (ModelState.IsValid)
             {
                 var pl = new Plantio
                 {
@@ -108,13 +131,39 @@ namespace OrganWeb.Areas.Sistema.Controllers
             }
 
             // Enviando listas da combobox caso o formulário não seja preenchido corretamente
-            plantio.Areas = db.Areas.Where(a => a.Disp == 1).ToList();
+            plantio.Areas = area.AreasDisponiveis();
             plantio.Sementes = semente.GetAll();
-            plantio.Sistemas = sistemas;
-            plantio.Periodos = periodo;
             ViewBag.Areas = new MultiSelectList(plantio.Areas, "Id", "Nome");
             ViewBag.Sementes = new SelectList(plantio.Sementes, "IdEstoque", "Nome");
             return View(plantio);
+        }
+
+        public ActionResult Excluir(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            plantio = plantio.GetByID(id);
+            if (plantio == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.Sistema = plantio.Sistemas.Where(x => x.Value == plantio.Sistema.ToString()).First().Text;
+            ViewBag.Periodo = plantio.Periodos.Where(x => x.Value == plantio.TipoPlantio.ToString()).First().Text;
+            return View(plantio);
+        }
+
+        [HttpPost, ActionName("Excluir")]
+        [ValidateAntiForgeryToken]
+        public ActionResult ExcluirConfirmado(Plantio plantio)
+        {
+            areap.DeleteByIdPlantio(plantio);
+            itensp.DeleteByIdPlantio(plantio);
+            plantio = plantio.GetByID(plantio.Id);
+            plantio.Delete(plantio.Id);
+            plantio.Save();
+            return RedirectToAction("Index");
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using OrganWeb.Areas.Sistema.Models.Armazenamento;
+using OrganWeb.Areas.Sistema.Models.zRepositories;
 using OrganWeb.Models.Banco;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Web;
 namespace OrganWeb.Areas.Sistema.Models.Safras
 {
     [Table("tbItensPlantio")]
-    public class ItensPlantio : Repository<ItensPlantio>
+    public class ItensPlantio : ItensPlantioRepository
     {
         [Required]
         public double QtdUsada { get; set; }
