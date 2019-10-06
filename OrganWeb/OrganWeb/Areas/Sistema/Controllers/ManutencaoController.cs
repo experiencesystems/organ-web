@@ -32,7 +32,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         public ActionResult Detalhes(int? id, int? id2)
         {
-            if (id == null)
+            if (id == null || id2 == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -45,19 +45,19 @@ namespace OrganWeb.Areas.Sistema.Controllers
         }
 
         [HttpGet]
-        public ActionResult _NovaManutencao()
+        public ActionResult Create()
         {
             var manutencaom = new MaquinaManutencao
             {
                 Maquinas = maquina.GetAll()
             };
-
+            ViewBag.Maquinas = new MultiSelectList(manutencaom.Maquinas, "IdEstoque", "Nome");
             return View(manutencaom);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult _NovaManutencao(MaquinaManutencao manutencaom)
+        public ActionResult Create(MaquinaManutencao manutencaom, int[] IdMaquina)
         {
             if (ModelState.IsValid)
             {
@@ -65,15 +65,23 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 {
                     Nome = manutencaom.Manutencao.Nome,
                     Data = manutencaom.Manutencao.Data,
-                    Detalhes = manutencaom.Manutencao.Detalhes
+                    Detalhes = manutencaom.Manutencao.Detalhes,
+                    ValorPago = manutencaom.Manutencao.ValorPago
                 };
                 manutencao.Add(manutencao);
-                manutencaom.IdManutencao = manutencao.Id;
-                manutencaom.Add(manutencaom);
-                manutencaom.Save();
+                manutencao.Save(); //Precisa salvar antes pra gerar um Id e asim coloca-lo na tabela máquina-manutenção
+
+                foreach (var item in IdMaquina)
+                {
+                    manutencaom.Add(new MaquinaManutencao { IdMaquina = item, IdManutencao = manutencao.Id });
+                    manutencaom.Save();
+                }
+
                 return RedirectToAction("Index");
             }
+            //Enviando a dropdownlist caso o formulário não seja preenchido corretamente (NullReferenceException)
             manutencaom.Maquinas = maquina.GetAll();
+            ViewBag.Maquinas = new MultiSelectList(manutencaom.Maquinas, "IdEstoque", "Nome");
             return View(manutencaom);
         }
 
@@ -99,9 +107,11 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 manutencao = new Manutencao
                 {
+                    Id = manumaq.IdManutencao,
                     Nome = manumaq.Manutencao.Nome,
                     Data = manumaq.Manutencao.Data,
-                    Detalhes = manumaq.Manutencao.Detalhes
+                    Detalhes = manumaq.Manutencao.Detalhes,
+                    ValorPago = manumaq.Manutencao.ValorPago
                 };
                 manutencao.Update(manutencao);
                 manutencao.Save();
@@ -115,26 +125,27 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         public ActionResult Excluir(int? id, int? id2)
         {
-            if (id == null)
+            if (id == null || id2 == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            manutencao = manutencao.GetByID(id);
-            if (manutencao == null)
+            manumaq = manumaq.GetByID(id, id2);
+            if (manumaq == null)
             {
                 return HttpNotFound();
             }
-            return View(manutencao);
+            return View(manumaq);
         }
         
         [HttpPost, ActionName("Excluir")]
         [ValidateAntiForgeryToken]
-        public ActionResult ExcluirConfirmado(int id, int id2)
+        public ActionResult ExcluirConfirmado(MaquinaManutencao mm)
         {
-            manutencao = manutencao.GetByID(id);
-            manumaq = manumaq.GetByID(id, id2);
-            manutencao.Delete(id);
-            manumaq.Delete(id, id2);
+            manutencao = manutencao.GetByID(mm.IdManutencao);
+            manumaq = manumaq.GetByID(mm.IdManutencao, mm.IdMaquina);
+            manumaq.Delete(mm.IdManutencao, mm.IdMaquina);
+            manumaq.Save();
+            manutencao.Delete(mm.IdManutencao);
             manutencao.Save();
             return RedirectToAction("Index");
         }

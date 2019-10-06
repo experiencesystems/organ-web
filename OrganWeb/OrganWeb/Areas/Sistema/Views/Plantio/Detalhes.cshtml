@@ -11,7 +11,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h6 class="card-title box-title">Plantios</h6>
+                    <h6 class="card-title box-title">Plantio</h6>
                     <div class="card-header-right">
                         <ul class="list-unstyled card-option">
                             <li><i class="ti-minus minimize-card"></i></li>
@@ -23,9 +23,15 @@
                     <div class="card-content">
                         <div class="card bg-light mb-3" style="max-width: 18rem;">
                             <div class="card-header">@Html.DisplayFor(model => model.Nome)</div>
-                            <div class="card-body">Iniciado em: @Html.DisplayFor(model => model.DataInicio)</div>
-                            <div class="card-body">Termina em: @Html.DisplayFor(model => model.DataColheita)</div>
-                            <div class="modal-footer"></div>
+                            <div class="card-body">
+                                Iniciado em: @Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.DataInicio))
+                                <br />Termina em: @Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.DataColheita))
+                                <br />Sistema: @ViewBag.Sistema
+                                <br />Período: @ViewBag.Periodo
+                            </div>
+                            <div class="modal-footer">
+                                <a class="popup btn btn-primary" href="@Url.Action("Editar", "Plantio", new { id = Model.Id })" style="margin-bottom:20px; margin-top:20px;">Editar</a><a class="popup btn btn-danger" href="@Url.Action("Excluir", "Plantio", new { id = Model.Id })" style="margin-bottom:20px; margin-top:20px;">Excluir</a>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -27,14 +27,11 @@
                                     @Html.ActionLink("Detalhes", "Detalhes", new { id = item.IdManutencao, id2 = item.IdMaquina })
                                 </div>
                                 <div class="card-body">
-                                    Data: @Html.DisplayFor(model => item.Manutencao.Data)
+                                    Data: @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Manutencao.Data))
                                     @Html.DisplayFor(model => item.Manutencao.Detalhes)
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary edit" data-toggle="newmodal" data-url="@Url.Action("Editar", "Manutencao", new { id = item.IdManutencao, id2 = item.IdMaquina })">Editar</button>
-                                    @*@<button type="button" class="btn btn-primary edit" data-toggle="edit-modal" data-target="#edit-item">Editar</button>
-                                        @{Html.RenderAction("Editar", "Manutencao", new { id = item.IdManuntencao, id2 = item.IdMaquina });}*@
-                                    <button type="button" class="btn btn-danger delete" data-url="@Url.Action("Excluir", "Manutencao", new { id = item.IdManutencao, id2 = item.IdMaquina })">Excluir</button>
+                                    <a class="popup btn btn-primary" href="@Url.Action("Editar", "Manutencao", new { id = item.IdManutencao, id2 = item.IdMaquina })" style="margin-bottom:20px; margin-top:20px;">Editar</a><a class="popup btn btn-danger" href="@Url.Action("Excluir", "Manutencao", new { id = item.IdManutencao, id2 = item.IdMaquina })" style="margin-bottom:20px; margin-top:20px;">Excluir</a>
                                 </div>
                             }
                         </div>
@@ -43,11 +40,9 @@
                 <div class="card-content">
                     <div class="card border-success mb-3" style="max-width: 18rem;">
                         <div class="card-body text-success">
-                            <h5 class="card-title">Nova manutenção</h5>
+                            <h5 class="card-title"></h5>
                             <p class="card-text">
-                                <div class="teste"></div>
-                                <button type="button" class="btn btn-info waves-effect" data-toggle="ajax-modal" data-target="#add-item">Nova manutenção</button>
-                                @{Html.RenderAction("_NovaManutencao", "Manutencao");}
+                                <a class="popup btn btn-add" href="/Sistema/Manutencao/Create" style="margin-bottom:20px; margin-top:20px;">Nova manutenção</a>
                             </p>
                         </div>
                     </div>
@@ -56,8 +51,6 @@
         </div>
     </div>
 </div>
-<div id="modal-placeholder"></div>
-<div class="modal fade" id="newmodal" tabindex="-1" role="dialog" data-backdrop="static" />
 
 <environment include="Development">
     <script src="~/Scripts/crudmodal.js" asp-append-version="true" defer></script>
@@ -89,7 +82,7 @@
                 $("#modal").load(url, function () {
                     $("#modal").modal("show");
                 })
-            });*/
+            });
 
             $(".delete").click(function () {
                 var url = $(this).data('url');
@@ -97,7 +90,7 @@
                 $("#newmodal").load(url, function () {
                     $("#newmodal").modal("show");
                 })
-            });
+            });*/
 
         })
     </script>
