@@ -9,6 +9,7 @@ using OrganWeb.Models.Banco;
 
 namespace OrganWeb.Areas.Sistema.Models.ViewsBanco
 {
+    [Table("VwItems")]
     public class VwItems : Repository<VwItems>
     {
         [Key]
