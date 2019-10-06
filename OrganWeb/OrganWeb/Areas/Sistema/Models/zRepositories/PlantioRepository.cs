@@ -13,7 +13,7 @@ namespace OrganWeb.Areas.Sistema.Models
          public List<Plantio> GetPlantios()
         {
             var select = _context.Plantios
-                        .ToList()
+                        .AsEnumerable()
                         .Select(p => new Plantio
                         {
                             Porcentagem = ProgressoPlantio(p),
@@ -26,6 +26,14 @@ namespace OrganWeb.Areas.Sistema.Models
                         })
                         .ToList();
             return select;
+        }
+
+        public List<Plantio> GetPlantiosIncompletos()
+        {
+            var plantios = GetPlantios();
+            var colheitas = new Colheita().GetAll();
+            plantios.RemoveAll(p => colheitas.Any(c => c.IdPlantio == p.Id));
+            return plantios;
         }
 
         public double ProgressoPlantio(Plantio plantio)
@@ -59,33 +67,3 @@ namespace OrganWeb.Areas.Sistema.Models
         }
     }
 }
-
-/*
- _context.Plantios.AsEnumerable()
-    .Select(x => new Plantio
-    {
-        Porcentagem = x.ProgressoPlantio(x),
-        IdSemente = x.IdSemente
-    })
-    .ToList();
-
-(from plantio in _context.Plantios
-             join semente in _context.Sementes
-             on plantio.IdSemente equals semente.Id
-             select new 
-             {
-                 Porcentagem = plantio.ProgressoPlantio(plantio),
-                 semente.Nome
-             }).ToList();
-
-var query = database.Posts    // your starting point - table in the "from" statement
-.Join(database.Post_Metas, // the source table of the inner join
-post => post.ID,        // Select the primary key (the first part of the "on" clause in an sql "join" statement)
-meta => meta.Post_ID,   // Select the foreign key (the second part of the "on" clause)
-(post, meta) => new { Post = post, Meta = meta }) // selection
-.Where(postAndMeta => postAndMeta.Post.ID == id);    // where statement
-
-
-            //return (from p in _context.Plantios.AsEnumerable()
-            //select new PlantioDTO { Porcentagem = p.ProgressoPlantio(p) }).ToList();
- */
