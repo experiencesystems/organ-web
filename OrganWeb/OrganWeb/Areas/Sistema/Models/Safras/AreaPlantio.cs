@@ -1,4 +1,5 @@
 ﻿using OrganWeb.Areas.Sistema.Models.Administrativo;
+using OrganWeb.Areas.Sistema.Models.zRepositories;
 using OrganWeb.Models.Banco;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Web;
 namespace OrganWeb.Areas.Sistema.Models.Safras
 {
     [Table("tbAreaPlantio")]
-    public class AreaPlantio : Repository<AreaPlantio>
+    public class AreaPlantio : AreaPlantioRepository
     {
         [Key, Column(Order = 1)]
         [ForeignKey("Plantio")]

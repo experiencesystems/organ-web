@@ -56,7 +56,7 @@ namespace OrganWeb.Models.Banco
 
         public void Update(T entity)
         {
-            _context.Entry<T>(entity).State = EntityState.Modified;
+            _context.Entry(entity).State = EntityState.Modified;
         }
 
         private bool disposed = false;

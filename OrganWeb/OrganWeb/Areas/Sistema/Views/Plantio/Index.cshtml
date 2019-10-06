@@ -4,23 +4,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="main-body">
-    <div class="row">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="card-title box-title">Plantios</h6>
-                    <div class="card-header-right">
-                        <ul class="list-unstyled card-option">
-                            <li><i class="ti-minus minimize-card"></i></li>
-                            <li><i class="icon-refresh"></i></li>
-                        </ul>
+<div class="tablecontainer">
+    <div class="main-body">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="card-title box-title">Plantios</h6>
+                        <div class="card-header-right">
+                            <ul class="list-unstyled card-option">
+                                <li><i class="ti-minus minimize-card"></i></li>
+                                <li><i class="icon-refresh"></i></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <div class="card-content">
-                        <div class="card bg-light mb-3" style="max-width: 18rem;">
-                            <div class="tablecontainer">
+                    <div class="card-body">
+                        <div class="card-content">
+                            <div class="card bg-light mb-3" style="max-width: 18rem;">
                                 @foreach (var item in Model.Plantios)
                                 {
                                     <div class="card-header">
@@ -46,15 +46,15 @@
                                     </div>
                                 }
                             </div>
-                        </div>
-                        <div class="card-content">
-                            <div class="card border-success mb-3" style="max-width: 18rem;">
-                                <div class="card-body text-success">
-                                    <h5 class="card-title">Novo plantio</h5>
-                                    <p class="card-text">
-                                        <div class="overlay"></div>
-                                        <a class="popup btn btn-add" href="/Sistema/Plantio/Create" style="margin-bottom:20px; margin-top:20px;">Novo plantio</a>
-                                    </p>
+                            <div class="card-content">
+                                <div class="card border-success mb-3" style="max-width: 18rem;">
+                                    <div class="card-body text-success">
+                                        <h5 class="card-title">Novo plantio</h5>
+                                        <p class="card-text">
+                                            <div class="overlay"></div>
+                                            <a class="popup btn btn-add" href="/Sistema/Plantio/Create" style="margin-bottom:20px; margin-top:20px;">Novo plantio</a>
+                                        </p>
+                                    </div>
 
                                 </div>
                             </div>
@@ -65,7 +65,6 @@
         </div>
     </div>
 </div>
-
 <!-- ========== NÃO TIRA O PROGRESSCIRCLE.JS ======== -->
 <environment include="Development">
     <script src="~/Scripts/progressCircle.js" asp-append-version="true" defer></script>
