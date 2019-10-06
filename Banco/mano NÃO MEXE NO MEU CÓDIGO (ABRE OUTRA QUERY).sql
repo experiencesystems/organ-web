@@ -4,6 +4,21 @@ create database dbOrgan;
 use dbOrgan;
 
 -- =================================================================== USUÁRIO ============================================     
+    create table `AspNetRoles`(
+	`Id` nvarchar(128)  not null ,
+	`Name` nvarchar(256)  not null ,
+	primary key (`Id`)) engine = InnoDB;
+    
+CREATE UNIQUE index  `RoleNameIndex` on `AspNetRoles` (`Name`);
+
+create table `AspNetUserRoles` (
+	`UserId` nvarchar(128)  not null ,
+	`RoleId` nvarchar(128)  not null ,
+	primary key ( `UserId`,`RoleId`) ) engine = InnoDB;
+ 
+CREATE index  `IX_UserId` on `AspNetUserRoles` (`UserId`);
+CREATE index  `IX_RoleId` on `AspNetUserRoles` (`RoleId`);
+   
    create table if not exists tbUsuario (
 		`Id` nvarchar(128)  not null ,
 			DataCadastro datetime default current_timestamp(),
@@ -18,7 +33,31 @@ use dbOrgan;
 		`SecurityStamp` longtext,
 		`UserName` varchar(50)  not null ,-- !
 	      constraint PKAspNetUsers primary key ( `Id`)
-	);
+	)engine = InnoDB;
+    
+    create table `AspNetUserClaims` (
+	`Id` int not null  auto_increment ,
+	`UserId` nvarchar(128)  not null ,
+	`ClaimType` longtext,
+	`ClaimValue` longtext,
+	primary key ( `Id`) )engine = InnoDB;
+    
+CREATE index  `IX_UserId` on `AspNetUserClaims` (`UserId`);
+
+create table `AspNetUserLogins` (
+	`LoginProvider` nvarchar(128)  not null ,
+	`ProviderKey` nvarchar(128)  not null ,
+	`UserId` nvarchar(128)  not null ,
+	primary key ( `LoginProvider`,`ProviderKey`,`UserId`) )
+    engine = InnoDB;
+
+CREATE index  `IX_UserId` on `AspNetUserLogins` (`UserId`);
+
+alter table `AspNetUserRoles` add constraint `FK_AspNetUserRoles_AspNetRoles_RoleId`  foreign key (`RoleId`) references `AspNetRoles` ( `Id`)  on update cascade on delete cascade;
+alter table `AspNetUserRoles` add constraint `FK_AspNetUserRoles_AspNetUsers_UserId`  foreign key (`UserId`) references tbUsuario ( `Id`)  on update cascade on delete cascade;
+alter table `AspNetUserClaims` add constraint `FK_AspNetUserClaims_AspNetUsers_UserId`  foreign key (`UserId`) references tbUsuario ( `Id`)  on update cascade on delete cascade; 
+alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_UserId`  foreign key (`UserId`) references tbUsuario ( `Id`)  on update cascade on delete cascade;
+
 -- =======================================================================================================================
 
 -- =================================================================== ENDEREÇO ==========================================
@@ -26,35 +65,35 @@ use dbOrgan;
 		CEP char(8),
 		 constraint PKLocalizacao primary key (CEP),
 		IdRua int not null
-	);
+	)engine = InnoDB;
     
     create table if not exists tbLogradouro(
 		Id int auto_increment,
 		 constraint PKRua primary key (Id),
 		Logradouro varchar(50) not null,
 		IdBairro int not null
-	);
+	)engine = InnoDB;
     
 	create table if not exists tbBairro(
 		Id int auto_increment,
 		 constraint PKBairro primary key (Id),
 		Bairro varchar(30) not null,
 		IdCidade int not null
-	);
+	)engine = InnoDB;
     
     create table if not exists tbCidade(
 		Id int auto_increment,
 		 constraint PKCidade primary key (Id),
 		Cidade varchar(30) not null,
 		IdEstado tinyint not null
-	);
+	)engine = InnoDB;
     
     create table if not exists tbEstado(
 		Id tinyint auto_increment,
 		 constraint PKEstado primary key (Id),
 		Estado varchar(30) not null,
 		UF char(2) not null
-	);
+	)engine = InnoDB;
     
 	alter table tbCidade add constraint FKCidadeEstado foreign key(IdEstado) references tbEstado(Id);
 	alter table tbBairro add constraint FKBairroCidade foreign key(IdCidade) references tbCidade(Id);
@@ -104,13 +143,13 @@ use dbOrgan;
 		Numero numeric(9),
 		IdTipo int not null,
 		IdDDD  numeric(2) not null
-	);
+	)engine = InnoDB;
     
     create table if not exists tbTipoTel(
 		Id int auto_increment,
          constraint PKTipoTel primary key(Id),
 		Tipo varchar(20) not null
-    );
+    )engine = InnoDB;
     
     insert into tbTipoTel(Tipo) values("Fixo"),
 									  ("Celular");
@@ -118,7 +157,7 @@ use dbOrgan;
     create table if not exists tbDDD(
 		DDD numeric(2) not null,
          constraint PKDDD primary key(DDD)
-    );
+    )engine = InnoDB;
     
     insert into tbDDD(DDD) values(11), (12), (13), (14), (15), (16), (17), (18), (19), (21), (22), (24), (27), (28), (31), (32), (33), (34),
 								 (35), (37), (38), (41), (42), (43), (44), (45), (46), (47), (48), (49), (51), (53), (54), (55), (61), (62),
@@ -142,7 +181,7 @@ use dbOrgan;
         NumeroEndereco int not null,
         CompEndereco varchar(30),
         CEP char(8) not null
-    );
+    )engine = InnoDB;
     alter table tbPessoa add constraint FKPessoaEndereco foreign key(CEP) references tbEndereco(CEP);
     
 	alter table tbUsuario add constraint FKAspNetUsersPessoa foreign key(IdPessoa) references tbPessoa(Id); 
@@ -162,7 +201,7 @@ use dbOrgan;
 		IdPessoa int,
         IdTelefone int,
          constraint PKTelPessoa primary key (IdPessoa, IdTelefone)
-    );
+    )engine = InnoDB;
 	alter table tbTelefonePessoa add constraint FKTelPessoa foreign key(IdTelefone) references tbTelefone(Id),
 								 add constraint FKPessoaTel foreign key(IdPessoa) references tbPessoa(Id);
     
@@ -180,7 +219,7 @@ use dbOrgan;
         Validade date not null, 
         IdPessoa int not null,
          constraint UQDadosBancariosIdPessoa unique(IdPessoa)
-	);
+	)engine = InnoDB;
     alter table tbDadosBancarios add constraint FKDBPessoa foreign key(IdPessoa) references tbPessoa(Id);
 	
     insert into tbDadosBancarios(CVV, Banco, NumCartao, Validade, IdPessoa) values(1111, 1, 11111111111111111, "01/01/01", 1);
@@ -193,7 +232,7 @@ use dbOrgan;
         RG char(9) not null,
         DataNasc date not null,
         Foto varchar(100) not null
-    );
+    )engine = InnoDB;
     alter table tbPessoaFisica add constraint FKPessoaFisica foreign key(IdPessoa) references tbPessoa(Id);
    
    insert into tbPessoaFisica (IdPessoa, CPF, RG, DataNasc, Foto) values(1, 12345678910, '123456789', "01/01/01", "NoPhotosPlox");
@@ -205,7 +244,7 @@ use dbOrgan;
         CNPJ numeric(14) not null,
          constraint UQCNPJ unique(CNPJ),
 		IE numeric(12) not null
-    );
+    )engine = InnoDB;
     alter table tbPessoaJuridica add constraint FKPessoaJuridica foreign key(IdPessoa) references tbPessoa(Id);
 	
     insert into tbPessoaJuridica(IdPessoa, RazaoSocial, CNPJ, IE) values(2, 'Exp Sisteminhas Muito Bons', 12345678910112, 123456789101);
@@ -219,7 +258,7 @@ use dbOrgan;
 		Qtd double not null default 0.00,
         UM int not null,
         ValorUnit double not null default 0.00
-    );
+    )engine = InnoDB;
     
     create table if not exists tbHistEstoque(
 		Id int auto_increment,
@@ -229,7 +268,7 @@ use dbOrgan;
         DataAlteracao datetime not null default current_timestamp,
         `Desc` varchar(300) not null,
         IdEstoque int not null
-    );
+    )engine = InnoDB;
     alter table tbHistEstoque add constraint FKHistEstoque foreign key(IdEstoque) references tbEstoque(Id);
      
                       -- ------------------------------- Semente ------------------------------------
@@ -241,7 +280,7 @@ use dbOrgan;
         IncSol decimal(5,2),
         IncVento decimal(5,2),
         Acidez decimal(5,2)       
-    );
+    )engine = InnoDB;
     alter table tbSemente add constraint FKSementeEstoque foreign key(IdEstoque) references tbEstoque(Id);
     
     insert into tbEstoque(Qtd, UM, ValorUnit) values(5, 1, 2.50);
@@ -254,14 +293,14 @@ use dbOrgan;
 		Nome varchar(50) not null,
         `Desc` varchar(300),
         IdCategoria int not null
-    );
+    )engine = InnoDB;
     alter table tbInsumo add constraint FKInsumoEstoque foreign key(IdEstoque) references tbEstoque(Id);
     
     create table if not exists tbCategoria(
 		Id int auto_increment,
          constraint PKCategoria primary key(Id),
 		Categoria varchar(30) not null
-    );
+    )engine = InnoDB;
     alter table tbInsumo add constraint FKInsumoCategoria foreign key(IdCategoria) references tbCategoria(Id);
     
     
@@ -287,7 +326,7 @@ use dbOrgan;
         DeprMes double,
         DeprAno double,
         DataCadastro datetime not null default current_timestamp
-    );
+    )engine = InnoDB;
     alter table tbMaquina add constraint FKMaquinaEstoque foreign key(IdEstoque) references tbEstoque(Id);
     
     insert into tbEstoque(Qtd, UM, ValorUnit) values(2, 3, 5000.00),
@@ -302,7 +341,7 @@ use dbOrgan;
         Detalhes varchar(300),
         `Data` date not null,
         ValorPago double not null
-    );
+    )engine = InnoDB;
 	
     insert into tbManutencao(Nome, `Data`, ValorPago) value("Revisão Anual", '01/01/01', 5000.00);
     
@@ -310,7 +349,7 @@ use dbOrgan;
 		IdMaquina int not null,
         IdManutencao int not null,
 		 constraint PKMaquinaManutencao primary key(IdMaquina, IdManutencao)
-    );
+    )engine = InnoDB;
     alter table tbMaquinaManutencao add constraint FKMaquinaManutencao foreign key(IdMaquina) references tbMaquina(IdEstoque),
 									add constraint FKManutencaoMaquina foreign key(IdManutencao) references tbManutencao(Id);
     
@@ -323,7 +362,7 @@ use dbOrgan;
          constraint PKFornecedor primary key(Id),
 		`Status` bool not null default true,
         IdPessoa int not null
-    );
+    )engine = InnoDB;
     alter table tbFornecedor add constraint FKFornecedorPessoa foreign key(IdPessoa) references tbPessoa(Id);
     
     insert into tbFornecedor(IdPessoa) value(2);
@@ -334,7 +373,7 @@ use dbOrgan;
 		QtdParcelas int not null default 1,
         VlParcela double not null,
         Tipo int not null -- 1 A Vista Memo
-    );
+    )engine = InnoDB;
     
     create table if not exists tbCompra(
 		Id int auto_increment,
@@ -343,7 +382,7 @@ use dbOrgan;
         `Data` date not null,
         IdForn int not null,
         IdPagamento int not null
-    );
+    )engine = InnoDB;
     alter table tbCompra add constraint FKCompraForn foreign key(IdForn) references tbFornecedor(Id),
 						 add constraint FKCompraPgmt foreign key(IdPagamento) references tbPagamento(Id);
                          
@@ -356,7 +395,7 @@ use dbOrgan;
          constraint PKEstocaCompra primary key(IdCompra, IdEstoque),
         DescontoProd int not null default 0.00,
         QtdProd double not null
-    );
+    )engine = InnoDB;
     alter table tbItensComprados add constraint FKItensCompraEstoque foreign key(IdCompra) references tbCompra(Id),
 							     add constraint FKItensEstoqueCompra foreign key(IdEstoque) references tbEstoque(Id);
                                  
@@ -373,7 +412,7 @@ use dbOrgan;
 		Id int auto_increment,
          constraint PKCliente primary key(Id),
         IdPessoa int not null
-    );
+    )engine = InnoDB;
     alter table tbCliente add constraint FKClientePessoa foreign key(IdPessoa) references tbPessoa(Id);
     
     insert into tbCliente(IdPessoa) value(1);
@@ -385,7 +424,7 @@ use dbOrgan;
         `Data` date not null,
         IdCliente int not null,
         IdPagamento int not null
-    );
+    )engine = InnoDB;
     alter table tbVenda add constraint FKVendaCliente foreign key(IdCliente) references tbCliente(Id),
 						add constraint FKVendaPgmt foreign key(IdPagamento) references tbPagamento(Id);
     
@@ -398,7 +437,7 @@ use dbOrgan;
          constraint PKVendaEstoque primary key(IdVenda, IdEstoque),
         DescontoProd decimal(5,2)  not null default 0.00,
         QtdVendida double not null
-    );
+    )engine = InnoDB;
     alter table tbItensVendidos add constraint FKItensVendaEstoque foreign key(IdVenda) references tbVenda(Id),
 								add constraint FKItensEstoqueVenda foreign key(IdEstoque) references tbEstoque(Id);
                                 
@@ -413,7 +452,7 @@ use dbOrgan;
         Salario double not null,
         IdPessoa int not null,
         IdCargo int not null
-    );
+    )engine = InnoDB;
     alter table tbFuncionario add constraint FKFuncPessoa foreign key(IdPessoa) references tbPessoa(Id);
     
     create table if not exists tbCargo(
@@ -421,29 +460,11 @@ use dbOrgan;
          constraint PKCargo primary key(Id),
 		Nivel int,
         Nome varchar(75) not null
-    );
+    )engine = InnoDB;
     alter table tbFuncionario add constraint FKFuncCargo foreign key(IdCargo) references tbCargo(Id);
     
     insert into tbCargo(Nivel, Nome) value(1, 'Carinha que Planta');
     insert into tbFuncionario(Salario, IdPessoa, IdCargo) value(2.000, 1, 1);
-    
-    create table if not exists tbEquipe(
-		Id int auto_increment,
-         constraint FKEquipe primary key(Id),
-		`Desc` varchar(300),
-        Nome varchar(30) not null
-	);
-    insert into tbEquipe(Nome) value("Equipe do Carinha que Planta");
-    
-    create table if not exists tbFuncEquipe(
-		IdFunc int not null,
-        IdEquipe int not null,
-         constraint PKFuncEquipe primary key(IdFunc, IdEquipe),
-		LIDER bool not null default false
-    );
-    alter table tbFuncEquipe add constraint FKFuncEquipe foreign key(IdFunc) references tbFuncionario(Id),
-							 add constraint FKEquipeFunc foreign key(IdEquipe) references tbEquipe(Id);
-    insert into tbFuncEquipe value(1,1,true);
 -- ======================================================================================================================= 
 
 
@@ -453,7 +474,7 @@ use dbOrgan;
          constraint PKDespesa primary key(Id),
 		ValorPago double not null,
         `Data` date not null
-    );
+    )engine = InnoDB;
     
     insert into tbDespesa(ValorPago, `Data`) values(1000.00, '01/01/01'),
 												   (700.00, '01/01/01');
@@ -462,7 +483,7 @@ use dbOrgan;
 		Id int auto_increment,
          constraint PKConta primary key(Id),
 		Nome varchar(30) not null
-    );
+    )engine = InnoDB;
     
     insert into tbContas(Nome) value('Conta de Luz');
     
@@ -471,7 +492,7 @@ use dbOrgan;
 		IdDespesa int not null,
         IdDespAdm int not null,
          constraint PKDespesaAdmin primary key(IdDespesa, IdDespAdm)
-    );
+    )engine = InnoDB;
     alter table tbDespesaAdm add constraint FKDespesaAdmDespesa foreign key(IdDespesa) references tbDespesa(Id),
 							   add constraint FKDespesaAdmConta foreign key(IdDespAdm) references tbContas(Id);
                                
@@ -481,7 +502,7 @@ use dbOrgan;
 		IdDespesa int not null,
         IdFunc int not null,
          constraint PKDespesaFunc primary key(IdDespesa, IdFunc)
-    );
+    )engine = InnoDB;
     alter table tbDespesaFunc add constraint FKDespesaFunc foreign key(IdDespesa) references tbDespesa(Id),
 							   add constraint FKFuncDespesa foreign key(IdFunc) references tbFuncionario(Id);
     
@@ -499,7 +520,7 @@ use dbOrgan;
         DataColheita date not null,
         DataInicio date not null,
         TipoPlantio int not null
-    );
+    )engine = InnoDB;
     
     insert into tbPlantio(Nome, Sistema, DataColheita, DataInicio, TipoPlantio) values('Plantio de Soja', 1, '01/01/01', '01/01/01', 1);
     
@@ -511,7 +532,7 @@ use dbOrgan;
         IncSolar decimal(5,2) not null default 0.00,
         IncVento decimal(5,2) not null default 0.00,
         Acidez decimal(5,2) not null default 0.00
-    );
+    )engine = InnoDB;
     
     insert into tbSolo(Nome, Tipo) values('Arenoso', 1), ('Vermelho', 1);
     
@@ -522,7 +543,7 @@ use dbOrgan;
         Disp int not null default 1,
         Tamanho int not null default 1,
         IdSolo int not null
-    );
+    )engine = InnoDB;
     alter table tbArea add constraint FKAreaSolo foreign key(IdSolo) references tbSolo(Id);
     
     insert into tbArea(Nome,  IdSolo) values('Area1', 1), ('Area2', 1), ('Area3', 2);
@@ -532,7 +553,7 @@ use dbOrgan;
         IdPlantio int not null,
         IdArea int not null,
          constraint PKAreaPlantio primary key(IdPlantio, IdArea)
-    );
+    )engine = InnoDB;
     alter table tbAreaPlantio add constraint FKAreaPlantioPlantio foreign key(IdPlantio) references tbPlantio(Id),
 									 add constraint FKAreaPlantioArea foreign key(IdArea) references tbArea(Id);
                                      
@@ -543,7 +564,7 @@ use dbOrgan;
         IdPlantio int not null,
         IdEstoque int not null,
          constraint PKItensPlantio primary key(IdPlantio, IdEstoque)
-    );
+    )engine = InnoDB;
     alter table tbItensPlantio add constraint FKItensPlantioPlantio foreign key(IdPlantio) references tbPlantio(Id),
 							   add constraint FKItensPlantioEstoque foreign key(IdEstoque) references tbEstoque(Id);
     
@@ -554,7 +575,7 @@ use dbOrgan;
          constraint PKProduto primary key(IdEstoque),
 		Nome varchar(50) not null,
         `Desc` varchar(300)
-    );
+    )engine = InnoDB;
     alter table tbProduto add constraint FKProdutoEstoque foreign key(IdEstoque) references tbEstoque(Id);
     
     insert into tbEstoque(Qtd, UM, ValorUnit) values(3, 3, 3);
@@ -567,72 +588,13 @@ use dbOrgan;
         IdPlantio int not null,
         IdProd int not null,
          constraint PKColheita primary key(IdPlantio, IdProd)
-    );
+    )engine = InnoDB;
     alter table tbColheita add constraint FKColheitaPlantio foreign key(IdPlantio) references tbPlantio(Id),
 						   add constraint FKColheitaProd foreign key(IdProd) references tbProduto(IdEstoque);
 	
     insert into tbColheita values('01/01/01',  1, 4, 1, 7);
     
 -- ======================================================================================================================== 
-
--- =================================================================== TAREFA ============================================
-	create table if not exists tbTarefa(
-		Id int auto_increment,
-         constraint PKTarefa primary key(Id),
-		Titulo varchar(30) not null default 'Sem Título',
-        `Desc` varchar(300),
-        `Status` bool not null default true,
-        DataEmissao datetime default current_timestamp,
-        Prioridade int not null,
-        DataFim date not null,
-        DataInicio date not null,
-        Relatorio varchar(100)
-    );
-    insert into tbTarefa(Titulo, `Status`, Prioridade, DataFim, DataInicio) values('Colher Soja', true, 1, '01-01-01', '01-01-01'),
-																				  ('Plantar Soja', true, 1, '01-01-01', '01-01-01');
-    create table if not exists tbTarefaFuncionario(
-		IdFunc int not null,
-        IdTarefa int not null,
-         constraint PKTarefaFuncionario primary key(IdFunc, IdTarefa)
-    ); 
-    alter table tbTarefaFuncionario add constraint FKFuncionarioTarefa foreign key(IdFunc) references tbFuncionario(Id),
-									add constraint FKTarefaFuncionario foreign key(IdTarefa) references tbTarefa(Id);
-                                    
-	insert into tbTarefaFuncionario value(1,1);
-    
-    create table if not exists tbTarefaEquipe(
-		IdTarefa int not null,
-        IdEquipe int not null,
-         constraint PKTarefaEquipe primary key(IdEquipe, IdTarefa)
-    );
-    alter table tbTarefaEquipe add constraint FKTarefaEquipe foreign key(IdTarefa) references tbTarefa(Id),
-							   add constraint FKEquipeTaerfa foreign key(IdEquipe) references tbEquipe(Id);
-                               
-	insert into tbTarefaEquipe value(2,1);
-    
-    create table if not exists tbAreaTarefa(
-		IdTarefa int not null,
-        IdArea int not null,
-         constraint PKTarefaArea primary key(IdArea, IdTarefa)
-    );
-    alter table tbAreaTarefa add constraint FKTarefaArea foreign key(IdTarefa) references tbTarefa(Id),
-							   add constraint FKAreaTarefa foreign key(IdArea) references tbArea(Id);
-	
-	insert into tbAreaTarefa value(1, 1),
-								  (2, 1);
-    
-    create table if not exists tbItensTarefa(
-		QtdUsada double not null,
-        IdTarefa int not null,
-        IdEstoque int not null,
-         constraint PKItensTarefa primary key(IdEstoque, IdTarefa)
-    );
-    alter table tbItensTarefa add constraint FKItensTarefaTarefa foreign key(IdTarefa) references tbTarefa(Id),
-							  add constraint FKItensTarefaEstoque foreign key(IdEstoque) references tbEstoque(Id);
-                              
-insert into tbItensTarefa value(1, 1, 6),
-							   (0.5, 2, 1);
--- ======================================================================================================================= 
 
 -- =================================================================== CONTROLE ============================================ 
 	create table if not exists tbControle(
@@ -641,18 +603,19 @@ insert into tbItensTarefa value(1, 1, 6),
 		`Status` bool not null default true,
         `Desc` varchar(300),
         Efic decimal(5,2) not null,
-        NumLiberacoes int not null
-    );
+        NumLiberacoes int not null,
+        `Data` date not null
+    )engine = InnoDB;
     
-    insert into tbControle(`Status`, Efic, NumLiberacoes) values(true, 100, 2),
-																(true, 50, 3);
+    insert into tbControle(`Status`, Efic, NumLiberacoes, `Data`) values(true, 100, 2, '01/01/01'),
+																		(true, 50, 3, '01/01/01');
     
     create table if not exists tbItensControle(
 		QtdUsada double not null,
         IdControle int not null,
         IdEstoque int not null,
          constraint PKItensControle primary key(IdControle, IdEstoque)
-    );
+    )engine = InnoDB;
     alter table tbItensControle add constraint FKItensControleControle foreign key(IdControle) references tbControle(Id),
 								add constraint FKItensControleEstoque foreign key(IdEstoque) references tbEstoque(Id);
                                 
@@ -664,7 +627,7 @@ insert into tbItensTarefa value(1, 1, 6),
          constraint PKPD primary key(Id),
 		Nome varchar(30) not null,
         `P/D` bool not null
-    );
+    )engine = InnoDB;
     
     insert into tbPragaOrDoenca(Nome, `P/D`) values('Praga do Mal', true),
 												   ('Doença Nem Tão do Mal', false);
@@ -673,7 +636,7 @@ insert into tbItensTarefa value(1, 1, 6),
 		IdControle int not null,
         IdPD int not null,
          constraint PKControlePD primary key(IdControle, IdPD)
-    );
+    )engine = InnoDB;
     alter table tbControlePD add constraint FKControlePD foreign key(IdControle) references tbControle(Id),
 							 add constraint FKPDControle foreign key(IdPD) references tbPragaOrDoenca(Id);
 	
@@ -685,7 +648,7 @@ insert into tbItensTarefa value(1, 1, 6),
         IdArea int not null,
         IdPd int not null,
          constraint PKAreaPD primary key(IdArea, IdPD)
-    );
+    )engine = InnoDB;
     alter table tbAreaPD add constraint FKAreaPD foreign key(IdArea) references tbArea(Id),
 						 add constraint FKPDArea foreign key(IdPd) references tbPragaOrDoenca(Id);
                          
