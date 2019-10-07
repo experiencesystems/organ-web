@@ -4,6 +4,24 @@ create database dbOrgan;
 use dbOrgan;
 
 -- =================================================================== USUÁRIO ============================================     
+create table `AspNetRoles`(
+	`Id` nvarchar(128)  not null ,
+	`Name` nvarchar(256)  not null ,
+	primary key (`Id`)) 
+	engine=InnoDb 
+	auto_increment=0;
+    
+CREATE UNIQUE index  `RoleNameIndex` on `AspNetRoles` (`Name`);
+
+create table `AspNetUserRoles` (
+	`UserId` nvarchar(128)  not null ,
+	`RoleId` nvarchar(128)  not null ,
+	primary key ( `UserId`,`RoleId`) )	
+	engine=InnoDb auto_increment=0;
+ 
+CREATE index  `IX_UserId` on `AspNetUserRoles` (`UserId`);
+CREATE index  `IX_RoleId` on `AspNetUserRoles` (`RoleId`);
+   
    create table if not exists tbUsuario (
 		`Id` nvarchar(128)  not null ,
 			DataCadastro datetime default current_timestamp(),
@@ -19,6 +37,30 @@ use dbOrgan;
 		`UserName` varchar(50)  not null ,-- !
 	      constraint PKAspNetUsers primary key ( `Id`)
 	);
+    
+    create table `AspNetUserClaims` (
+	`Id` int not null  auto_increment ,
+	`UserId` nvarchar(128)  not null ,
+	`ClaimType` longtext,
+	`ClaimValue` longtext,
+	primary key ( `Id`) ) 
+	engine=InnoDb auto_increment=0;
+    
+CREATE index  `IX_UserId` on `AspNetUserClaims` (`UserId`);
+
+create table `AspNetUserLogins` (
+	`LoginProvider` nvarchar(128)  not null ,
+	`ProviderKey` nvarchar(128)  not null ,
+	`UserId` nvarchar(128)  not null ,
+	primary key ( `LoginProvider`,`ProviderKey`,`UserId`) ) 
+	engine=InnoDb auto_increment=0;
+
+CREATE index  `IX_UserId` on `AspNetUserLogins` (`UserId`);
+
+alter table `AspNetUserRoles` add constraint `FK_AspNetUserRoles_AspNetRoles_RoleId`  foreign key (`RoleId`) references `AspNetRoles` ( `Id`)  on update cascade on delete cascade;
+alter table `AspNetUserRoles` add constraint `FK_AspNetUserRoles_AspNetUsers_UserId`  foreign key (`UserId`) references tbUsuario ( `Id`)  on update cascade on delete cascade;
+alter table `AspNetUserClaims` add constraint `FK_AspNetUserClaims_AspNetUsers_UserId`  foreign key (`UserId`) references tbUsuario ( `Id`)  on update cascade on delete cascade; 
+alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_UserId`  foreign key (`UserId`) references tbUsuario ( `Id`)  on update cascade on delete cascade;
 -- =======================================================================================================================
 
 -- =================================================================== ENDEREÇO ==========================================
@@ -339,7 +381,7 @@ use dbOrgan;
     create table if not exists tbCompra(
 		Id int auto_increment,
          constraint PKCompra primary key(Id),
-		Desconto decimal(5,2) not null default 0,
+		Desconto decimal(5,2) not null default 0.00,
         `Data` date not null,
         IdForn int not null,
         IdPagamento int not null
