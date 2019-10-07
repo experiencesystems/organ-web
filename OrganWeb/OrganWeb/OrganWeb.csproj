@@ -232,7 +232,6 @@
     <Compile Include="Areas\Sistema\Controllers\EstoqueController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FinanceiroController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FornecedorController.cs" />
-    <Compile Include="Areas\Sistema\Controllers\FuncionarioController.cs" />
     <Compile Include="Areas\Sistema\Controllers\ItemController.cs" />
     <Compile Include="Areas\Sistema\Controllers\ManutencaoController.cs" />
     <Compile Include="Areas\Sistema\Controllers\MaquinaController.cs" />
@@ -275,12 +274,10 @@
     <Compile Include="Areas\Sistema\Models\Safras\Plantio.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\CreateCompraViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\CreatePlantioViewModel.cs" />
-    <Compile Include="Areas\Sistema\Models\ViewModels\ViewEquipe.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewModels\ViewCompra.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewMaquina.cs" />
-    <Compile Include="Areas\Sistema\Models\ViewModels\ViewMonitoramento.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewPragaDoenca.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewSementes.cs" />
-    <Compile Include="Areas\Sistema\Models\ViewModels\ViewFornecedor.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewFuncionario.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewFinanceiro.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewManutencao.cs" />
@@ -291,6 +288,8 @@
     <Compile Include="Areas\Sistema\Models\ViewsBanco\VwVenda.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\AreaPlantioRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\AreaRepository.cs" />
+    <Compile Include="Areas\Sistema\Models\zRepositories\FornecedorRepository.cs" />
+    <Compile Include="Areas\Sistema\Models\zRepositories\ItensCompradosRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\ItensPlantioRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\MaquinaManutencaoRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\PlantioRepository.cs" />
@@ -452,6 +451,9 @@
     <Content Include="Areas\Sistema\Views\Plantio\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Plantio\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Plantio\Excluir.cshtml" />
+    <Content Include="Areas\Sistema\Views\Compra\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Compra\Editar.cshtml" />
+    <Content Include="Areas\Sistema\Views\Compra\Excluir.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -537,7 +539,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Ecommerce\Views\Shared\" />
-    <Folder Include="Areas\Sistema\Views\Compra\" />
     <Folder Include="Areas\Sistema\Views\Controles\" />
     <Folder Include="Areas\Sistema\Views\Shared\" />
   </ItemGroup>

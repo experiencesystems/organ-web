@@ -18,18 +18,21 @@ namespace OrganWeb.Areas.Sistema.Models.Financas
         public int Id { get; set; }
 
         [Required]
+        [DataType(DataType.Date, ErrorMessage = "Data em formato inválido"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Data { get; set; }
 
-        [Range(0.01, 999.99)]
+        [Required]
+        [Range(0.00, 999.99)]
         public double Desconto { get; set; }
 
         [Required]
         [ForeignKey("Fornecedor")]
+        [Display(Name = "Fornecedor")]
         public int IdForn { get; set; }
 
         [Required]
         [ForeignKey("Pagamento")]
-        public int IdPagmento { get; set; }
+        public int IdPagamento { get; set; }
 
         public virtual Fornecedor Fornecedor { get; set; }
         public virtual Pagamento Pagamento { get; set; }

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using OrganWeb.Areas.Sistema.Models.zRepositories;
 using OrganWeb.Models;
 using OrganWeb.Models.Banco;
 using OrganWeb.Models.Pessoa;
@@ -11,7 +12,7 @@ using OrganWeb.Models.Pessoa;
 namespace OrganWeb.Areas.Sistema.Models.Armazenamento
 {
     [Table("tbFornecedor")]
-    public class Fornecedor : Repository<Fornecedor>
+    public class Fornecedor : FornecedorRepository
     {
         [Key]
         public int Id { get; set; }
@@ -23,5 +24,9 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
         public int IdPessoa { get; set; }
 
         public virtual Pessoa Pessoa { get; set; }
+
+        //IGNORA ESSA PROPRIEDADE AQUI
+        [NotMapped]
+        public string Nome { get; set; }
     }
 }
