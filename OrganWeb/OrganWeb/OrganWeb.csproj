@@ -227,11 +227,11 @@
     <Compile Include="Areas\Ecommerce\Models\Pedido.cs" />
     <Compile Include="Areas\Ecommerce\Models\VendaAnuncio.cs" />
     <Compile Include="Areas\Ecommerce\Models\Wishlist.cs" />
+    <Compile Include="Areas\Sistema\Controllers\CompraController.cs" />
     <Compile Include="Areas\Sistema\Controllers\DoencasController.cs" />
     <Compile Include="Areas\Sistema\Controllers\EstoqueController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FinanceiroController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FornecedorController.cs" />
-    <Compile Include="Areas\Sistema\Controllers\FuncionarioController.cs" />
     <Compile Include="Areas\Sistema\Controllers\ItemController.cs" />
     <Compile Include="Areas\Sistema\Controllers\ManutencaoController.cs" />
     <Compile Include="Areas\Sistema\Controllers\MaquinaController.cs" />
@@ -272,13 +272,12 @@
     <Compile Include="Areas\Sistema\Models\Safras\Colheita.cs" />
     <Compile Include="Areas\Sistema\Models\Safras\ItensPlantio.cs" />
     <Compile Include="Areas\Sistema\Models\Safras\Plantio.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewModels\CreateCompraViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\CreatePlantioViewModel.cs" />
-    <Compile Include="Areas\Sistema\Models\ViewModels\ViewEquipe.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewModels\ViewCompra.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewMaquina.cs" />
-    <Compile Include="Areas\Sistema\Models\ViewModels\ViewMonitoramento.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewPragaDoenca.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewSementes.cs" />
-    <Compile Include="Areas\Sistema\Models\ViewModels\ViewFornecedor.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewFuncionario.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewFinanceiro.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewManutencao.cs" />
@@ -289,6 +288,8 @@
     <Compile Include="Areas\Sistema\Models\ViewsBanco\VwVenda.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\AreaPlantioRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\AreaRepository.cs" />
+    <Compile Include="Areas\Sistema\Models\zRepositories\FornecedorRepository.cs" />
+    <Compile Include="Areas\Sistema\Models\zRepositories\ItensCompradosRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\ItensPlantioRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\MaquinaManutencaoRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\PlantioRepository.cs" />
@@ -446,10 +447,13 @@
     <Content Include="Areas\Sistema\Views\Funcionario\Funcionario.cshtml" />
     <Content Include="Areas\Sistema\Views\Funcionario\Equipe.cshtml" />
     <Content Include="Areas\Sistema\Views\Funcionario\NovaEquipe.cshtml" />
-    <Content Include="Areas\Sistema\Views\Financeiro\Compras.cshtml" />
+    <Content Include="Areas\Sistema\Views\Financeiro\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Plantio\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Plantio\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Plantio\Excluir.cshtml" />
+    <Content Include="Areas\Sistema\Views\Compra\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Compra\Editar.cshtml" />
+    <Content Include="Areas\Sistema\Views\Compra\Excluir.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -528,6 +532,9 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Account\LoginRegistro.cshtml" />
     <Content Include="Views\Shared\_LoginStart.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Registro.cshtml" />
+    <Content Include="Views\Account\Assinatura.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

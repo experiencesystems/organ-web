@@ -9,6 +9,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using OrganWeb.Areas.Sistema.Models;
+using OrganWeb.Models.Banco;
 
 namespace OrganWeb.Models.Usuario
 {

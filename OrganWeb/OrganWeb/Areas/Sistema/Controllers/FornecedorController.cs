@@ -26,11 +26,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         
         public ActionResult Fornecedores()
         {
-            var select = new ViewFornecedor
-            {
-                    Fornecedors = fornec.GetFew()
-            };
-            return View(select);
+            return View();
         }
 
         // GET: Sistema/Fornecedor/Details/5

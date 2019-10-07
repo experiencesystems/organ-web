@@ -36,7 +36,7 @@ namespace OrganWeb.Areas.Sistema.Models
             return plantios;
         }
 
-        public double ProgressoPlantio(Plantio plantio)
+        private double ProgressoPlantio(Plantio plantio)
         {
             DateTime hoje = DateTime.Today;
             try
