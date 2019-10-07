@@ -1,4 +1,6 @@
 ﻿using OrganWeb.Areas.Sistema.Models.Armazenamento;
+using OrganWeb.Areas.Sistema.Models.zRepositories;
+using OrganWeb.Models.Banco;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +11,7 @@ using System.Web;
 namespace OrganWeb.Areas.Sistema.Models.Financas
 {
     [Table("tbItensComprados")]
-    public class ItensComprados
+    public class ItensComprados : ItensCompradosRepository
     {
         [Key, Column(Order = 1)]
         [ForeignKey("Compra")]
@@ -19,8 +21,10 @@ namespace OrganWeb.Areas.Sistema.Models.Financas
         [ForeignKey("Estoque")]
         public int IdEstoque { get; set; }
 
+        [Required]
+        [Range(0.00, 999.99)]
         [Display(Name = "Desconto do produto")]
-        public int DescontoProd { get; set; }
+        public double DescontoProd { get; set; }
 
         [Required]
         [Display(Name = "Quantidade")]
