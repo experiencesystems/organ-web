@@ -112,7 +112,7 @@ namespace OrganWeb.Models.Banco
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            
+
             // MAPEAMENTO DOS NOMES
 
             modelBuilder.Entity<Cargo>()
@@ -150,6 +150,10 @@ namespace OrganWeb.Models.Banco
             modelBuilder.Entity<PragaOrDoenca>()
                 .Property(t => t.PD)
                 .HasColumnName("P/D");
+
+            modelBuilder.Entity<VwCompra>()
+                .Property(t => t.ValorTotal)
+                .HasColumnName("Valor Total");
 
             modelBuilder.Entity<VwItems>()
                 .Property(t => t.ValorUnit)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -13,6 +14,7 @@ using OrganWeb.Models;
 using OrganWeb.Models.Banco;
 using OrganWeb.Models.Endereco;
 using OrganWeb.Models.Pessoa;
+using OrganWeb.Models.Telefone;
 using OrganWeb.Models.Usuario;
 
 namespace OrganWeb.Controllers
@@ -22,6 +24,8 @@ namespace OrganWeb.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private DDD ddd = new DDD();
+        private Estado estado = new Estado();
 
         public AccountController()
         {
@@ -58,11 +62,46 @@ namespace OrganWeb.Controllers
         }
 
         //
-        // GET: /Account/LoginRegistro
+        // GET: /Account/Login
         [AllowAnonymous]
-        public ActionResult LoginRegistro(LoginRegisterViewModel model)
+        public ActionResult Login(string returnUrl)
         {
-            return View(new LoginRegisterViewModel { Login = new LoginViewModel(), Registro = new RegisterViewModel() });
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+
+        //
+        // GET: /Account/Registro
+        [AllowAnonymous]
+        public ActionResult Registro()
+        {
+            var selectestados = new RegisterViewModel
+            {
+                Estados = estado.GetAll(),
+                DDDs = ddd.GetAll()
+            };
+            return View(selectestados);
+        }
+
+        private List<SelectListItem> bancossl = new List<SelectListItem>()
+            {
+            new SelectListItem() { Text = "VISA", Value = "1" },
+            new SelectListItem() { Text = "MasterCard", Value = "2" },
+            new SelectListItem() { Text = "AMEX", Value = "3" },
+            new SelectListItem() { Text = "elo", Value = "4" },
+            new SelectListItem() { Text = "Hipercard", Value = "5" }
+            };
+
+        //
+        // GET: /Account/Assinatura
+        [AllowAnonymous]
+        public ActionResult Assinatura()
+        {
+            var assist = new AssinaturaViewModel
+            {
+                Bancos = bancossl
+            };
+            return View(assist);
         }
 
         //
@@ -73,14 +112,14 @@ namespace OrganWeb.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginRegisterViewModel model, string returnUrl)
+        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var user = UserManager.FindByEmail(model.Login.Email);
-                    var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Login.Password, model.Login.RememberMe, shouldLockout: false);
+                    var user = UserManager.FindByEmail(model.Email);
+                    var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: false);
                     switch (result)
                     {
                         case SignInStatus.Success:
@@ -88,20 +127,20 @@ namespace OrganWeb.Controllers
                         case SignInStatus.LockedOut:
                             return View("Lockout");
                         case SignInStatus.RequiresVerification:
-                            return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, model.Login.RememberMe });
+                            return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, model.RememberMe });
                         case SignInStatus.Failure:
                         default:
                             ModelState.AddModelError("", "Tentativa de login inválida.");
-                            return View("LoginRegistro", model);
+                            return View(model);
                     }
                 }
                 catch
                 {
                     ModelState.AddModelError("", "Tentativa de login inválida.");
-                    return View("LoginRegistro", model);
+                    return View(model);
                 }
             }
-            return View("LoginRegistro", new LoginRegisterViewModel { Login = new LoginViewModel(), Registro = new RegisterViewModel() });
+            return View(model);
         }
 
         //
@@ -148,40 +187,120 @@ namespace OrganWeb.Controllers
         }
 
         //
-        // POST: /Account/Register
+        // POST: /Account/Assinatura
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(LoginRegisterViewModel model)
+        public ActionResult Assinatura(AssinaturaViewModel model)
         {
             if (ModelState.IsValid)
+            { }
+            model.Bancos = bancossl;
+            return View(model);
+        }
+
+        //
+        // POST: /Account/Registro
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Registro(RegisterViewModel model)
+        {
+            var db = new BancoContext();
+            ApplicationUser user = new ApplicationUser();
+            if (ModelState.IsValid)
             {
-                var user = new ApplicationUser
+                var cidade = new Cidade
                 {
-                    UserName = model.Registro.UserName,
-                    Email = model.Registro.Email,
+                    Nome = model.Cidade,
+                    IdEstado = model.Estado
+                };
+
+                db.Cidades.Add(cidade);
+                db.SaveChanges();
+
+                var bairro = new Bairro
+                {
+                    Nome = model.Bairro,
+                    IdCidade = cidade.Id
+                };
+
+                db.Bairros.Add(bairro);
+                db.SaveChanges();
+
+                var rua = new Logradouro
+                {
+                    Nome = model.Rua,
+                    IdBairro = bairro.Id
+                };
+
+                db.Logradouros.Add(rua);
+                db.SaveChanges();
+
+                var cep = new Endereco
+                {
+                    CEP = model.CEP,
+                    IdRua = rua.Id
+                };
+
+                db.Enderecos.Add(cep);
+                db.SaveChanges();
+
+                var pessoa = new Pessoa
+                {
+                    Nome = model.Nome,
+                    Email = model.Email,
+                    NumeroEndereco = model.Numero,
+                    CompEndereco = model.Complemento,
+                    CEP = cep.CEP
+                };
+
+                db.Pessoas.Add(pessoa);
+                db.SaveChanges();
+
+                var tipotel = new TipoTel
+                {
+                    Tipo = model.TipoTelefone
+                };
+
+                db.TipoTels.Add(tipotel);
+                db.SaveChanges();
+
+                var telefone = new Telefone
+                {
+                    Numero = model.Numero,
+                    IdDDD = model.DDD,
+                    IdTipo = tipotel.Id
+                };
+
+                db.Telefones.Add(telefone);
+                db.SaveChanges();
+
+                var telpessoa = new TelefonePessoa
+                {
+                    IdPessoa = pessoa.Id,
+                    IdTelefone = telefone.Id
+                };
+
+                db.TelefonePessoas.Add(telpessoa);
+                db.SaveChanges();
+
+                user = new ApplicationUser
+                {
+                    UserName = model.UserName,
+                    Email = model.Email,
                     Assinatura = false,
                     Confirmacao = false,
                     DataCadastro = DateTime.Today,
-                    IdPessoa = 3
+                    IdPessoa = pessoa.Id
                 };
 
-                var result = await UserManager.CreateAsync(user, model.Registro.Password);
+                db.Dispose();
+
+                var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                    try
-                    {
-                        var db = new BancoContext();
-                        db.Users.Add(user);
-                        db.SaveChanges();
-                    }
-                    catch
-                    {
-                        ModelState.AddModelError("", "Tentativa de registro inválida.");
-                        return View("LoginRegistro", model);
-                    }
 
                     // Para obter mais informações sobre como habilitar a confirmação da conta e redefinição de senha, visite https://go.microsoft.com/fwlink/?LinkID=320771
                     // Enviar um email com este link
@@ -191,11 +310,15 @@ namespace OrganWeb.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
+                model.DDDs = ddd.GetAll();
+                model.Estados = estado.GetAll();
                 AddErrors(result);
             }
 
             // Se chegamos até aqui e houver alguma falha, exiba novamente o formulário
-            return View("LoginRegistro", new LoginRegisterViewModel { Login = new LoginViewModel(), Registro = new RegisterViewModel() });
+            model.DDDs = ddd.GetAll();
+            model.Estados = estado.GetAll();
+            return View(model);
         }
 
         //

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrganWeb.Models.Banco;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,13 +9,9 @@ using System.Web;
 namespace OrganWeb.Models.Telefone
 {
     [Table("tbDDD")]
-    public class DDD
+    public class DDD : Repository<DDD>
     {
         [Key]
-        public int Id { get; set; }
-
-        [Required]
-        [Range(1, 99)]
         public int Valor { get; set; }
     }
 }

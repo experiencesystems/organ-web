@@ -9,9 +9,8 @@ namespace OrganWeb.Areas.Sistema.Models.ViewModels
 {
     public class ViewFinanceiro
     {
-        public IEnumerable<Compra> Compras { get; set; }
-        public IEnumerable<Despesa> Despesas { get; set; }
         public IEnumerable<VwCompra> VwCompras { get; set; }
+        public IEnumerable<VwSaldo> VwSaldos { get; set; }
         public IEnumerable<VwFluxoDeCaixa> VwFluxoDeCaixas { get; set; }
     }
 }
