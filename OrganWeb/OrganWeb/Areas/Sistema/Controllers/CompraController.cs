@@ -23,7 +23,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private Compra compra = new Compra();
         private VwItems items = new VwItems();
         private ItensComprados itemscomp = new ItensComprados();
-        
+
         public ActionResult Index()
         {
             return Redirect("~/Sistema/Financeiro/Index");
@@ -60,7 +60,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 Pagamento = pagamento.GetByID(compra.IdPagamento),
                 VwItems = items.GetAll().Where(a => itemscompr.Any(c => c.IdEstoque == a.Id))
             };
-            ViewBag.Tipo = pagamento.Tipos.Where(x => x.Value == pagamento.Tipo.ToString()).First().Text;
+            ViewBag.Tipo = pagamento.Tipos.Where(x => x.Value == select.Pagamento.Tipo.ToString()).First().Text;
             return View(select);
         }
 
@@ -168,18 +168,14 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExcluirConfirmado(ViewCompra vcompra)
         {
-            if (ModelState.IsValid)
-            {
-                itemscomp.DeleteByIdCompra(vcompra.Compra);
-                compra = vcompra.Compra;
-                compra.Delete(vcompra.Compra.Id);
-                compra.Save();
-                pagamento = vcompra.Pagamento;
-                pagamento.Delete(vcompra.Pagamento.Id);
-                pagamento.Save();
-                return RedirectToAction("Index");
-            }
-            return View(vcompra);
+            itemscomp.DeleteByIdCompra(vcompra.Compra);
+            compra = vcompra.Compra;
+            compra.Delete(vcompra.Compra.Id);
+            compra.Save();
+            pagamento = vcompra.Pagamento;
+            pagamento.Delete(vcompra.Pagamento.Id);
+            pagamento.Save();
+            return RedirectToAction("Index");
         }
     }
 }

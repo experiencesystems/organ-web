@@ -94,13 +94,9 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Excluir(Despesa despesa)
         {
-            if (ModelState.IsValid)
-            {
-                despesa.Delete(despesa.Id);
-                despesa.Save();
-                return RedirectToAction("Index");
-            }
-            return View(despesa);
+            despesa.Delete(despesa.Id);
+            despesa.Save();
+            return RedirectToAction("Index");
         }
     }
 }
