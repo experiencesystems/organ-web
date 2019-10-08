@@ -4,51 +4,70 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+
 <div class="main-body">
     <div class="row">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="card-title box-title">Manutenções recentes</h6>
-                    <div class="card-header-right">
-                        <ul class="list-unstyled card-option">
-                            <li><i class="ti-minus minimize-card"></i></li>
-                            <li><i class="icon-refresh"></i></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="card-content">
-                        <div class="card bg-light mb-3" style="max-width: 18rem;">
-                            @foreach (var item in Model.MaquinaManutencaos)
-                            {
-                                <div class="card-header">
-                                    Manutenção de @Html.DisplayFor(model => item.Maquina.Nome) -
-                                    @Html.ActionLink("Detalhes", "Detalhes", new { id = item.IdManutencao, id2 = item.IdMaquina })
-                                </div>
-                                <div class="card-body">
-                                    Data: @Html.DisplayFor(model => item.Manutencao.Data)
-                                    @Html.DisplayFor(model => item.Manutencao.Detalhes)
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary edit" data-toggle="newmodal" data-url="@Url.Action("Editar", "Manutencao", new { id = item.IdManutencao, id2 = item.IdMaquina })">Editar</button>
-                                    @*@<button type="button" class="btn btn-primary edit" data-toggle="edit-modal" data-target="#edit-item">Editar</button>
-                                        @{Html.RenderAction("Editar", "Manutencao", new { id = item.IdManuntencao, id2 = item.IdMaquina });}*@
-                                    <button type="button" class="btn btn-danger delete" data-url="@Url.Action("Excluir", "Manutencao", new { id = item.IdManutencao, id2 = item.IdMaquina })">Excluir</button>
-                                </div>
-                            }
+            <div class="tablecontainer">
+                <p class="card-text">
+                    <a class="popup btn btn-add" href="/Sistema/Manutencao/_NovaManutencao" style="margin-bottom:20px; margin-top:20px;">Nova manutenção</a>
+                </p>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="card-title box-title">Manutenções recentes</h6>
+                        <div class="card-header-right">
+                            <ul class="list-unstyled card-option">
+                                <li><i class="ti-minus minimize-card"></i></li>
+                                <li><i class="icon-refresh"></i></li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-                <div class="card-content">
-                    <div class="card border-success mb-3" style="max-width: 18rem;">
-                        <div class="card-body text-success">
-                            <h5 class="card-title">Nova manutenção</h5>
-                            <p class="card-text">
-                                <div class="teste"></div>
-                                <button type="button" class="btn btn-info waves-effect" data-toggle="ajax-modal" data-target="#add-item">Nova manutenção</button>
-                                @{Html.RenderAction("_NovaManutencao", "Manutencao");}
-                            </p>
+                    <div class="card-body">
+                        <div class="card-content">
+                            <div class="card-title box-title">
+
+
+                                <table class="table" id="myDatatable">
+
+                                    <thead class="thead-title">
+                                        <tr>
+                                            <th>Máquina em manutenção</th>
+                                            <th scope="col">Data</th>
+                                            <th scope="col">Tratamento</th>
+                                            <th scope="col">Descrição</th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.MaquinaManutencaos)
+                                        {
+                                            <tr class="tr-shadow">
+                                                <td>
+                                                    @Html.DisplayFor(model => item.Maquina.Nome)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(model => item.Manutencao.Data)
+                                                </td>
+                                                <td>
+                                                    @Html.ActionLink("Detalhes", "Detalhes", new { id = item.IdManutencao, id2 = item.IdMaquina }, new { @class = "popup" })
+                                                </td>
+                                                <td>
+
+                                                    @Html.ActionLink("Editar", "Editar", new { id = item.IdManutencao, id2 = item.IdMaquina }, new { @class = "popup" })
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger delete" data-url="@Url.Action("Excluir", "Manutencao", new { id = item.IdManutencao, id2 = item.IdMaquina })">Excluir</button>
+                                                </td>
+                                            </tr>
+                                            <tr class="spacer"></tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -56,49 +75,66 @@
         </div>
     </div>
 </div>
-<div id="modal-placeholder"></div>
-<div class="modal fade" id="newmodal" tabindex="-1" role="dialog" data-backdrop="static" />
 
-<environment include="Development">
-    <script src="~/Scripts/crudmodal.js" asp-append-version="true" defer></script>
-</environment>
 
-<environment exclude="Development">
-    <script src="~/js/crudmodal.min.js" asp-append-version="true" defer></script>
-</environment>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"
-        integrity="sha256-F6h55Qw6sweK+t7SiOJX+2bpSAa3b/fnlrVCJvmEj1A="
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.9/jquery.validate.unobtrusive.min.js"
-        integrity="sha256-paoxpct33kY9fpQlvgC8IokjGq8iqYaVFawgFPg8oz0="
-        crossorigin="anonymous"></script>
-
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-
-@section scripts{
+@section Scripts {
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.0.5/dist/jBox.all.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.semanticui.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
 
     <script>
-        $(function () {
+        var Popup;
+        $(document).ready(function () {
+            $('.tablecontainer').on('click', 'a.popup', function (e) {
+                e.preventDefault();
+                OpenPopup($(this).attr('href'));
 
-            /*$(".edit").click(function () {
-                var url = $(this).data('url');
+            })
+            function OpenPopup(pageUrl) {
+                var $pageContent = $('<div/>');
+                $pageContent.load(pageUrl, function () {
+                    $('#popupForm', $pageContent).removeData('validator');
+                    $('#popupForm', $pageContent).removeData('unobtrusiveValidation');
+                    $.validator.unobtrusive.parse('form');
+                });
 
-                $("#modal").load(url, function () {
-                    $("#modal").modal("show");
+                $dialog = $('<div class="popupWindow" style="overflow:auto"></div>')
+                    .html($pageContent)
+                    .dialog({
+                        draggable: false,
+                        autoOpen: false,
+                        resizable: false,
+                        modal: true,
+                        height: 600,
+                        width: 650,
+                        close: function () {
+                            $('.overlay').hide(),
+                                $dialog.dialog('destroy').remove();
+                        }
+                    })
+
+                $('.popupWindow').on('submit', '#popupForm', function (e) {
+                    var url = $('#popupForm')[0].action;
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: $('#popupForm').serialize(),
+                        success: function (data) {
+                            if (data.status) {
+                                $dialog.dialog('close');
+                                oTable.ajax.reload();
+                            }
+                        }
+                    })
+
+                    e.preventDefault();
                 })
-            });*/
-
-            $(".delete").click(function () {
-                var url = $(this).data('url');
-
-                $("#newmodal").load(url, function () {
-                    $("#newmodal").modal("show");
-                })
-            });
-
+                $dialog.dialog('open');
+            }
         })
     </script>
 }
