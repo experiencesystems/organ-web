@@ -1,5 +1,6 @@
 ﻿using OrganWeb.Areas.Sistema.Models.ViewModels;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco;
+using OrganWeb.Areas.Sistema.Models.ViewsBanco.Financeiro;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -2,6 +2,7 @@
 using OrganWeb.Areas.Sistema.Models.Financas;
 using OrganWeb.Areas.Sistema.Models.ViewModels;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco;
+using OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque;
 using OrganWeb.Models.Banco;
 using OrganWeb.Models.Financeiro;
 using System;

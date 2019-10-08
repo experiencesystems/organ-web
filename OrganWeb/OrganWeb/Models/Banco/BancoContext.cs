@@ -3,7 +3,6 @@ using OrganWeb.Areas.Sistema.Models.Funcionarios;
 using OrganWeb.Areas.Sistema.Models.Safras;
 using OrganWeb.Areas.Sistema.Models.Armazenamento;
 using OrganWeb.Areas.Sistema.Models.Administrativo;
-using OrganWeb.Areas.Sistema.Models.ViewModels;
 using OrganWeb.Areas.Sistema.Models.Ferramentas;
 using OrganWeb.Areas.Sistema.Models.Financas;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -14,7 +13,9 @@ using OrganWeb.Models.Usuario;
 using OrganWeb.Models.Financeiro;
 using OrganWeb.Areas.Sistema.Models.Controles;
 using OrganWeb.Areas.Sistema.Models.Praga_e_Doenca;
-using OrganWeb.Areas.Sistema.Models.ViewsBanco;
+using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
+using OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque;
+using OrganWeb.Areas.Sistema.Models.ViewsBanco.Financeiro;
 
 namespace OrganWeb.Models.Banco
 {
@@ -74,12 +75,22 @@ namespace OrganWeb.Models.Banco
         public DbSet<Semente> Sementes { get; set; }
 
         // VIEWS
+        public DbSet<VwEndereco> VwEnderecos { get; set; }
+        public DbSet<VwTelefone> VwTelefones { get; set; }
+        public DbSet<VwPessoa> VwPessoas { get; set; }
+        public DbSet<VwPessoaFisica> VwPessoaFisicas { get; set; }
+        public DbSet<VwPessoaJuridica> VwPessoaJuridicas { get; set; }
+        public DbSet<VwFuncionario> VwFuncionarios { get; set; }
         public DbSet<VwItems> VwItems { get; set; }
         public DbSet<VwCompra> VwCompras { get; set; }
-        public DbSet<VwFluxoDeCaixa> VwFluxoDeCaixas { get; set; }
         public DbSet<VwSaida> VwSaidas { get; set; }
-        public DbSet<VwSaldo> VwSaldos { get; set; }
         public DbSet<VwVenda> VwVendas { get; set; }
+        public DbSet<VwSaldo> VwSaldos { get; set; }
+        public DbSet<VwFluxoDeCaixa> VwFluxoDeCaixas { get; set; }
+        public DbSet<VwQtdMa> VwQtdMas { get; set; }
+        public DbSet<VwManutencao> VwManutencaos { get; set; }
+        public DbSet<VwPragaOrDoenca> VwPragaOrDoencas { get; set; }
+        public DbSet<VwControle> VwControles { get; set; }
 
         // ENDEREÇO
         public DbSet<Endereco.Endereco> Enderecos { get; set; }
@@ -141,21 +152,133 @@ namespace OrganWeb.Models.Banco
                 .Property(t => t.PD)
                 .HasColumnName("P/D");
 
-            modelBuilder.Entity<VwCompra>()
-                .Property(t => t.ValorTotal)
-                .HasColumnName("Valor Total");
+            modelBuilder.Entity<VwPessoa>()
+                .Property(t => t.Endereco)
+                .HasColumnName("Endereço");
+
+            modelBuilder.Entity<VwPessoaFisica>()
+                .Property(t => t.Endereco)
+                .HasColumnName("Endereço");
+
+            modelBuilder.Entity<VwPessoaFisica>()
+                .Property(t => t.DataNascimento)
+                .HasColumnName("Data de Nascimento");
+
+            modelBuilder.Entity<VwPessoaJuridica>()
+                .Property(t => t.Endereco)
+                .HasColumnName("Endereço");
+
+            modelBuilder.Entity<VwFuncionario>()
+                .Property(t => t.Salario)
+                .HasColumnName("Salário");
+
+            modelBuilder.Entity<VwFuncionario>()
+                .Property(t => t.DataNascimento)
+                .HasColumnName("Data de Nascimento");
+
+            modelBuilder.Entity<VwFuncionario>()
+                .Property(t => t.Endereco)
+                .HasColumnName("Endereço");
+
+            modelBuilder.Entity<VwFornecedor>()
+                .Property(t => t.NomeFantasia)
+                .HasColumnName("Nome Fantasia");
+
+            modelBuilder.Entity<VwFornecedor>()
+                .Property(t => t.RazaoSocial)
+                .HasColumnName("Razão Social");
+
+            modelBuilder.Entity<VwFornecedor>()
+                .Property(t => t.Endereco)
+                .HasColumnName("Endereço");
 
             modelBuilder.Entity<VwItems>()
-                .Property(t => t.ValorUnit)
-                .HasColumnName("Valor Unitário (R$)");
+                .Property(t => t.UnidadeMedida)
+                .HasColumnName("Unidade de Medida");
 
             modelBuilder.Entity<VwItems>()
                 .Property(t => t.ValorTotal)
                 .HasColumnName("Valor Total (p/Produto)");
 
             modelBuilder.Entity<VwItems>()
-                .Property(t => t.UnidadeMedida)
-                .HasColumnName("Unidade de Medida");
+                .Property(t => t.ValorUnitario)
+                .HasColumnName("Valor Unitário (R$)");
+
+            modelBuilder.Entity<VwCompra>()
+                .Property(t => t.ItensQtd)
+                .HasColumnName("Itens - Quantidade Comprada");
+
+            modelBuilder.Entity<VwCompra>()
+                .Property(t => t.ValorTotal)
+                .HasColumnName("Valor Total");
+
+            modelBuilder.Entity<VwSaida>()
+                .Property(t => t.Saida)
+                .HasColumnName("Saída");
+
+            modelBuilder.Entity<VwFluxoDeCaixa>()
+                .Property(t => t.Saida)
+                .HasColumnName("Saída");
+
+            modelBuilder.Entity<VwFluxoDeCaixa>()
+                .Property(t => t.Mes)
+                .HasColumnName("MÊS");
+
+            modelBuilder.Entity<VwFluxoDeCaixa>()
+                .Property(t => t.Ano)
+                .HasColumnName("ANO");
+
+            modelBuilder.Entity<VwQtdMa>()
+                .Property(t => t.Quantidade)
+                .HasColumnName("Quantidade de Manutenções");
+
+            modelBuilder.Entity<VwQtdMa>()
+                .Property(t => t.CustoTotal)
+                .HasColumnName("Custo Total");
+
+            modelBuilder.Entity<VwManutencao>()
+                .Property(t => t.Maquina)
+                .HasColumnName("Máquina");
+
+            modelBuilder.Entity<VwManutencao>()
+                .Property(t => t.Tipo)
+                .HasColumnName("Tipo de Máquina");
+
+            modelBuilder.Entity<VwManutencao>()
+                .Property(t => t.Manutencao)
+                .HasColumnName("Manutenção");
+
+            modelBuilder.Entity<VwManutencao>()
+                .Property(t => t.Data)
+                .HasColumnName("Data de Manutenção");
+
+            modelBuilder.Entity<VwManutencao>()
+                .Property(t => t.Valor)
+                .HasColumnName("Valor da Manutenção");
+
+            modelBuilder.Entity<VwPragaOrDoenca>()
+                .Property(t => t.Areas)
+                .HasColumnName("Áreas");
+
+            modelBuilder.Entity<VwControle>()
+                .Property(t => t.Descricao)
+                .HasColumnName("Descrição");
+
+            modelBuilder.Entity<VwControle>()
+                .Property(t => t.Eficiencia)
+                .HasColumnName("Eficiência(%)");
+
+            modelBuilder.Entity<VwControle>()
+                .Property(t => t.Liberacoes)
+                .HasColumnName("Número de Liberações");
+
+            modelBuilder.Entity<VwControle>()
+                .Property(t => t.Nome)
+                .HasColumnName("Pragas/Doenças");
+
+            modelBuilder.Entity<VwControle>()
+                .Property(t => t.Itens)
+                .HasColumnName("Itens Usados - Quantidade");
 
             modelBuilder.Entity<ApplicationUser>()
                 .ToTable("tbUsuario")
@@ -165,22 +288,6 @@ namespace OrganWeb.Models.Banco
                 .Ignore(t => t.LockoutEnabled)
                 .Ignore(t => t.AccessFailedCount)
                 .Ignore(t => t.TwoFactorEnabled);
-
-            // RELAÇÕES
-
-            //modelBuilder.Entity<Funcionario>()
-            //.HasRequired(u => u.User)
-            //.WithRequiredDependent(u => u.Funcionario)
-            //.Map(u => u.MapKey("IdUsuario"));
-
-            /*modelBuilder.Entity<Funcionario>()
-            .HasRequired(f => f.Cargo)
-            .WithMany(c => c.Funcionarios)
-            .HasForeignKey(f => f.IdCargo);
-            
-            modelBuilder.Entity<Fazenda>()
-            .HasRequired(f => f.Localizacao)
-            .WithRequiredDependent(l => l.Fazenda);*/
         }
 
         public static BancoContext Create()

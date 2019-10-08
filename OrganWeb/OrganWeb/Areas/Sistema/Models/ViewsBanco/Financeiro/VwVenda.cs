@@ -5,15 +5,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace OrganWeb.Areas.Sistema.Models.ViewsBanco
+namespace OrganWeb.Areas.Sistema.Models.ViewsBanco.Financeiro
 {
     [Table("vwVenda")]
     public class VwVenda
     {
         [Key]
-        public int IdVenda { get; set; }
-        public DateTime D { get; set; }
-        public DateTime Data { get; set; }
+        public int Venda { get; set; }
+        public string Data { get; set; }
         public int IdEstoque { get; set; }
         public double ValorTotal { get; set; }
     }

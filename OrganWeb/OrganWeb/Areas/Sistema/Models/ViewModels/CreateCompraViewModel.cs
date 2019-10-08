@@ -1,5 +1,6 @@
 ﻿using OrganWeb.Areas.Sistema.Models.Armazenamento;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco;
+using OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

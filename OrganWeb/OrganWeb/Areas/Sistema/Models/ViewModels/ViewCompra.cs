@@ -1,6 +1,7 @@
 ﻿using OrganWeb.Areas.Sistema.Models.Armazenamento;
 using OrganWeb.Areas.Sistema.Models.Financas;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco;
+using OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque;
 using OrganWeb.Models.Financeiro;
 using System;
 using System.Collections.Generic;
