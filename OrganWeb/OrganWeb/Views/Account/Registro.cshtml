@@ -10,150 +10,673 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Registro</title>
+    <style>
+* {margin: 0; padding: 0;}
+html {
+  height: 100%;
+  background: #e9e9e9;
+}
+body {
+  font-family: montserrat, arial, verdana;
+  width: 100%;
+  overflow-x: hidden;
+}
+/*form styles*/
+.steps {
+  width: 675px;
+  margin: 50px auto;
+  margin-right: 2%;
+  position: relative;
+}
+
+.steps fieldset {
+  background: white;
+  border: 0 none;
+  border-radius: 3px;
+  box-shadow: 0 17px 41px -21px rgb(0, 0, 0);
+  padding: 20px 30px;
+  box-sizing: border-box;
+  width: 80%;
+  margin: 0 10%;
+  /*stacking fieldsets above each other*/
+  position: absolute;
+}
+/*Hide all except first fieldset*/
+.steps fieldset:not(:first-of-type) { display: none; }
+/*inputs*/
+input, button {
+    border: none;
+    outline: none;
+    background: none;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+}
+.steps label {
+    width: 100%;
+    top: 0px;
+    text-align: left;
+    line-height: 1.5;
+    font-size: 12px;
+    color: #666666;
+    text-transform: uppercase;
+}
+input {
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  padding-bottom: 5px;
+  font-size: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  text-align: center;
+  margin-bottom: 10px;
+}
+/*buttons*/
+.steps .action-button, .action-button {
+  width: 120px !important;
+  display: block;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-size: .75em;
+  letter-spacing: 1px;
+  height: 38px;
+  line-height: 38px;
+  overflow: hidden;
+  background: #18b000;
+  border-radius: 3px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  border: 0;
+  color: #fff;
+  margin-top: 30px;
+  cursor: pointer;
+  transition: all .3s ease;
+}
+.steps .next, .steps .submit{ float: right; }
+.steps .previous{ float:left; }
+.steps .action-button:hover, .steps .action-button:focus, .action-button:hover, .action-button:focus { background:#047c11; }
+/*headings*/
+.fs-title {
+    margin: 10px 0 25px;
+    font-family: Roboto;
+    line-height: 1;
+    color: #837E7E;
+    font-size: 18px;
+    font-weight: 500;
+    text-align:left;
+    text-transform: uppercase;
+}
+/*progressbar*/
+#progressbar {
+  margin-bottom: 30px;
+  overflow: hidden;
+  /*CSS counters to number the steps*/
+  counter-reset: step;
+  width:100%;
+  text-align: center;
+}
+#progressbar li {
+  list-style-type: none;
+  color: rgb(51, 51, 51);
+  text-transform: uppercase;
+  font-size: 9px;
+  width: 20%;
+  float: left;
+  position: relative;
+}
+#progressbar li:before {
+  content: counter(step);
+  counter-increment: step;
+  width: 20px;
+  line-height: 20px;
+  display: block;
+  font-size: 10px;
+  color: #333;
+  background: white;
+  border-radius: 25px;
+  margin: 0 auto 5px auto;
+}
+/*progressbar connectors*/
+#progressbar li:after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background: white;
+  position: absolute;
+  left: -50%;
+  top: 9px;
+  z-index: -1; /*put it behind the numbers*/
+}
+#progressbar li:first-child:after {
+  /*connector not needed before the first step*/
+  content: none;
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before,  #progressbar li.active:after{
+  background: #18b000;
+  color: white;
+}
+    </style>
 </head>
 <body>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
 
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Registro", "Account", FormMethod.Post, new { enctype = "multipart/form-data", @class = "steps" }))
     {
         @Html.AntiForgeryToken()
+        
+            <ul id="progressbar">
+                <li class="active">Planos disponíveis</li>
+                <li>Identificação</li>
+                <li>Localização</li>
+                <li>Dados bancários</li>
+                <li>Finalizar</li>
+            </ul>
 
-        <div class="form-horizontal">
-            <h4>RegisterViewModel</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                </div>
-            </div>
+            <!-- PLANOS -->
+            <fieldset>
+                <h2 class="fs-title">Planos disponíveis</h2>
+                <input type="button" data-page="1" name="next" class="next action-button" value="Next" />
+            </fieldset>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+            <!-- IDENTIFICAÇÃO -->
+            <fieldset>
+                <h2 class="fs-title">Identificação</h2>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.DDD, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.DDD, new SelectList(Model.DDDs, "Valor", "Valor"))
-                    @Html.ValidationMessageFor(model => model.DDD, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Telefone, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                <div class="form-row row">
+                    @Html.LabelFor(model => model.DDD, htmlAttributes: new { @class = "control-label col-md-2" })
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.TipoTelefone, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.TipoTelefone, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.TipoTelefone, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                    @Html.LabelFor(model => model.Telefone, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-auto">
+                        @Html.DropDownListFor(model => model.DDD, new SelectList(Model.DDDs, "Valor", "Valor"))
+                        @Html.ValidationMessageFor(model => model.DDD, "", new { @class = "text-danger" })
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.CEP, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.CEP, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.CEP, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TipoTelefone, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TipoTelefone, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TipoTelefone, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <input type="button" data-page="2" name="previous" class="previous action-button" value="Previous" />
+                <input type="button" data-page="2" name="next" class="next action-button" value="Next" />
+            </fieldset>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Rua, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Rua, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Rua, "", new { @class = "text-danger" })
+            <!-- LOCALIZAÇÃO -->
+            <fieldset>
+                <h2 class="fs-title">Localização</h2>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CEP, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CEP, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CEP, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Numero, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Numero, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Numero, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Rua, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Rua, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Rua, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Complemento, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Complemento, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Complemento, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Numero, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Numero, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Numero, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Bairro, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Bairro, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Bairro, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Complemento, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Complemento, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Complemento, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Cidade, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Cidade, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Cidade, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Bairro, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Bairro, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Bairro, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.Estado, new SelectList(Model.Estados, "Id", "Nome", Model.Estado), "Estado")
-                    @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Cidade, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Cidade, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Cidade, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.Estado, new SelectList(Model.Estados, "Id", "Nome", Model.Estado), "Estado")
+                        @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
-        </div>
+                <input type="button" data-page="3" name="previous" class="previous action-button" value="Previous" />
+                <input type="button" data-page="3" name="next" class="next action-button" value="Next" />
+            </fieldset>
+
+
+
+            <!-- DADOS BANCÁRIOS -->
+            <fieldset>
+                <h2 class="fs-title">Dados bancários</h2>
+                <input type="button" data-page="4" name="previous" class="previous action-button" value="Previous" />
+                <input type="button" data-page="4" name="next" class="next action-button" value="Next" />
+            </fieldset>
+
+            <!-- RETENTION FIELD SET -->
+            <fieldset>
+                <h2 class="fs-title">FINALIZAR</h2>
+                <input type="button" data-page="5" name="previous" class="previous action-button" value="Previous" />
+                <input id="submit" class="hs-button primary large action-button next" type="submit" value="Submit">
+            </fieldset>
+            }
+
+            <script>
+                /* Fundraising Grader
+*
+* Generic Copyright, yadda yadd yadda
+*
+* Plug-ins: jQuery Validate, jQuery 
+* Easing
+*/
+
+$(document).ready(function() {
+    var current_fs, next_fs, previous_fs;
+    var left, opacity, scale;
+    var animating;
+    $(".steps").validate({
+        errorClass: 'invalid',
+        errorElement: 'span',
+        errorPlacement: function(error, element) {
+            error.insertAfter(element.next('span').children());
+        },
+        highlight: function(element) {
+            $(element).next('span').show();
+        },
+        unhighlight: function(element) {
+            $(element).next('span').hide();
+        }
+    });
+    $(".next").click(function() {
+        $(".steps").validate({
+            errorClass: 'invalid',
+            errorElement: 'span',
+            errorPlacement: function(error, element) {
+                error.insertAfter(element.next('span').children());
+            },
+            highlight: function(element) {
+                $(element).next('span').show();
+            },
+            unhighlight: function(element) {
+                $(element).next('span').hide();
+            }
+        });
+        if ((!$('.steps').valid())) {
+            return true;
+        }
+        if (animating) return false;
+        animating = true;
+        current_fs = $(this).parent();
+        next_fs = $(this).parent().next();
+        $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+        next_fs.show();
+        current_fs.animate({
+            opacity: 0
+        }, {
+            step: function(now, mx) {
+                scale = 1 - (1 - now) * 0.2;
+                left = (now * 50) + "%";
+                opacity = 1 - now;
+                current_fs.css({
+                    'transform': 'scale(' + scale + ')'
+                });
+                next_fs.css({
+                    'left': left,
+                    'opacity': opacity
+                });
+            },
+            duration: 800,
+            complete: function() {
+                current_fs.hide();
+                animating = false;
+            }
+        });
+    });
+    $(".submit").click(function() {
+        $(".steps").validate({
+            errorClass: 'invalid',
+            errorElement: 'span',
+            errorPlacement: function(error, element) {
+                error.insertAfter(element.next('span').children());
+            },
+            highlight: function(element) {
+                $(element).next('span').show();
+            },
+            unhighlight: function(element) {
+                $(element).next('span').hide();
+            }
+        });
+        if ((!$('.steps').valid())) {
+            return false;
+        }
+        if (animating) return false;
+        animating = true;
+        current_fs = $(this).parent();
+        next_fs = $(this).parent().next();
+        $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+        next_fs.show();
+        current_fs.animate({
+            opacity: 0
+        }, {
+            step: function(now, mx) {
+                scale = 1 - (1 - now) * 0.2;
+                left = (now * 50) + "%";
+                opacity = 1 - now;
+                current_fs.css({
+                    'transform': 'scale(' + scale + ')'
+                });
+                next_fs.css({
+                    'left': left,
+                    'opacity': opacity
+                });
+            },
+            duration: 800,
+            complete: function() {
+                current_fs.hide();
+                animating = false;
+            }
+        });
+    });
+    $(".previous").click(function() {
+        if (animating) return false;
+        animating = true;
+        current_fs = $(this).parent();
+        previous_fs = $(this).parent().prev();
+        $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+        previous_fs.show();
+        current_fs.animate({
+            opacity: 0
+        }, {
+            step: function(now, mx) {
+                scale = 0.8 + (1 - now) * 0.2;
+                left = ((1 - now) * 50) + "%";
+                opacity = 1 - now;
+                current_fs.css({
+                    'left': left
+                });
+                previous_fs.css({
+                    'transform': 'scale(' + scale + ')',
+                    'opacity': opacity
+                });
+            },
+            duration: 800,
+            complete: function() {
+                current_fs.hide();
+                animating = false;
+            }
+        });
+    });
+});
+jQuery(document).ready(function() {
+    jQuery("#edit-submitted-acquisition-amount-1,#edit-submitted-acquisition-amount-2,#edit-submitted-cultivation-amount-1,#edit-submitted-cultivation-amount-2,#edit-submitted-cultivation-amount-3,#edit-submitted-cultivation-amount-4,#edit-submitted-retention-amount-1,#edit-submitted-retention-amount-2,#edit-submitted-constituent-base-total-constituents").keyup(function() {
+        calcTotal();
+    });
+});
+
+function calcTotal() {
+    var grade = 0;
+    var donorTotal = Number(jQuery("#edit-submitted-constituent-base-total-constituents").val().replace(/,/g, ""));
+    if (donorTotal) {
+        donorTotal = parseFloat(donorTotal);
+    } else {
+        donorTotal = 0;
     }
+    grade += getBonusDonorPoints(donorTotal);
+    var acqAmount1 = Number(jQuery("#edit-submitted-acquisition-amount-1").val().replace(/,/g, ""));
+    var acqAmount2 = Number(jQuery("#edit-submitted-acquisition-amount-2").val().replace(/,/g, ""));
+    var acqTotal = 0;
+    if (acqAmount1) {
+        acqAmount1 = parseFloat(acqAmount1);
+    } else {
+        acqAmount1 = 0;
+    }
+    if (acqAmount2) {
+        acqAmount2 = parseFloat(acqAmount2);
+    } else {
+        acqAmount2 = 0;
+    }
+    if (acqAmount1 > 0 && acqAmount2 > 0) {
+        acqTotal = ((acqAmount2 - acqAmount1) / acqAmount1 * 100).toFixed(2);
+    } else {
+        acqTotal = 0;
+    }
+    jQuery("#edit-submitted-acquisition-percent-change").val(acqTotal + '%');
+    grade += getAcquisitionPoints(acqTotal);
+    console.log(grade);
+    var cultAmount1 = Number(jQuery("#edit-submitted-cultivation-amount-1").val().replace(/,/g, ""));
+    var cultAmount2 = Number(jQuery("#edit-submitted-cultivation-amount-2").val().replace(/,/g, ""));
+    var cultTotal = 0;
+    if (cultAmount1) {
+        cultAmount1 = parseFloat(cultAmount1);
+    } else {
+        cultAmount1 = 0;
+    }
+    if (cultAmount2) {
+        cultAmount2 = parseFloat(cultAmount2);
+    } else {
+        cultAmount2 = 0;
+    }
+    if (cultAmount1 > 0 && cultAmount2 > 0) {
+        cultTotal = ((cultAmount2 - cultAmount1) / cultAmount1 * 100).toFixed(2);
+    } else {
+        cultTotal = 0;
+    }
+    jQuery("#edit-submitted-cultivation-percent-change1").val(cultTotal + '%');
+    grade += getAcquisitionPoints(cultTotal);
+    var cultAmount3 = Number(jQuery("#edit-submitted-cultivation-amount-3").val().replace(/,/g, ""));
+    var cultAmount4 = Number(jQuery("#edit-submitted-cultivation-amount-4").val().replace(/,/g, ""));
+    if (cultAmount3) {
+        cultAmount3 = parseFloat(cultAmount3);
+    } else {
+        cultAmount3 = 0;
+    }
+    if (cultAmount4) {
+        cultAmount4 = parseFloat(cultAmount4);
+    } else {
+        cultAmount4 = 0;
+    }
+    if (cultAmount3 > 0 && cultAmount4 > 0) {
+        cultTotal2 = ((cultAmount4 - cultAmount3) / cultAmount3 * 100).toFixed(2);
+    } else {
+        cultTotal2 = 0;
+    }
+    jQuery("#edit-submitted-cultivation-percent-change2").val(cultTotal2 + '%');
+    grade += getAcquisitionPoints(cultTotal2);
+    var retAmount1 = Number(jQuery("#edit-submitted-retention-amount-1").val().replace(/,/g, ""));
+    var retAmount2 = Number(jQuery("#edit-submitted-retention-amount-2").val().replace(/,/g, ""));
+    var retTotal = 0;
+    if (retAmount1) {
+        retAmount1 = parseFloat(retAmount1);
+    } else {
+        retAmount1 = 0;
+    }
+    if (retAmount2) {
+        retAmount2 = parseFloat(retAmount2);
+    } else {
+        retAmount2 = 0;
+    }
+    if (retAmount1 > 0 && retAmount2 > 0) {
+        retTotal = (retAmount2 / retAmount1 * 100).toFixed(2);
+    } else {
+        retTotal = 0;
+    }
+    jQuery("#edit-submitted-retention-percent-change").val(retTotal + '%');
+    grade += getAcquisitionPoints(retTotal);
+    jQuery("#edit-submitted-final-grade-grade").val(grade + ' / 400');
+}
 
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
-</body>
+function getAcquisitionPoints(val) {
+    if (val < 1) {
+        return 0;
+    } else if (val >= 1 && val < 6) {
+        return 50;
+    } else if (val >= 6 && val < 11) {
+        return 60;
+    } else if (val >= 11 && val < 16) {
+        return 70;
+    } else if (val >= 16 && val < 21) {
+        return 75;
+    } else if (val >= 21 && val < 26) {
+        return 80;
+    } else if (val >= 26 && val < 31) {
+        return 85;
+    } else if (val >= 31 && val < 36) {
+        return 90;
+    } else if (val >= 36 && val < 41) {
+        return 95;
+    } else if (val >= 41) {
+        return 100;
+    }
+}
+
+function getCultivationGiftPoints(val) {
+    if (val < 1) {
+        return 0;
+    } else if (val >= 1 && val < 4) {
+        return 50;
+    } else if (val >= 4 && val < 7) {
+        return 60;
+    } else if (val >= 7 && val < 10) {
+        return 70;
+    } else if (val >= 10 && val < 13) {
+        return 75;
+    } else if (val >= 13 && val < 16) {
+        return 80;
+    } else if (val >= 16 && val < 21) {
+        return 85;
+    } else if (val >= 21 && val < 26) {
+        return 90;
+    } else if (val >= 26 && val < 51) {
+        return 95;
+    } else if (val >= 51) {
+        return 100;
+    }
+}
+
+function getCultivationDonationPoints(val) {
+    if (val < 1) {
+        return 0;
+    } else if (val >= 1 && val < 6) {
+        return 50;
+    } else if (val >= 6 && val < 11) {
+        return 60;
+    } else if (val >= 11 && val < 16) {
+        return 70;
+    } else if (val >= 16 && val < 21) {
+        return 75;
+    } else if (val >= 21 && val < 26) {
+        return 80;
+    } else if (val >= 26 && val < 31) {
+        return 85;
+    } else if (val >= 31 && val < 36) {
+        return 90;
+    } else if (val >= 36 && val < 41) {
+        return 95;
+    } else if (val >= 41) {
+        return 100;
+    }
+}
+
+function getRetentionPoints(val) {
+    if (val < 1) {
+        return 0;
+    } else if (val >= 1 && val < 51) {
+        return 50;
+    } else if (val >= 51 && val < 56) {
+        return 60;
+    } else if (val >= 56 && val < 61) {
+        return 70;
+    } else if (val >= 61 && val < 66) {
+        return 75;
+    } else if (val >= 66 && val < 71) {
+        return 80;
+    } else if (val >= 71 && val < 76) {
+        return 85;
+    } else if (val >= 76 && val < 81) {
+        return 90;
+    } else if (val >= 81 && val < 91) {
+        return 95;
+    } else if (val >= 91) {
+        return 100;
+    }
+}
+
+function getBonusDonorPoints(val) {
+    if (val < 10001) {
+        return 0;
+    } else if (val >= 10001 && val < 25001) {
+        return 10;
+    } else if (val >= 25001 && val < 50000) {
+        return 15;
+    } else if (val >= 50000) {
+        return 20;
+    }
+}
+modules.init();
+            </script>
+    </body>
 </html>
