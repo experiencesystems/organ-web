@@ -1,4 +1,5 @@
-﻿using OrganWeb.Models.Endereco;
+﻿using OrganWeb.Models.Banco;
+using OrganWeb.Models.Endereco;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +10,7 @@ using System.Web;
 namespace OrganWeb.Models.Pessoa
 {
     [Table("tbPessoa")]
-    public class Pessoa
+    public class Pessoa : Repository<Pessoa>
     {
         [Key]
         public int Id { get; set; }

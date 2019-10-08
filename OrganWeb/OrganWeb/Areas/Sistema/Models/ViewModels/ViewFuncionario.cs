@@ -9,10 +9,7 @@ namespace OrganWeb.Areas.Sistema.Models.ViewModels
 {
     public class ViewFuncionario
     {
-     
         public IEnumerable<Cargo> Cargo { get; set; }
         public IEnumerable<Funcionario> Funcionario { get; set; }
-        //public IEnumerable<Tarefa> Tarefa { get; set; }
-
     }
 }
