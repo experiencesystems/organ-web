@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 
@@ -51,12 +52,20 @@ namespace OrganWeb.Models.Banco
 
         public void Save()
         {
-            _context.SaveChanges();
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                string errorMessages = string.Join("; ", ex.EntityValidationErrors.SelectMany(x => x.ValidationErrors).Select(x => x.PropertyName + ": " + x.ErrorMessage));
+                throw new DbEntityValidationException(errorMessages);
+            }
         }
 
         public void Update(T entity)
         {
-            _context.Entry<T>(entity).State = EntityState.Modified;
+            _context.Entry(entity).State = EntityState.Modified;
         }
 
         private bool disposed = false;

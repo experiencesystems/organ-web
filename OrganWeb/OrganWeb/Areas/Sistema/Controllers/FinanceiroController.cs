@@ -1,5 +1,6 @@
 ﻿using OrganWeb.Areas.Sistema.Models.ViewModels;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco;
+using OrganWeb.Areas.Sistema.Models.ViewsBanco.Financeiro;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,20 +12,16 @@ namespace OrganWeb.Areas.Sistema.Controllers
     public class FinanceiroController : Controller
     {
         private VwCompra vwcompra = new VwCompra();
+        private VwSaldo vwsaldo = new VwSaldo();
         private VwFluxoDeCaixa vwfluxo = new VwFluxoDeCaixa();
 
         // GET: Sistema/Financeiro
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult Compras()
-        {
             var select = new ViewFinanceiro
             {
-                VwCompras = vwcompra.GetFew(),
-                VwFluxoDeCaixas = vwfluxo.GetFew()
+                VwCompras = vwcompra.GetAll(),
+                VwSaldos = vwsaldo.GetAll()
             };
             return View(select);
         }
