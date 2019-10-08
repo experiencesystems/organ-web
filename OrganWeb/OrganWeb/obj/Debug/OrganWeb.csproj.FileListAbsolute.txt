@@ -435,3 +435,4 @@ C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\Org
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.csproj.CopyComplete
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.pdb
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.csprojAssemblyReference.cache

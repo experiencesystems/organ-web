@@ -19,7 +19,8 @@ namespace OrganWeb.Areas.Sistema.Models.Financas
         [Display(Name = "Valor pago")]
         public double ValorPago { get; set; }
 
-        //TODO: [Required] Data despesa
+        [Required]
+        [DataType(DataType.Date, ErrorMessage = "Data em formato inválido"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Data { get; set; }
     }
 }
