@@ -5,13 +5,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace OrganWeb.Areas.Sistema.Models.ViewsBanco
+namespace OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa
 {
-    [Table("vwSaida")]
-    public class VwSaida
+    [Table("vwTelefone")]
+    public class VwTelefone
     {
         [Key]
-        public DateTime Data { get; set; }
-        public double Saida { get; set; }
+        public int Id { get; set; }
+        public string Telefone { get; set; }
     }
 }

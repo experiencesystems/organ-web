@@ -1,20 +1,20 @@
-﻿using OrganWeb.Models.Banco;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace OrganWeb.Areas.Sistema.Models.ViewsBanco
+namespace OrganWeb.Areas.Sistema.Models.ViewsBanco.Financeiro
 {
     [Table("vwFluxoDeCaixa")]
-    public class VwFluxoDeCaixa : Repository<VwFluxoDeCaixa>
+    public class VwFluxoDeCaixa
     {
         [Key]
-        public double Saída { get; set; }
+        public double Saida { get; set; }
         public double Entrada { get; set; }
         public double Saldo { get; set; }
-        public string Mês { get; set; }
+        public string Mes { get; set; }
+        public string Ano { get; set; }
     }
 }

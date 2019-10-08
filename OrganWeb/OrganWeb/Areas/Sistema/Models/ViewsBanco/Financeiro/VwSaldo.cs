@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace OrganWeb.Areas.Sistema.Models.ViewsBanco
+namespace OrganWeb.Areas.Sistema.Models.ViewsBanco.Financeiro
 {
     [Table("vwSaldo")]
     public class VwSaldo : Repository<VwSaldo>

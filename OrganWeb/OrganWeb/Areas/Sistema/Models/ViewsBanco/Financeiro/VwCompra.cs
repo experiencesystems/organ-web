@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace OrganWeb.Areas.Sistema.Models.ViewsBanco
+namespace OrganWeb.Areas.Sistema.Models.ViewsBanco.Financeiro
 {
     [Table("vwCompra")]
     public class VwCompra : Repository<VwCompra>
@@ -14,8 +14,8 @@ namespace OrganWeb.Areas.Sistema.Models.ViewsBanco
         [Key]
         public int Compra { get; set; }
         public string Data { get; set; }
+        public string ItensQtd { get; set; }
         public int Estoque { get; set; }
-        public string Item { get; set; }
         public double ValorTotal { get; set; }
     }
 }
