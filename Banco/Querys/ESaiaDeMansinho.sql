@@ -486,6 +486,8 @@ alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_U
     
     insert into tbDespesa(ValorPago, `Data`) values(1000.00, '01/01/01'),
 												   (700.00, '01/01/01');
+	insert into tbDespesa(ValorPago, `Data`) values(1100.00, '01/02/01'),
+												   (850.00, '01/01/01');
     
     create table if not exists tbContas(
 		Id int auto_increment,
@@ -494,6 +496,7 @@ alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_U
     )engine = InnoDB;
     
     insert into tbContas(Nome) value('Conta de Luz');
+    insert into tbContas(Nome) value('Conta de Água');
     
     
     create table if not exists tbDespesaAdm(
@@ -505,6 +508,7 @@ alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_U
 							   add constraint FKDespesaAdmConta foreign key(IdDespAdm) references tbContas(Id);
                                
 	insert into tbDespesaAdm value(2, 1);
+    insert into tbDespesaAdm value(4, 2); 
     
 	create table if not exists tbDespesaFunc(
 		IdDespesa int not null,
@@ -515,7 +519,7 @@ alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_U
 							   add constraint FKFuncDespesa foreign key(IdFunc) references tbFuncionario(Id);
     
 	insert into tbDespesaFunc value(1, 1);
-                               
+	insert into tbDespesaFunc value(3, 1);
 
 -- =============================================================================================================================== 
 
@@ -1128,7 +1132,7 @@ alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_U
     alter table tbFuncionario add constraint FKFuncCargo foreign key(IdCargo) references tbCargo(Id);
     
     insert into tbCargo(Nivel, Nome) value(1, 'Carinha que Planta');
-    insert into tbFuncionario(Salario, IdPessoa, IdCargo) value(2.000, 1, 1);
+    insert into tbFuncionario(Salario, IdPessoa, IdCargo) value(2000, 1, 1); 
 -- ======================================================================================================================= 
 
 

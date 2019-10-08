@@ -1,5 +1,68 @@
 use dbOrgan;
 
+-- =================================================================== [NOME] ==================================================== 
+-- =============================================================================================================================== 
+ 
+-- =================================================================== PESSOA ====================================================
+	drop view if exists vwEndereco;
+	create view vwEndereco as(
+	select E.CEP,  R.Logradouro `Rua`, concat(B.Bairro,' - ', C.Cidade,'/', Es.UF) `BCF` 
+	 from tbEndereco E 
+		inner join tbLogradouro R on E.IdRua = R.Id
+		inner join tbBairro B on R.IdBairro = B.Id
+		inner join tbCidade C on B.IdCidade = C.Id
+		inner join tbEstado Es on C.IdEstado = Es.Id
+	);
+
+	drop view if exists vwTelefone;
+	create view vwTelefone as(
+	select T.Id, concat('(',T.IdDDD,') ',T.Numero,' - ',Ti.Tipo) `Telefone`
+	 from tbTelefone T
+		inner join tbTipoTel Ti on Ti.Id = T.IdTipo
+	); 
+
+	drop view if exists vwPessoa;
+	create view vwPessoa as(
+	select P.Id, P.Nome, P.Email, concat(E.Rua,', ', P.NumeroEndereco,' - ', ifnull(P.CompEndereco, 'Sem Complemento'),' - ',E.BCF,' - ',E.CEP) `Endereço`,  group_concat(T.Telefone separator '; ') `Telefones`
+	 from tbPessoa P 
+		inner join vwEndereco E on P.CEP = E.CEP
+		inner join tbTelefonePessoa TP on P.Id = TP.IdPessoa
+		inner join vwTelefone T on T.Id = TP.IdTelefone
+	 group by P.Id
+	 );
+	 
+	 drop view if exists vwPessoaFisica;
+	 create view vwPessoaFisica as(
+	 select P.Id, P.Nome, F.CPF, F.RG, date_format(F.DataNasc, '%d/%m/%Y') `Data de Nascimento`, P.Telefones, P.Email, P.`Endereço`
+	  from tbPessoaFisica F 
+		inner join vwPessoa P on F.IdPessoa = P.Id
+	);
+
+	drop view if exists vwPessoaJuridica;
+	create view vwPessoaJuridica as(
+	select P.Id, P.Nome, J.RazaoSocial, J.CNPJ, J.IE, P.Telefones, P.Email, P.`Endereço`
+	 from tbPessoaJuridica J 
+		inner join vwPessoa P on J.IdPessoa = P.Id
+	);
+	 
+	drop view if exists vwFuncionario;
+	create view vwFuncionario as(
+	select PF.Nome,  C.Nome `Cargo`, F.Salario `Salário`, PF.CPF, PF.RG, PF.`Data de Nascimento`, PF.Telefones, PF.Email, PF.`Endereço`
+	 from tbFuncionario F
+		inner join vwPessoaFisica PF on F.IdPessoa = PF.Id
+		inner join tbCargo C on F.IdCargo = C.Id
+	 where F.`Status` = true
+	);
+
+	drop view if exists vwFornecedor;
+	create view vwFornecedor as(
+	select PJ.Nome `Nome Fantasia`, PJ.RazaoSocial `Razão Social`, PJ.CNPJ, PJ.IE, PJ.Telefones, PJ.Email, PJ.`Endereço`
+	 from tbFornecedor F
+		inner join vwPessoaJuridica PJ on PJ.Id = F.IdPessoa
+		where F.`Status` = true
+	);  
+-- ===============================================================================================================================  
+
 -- =================================================================== ESTOQUE ============================================  
     drop view if exists vwItems;
     create view vwItems as
