@@ -152,6 +152,10 @@ namespace OrganWeb.Models.Banco
                 .Property(t => t.PD)
                 .HasColumnName("P/D");
 
+            modelBuilder.Entity<DespesaAdm>()
+                .Property(t => t.IdConta)
+                .HasColumnName("IdDespAdm");
+
             modelBuilder.Entity<VwPessoa>()
                 .Property(t => t.Endereco)
                 .HasColumnName("Endereço");
