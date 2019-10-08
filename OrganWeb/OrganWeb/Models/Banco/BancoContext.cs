@@ -14,7 +14,6 @@ using OrganWeb.Models.Usuario;
 using OrganWeb.Models.Financeiro;
 using OrganWeb.Areas.Sistema.Models.Controles;
 using OrganWeb.Areas.Sistema.Models.Praga_e_Doenca;
-using OrganWeb.Areas.Sistema.Models.Tarefas;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco;
 
 namespace OrganWeb.Models.Banco
@@ -60,8 +59,6 @@ namespace OrganWeb.Models.Banco
 
         // FUNCIONÁRIO
         public DbSet<Cargo> Cargos { get; set; }
-        public DbSet<Equipe> Equipes { get; set; }
-        public DbSet<FuncEquipe> FuncEquipes { get; set; }
         public DbSet<Funcionario> Funcionarios { get; set; }
 
         // PRAGA/DOENÇA
@@ -75,13 +72,6 @@ namespace OrganWeb.Models.Banco
         public DbSet<ItensPlantio> ItensPlantios { get; set; }
         public DbSet<Plantio> Plantios { get; set; }
         public DbSet<Semente> Sementes { get; set; }
-
-        // TAREFAS
-        public DbSet<AreaTarefa> AreaTarefas { get; set; }
-        public DbSet<ItensTarefa> ItensTarefas { get; set; }
-        public DbSet<Tarefa> Tarefas { get; set; }
-        public DbSet<TarefaEquipe> TarefaEquipes { get; set; }
-        public DbSet<TarefaFuncionario> TarefaFuncionarios { get; set; }
 
         // VIEWS
         public DbSet<VwItems> VwItems { get; set; }
