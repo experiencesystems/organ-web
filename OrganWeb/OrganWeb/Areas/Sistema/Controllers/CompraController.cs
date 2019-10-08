@@ -23,7 +23,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private Compra compra = new Compra();
         private VwItems items = new VwItems();
         private ItensComprados itemscomp = new ItensComprados();
-        // GET: Sistema/Compra
+        
         public ActionResult Index()
         {
             return Redirect("~/Sistema/Financeiro/Index");

@@ -228,6 +228,7 @@
     <Compile Include="Areas\Ecommerce\Models\VendaAnuncio.cs" />
     <Compile Include="Areas\Ecommerce\Models\Wishlist.cs" />
     <Compile Include="Areas\Sistema\Controllers\CompraController.cs" />
+    <Compile Include="Areas\Sistema\Controllers\DespesaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\EstoqueController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FinanceiroController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FornecedorController.cs" />
@@ -453,6 +454,10 @@
     <Content Include="Areas\Sistema\Views\Compra\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Compra\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Compra\Excluir.cshtml" />
+    <Content Include="Areas\Sistema\Views\Despesa\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Despesa\Editar.cshtml" />
+    <Content Include="Areas\Sistema\Views\Despesa\Detalhes.cshtml" />
+    <Content Include="Areas\Sistema\Views\Despesa\Excluir.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -532,6 +537,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Ecommerce\Views\Shared\" />
+    <Folder Include="Areas\Sistema\Views\Conta\Administrador\" />
+    <Folder Include="Areas\Sistema\Views\Conta\Funcionario\" />
     <Folder Include="Areas\Sistema\Views\Controles\" />
     <Folder Include="Areas\Sistema\Views\Shared\" />
   </ItemGroup>
