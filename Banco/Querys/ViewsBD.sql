@@ -47,7 +47,7 @@ use dbOrgan;
 	 
 	drop view if exists vwFuncionario;
 	create view vwFuncionario as(
-	select PF.Nome,  C.Nome `Cargo`, F.Salario `Salário`, PF.CPF, PF.RG, PF.`Data de Nascimento`, PF.Telefones, PF.Email, PF.`Endereço`
+	select F.Id, PF.Nome,  C.Nome `Cargo`, F.Salario `Salário`, PF.CPF, PF.RG, PF.`Data de Nascimento`, PF.Telefones, PF.Email, PF.`Endereço`
 	 from tbFuncionario F
 		inner join vwPessoaFisica PF on F.IdPessoa = PF.Id
 		inner join tbCargo C on F.IdCargo = C.Id
@@ -56,7 +56,7 @@ use dbOrgan;
 
 	drop view if exists vwFornecedor;
 	create view vwFornecedor as(
-	select PJ.Nome `Nome Fantasia`, PJ.RazaoSocial `Razão Social`, PJ.CNPJ, PJ.IE, PJ.Telefones, PJ.Email, PJ.`Endereço`
+	select F.Id, PJ.Nome `Nome Fantasia`, PJ.RazaoSocial `Razão Social`, PJ.CNPJ, PJ.IE, PJ.Telefones, PJ.Email, PJ.`Endereço`
 	 from tbFornecedor F
 		inner join vwPessoaJuridica PJ on PJ.Id = F.IdPessoa
 		where F.`Status` = true
@@ -113,7 +113,7 @@ use dbOrgan;
 	drop view if exists vwCompra;
     create view vwCompra as(
     select C.Id 'Compra', DATE_FORMAT(C.`Data`, '%d/%m/%Y') `Data`,
-		   group_concat(distinct concat(I.Item, ' - ', IC.QtdProd) separator ', ') `Itens - Quantidade Comprada`,    E.Id 'Estoque',
+		   group_concat(distinct concat(I.Item, ' - ', IC.QtdProd) separator ', ') `Itens - Quantidade Comprada`,
 		   SUM(
            ((IC.QtdProd * E.ValorUnit) - ((IC.QtdProd * E.ValorUnit) * IC.DescontoProd)) - 
 		   (((IC.QtdProd * E.ValorUnit) - ((IC.QtdProd * E.ValorUnit) * IC.DescontoProd)) * C.Desconto)
@@ -288,14 +288,14 @@ use dbOrgan;
 -- =================================================================== MANUTENÇÃO ================================================
 drop view if exists vwQtdMa;
 create view vwQtdMa as
-select m.Nome, ifnull(count(IdMaquina), 0) `Quantidade de Manutenções`, ifnull(sum(ma.ValorPago), 0) `Custo Total`
+select mm.IdMaquina, mm.IdManutencao, m.Nome, ifnull(count(IdMaquina), 0) `Quantidade de Manutenções`, ifnull(sum(ma.ValorPago), 0) `Custo Total`
 	from tbMaquina m
     inner join tbMaquinaManutencao mm on m.IdEstoque = mm.IdMaquina
     inner join tbManutencao ma on ma.Id = mm.IdManutencao;
 
 drop view if exists vwManutencao;
 create view vwManutencao as
-select M.Nome `Máquina`, M.Tipo `Tipo de Máquina`, Ma.Nome `Manutenção`, (DATE_FORMAT(MA.`Data`, '%d/%m/%Y')) `Data da Manutenção`, Ma.ValorPago `Valor da Manutenção`
+select mm.IdMaquina, mm.IdManutencao, M.Nome `Máquina`, M.Tipo `Tipo de Máquina`, Ma.Nome `Manutenção`, (DATE_FORMAT(MA.`Data`, '%d/%m/%Y')) `Data da Manutenção`, Ma.ValorPago `Valor da Manutenção`
  from tbMaquina M 
  inner join tbMaquinaManutencao mm 
 	on mm.IdMaquina = M.IdEstoque
@@ -306,7 +306,7 @@ select M.Nome `Máquina`, M.Tipo `Tipo de Máquina`, Ma.Nome `Manutenção`, (DA
 -- =================================================================== PROC ESTOQUE ===============================================
 	drop view if exists vwPragaOrDoenca ;
      create view vwPragaOrDoenca as
-		select  pd.Nome `Nome`,
+		select pd.Id, pd.Nome `Nome`,
         (case
 			when pd.`P/D` = true then 'Praga'
             else'Doença'
@@ -317,11 +317,11 @@ select M.Nome `Máquina`, M.Tipo `Tipo de Máquina`, Ma.Nome `Manutenção`, (DA
             inner join tbArea a on apd.IdArea = a.Id
             inner join tbControlePD cpd on cpd.IdPd = pd.Id
             inner join tbControle c on c.Id = cpd.IdControle
-		group by `Nome`;
+		group by `Id`;
 	
     drop view if exists vwControle;
     create view vwControle as
-    select DATE_FORMAT(c.`Data`, '%d/%m/%Y') `Data`, c.`Status`, ifnull(c.`Desc`, 'Sem Descrição') `Descrição`, c.Efic `Eficiência(%)`,
+    select c.Id, DATE_FORMAT(c.`Data`, '%d/%m/%Y') `Data`, c.`Status`, ifnull(c.`Desc`, 'Sem Descrição') `Descrição`, c.Efic `Eficiência(%)`,
 		   c.NumLiberacoes `Número de Liberações`, group_concat(distinct p.Nome separator ', ' ) `Pragas/Doenças`,
            group_concat(distinct concat(i.Item, ' - ', ic.QtdUsada) separator ', ') `Itens Usados - Quantidade`
     from tbControle c

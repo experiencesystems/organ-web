@@ -95,7 +95,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                     itemscomp.Save();
                 }
 
-                return Redirect("~/Sistema/Financeiro/Index");
+                return RedirectToAction("Index", "Financeiro");
             }
             ViewBag.Items = new MultiSelectList(items.GetAll(), "Id", "Item");
             compra.Fornecedores = fornecedor.GetNomesFornecedor();
