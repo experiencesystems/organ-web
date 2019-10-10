@@ -3,6 +3,7 @@ using OrganWeb.Areas.Sistema.Models.Financas;
 using OrganWeb.Areas.Sistema.Models.ViewModels;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque;
+using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
 using OrganWeb.Models.Banco;
 using OrganWeb.Models.Financeiro;
 using System;
@@ -19,6 +20,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
     {
         private BancoContext db = new BancoContext();
         private Fornecedor fornecedor = new Fornecedor();
+        private VwFornecedor vwfornecedor = new VwFornecedor();
         private Pagamento pagamento = new Pagamento();
         private Compra compra = new Compra();
         private VwItems items = new VwItems();
@@ -33,7 +35,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         {
             var create = new CreateCompraViewModel
             {
-                Fornecedores = fornecedor.GetNomesFornecedor(),
+                Fornecedores = vwfornecedor.GetAll(),
                 Items = items.GetAll(),
                 Tipos = pagamento.Tipos
             };
@@ -98,7 +100,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 return RedirectToAction("Index", "Financeiro");
             }
             ViewBag.Items = new MultiSelectList(items.GetAll(), "Id", "Item");
-            compra.Fornecedores = fornecedor.GetNomesFornecedor();
+            compra.Fornecedores = vwfornecedor.GetAll();
             compra.Tipos = pagamento.Tipos;
             compra.Items = items.GetAll();
             return View(compra);
@@ -117,7 +119,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
             }
             var select = new ViewCompra
             {
-                Fornecedores = fornecedor.GetNomesFornecedor(),
+                Fornecedores = vwfornecedor.GetAll(),
                 Compra = compra,
                 Pagamento = pagamento.GetAll().Where(a => a.Id == compra.IdPagamento).FirstOrDefault()
             };

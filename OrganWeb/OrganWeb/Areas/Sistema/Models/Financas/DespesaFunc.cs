@@ -19,6 +19,7 @@ namespace OrganWeb.Areas.Sistema.Models.Financas
 
         [Key, Column(Order = 2)]
         [ForeignKey("Funcionario")]
+        [Display(Name = "Funcionário")]
         public int IdFunc { get; set; }
 
         public virtual Despesa Despesa { get; set; }

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using OrganWeb.Models;
 using OrganWeb.Models.Banco;
 
@@ -24,17 +25,29 @@ namespace OrganWeb.Areas.Sistema.Models.Administrativo
         public int Tipo { get; set; }
        
         [Required]
-        [Range(0.01, 999.99)]
+        [Range(0, 999.99)]
         [Display(Name = "Incidência Solar")]
-        public double IncSolar { get; set; }
+        [DisplayFormat(DataFormatString = "{0:n2}", ApplyFormatInEditMode = true)]
+        public decimal IncSolar { get; set; }
         
         [Required]
-        [Range(0.01, 999.99)]
+        [Range(0, 999.99)]
         [Display(Name = "Incidência do Vento")]
-        public double IncVento { get; set; }
+        [DisplayFormat(DataFormatString = "{0:n2}", ApplyFormatInEditMode = true)]
+        public decimal IncVento { get; set; }
         
         [Required]
-        [Range(0.01, 999.99)]
-        public double Acidez { get; set; }
+        [Range(0, 999.99)]
+        [DisplayFormat(DataFormatString = "{0:n2}", ApplyFormatInEditMode = true)]
+        public decimal Acidez { get; set; }
+
+        [NotMapped]
+        public readonly List<SelectListItem> Tipos = new List<SelectListItem>()
+            {
+            new SelectListItem() { Text = "Argiloso", Value = "1" },
+            new SelectListItem() { Text = "Arenoso", Value = "2" },
+            new SelectListItem() { Text = "Humoso", Value = "3" },
+            new SelectListItem() { Text = "Calcário", Value = "4" },
+            };
     }
 }

@@ -1,6 +1,7 @@
 ﻿using OrganWeb.Areas.Sistema.Models.Armazenamento;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque;
+using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -45,7 +46,7 @@ namespace OrganWeb.Areas.Sistema.Models.ViewModels
         public int Tipo { get; set; }
 
         public IEnumerable<VwItems> Items { get; set; }
-        public IEnumerable<Fornecedor> Fornecedores { get; set; }
+        public IEnumerable<VwFornecedor> Fornecedores { get; set; }
         public IEnumerable<SelectListItem> Tipos { get; set; }
     }
 }
