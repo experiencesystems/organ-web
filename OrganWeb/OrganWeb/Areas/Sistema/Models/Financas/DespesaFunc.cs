@@ -1,4 +1,6 @@
 ﻿using OrganWeb.Areas.Sistema.Models.Funcionarios;
+using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
+using OrganWeb.Areas.Sistema.Models.zRepositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +11,7 @@ using System.Web;
 namespace OrganWeb.Areas.Sistema.Models.Financas
 {
     [Table("tbDespesaFunc")]
-    public class DespesaFunc
+    public class DespesaFunc : DespesaFuncRepository
     {
         [Key, Column(Order = 1)]
         [ForeignKey("Despesa")]
@@ -21,5 +23,7 @@ namespace OrganWeb.Areas.Sistema.Models.Financas
 
         public virtual Despesa Despesa { get; set; }
         public virtual Funcionario Funcionario { get; set; }
+
+        public IEnumerable<VwFuncionario> Funcionarios { get; set; }
     }
 }
