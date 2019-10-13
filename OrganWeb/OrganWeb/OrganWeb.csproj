@@ -227,8 +227,10 @@
     <Compile Include="Areas\Ecommerce\Models\Pedido.cs" />
     <Compile Include="Areas\Ecommerce\Models\VendaAnuncio.cs" />
     <Compile Include="Areas\Ecommerce\Models\Wishlist.cs" />
+    <Compile Include="Areas\Sistema\Controllers\AreaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\CompraController.cs" />
     <Compile Include="Areas\Sistema\Controllers\ContaADMController.cs" />
+    <Compile Include="Areas\Sistema\Controllers\ContaFUNCController.cs" />
     <Compile Include="Areas\Sistema\Controllers\DespesaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\EstoqueController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FinanceiroController.cs" />
@@ -237,6 +239,7 @@
     <Compile Include="Areas\Sistema\Controllers\MaquinaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\PlantioController.cs" />
     <Compile Include="Areas\Sistema\Controllers\SementeController.cs" />
+    <Compile Include="Areas\Sistema\Controllers\SoloController.cs" />
     <Compile Include="Areas\Sistema\Models\Administrativo\Area.cs" />
     <Compile Include="Areas\Sistema\Models\Administrativo\Cliente.cs" />
     <Compile Include="Areas\Sistema\Models\Armazenamento\Insumo.cs" />
@@ -265,13 +268,9 @@
     <Compile Include="Areas\Sistema\Models\Safras\ItensPlantio.cs" />
     <Compile Include="Areas\Sistema\Models\Safras\Plantio.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\CreateCompraViewModel.cs" />
-    <Compile Include="Areas\Sistema\Models\ViewModels\CreateFornecedorViewModel.cs" />
-    <Compile Include="Areas\Sistema\Models\ViewModels\CreateFuncionarioViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\CreatePlantioViewModel.cs" />
-    <Compile Include="Areas\Sistema\Models\ViewModels\CreatePragaOrDoencaViewModel.cs" />
-    <Compile Include="Areas\Sistema\Models\ViewModels\CreateSementeViewModel.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewModels\ViewAreas.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewCompra.cs" />
-    <Compile Include="Areas\Sistema\Models\ViewModels\ViewFornecedor.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewMaquina.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewPragaDoenca.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewSementes.cs" />
@@ -298,7 +297,7 @@
     <Compile Include="Areas\Sistema\Models\zRepositories\AreaPlantioRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\AreaRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\DespesaAdmRepository.cs" />
-    <Compile Include="Areas\Sistema\Models\zRepositories\FornecedorRepository.cs" />
+    <Compile Include="Areas\Sistema\Models\zRepositories\DespesaFuncRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\ItensCompradosRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\ItensPlantioRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\MaquinaManutencaoRepository.cs" />
@@ -470,13 +469,19 @@
     <Content Include="Areas\Sistema\Views\Compra\Detalhes.cshtml" />
     <Content Include="Areas\Sistema\Views\ContaADM\Detalhes.cshtml" />
     <Content Include="Areas\Sistema\Views\ContaADM\Excluir.cshtml" />
-    <Content Include="Areas\Sistema\Views\Semente\Create.cshtml" />
-    <Content Include="Areas\Sistema\Views\Semente\Excluir.cshtml" />
-    <Content Include="Areas\Sistema\Views\Semente\Editar.cshtml" />
-    <Content Include="Areas\Sistema\Views\Funcionario\Excluir.cshtml" />
-    <Content Include="Areas\Sistema\Views\Fornecedor\Create.cshtml" />
-    <Content Include="Areas\Sistema\Views\Funcionario\Create.cshtml" />
-    <Content Include="Areas\Sistema\Views\Maquina\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\ContaFUNC\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\ContaFUNC\Detalhes.cshtml" />
+    <Content Include="Areas\Sistema\Views\ContaFUNC\Excluir.cshtml" />
+    <Content Include="Areas\Sistema\Views\ContaFUNC\Editar.cshtml" />
+    <Content Include="Areas\Sistema\Views\Area\Index.cshtml" />
+    <Content Include="Areas\Sistema\Views\Area\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Area\Editar.cshtml" />
+    <Content Include="Areas\Sistema\Views\Area\Detalhes.cshtml" />
+    <Content Include="Areas\Sistema\Views\Area\Excluir.cshtml" />
+    <Content Include="Areas\Sistema\Views\Solo\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Solo\Editar.cshtml" />
+    <Content Include="Areas\Sistema\Views\Solo\Detalhes.cshtml" />
+    <Content Include="Areas\Sistema\Views\Solo\Excluir.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -557,7 +562,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Ecommerce\Views\Shared\" />
     <Folder Include="Areas\Sistema\Views\Controles\" />
-    <Folder Include="Areas\Sistema\Views\DespesaAdm\" />
     <Folder Include="Areas\Sistema\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>

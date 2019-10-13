@@ -1,0 +1,27 @@
+﻿@model OrganWeb.Areas.Sistema.Models.Administrativo.Solo
+
+<div>
+    <h4>Solo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.Nome)</dt>
+        <dd>@Html.DisplayFor(model => model.Nome)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Tipo)</dt>
+        <dd>@Html.DisplayFor(model => model.Tipos.Where(x => x.Value == model.Tipo.ToString()).First().Text)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.IncSolar)</dt>
+        <dd>@Html.DisplayFor(model => model.IncSolar)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.IncVento)</dt>
+        <dd>@Html.DisplayFor(model => model.IncVento)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Acidez)</dt>
+        <dd>@Html.DisplayFor(model => model.Acidez)</dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Editar", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
