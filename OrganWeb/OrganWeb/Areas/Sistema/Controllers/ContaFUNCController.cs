@@ -1,4 +1,7 @@
 ﻿using OrganWeb.Areas.Sistema.Models.Financas;
+using OrganWeb.Areas.Sistema.Models.Funcionarios;
+using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
+using OrganWeb.Models.Pessoa;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +11,11 @@ using System.Web.Mvc;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
-    public class ContaADMController : Controller
+    public class ContaFUNCController : Controller
     {
-        private DespesaAdm despesaadm = new DespesaAdm();
+        private DespesaFunc despesafunc = new DespesaFunc();
         private Despesa despesa = new Despesa();
-        private Conta conta = new Conta();
+        private VwFuncionario vwfuncionario = new VwFuncionario();
 
         public ActionResult Index()
         {
@@ -21,41 +24,38 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            var select = new DespesaFunc
+            {
+                Funcionarios = vwfuncionario.GetAll()
+            };
+            return View(select);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(DespesaAdm despesaadm)
+        public ActionResult Create(DespesaFunc despesafunc)
         {
             if (ModelState.IsValid)
             {
-                var conta = new Conta
-                {
-                    Nome = despesaadm.Conta.Nome
-                };
-                conta.Add(conta);
-                conta.Save();
-
                 var despesa = new Despesa
                 {
-                    Data = despesaadm.Despesa.Data,
-                    ValorPago = despesaadm.Despesa.ValorPago
+                    Data = despesafunc.Despesa.Data,
+                    ValorPago = despesafunc.Despesa.ValorPago
                 };
                 despesa.Add(despesa);
                 despesa.Save();
 
-                var despesaadm2 = new DespesaAdm
+                var despesaadm2 = new DespesaFunc
                 {
                     IdDespesa = despesa.Id,
-                    IdConta = conta.Id
+                    IdFunc = despesafunc.IdFunc
                 };
-                despesaadm2.Add(despesaadm);
+                despesaadm2.Add(despesafunc);
                 despesaadm2.Save();
 
                 return RedirectToAction("Index");
             }
-            return View(despesaadm);
+            return View(despesafunc);
         }
 
         public ActionResult Editar(int? id, int? id2)
@@ -64,27 +64,28 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            despesaadm = despesaadm.GetByID(id, id2);
-            if (despesaadm == null)
+            despesafunc = despesafunc.GetByID(id, id2);
+            if (despesafunc == null)
             {
                 return HttpNotFound();
             }
-            return View(despesaadm);
+            despesafunc.Funcionarios = vwfuncionario.GetAll();
+            return View(despesafunc);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar(DespesaAdm despesaadm)
+        public ActionResult Editar(DespesaFunc despesafunc)
         {
             if (ModelState.IsValid)
             {
-                conta.Update(despesaadm.Conta);
-                conta.Save();
-                despesa.Update(despesaadm.Despesa);
+                despesafunc.Update(despesafunc);
+                despesafunc.Save();
+                despesa.Update(despesafunc.Despesa);
                 despesa.Save();
                 return RedirectToAction("Index");
             }
-            return View(despesaadm);
+            return View(despesafunc);
         }
 
         public ActionResult Detalhes(int? id, int? id2)
@@ -93,37 +94,35 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            despesaadm = despesaadm.GetByID(id, id2);
-            if (despesaadm == null)
+            despesafunc = despesafunc.GetByID(id, id2);
+            if (despesafunc == null)
             {
                 return HttpNotFound();
             }
-            return View(despesaadm);
+            return View(despesafunc);
         }
 
         public ActionResult Excluir(int? id, int? id2)
         {
-            if (id == null || id2 == null)
+            if (id == null | id2 == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            despesaadm = despesaadm.GetByID(id, id2);
-            if (despesaadm == null)
+            despesafunc = despesafunc.GetByID(id, id2);
+            if (despesafunc == null)
             {
                 return HttpNotFound();
             }
-            return View(despesaadm);
+            return View(despesafunc);
         }
 
         [HttpPost, ActionName("Excluir")]
         [ValidateAntiForgeryToken]
-        public ActionResult ExcluirConfirmado(DespesaAdm despesaadm)
+        public ActionResult ExcluirConfirmado(DespesaFunc despesafunc)
         {
-            despesaadm.Delete(despesaadm.IdConta, despesaadm.IdDespesa);
-            despesaadm.Save();
-            conta.Delete(despesaadm.IdConta);
-            conta.Save();
-            despesa.Delete(despesaadm.IdDespesa);
+            despesafunc.Delete(despesafunc.IdFunc, despesafunc.IdDespesa);
+            despesafunc.Save();
+            despesa.Delete(despesafunc.IdDespesa);
             despesa.Save();
             return RedirectToAction("Index");
         }

@@ -12,7 +12,7 @@ using OrganWeb.Models.Pessoa;
 namespace OrganWeb.Areas.Sistema.Models.Armazenamento
 {
     [Table("tbFornecedor")]
-    public class Fornecedor : FornecedorRepository
+    public class Fornecedor : Repository<Fornecedor>
     {
         [Key]
         public int Id { get; set; }
