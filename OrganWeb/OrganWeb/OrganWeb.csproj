@@ -265,8 +265,13 @@
     <Compile Include="Areas\Sistema\Models\Safras\ItensPlantio.cs" />
     <Compile Include="Areas\Sistema\Models\Safras\Plantio.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\CreateCompraViewModel.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewModels\CreateFornecedorViewModel.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewModels\CreateFuncionarioViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\CreatePlantioViewModel.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewModels\CreatePragaOrDoencaViewModel.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewModels\CreateSementeViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewCompra.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewModels\ViewFornecedor.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewMaquina.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewPragaDoenca.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewSementes.cs" />
@@ -465,6 +470,13 @@
     <Content Include="Areas\Sistema\Views\Compra\Detalhes.cshtml" />
     <Content Include="Areas\Sistema\Views\ContaADM\Detalhes.cshtml" />
     <Content Include="Areas\Sistema\Views\ContaADM\Excluir.cshtml" />
+    <Content Include="Areas\Sistema\Views\Semente\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Semente\Excluir.cshtml" />
+    <Content Include="Areas\Sistema\Views\Semente\Editar.cshtml" />
+    <Content Include="Areas\Sistema\Views\Funcionario\Excluir.cshtml" />
+    <Content Include="Areas\Sistema\Views\Fornecedor\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Funcionario\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Maquina\Create.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

@@ -42,15 +42,17 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">NomePopular</th>
+                                        <th scope="col">Tipo</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var item in Model.PragaOrDoencas)
                                     {
-                                        <tr class="linha">
-                                            <th scope="row"></th>
-                                            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
-                                        </tr>
+                                    <tr class="linha">
+                                        <th scope="row"></th>
+                                        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.PD)</td>
+                                    </tr>
                                     }
                                 </tbody>
                                 </table>

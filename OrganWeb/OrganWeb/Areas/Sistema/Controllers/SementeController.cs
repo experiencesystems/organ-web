@@ -20,5 +20,21 @@ namespace OrganWeb.Areas.Sistema.Controllers
             };
             return View(select);
         }
+
+
+        public ActionResult Create()
+            {
+               
+                return View();
+            }
+
+        public ActionResult Excluir() {
+            return View();
+        }
+
+        public ActionResult Editar() {
+            return View();
+        }
+        
     }
 }
