@@ -6,59 +6,74 @@ using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using OrganWeb.Models.Endereco;
+using OrganWeb.Models.Telefone;
 
 namespace OrganWeb.Areas.Sistema.Models.ViewModels
 {
     public class CreateFornecedorViewModel
     {
-
-        [Key]
-        public int Id { get; set; }
-
-        public bool Status { get; set; }
-
         [Required]
-        [ForeignKey("Pessoa")]
-        public int IdPessoa { get; set; }
-        [Required]
+        [Display(Name = "Nome Fantasia")]
+        [StringLength(100, MinimumLength = 5)]
         public string NomeFantasia { get; set; }
+
         [Required]
+        [Display(Name = "Razão Social")]
+        [StringLength(100, MinimumLength = 10)]
         public string RazaoSocial { get; set; }
+
         [Required]
-        public string CNPJ { get; set; }
+        [RegularExpression(@"[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}", ErrorMessage = "Digite um CPNJ válido somente com números")]
+        public Int64 CNPJ { get; set; }
+
         [Required]
-        //n sei o name display disso dsahduajhsd
-        public string IE { get; set; }
+        [Display(Name = "Inscrição Estadual")]
+        public Int64 IE { get; set; }
+
         [Required]
-        public string Telefones { get; set; }
-        [Required]
+        [StringLength(100, MinimumLength = 5)]
         public string Email { get; set; }
+
         [Required]
-        public string Endereco { get; set; }
+        public int DDD { get; set; }
+
         [Required]
+        public int Telefone { get; set; }
+
+        [Required]
+        [Display(Name = "Tipo do telefone (Principal, WhatsApp, etc.)")]
+        [StringLength(20, MinimumLength = 2)]
+        public string TipoTelefone { get; set; }
+
+        [Required]
+        [StringLength(8, MinimumLength = 8)]
+        [RegularExpression(@"[0-9]{5}[\d]{3}", ErrorMessage = "Digite um CEP válido somente com números")]
         public string CEP { get; set; }
+
         [Required]
+        [StringLength(50, MinimumLength = 5)]
         public string Rua { get; set; }
+
         [Required]
-        public string BCF { get; set; }
+        [Display(Name = "Número")]
+        public int Numero { get; set; }
 
+        [StringLength(30, MinimumLength = 2)]
+        public string Complemento { get; set; }
 
+        [Required]
+        [StringLength(30, MinimumLength = 5)]
+        public string Bairro { get; set; }
 
+        [Required]
+        [StringLength(30, MinimumLength = 5)]
+        public string Cidade { get; set; }
 
+        [Required]
+        public int Estado { get; set; }
 
-
-
-
-
-
-
-
-
-
-
-        public IEnumerable<VwFornecedor> VwFornecedors { get; set; }
-        public IEnumerable<VwPessoaJuridica> PessoaJuridicas { get; set; }
-        public IEnumerable<VwEndereco> Enderecos { get; set; }
-        public IEnumerable<Fornecedor> Fornecedors { get; set; }
+        public IEnumerable<Estado> Estados { get; set; }
+        public IEnumerable<DDD> DDDs { get; set; }
     }
 }
