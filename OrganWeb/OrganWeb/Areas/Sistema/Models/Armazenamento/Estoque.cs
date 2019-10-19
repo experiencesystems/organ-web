@@ -18,9 +18,9 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
         public int Id { get; set; }
 
         [Required]
-        [Range(0.01, 999.99)]
         [Display(Name = "Quantidade")]
-        [RegularExpression(@"^\d+(\,\d{1,2})?$")]
+        [Range(0.01, 999.99, ErrorMessage = "Esse campo deve conter valores até 999,99")]
+        [RegularExpression(@"^\d+(\,\d{1,2})?$", ErrorMessage = "Digite um valor válido com até duas casas decimais, como 99,99")]
         public double Qtd { get; set; }
 
         [Required]
@@ -28,9 +28,9 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
         public int UM { get; set; }
 
         [Required]
-        [Range(0.01, 999.99)]
         [Display(Name = "Valor unitário")]
-        [RegularExpression(@"^\d+(\,\d{1,2})?$")]
+        [Range(0.01, 999.99, ErrorMessage = "Esse campo deve conter valores até 999,99")]
+        [RegularExpression(@"^\d+(\,\d{1,2})?$", ErrorMessage = "Digite um valor válido com até duas casas decimais, como 99,99")]
         public double ValorUnit { get; set; }
 
         [NotMapped]

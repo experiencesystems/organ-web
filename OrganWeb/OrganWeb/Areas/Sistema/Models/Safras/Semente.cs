@@ -25,18 +25,18 @@ namespace OrganWeb.Areas.Sistema.Models.Safras
         [Display(Name = "Solo ideal")]
         public string Solo { get; set; }
 
-        [Range(0.01, 999.99)]
         [Display(Name = "Incidência solar ideal")]
-        [RegularExpression(@"^\d+(\,\d{1,2})?$")]
+        [Range(0.01, 999.99, ErrorMessage = "Esse campo deve conter valores até 999,99")]
+        [RegularExpression(@"^\d+(\,\d{1,2})?$", ErrorMessage = "Digite um valor válido com até duas casas decimais, como 99,99")]
         public decimal? IncSol { get; set; }
-
-        [Range(0.01, 999.99)]
-        [Display(Name = "Incidência vento ideal")]
-        [RegularExpression(@"^\d+(\,\d{1,2})?$")]
-        public decimal? IncVento { get; set; }
         
-        [Range(0.01, 999.99)]
-        [RegularExpression(@"^\d+(\,\d{1,2})?$")]
+        [Display(Name = "Incidência vento ideal")]
+        [Range(0.01, 999.99, ErrorMessage = "Esse campo deve conter valores até 999,99")]
+        [RegularExpression(@"^\d+(\,\d{1,2})?$", ErrorMessage = "Digite um valor válido com até duas casas decimais, como 99,99")]
+        public decimal? IncVento { get; set; }
+
+        [Range(0.01, 999.99, ErrorMessage = "Esse campo deve conter valores até 999,99")]
+        [RegularExpression(@"^\d+(\,\d{1,2})?$", ErrorMessage = "Digite um valor válido com até duas casas decimais, como 99,99")]
         public decimal? Acidez { get; set; }
 
         public virtual Estoque Estoque { get; set; }
