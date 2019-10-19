@@ -108,6 +108,7 @@ namespace OrganWeb.Models.Usuario
 
         [Required]
         [StringLength(8, MinimumLength = 8)]
+        [RegularExpression(@"[0-9]{5}[\d]{3}", ErrorMessage = "Digite um CEP válido somente com números")]
         public string CEP { get; set; }
 
         [Required]
