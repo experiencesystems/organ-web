@@ -52,7 +52,7 @@ use dbOrgan;
 		inner join vwPessoaFisica PF on F.IdPessoa = PF.Id
 		inner join tbCargo C on F.IdCargo = C.Id
 	 where F.`Status` = true
-	);
+	); 
 
 	drop view if exists vwFornecedor;
 	create view vwFornecedor as(
