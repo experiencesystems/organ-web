@@ -24,16 +24,19 @@ namespace OrganWeb.Areas.Sistema.Models.Safras
         [StringLength(50, MinimumLength = 3)]
         [Display(Name = "Solo ideal")]
         public string Solo { get; set; }
-        
+
+        [Range(0.01, 999.99)]
         [Display(Name = "Incidência solar ideal")]
-        [Range(0.01, 999.99)]
+        [RegularExpression(@"^\d+(\,\d{1,2})?$")]
         public decimal? IncSol { get; set; }
-        
-        [Display(Name = "Incidência vento ideal")]
+
         [Range(0.01, 999.99)]
+        [Display(Name = "Incidência vento ideal")]
+        [RegularExpression(@"^\d+(\,\d{1,2})?$")]
         public decimal? IncVento { get; set; }
         
         [Range(0.01, 999.99)]
+        [RegularExpression(@"^\d+(\,\d{1,2})?$")]
         public decimal? Acidez { get; set; }
 
         public virtual Estoque Estoque { get; set; }
