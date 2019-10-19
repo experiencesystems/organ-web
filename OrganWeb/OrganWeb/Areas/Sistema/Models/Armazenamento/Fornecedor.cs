@@ -24,9 +24,5 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
         public int IdPessoa { get; set; }
 
         public virtual Pessoa Pessoa { get; set; }
-
-        //IGNORA ESSA PROPRIEDADE AQUI
-        [NotMapped]
-        public string Nome { get; set; }
     }
 }

@@ -37,11 +37,5 @@ namespace OrganWeb.Areas.Sistema.Models.ViewModels
         public string Rua { get; set; }
         [Required]
         public string BCF { get; set; }
-
-        public IEnumerable<Cargo> Cargos{ get; set; }
-        public IEnumerable<Funcionario> Funcionarios { get; set; }
-        public IEnumerable<VwPessoa> Pessoas { get; set; }
-        public IEnumerable<VwFuncionario> vwFuncionarios { get; set; }
-        public IEnumerable<VwEndereco> Enderecos { get; set; }
     }
 }

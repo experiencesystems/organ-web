@@ -1,6 +1,7 @@
 ﻿//https://stackoverflow.com/questions/13174197/microsoft-sqlserver-types-version-10-or-higher-could-not-be-found-on-azure
 
 using Microsoft.SqlServer.Types;
+using OrganWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.SqlServer;
@@ -20,6 +21,7 @@ namespace OrganWeb
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            ModelBinders.Binders.Add(typeof(decimal?), new DecimalModelBinder());
             SqlServerTypes.Utilities.LoadNativeAssemblies(Server.MapPath("~/bin"));
             SqlProviderServices.SqlServerTypesAssemblyName = typeof(SqlGeometry).Assembly.FullName;
         }
