@@ -25,20 +25,20 @@ namespace OrganWeb.Areas.Sistema.Models.Administrativo
         public int Tipo { get; set; }
        
         [Required]
-        [Range(0, 999.99)]
         [Display(Name = "Incidência Solar")]
-        [DisplayFormat(DataFormatString = "{0:n2}", ApplyFormatInEditMode = true)]
+        [Range(0, 999.99, ErrorMessage = "Esse campo deve conter valores até 999,99")]
+        [RegularExpression(@"^\d+(\,\d{1,2})?$", ErrorMessage = "Digite um valor válido com até duas casas decimais, como 99,99")]
         public decimal IncSolar { get; set; }
         
         [Required]
-        [Range(0, 999.99)]
         [Display(Name = "Incidência do Vento")]
-        [DisplayFormat(DataFormatString = "{0:n2}", ApplyFormatInEditMode = true)]
+        [Range(0, 999.99, ErrorMessage = "Esse campo deve conter valores até 999,99")]
+        [RegularExpression(@"^\d+(\,\d{1,2})?$", ErrorMessage = "Digite um valor válido com até duas casas decimais, como 99,99")]
         public decimal IncVento { get; set; }
         
         [Required]
-        [Range(0, 999.99)]
-        [DisplayFormat(DataFormatString = "{0:n2}", ApplyFormatInEditMode = true)]
+        [Range(0, 999.99, ErrorMessage = "Esse campo deve conter valores até 999,99")]
+        [RegularExpression(@"^\d+(\,\d{1,2})?$", ErrorMessage = "Digite um valor válido com até duas casas decimais, como 99,99")]
         public decimal Acidez { get; set; }
 
         [NotMapped]
