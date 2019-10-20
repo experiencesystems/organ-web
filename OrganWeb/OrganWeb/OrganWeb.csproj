@@ -228,6 +228,7 @@
     <Compile Include="Areas\Ecommerce\Models\VendaAnuncio.cs" />
     <Compile Include="Areas\Ecommerce\Models\Wishlist.cs" />
     <Compile Include="Areas\Sistema\Controllers\AreaController.cs" />
+    <Compile Include="Areas\Sistema\Controllers\ColheitaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\CompraController.cs" />
     <Compile Include="Areas\Sistema\Controllers\ContaADMController.cs" />
     <Compile Include="Areas\Sistema\Controllers\ContaFUNCController.cs" />
@@ -489,6 +490,8 @@
     <Content Include="Areas\Sistema\Views\Semente\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Semente\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Semente\Excluir.cshtml" />
+    <Content Include="Areas\Sistema\Views\Colheita\Index.cshtml" />
+    <Content Include="Areas\Sistema\Views\Colheita\Create.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
