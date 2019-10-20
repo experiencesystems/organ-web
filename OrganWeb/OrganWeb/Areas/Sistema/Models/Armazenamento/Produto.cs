@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrganWeb.Models.Banco;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,7 +9,7 @@ using System.Web;
 namespace OrganWeb.Areas.Sistema.Models.Armazenamento
 {
     [Table("tbProduto")]
-    public class Produto
+    public class Produto : Repository<Produto>
     {
         [Key]
         [ForeignKey("Estoque")]
@@ -16,9 +17,11 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
 
         [Required]
         [StringLength(50, MinimumLength = 2)]
+        [Display(Name = "Produto")]
         public string Nome { get; set; }
         
         [StringLength(300, MinimumLength = 2)]
+        [Display(Name = "Descrição")]
         public string Desc { get; set; }
 
         public virtual Estoque Estoque { get; set; }

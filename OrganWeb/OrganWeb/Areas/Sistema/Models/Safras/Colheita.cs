@@ -13,14 +13,16 @@ namespace OrganWeb.Areas.Sistema.Models.Safras
     public class Colheita : Repository<Colheita>
     {
         [Required]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date, ErrorMessage = "Data em formato inválido"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Data { get; set; }
         
+        [Required]
         [Display(Name = "Quantidade de perdas")]
-        public double QtdPerdas { get; set; }
+        public decimal QtdPerdas { get; set; }
 
+        [Required]
         [Display(Name = "Quantidade total")]
-        public double QtdTotal { get; set; }
+        public decimal QtdTotal { get; set; }
 
         [Key, Column(Order = 1)]
         [ForeignKey("Plantio")]
