@@ -19,6 +19,14 @@ namespace OrganWeb.Areas.Sistema.Models.ViewModels
         public string NomeFantasia { get; set; }
 
         [Required]
+        public bool Status { get; set; }
+
+
+        public int IdPessoa { get; set; }
+
+        //to cafusa sobre esse, preciso v dps
+
+        [Required]
         [Display(Name = "Razão Social")]
         [StringLength(100, MinimumLength = 10)]
         public string RazaoSocial { get; set; }
@@ -71,9 +79,14 @@ namespace OrganWeb.Areas.Sistema.Models.ViewModels
         public string Cidade { get; set; }
 
         [Required]
-        public int Estado { get; set; }
+        public string Estado { get; set; }
+
+        [Required]
+        public string BCF { get; set; }
 
         public IEnumerable<Estado> Estados { get; set; }
+        public IEnumerable<VwFornecedor> Fornecedor { get; set; }
         public IEnumerable<DDD> DDDs { get; set; }
+        public IEnumerable<VwEndereco> Enderecos { get; set; }
     }
 }
