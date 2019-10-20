@@ -15,9 +15,9 @@ namespace OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa
         public int Id { get; set; }
         public string NomeFantasia { get; set; }
         public string RazaoSocial { get; set; }
-        public string CNPJ { get; set; }
-        public string IE { get; set; }
-        public string Telefones { get; set; }
+        public Int64 IE { get; set; }
+        public Int64 CNPJ { get; set; }
+        public int Telefones { get; set; }
         public string Email { get; set; }
         public string Endereco { get; set; }
     }

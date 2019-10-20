@@ -13,6 +13,7 @@ using OrganWeb.Areas.Sistema.Models.Armazenamento;
 using OrganWeb.Models.Banco;
 using OrganWeb.Models.Endereco;
 using OrganWeb.Models.Telefone;
+using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
@@ -63,9 +64,54 @@ namespace OrganWeb.Areas.Sistema.Controllers
         {
             if (ModelState.IsValid)
             {
-                //fornecedor.Add(fornecedor);
-                //fornecedor.Save();
-                return RedirectToAction("Index");
+                var forn = new Fornecedor
+                {
+                    Status = fornecedor.Status,
+                    IdPessoa = fornecedor.IdPessoa
+                };
+                forn.Add(forn);
+                forn.Save();
+
+                var pess = new VwFornecedor
+                {
+                    NomeFantasia = fornecedor.NomeFantasia,
+                    RazaoSocial = fornecedor.RazaoSocial,
+                      CNPJ = fornecedor.CNPJ,
+                        IE = fornecedor.IE,
+                    Email = fornecedor.RazaoSocial,
+                    Telefones = fornecedor.Telefone
+
+                };
+                pess.Add(pess);
+                pess.Save();
+                var ddd = new DDD
+                {
+                    Valor = fornecedor.DDD,
+                    
+
+                };
+                ddd.Add(ddd);
+                ddd.Save();
+
+                var estado = new Estado
+                {
+                    Nome = fornecedor.Estado
+                    
+
+                };
+                estado.Add(estado);
+                estado.Save();
+                /*var endereco = new VwEndereco
+                {
+
+                    Rua = fornecedor.Rua,
+                    BCF = fornecedor.BCF
+
+                };
+                endereco.Add(endereco);
+                endereco.Save() ta dano ruim aki*/
+
+
             }
             return View(fornecedor);
         }
@@ -97,7 +143,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
             return View(fornecedor);
         }
         
-        public ActionResult Delete(int? id)
+        public ActionResult Excluir(int? id)
         {
             if (id == null)
             {
@@ -110,15 +156,47 @@ namespace OrganWeb.Areas.Sistema.Controllers
             }
             return View(fornecedor);
         }
-        
-        [HttpPost, ActionName("Delete")]
+
+        [HttpPost, ActionName("Excluir")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult ExcluirConfirmado(Fornecedor fornecedor)
         {
-            //Fornecedor fornecedor = db.Fornecedors.Find(id);
-            //db.Fornecedors.Remove(fornecedor);
-            //db.SaveChanges();
+
+            fornecedor = fornecedor.GetByID(fornecedor.Id);
+            fornecedor.Delete(fornecedor.Id);
+            fornecedor.Save();
             return RedirectToAction("Index");
+        }
+
+
+
+
+        public ActionResult Editar(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            fornecedor = fornecedor.GetByID(id);
+            if (fornecedor == null)
+            {
+                return HttpNotFound();
+            }
+            return View(fornecedor);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Editar(Fornecedor fornecedor)
+        {
+
+            if (ModelState.IsValid)
+            {
+                fornecedor.Update(fornecedor);
+                fornecedor.Save();
+                return RedirectToAction("Index");
+            }
+            return View(fornecedor);
         }
     }
 }
