@@ -238,6 +238,7 @@
     <Compile Include="Areas\Sistema\Controllers\ManutencaoController.cs" />
     <Compile Include="Areas\Sistema\Controllers\MaquinaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\PlantioController.cs" />
+    <Compile Include="Areas\Sistema\Controllers\PragaDoencaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\SementeController.cs" />
     <Compile Include="Areas\Sistema\Controllers\SoloController.cs" />
     <Compile Include="Areas\Sistema\Models\Administrativo\Area.cs" />
@@ -271,6 +272,7 @@
     <Compile Include="Areas\Sistema\Models\ViewModels\CreateFornecedorViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\CreateFuncionarioViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\CreatePlantioViewModel.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewModels\CreatePragaOrDoencaViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewAreas.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewCompra.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewMaquina.cs" />
@@ -489,6 +491,11 @@
     <Content Include="Areas\Sistema\Views\Semente\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Semente\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Semente\Excluir.cshtml" />
+    <Content Include="Areas\Sistema\Views\Maquina\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Maquina\Excluir.cshtml" />
+    <Content Include="Areas\Sistema\Views\Maquina\Editar.cshtml" />
+    <Content Include="Areas\Sistema\Views\Fornecedor\Editar.cshtml" />
+    <Content Include="Areas\Sistema\Views\Fornecedor\Excluir.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
