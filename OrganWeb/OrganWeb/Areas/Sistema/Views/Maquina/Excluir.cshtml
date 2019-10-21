@@ -1,0 +1,82 @@
+﻿@model OrganWeb.Areas.Sistema.Models.Ferramentas.Maquina
+
+<h3>Acha que tens o que é necessário para deletar-me?</h3>
+<div>
+    <h4>Maquina</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Desc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Desc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VidaUtil)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VidaUtil)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorInicial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorInicial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeprMes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeprMes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeprAno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeprAno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataCadastro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataCadastro)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

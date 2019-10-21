@@ -509,7 +509,7 @@ alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_U
                                
 	insert into tbDespesaAdm value(2, 1);
     insert into tbDespesaAdm value(4, 2); 
-    
+ 
 	create table if not exists tbDespesaFunc(
 		IdDespesa int not null,
         IdFunc int not null,

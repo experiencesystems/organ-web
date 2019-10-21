@@ -19,7 +19,8 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
         public double QtdAlterada { get; set; }
 
         [Required]
-        [Range(0.01, 99999.99)]
+        [Range(0.01, 99999.99, ErrorMessage = "Esse campo deve conter valores até 99999,99")]
+        [RegularExpression(@"^\d+(\,\d{1,2})?$", ErrorMessage = "Digite um valor válido com até duas casas decimais, como 99,99")]
         public double QtdAntiga { get; set; }
 
         [Required]

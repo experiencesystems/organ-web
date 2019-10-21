@@ -1,0 +1,44 @@
+﻿@model OrganWeb.Areas.Sistema.Models.Armazenamento.Insumo
+
+<div>
+    <h4>Insumo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Desc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Desc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Categoria.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Categoria.Nome)
+        </dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Estoque.Qtd)</dt>
+        <dd>@Html.DisplayFor(model => model.Estoque.Qtd)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Estoque.UM)</dt>
+        <dd>@ViewBag.UnidadeMedida</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Estoque.ValorUnit)</dt>
+        <dd>R$ @Html.DisplayFor(model => model.Estoque.ValorUnit)</dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Editar", new { id = Model.IdEstoque }) |
+    @Html.ActionLink("Voltar", "Index")
+</p>

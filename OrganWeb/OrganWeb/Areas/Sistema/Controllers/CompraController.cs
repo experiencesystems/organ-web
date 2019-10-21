@@ -3,6 +3,7 @@ using OrganWeb.Areas.Sistema.Models.Financas;
 using OrganWeb.Areas.Sistema.Models.ViewModels;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque;
+using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
 using OrganWeb.Models.Banco;
 using OrganWeb.Models.Financeiro;
 using System;
@@ -19,6 +20,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
     {
         private BancoContext db = new BancoContext();
         private Fornecedor fornecedor = new Fornecedor();
+        private VwFornecedor vwfornecedor = new VwFornecedor();
         private Pagamento pagamento = new Pagamento();
         private Compra compra = new Compra();
         private VwItems items = new VwItems();
@@ -31,14 +33,13 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         public ActionResult Create()
         {
-            var create = new CreateCompraViewModel
+            compra = new Compra
             {
-                Fornecedores = fornecedor.GetNomesFornecedor(),
+                //Fornecedores = vwfornecedor.GetAll(),
                 Items = items.GetAll(),
-                Tipos = pagamento.Tipos
+                Pagamento = new Pagamento()
             };
-            ViewBag.Items = new MultiSelectList(create.Items, "Id", "Item");
-            return View(create);
+            return View(compra);
         }
 
         public ActionResult Detalhes(int? id)
@@ -66,40 +67,28 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CreateCompraViewModel compra, int[] IdItem, int Tipo)
+        public ActionResult Create(Compra compra, int[] IdEstoque)
         {
             if (ModelState.IsValid)
             {
-                var pag = new Pagamento
-                {
-                    QtdParcelas = compra.QtdParcelas,
-                    Tipo = Tipo,
-                    VlParcela = compra.ValorParcela
-                };
-                pag.Add(pag);
-                pag.Save();
+                pagamento = compra.Pagamento;
+                pagamento.Add(pagamento);
+                pagamento.Save();
 
-                var c = new Compra
-                {
-                    Data = compra.Data,
-                    Desconto = compra.Desconto,
-                    IdForn = compra.IdFornecedor,
-                    IdPagamento = pag.Id
-                };
-                c.Add(c);
-                c.Save();
+                compra.IdPagamento = pagamento.Id;
+                compra.Add(compra);
+                compra.Save();
 
-                foreach (var item in IdItem)
+                foreach (var item in IdEstoque)
                 {
-                    itemscomp.Add(new ItensComprados { IdEstoque = item, IdCompra = c.Id, DescontoProd = compra.Desconto, QtdProd = compra.Quantidade });
+                    itemscomp.Add(new ItensComprados { IdEstoque = item, IdCompra = compra.Id, DescontoProd = compra.Desconto, QtdProd = compra.ItensComprados.QtdProd });
                     itemscomp.Save();
                 }
 
-                return Redirect("~/Sistema/Financeiro/Index");
+                return RedirectToAction("Index", "Financeiro");
             }
-            ViewBag.Items = new MultiSelectList(items.GetAll(), "Id", "Item");
-            compra.Fornecedores = fornecedor.GetNomesFornecedor();
-            compra.Tipos = pagamento.Tipos;
+            compra.Fornecedores = vwfornecedor.GetAll();
+            compra.Pagamento = new Pagamento();
             compra.Items = items.GetAll();
             return View(compra);
         }
@@ -117,7 +106,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
             }
             var select = new ViewCompra
             {
-                Fornecedores = fornecedor.GetNomesFornecedor(),
+                Fornecedores = vwfornecedor.GetAll(),
                 Compra = compra,
                 Pagamento = pagamento.GetAll().Where(a => a.Id == compra.IdPagamento).FirstOrDefault()
             };

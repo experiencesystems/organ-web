@@ -11,86 +11,128 @@ using OrganWeb.Areas.Sistema.Models;
 using OrganWeb.Models;
 using OrganWeb.Areas.Sistema.Models.Armazenamento;
 using OrganWeb.Models.Banco;
+using OrganWeb.Models.Endereco;
+using OrganWeb.Models.Telefone;
+using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
     public class FornecedorController : Controller
     {
-        private Fornecedor fornec = new Fornecedor();
-
-        // GET: Sistema/Fornecedor
+        private Fornecedor fornecedor = new Fornecedor();
+        private Estado estado = new Estado();
+        private DDD ddd = new DDD();
+        
         public ActionResult Index()
         {
-            return View(fornec.GetFew());
+            return RedirectToAction("Index", "Financeiro");
         }
         
         public ActionResult Fornecedores()
         {
             return View();
         }
-
-        // GET: Sistema/Fornecedor/Details/5
+        
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            fornec = fornec.GetByID(id);
-            if (fornec == null)
+            fornecedor = fornecedor.GetByID(id);
+            if (fornecedor == null)
             {
                 return HttpNotFound();
             }
-            return View(fornec);
+            return View(fornecedor);
         }
-
-        // GET: Sistema/Fornecedor/Create
+        
         public ActionResult Create()
         {
-            //ViewBag.CEP = new SelectList(db.Localizacaos, "CEP", "Endereco");
-            return View();
+            var select = new CreateFornecedorViewModel
+            {
+                Estados = estado.GetAll(),
+                DDDs = ddd.GetAll()
+            };
+            // aqui ele tá enviando os estados e ddds pro usuário selecionar qnd ele for criar um fornecedor
+            return View(select);
         }
-
-        // POST: Sistema/Fornecedor/Create
-        // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
-        // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,CNPJ,RazaoSocial,Site,Email,Status,CEP,Numero")] Fornecedor fornecedor)
+        public ActionResult Create(CreateFornecedorViewModel fornecedor)
         {
             if (ModelState.IsValid)
             {
-                fornec.Add(fornecedor);
-                fornec.Save();
-                return RedirectToAction("Index");
-            }
+                var forn = new Fornecedor
+                {
+                    Status = fornecedor.Status,
+                    IdPessoa = fornecedor.IdPessoa
+                };
+                forn.Add(forn);
+                forn.Save();
 
-            //ViewBag.CEP = new SelectList(db.Localizacaos, "CEP", "Endereco", fornecedor.CEP);
+                var pess = new VwFornecedor
+                {
+                    NomeFantasia = fornecedor.NomeFantasia,
+                    RazaoSocial = fornecedor.RazaoSocial,
+                      CNPJ = fornecedor.CNPJ,
+                        IE = fornecedor.IE,
+                    Email = fornecedor.RazaoSocial,
+                    Telefones = fornecedor.Telefone
+
+                };
+                pess.Add(pess);
+                pess.Save();
+                var ddd = new DDD
+                {
+                    Valor = fornecedor.DDD,
+                    
+
+                };
+                ddd.Add(ddd);
+                ddd.Save();
+
+                var estado = new Estado
+                {
+                    Nome = fornecedor.Estado
+                    
+
+                };
+                estado.Add(estado);
+                estado.Save();
+                /*var endereco = new VwEndereco
+                {
+
+                    Rua = fornecedor.Rua,
+                    BCF = fornecedor.BCF
+
+                };
+                endereco.Add(endereco);
+                endereco.Save() ta dano ruim aki*/
+
+
+            }
             return View(fornecedor);
         }
-
-        // GET: Sistema/Fornecedor/Edit/5
+        
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            fornec = fornec.GetByID(id);
-            if (fornec == null)
+            fornecedor = fornecedor.GetByID(id);
+            if (fornecedor == null)
             {
                 return HttpNotFound();
             }
-            //ViewBag.CEP = new SelectList(db.Localizacaos, "CEP", "Endereco", fornecedor.CEP);
-            return View(fornec);
+            return View(fornecedor);
         }
-
-        // POST: Sistema/Fornecedor/Edit/5
-        // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
-        // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome,CNPJ,RazaoSocial,Site,Email,Status,CEP,Numero")] Fornecedor fornecedor)
+        public ActionResult Edit(Fornecedor fornecedor)
         {
             if (ModelState.IsValid)
             {
@@ -98,34 +140,63 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 //db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            //ViewBag.CEP = new SelectList(db.Localizacaos, "CEP", "Endereco", fornecedor.CEP);
             return View(fornecedor);
         }
-
-        // GET: Sistema/Fornecedor/Delete/5
-        public ActionResult Delete(int? id)
+        
+        public ActionResult Excluir(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            fornec = fornec.GetByID(id);
-            if (fornec == null)
+            fornecedor = fornecedor.GetByID(id);
+            if (fornecedor == null)
             {
                 return HttpNotFound();
             }
-            return View(fornec);
+            return View(fornecedor);
         }
 
-        // POST: Sistema/Fornecedor/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Excluir")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult ExcluirConfirmado(Fornecedor fornecedor)
         {
-            //Fornecedor fornecedor = db.Fornecedors.Find(id);
-            //db.Fornecedors.Remove(fornecedor);
-            //db.SaveChanges();
+
+            fornecedor = fornecedor.GetByID(fornecedor.Id);
+            fornecedor.Delete(fornecedor.Id);
+            fornecedor.Save();
             return RedirectToAction("Index");
+        }
+
+
+
+
+        public ActionResult Editar(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            fornecedor = fornecedor.GetByID(id);
+            if (fornecedor == null)
+            {
+                return HttpNotFound();
+            }
+            return View(fornecedor);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Editar(Fornecedor fornecedor)
+        {
+
+            if (ModelState.IsValid)
+            {
+                fornecedor.Update(fornecedor);
+                fornecedor.Save();
+                return RedirectToAction("Index");
+            }
+            return View(fornecedor);
         }
     }
 }

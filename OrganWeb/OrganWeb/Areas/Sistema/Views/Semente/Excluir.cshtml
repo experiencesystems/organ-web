@@ -1,0 +1,55 @@
+﻿@model OrganWeb.Areas.Sistema.Models.Safras.Semente
+
+<h3>Tem certeza que deseja deletar esse registro?</h3>
+<div>
+    <h4>Semente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dt>
+            @Html.DisplayFor(model => model.Nome)
+        </dt>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Solo)
+        </dt>
+        <dt>
+            @Html.DisplayFor(model => model.Solo)
+        </dt>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IncSol)
+        </dt>
+        <dt>
+            @Html.DisplayFor(model => model.IncSol)
+        </dt>
+
+        <dd>
+            @Html.DisplayNameFor(model => model.IncVento)
+        </dd>
+        <dt>
+            @Html.DisplayFor(model => model.IncVento)
+        </dt>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Acidez)
+        </dt>
+        <dt>
+            @Html.DisplayFor(model => model.Acidez)
+        </dt>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Voltar", "Index")
+        </div>
+    }
+</div>
+

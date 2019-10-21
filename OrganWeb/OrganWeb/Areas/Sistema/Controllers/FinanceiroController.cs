@@ -20,8 +20,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         {
             var select = new ViewFinanceiro
             {
-                VwCompras = vwcompra.GetAll(),
-                VwSaldos = vwsaldo.GetAll()
+                VwCompras = vwcompra.GetAll()
             };
             return View(select);
         }

@@ -15,7 +15,6 @@ namespace OrganWeb.Areas.Sistema.Models.ViewsBanco.Financeiro
         public int Compra { get; set; }
         public string Data { get; set; }
         public string ItensQtd { get; set; }
-        public int Estoque { get; set; }
         public double ValorTotal { get; set; }
     }
 }

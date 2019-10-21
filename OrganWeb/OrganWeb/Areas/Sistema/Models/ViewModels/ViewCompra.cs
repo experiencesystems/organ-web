@@ -2,6 +2,7 @@
 using OrganWeb.Areas.Sistema.Models.Financas;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque;
+using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
 using OrganWeb.Models.Financeiro;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace OrganWeb.Areas.Sistema.Models.ViewModels
     {
         public Compra Compra { get; set; }
         public Pagamento Pagamento { get; set; }
-        public IEnumerable<Fornecedor> Fornecedores { get; set; }
+        public IEnumerable<VwFornecedor> Fornecedores { get; set; }
         public IEnumerable<VwItems> VwItems { get; set; }
         public IEnumerable<ItensComprados> ItensComprados { get; set; }
     }

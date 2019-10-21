@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using OrganWeb.Areas.Sistema.Models.Armazenamento;
 using OrganWeb.Areas.Sistema.Models.Safras;
+using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
 
 
 namespace OrganWeb.Areas.Sistema.Models.ViewModels
@@ -13,7 +14,8 @@ namespace OrganWeb.Areas.Sistema.Models.ViewModels
        
         public IEnumerable<Semente>Semente{ get; set; }
         public IEnumerable<Estoque>Estoques { get; set; }
-        public IEnumerable<Fornecedor> FornecedorSemente { get; set; }
+        public IEnumerable<Fornecedor> FornecedorSementess { get; set; }
+        public IEnumerable<VwFornecedor> FornecedorSementes { get; set; }
 
     }
 }
