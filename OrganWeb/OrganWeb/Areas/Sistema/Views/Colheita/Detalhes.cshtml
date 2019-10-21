@@ -1,0 +1,54 @@
+﻿@model OrganWeb.Areas.Sistema.Models.Safras.Colheita
+
+<div>
+    <h4>Colheita</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        @Html.HiddenFor(model => model.IdPlantio)
+        @Html.HiddenFor(model => model.IdProd)
+
+        <dt>Nome do plantio</dt>
+        <dd>@Html.DisplayFor(model => model.Plantio.Nome)</dd>
+
+        <dt>Iniciado em:</dt>
+        <dd>@Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.Plantio.DataInicio))<dd>
+
+        <dt>Término previsto para:</dt>
+        <dd>@Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.Plantio.DataColheita))<dd>
+
+        <dt>Sistema:</dt>
+        <dd>@ViewBag.Sistema<dd>
+
+        <dt>Período:</dt>
+        <dd>@ViewBag.Periodo<dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Data) da colheita</dt>
+        <dd>@Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.Data))</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.QtdPerdas)</dt>
+        <dd>@Html.DisplayFor(model => model.QtdPerdas)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.QtdTotal)</dt>
+        <dd>@Html.DisplayFor(model => model.QtdTotal)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Produto.Nome)</dt>
+        <dd>@Html.DisplayFor(model => model.Produto.Nome)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Produto.Desc)</dt>
+        <dd>@Html.DisplayFor(model => model.Produto.Desc)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Produto.Estoque.Qtd)</dt>
+        <dd>@Html.DisplayFor(model => model.Produto.Estoque.Qtd)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Produto.Estoque.UM)</dt>
+        <dd>@ViewBag.UnidadeMedida</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Produto.Estoque.ValorUnit)</dt>
+        <dd>R$ @Html.DisplayFor(model => model.Produto.Estoque.ValorUnit)</dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Editar", new { id=Model.IdPlantio, id2=Model.IdProd }) |
+    @Html.ActionLink("Voltar", "Index")
+</p>
