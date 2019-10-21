@@ -18,7 +18,7 @@
     <!--Menu Lateral-->
     <div class="container-scroller">
 
-         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+         <nav class="navbar p-0 d-flex flex-row">
             <div class="navbar-brand-wrapper d-flex justify-content-center">
                 <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
                     <a class="navbar-brand brand-logo" href="#"><img src="~/Imagens/logo.png" alt="logo" /></a>
@@ -31,6 +31,7 @@
                 </div>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+                <div class="barra"></div>
                 @Html.Partial("_LoginPartial")
             </div>
         </nav>
@@ -69,22 +70,7 @@
                         </a>
                         <div class="collapse" id="controle">
                             <ul class="nav flex-column sub-menu">
-                                <li><a href="#">@Html.ActionLink("Praga", "Index", "Praga", new { area = "Sistema" }, new { @class = "" })</a></li>
-                                <li><a href="#">@Html.ActionLink("Doenca", "Index", "Doencas", new { area = "Sistema" }, new { @class = "" })</a></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#tarefa" aria-expanded="false" aria-controls="auth">
-                            <i class="menu-icon fa fa-users"></i>
-                            <span class="menu-title">Tarefa e equipe</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="tarefa">
-                            <ul class="nav flex-column sub-menu">
-                                <li><a href="#">@Html.ActionLink("Tarefas", "Index", "Tarefa", new { area = "Sistema" }, new { @class = "" })</a></li>
-                                <li><a href="#">@Html.ActionLink("Equipes", "Index", "Equipe", new { area = "Sistema" }, new { @class = "" })</a></li>
+                                <li><a href="#">@Html.ActionLink("Praga e Doença", "Index", "PragaOrDoenca", new { area = "Sistema" }, new { @class = "" })</a></li>
                             </ul>
                         </div>
                     </li>

@@ -224,7 +224,7 @@ select.form-control, .dataTables_wrapper select {
   -moz-box-shadow: none;
   /*-ms-box-shadow: none;*/
   border-right: 1px solid #e3e3e3;
-  box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 1px 0 20px rgba(0, 0, 0, 0.0);
 }
 .sidebar .nav {
   overflow: hidden;
@@ -409,11 +409,11 @@ select.form-control, .dataTables_wrapper select {
   transition: background 0.25s ease;
   -webkit-transition: background 0.25s ease;
   -moz-transition: background 0.25s ease;
+  height: 0;
   /*-ms-transition: background 0.25s ease;*/
 }
-
 .navbar .navbar-brand-wrapper {
-  background: #ffffff;
+  background: #fff;
   border-bottom: 1px solid #e3e3e3;
   transition: width 0.25s ease, background 0.25s ease;
   -webkit-transition: width 0.25s ease, background 0.25s ease;
@@ -471,17 +471,17 @@ select.form-control, .dataTables_wrapper select {
   margin: auto;
 }
 .navbar .navbar-menu-wrapper {
-  background: #fff;
-  transition: width 0.25s ease;
-  -webkit-transition: width 0.25s ease;
-  -moz-transition: width 0.25s ease;
-  /*-ms-transition: width 0.25s ease;*/
-  color: #9b9b9b;
-  padding-left: 1.062rem;
-  padding-right: 1.062rem;
-  width: calc(100% - 257px);
-  height: 60px;
-  border-bottom: 1px solid #e3e3e3;
+    transition: width 0.25s ease;
+    -webkit-transition: width 0.25s ease;
+    -moz-transition: width 0.25s ease;
+    background: #fff;
+    /*-ms-transition: width 0.25s ease;*/
+    color: #9b9b9b;
+    height: 60px;
+    padding-left: 1.062rem;
+    padding-right: 1.062rem;
+    width: calc(100% - 257px);
+    border-bottom: 1px solid #e3e3e3;
 }
 @media (max-width: 991px) {
   .navbar .navbar-menu-wrapper {

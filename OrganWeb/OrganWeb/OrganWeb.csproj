@@ -588,6 +588,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Ecommerce\Views\Shared\" />
     <Folder Include="Areas\Sistema\Views\Controles\" />
+    <Folder Include="Areas\Sistema\Views\DespesaAdm\" />
     <Folder Include="Areas\Sistema\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>

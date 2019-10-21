@@ -23,7 +23,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.ItensComprados.IdEstoque, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("Id", new MultiSelectList(Model.Items, "Id", "Item"), new { multiple = "multiple", id = "items" })
+            @Html.DropDownListFor(model => model.ItensComprados.IdEstoque, new MultiSelectList(Model.Items, "Id", "Item"), new { multiple = "multiple", id = "items" })
             @Html.ValidationMessageFor(model => model.ItensComprados.IdEstoque, "", new { @class = "text-danger" })
         </div>
     </div>
