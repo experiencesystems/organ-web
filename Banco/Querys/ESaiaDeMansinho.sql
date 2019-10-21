@@ -2,7 +2,7 @@ use sys;
 drop database if exists dbOrgan;
 create database dbOrgan;
 use dbOrgan;
-
+-- Blob Tipo pra foto ou arquivo
 -- =================================================================== USUÁRIO ============================================     
     drop table if exists `AspNetRoles`;
 	create table `AspNetRoles`(
@@ -411,8 +411,9 @@ use dbOrgan;
 		-- Desconto decimal(5,2) default 0,
         `Data` date not null,
         IdForn int not null,
-        IdPagamento int not null
-    )engine = InnoDB;
+        IdPagamento int not null,
+		Desconto decimal(5,2) default 0.00
+        )engine = InnoDB;
     alter table tbCompra add constraint FKCompraForn foreign key(IdForn) references tbFornecedor(Id),
 						 add constraint FKCompraPgmt foreign key(IdPagamento) references tbPagamento(Id);
                          
@@ -462,7 +463,7 @@ use dbOrgan;
 	create table tbVenda(
 		Id int auto_increment,
          constraint PKVenda primary key(Id),
-		Desconto decimal(5,2) not null default 0.00,
+		Desconto decimal(5,2) default 0.00,
         `Data` date not null,
         IdCliente int not null,
         IdPagamento int not null
@@ -496,7 +497,7 @@ use dbOrgan;
         Salario double not null,
         IdPessoa int not null,
         IdCargo int not null,
-        Foto varchar(100)
+        Foto Blob
     )engine = InnoDB;
     alter table tbFuncionario add constraint FKFuncPessoa foreign key(IdPessoa) references tbPessoa(Id);
     
@@ -729,7 +730,7 @@ use dbOrgan;
 		Nome varchar(75) not null,
         `Desc` varchar(300),
         `Status` bool not null,
-        Foto varchar(100) not null,
+        Foto Blob not null,
         Desconto decimal(5,2)
     )engine = InnoDB;
     
@@ -814,7 +815,7 @@ use dbOrgan;
 		Id int auto_increment,
          constraint PKVendaAnuncio primary key(Id),
 		`Data` datetime default current_timestamp,
-        Contrato varchar(100),
+        Contrato Blob,
         CEP char(8) not null,
         IdPagamento int not null,
         IdPedido int not null
