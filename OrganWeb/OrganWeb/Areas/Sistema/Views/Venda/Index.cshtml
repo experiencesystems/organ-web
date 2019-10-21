@@ -1,0 +1,46 @@
+﻿@model IEnumerable<OrganWeb.Areas.Sistema.Models.ViewsBanco.Financeiro.VwVenda>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Venda)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Data)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorTotal)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Venda)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValorTotal)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Editar", new { id = item.Venda }) |
+            @Html.ActionLink("Detalhes", "Detalhes", new { id = item.Venda }) |
+            @Html.ActionLink("Excluir", "Excluir", new { id = item.Venda })
+        </td>
+    </tr>
+}
+
+</table>
