@@ -301,6 +301,7 @@
     <Compile Include="Areas\Sistema\Models\ViewsBanco\Financeiro\VwVenda.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\AreaPlantioRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\AreaRepository.cs" />
+    <Compile Include="Areas\Sistema\Models\zRepositories\ColheitaRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\DespesaAdmRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\DespesaFuncRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\ItensCompradosRepository.cs" />
@@ -443,7 +444,6 @@
     <Content Include="Areas\Sistema\Views\PragaDoenca\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Fazenda\_NovoFuncionario.cshtml" />
     <Content Include="Areas\Sistema\Views\Estoque\Index.cshtml" />
-    <Content Include="Areas\Sistema\Views\Estoque\_NovoItem.cshtml" />
     <Content Include="Areas\Sistema\Views\Plantio\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Plantio\Detalhes.cshtml" />
     <Content Include="Areas\Sistema\Views\Manutencao\Index.cshtml" />
@@ -499,6 +499,13 @@
     <Content Include="Areas\Sistema\Views\Maquina\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Fornecedor\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Fornecedor\Excluir.cshtml" />
+    <Content Include="Areas\Sistema\Views\Colheita\Detalhes.cshtml" />
+    <Content Include="Areas\Sistema\Views\Colheita\Excluir.cshtml" />
+    <Content Include="Areas\Sistema\Views\Colheita\Editar.cshtml" />
+    <Content Include="Areas\Sistema\Views\Estoque\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Estoque\Detalhes.cshtml" />
+    <Content Include="Areas\Sistema\Views\Estoque\Editar.cshtml" />
+    <Content Include="Areas\Sistema\Views\Estoque\Excluir.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

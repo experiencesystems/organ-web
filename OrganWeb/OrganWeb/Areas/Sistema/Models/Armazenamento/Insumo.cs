@@ -9,16 +9,17 @@ using System.Web;
 namespace OrganWeb.Areas.Sistema.Models.Armazenamento
 {
     [Table("tbInsumo")]
-    public class Insumo : Repository<Categoria>
+    public class Insumo : Repository<Insumo>
     {
         [Key]
-        public int Id { get; set; }
+        [ForeignKey("Estoque")]
+        public int IdEstoque { get; set; }
 
         [Required]
         [StringLength(50, MinimumLength = 2)]
         public string Nome { get; set; }
-
-        [Required]
+        
+        [Display(Name = "Descrição")]
         [StringLength(300, MinimumLength = 10)]
         public string Desc { get; set; }
 
@@ -27,5 +28,8 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
         public int IdCategoria { get; set; }
 
         public virtual Categoria Categoria { get; set; }
+        public virtual Estoque Estoque { get; set; }
+
+        public IEnumerable<Categoria> Categorias { get; set; }
     }
 }
