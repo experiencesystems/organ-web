@@ -15,14 +15,15 @@ namespace OrganWeb.Models.Financeiro
         [Key]
         public int Id { get; set; }
         
-        [Display(Name = "Quantidade de parcelas")]
+        [Display(Name = "Quantidade de parcelas")] //TODO: ver se esse int? não da problema
         public int? QtdParcelas { get; set; }
 
         [Required]
-        [Display(Name = "Valor da parcela")]
+        [Display(Name = "Valor da parcela (se for somente uma, coloque o valor total)")]
         public double VlParcela { get; set; }
 
         [Required]
+        [Display(Name = "Tipo de pagamento")]
         public int Tipo { get; set; }
 
         [NotMapped]

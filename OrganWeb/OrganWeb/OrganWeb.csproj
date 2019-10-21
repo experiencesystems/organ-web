@@ -242,6 +242,7 @@
     <Compile Include="Areas\Sistema\Controllers\PragaDoencaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\SementeController.cs" />
     <Compile Include="Areas\Sistema\Controllers\SoloController.cs" />
+    <Compile Include="Areas\Sistema\Controllers\VendaController.cs" />
     <Compile Include="Areas\Sistema\Models\Administrativo\Area.cs" />
     <Compile Include="Areas\Sistema\Models\Administrativo\Cliente.cs" />
     <Compile Include="Areas\Sistema\Models\Armazenamento\Insumo.cs" />
@@ -269,7 +270,6 @@
     <Compile Include="Areas\Sistema\Models\Safras\Colheita.cs" />
     <Compile Include="Areas\Sistema\Models\Safras\ItensPlantio.cs" />
     <Compile Include="Areas\Sistema\Models\Safras\Plantio.cs" />
-    <Compile Include="Areas\Sistema\Models\ViewModels\CreateCompraViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\CreateFornecedorViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\CreateFuncionarioViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\CreatePlantioViewModel.cs" />
@@ -506,6 +506,8 @@
     <Content Include="Areas\Sistema\Views\Estoque\Detalhes.cshtml" />
     <Content Include="Areas\Sistema\Views\Estoque\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Estoque\Excluir.cshtml" />
+    <Content Include="Areas\Sistema\Views\Venda\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Venda\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
