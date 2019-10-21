@@ -20,63 +20,54 @@ Vi
                 <div class="card-body">
                     <div class="card-content">
                         <div class="card bg-light mb-3" style="max-width: 18rem;">
-                           
-                                <table class="table">
-                                    <thead class="thead-title">
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Nome</th>
-                                            <th scope="col">CNPJ</th>
-                                            <th scope="col">RazaoSocial</th>
-                                            <th scope="col">Site</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">CEP</th>
-                                            <th scope="col">Numero</th>
-                                            <th scope="col">Localizacao</th>
-                                          
-                                            
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in Model.Fornecedors)
-                                        {
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.CNPJ)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.RazaoSocial)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Site)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.CEP)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Numero)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Localizacao)</td>
-                                          
 
-                                            @*nao sei como q coloca o telefone milena, vou lembrar de te perguntar*@
+                            <table class="table">
+                                <thead class="thead-title">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">CNPJ</th>
+                                        <th scope="col">RazaoSocial</th>
+                                        <th scope="col">Site</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">CEP</th>
+                                        <th scope="col">Numero</th>
+                                        <th scope="col">Localizacao</th>
+                                        <th scope="col">Telefone</th>
 
-                                        </tr>
-                                        }
-                                    </tbody>
-                                    @* <div class="modal-footer">
-                <button type="button" class="btn btn-primary edit" data-toggle="newmodal" data-url="@Url.Action("Editar", "Manutencao", new { id = item.IdManuntencao, id2 = item.IdMaquina })">Editar</button>
-                @*<button type="button" class="btn btn-primary edit" data-toggle="edit-modal" data-target="#edit-item">Editar</button>*@
-                                    @* @{Html.RenderAction("Editar", "Manutencao", new { id = item.IdManuntencao, id2 = item.IdMaquina });}
-                    <button type="button" class="btn btn-danger delete" data-url="@Url.Action("Excluir", "Manutencao", new { id = item.IdManuntencao, id2 = item.IdMaquina })">Excluir</button>
-                </div>*@
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Fornecedor)
+                                    {
+                                    <tr>
+                                        <th scope="row"></th>
+                                        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.CNPJ)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.RazaoSocial)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Site)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.CEP)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Numero)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Localizacao)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Telefone)</td>
+                                       
+
+                                    </tr>
                                     }
-                            </div>
+                                </tbody>
+                         
+                                }
+                        </div>
                     </div>
                 </div>
                 <div class="card-content">
                     <div class="card border-success mb-3" style="max-width: 18rem;">
                         <div class="card-body text-success">
-                            @* <h5 class="card-title">Nova manutenção</h5>
-        <p class="card-text">
-            <div class="teste"></div>
-            <button type="button" class="btn btn-info waves-effect" data-toggle="ajax-modal" data-target="#add-item">Nova manutenção</button>
-            @{Html.RenderAction("_NovaManutencao", "Manutencao");}*@
+              
                             </p>
                         </div>
                     </div>

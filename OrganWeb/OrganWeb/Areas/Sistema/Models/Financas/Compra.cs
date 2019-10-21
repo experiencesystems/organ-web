@@ -1,4 +1,6 @@
 ﻿using OrganWeb.Areas.Sistema.Models.Armazenamento;
+using OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque;
+using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
 using OrganWeb.Models;
 using OrganWeb.Models.Banco;
 using OrganWeb.Models.Financeiro;
@@ -36,5 +38,11 @@ namespace OrganWeb.Areas.Sistema.Models.Financas
 
         public virtual Fornecedor Fornecedor { get; set; }
         public virtual Pagamento Pagamento { get; set; }
+
+        public IEnumerable<VwFornecedor> Fornecedores { get; set; }
+        public IEnumerable<VwItems> Items { get; set; }
+
+        [NotMapped]
+        public ItensComprados ItensComprados { get; set; }
     }
 }

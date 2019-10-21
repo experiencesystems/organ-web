@@ -1,0 +1,62 @@
+﻿@model OrganWeb.Areas.Sistema.Models.ViewModels.ViewAreas
+
+<p>
+    @Html.ActionLink("Nova área", "Create")
+</p>
+<p>
+    @Html.ActionLink("Novo solo", "Create", "Solo")
+</p>
+
+<!-- ÁREAS -->
+
+<table class="table">
+    <tr>
+        <th>Nome</th>
+        <th>Disponibilidade</th>
+        <th>Tamanho</th>
+        <th>Tipo de solo</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Areas) {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+        <td>@Html.DisplayFor(modelItem => item.Disponibilidades.Where(x => x.Value == item.Disp.ToString()).First().Text)</td>
+        <td>@Html.DisplayFor(modelItem => item.Tamanho) ha</td>
+        <td>@Html.DisplayFor(modelItem => item.Solo.Nome)</td>
+        <td>
+            @Html.ActionLink("Editar", "Editar", new { id=item.Id }) |
+            @Html.ActionLink("Detalhes", "Detalhes", new { id=item.Id }) |
+            @Html.ActionLink("Excluir", "Excluir", new { id=item.Id })
+        </td>
+    </tr>
+}
+</table>
+
+<!-- SOLOS -->
+
+<table class="table">
+    <tr>
+        <th>Nome</th>
+        <th>Tipo</th>
+        <th>Incidência solar</th>
+        <th>Incidência do vento</th>
+        <th>Acidez</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Solos) {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+        <td>@Html.DisplayFor(modelItem => item.Tipos.Where(x => x.Value == item.Tipo.ToString()).First().Text)</td>
+        <td>@Html.DisplayFor(modelItem => item.IncSolar) %</td>
+        <td>@Html.DisplayFor(modelItem => item.IncVento) %</td>
+        <td>@Html.DisplayFor(modelItem => item.Acidez) %</td>
+        <td>
+            @Html.ActionLink("Editar", "Editar", "Solo", new { id=item.Id }, null) |
+            @Html.ActionLink("Detalhes", "Detalhes", "Solo", new { id=item.Id }, null) |
+            @Html.ActionLink("Excluir", "Excluir", "Solo", new { id=item.Id }, null)
+        </td>
+    </tr>
+}
+</table>

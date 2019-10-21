@@ -42,7 +42,8 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-success m-b-0" data-save="ajax-modal">Colher</button>
+                                        <div class="overlay"></div>
+                                        <a class="popup btn btn-add" href="@Url.Action("Create", "Colheita", new { id = item.Id })">Colher</a>
                                     </div>
                                 }
                             </div>

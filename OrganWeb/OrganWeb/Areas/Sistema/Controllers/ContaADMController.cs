@@ -60,7 +60,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         public ActionResult Editar(int? id, int? id2)
         {
-            if (id == null)
+            if (id == null || id2 == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -103,7 +103,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         public ActionResult Excluir(int? id, int? id2)
         {
-            if (id == null)
+            if (id == null || id2 == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }

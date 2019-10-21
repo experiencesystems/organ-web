@@ -83,7 +83,9 @@ namespace OrganWeb.Areas.Sistema.Controllers
             var view = new CreatePlantioViewModel
             {
                 Areas = area.AreasDisponiveis(),
-                Sementes = semente.GetAll()
+                Sementes = semente.GetAll(),
+                Sistemas = plantio.Sistemas,
+                Periodos = plantio.Periodos
             };
             ViewBag.Areas = new MultiSelectList(view.Areas, "Id", "Nome");
             ViewBag.Sementes = new SelectList(view.Sementes, "IdEstoque", "Nome");
