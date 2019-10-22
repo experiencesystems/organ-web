@@ -1,4 +1,5 @@
 ﻿using OrganWeb.Areas.Sistema.Models.Armazenamento;
+using OrganWeb.Areas.Sistema.Models.zRepositories;
 using OrganWeb.Models.Banco;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Web;
 namespace OrganWeb.Areas.Sistema.Models.Safras
 {
     [Table("tbColheita")]
-    public class Colheita : Repository<Colheita>
+    public class Colheita : ColheitaRepository
     {
         [Required]
         [DataType(DataType.Date, ErrorMessage = "Data em formato inválido"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

@@ -112,17 +112,19 @@ use dbOrgan;
 -- =================================================================== FLUXO DE CAIXA ============================================  
 	drop view if exists vwCompra;
     create view vwCompra as(
-    select C.Id 'Compra', DATE_FORMAT(C.`Data`, '%d/%m/%Y') `Data`,
+    select C.Id `Compra`, DATE_FORMAT(C.`Data`, '%d/%m/%Y') `Data`,
 		   group_concat(distinct concat(I.Item, ' - ', IC.QtdProd) separator ', ') `Itens - Quantidade Comprada`,
 		   SUM(
-           ((IC.QtdProd * E.ValorUnit) - ((IC.QtdProd * E.ValorUnit) * IC.DescontoProd)) - 
-		   (((IC.QtdProd * E.ValorUnit) - ((IC.QtdProd * E.ValorUnit) * IC.DescontoProd)) * C.Desconto)
+           ((IC.QtdProd * E.ValorUnit)) - 
+		   (((IC.QtdProd * E.ValorUnit) - (IC.QtdProd * E.ValorUnit)) * C.Desconto)
            ) `Valor Total`
 		from tbItensComprados IC INNER JOIN tbEstoque E on IC.IdEstoque = E.Id
 								 INNER JOIN tbCompra C on IC.IdCompra = C.Id
                                  INNER JOIN vwItems I on I.Id = E.Id
-	group by Compra
-    );                             
+	group by `Compra`
+    );
+    
+     
 	
     drop view if exists vwSaida;
 	create View vwSaida as select DATE_FORMAT(Co.`Data`, '%d/%m/%Y') `Data`, (SUM(M.ValorPago) + SUM(D.ValorPago)  + SUM(Co.`Valor Total`)) `Saída` from tbManutencao M, tbDespesa D, vwCompra Co group by Co.`Data`;
@@ -130,12 +132,12 @@ use dbOrgan;
 	drop view if exists vwVenda;
 	create view vwVenda as(
     select V.Id `Venda`, (DATE_FORMAT(V.`Data`, '%d/%m/%Y')) `Data`, E.Id 'IdEstoque',
-    SUM(((IV.QtdVendida * E.ValorUnit) - ((IV.QtdVendida * E.ValorUnit) * IV.DescontoProd))
-    - (((IV.QtdVendida * E.ValorUnit)
-    - ((IV.QtdVendida * E.ValorUnit) * IV.DescontoProd)) * V.Desconto)) ValorTotal
+    SUM(((IV.QtdVendida * E.ValorUnit))
+    - (IV.QtdVendida * E.ValorUnit) * IV.DescontoProd) ValorTotal
 		from tbItensVendidos IV INNER JOIN tbEstoque E on IV.IdEstoque = E.Id
 								INNER JOIN tbVenda V on IV.IdVenda = V.Id
-	);
+	group by `Venda`
+    );
     
     drop view if exists vwSaldo;
     create view vwSaldo as select (IFNULL(V.ValorTotal, 0) - IFNULL(S.Saída, 0))  `Saldo` from vwSaida S, vwVenda V;
@@ -147,7 +149,55 @@ use dbOrgan;
     where S.`Data` = V.`Data`
     group by `ANO`; 
     
-    
+    -- ================================================================= function FLUXO DE CAIXA ============================================  
+	DELIMITER $$
+    drop function if exists spFluxoCaixa$$ 
+	create function spFluxoCaixa()
+	returns @FluxoCaixa table(
+					@Compra double,
+					@Venda double,
+					@Saldo double,
+					@MES varchar(15),
+					@ANO int)
+	begin	
+		declare double Venda, Compra, TVenda, TCompra, Saldo;
+        declare date  DtC, dtV;
+        DECLARE done INT DEFAULT 0;
+        DECLARE curCompra CURSOR FOR SELECT `Valor Total` FROM vwCompra group by `Data`;
+        declare curDtC cursor for select `Data` from vwCompra;
+        DECLARE curVenda CURSOR FOR SELECT ValorTotal FROM vwVenda;
+        declare curDtV cursor for select `Data` from vwVenda;
+        
+		  DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+
+		  OPEN curCompra;
+          open curDtC;
+          open curVenda;
+          open curDtV;
+
+		  REPEAT
+			FETCH curCompra INTO Compra;
+            fetch curDtC into DtC;
+            
+			SET TCompra +=  Compra;
+              
+		  UNTIL done END REPEAT;
+		  CLOSE curCompra;
+          close curDtC;
+          
+          REPEAT
+            fetch curVenda into Venda;
+            fetch curDtV into DtV;
+            
+			SET TVenda +=  Venda;
+		  
+          UNTIL done END REPEAT;
+		  CLOSE curVenda;
+          close curDtV;
+          
+		  
+	end
+	DELIMITER ;
 -- MUDAR VALOR DOS NOMES DAS DATAS PRA PORTUGUES    SET lc_time_names = 'pt_BR';
 -- =============================================================================================================================== 
 

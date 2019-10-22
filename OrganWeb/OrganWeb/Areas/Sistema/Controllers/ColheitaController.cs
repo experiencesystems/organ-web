@@ -38,8 +38,11 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 Produto = new Produto()
                 {
                     Estoque = new Estoque()
-                }
+                },
+                Plantio = plantio
             };
+            ViewBag.Sistema = colheita.Plantio.Sistemas.Where(x => x.Value == colheita.Plantio.Sistema.ToString()).First().Text;
+            ViewBag.Periodo = colheita.Plantio.Periodos.Where(x => x.Value == colheita.Plantio.TipoPlantio.ToString()).First().Text;
             return View(colheita);
         }
 
@@ -79,31 +82,80 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         public ActionResult Detalhes(int? id, int? id2)
         {
-            return View();
+            if (id == null || id2 == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            colheita = colheita.GetByID(id, id2);
+            if (colheita == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.Sistema = colheita.Plantio.Sistemas.Where(x => x.Value == colheita.Plantio.Sistema.ToString()).First().Text;
+            ViewBag.Periodo = colheita.Plantio.Periodos.Where(x => x.Value == colheita.Plantio.TipoPlantio.ToString()).First().Text;
+            ViewBag.UnidadeMedida = colheita.Produto.Estoque.UnidadesDeMedida.Where(x => x.Value == colheita.Produto.Estoque.UM.ToString()).First().Text;
+            return View(colheita);
         }
 
         public ActionResult Editar(int? id, int? id2)
         {
-            return View();
+            if (id == null || id2 == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            colheita = colheita.GetByID(id, id2);
+            if (colheita == null)
+            {
+                return HttpNotFound();
+            }
+            return View(colheita);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Editar(Colheita colheita)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                estoque = colheita.Produto.Estoque;
+                estoque.Update(estoque);
+                estoque.Save();
+
+                produto = colheita.Produto;
+                produto.Update(produto);
+                produto.Save();
+
+                colheita.Update(colheita);
+                colheita.Save();
+                return RedirectToAction("Index");
+            }
+            return View(colheita);
         }
 
         public ActionResult Excluir(int? id, int? id2)
         {
-            return View();
+            if (id == null || id2 == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            colheita = colheita.GetByID(id, id2);
+            if (colheita == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.Sistema = colheita.Plantio.Sistemas.Where(x => x.Value == colheita.Plantio.Sistema.ToString()).First().Text;
+            ViewBag.Periodo = colheita.Plantio.Periodos.Where(x => x.Value == colheita.Plantio.TipoPlantio.ToString()).First().Text;
+            return View(colheita);
         }
 
         [ValidateAntiForgeryToken]
         [HttpPost, ActionName("Excluir")]
         public ActionResult ExcluirConfirmado(Colheita colheita)
-        {
-            return View();
+        {//TODO: Delete colheita
+            colheita.Delete(colheita.IdPlantio, colheita.IdProd);
+            colheita.Save();
+
+            return RedirectToAction("Index");
         }
     }
 }

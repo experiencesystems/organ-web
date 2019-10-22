@@ -1,4 +1,4 @@
-﻿@model OrganWeb.Areas.Sistema.Models.Financas.Compra
+﻿@model OrganWeb.Areas.Sistema.Models.Financas.Venda
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/jqueryval")
@@ -9,30 +9,15 @@
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
-    <h4>Nova compra</h4>
+    <h4>Venda</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
     <div class="form-group">
         @Html.LabelFor(model => model.Data, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Data, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.ItensComprados.IdEstoque, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.ItensComprados.IdEstoque, new MultiSelectList(Model.Items, "Id", "Item"), new { multiple = "multiple", id = "items" })
-            @Html.ValidationMessageFor(model => model.ItensComprados.IdEstoque, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.IdForn, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.IdForn, new SelectList(Model.Fornecedores, "Id", "NomeFantasia"))
-            @Html.ValidationMessageFor(model => model.IdForn, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -45,10 +30,18 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.ItensComprados.QtdProd, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.ItensVendidos.IdEstoque, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.ItensComprados.QtdProd, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.ItensComprados.QtdProd, "", new { @class = "text-danger" })
+            @Html.DropDownList("IdEstoque", new MultiSelectList(Model.Items, "Id", "Item"), new { multiple = "multiple", id = "items" })
+            @Html.ValidationMessageFor(model => model.ItensVendidos.IdEstoque, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ItensVendidos.QtdVendida, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ItensVendidos.QtdVendida, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ItensVendidos.QtdVendida, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -77,6 +70,14 @@
     </div>
 
     <div class="form-group">
+        @Html.LabelFor(model => model.IdCliente, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.IdCliente, new SelectList(Model.Clientes, "Id", "Pessoa.Nome"))
+            @Html.ValidationMessageFor(model => model.Pagamento.Tipo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Create" class="btn btn-default" />
         </div>
@@ -85,5 +86,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Voltar", "Index")
 </div>

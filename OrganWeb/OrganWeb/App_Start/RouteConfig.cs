@@ -25,12 +25,6 @@ namespace OrganWeb
               namespaces: new[]{"OrganWeb.Controllers"}
           );
             routes.MapRoute(
-              name: "Equipes",
-              url: "Equipes/",
-              defaults: new { controller = "Equipes", action = "Index", id = UrlParameter.Optional },
-              namespaces: new[] { "OrganWeb.Controllers" }
-          );
-            routes.MapRoute(
              name: "Controle",
              url: "Controle/",
              defaults: new { controller = "Controle", action = "Index", id = UrlParameter.Optional }
@@ -41,12 +35,6 @@ namespace OrganWeb
              name: "Estoque",
              url: "Estoque/",
              defaults: new { controller = "Estoque", action = "Index", id = UrlParameter.Optional },
-              namespaces: new[] { "OrganWeb.Controllers" }
-         );
-            routes.MapRoute(
-             name: "Fazenda",
-             url: "Fazenda/",
-             defaults: new { controller = "Fazenda", action = "Index", id = UrlParameter.Optional },
               namespaces: new[] { "OrganWeb.Controllers" }
          );
             routes.MapRoute(
@@ -80,33 +68,15 @@ namespace OrganWeb
              namespaces: new[] { "OrganWeb.Controllers" }
         );
             routes.MapRoute(
-            name: "Monitoramento",
-            url: "Monitoramento/",
-            defaults: new { controller = "Monitoramento", action = "Index", id = UrlParameter.Optional },
-             namespaces: new[] { "OrganWeb.Controllers" }
-        );
-            routes.MapRoute(
             name: "Praga",
             url: "Praga/",
             defaults: new { controller = "Praga", action = "Index", id = UrlParameter.Optional },
              namespaces: new[] { "OrganWeb.Controllers" }
         );
             routes.MapRoute(
-            name: "Tarefa",
-            url: "Tarefa/",
-            defaults: new { controller = "Tarefa", action = "Index", id = UrlParameter.Optional },
-             namespaces: new[] { "OrganWeb.Controllers" }
-        );
-            routes.MapRoute(
-            name: "VwItems",
-            url: "VwItems/",
-            defaults: new { controller = "VwItems", action = "Index", id = UrlParameter.Optional },
-             namespaces: new[] { "OrganWeb.Controllers" }
-        );
-            routes.MapRoute(
             name: "Login",
-            url: "LoginRegistro/",
-            defaults: new { controller = "Account", action = "LoginRegistro", id = UrlParameter.Optional },
+            url: "Login/",
+            defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional },
              namespaces: new[] { "OrganWeb.Controllers" }
         );
         }
