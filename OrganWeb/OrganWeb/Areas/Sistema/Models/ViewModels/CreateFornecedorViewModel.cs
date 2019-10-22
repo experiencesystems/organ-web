@@ -85,8 +85,9 @@ namespace OrganWeb.Areas.Sistema.Models.ViewModels
         public string BCF { get; set; }
 
         public IEnumerable<Estado> Estados { get; set; }
-        public IEnumerable<VwFornecedor> Fornecedor { get; set; }
+       
         public IEnumerable<DDD> DDDs { get; set; }
         public IEnumerable<VwEndereco> Enderecos { get; set; }
+        public IEnumerable<VwFornecedor> Fornecedor { get; set; }
     }
 }

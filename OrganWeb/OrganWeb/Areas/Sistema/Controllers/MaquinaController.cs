@@ -1,4 +1,5 @@
-﻿using OrganWeb.Areas.Sistema.Models.Ferramentas;
+﻿using OrganWeb.Areas.Sistema.Models.Armazenamento;
+using OrganWeb.Areas.Sistema.Models.Ferramentas;
 using OrganWeb.Areas.Sistema.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
     public class MaquinaController : Controller
     {
         private Maquina maquina = new Maquina();
+        private Estoque estoque = new Estoque();
 
         public ActionResult Index()
         {
@@ -24,8 +26,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         public ActionResult Create()
         {
-           
-            // n sei oq isso aki retornaria sinceramente vo v
+            maquina = new Maquina() { Estoque = new Estoque() };
+        
             return View();
         }
 
@@ -35,22 +37,17 @@ namespace OrganWeb.Areas.Sistema.Controllers
         {
             if (ModelState.IsValid)
             {
-                var maq = new Maquina
-                {
-                    Nome = maquina.Nome,
-                    Tipo = maquina.Tipo,
-                    Desc = maquina.Desc,
-                    VidaUtil = maquina.VidaUtil,
-                    ValorInicial = maquina.ValorInicial,
-                    DeprMes = maquina.DeprMes,
-                    DeprAno = maquina.DeprAno,
-                    DataCadastro = maquina.DataCadastro,
-                };
-                maq.Add(maq);
-                maq.Save();
-
+                estoque = maquina.Estoque;
+                estoque.Add(estoque);
+                estoque.Save();
+                maquina.IdEstoque = estoque.Id;
+                maquina.Estoque = null;
+                estoque = null;
+                maquina.Add(maquina);
+                maquina.Save();
+                return RedirectToAction("Index");
                 
-
+         
             }
             return View(maquina);
         }

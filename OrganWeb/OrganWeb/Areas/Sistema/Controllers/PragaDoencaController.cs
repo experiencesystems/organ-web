@@ -13,6 +13,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
     {
 
         private Area area = new Area();
+        private AreaPD areapd = new AreaPD();
 
         // GET: Sistema/PragaDoenca
         public ActionResult Index()
@@ -45,11 +46,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
             foreach (var item in IdArea)
             {
-                
-        //        areapd.Add(new AreaPD { IdArea = item, IdPd = pd.Id });
-       //         areapd.Save();
-
-// meu deus do ceu ki porra eh areapd sao duas da manha raquel nao esquece de perguntar
+             areapd.Add(new AreaPD { IdArea = item, IdPd = pd.Id });
+               areapd.Save();
             }
             return View();
         }

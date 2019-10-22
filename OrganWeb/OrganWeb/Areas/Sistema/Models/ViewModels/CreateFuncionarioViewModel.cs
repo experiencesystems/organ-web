@@ -6,6 +6,8 @@ using OrganWeb.Areas.Sistema.Models.Funcionarios;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using OrganWeb.Models.Endereco;
+using OrganWeb.Models.Telefone;
 
 namespace OrganWeb.Areas.Sistema.Models.ViewModels
 {
@@ -37,5 +39,10 @@ namespace OrganWeb.Areas.Sistema.Models.ViewModels
         public string Rua { get; set; }
         [Required]
         public string BCF { get; set; }
+
+        public IEnumerable<Estado> Estados { get; set; }
+
+        public IEnumerable<DDD> DDDs { get; set; }
+
     }
 }

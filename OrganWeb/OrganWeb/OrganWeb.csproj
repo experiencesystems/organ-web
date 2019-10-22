@@ -236,6 +236,7 @@
     <Compile Include="Areas\Sistema\Controllers\EstoqueController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FinanceiroController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FornecedorController.cs" />
+    <Compile Include="Areas\Sistema\Controllers\FuncionarioController.cs" />
     <Compile Include="Areas\Sistema\Controllers\ManutencaoController.cs" />
     <Compile Include="Areas\Sistema\Controllers\MaquinaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\PlantioController.cs" />
@@ -258,12 +259,12 @@
     <Compile Include="Areas\Sistema\Models\Financas\ItensComprados.cs" />
     <Compile Include="Areas\Sistema\Models\Financas\ItensVendidos.cs" />
     <Compile Include="Areas\Sistema\Models\Financas\Venda.cs" />
-    <Compile Include="Areas\Sistema\Models\Funcionarios\Cargo.cs" />
+    <Compile Include="Areas\Sistema\Models\Funcionario\Cargo.cs" />
     <Compile Include="Areas\Sistema\Models\Armazenamento\Categoria.cs" />
     <Compile Include="Areas\Sistema\Models\Financas\Despesa.cs" />
     <Compile Include="Areas\Sistema\Models\Armazenamento\Estoque.cs" />
     <Compile Include="Areas\Sistema\Models\Armazenamento\Fornecedor.cs" />
-    <Compile Include="Areas\Sistema\Models\Funcionarios\Funcionario.cs" />
+    <Compile Include="Areas\Sistema\Models\Funcionario\Funcionario.cs" />
     <Compile Include="Areas\Sistema\Models\Armazenamento\HistoricoEstoque.cs" />
     <Compile Include="Areas\Sistema\Models\Safras\AreaPlantio.cs" />
     <Compile Include="Areas\Sistema\Models\Safras\Colheita.cs" />

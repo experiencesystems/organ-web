@@ -19,6 +19,7 @@ namespace OrganWeb.Areas.Sistema.Models.Praga_e_Doenca
         public string Nome { get; set; }
 
         [Required]
+        //praga ou doenca 
         public bool PD { get; set; }
     }
 }
