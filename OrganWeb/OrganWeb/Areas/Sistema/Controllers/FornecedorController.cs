@@ -14,6 +14,7 @@ using OrganWeb.Models.Banco;
 using OrganWeb.Models.Endereco;
 using OrganWeb.Models.Telefone;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
+using OrganWeb.Models.Pessoa;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
@@ -22,7 +23,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private Fornecedor fornecedor = new Fornecedor();
         private Estado estado = new Estado();
         private DDD ddd = new DDD();
-        
+        private BancoContext db = new BancoContext();
+
         public ActionResult Index()
         {
             return RedirectToAction("Index", "Financeiro");
@@ -60,58 +62,104 @@ namespace OrganWeb.Areas.Sistema.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CreateFornecedorViewModel fornecedor)
+        public ActionResult Create(CreateFornecedorViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var forn = new Fornecedor
+                var cidade = new Cidade
                 {
-                    Status = fornecedor.Status,
-                    IdPessoa = fornecedor.IdPessoa
+                    Nome = model.Cidade,
+                    IdEstado = model.Estado
                 };
-                forn.Add(forn);
-                forn.Save();
 
-                var pess = new VwFornecedor
+                db.Cidades.Add(cidade);
+                db.SaveChanges();
+
+                var bairro = new Bairro
                 {
-                    NomeFantasia = fornecedor.NomeFantasia,
-                    RazaoSocial = fornecedor.RazaoSocial,
-                      CNPJ = fornecedor.CNPJ,
-                        IE = fornecedor.IE,
-                    Email = fornecedor.RazaoSocial,
-                    Telefones = fornecedor.Telefone
-
+                    Nome = model.Bairro,
+                    IdCidade = cidade.Id
                 };
-                pess.Add(pess);
-                pess.Save();
-                var ddd = new DDD
+
+                db.Bairros.Add(bairro);
+                db.SaveChanges();
+
+                var rua = new Logradouro
                 {
-                    Valor = fornecedor.DDD,
-                    
-
+                    Nome = model.Rua,
+                    IdBairro = bairro.Id
                 };
-                ddd.Add(ddd);
-                ddd.Save();
 
-                var estado = new Estado
+                db.Logradouros.Add(rua);
+                db.SaveChanges();
+
+                var cep = new Endereco
                 {
-                    Nome = fornecedor.Estado
-                    
-
+                    CEP = model.CEP,
+                    IdRua = rua.Id
                 };
-                estado.Add(estado);
-                estado.Save();
-                /*var endereco = new VwEndereco
+
+                db.Enderecos.Add(cep);
+                db.SaveChanges();
+
+                var pessoa = new Pessoa
                 {
-
-                    Rua = fornecedor.Rua,
-                    BCF = fornecedor.BCF
-
+                    Nome = model.NomeFantasia,
+                    Email = model.Email,
+                    NumeroEndereco = model.Numero,
+                    CompEndereco = model.Complemento,
+                    CEP = cep.CEP
                 };
-                endereco.Add(endereco);
-                endereco.Save() ta dano ruim aki*/
+
+                db.Pessoas.Add(pessoa);
+                db.SaveChanges();
+
+                var tipotel = new TipoTel
+                {
+                    Tipo = model.TipoTelefone
+                };
+
+                db.TipoTels.Add(tipotel);
+                db.SaveChanges();
+
+                var telefone = new Telefone
+                {
+                    Numero = model.Numero,
+                    IdDDD = model.DDD,
+                    IdTipo = tipotel.Id
+                };
+
+                db.Telefones.Add(telefone);
+                db.SaveChanges();
+
+                var telpessoa = new TelefonePessoa
+                {
+                    IdPessoa = pessoa.Id,
+                    IdTelefone = telefone.Id
+                };
+
+                db.TelefonePessoas.Add(telpessoa);
+                db.SaveChanges();
 
 
+                var pessoajuridica = new PessoaJuridica
+                {
+                    RazaoSocial = model.RazaoSocial,
+                    CNPJ = model.CNPJ,
+                    IE = model.IE,
+                    IdPessoa = pessoa.Id
+                };
+
+                db.PessoaJuridicas.Add(pessoajuridica);
+                db.SaveChanges();
+
+                var fornecedor = new Fornecedor
+                {
+                    Status = true,
+                    IdPessoa = pessoa.Id
+                };
+                db.Fornecedors.Add(fornecedor);
+                db.SaveChanges();
             }
             return View(fornecedor);
         }

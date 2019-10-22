@@ -442,7 +442,6 @@
     <Content Include="Areas\Sistema\Views\PragaDoenca\Delete.cshtml" />
     <Content Include="Areas\Sistema\Views\PragaDoenca\Details.cshtml" />
     <Content Include="Areas\Sistema\Views\PragaDoenca\Edit.cshtml" />
-    <Content Include="Areas\Sistema\Views\PragaDoenca\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Fazenda\_NovoFuncionario.cshtml" />
     <Content Include="Areas\Sistema\Views\Estoque\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Plantio\Index.cshtml" />
@@ -454,7 +453,7 @@
     <Content Include="Areas\Sistema\Views\Manutencao\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Estoque\Fornecedores.cshtml" />
     <Content Include="Areas\Sistema\Views\Semente\Index.cshtml" />
-    <Content Include="Areas\Sistema\Views\PragaDoenca\PragaDoenca.cshtml" />
+    <Content Include="Areas\Sistema\Views\PragaDoenca\Index.cshtml" />
     <Content Include="Areas\Ecommerce\Views\web.config" />
     <Content Include="Areas\Ecommerce\Views\Loja\Detalhes.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Loja\Index.cshtml" />
@@ -510,6 +509,8 @@
     <Content Include="Areas\Sistema\Views\Venda\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Venda\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Funcionario\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\PragaDoenca\Detalhes.cshtml" />
+    <Content Include="Areas\Sistema\Views\PragaDoenca\Excluir.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

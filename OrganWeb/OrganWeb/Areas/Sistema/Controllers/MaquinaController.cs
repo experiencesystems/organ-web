@@ -27,7 +27,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         public ActionResult Create()
         {
             maquina = new Maquina() { Estoque = new Estoque() };
-        
+
             return View();
         }
 
@@ -46,8 +46,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 maquina.Add(maquina);
                 maquina.Save();
                 return RedirectToAction("Index");
-                
-         
+
+
             }
             return View(maquina);
         }
@@ -63,7 +63,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return HttpNotFound();
             }
-            
+
             return View(maquina);
         }
 
@@ -71,7 +71,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExcluirConfirmado(Maquina maquina)
         {
-            
+
             maquina = maquina.GetByID(maquina.IdEstoque);
             maquina.Delete(maquina.IdEstoque);
             maquina.Save();
@@ -96,8 +96,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Editar(Maquina maquina)
         {
-           
-             if (ModelState.IsValid)
+
+            if (ModelState.IsValid)
             {
                 maquina.Update(maquina);
                 maquina.Save();
