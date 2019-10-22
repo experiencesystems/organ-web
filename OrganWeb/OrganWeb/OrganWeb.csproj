@@ -459,7 +459,7 @@
     <Content Include="Areas\Ecommerce\Views\Loja\Detalhes.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Loja\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Maquina\Index.cshtml" />
-    <Content Include="Areas\Sistema\Views\Funcionario\Funcionario.cshtml" />
+    <Content Include="Areas\Sistema\Views\Funcionario\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Financeiro\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Plantio\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Plantio\Editar.cshtml" />
@@ -509,6 +509,7 @@
     <Content Include="Areas\Sistema\Views\Estoque\Excluir.cshtml" />
     <Content Include="Areas\Sistema\Views\Venda\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Venda\Index.cshtml" />
+    <Content Include="Areas\Sistema\Views\Funcionario\Create.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
