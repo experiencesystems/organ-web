@@ -1,12 +1,12 @@
 use dbOrgan;
-
+/*SELECT LAST_INSERT_ID();*/
 -- =================================================================== [NOME] ==================================================== 
 -- =============================================================================================================================== 
  
 -- =================================================================== PESSOA ====================================================
 	drop view if exists vwEndereco;
 	create view vwEndereco as(
-	select E.CEP,  R.Logradouro `Rua`, concat(B.Bairro,' - ', C.Cidade,'/', Es.UF) `BCF` 
+	select E.CEP,  R.Logradouro `Rua`, concat(B.Bairro,' - ', C.Cidade,'/', Es.UF) `BCE` 
 	 from tbEndereco E 
 		inner join tbLogradouro R on E.IdRua = R.Id
 		inner join tbBairro B on R.IdBairro = B.Id
@@ -23,7 +23,7 @@ use dbOrgan;
 
 	drop view if exists vwPessoa;
 	create view vwPessoa as(
-	select P.Id, P.Nome, P.Email, concat(E.Rua,', ', P.NumeroEndereco,' - ', ifnull(P.CompEndereco, 'Sem Complemento'),' - ',E.BCF,' - ',E.CEP) `Endereço`,  group_concat(T.Telefone separator '; ') `Telefones`
+	select P.Id, P.Nome, P.Email, concat(E.Rua,', ', P.NumeroEndereco,' - ', ifnull(P.CompEndereco, 'Sem Complemento'),' - ',E.BCE,' - ',E.CEP) `Endereço`,  group_concat(T.Telefone separator '; ') `Telefones`
 	 from tbPessoa P 
 		inner join vwEndereco E on P.CEP = E.CEP
 		inner join tbTelefonePessoa TP on P.Id = TP.IdPessoa
@@ -109,23 +109,34 @@ use dbOrgan;
     order by `Categoria`;
 -- ===============================================================================================================================  
 
--- =================================================================== FLUXO DE CAIXA ============================================  
+-- =================================================================== FLUXO DE CAIXA ============================================
+	DELIMITER $$ -- Consertar
+    drop function if exists spValorTotal$$
+    create function spValorTotal(QtdProd double, ValorUnitario double, Desconto decimal(5,2))
+    returns double 
+    deterministic
+    begin
+			
+			declare VDS, ValorTotal /*Valor Sem Desconto*/ double;
+			set VDS = ((@QtdProd * @ValorUnitario));
+			set ValorTotal = VDS - (VDS * @Desconto);
+            return ValorTotal;
+	end$$
+    DELIMITER ;
+  
 	drop view if exists vwCompra;
     create view vwCompra as(
     select C.Id `Compra`, DATE_FORMAT(C.`Data`, '%d/%m/%Y') `Data`,
 		   group_concat(distinct concat(I.Item, ' - ', IC.QtdProd) separator ', ') `Itens - Quantidade Comprada`,
-		   SUM(
-           ((IC.QtdProd * E.ValorUnit)) - 
-		   (((IC.QtdProd * E.ValorUnit) - (IC.QtdProd * E.ValorUnit)) * C.Desconto)
-           ) `Valor Total`
+		   SUM(spValorTotal(IC.QtdProd, E.ValorUnit, C.Desconto)) `Valor Total`
 		from tbItensComprados IC INNER JOIN tbEstoque E on IC.IdEstoque = E.Id
 								 INNER JOIN tbCompra C on IC.IdCompra = C.Id
                                  INNER JOIN vwItems I on I.Id = E.Id
 	group by `Compra`
     );
     
-     
-	
+     select * from vwCompra;
+
     drop view if exists vwSaida;
 	create View vwSaida as select DATE_FORMAT(Co.`Data`, '%d/%m/%Y') `Data`, (SUM(M.ValorPago) + SUM(D.ValorPago)  + SUM(Co.`Valor Total`)) `Saída` from tbManutencao M, tbDespesa D, vwCompra Co group by Co.`Data`;
 
@@ -382,4 +393,5 @@ select mm.IdMaquina, mm.IdManutencao, M.Nome `Máquina`, M.Tipo `Tipo de Máquin
 	group by c.Id;
     
 -- =============================================================================================================================== 
-
+SELECT * from VwCompra;
+select * from vwVenda;
