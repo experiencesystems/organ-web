@@ -105,5 +105,22 @@ namespace OrganWeb.Areas.Sistema.Controllers
             }
             return View(maquina);
         }
+
+        public ActionResult Detalhes(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            maquina = maquina.GetByID(id);
+            if (maquina == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(maquina);
+        }
+
+        
     }
 }

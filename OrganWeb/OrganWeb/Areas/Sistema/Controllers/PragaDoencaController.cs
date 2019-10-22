@@ -55,6 +55,20 @@ namespace OrganWeb.Areas.Sistema.Controllers
             return View(praga);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Editar(PragaOrDoenca praga)
+        {
+
+            if (ModelState.IsValid)
+            {
+                praga.Update(praga);
+                praga.Save();
+                return RedirectToAction("Index");
+            }
+            return View(praga);
+        }
+
         public ActionResult Create()
         {
             var view = new CreatePragaOrDoencaViewModel

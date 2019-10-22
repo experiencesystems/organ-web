@@ -1,5 +1,9 @@
 ﻿@model OrganWeb.Areas.Sistema.Models.Ferramentas.Maquina
 
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()

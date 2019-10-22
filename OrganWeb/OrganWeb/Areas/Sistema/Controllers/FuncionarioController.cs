@@ -1,5 +1,6 @@
 ﻿using OrganWeb.Areas.Sistema.Models.Funcionarios;
 using OrganWeb.Areas.Sistema.Models.ViewModels;
+using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
 using OrganWeb.Models.Banco;
 using OrganWeb.Models.Endereco;
 using OrganWeb.Models.Pessoa;
@@ -7,6 +8,7 @@ using OrganWeb.Models.Telefone;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -18,6 +20,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private DDD ddd = new DDD();
         private Funcionario funcionario = new Funcionario();
         private BancoContext db = new BancoContext();
+        private VwFuncionario vwfuncionario = new VwFuncionario();
 
         public ActionResult Index()
         {
@@ -154,7 +157,73 @@ namespace OrganWeb.Areas.Sistema.Controllers
             }
             return View(funcionario);
         }
+        public ActionResult Detalhes(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+             vwfuncionario= vwfuncionario.GetByID(id);
+            if (vwfuncionario == null)
+            {
+                return HttpNotFound();
+            }
 
+            return View(vwfuncionario);
+        }
+
+        public ActionResult Editar(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            funcionario = funcionario.GetByID(id);
+            if (funcionario == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(funcionario);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Editar(Funcionario funcionario)
+        {
+
+            if (ModelState.IsValid)
+            {
+                funcionario.Update(funcionario);
+                funcionario.Save();
+                return RedirectToAction("Index");
+            }
+            return View(funcionario);
+        }
+        public ActionResult Excluir(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            vwfuncionario = vwfuncionario.GetByID(id);
+            if (vwfuncionario == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(vwfuncionario);
+        }
+
+        [HttpPost, ActionName("Excluir")]
+        [ValidateAntiForgeryToken]
+        public ActionResult ExcluirConfirmado(VwFuncionario vwfuncionario)
+        {
+            funcionario.Delete(vwfuncionario.Id);
+            funcionario.Save();
+
+            return RedirectToAction("Index");
+        }
 
 
     }

@@ -511,6 +511,10 @@
     <Content Include="Areas\Sistema\Views\Funcionario\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\PragaDoenca\Detalhes.cshtml" />
     <Content Include="Areas\Sistema\Views\PragaDoenca\Excluir.cshtml" />
+    <Content Include="Areas\Sistema\Views\Maquina\Detalhes.cshtml" />
+    <Content Include="Areas\Sistema\Views\Funcionario\Excluir.cshtml" />
+    <Content Include="Areas\Sistema\Views\Funcionario\Editar.cshtml" />
+    <Content Include="Areas\Sistema\Views\Funcionario\Detalhes.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
