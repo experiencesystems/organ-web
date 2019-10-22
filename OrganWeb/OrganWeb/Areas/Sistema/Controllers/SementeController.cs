@@ -4,6 +4,7 @@ using OrganWeb.Areas.Sistema.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -13,6 +14,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
     {
         private Semente semente = new Semente();
         private Estoque estoque = new Estoque();
+
 
         public ActionResult Sementes()
         {
@@ -60,14 +62,73 @@ namespace OrganWeb.Areas.Sistema.Controllers
             return View(semente);
         }
 
-        public ActionResult Excluir()
+        public ActionResult Detalhes(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            semente = semente.GetByID(id);
+            if (semente == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(semente);
         }
 
-        public ActionResult Editar()
+        public ActionResult Editar(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            semente = semente.GetByID(id);
+            if (semente == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(semente);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Editar(Semente semente)
+        {
+
+            if (ModelState.IsValid)
+            {
+                semente.Update(semente);
+                semente.Save();
+                return RedirectToAction("Index");
+            }
+            return View(semente);
+        }
+        public ActionResult Excluir(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            semente = semente.GetByID(id);
+            if (semente == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(semente);
+        }
+
+        [HttpPost, ActionName("Excluir")]
+        [ValidateAntiForgeryToken]
+        public ActionResult ExcluirConfirmado(Semente semente)
+        {
+            semente.Delete(semente.IdEstoque);
+            semente.Save();
+
+            return RedirectToAction("Index");
+        }
+
     }
 }

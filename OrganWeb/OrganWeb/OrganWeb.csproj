@@ -515,6 +515,8 @@
     <Content Include="Areas\Sistema\Views\Funcionario\Excluir.cshtml" />
     <Content Include="Areas\Sistema\Views\Funcionario\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Funcionario\Detalhes.cshtml" />
+    <Content Include="Areas\Sistema\Views\Fornecedor\Detalhes.cshtml" />
+    <Content Include="Areas\Sistema\Views\Semente\Detalhes.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

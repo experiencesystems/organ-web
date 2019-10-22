@@ -24,6 +24,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private Estado estado = new Estado();
         private DDD ddd = new DDD();
         private BancoContext db = new BancoContext();
+        private VwFornecedor vwfornecedor = new VwFornecedor();
 
         public ActionResult Index()
         {
@@ -246,5 +247,24 @@ namespace OrganWeb.Areas.Sistema.Controllers
             }
             return View(fornecedor);
         }
+        public ActionResult Detalhes(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            vwfornecedor = vwfornecedor.GetByID(id);
+            if (vwfornecedor == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(vwfornecedor);
+        }
+
+       
+        
+        
+
     }
 }
