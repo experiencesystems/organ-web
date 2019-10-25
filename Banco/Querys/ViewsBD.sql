@@ -1,9 +1,6 @@
 use dbOrgan;
 /*SELECT LAST_INSERT_ID();*/
--- =================================================================== [NOME] ==================================================== 
--- =============================================================================================================================== 
- 
--- =================================================================== PESSOA ====================================================
+
 	drop view if exists vwEndereco;
 	create view vwEndereco as(
 	select E.CEP,  R.Logradouro `Rua`, concat(B.Bairro,' - ', C.Cidade,'/', Es.UF) `BCE` 
@@ -61,9 +58,7 @@ use dbOrgan;
 		inner join vwPessoaJuridica PJ on PJ.Id = F.IdPessoa
 		where F.`Status` = true
 	);  
--- ===============================================================================================================================  
 
--- =================================================================== ESTOQUE ============================================  
     drop view if exists vwItems;
     create view vwItems as
 	(SELECT S.IdEstoque `Id`,
@@ -107,21 +102,19 @@ use dbOrgan;
 	FROM tbProduto P
 	INNER JOIN tbEstoque E ON P.IdEstoque = E.Id)
     order by `Categoria`;
--- ===============================================================================================================================  
 
--- =================================================================== FLUXO DE CAIXA ============================================
-	DELIMITER $$ -- Consertar
+	DELIMITER $$ 
     drop function if exists spValorTotal$$
     create function spValorTotal(QtdProd double, ValorUnitario double, Desconto decimal(5,2))
     returns double 
     deterministic
     begin
-			
 			declare VDS, ValorTotal /*Valor Sem Desconto*/ double;
-			set VDS = ((@QtdProd * @ValorUnitario));
-			set ValorTotal = VDS - (VDS * @Desconto);
+			set VDS = ((QtdProd * ValorUnitario));
+			set ValorTotal = VDS - (VDS * (Desconto/100));
             return ValorTotal;
 	end$$
+    
     DELIMITER ;
   
 	drop view if exists vwCompra;
@@ -134,24 +127,23 @@ use dbOrgan;
                                  INNER JOIN vwItems I on I.Id = E.Id
 	group by `Compra`
     );
-    
-     select * from vwCompra;
-
+	
     drop view if exists vwSaida;
 	create View vwSaida as select DATE_FORMAT(Co.`Data`, '%d/%m/%Y') `Data`, (SUM(M.ValorPago) + SUM(D.ValorPago)  + SUM(Co.`Valor Total`)) `Saída` from tbManutencao M, tbDespesa D, vwCompra Co group by Co.`Data`;
-
+	
+    select * from vwSaida;
+    
 	drop view if exists vwVenda;
 	create view vwVenda as(
     select V.Id `Venda`, (DATE_FORMAT(V.`Data`, '%d/%m/%Y')) `Data`, E.Id 'IdEstoque',
-    SUM(((IV.QtdVendida * E.ValorUnit))
-    - (IV.QtdVendida * E.ValorUnit) * IV.DescontoProd) ValorTotal
+    SUM(spValorTotal(IV.QtdVendida, E.ValorUnit, V.Desconto)) `Valor Total`
 		from tbItensVendidos IV INNER JOIN tbEstoque E on IV.IdEstoque = E.Id
 								INNER JOIN tbVenda V on IV.IdVenda = V.Id
 	group by `Venda`
     );
     
     drop view if exists vwSaldo;
-    create view vwSaldo as select (IFNULL(V.ValorTotal, 0) - IFNULL(S.Saída, 0))  `Saldo` from vwSaida S, vwVenda V;
+    create view vwSaldo as select (IFNULL(V.`Valor Total`, 0) - IFNULL(S.Saída, 0))  `Saldo` from vwSaida S, vwVenda V;
 	
     drop view if exists vwFluxoDeCaixa; 
     create view vwFluxoDeCaixa as
@@ -160,7 +152,6 @@ use dbOrgan;
     where S.`Data` = V.`Data`
     group by `ANO`; 
     
-    -- ================================================================= function FLUXO DE CAIXA ============================================  
 	DELIMITER $$
     drop function if exists spFluxoCaixa$$ 
 	create function spFluxoCaixa()
@@ -210,9 +201,7 @@ use dbOrgan;
 	end
 	DELIMITER ;
 -- MUDAR VALOR DOS NOMES DAS DATAS PRA PORTUGUES    SET lc_time_names = 'pt_BR';
--- =============================================================================================================================== 
 
--- =================================================================== PROC ESTOQUE ===============================================
 	DELIMITER $$
     
     drop procedure if exists spInsertEstoque$$
@@ -345,8 +334,8 @@ use dbOrgan;
     call spInsertInsumo(1, 3, 2.0, 'Pá', null, 2)$$
     call spInsertMaquina(1, 3, 2500, 'Tratorzinho', 1, 'Joana Motors', null, 2, 2300, 20, 240)$$*/
     DELIMITER ;
--- =============================================================================================================================== 
--- =================================================================== MANUTENÇÃO ================================================
+    
+    
 drop view if exists vwQtdMa;
 create view vwQtdMa as
 select mm.IdMaquina, mm.IdManutencao, m.Nome, ifnull(count(IdMaquina), 0) `Quantidade de Manutenções`, ifnull(sum(ma.ValorPago), 0) `Custo Total`
@@ -362,9 +351,7 @@ select mm.IdMaquina, mm.IdManutencao, M.Nome `Máquina`, M.Tipo `Tipo de Máquin
 	on mm.IdMaquina = M.IdEstoque
  inner join tbManutencao Ma 
 	on Ma.Id = mm.IdManutencao;
--- =============================================================================================================================== 
 
--- =================================================================== PROC ESTOQUE ===============================================
 	drop view if exists vwPragaOrDoenca ;
      create view vwPragaOrDoenca as
 		select pd.Id, pd.Nome `Nome`,
@@ -391,7 +378,3 @@ select mm.IdMaquina, mm.IdManutencao, M.Nome `Máquina`, M.Tipo `Tipo de Máquin
         inner join tbItensControle ic on c.Id = ic.IdControle
         inner join vwItems i on ic.IdEstoque = i.Id
 	group by c.Id;
-    
--- =============================================================================================================================== 
-SELECT * from VwCompra;
-select * from vwVenda;
