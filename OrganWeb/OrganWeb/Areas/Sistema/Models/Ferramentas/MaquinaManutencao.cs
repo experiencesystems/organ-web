@@ -23,7 +23,7 @@ namespace OrganWeb.Areas.Sistema.Models.Ferramentas
         public virtual Maquina Maquina { get; set; }
         public virtual Manutencao Manutencao { get; set; }
 
-        //TODO: ver se é IEnumerable msm
+       
         public IEnumerable<Maquina> Maquinas { get; set; }
     }
 }

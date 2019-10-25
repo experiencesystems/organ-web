@@ -17,10 +17,7 @@ namespace OrganWeb.Areas.Sistema.Models.Financas
     {
         [Key]
         public int Id { get; set; }
-        
-        [Range(0.01, 999.99, ErrorMessage = "Esse campo deve conter valores até 999,99")]
-        public double? Desconto { get; set; }
-
+ 
         [Required]
         [DataType(DataType.Date, ErrorMessage = "Data em formato inválido"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Data { get; set; }
@@ -34,7 +31,7 @@ namespace OrganWeb.Areas.Sistema.Models.Financas
         [ForeignKey("Pagamento")]
         public int IdPagamento { get; set; }
         //TODO: VWCLIENTE
-        //TODO: tirar desconto prod de tb junção
+       
         public virtual Cliente Cliente { get; set; }
         public virtual Pagamento Pagamento { get; set; }
         [NotMapped]

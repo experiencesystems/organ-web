@@ -51,7 +51,7 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#insumo" aria-expanded="false" aria-controls="insumo">
                             <i class="menu-icon fas fa-tree"></i>
-                            <span class="menu-title">Plantio e colheita</span>
+                            <span class="menu-title">Safra</span>
                             <i class="menu-arrow"></i>
                         </a>
                         <div class="collapse" id="insumo">
@@ -78,13 +78,12 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#estoque" aria-expanded="false" aria-controls="auth">
                             <i class="menu-icon fas fa-warehouse"></i>
-                            <span class="menu-title">Estoque</span>
+                            <span class="menu-title">Armazenamento</span>
                             <i class="menu-arrow"></i>
                         </a>
                         <div class="collapse" id="estoque">
                             <ul class="nav flex-column sub-menu">
                                 <li><a href="#">@Html.ActionLink("Sementes", "Index", "Semente", new { area = "Sistema" }, new { @class = "" })</a></li>
-                                <li><a href="#">@Html.ActionLink("Item", "Index", "VwItems", new { area = "Sistema" }, new { @class = "" })</a></li>
                                 <li><a href="#">@Html.ActionLink("Estoque", "Index", "Estoque", new { area = "Sistema" }, new { @class = "" })</a></li>
                             </ul>
                         </div>

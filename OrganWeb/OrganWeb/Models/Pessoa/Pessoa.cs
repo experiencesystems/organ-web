@@ -21,6 +21,7 @@ namespace OrganWeb.Models.Pessoa
 
         [Required]
         [StringLength(100, MinimumLength = 5)]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Required]
@@ -28,9 +29,10 @@ namespace OrganWeb.Models.Pessoa
 
         [StringLength(30, MinimumLength = 2)]
         public string CompEndereco { get; set; }
-
+     
         [Required]
         [ForeignKey("Endereco")]
+        [RegularExpression(@"[0-9]{5}[\d]{3}", ErrorMessage = "Digite um CEP válido somente com números")]
         public string CEP { get; set; }
 
         public virtual Endereco.Endereco Endereco { get; set; }

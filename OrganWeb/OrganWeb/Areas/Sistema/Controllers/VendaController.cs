@@ -59,7 +59,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
                 foreach (var item in IdEstoque)
                 {
-                    itensv.Add(new ItensVendidos { IdEstoque = item, IdVenda = venda.Id, DescontoProd = venda.Desconto, QtdVendida = venda.ItensVendidos.QtdVendida });
+                    itensv.Add(new ItensVendidos { IdEstoque = item, IdVenda = venda.Id, QtdVendida = venda.ItensVendidos.QtdVendida });
                     itensv.Save();
                 }
 

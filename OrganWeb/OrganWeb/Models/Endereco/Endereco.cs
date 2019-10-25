@@ -11,6 +11,7 @@ namespace OrganWeb.Models.Endereco
     public class Endereco
     {
         [Key]
+        [RegularExpression(@"[0-9]{5}[\d]{3}", ErrorMessage = "Digite um CEP válido somente com números")]
         [StringLength(8, MinimumLength = 8)]
         public string CEP { get; set; }
 

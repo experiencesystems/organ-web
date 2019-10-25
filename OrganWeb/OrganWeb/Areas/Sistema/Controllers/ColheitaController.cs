@@ -151,7 +151,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [ValidateAntiForgeryToken]
         [HttpPost, ActionName("Excluir")]
         public ActionResult ExcluirConfirmado(Colheita colheita)
-        {//TODO: Delete colheita
+        {//TODO: Delete colheita - victor disse nao 
             colheita.Delete(colheita.IdPlantio, colheita.IdProd);
             colheita.Save();
 

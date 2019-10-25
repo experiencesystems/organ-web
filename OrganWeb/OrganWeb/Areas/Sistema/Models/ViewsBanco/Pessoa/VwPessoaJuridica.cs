@@ -12,7 +12,6 @@ namespace OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa
     {
         [Key]
         public int Id { get; set; }
-        //TODO: Colocar o ID do Fornecedor
         public string Nome { get; set; }
         public string RazaoSocial { get; set; }
         public string CNPJ { get; set; }

@@ -14,10 +14,10 @@ namespace OrganWeb.Models.Pessoa
         [ForeignKey("Pessoa")]
         public int IdPessoa { get; set; }
 
-        [Required]
-        //TODO: Validação CPF
+        [Required] 
+        [RegularExpression (@"[0-9]{3}[0-9]{3}[0-9]{3}[0-9]{2}", ErrorMessage = "CPF Inválido!")]
         public Int64 CPF { get; set; }
-
+        //TODO: arrumar o datetime
         [Required]
         [StringLength(9, MinimumLength = 6)]
         public string RG { get; set; }
