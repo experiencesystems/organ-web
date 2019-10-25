@@ -446,6 +446,8 @@ use dbOrgan;
 
     insert into tbItensComprados(IdCompra, IdEstoque, QtdProd) values(2, 7, (select Qtd from tbEstoque where Id = 7)),
 																	 (2, 1, 1);
+	update tbEstoque set Qtd = Qtd+1 where Id = 1;
+    insert into tbItensComprados(IdCompra, IdEstoque, QtdProd) values(3, 1, 1);
 -- =======================================================================================================================
 
 -- =================================================================== VENDA ============================================ 
@@ -563,7 +565,6 @@ use dbOrgan;
     
 	insert into tbDespesaFunc value(1, 1);
 	insert into tbDespesaFunc value(3, 1);
-
 -- =============================================================================================================================== 
 
 -- =================================================================== PLANTIO ============================================
@@ -654,7 +655,6 @@ use dbOrgan;
 						   add constraint FKColheitaProd foreign key(IdProd) references tbProduto(IdEstoque);
 	
     insert into tbColheita values('01/01/01',  1, 4, 1, 7);
-    
 -- ======================================================================================================================== 
 
 -- =================================================================== CONTROLE ============================================ 
@@ -848,3 +848,22 @@ use dbOrgan;
     )engine = InnoDB;
     alter table tbPacote add constraint FKPacoteEntrega foreign key(IdEntrega) references tbEntrega(Id);
 -- ================================================================================================================================ 
+
+start transaction;
+begin;
+select * from tbCompra;
+select * from vwCompra;
+insert into tbDespesa(`Data`, ValorPago) values((select `Data` from tbCompra where Id=1)/*2001-01-01*/, (select `Valor Total` from vwCompra where `Compra` = 1)),
+									((select `Data` from tbCompra where Id=2)/*2001-02-01*/, (select `Valor Total` from vwCompra where `Compra` = 2)),
+                                    ((select `Data` from tbCompra where Id=3)/*2002-02-01*/, (select `Valor Total` from vwCompra where `Compra` = 3));
+select * from tbDespesa; 
+commit;
+
+start transaction;select * from tbCompra;
+begin;
+alter table tbCompra add column IdDespesa int, add constraint FKCompraDespesa foreign key(IdDespesa) references tbDespesa(Id);
+update tbCompra set IdDespesa = 11 where Id = 1;
+update tbCompra set IdDespesa = 12 where Id = 2;
+update tbCompra set IdDespesa = 13 where Id = 3;
+select D.*, C.* from tbDespesa D inner join tbCompra C on C.IdDespesa = D.Id; 
+ 
