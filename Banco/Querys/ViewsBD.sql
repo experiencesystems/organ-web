@@ -103,103 +103,6 @@ use dbOrgan;
 	INNER JOIN tbEstoque E ON P.IdEstoque = E.Id)
     order by `Categoria`;
 
-	DELIMITER $$ 
-    drop function if exists spValorTotal$$
-    create function spValorTotal(QtdProd double, ValorUnitario double, Desconto decimal(5,2))
-    returns double 
-    deterministic
-    begin
-			declare VDS, ValorTotal /*Valor Sem Desconto*/ double;
-			set VDS = ((QtdProd * ValorUnitario));
-			set ValorTotal = VDS - (VDS * (Desconto/100));
-            return ValorTotal;
-	end$$
-    
-    DELIMITER ;
-  
-	drop view if exists vwCompra;
-    create view vwCompra as(
-    select C.Id `Compra`, DATE_FORMAT(C.`Data`, '%d/%m/%Y') `Data`,
-		   group_concat(distinct concat(I.Item, ' - ', IC.QtdProd) separator ', ') `Itens - Quantidade Comprada`,
-		   SUM(spValorTotal(IC.QtdProd, E.ValorUnit, C.Desconto)) `Valor Total`
-		from tbItensComprados IC INNER JOIN tbEstoque E on IC.IdEstoque = E.Id
-								 INNER JOIN tbCompra C on IC.IdCompra = C.Id
-                                 INNER JOIN vwItems I on I.Id = E.Id
-	group by `Compra`
-    );
-	
-    drop view if exists vwSaida;
-	create View vwSaida as select DATE_FORMAT(Co.`Data`, '%d/%m/%Y') `Data`, (SUM(M.ValorPago) + SUM(D.ValorPago)  + SUM(Co.`Valor Total`)) `Saída` from tbManutencao M, tbDespesa D, vwCompra Co group by Co.`Data`;
-	
-    select * from vwSaida;
-    
-	drop view if exists vwVenda;
-	create view vwVenda as(
-    select V.Id `Venda`, (DATE_FORMAT(V.`Data`, '%d/%m/%Y')) `Data`, E.Id 'IdEstoque',
-    SUM(spValorTotal(IV.QtdVendida, E.ValorUnit, V.Desconto)) `Valor Total`
-		from tbItensVendidos IV INNER JOIN tbEstoque E on IV.IdEstoque = E.Id
-								INNER JOIN tbVenda V on IV.IdVenda = V.Id
-	group by `Venda`
-    );
-    
-    drop view if exists vwSaldo;
-    create view vwSaldo as select (IFNULL(V.`Valor Total`, 0) - IFNULL(S.Saída, 0))  `Saldo` from vwSaida S, vwVenda V;
-	
-    drop view if exists vwFluxoDeCaixa; 
-    create view vwFluxoDeCaixa as
-    select IFNULL(S.`Saída`,0) `Saída`, IFNULL(V.ValorTotal, 0) `Entrada`, Sal.Saldo, monthname(S.`Data`) `MÊS`, year(S.`Data`) `ANO`
-    from vwVenda V, vwSaida S, vwSaldo Sal
-    where S.`Data` = V.`Data`
-    group by `ANO`; 
-    
-	DELIMITER $$
-    drop function if exists spFluxoCaixa$$ 
-	create function spFluxoCaixa()
-	returns @FluxoCaixa table(
-					@Compra double,
-					@Venda double,
-					@Saldo double,
-					@MES varchar(15),
-					@ANO int)
-	begin	
-		declare double Venda, Compra, TVenda, TCompra, Saldo;
-        declare date  DtC, dtV;
-        DECLARE done INT DEFAULT 0;
-        DECLARE curCompra CURSOR FOR SELECT `Valor Total` FROM vwCompra group by `Data`;
-        declare curDtC cursor for select `Data` from vwCompra;
-        DECLARE curVenda CURSOR FOR SELECT ValorTotal FROM vwVenda;
-        declare curDtV cursor for select `Data` from vwVenda;
-        
-		  DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
-
-		  OPEN curCompra;
-          open curDtC;
-          open curVenda;
-          open curDtV;
-
-		  REPEAT
-			FETCH curCompra INTO Compra;
-            fetch curDtC into DtC;
-            
-			SET TCompra +=  Compra;
-              
-		  UNTIL done END REPEAT;
-		  CLOSE curCompra;
-          close curDtC;
-          
-          REPEAT
-            fetch curVenda into Venda;
-            fetch curDtV into DtV;
-            
-			SET TVenda +=  Venda;
-		  
-          UNTIL done END REPEAT;
-		  CLOSE curVenda;
-          close curDtV;
-          
-		  
-	end
-	DELIMITER ;
 -- MUDAR VALOR DOS NOMES DAS DATAS PRA PORTUGUES    SET lc_time_names = 'pt_BR';
 
 	DELIMITER $$
@@ -345,7 +248,7 @@ select mm.IdMaquina, mm.IdManutencao, m.Nome, ifnull(count(IdMaquina), 0) `Quant
 
 drop view if exists vwManutencao;
 create view vwManutencao as
-select mm.IdMaquina, mm.IdManutencao, M.Nome `Máquina`, M.Tipo `Tipo de Máquina`, Ma.Nome `Manutenção`, (DATE_FORMAT(MA.`Data`, '%d/%m/%Y')) `Data da Manutenção`, Ma.ValorPago `Valor da Manutenção`
+select mm.IdMaquina, mm.IdManutencao, M.Nome `Máquina`, M.Tipo `Tipo de Máquina`, Ma.Nome `Manutenção`, (DATE_FORMAT(Ma.`Data`, '%d/%m/%Y')) `Data da Manutenção`, Ma.ValorPago `Valor da Manutenção`
  from tbMaquina M 
  inner join tbMaquinaManutencao mm 
 	on mm.IdMaquina = M.IdEstoque
@@ -378,3 +281,4 @@ select mm.IdMaquina, mm.IdManutencao, M.Nome `Máquina`, M.Tipo `Tipo de Máquin
         inner join tbItensControle ic on c.Id = ic.IdControle
         inner join vwItems i on ic.IdEstoque = i.Id
 	group by c.Id;
+    

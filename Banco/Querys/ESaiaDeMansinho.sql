@@ -269,6 +269,32 @@ use dbOrgan;
     insert into tbPessoaJuridica(IdPessoa, RazaoSocial, CNPJ, IE) values(2, 'Exp Sisteminhas Muito Bons', 12345678910112, 123456789101);
     
 -- =======================================================================================================================   
+
+-- =================================================================== FUNCIONARIO ============================================  
+	drop table if exists tbFuncionario;
+	create table tbFuncionario(
+		Id int auto_increment,
+         constraint PKFunc primary key(Id),
+		`Status` bool not null default true,
+        Salario double not null,
+        IdPessoa int not null,
+        IdCargo int not null,
+        Foto Blob
+    )engine = InnoDB;
+    alter table tbFuncionario add constraint FKFuncPessoa foreign key(IdPessoa) references tbPessoa(Id);
+    
+    drop table if exists tbCargo;
+	create table tbCargo(
+		Id int auto_increment,
+         constraint PKCargo primary key(Id),
+		Nivel int,
+        Nome varchar(75) not null
+    )engine = InnoDB;
+    alter table tbFuncionario add constraint FKFuncCargo foreign key(IdCargo) references tbCargo(Id);
+    
+    insert into tbCargo(Nivel, Nome) value(1, 'Carinha que Planta');
+    insert into tbFuncionario(Salario, IdPessoa, IdCargo) value(2.000, 1, 1);
+-- ======================================================================================================================= 
   
 -- =================================================================== ESTOQUE ============================================  
 	drop table if exists tbEstoque;
@@ -368,7 +394,7 @@ use dbOrgan;
         `Data` date not null,
         ValorPago double not null
     )engine = InnoDB;
-	
+    
     insert into tbManutencao(Nome, `Data`, ValorPago) value("Revisão Anual", '01/01/01', 5000.00);
     
     drop table if exists tbMaquinaManutencao;
@@ -383,7 +409,7 @@ use dbOrgan;
     insert into tbMaquinaManutencao value(5,1);    
 -- ======================================================================================================================= 
   
--- ========================================================== COMPRA ==============================================  
+-- ========================================================== FORNECEDOR ==============================================  
 	drop table if exists tbFornecedor;
 	create table tbFornecedor(
 		Id int auto_increment,
@@ -394,63 +420,9 @@ use dbOrgan;
     alter table tbFornecedor add constraint FKFornecedorPessoa foreign key(IdPessoa) references tbPessoa(Id);
     
     insert into tbFornecedor(IdPessoa) value(2);
-    
-    drop table if exists tbPagamento;
-	create table tbPagamento(
-		Id int auto_increment,
-         constraint PKPagamento primary key(Id),
-		QtdParcelas int not null default 1,
-        VlParcela double not null,
-        Tipo int not null -- 1 A Vista Memo
-    )engine = InnoDB;
-    
-    drop table if exists tbCompra;
-	create table tbCompra(
-		Id int auto_increment,
-         constraint PKCompra primary key(Id),
-		-- Desconto decimal(5,2) default 0,
-        `Data` date not null,
-        IdForn int not null,
-        IdPagamento int not null,
-		Desconto decimal(5,2) default 0.00
-        )engine = InnoDB;
-    alter table tbCompra add constraint FKCompraForn foreign key(IdForn) references tbFornecedor(Id),
-						 add constraint FKCompraPgmt foreign key(IdPagamento) references tbPagamento(Id);
-                         
-	insert into tbPagamento(VlParcela, Tipo) value(0.00, 1);
-    insert into tbCompra(`Data`, IdForn, IdPagamento) value('01/01/01', 1, 1);
-    insert into tbCompra(`Data`, IdForn, IdPagamento) value('01/02/01', 1, 1);
-    insert into tbCompra(`Data`, IdForn, IdPagamento) value('02/02/01', 1, 1);
-    
-    drop table if exists tbItensComprados;
-	create table tbItensComprados(
-		IdCompra int not null,
-        IdEstoque int not null,
-         constraint PKEstocaCompra primary key(IdCompra, IdEstoque),
-        -- DescontoProd int default 0.00,
-        QtdProd double not null
-    )engine = InnoDB;
-    alter table tbItensComprados add constraint FKItensCompraEstoque foreign key(IdCompra) references tbCompra(Id),
-							     add constraint FKItensEstoqueCompra foreign key(IdEstoque) references tbEstoque(Id);
-                                 
-	insert into tbItensComprados(IdCompra, IdEstoque, QtdProd) values(1, 1, (select Qtd from tbEstoque where Id = 1)),
-																	 (1, 2, (select Qtd from tbEstoque where Id = 2)),
-                                                                     (1, 3, (select Qtd from tbEstoque where Id = 3)),
-                                                                     (1, 4, (select Qtd from tbEstoque where Id = 4)),
-                                                                     (1, 5, (select Qtd from tbEstoque where Id = 5)),
-                                                                     (1, 6, (select Qtd from tbEstoque where Id = 6));
-                                                                     
-	insert into tbEstoque(Qtd, UM, ValorUnit) values(1, 1, 0.50);
-    update tbEstoque set Qtd = Qtd+1 where Id = 1;
-    insert into tbSemente(IdEstoque, Nome) values(7, "Semente de Mandioquinha");
-
-    insert into tbItensComprados(IdCompra, IdEstoque, QtdProd) values(2, 7, (select Qtd from tbEstoque where Id = 7)),
-																	 (2, 1, 1);
-	update tbEstoque set Qtd = Qtd+1 where Id = 1;
-    insert into tbItensComprados(IdCompra, IdEstoque, QtdProd) values(3, 1, 1);
 -- =======================================================================================================================
 
--- =================================================================== VENDA ============================================ 
+-- =================================================================== CLIENTE ============================================ 
     drop table if exists tbCliente;
 	create table tbCliente(
 		Id int auto_increment,
@@ -460,113 +432,8 @@ use dbOrgan;
     alter table tbCliente add constraint FKClientePessoa foreign key(IdPessoa) references tbPessoa(Id);
     
     insert into tbCliente(IdPessoa) value(1);
-    
-    drop table if exists tbVenda;
-	create table tbVenda(
-		Id int auto_increment,
-         constraint PKVenda primary key(Id),
-		Desconto decimal(5,2) default 0.00,
-        `Data` date not null,
-        IdCliente int not null,
-        IdPagamento int not null
-    )engine = InnoDB;
-    alter table tbVenda add constraint FKVendaCliente foreign key(IdCliente) references tbCliente(Id),
-						add constraint FKVendaPgmt foreign key(IdPagamento) references tbPagamento(Id);
-    
-    
-    insert into tbVenda(`Data`, IdCliente, IdPagamento) value('01/01/01', 1, 1);
-    
-    drop table if exists tbItensVendidos;
-	create table tbItensVendidos(
-		IdVenda int not null,
-        IdEstoque int not null,
-         constraint PKVendaEstoque primary key(IdVenda, IdEstoque),
-        DescontoProd decimal(5,2)  not null default 0.00,
-        QtdVendida double not null
-    )engine = InnoDB;
-    alter table tbItensVendidos add constraint FKItensVendaEstoque foreign key(IdVenda) references tbVenda(Id),
-								add constraint FKItensEstoqueVenda foreign key(IdEstoque) references tbEstoque(Id);
-                                
-	insert into tbItensVendidos(IdVenda, IdEstoque, QtdVendida) values(1, 1, 1);
 -- ======================================================================================================================= 
  
--- =================================================================== FUNCIONARIO ============================================  
-	drop table if exists tbFuncionario;
-	create table tbFuncionario(
-		Id int auto_increment,
-         constraint PKFunc primary key(Id),
-		`Status` bool not null default true,
-        Salario double not null,
-        IdPessoa int not null,
-        IdCargo int not null,
-        Foto Blob
-    )engine = InnoDB;
-    alter table tbFuncionario add constraint FKFuncPessoa foreign key(IdPessoa) references tbPessoa(Id);
-    
-    drop table if exists tbCargo;
-	create table tbCargo(
-		Id int auto_increment,
-         constraint PKCargo primary key(Id),
-		Nivel int,
-        Nome varchar(75) not null
-    )engine = InnoDB;
-    alter table tbFuncionario add constraint FKFuncCargo foreign key(IdCargo) references tbCargo(Id);
-    
-    insert into tbCargo(Nivel, Nome) value(1, 'Carinha que Planta');
-    insert into tbFuncionario(Salario, IdPessoa, IdCargo) value(2.000, 1, 1);
--- ======================================================================================================================= 
-
-
--- =================================================================== FLUXO DE CAIXA ============================================  
-	drop table if exists tbDespesa;
-	create table tbDespesa(
-		Id int auto_increment,
-         constraint PKDespesa primary key(Id),
-		ValorPago double not null,
-        `Data` date not null
-    )engine = InnoDB;
-    
-    insert into tbDespesa(ValorPago, `Data`) values(1000.00, '01/01/01'),
-												   (700.00, '01/01/01');
-	insert into tbDespesa(ValorPago, `Data`) values(1100.00, '01/02/01'),
-												   (850.00, '01/01/01');
-    
-    drop table if exists tbContas;
-	create table tbContas(
-		Id int auto_increment,
-         constraint PKConta primary key(Id),
-		Nome varchar(30) not null
-    )engine = InnoDB;
-    
-    insert into tbContas(Nome) value('Conta de Luz');
-    insert into tbContas(Nome) value('Conta de Água');
-    
-    
-    drop table if exists tbDespesaAdm;
-	create table tbDespesaAdm(
-		IdDespesa int not null,
-        IdDespAdm int not null,
-         constraint PKDespesaAdmin primary key(IdDespesa, IdDespAdm)
-    )engine = InnoDB;
-    alter table tbDespesaAdm add constraint FKDespesaAdmDespesa foreign key(IdDespesa) references tbDespesa(Id),
-							   add constraint FKDespesaAdmConta foreign key(IdDespAdm) references tbContas(Id);
-                               
-	insert into tbDespesaAdm value(2, 1);
-    insert into tbDespesaAdm value(4, 2); 
-    
-	drop table if exists tbDespesaFunc;
-	create table tbDespesaFunc(
-		IdDespesa int not null,
-        IdFunc int not null,
-         constraint PKDespesaFunc primary key(IdDespesa, IdFunc)
-    )engine = InnoDB;
-    alter table tbDespesaFunc add constraint FKDespesaFunc foreign key(IdDespesa) references tbDespesa(Id),
-							   add constraint FKFuncDespesa foreign key(IdFunc) references tbFuncionario(Id);
-    
-	insert into tbDespesaFunc value(1, 1);
-	insert into tbDespesaFunc value(3, 1);
--- =============================================================================================================================== 
-
 -- =================================================================== PLANTIO ============================================
 	drop table if exists tbPlantio;
 	create table tbPlantio(
@@ -655,6 +522,14 @@ use dbOrgan;
 						   add constraint FKColheitaProd foreign key(IdProd) references tbProduto(IdEstoque);
 	
     insert into tbColheita values('01/01/01',  1, 4, 1, 7);
+    
+    create table tbFuncPlantio(
+		IdFunc int not null,
+		IdPlantio int not null,
+		 constraint PKFuncPlantio primary key(IdFunc, IdPlantio)
+    )engine = InnoDB;
+    alter table tbFuncPlantio add constraint FKFuncPlantioFuncionario foreign key(IdFunc) references tbFuncionario(Id),
+							  add constraint FKFuncPlantioPlantio foreign key(IdPlantio) references tbPlantio(Id);
 -- ======================================================================================================================== 
 
 -- =================================================================== CONTROLE ============================================ 
@@ -720,6 +595,14 @@ use dbOrgan;
                          
 	insert into tbAreaPD values(true, 2, 1),
 							   (true, 3, 2);
+                               
+	create table tbFuncControle(
+		IdFunc int not null,
+        IdControle int not null,
+         constraint PKFuncControle primary key(IdFunc, IdControle)
+    )engine = InnoDB;
+    alter table tbFuncControle add constraint FKFuncControleFuncionario foreign key(IdFunc) references tbFuncionario(Id),
+							   add constraint FKFuncControleControle foreign key(IdControle) references tbControle(Id);
 -- ========================================================================================================================= 
 
 -- =================================================================== ANÚNCIO ====================================================
@@ -809,7 +692,16 @@ use dbOrgan;
     )engine = InnoDB;
     alter table tbResposta add constraint FKRespostaComentario foreign key(IdComentario) references tbComentario(Id),
 						   add constraint FKRespostaResposta foreign key(IdResposta) references tbComentario(Id);
-	
+        
+    drop table if exists tbPagamento;
+	create table tbPagamento(
+		Id int auto_increment,
+         constraint PKPagamento primary key(Id),
+		QtdParcelas int not null default 1,
+        -- VlParcela double not null,
+        Tipo int not null -- 1 A Vista Memo, 2 Crédito
+    )engine = InnoDB;
+    
     drop table if exists tbVendaAnuncio;
     create table tbVendaAnuncio(
 		Id int auto_increment,
@@ -847,23 +739,4 @@ use dbOrgan;
         eFragil bool default false
     )engine = InnoDB;
     alter table tbPacote add constraint FKPacoteEntrega foreign key(IdEntrega) references tbEntrega(Id);
--- ================================================================================================================================ 
-
-start transaction;
-begin;
-select * from tbCompra;
-select * from vwCompra;
-insert into tbDespesa(`Data`, ValorPago) values((select `Data` from tbCompra where Id=1)/*2001-01-01*/, (select `Valor Total` from vwCompra where `Compra` = 1)),
-									((select `Data` from tbCompra where Id=2)/*2001-02-01*/, (select `Valor Total` from vwCompra where `Compra` = 2)),
-                                    ((select `Data` from tbCompra where Id=3)/*2002-02-01*/, (select `Valor Total` from vwCompra where `Compra` = 3));
-select * from tbDespesa; 
-commit;
-
-start transaction;select * from tbCompra;
-begin;
-alter table tbCompra add column IdDespesa int, add constraint FKCompraDespesa foreign key(IdDespesa) references tbDespesa(Id);
-update tbCompra set IdDespesa = 11 where Id = 1;
-update tbCompra set IdDespesa = 12 where Id = 2;
-update tbCompra set IdDespesa = 13 where Id = 3;
-select D.*, C.* from tbDespesa D inner join tbCompra C on C.IdDespesa = D.Id; 
- 
+-- ================================================================================================================================ alter table tbDespesaFunc add constraint FKDespesaFunc foreign key(IdDespesa) references tbDespesa(Id),           add constraint FKFuncDespesa foreign key(IdFunc) references tbFuncionario(Id)
