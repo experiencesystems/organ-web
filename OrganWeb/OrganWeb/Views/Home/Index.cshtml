@@ -4,61 +4,73 @@
 
 <div class="main-body">
     <div class="row">
-        <!--Tarefas-->
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="card-title box-title">Tarefas em andamento</h6>
-                    <div class="card-header-right">
-                        <ul class="list-unstyled card-option">
-                            <li><i class="ti-minus minimize-card"></i></li>
-                            <li><i class="icon-refresh"></i></li>
-                        </ul>
+        <!--Resumos-->
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-c-green update-card">
+                <div class="card-block">
+                    <div class="row align-items-end">
+                        <div class="col-8">
+                            <label class="text-white">Hoje</label>
+                            <h4 class="text-white">+290</h4>
+                            <h6 class="text-white m-b-0">Visualizações</h6>
+                        </div>
+                        <div class="col-4 text-right">
+                            <canvas id="update-chart-2" height="50"></canvas>
+                        </div>
                     </div>
                 </div>
-                <!-- Filtro -->
-                <div class="filter-menu dropdown float-right">
-                    <a class="nav-link" data-toggle="dropdown" aria-expanded="false" href="#!">Filtrar por: <b>Data</b><i class="feather icon-chevron-down"></i></a>
-                    <div class="filter dropdown-menu">
-                        <a class="dropdown-item nav-link dropdown" href="#!" id="bydate" data-toggle="dropdown" aria-expanded="false"><i class="icofont icofont-clock-time"></i>Data</a>
-                        <a class="dropdown-item nav-link dropdown" href="#!" id="bystatus" data-toggle="dropdown" aria-expanded="false"><i class="icofont icofont-chart-histogram-alt"></i>Status</a>
-                        <a class="dropdown-item nav-link dropdown" href="#!" id="bypriority" data-toggle="dropdown" aria-expanded="false"><i class="icofont icofont-sub-listing"></i>Prioridade</a>
-                    </div>
-                    <button class="btn btn-square badge" type="button">Nova Tarefa</button>
-                </div>
-                <!-- Fim do filtro -->
-                <div class="card-body">
-                    <div class="card-content">
-                        <div class="todo-list">
-                            <div class="tdl-holder">
-                                <div class="tdl-content">
-                                    <ul>
-                                        <li>
-                                            <label>
-                                                <input type="checkbox"><i class="check-box"></i><span>Colher morangos</span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input type="checkbox"><i class="check-box"></i><span>Jogar colheita feliz</span>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label>
-                                                <input type="checkbox"><i class="check-box"></i><span>Comer os morangos</span>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div> <!-- /.todo-list -->
-                    </div>
-                </div> <!-- /.card-body -->
-            </div><!-- /.card -->
+            </div>
         </div>
-        <!--Fim das tarefas-->
-        <!--Tabelas-->
-        <div class="col-md-8">
+        <div class="col-xl-3 col-md-6">
+            <div class="card update-card">
+                <div class="card-block">
+                    <div class="row align-items-end">
+                        <div class="col-8">
+                            <label>Esta semana</label>
+                            <h4>+550</h4>
+                            <h6>Novos pedidos</h6>
+                        </div>
+                        <div class="col-4 text-right">
+                            <canvas id="update-chart-2" height="50"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card update-card">
+                <div class="card-block">
+                    <div class="row align-items-end">
+                        <div class="col-8">
+                            <label>Aumento</label>
+                            <h4>+20%</h4>
+                            <h6>Vendas</h6>
+                        </div>
+                        <div class="col-4 text-right">
+                            <canvas id="update-chart-2" height="50"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card update-card">
+                <div class="card-block">
+                    <div class="row align-items-end">
+                        <div class="col-8">
+                            <label>Este mês</label>
+                            <h4>+15%</h4>
+                            <h6>Usuários cadastrados</h6>
+                        </div>
+                        <div class="col-4 text-right">
+                            <canvas id="update-chart-2" height="50"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Vendas gráfico-->
+        <div class="col-xl-8 col-md-12">
             <div class="card">
                 <div class="card-header">
                     <h6 class="card-title box-title">Vendas</h6>
@@ -71,46 +83,15 @@
                 </div>
                 <div class="card-body">
                     <div class="card-content">
-                        <table class="table">
-                            <thead class="thead-title">
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>mdo</td>
-                                </tr>
-                                <tr class="table-list">
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>twitter</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div id="chartdiv" style="height:300px"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--Fim das Tabelas-->
-        <!--Progresso dos plantios-->
-        <div class="col-xl-6 col-md-12">
+        <div class="col-xl-4 col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h6 class="card-title box-title">Progresso dos plantios</h6>
+                    <h6 class="card-title box-title">Clima</h6>
                     <div class="card-header-right">
                         <ul class="list-unstyled card-option">
                             <li><i class="ti-minus minimize-card"></i></li>
@@ -120,157 +101,31 @@
                 </div>
                 <div class="card-body">
                     <div class="card-content">
-                        <!-- Modal novo plantio-->
-                        <button type="button" class="btn btn-info waves-effect" data-toggle="modal" data-target="#Modal-lightbox">Abra e verás</button>
-                        <div class="modal fade" id="Modal-lightbox" tabindex="-1" role="dialog">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-
-                                        <h6 class="card-title box-title"><i class="icofont icofont-plant"></i>Criar plantios</h6>
-
-                                        <form id="main" method="post" action="#" novalidate="">
-                                            <div class="form-group row">
-                                                <label class="col-sm-8 col-form">Nome:</label>
-                                                <label class="col-sm-2 col-form">Cor:</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Ex.: Plantio de soja">
-                                                    <span class="messages"></span>
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <input type="color" class="form-control">
-                                                    <span class="messages"></span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 col-form-sm">Cultura:</label>
-                                                <div class="col-sm-12">
-                                                    <select class="form-control" id="sel1">
-                                                        <option>Soja</option>
-                                                        <option>Milho</option>
-                                                        <option>Tomate</option>
-                                                        <option>Limão</option>
-                                                    </select>
-                                                    <span class="messages"></span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 col-form-sm">Áreas:</label>
-                                                <div class="col-sm-12">
-                                                    <select class="form-control" id="sel1">
-                                                        <option>Talhão 1</option>
-                                                        <option>Talhão 2</option>
-                                                        <option>Talhão 3</option>
-                                                        <option>Talhão 4</option>
-                                                    </select>
-                                                    <span class="messages"></span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-sm-6 col-form-label">Tipo de plantio:</label>
-                                                <div class="col-sm-12">
-                                                    <select class="form-control" id="sel1">
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                    </select>
-                                                    <span class="messages"></span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-sm-6 col-form-label">Período inicial:</label>
-                                                <label class="col-sm-6 col-form-label">Período final:</label>
-                                                <div class="col-sm-6">
-                                                    <div class="input-group date">
-                                                        <span class="input-group-addon" id="basic-addon2"><i class="icofont icofont-ui-calendar"></i></span>
-                                                        <input type="date" class="form-control" name="name" id="name" placeholder="Período inicial">
-                                                    </div>
-                                                    <span class="messages"></span>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="input-group date">
-                                                        <span class="input-group-addon" id="basic-addon2"><i class="icofont icofont-ui-calendar"></i></span>
-                                                        <input type="date" class="form-control" name="name" id="name" placeholder="Período inicial">
-                                                    </div>
-                                                    <span class="messages"></span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-sm-10 col-form-label">Plantio personalizado: <i class="icofont icofont-question-circle"></i></label>
-                                                <div class="col-sm-12">
-                                                    <select class="form-control" id="sel1">
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                    </select>
-                                                    <span class="messages"></span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-sm-7"></label>
-                                                <div class="col-sm-10">
-                                                    <button type="submit" class="btn btn-success m-b-0">Adicionar</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- /.card-body -->
-                </div><!-- /.card -->
-            </div> <!--Fim progresso dos plantios-->
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="card-title box-title">Formulário</h6>
-                    <div class="card-header-right">
-                        <ul class="list-unstyled card-option">
-                            <li><i class="ti-minus minimize-card"></i></li>
-                            <li><i class="icon-refresh"></i></li>
-                        </ul>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="card-content">
-                        <form class="forms-sample">
-                            <div class="form-group">
-                                <label for="exampleInputName1">Name</label>
-                                <input type="text" class="form-control" id="exampleInputName1" placeholder="Name">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail3">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword4">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword4" placeholder="Password">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-control-label" for="input-name">Name</label>
-                                <select class="form-control" id="exampleSelectGender">
-                                    <option>Male</option>
-                                    <option>Female</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleTextarea1">Textarea</label>
-                                <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                            <button class="btn btn-light">Cancel</button>
-                        </form>
-                    </div>
-                </div> <!-- /.card-body -->
-            </div><!-- /.card -->
-
+            </div>
         </div>
-        <!--Input-->
-        <div class="col-xl-6 col-md-10">
+        <!--Cotações-->
+        <div class="col-xl-4 col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title box-title">Cotação</h6>
+                    <div class="card-header-right">
+                        <ul class="list-unstyled card-option">
+                            <li><i class="ti-minus minimize-card"></i></li>
+                            <li><i class="icon-refresh"></i></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-content">
+                        <iframe src="https://br.widgets.investing.com/live-commodities?theme=darkTheme&pairs=8832,8917,8918,8916,8891,8915" width="100%" height="450" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Mapa-->
+        <div class="col-xl-8 col-md-12">
             <div class="card">
                 <div class="card-header">
                     <h6 class="card-title box-title">Mapa</h6>
@@ -283,15 +138,18 @@
                 </div>
                 <div class="card-body">
                     <div class="card-content">
-                        <div id="map" style="width: 100%; height: 600px; border: 1px solid #ccc"></div>
+                        <div id="map" style="width: 100%; height: 455px; border: 1px solid #ccc"></div>
                     </div> <!-- /.card-body -->
                 </div><!-- /.card -->
             </div>
-
         </div>
-        <!--fim Input-->
+        <!--Fim mapa-->
     </div>
 </div> <!--Fim right side-->
+
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
 
 <script>
     var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -385,4 +243,179 @@
             }
         });
     });
+</script>
+<!-- Chart code -->
+<script>
+    am4core.ready(function () {
+        // Themes begin
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+        // Create chart instance
+
+        var chart = am4core.create("chartdiv", am4charts.XYChart);
+        // Add data
+        chart.data = [{
+            "date": "2013-01-16",
+            "market1": 71,
+            "market2": 75,
+            "sales1": 5,
+            "sales2": 8
+        }, {
+            "date": "2013-01-17",
+            "market1": 74,
+            "market2": 78,
+            "sales1": 4,
+            "sales2": 6
+        }, {
+            "date": "2013-01-18",
+            "market1": 78,
+            "market2": 88,
+            "sales1": 5,
+            "sales2": 2
+        }, {
+            "date": "2013-01-19",
+            "market1": 85,
+            "market2": 89,
+            "sales1": 8,
+            "sales2": 9
+        }, {
+            "date": "2013-01-20",
+            "market1": 82,
+            "market2": 89,
+            "sales1": 9,
+            "sales2": 6
+        }, {
+            "date": "2013-01-21",
+            "market1": 83,
+            "market2": 85,
+            "sales1": 3,
+            "sales2": 5
+        }, {
+            "date": "2013-01-22",
+            "market1": 88,
+            "market2": 92,
+            "sales1": 5,
+            "sales2": 7
+        }, {
+            "date": "2013-01-23",
+            "market1": 85,
+            "market2": 90,
+            "sales1": 7,
+            "sales2": 6
+        }, {
+            "date": "2013-01-24",
+            "market1": 85,
+            "market2": 91,
+            "sales1": 9,
+            "sales2": 5
+        }, {
+            "date": "2013-01-25",
+            "market1": 80,
+            "market2": 84,
+            "sales1": 5,
+            "sales2": 8
+        }, {
+            "date": "2013-01-26",
+            "market1": 87,
+            "market2": 92,
+            "sales1": 4,
+            "sales2": 8
+        }, {
+            "date": "2013-01-27",
+            "market1": 84,
+            "market2": 87,
+            "sales1": 3,
+            "sales2": 4
+        }, {
+            "date": "2013-01-28",
+            "market1": 83,
+            "market2": 88,
+            "sales1": 5,
+            "sales2": 7
+        }, {
+            "date": "2013-01-29",
+            "market1": 84,
+            "market2": 87,
+            "sales1": 5,
+            "sales2": 8
+        }, {
+            "date": "2013-01-30",
+            "market1": 81,
+            "market2": 85,
+            "sales1": 4,
+            "sales2": 7
+        }];
+
+        // Create axes
+        var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+        //dateAxis.renderer.grid.template.location = 0;
+        //dateAxis.renderer.minGridDistance = 30;
+        var valueAxis1 = chart.yAxes.push(new am4charts.ValueAxis());
+        valueAxis1.title.text = "Sales";
+        var valueAxis2 = chart.yAxes.push(new am4charts.ValueAxis());
+        valueAxis2.title.text = "Market Days";
+        valueAxis2.renderer.opposite = true;
+        valueAxis2.renderer.grid.template.disabled = true;
+        // Create series
+        var series1 = chart.series.push(new am4charts.ColumnSeries());
+        series1.dataFields.valueY = "sales1";
+        series1.dataFields.dateX = "date";
+        series1.yAxis = valueAxis1;
+        series1.name = "Custo por ha.";
+        series1.tooltipText = "{name}\n[bold font-size: 17]R${valueY}M[/]";
+        series1.fill = am4core.color("#09b76b");
+        series1.strokeWidth = 0;
+        series1.clustered = false;
+        series1.columns.template.width = am4core.percent(40);
+
+        var series2 = chart.series.push(new am4charts.ColumnSeries());
+        series2.dataFields.valueY = "sales2";
+        series2.dataFields.dateX = "date";
+        series2.yAxis = valueAxis1;
+        series2.name = "Lucro por ha.";
+        series2.tooltipText = "{name}\n[bold font-size: 17]R${valueY}M[/]";
+        series2.fill = am4core.color("#07814c");
+        series2.strokeWidth = 0;
+        series2.clustered = false;
+        series2.toBack();
+
+        var series3 = chart.series.push(new am4charts.LineSeries());
+        series3.dataFields.valueY = "market1";
+        series3.dataFields.dateX = "date";
+        series3.name = "Produtividade";
+        series3.strokeWidth = 2;
+        series3.tensionX = 0.7;
+        series3.yAxis = valueAxis2;
+        series3.stroke = am4core.color("#FDD835");
+        series3.tooltipText = "{name}\n[bold font-size: 17]{valueY}[/]";
+
+        var bullet3 = series3.bullets.push(new am4charts.CircleBullet());
+        bullet3.circle.radius = 3;
+        bullet3.circle.strokeWidth = 2;
+        bullet3.circle.fill = am4core.color("#fff");
+
+        var series4 = chart.series.push(new am4charts.LineSeries());
+        series4.dataFields.valueY = "market2";
+        series4.dataFields.dateX = "date";
+        series4.name = "Perdas";
+        series4.strokeWidth = 2;
+        series4.tensionX = 0.7;
+        series4.yAxis = valueAxis2;
+        series4.tooltipText = "{name}\n[bold font-size: 17]{valueY}[/]";
+        series4.stroke = am4core.color("#e84118");
+        series4.strokeDasharray = "3,3";
+
+        var bullet4 = series4.bullets.push(new am4charts.CircleBullet());
+        bullet4.circle.radius = 3;
+        bullet4.circle.strokeWidth = 2;
+        bullet4.circle.fill = am4core.color("#fff");
+
+        // Add cursor
+        chart.cursor = new am4charts.XYCursor();
+
+        // Add legend
+        chart.legend = new am4charts.Legend();
+        chart.legend.position = "top";
+
+    }); // end am4core.ready()
 </script>
