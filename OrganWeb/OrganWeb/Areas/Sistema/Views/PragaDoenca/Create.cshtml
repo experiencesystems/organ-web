@@ -27,7 +27,8 @@
     </div>
 
     <div class="form-group">
-        @Html.DropDownList("IdArea", (MultiSelectList)ViewBag.Areas, new { multiple =
+        @Html.DropDownList("IdArea", new MultiSelectList(Model.Areas,
+           "Id", "Nome"), new { multiple =
     "multiple", id = "areas" }) 
     </div>
         <div class="form-group">

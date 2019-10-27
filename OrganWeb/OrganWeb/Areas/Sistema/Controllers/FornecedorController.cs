@@ -38,7 +38,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
         public ActionResult Index()
         {
             return RedirectToAction("Index", "Estoque");
-            //TODO: colocar o select do fornecedor na pg do estoque
         }
         
         public async Task<ActionResult> Create()
@@ -161,20 +160,21 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            fornecedor = await fornecedor.GetByID(id);
-            if (fornecedor == null)
+            vwfornecedor = await vwfornecedor.GetByID(id);
+            if (vwfornecedor == null)
             {
                 return HttpNotFound();
             }
-            return View(fornecedor);
+            return View(vwfornecedor);
         }
 
         [HttpPost, ActionName("Excluir")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ExcluirConfirmado(Fornecedor fornecedor)
+        public async Task<ActionResult> ExcluirConfirmado(VwFornecedor vwfornecedor)
         {
-            fornecedor = await fornecedor.GetByID(fornecedor.Id);
-            fornecedor.Delete(fornecedor.Id);
+            fornecedor = await fornecedor.GetByID(vwfornecedor.Id);
+            fornecedor.Status = false;
+            fornecedor.Update(fornecedor);
             await fornecedor.Save();
             return RedirectToAction("Index");
         }
@@ -196,7 +196,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Editar(Fornecedor fornecedor)
-        {
+        {//Todo: ver se é createfornecedorviewmodel
             if (ModelState.IsValid)
             {
                 fornecedor.Update(fornecedor);

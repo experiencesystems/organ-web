@@ -75,8 +75,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 Areas = await area.GetAll()
             };
-            ViewBag.Areas = new MultiSelectList(view.Areas,
-           "Id", "Nome");
             return View(view);
         }
 

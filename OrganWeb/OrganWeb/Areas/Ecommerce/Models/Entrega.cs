@@ -21,7 +21,7 @@ namespace OrganWeb.Areas.Ecommerce.Models
         [Display(Name = "Valor do frete")]
         public double ValorFrete { get; set; }
 
-        [Required] //todo: testar se double valida igual decimal
+        [Required]
         [Display(Name = "Desconto do frete")]
         public double DescFrete { get; set; }
 

@@ -415,12 +415,7 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="Areas\Sistema\Views\Fazenda\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\PragaDoenca\Create.cshtml" />
-    <Content Include="Areas\Sistema\Views\PragaDoenca\Delete.cshtml" />
-    <Content Include="Areas\Sistema\Views\PragaDoenca\Details.cshtml" />
-    <Content Include="Areas\Sistema\Views\PragaDoenca\Edit.cshtml" />
-    <Content Include="Areas\Sistema\Views\Fazenda\_NovoFuncionario.cshtml" />
     <Content Include="Areas\Sistema\Views\Estoque\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Plantio\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Plantio\Detalhes.cshtml" />
@@ -429,7 +424,6 @@
     <Content Include="Areas\Sistema\Views\Manutencao\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Manutencao\Excluir.cshtml" />
     <Content Include="Areas\Sistema\Views\Manutencao\Editar.cshtml" />
-    <Content Include="Areas\Sistema\Views\Estoque\Fornecedores.cshtml" />
     <Content Include="Areas\Sistema\Views\Semente\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\PragaDoenca\Index.cshtml" />
     <Content Include="Areas\Ecommerce\Views\web.config" />
@@ -457,7 +451,6 @@
     <Content Include="Areas\Sistema\Views\Maquina\Excluir.cshtml" />
     <Content Include="Areas\Sistema\Views\Maquina\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Fornecedor\Editar.cshtml" />
-    <Content Include="Areas\Sistema\Views\Fornecedor\Excluir.cshtml" />
     <Content Include="Areas\Sistema\Views\Colheita\Detalhes.cshtml" />
     <Content Include="Areas\Sistema\Views\Colheita\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Estoque\Create.cshtml" />
@@ -489,6 +482,7 @@
     <Content Include="fonts\DubaiW23-Regular.ttf" />
     <Content Include="fonts\DubaiW23-Regular.woff" />
     <Content Include="fonts\DubaiW23-Regular.woff2" />
+    <Content Include="Areas\Sistema\Views\Fornecedor\Excluir.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

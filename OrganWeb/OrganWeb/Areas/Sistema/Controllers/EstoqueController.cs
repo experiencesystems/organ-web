@@ -11,6 +11,7 @@ using OrganWeb.Models.Banco;
 using System.Net;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque;
 using System.Threading.Tasks;
+using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
@@ -22,6 +23,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private Estoque estoque = new Estoque();
         private Categoria categoria = new Categoria();
         private VwItems vwItems = new VwItems();
+        private VwFornecedor vwFornecedor = new VwFornecedor();
         private HistoricoEstoque historicoEstoque = new HistoricoEstoque();
         private ViewEstoque viewestoque = new ViewEstoque();
 
@@ -31,6 +33,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 VwItems = await vwItems.GetFew(),
                 HistoricoEstoques = await historicoEstoque.GetFew(),
+                Fornecedors = await vwFornecedor.GetAll()
             };
             return View(viewestoque);
         }
