@@ -14,20 +14,22 @@ using OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque;
 namespace OrganWeb.Areas.Sistema.Controllers
 {
     public class EstoqueController : Controller
-    {   //TODO: arrumar classes bridge
+    { 
         //TODO: categorias máquina
-        //TODO: histórico estoque
+        //TODO: view histórico estoque
         private Insumo insumo = new Insumo();
         private Estoque estoque = new Estoque();
         private Categoria categoria = new Categoria();
         private VwItems vwItems = new VwItems();
+        private HistoricoEstoque historicoEstoque = new HistoricoEstoque();
         private ViewEstoque viewestoque = new ViewEstoque();
 
         public ActionResult Index()
         {
             viewestoque = new ViewEstoque()
             {
-                VwItems = vwItems.GetFew()
+                VwItems = vwItems.GetFew(),
+                HistoricoEstoques = historicoEstoque.GetFew(),
             };
             return View(viewestoque);
         }

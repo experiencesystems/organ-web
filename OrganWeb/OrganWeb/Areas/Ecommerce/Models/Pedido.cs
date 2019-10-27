@@ -18,7 +18,7 @@ namespace OrganWeb.Areas.Ecommerce.Models
         public int IdAnuncio { get; set; }
 
         [ForeignKey("Usuario")]
-        public int IdUsuario { get; set; }
+        public string IdUsuario { get; set; }
 
         [DataType(DataType.Date, ErrorMessage = "Data em formato inválido"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Data { get; set; }

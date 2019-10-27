@@ -57,6 +57,51 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title box-title">Histórico de alterações</h6>
+                    <div class="card-header-right">
+                        <ul class="list-unstyled card-option">
+                            <li><i class="ti-minus minimize-card"></i></li>
+                            <li><i class="icon-refresh"></i></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-content">
+                        <div class="card-content">
+                            <div class="tablecontainer">
+                            </div>
+                            <table class="table">
+                                <thead class="thead-title">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Data</th>
+                                        <th scope="col">Qtd Antiga</th>
+                                        <th scope="col">Alterado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.HistoricoEstoques)
+                                    {
+                                        <tr>
+                                            <td>@Html.DisplayFor(modelItem => item.IdEstoque)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.DataAlteracao)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.QtdAntiga)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.QtdAlterada)</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts {

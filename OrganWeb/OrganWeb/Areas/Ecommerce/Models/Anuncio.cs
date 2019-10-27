@@ -25,7 +25,7 @@ namespace OrganWeb.Areas.Ecommerce.Models
 
         [Required]
         public byte[] Foto { get; set; }
-        //TODO: desconto porcentagem
+
         [Range(0.00, 100.00)]
         public decimal Desconto { get; set; }
     }

@@ -20,6 +20,6 @@ namespace OrganWeb.Areas.Sistema.Models.Controles
         public int IdControle { get; set; }
 
         public virtual Funcionario Funcionario { get; set; }
-        public virtual Controle Plantio { get; set; }
+        public virtual Controle Controle { get; set; }
     }
 }

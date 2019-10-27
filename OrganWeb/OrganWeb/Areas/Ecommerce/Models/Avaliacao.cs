@@ -17,7 +17,7 @@ namespace OrganWeb.Areas.Ecommerce.Models
 
         [Key, Column(Order = 2)]
         [ForeignKey("Usuario")]
-        public int IdUsuario { get; set; }
+        public string IdUsuario { get; set; }
 
         public int Nota { get; set; }
         public bool Like { get; set; }
