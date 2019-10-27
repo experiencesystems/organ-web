@@ -300,6 +300,7 @@
     </Compile>
     <Compile Include="Models\DecimalModelBinder.cs" />
     <Compile Include="Models\Financeiro\DadosBancario.cs" />
+    <Compile Include="Models\OmieAPI.cs" />
     <Compile Include="Models\Pessoa\PessoaFisica.cs" />
     <Compile Include="Models\Pessoa\PessoaJuridica.cs" />
     <Compile Include="Models\Usuario\AccountViewModels.cs" />
@@ -439,11 +440,9 @@
     <Content Include="Areas\Sistema\Views\Area\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Area\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Area\Detalhes.cshtml" />
-    <Content Include="Areas\Sistema\Views\Area\Excluir.cshtml" />
     <Content Include="Areas\Sistema\Views\Solo\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Solo\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Solo\Detalhes.cshtml" />
-    <Content Include="Areas\Sistema\Views\Solo\Excluir.cshtml" />
     <Content Include="Areas\Sistema\Views\Fornecedor\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Semente\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Semente\Editar.cshtml" />

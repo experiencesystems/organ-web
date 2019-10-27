@@ -8,6 +8,7 @@ using OrganWeb.Models;
 using OrganWeb.Areas.Sistema.Models.Safras;
 using OrganWeb.Models.Banco;
 using System.Web.Mvc;
+using OrganWeb.Areas.Sistema.Models.zRepositories;
 
 namespace OrganWeb.Areas.Sistema.Models.Armazenamento
 {
@@ -28,7 +29,7 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
         [Required]
         [Display(Name = "Valor unitário")]
         public double ValorUnit { get; set; }
-        // TODO: colocar o valor do desconto como porcentagem
+
         [NotMapped]
         public readonly List<SelectListItem> UnidadesDeMedida = new List<SelectListItem>()
             {
@@ -71,14 +72,14 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
             new SelectListItem() { Text = "Metro Quadrado", Value = "37" },
             new SelectListItem() { Text = "Pacote", Value = "38" },
             new SelectListItem() { Text = "Pacote 500g", Value = "39" },
-            new SelectListItem() { Text = "Pacote 1kg", Value = "40" },
+            new SelectListItem() { Text = "Pacote 1kg", Value = "40" }/*,
             new SelectListItem() { Text = "Pacote 1,5kg", Value = "38" },
             new SelectListItem() { Text = "Pacote 2kg", Value = "38" },
             new SelectListItem() { Text = "Pacote 3kg", Value = "38" },
             new SelectListItem() { Text = "Pacote 5kg", Value = "38" },
             new SelectListItem() { Text = "Kit", Value = "38" },
             new SelectListItem() { Text = "Muda", Value = "38" },
-            new SelectListItem() { Text = "Capsula", Value = "38" }
+            new SelectListItem() { Text = "Capsula", Value = "38" }*/
             };
     }//TODO: verificar se qdo ele usar dois pacote de semente o sistema vai ve bl
 

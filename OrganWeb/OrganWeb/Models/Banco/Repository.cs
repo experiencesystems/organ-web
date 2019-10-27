@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace OrganWeb.Models.Banco
 {
     public class Repository<T> : IDisposable where T : class
     {
-        public BancoContext _context;
-
+        protected BancoContext _context;
         protected DbSet<T> DbSet { get; set; }
 
         public Repository()
@@ -22,7 +22,7 @@ namespace OrganWeb.Models.Banco
 
         public Repository(BancoContext context)
         {
-            this._context = context;
+            _context = context;
         }
 
         public void Delete(int id)
@@ -30,19 +30,19 @@ namespace OrganWeb.Models.Banco
             DbSet.Remove(DbSet.Find(id));
         }
 
-        public List<T> GetAll()
+        public async Task<List<T>> GetAll()
         {
-            return DbSet.ToList();
+            return await DbSet.ToListAsync();
         }
 
-        public List<T> GetFew()
+        public async Task<List<T>> GetFew()
         {
-            return DbSet.Take(10).ToList();
+            return await DbSet.Take(10).ToListAsync();
         }
 
-        public T GetByID(int? id)
+        public async Task<T> GetByID(int? id)
         {
-            return DbSet.Find(id);
+            return await DbSet.FindAsync(id);
         }
 
         public void Add(T entity)
@@ -50,11 +50,11 @@ namespace OrganWeb.Models.Banco
             DbSet.Add(entity);
         }
 
-        public void Save()
+        public async Task Save()
         {
             try
             {
-                _context.SaveChanges();
+               await _context.SaveChangesAsync();
             }
             catch (DbEntityValidationException ex)
             {

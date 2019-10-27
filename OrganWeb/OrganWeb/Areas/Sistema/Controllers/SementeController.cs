@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -14,13 +15,12 @@ namespace OrganWeb.Areas.Sistema.Controllers
     {
         private Semente semente = new Semente();
         private Estoque estoque = new Estoque();
-
-
-        public ActionResult Sementes()
+        
+        public async Task<ActionResult> Sementes()
         {
             var select = new ViewSementes
             {
-                Semente = semente.GetFew()
+                Semente = await semente.GetFew()
             };
             return View(select);
         }
@@ -36,7 +36,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Semente semente)
+        public async Task<ActionResult> Create(Semente semente)
         {
             if (ModelState.IsValid)
             {
@@ -47,14 +47,14 @@ namespace OrganWeb.Areas.Sistema.Controllers
                     ValorUnit = semente.Estoque.ValorUnit
                 };
                 estoque.Add(estoque);
-                estoque.Save();
+                await estoque.Save();
                 estoque.Dispose();
 
                 semente.IdEstoque = estoque.Id;
                 semente.Estoque = null;
                 estoque = null;
                 semente.Add(semente);
-                semente.Save();
+                await semente.Save();
                 semente.Dispose();
 
                 return RedirectToAction("Index");
@@ -62,73 +62,69 @@ namespace OrganWeb.Areas.Sistema.Controllers
             return View(semente);
         }
 
-        public ActionResult Detalhes(int? id)
+        public async Task<ActionResult> Detalhes(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            semente = semente.GetByID(id);
+            semente = await semente.GetByID(id);
             if (semente == null)
             {
                 return HttpNotFound();
             }
-
             return View(semente);
         }
 
-        public ActionResult Editar(int? id)
+        public async Task<ActionResult> Editar(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            semente = semente.GetByID(id);
+            semente = await semente.GetByID(id);
             if (semente == null)
             {
                 return HttpNotFound();
             }
-
             return View(semente);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar(Semente semente)
+        public async Task<ActionResult> Editar(Semente semente)
         {
-
             if (ModelState.IsValid)
             {
                 semente.Update(semente);
-                semente.Save();
+                await semente.Save();
                 return RedirectToAction("Index");
             }
             return View(semente);
         }
-        public ActionResult Excluir(int? id)
+
+        public async Task<ActionResult> Excluir(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            semente = semente.GetByID(id);
+            semente = await semente.GetByID(id);
             if (semente == null)
             {
                 return HttpNotFound();
             }
-
             return View(semente);
         }
 
         [HttpPost, ActionName("Excluir")]
         [ValidateAntiForgeryToken]
-        public ActionResult ExcluirConfirmado(Semente semente)
+        public async Task<ActionResult> ExcluirConfirmado(Semente semente)
         {
             semente.Delete(semente.IdEstoque);
-            semente.Save();
+            await semente.Save();
 
             return RedirectToAction("Index");
         }
-
     }
 }

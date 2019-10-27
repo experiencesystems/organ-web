@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using OrganWeb.Models.Endereco;
 using OrganWeb.Models.Telefone;
+using System.Threading.Tasks;
 
 namespace OrganWeb.Areas.Sistema.Models.ViewModels
 {
@@ -17,9 +18,7 @@ namespace OrganWeb.Areas.Sistema.Models.ViewModels
         [Display(Name = "Nome Fantasia")]
         [StringLength(100, MinimumLength = 5)]
         public string NomeFantasia { get; set; }
-
         
-
         [Required]
         [Display(Name = "Razão Social")]
         [StringLength(100, MinimumLength = 10)]

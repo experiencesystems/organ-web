@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -25,13 +26,13 @@ namespace OrganWeb.Areas.Sistema.Controllers
             return View(praga.GetFew());
         }
 
-        public ActionResult Detalhes(int? id)
+        public async Task<ActionResult> Detalhes(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            vwpraga = vwpraga.GetByID(id);
+            vwpraga = await vwpraga.GetByID(id);
             if (vwpraga == null)
             {
                 return HttpNotFound();
@@ -40,13 +41,13 @@ namespace OrganWeb.Areas.Sistema.Controllers
             return View(vwpraga);
         }
 
-        public ActionResult Editar(int? id)
+        public async Task<ActionResult> Editar(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            praga = praga.GetByID(id);
+            praga = await praga.GetByID(id);
             if (praga == null)
             {
                 return HttpNotFound();
@@ -57,23 +58,22 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar(PragaOrDoenca praga)
+        public async Task<ActionResult> Editar(PragaOrDoenca praga)
         {
-
             if (ModelState.IsValid)
             {
                 praga.Update(praga);
-                praga.Save();
+                await praga.Save();
                 return RedirectToAction("Index");
             }
             return View(praga);
         }
 
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
             var view = new CreatePragaOrDoencaViewModel
             {
-                Areas = area.GetAll()
+                Areas = await area.GetAll()
             };
             ViewBag.Areas = new MultiSelectList(view.Areas,
            "Id", "Nome");
@@ -81,7 +81,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(CreatePragaOrDoencaViewModel pragadoenca, int[] IdArea)
+        public async Task<ActionResult> Create(CreatePragaOrDoencaViewModel pragadoenca, int[] IdArea)
         {
             if (ModelState.IsValid)
             {
@@ -91,40 +91,38 @@ namespace OrganWeb.Areas.Sistema.Controllers
                     PD = pragadoenca.PD
                 };
                 pd.Add(pd);
-                pd.Save();
-
-
+                await pd.Save();
+                
                 foreach (var item in IdArea)
                 {
                     areapd.Add(new AreaPD { IdArea = item, IdPd = pd.Id });
-                    areapd.Save();
+                    await areapd.Save();
                 }
                 return RedirectToAction("Index");
             }
             return View(pragadoenca);
         }
 
-        public ActionResult Excluir(int? id)
+        public async Task<ActionResult> Excluir(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            vwpraga = vwpraga.GetByID(id);
+            vwpraga = await vwpraga.GetByID(id);
             if (vwpraga == null)
             {
                 return HttpNotFound();
             }
-
             return View(vwpraga);
         }
 
         [HttpPost, ActionName("Excluir")]
         [ValidateAntiForgeryToken]
-        public ActionResult ExcluirConfirmado(VwPragaOrDoenca vwpraga)  
+        public async Task<ActionResult> ExcluirConfirmado(VwPragaOrDoenca vwpraga)  
         {
             praga.Delete(vwpraga.Id);
-            praga.Save();
+            await praga.Save();
 
             return RedirectToAction("Index");
         }

@@ -22,6 +22,15 @@ namespace OrganWeb.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private Cidade cidade;
+        private Bairro bairro;
+        private Logradouro logradouro;
+        private Endereco endereco;
+        private Pessoa pessoa;
+        private TipoTel tipotel;
+        private Telefone telefone;
+        private TelefonePessoa telefonePessoa;
+        private PessoaFisica pessoaFisica;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private DDD ddd = new DDD();
@@ -73,12 +82,12 @@ namespace OrganWeb.Controllers
         //
         // GET: /Account/Registro
         [AllowAnonymous]
-        public ActionResult Registro()
+        public async Task<ActionResult> Registro()
         {
             var selectestados = new RegisterViewModel
             {
-                Estados = estado.GetAll(),
-                DDDs = ddd.GetAll()
+                Estados = await estado.GetAll(),
+                DDDs = await ddd.GetAll()
             };
             return View(selectestados);
         }
@@ -210,80 +219,80 @@ namespace OrganWeb.Controllers
             ApplicationUser user = new ApplicationUser();
             if (ModelState.IsValid)
             {
-                var cidade = new Cidade
+                cidade = new Cidade
                 {
                     Nome = model.Cidade,
                     IdEstado = model.Estado
                 };
 
-                db.Cidades.Add(cidade);
-                db.SaveChanges();
+                cidade.Add(cidade);
+                await cidade.Save();
 
-                var bairro = new Bairro
+                bairro = new Bairro
                 {
                     Nome = model.Bairro,
                     IdCidade = cidade.Id
                 };
 
-                db.Bairros.Add(bairro);
-                db.SaveChanges();
+                bairro.Add(bairro);
+                await bairro.Save();
 
-                var rua = new Logradouro
+                logradouro = new Logradouro
                 {
                     Nome = model.Rua,
                     IdBairro = bairro.Id
                 };
 
-                db.Logradouros.Add(rua);
-                db.SaveChanges();
+                logradouro.Add(logradouro);
+                await logradouro.Save();
 
-                var cep = new Endereco
+                endereco = new Endereco
                 {
                     CEP = model.CEP,
-                    IdRua = rua.Id
+                    IdRua = logradouro.Id
                 };
 
-                db.Enderecos.Add(cep);
-                db.SaveChanges();
+                endereco.Add(endereco);
+                await endereco.Save();
 
-                var pessoa = new Pessoa
+                pessoa = new Pessoa
                 {
                     Nome = model.Nome,
                     Email = model.Email,
                     NumeroEndereco = model.Numero,
                     CompEndereco = model.Complemento,
-                    CEP = cep.CEP
+                    CEP = endereco.CEP
                 };
 
-                db.Pessoas.Add(pessoa);
-                db.SaveChanges();
+                pessoa.Add(pessoa);
+                await pessoa.Save();
 
-                var tipotel = new TipoTel
+                tipotel = new TipoTel
                 {
                     Tipo = model.TipoTelefone
                 };
 
-                db.TipoTels.Add(tipotel);
-                db.SaveChanges();
+                tipotel.Add(tipotel);
+                await tipotel.Save();
 
-                var telefone = new Telefone
+                telefone = new Telefone
                 {
                     Numero = model.Numero,
                     IdDDD = model.DDD,
                     IdTipo = tipotel.Id
                 };
 
-                db.Telefones.Add(telefone);
-                db.SaveChanges();
+                telefone.Add(telefone);
+                await telefone.Save();
 
-                var telpessoa = new TelefonePessoa
+                telefonePessoa = new TelefonePessoa
                 {
                     IdPessoa = pessoa.Id,
                     IdTelefone = telefone.Id
                 };
 
-                db.TelefonePessoas.Add(telpessoa);
-                db.SaveChanges();
+                telefonePessoa.Add(telefonePessoa);
+                await telefonePessoa.Save();
 
                 user = new ApplicationUser
                 {
@@ -294,8 +303,6 @@ namespace OrganWeb.Controllers
                     DataCadastro = DateTime.Today,
                     IdPessoa = pessoa.Id
                 };
-
-                db.Dispose();
 
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -310,14 +317,14 @@ namespace OrganWeb.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
-                model.DDDs = ddd.GetAll();
-                model.Estados = estado.GetAll();
+                model.DDDs = await ddd.GetAll();
+                model.Estados = await estado.GetAll();
                 AddErrors(result);
             }
 
             // Se chegamos até aqui e houver alguma falha, exiba novamente o formulário
-            model.DDDs = ddd.GetAll();
-            model.Estados = estado.GetAll();
+            model.DDDs = await ddd.GetAll();
+            model.Estados = await estado.GetAll();
             return View(model);
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrganWeb.Models.Banco;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,7 +9,7 @@ using System.Web;
 namespace OrganWeb.Models.Pessoa
 {
     [Table("tbTelefonePessoa")]
-    public class TelefonePessoa
+    public class TelefonePessoa : Repository<TelefonePessoa>
     {
         [Key, Column(Order = 1)]
         [ForeignKey("Pessoa")]

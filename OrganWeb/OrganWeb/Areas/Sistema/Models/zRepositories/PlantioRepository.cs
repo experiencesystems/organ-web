@@ -5,33 +5,31 @@ using System.Web;
 using OrganWeb.Models;
 using OrganWeb.Areas.Sistema.Models.Safras;
 using OrganWeb.Models.Banco;
+using System.Threading.Tasks;
 
 namespace OrganWeb.Areas.Sistema.Models
 {
     public class PlantioRepository : Repository<Plantio>
-    { 
-         public List<Plantio> GetPlantios()
+    {
+        public async Task<List<Plantio>> GetPlantios()
         {
-            var select = _context.Plantios
-                        .AsEnumerable()
-                        .Select(p => new Plantio
-                        {
-                            Porcentagem = ProgressoPlantio(p),
-                            Id = p.Id,
-                            Nome = p.Nome,
-                            Sistema = p.Sistema,
-                            TipoPlantio = p.TipoPlantio,
-                            DataInicio = p.DataInicio,
-                            DataColheita = p.DataColheita
-                        })
-                        .ToList();
-            return select;
+            var plantios = await GetAll();
+            return plantios.Select(p => new Plantio
+            {
+                Porcentagem = ProgressoPlantio(p),
+                Id = p.Id,
+                Nome = p.Nome,
+                Sistema = p.Sistema,
+                TipoPlantio = p.TipoPlantio,
+                DataInicio = p.DataInicio,
+                DataColheita = p.DataColheita
+            }).ToList();
         }
 
-        public List<Plantio> GetPlantiosIncompletos()
+        public async Task<List<Plantio>> GetPlantiosIncompletos()
         {
-            var plantios = GetPlantios();
-            var colheitas = new Colheita().GetAll();
+            var plantios = await GetPlantios();
+            var colheitas = await new Colheita().GetAll();
             plantios.RemoveAll(p => colheitas.Any(c => c.IdPlantio == p.Id));
             return plantios;
         }

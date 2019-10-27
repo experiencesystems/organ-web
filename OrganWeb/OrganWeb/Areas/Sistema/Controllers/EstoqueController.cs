@@ -10,6 +10,7 @@ using OrganWeb.Areas.Sistema.Models.ViewModels;
 using OrganWeb.Models.Banco;
 using System.Net;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque;
+using System.Threading.Tasks;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
@@ -24,56 +25,56 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private HistoricoEstoque historicoEstoque = new HistoricoEstoque();
         private ViewEstoque viewestoque = new ViewEstoque();
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             viewestoque = new ViewEstoque()
             {
-                VwItems = vwItems.GetFew(),
-                HistoricoEstoques = historicoEstoque.GetFew(),
+                VwItems = await vwItems.GetFew(),
+                HistoricoEstoques = await historicoEstoque.GetFew(),
             };
             return View(viewestoque);
         }
 
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
             insumo = new Insumo()
             {
                 Estoque = new Estoque(),
-                Categorias = categoria.GetAll()
+                Categorias = await categoria.GetAll()
             };
             return View(insumo);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Insumo insumo)
+        public async Task<ActionResult> Create(Insumo insumo)
         {
             if (ModelState.IsValid)
             {
                 estoque = insumo.Estoque;
                 estoque.Add(estoque);
-                estoque.Save();
+                await estoque.Save();
 
                 insumo.IdEstoque = estoque.Id;
                 insumo.Estoque = null;
                 estoque = null;
                 insumo.Add(insumo);
-                insumo.Save();
+                await insumo.Save();
 
                 return RedirectToAction("Index");
             }
-            insumo.Categorias = categoria.GetAll();
+            insumo.Categorias = await categoria.GetAll();
             ViewBag.UnidadeMedida = insumo.Estoque.UnidadesDeMedida.Where(x => x.Value == insumo.Estoque.UM.ToString()).First().Text;
             return View(insumo);
         }
 
-        public ActionResult Detalhes(int? id)
+        public async Task<ActionResult> Detalhes(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            insumo = insumo.GetByID(id);
+            insumo = await insumo.GetByID(id);
             if (insumo == null)
             {
                 return HttpNotFound();
@@ -82,51 +83,51 @@ namespace OrganWeb.Areas.Sistema.Controllers
             return View(insumo);
         }
 
-        public ActionResult Editar(int? id)
+        public async Task<ActionResult> Editar(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            insumo = insumo.GetByID(id);
+            insumo = await insumo.GetByID(id);
             if (insumo == null)
             {
                 return HttpNotFound();
             }
-            insumo.Categorias = categoria.GetAll();
+            insumo.Categorias = await categoria.GetAll();
             ViewBag.UnidadeMedida = insumo.Estoque.UnidadesDeMedida.Where(x => x.Value == insumo.Estoque.UM.ToString()).First().Text;
             return View(insumo);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar(Insumo insumo)
+        public async Task<ActionResult> Editar(Insumo insumo)
         {
             if (ModelState.IsValid)
             {
-                estoque = estoque.GetByID(insumo.IdEstoque);
+                estoque = await estoque.GetByID(insumo.IdEstoque);
                 estoque.Update(estoque);
-                estoque.Save();
+                await estoque.Save();
 
                 insumo.Estoque = null;
                 estoque = null;
                 insumo.Update(insumo);
-                insumo.Save();
+                await insumo.Save();
 
                 return RedirectToAction("Index");
             }
-            insumo.Categorias = categoria.GetAll();
+            insumo.Categorias = await categoria.GetAll();
             ViewBag.UnidadeMedida = insumo.Estoque.UnidadesDeMedida.Where(x => x.Value == insumo.Estoque.UM.ToString()).First().Text;
             return View(insumo);
         }
 
-        public ActionResult Excluir(int? id)
+        public async Task<ActionResult> Excluir(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            insumo = insumo.GetByID(id);
+            insumo = await insumo.GetByID(id);
             if (insumo == null)
             {
                 return HttpNotFound();
@@ -137,10 +138,10 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Excluir(Insumo insumo)
+        public async Task<ActionResult> Excluir(Insumo insumo)
         {
             insumo.Delete(insumo.IdEstoque);
-            insumo.Save(); //TODO: excluir da tabela estoque conflito itenscontrole
+            await insumo.Save(); //TODO: excluir da tabela estoque conflito itenscontrole
             return RedirectToAction("Index");
         }
     }

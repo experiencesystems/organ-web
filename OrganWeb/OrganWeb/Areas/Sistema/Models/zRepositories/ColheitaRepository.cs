@@ -5,19 +5,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace OrganWeb.Areas.Sistema.Models.zRepositories
 {
     public class ColheitaRepository : Repository<Colheita>
     {
-        public Colheita GetByID(int? pl, int? pr)
+        public async Task<Colheita> GetByID(int? pl, int? pr)
         {
-            return DbSet.Include(p => p.Plantio).Include(pro => pro.Produto).Where(a => a.IdPlantio == pl && a.IdProd == pr).FirstOrDefault();
+            return await DbSet.Include(p => p.Plantio).Include(pro => pro.Produto).Where(a => a.IdPlantio == pl && a.IdProd == pr).FirstOrDefaultAsync();
         }
 
-        public void Delete(int id, int id2)
+        public async void Delete(int id, int id2)
         {
-            DbSet.Remove(GetByID(id, id2));
+            DbSet.Remove(await GetByID(id, id2));
         }
     }
 }

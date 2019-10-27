@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using OrganWeb.Areas.Sistema.Models.ViewModels;
 using OrganWeb.Models.Banco;
 using OrganWeb.Areas.Sistema.Models.Administrativo;
+using System.Threading.Tasks;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
@@ -19,24 +20,23 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private ItensPlantio itensp = new ItensPlantio();
         private Area area = new Area();
         private Semente semente = new Semente();
-
-        // GET: Sistema/Plantio
-        public ActionResult Index()
+        
+        public async Task<ActionResult> Index()
         {
             var select = new ViewPlantio
             {
-                Plantios = plantio.GetPlantiosIncompletos()
+                Plantios = await plantio.GetPlantiosIncompletos()
             };
             return View(select);
         }
 
-        public ActionResult Detalhes(int? id)
+        public async Task<ActionResult> Detalhes(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            plantio = plantio.GetByID(id);
+            plantio = await plantio.GetByID(id);
             if (plantio == null)
             {
                 return HttpNotFound();
@@ -46,13 +46,13 @@ namespace OrganWeb.Areas.Sistema.Controllers
             return View(plantio);
         }
         
-        public ActionResult Editar(int? id)
+        public async Task<ActionResult> Editar(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            plantio = plantio.GetByID(id);
+            plantio = await plantio.GetByID(id);
             if (plantio == null)
             {
                 return HttpNotFound();
@@ -62,7 +62,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar(Plantio plantio)
+        public async Task<ActionResult> Editar(Plantio plantio)
         {
             if (plantio.DataInicio > plantio.DataColheita)
             {
@@ -72,18 +72,18 @@ namespace OrganWeb.Areas.Sistema.Controllers
             else if (ModelState.IsValid)
             {
                 plantio.Update(plantio);
-                plantio.Save();
+                await plantio.Save();
                 return RedirectToAction("Index");
             }
             return View(plantio);
         }
 
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
             var view = new CreatePlantioViewModel
             {
-                Areas = area.AreasDisponiveis(),
-                Sementes = semente.GetAll(),
+                Areas = await area.AreasDisponiveis(),
+                Sementes = await semente.GetAll(),
                 Sistemas = plantio.Sistemas,
                 Periodos = plantio.Periodos
             };
@@ -94,7 +94,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CreatePlantioViewModel plantio, int[] IdArea, int Sistema, int Tipo)
+        public async Task<ActionResult> Create(CreatePlantioViewModel plantio, int[] IdArea, int Sistema, int Tipo)
         {
             if (plantio.Inicio > plantio.Colheita)
             {
@@ -112,12 +112,12 @@ namespace OrganWeb.Areas.Sistema.Controllers
                     TipoPlantio = plantio.Tipo
                 };
                 pl.Add(pl);
-                pl.Save();
+                await pl.Save();
 
                 foreach (var item in IdArea)
                 {
                    areap.Add(new AreaPlantio { IdArea = item, IdPlantio = pl.Id, Densidade = plantio.Densidade });
-                   areap.Save();
+                   await areap.Save();
                 }
 
                 var itemplantio = new ItensPlantio
@@ -127,26 +127,26 @@ namespace OrganWeb.Areas.Sistema.Controllers
                    QtdUsada = plantio.Quantidade
                 };
                 itemplantio.Add(itemplantio);
-                itemplantio.Save();
+                await itemplantio.Save();
 
                 return RedirectToAction("Index");
             }
 
             // Enviando listas da combobox caso o formulário não seja preenchido corretamente
-            plantio.Areas = area.AreasDisponiveis();
-            plantio.Sementes = semente.GetAll();
+            plantio.Areas = await area.AreasDisponiveis();
+            plantio.Sementes = await semente.GetAll();
             ViewBag.Areas = new MultiSelectList(plantio.Areas, "Id", "Nome");
             ViewBag.Sementes = new SelectList(plantio.Sementes, "IdEstoque", "Nome");
             return View(plantio);
         }
 
-        public ActionResult Excluir(int? id)
+        public async Task<ActionResult> Excluir(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            plantio = plantio.GetByID(id);
+            plantio = await plantio.GetByID(id);
             if (plantio == null)
             {
                 return HttpNotFound();
@@ -158,13 +158,13 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         [HttpPost, ActionName("Excluir")]
         [ValidateAntiForgeryToken]
-        public ActionResult ExcluirConfirmado(Plantio plantio)
+        public async Task<ActionResult> ExcluirConfirmado(Plantio plantio)
         {
             areap.DeleteByIdPlantio(plantio);
             itensp.DeleteByIdPlantio(plantio);
-            plantio = plantio.GetByID(plantio.Id);
+            plantio = await plantio.GetByID(plantio.Id);
             plantio.Delete(plantio.Id);
-            plantio.Save();
+            await plantio.Save();
             return RedirectToAction("Index");
         }
     }

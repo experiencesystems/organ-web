@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -21,13 +22,13 @@ namespace OrganWeb.Areas.Sistema.Controllers
             return View(colheita.GetFew());
         }
 
-        public ActionResult Create(int? id) //recebe o id do plantio
+        public async Task<ActionResult> Create(int? id) //recebe o id do plantio
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            plantio = plantio.GetByID(id);
+            plantio = await plantio.GetByID(id);
             if (plantio == null)
             {
                 return HttpNotFound();
@@ -48,9 +49,9 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Colheita colheita)
+        public async Task<ActionResult> Create(Colheita colheita)
         {
-            plantio = plantio.GetByID(colheita.IdPlantio);
+            plantio = await plantio.GetByID(colheita.IdPlantio);
             if (plantio.DataInicio > colheita.Data)
             {
                 ModelState.AddModelError("", "Insira uma data de colheita posterior à de início do plantio.");
@@ -60,33 +61,33 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 estoque = colheita.Produto.Estoque;
                 estoque.Add(estoque);
-                estoque.Save();
+                await estoque.Save();
 
                 produto = colheita.Produto;
                 produto.IdEstoque = estoque.Id;
                 produto.Estoque = null;
                 estoque = null;
                 produto.Add(produto);
-                produto.Save();
+                await produto.Save();
 
                 colheita.IdProd = produto.IdEstoque;
                 colheita.Produto = null;
                 produto = null;
                 colheita.Add(colheita);
-                colheita.Save();
+                await colheita.Save();
 
                 return RedirectToAction("Index");
             }
             return View(colheita);
         }
 
-        public ActionResult Detalhes(int? id, int? id2)
+        public async Task<ActionResult> Detalhes(int? id, int? id2)
         {
             if (id == null || id2 == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            colheita = colheita.GetByID(id, id2);
+            colheita = await colheita.GetByID(id, id2);
             if (colheita == null)
             {
                 return HttpNotFound();
@@ -97,13 +98,13 @@ namespace OrganWeb.Areas.Sistema.Controllers
             return View(colheita);
         }
 
-        public ActionResult Editar(int? id, int? id2)
+        public async Task<ActionResult> Editar(int? id, int? id2)
         {
             if (id == null || id2 == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            colheita = colheita.GetByID(id, id2);
+            colheita = await colheita.GetByID(id, id2);
             if (colheita == null)
             {
                 return HttpNotFound();
@@ -113,20 +114,20 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar(Colheita colheita)
+        public async Task<ActionResult> Editar(Colheita colheita)
         {
             if (ModelState.IsValid)
             {
                 estoque = colheita.Produto.Estoque;
                 estoque.Update(estoque);
-                estoque.Save();
+                await estoque.Save();
 
                 produto = colheita.Produto;
                 produto.Update(produto);
-                produto.Save();
+                await produto.Save();
 
                 colheita.Update(colheita);
-                colheita.Save();
+                await colheita.Save();
                 return RedirectToAction("Index");
             }
             return View(colheita);

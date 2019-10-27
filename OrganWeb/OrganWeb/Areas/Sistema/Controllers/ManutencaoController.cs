@@ -10,6 +10,7 @@ using OrganWeb.Areas.Sistema.Models.ViewModels;
 using System.Net;
 using System.Data.Entity;
 using OrganWeb.Models.Banco;
+using System.Threading.Tasks;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
@@ -21,22 +22,22 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private readonly BancoContext db = new BancoContext();
 
         // GET: Sistema/Manutencao
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             var select = new ViewManutencao
             {
-                MaquinaManutencaos = manumaq.GetFew()
+                MaquinaManutencaos = await manumaq.GetFew()
             };
             return View(select);
         }
 
-        public ActionResult Detalhes(int? id, int? id2)
+        public async Task<ActionResult> Detalhes(int? id, int? id2)
         {
             if (id == null || id2 == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            manumaq = manumaq.GetByID(id, id2);
+            manumaq = await manumaq.GetByID(id, id2);
             if (manumaq == null)
             {
                 return HttpNotFound();
@@ -45,11 +46,11 @@ namespace OrganWeb.Areas.Sistema.Controllers
         }
 
         [HttpGet]
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
             var manutencaom = new MaquinaManutencao
             {
-                Maquinas = maquina.GetAll()
+                Maquinas = await maquina.GetAll()
             };
             ViewBag.Maquinas = new MultiSelectList(manutencaom.Maquinas, "IdEstoque", "Nome");
             return View(manutencaom);
@@ -57,7 +58,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(MaquinaManutencao manutencaom, int[] IdMaquina)
+        public async Task<ActionResult> Create(MaquinaManutencao manutencaom, int[] IdMaquina)
         {
             if (ModelState.IsValid)
             {
@@ -69,29 +70,29 @@ namespace OrganWeb.Areas.Sistema.Controllers
                     ValorPago = manutencaom.Manutencao.ValorPago
                 };
                 manutencao.Add(manutencao);
-                manutencao.Save(); //Precisa salvar antes pra gerar um Id e asim coloca-lo na tabela máquina-manutenção
+                await manutencao.Save(); //Precisa salvar antes pra gerar um Id e asim coloca-lo na tabela máquina-manutenção
 
                 foreach (var item in IdMaquina)
                 {
                     manutencaom.Add(new MaquinaManutencao { IdMaquina = item, IdManutencao = manutencao.Id });
-                    manutencaom.Save();
+                    await manutencaom.Save();
                 }
 
                 return RedirectToAction("Index");
             }
             //Enviando a dropdownlist caso o formulário não seja preenchido corretamente (NullReferenceException)
-            manutencaom.Maquinas = maquina.GetAll();
+            manutencaom.Maquinas = await maquina.GetAll();
             ViewBag.Maquinas = new MultiSelectList(manutencaom.Maquinas, "IdEstoque", "Nome");
             return View(manutencaom);
         }
 
-        public ActionResult Editar(int? id, int? id2)
+        public async Task<ActionResult> Editar(int? id, int? id2)
         {
             if (id == null || id2 == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            manumaq = manumaq.GetByID(id, id2);
+            manumaq = await manumaq.GetByID(id, id2);
             if (manumaq == null)
             {
                 return HttpNotFound();
@@ -101,7 +102,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar(MaquinaManutencao manumaq)
+        public async Task<ActionResult> Editar(MaquinaManutencao manumaq)
         {
             if (ModelState.IsValid)
             {
@@ -114,7 +115,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                     ValorPago = manumaq.Manutencao.ValorPago
                 };
                 manutencao.Update(manutencao);
-                manutencao.Save();
+                await manutencao.Save();
                 return RedirectToAction("Index");
             }
             return View(manumaq);
@@ -123,13 +124,13 @@ namespace OrganWeb.Areas.Sistema.Controllers
         //http://www.macoratti.net/18/06/mvc5_vmodal2.htm
         //https://cursos.alura.com.br/forum/topico-implementacao-de-alteracao-de-produto-41440
 
-        public ActionResult Excluir(int? id, int? id2)
+        public async Task<ActionResult> Excluir(int? id, int? id2)
         {
             if (id == null || id2 == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            manumaq = manumaq.GetByID(id, id2);
+            manumaq = await manumaq.GetByID(id, id2);
             if (manumaq == null)
             {
                 return HttpNotFound();
@@ -139,14 +140,14 @@ namespace OrganWeb.Areas.Sistema.Controllers
         
         [HttpPost, ActionName("Excluir")]
         [ValidateAntiForgeryToken]
-        public ActionResult ExcluirConfirmado(MaquinaManutencao mm)
+        public async Task<ActionResult> ExcluirConfirmado(MaquinaManutencao mm)
         {
-            manutencao = manutencao.GetByID(mm.IdManutencao);
-            manumaq = manumaq.GetByID(mm.IdManutencao, mm.IdMaquina);
+            manutencao = await manutencao.GetByID(mm.IdManutencao);
+            manumaq = await manumaq.GetByID(mm.IdManutencao, mm.IdMaquina);
             manumaq.Delete(mm.IdManutencao, mm.IdMaquina);
-            manumaq.Save();
+            await manumaq.Save();
             manutencao.Delete(mm.IdManutencao);
-            manutencao.Save();
+            await manutencao.Save();
             return RedirectToAction("Index");
         }
     }

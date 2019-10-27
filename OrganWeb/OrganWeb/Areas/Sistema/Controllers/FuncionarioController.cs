@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -16,115 +17,122 @@ namespace OrganWeb.Areas.Sistema.Controllers
 {
     public class FuncionarioController : Controller
     {
+        private Cidade cidade = new Cidade();
+        private Bairro bairro = new Bairro();
+        private Logradouro logradouro = new Logradouro();
+        private Endereco endereco = new Endereco();
+        private Pessoa pessoa = new Pessoa();
+        private TipoTel tipotel = new TipoTel();
+        private Telefone telefone = new Telefone();
+        private TelefonePessoa telefonePessoa = new TelefonePessoa();
+        private PessoaFisica pessoaFisica = new PessoaFisica();
+        private Cargo cargo = new Cargo();
         private Estado estado = new Estado();
         private DDD ddd = new DDD();
         private Funcionario funcionario = new Funcionario();
-        private BancoContext db = new BancoContext();
         private VwFuncionario vwfuncionario = new VwFuncionario();
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             var select = new ViewFuncionario
             {
-                Funcionario = funcionario.GetFew()
+                Funcionario = await funcionario.GetFew()
             };
             return View(select);
         }
 
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
             var select = new CreateFuncionarioViewModel
             {
-                Estados = estado.GetAll(),
-                DDDs = ddd.GetAll()
+                Estados = await estado.GetAll(),
+                DDDs = await ddd.GetAll()
             };
             return View(funcionario);
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CreateFuncionarioViewModel model)
+        public async Task<ActionResult> Create(CreateFuncionarioViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var cidade = new Cidade
+                cidade = new Cidade
                 {
                     Nome = model.Cidade,
                     IdEstado = model.Estado
                 };
 
-                db.Cidades.Add(cidade);
-                db.SaveChanges();
+                cidade.Add(cidade);
+                await cidade.Save();
 
-                var bairro = new Bairro
+                bairro = new Bairro
                 {
                     Nome = model.Bairro,
                     IdCidade = cidade.Id
                 };
 
-                db.Bairros.Add(bairro);
-                db.SaveChanges();
+                bairro.Add(bairro);
+                await bairro.Save();
 
-                var rua = new Logradouro
+                logradouro = new Logradouro
                 {
                     Nome = model.Rua,
                     IdBairro = bairro.Id
                 };
 
-                db.Logradouros.Add(rua);
-                db.SaveChanges();
+                logradouro.Add(logradouro);
+                await logradouro.Save();
 
-                var cep = new Endereco
+                endereco = new Endereco
                 {
                     CEP = model.CEP,
-                    IdRua = rua.Id
+                    IdRua = logradouro.Id
                 };
 
-                db.Enderecos.Add(cep);
-                db.SaveChanges();
+                endereco.Add(endereco);
+                await endereco.Save();
 
-                var pessoa = new Pessoa
+                pessoa = new Pessoa
                 {
                     Nome = model.Nome,
                     Email = model.Email,
                     NumeroEndereco = model.Numero,
                     CompEndereco = model.Complemento,
-                    CEP = cep.CEP
+                    CEP = endereco.CEP
                 };
 
-                db.Pessoas.Add(pessoa);
-                db.SaveChanges();
+                pessoa.Add(pessoa);
+                await pessoa.Save();
 
-                var tipotel = new TipoTel
+                tipotel = new TipoTel
                 {
                     Tipo = model.TipoTelefone
                 };
 
-                db.TipoTels.Add(tipotel);
-                db.SaveChanges();
+                tipotel.Add(tipotel);
+                await tipotel.Save();
 
-                var telefone = new Telefone
+                telefone = new Telefone
                 {
                     Numero = model.Numero,
                     IdDDD = model.DDD,
                     IdTipo = tipotel.Id
                 };
 
-                db.Telefones.Add(telefone);
-                db.SaveChanges();
+                telefone.Add(telefone);
+                await telefone.Save();
 
-                var telpessoa = new TelefonePessoa
+                telefonePessoa = new TelefonePessoa
                 {
                     IdPessoa = pessoa.Id,
                     IdTelefone = telefone.Id
                 };
 
-                db.TelefonePessoas.Add(telpessoa);
-                db.SaveChanges();
+                telefonePessoa.Add(telefonePessoa);
+                await telefonePessoa.Save();
 
-
-                var pessoafisica = new PessoaFisica
+                pessoaFisica = new PessoaFisica
                 {
                     CPF = model.CPF,
                     DataNasc = model.DataNascimento,
@@ -132,38 +140,41 @@ namespace OrganWeb.Areas.Sistema.Controllers
                     Foto = "",
                     IdPessoa = pessoa.Id
                 };
-                
-                db.PessoaFisicas.Add(pessoafisica);
-                db.SaveChanges();
 
+                pessoaFisica.Add(pessoaFisica);
+                await pessoaFisica.Save();
 
-                var cargo = new Cargo {
+                cargo = new Cargo
+                {
                     Nome = model.Cargo
                 };
-                db.Cargos.Add(cargo);
-                db.SaveChanges();
 
+                cargo.Add(cargo);
+                await cargo.Save();
 
-                var funcionario = new Funcionario {
+                funcionario = new Funcionario
+                {
                     Salario = model.Salario,
                     IdCargo = cargo.Id,
                     IdPessoa = pessoa.Id,
                     Status = true
-               
                 };
-                db.Funcionarios.Add(funcionario);
-                db.SaveChanges();
+
+                funcionario.Add(funcionario);
+                await funcionario.Save();
+
                 return RedirectToAction("Index");
             }
             return View(funcionario);
         }
-        public ActionResult Detalhes(int? id)
+
+        public async Task<ActionResult> Detalhes(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-             vwfuncionario= vwfuncionario.GetByID(id);
+            vwfuncionario = await vwfuncionario.GetByID(id);
             if (vwfuncionario == null)
             {
                 return HttpNotFound();
@@ -172,13 +183,13 @@ namespace OrganWeb.Areas.Sistema.Controllers
             return View(vwfuncionario);
         }
 
-        public ActionResult Editar(int? id)
+        public async Task<ActionResult> Editar(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            funcionario = funcionario.GetByID(id);
+            funcionario = await funcionario.GetByID(id);
             if (funcionario == null)
             {
                 return HttpNotFound();
@@ -189,24 +200,24 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar(Funcionario funcionario)
+        public async Task<ActionResult> Editar(Funcionario funcionario)
         {
-
             if (ModelState.IsValid)
             {
                 funcionario.Update(funcionario);
-                funcionario.Save();
+                await funcionario.Save();
                 return RedirectToAction("Index");
             }
             return View(funcionario);
         }
-        public ActionResult Excluir(int? id)
+
+        public async Task<ActionResult> Excluir(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            vwfuncionario = vwfuncionario.GetByID(id);
+            vwfuncionario = await vwfuncionario.GetByID(id);
             if (vwfuncionario == null)
             {
                 return HttpNotFound();
@@ -217,14 +228,11 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         [HttpPost, ActionName("Excluir")]
         [ValidateAntiForgeryToken]
-        public ActionResult ExcluirConfirmado(VwFuncionario vwfuncionario)
+        public async Task<ActionResult> ExcluirConfirmado(VwFuncionario vwfuncionario)
         {
             funcionario.Delete(vwfuncionario.Id);
-            funcionario.Save();
-
+            await funcionario.Save();
             return RedirectToAction("Index");
         }
-
-
     }
 }

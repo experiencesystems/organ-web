@@ -15,47 +15,38 @@ using OrganWeb.Models.Endereco;
 using OrganWeb.Models.Telefone;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
 using OrganWeb.Models.Pessoa;
+using System.Threading.Tasks;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
     public class FornecedorController : Controller
     {
+        private Cidade cidade = new Cidade();
+        private Bairro bairro = new Bairro();
+        private Logradouro logradouro = new Logradouro();
+        private Endereco endereco = new Endereco();
+        private Pessoa pessoa = new Pessoa();
+        private TipoTel tipotel = new TipoTel();
+        private Telefone telefone = new Telefone();
+        private TelefonePessoa telefonePessoa = new TelefonePessoa();
+        private PessoaJuridica pessoaJuridica = new PessoaJuridica();
         private Fornecedor fornecedor = new Fornecedor();
         private Estado estado = new Estado();
         private DDD ddd = new DDD();
-        private BancoContext db = new BancoContext();
         private VwFornecedor vwfornecedor = new VwFornecedor();
 
         public ActionResult Index()
         {
-            return RedirectToAction("Index", "Financeiro");
+            return RedirectToAction("Index", "Estoque");
+            //TODO: colocar o select do fornecedor na pg do estoque
         }
         
-        public ActionResult Fornecedores()
-        {
-            return View();
-        }
-        
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            fornecedor = fornecedor.GetByID(id);
-            if (fornecedor == null)
-            {
-                return HttpNotFound();
-            }
-            return View(fornecedor);
-        }
-        
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
             var select = new CreateFornecedorViewModel
             {
-                Estados = estado.GetAll(),
-                DDDs = ddd.GetAll()
+                Estados = await estado.GetAll(),
+                DDDs = await ddd.GetAll()
             };
             // aqui ele tá enviando os estados e ddds pro usuário selecionar qnd ele for criar um fornecedor
             return View(select);
@@ -63,87 +54,86 @@ namespace OrganWeb.Areas.Sistema.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CreateFornecedorViewModel model)
+        public async Task<ActionResult> Create(CreateFornecedorViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var cidade = new Cidade
+                cidade = new Cidade
                 {
                     Nome = model.Cidade,
                     IdEstado = model.Estado
                 };
 
-                db.Cidades.Add(cidade);
-                db.SaveChanges();
+                cidade.Add(cidade);
+                await cidade.Save();
 
-                var bairro = new Bairro
+                bairro = new Bairro
                 {
                     Nome = model.Bairro,
                     IdCidade = cidade.Id
                 };
 
-                db.Bairros.Add(bairro);
-                db.SaveChanges();
+                bairro.Add(bairro);
+                await bairro.Save();
 
-                var rua = new Logradouro
+                logradouro = new Logradouro
                 {
                     Nome = model.Rua,
                     IdBairro = bairro.Id
                 };
 
-                db.Logradouros.Add(rua);
-                db.SaveChanges();
+                logradouro.Add(logradouro);
+                await logradouro.Save();
 
-                var cep = new Endereco
+                endereco = new Endereco
                 {
                     CEP = model.CEP,
-                    IdRua = rua.Id
+                    IdRua = logradouro.Id
                 };
 
-                db.Enderecos.Add(cep);
-                db.SaveChanges();
+                endereco.Add(endereco);
+                await endereco.Save();
 
-                var pessoa = new Pessoa
+                pessoa = new Pessoa
                 {
                     Nome = model.NomeFantasia,
                     Email = model.Email,
                     NumeroEndereco = model.Numero,
                     CompEndereco = model.Complemento,
-                    CEP = cep.CEP
+                    CEP = endereco.CEP
                 };
 
-                db.Pessoas.Add(pessoa);
-                db.SaveChanges();
+                pessoa.Add(pessoa);
+                await pessoa.Save();
 
-                var tipotel = new TipoTel
+                tipotel = new TipoTel
                 {
                     Tipo = model.TipoTelefone
                 };
 
-                db.TipoTels.Add(tipotel);
-                db.SaveChanges();
+                tipotel.Add(tipotel);
+                await tipotel.Save();
 
-                var telefone = new Telefone
+                telefone = new Telefone
                 {
                     Numero = model.Numero,
                     IdDDD = model.DDD,
                     IdTipo = tipotel.Id
                 };
 
-                db.Telefones.Add(telefone);
-                db.SaveChanges();
+                telefone.Add(telefone);
+                await telefone.Save();
 
-                var telpessoa = new TelefonePessoa
+                telefonePessoa = new TelefonePessoa
                 {
                     IdPessoa = pessoa.Id,
                     IdTelefone = telefone.Id
                 };
 
-                db.TelefonePessoas.Add(telpessoa);
-                db.SaveChanges();
-
-
-                var pessoajuridica = new PessoaJuridica
+                telefonePessoa.Add(telefonePessoa);
+                await telefonePessoa.Save();
+                
+                pessoaJuridica = new PessoaJuridica
                 {
                     RazaoSocial = model.RazaoSocial,
                     CNPJ = model.CNPJ,
@@ -151,54 +141,27 @@ namespace OrganWeb.Areas.Sistema.Controllers
                     IdPessoa = pessoa.Id
                 };
 
-                db.PessoaJuridicas.Add(pessoajuridica);
-                db.SaveChanges();
+                pessoaJuridica.Add(pessoaJuridica);
+                await pessoaJuridica.Save();
 
-                var fornecedor = new Fornecedor
+                fornecedor = new Fornecedor
                 {
                     Status = true,
                     IdPessoa = pessoa.Id
                 };
-                db.Fornecedors.Add(fornecedor);
-                db.SaveChanges();
+                fornecedor.Add(fornecedor);
+                await fornecedor.Save();
             }
             return View(fornecedor);
         }
         
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Excluir(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            fornecedor = fornecedor.GetByID(id);
-            if (fornecedor == null)
-            {
-                return HttpNotFound();
-            }
-            return View(fornecedor);
-        }
-        
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Fornecedor fornecedor)
-        {
-            if (ModelState.IsValid)
-            {
-                //db.Entry(fornecedor).State = EntityState.Modified;
-                //db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(fornecedor);
-        }
-        
-        public ActionResult Excluir(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            fornecedor = fornecedor.GetByID(id);
+            fornecedor = await fornecedor.GetByID(id);
             if (fornecedor == null)
             {
                 return HttpNotFound();
@@ -208,25 +171,21 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         [HttpPost, ActionName("Excluir")]
         [ValidateAntiForgeryToken]
-        public ActionResult ExcluirConfirmado(Fornecedor fornecedor)
+        public async Task<ActionResult> ExcluirConfirmado(Fornecedor fornecedor)
         {
-
-            fornecedor = fornecedor.GetByID(fornecedor.Id);
+            fornecedor = await fornecedor.GetByID(fornecedor.Id);
             fornecedor.Delete(fornecedor.Id);
-            fornecedor.Save();
+            await fornecedor.Save();
             return RedirectToAction("Index");
         }
 
-
-
-
-        public ActionResult Editar(int? id)
+        public async Task<ActionResult> Editar(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            fornecedor = fornecedor.GetByID(id);
+            fornecedor = await fornecedor.GetByID(id);
             if (fornecedor == null)
             {
                 return HttpNotFound();
@@ -236,35 +195,29 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar(Fornecedor fornecedor)
+        public async Task<ActionResult> Editar(Fornecedor fornecedor)
         {
-
             if (ModelState.IsValid)
             {
                 fornecedor.Update(fornecedor);
-                fornecedor.Save();
+                await fornecedor.Save();
                 return RedirectToAction("Index");
             }
             return View(fornecedor);
         }
-        public ActionResult Detalhes(int? id)
+
+        public async Task<ActionResult> Detalhes(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            vwfornecedor = vwfornecedor.GetByID(id);
+            vwfornecedor = await vwfornecedor.GetByID(id);
             if (vwfornecedor == null)
             {
                 return HttpNotFound();
             }
-
             return View(vwfornecedor);
         }
-
-       
-        
-        
-
     }
 }
