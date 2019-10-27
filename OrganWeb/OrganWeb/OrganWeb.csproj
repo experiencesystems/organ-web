@@ -106,6 +106,9 @@
     <Reference Include="System.Drawing">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData">
       <Private>True</Private>
     </Reference>
@@ -237,6 +240,7 @@
     <Compile Include="Areas\Sistema\Controllers\SoloController.cs" />
     <Compile Include="Areas\Sistema\Models\Administrativo\Area.cs" />
     <Compile Include="Areas\Sistema\Models\Administrativo\Cliente.cs" />
+    <Compile Include="Areas\Sistema\Models\API\ListarUnidades.cs" />
     <Compile Include="Areas\Sistema\Models\Armazenamento\Insumo.cs" />
     <Compile Include="Areas\Sistema\Models\Armazenamento\Produto.cs" />
     <Compile Include="Areas\Sistema\Models\Controles\Controle.cs" />
@@ -564,6 +568,9 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

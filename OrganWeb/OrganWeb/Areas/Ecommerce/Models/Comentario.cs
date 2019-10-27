@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrganWeb.Models.Usuario;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -22,5 +23,17 @@ namespace OrganWeb.Areas.Ecommerce.Models
         [Required]
         [StringLength(300)]
         public string Valor { get; set; }
+
+        [Required]
+        [ForeignKey("Anuncio")]
+        public int IdAnuncio { get; set; }
+
+        [Required]
+        [ForeignKey("Usuario")]
+        public string IdUsuario { get; set; }
+
+        public virtual Anuncio Anuncio { get; set; }
+        public virtual ApplicationUser Usuario { get; set; }
+        public virtual List<Resposta> Respostas { get; set; }
     }
 }

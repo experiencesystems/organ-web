@@ -7,6 +7,8 @@
 <div class="form-horizontal">
     <h4>Maquina</h4>
     <hr />
+    @Html.Raw(ViewBag.ReturnedData)
+
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
