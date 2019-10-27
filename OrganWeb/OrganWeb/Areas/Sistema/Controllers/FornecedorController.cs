@@ -196,7 +196,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Editar(Fornecedor fornecedor)
-        {//Todo: ver se é createfornecedorviewmodel
+        {//TODO: ver se é createfornecedorviewmodel
             if (ModelState.IsValid)
             {
                 fornecedor.Update(fornecedor);

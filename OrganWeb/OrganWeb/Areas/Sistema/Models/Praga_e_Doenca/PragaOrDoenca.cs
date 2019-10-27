@@ -1,4 +1,5 @@
-﻿using OrganWeb.Models.Banco;
+﻿using OrganWeb.Areas.Sistema.Models.Administrativo;
+using OrganWeb.Models.Banco;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -21,5 +22,12 @@ namespace OrganWeb.Areas.Sistema.Models.Praga_e_Doenca
         [Required]
         //praga ou doenca 
         public bool PD { get; set; }
+
+        [NotMapped]
+        public IEnumerable<Area> Areas { get; set; }
+
+        [NotMapped]
+        [Required]
+        public int[] IdArea { get; set; }
     }
 }

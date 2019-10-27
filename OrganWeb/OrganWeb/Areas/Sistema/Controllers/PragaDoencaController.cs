@@ -14,16 +14,14 @@ namespace OrganWeb.Areas.Sistema.Controllers
 {
     public class PragaDoencaController : Controller
     {
-
         private Area area = new Area();
         private AreaPD areapd = new AreaPD();
         private PragaOrDoenca praga = new PragaOrDoenca();
         private VwPragaOrDoenca vwpraga = new VwPragaOrDoenca();
-
-        // GET: Sistema/PragaDoenca
-        public ActionResult Index()
+        
+        public async Task<ActionResult> Index()
         {
-            return View(praga.GetFew());
+            return View(await vwpraga.GetFew());
         }
 
         public async Task<ActionResult> Detalhes(int? id)
@@ -60,6 +58,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Editar(PragaOrDoenca praga)
         {
+            //TODO: editar pragadoenca
             if (ModelState.IsValid)
             {
                 praga.Update(praga);
@@ -71,7 +70,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         public async Task<ActionResult> Create()
         {
-            var view = new CreatePragaOrDoencaViewModel
+            var view = new PragaOrDoenca
             {
                 Areas = await area.GetAll()
             };
@@ -79,19 +78,20 @@ namespace OrganWeb.Areas.Sistema.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(CreatePragaOrDoencaViewModel pragadoenca, int[] IdArea)
+        public async Task<ActionResult> Create(PragaOrDoenca pragadoenca)
         {
             if (ModelState.IsValid)
             {
+                //ACTION NÃO FUNCIONANDO!!
                 var pd = new PragaOrDoenca
                 {
                     Nome = pragadoenca.Nome,
                     PD = pragadoenca.PD
-                };
+                }; //TODO: preencher de acordo com radiobutton
                 pd.Add(pd);
                 await pd.Save();
                 
-                foreach (var item in IdArea)
+                foreach (var item in pragadoenca.IdArea)
                 {
                     areapd.Add(new AreaPD { IdArea = item, IdPd = pd.Id });
                     await areapd.Save();
@@ -99,30 +99,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 return RedirectToAction("Index");
             }
             return View(pragadoenca);
-        }
-
-        public async Task<ActionResult> Excluir(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            vwpraga = await vwpraga.GetByID(id);
-            if (vwpraga == null)
-            {
-                return HttpNotFound();
-            }
-            return View(vwpraga);
-        }
-
-        [HttpPost, ActionName("Excluir")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ExcluirConfirmado(VwPragaOrDoenca vwpraga)  
-        {
-            praga.Delete(vwpraga.Id);
-            await praga.Save();
-
-            return RedirectToAction("Index");
         }
     }
 }

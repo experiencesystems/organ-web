@@ -18,7 +18,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
     public class EstoqueController : Controller
     { 
         //TODO: categorias máquina
-        //TODO: view histórico estoque
         private Insumo insumo = new Insumo();
         private Estoque estoque = new Estoque();
         private Categoria categoria = new Categoria();
@@ -122,30 +121,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
             insumo.Categorias = await categoria.GetAll();
             ViewBag.UnidadeMedida = insumo.Estoque.UnidadesDeMedida.Where(x => x.Value == insumo.Estoque.UM.ToString()).First().Text;
             return View(insumo);
-        }
-
-        public async Task<ActionResult> Excluir(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            insumo = await insumo.GetByID(id);
-            if (insumo == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.UnidadeMedida = insumo.Estoque.UnidadesDeMedida.Where(x => x.Value == insumo.Estoque.UM.ToString()).First().Text;
-            return View(insumo);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Excluir(Insumo insumo)
-        {
-            insumo.Delete(insumo.IdEstoque);
-            await insumo.Save(); //TODO: excluir da tabela estoque conflito itenscontrole
-            return RedirectToAction("Index");
         }
     }
 }

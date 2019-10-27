@@ -51,7 +51,7 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#insumo" aria-expanded="false" aria-controls="insumo">
                             <i class="menu-icon fas fa-tree"></i>
-                            <span class="menu-title">Safra</span>
+                            <span class="menu-title">Cultivo</span>
                             <i class="menu-arrow"></i>
                         </a>
                         <div class="collapse" id="insumo">
@@ -65,12 +65,13 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#controle" aria-expanded="false" aria-controls="auth">
                             <i class="menu-icon fa fa-bug"></i>
-                            <span class="menu-title">Controles</span>
+                            <span class="menu-title">Pragas e doenças</span>
                             <i class="menu-arrow"></i>
                         </a>
                         <div class="collapse" id="controle">
                             <ul class="nav flex-column sub-menu">
-                                <li><a href="#">@Html.ActionLink("Praga e Doença", "Index", "PragaOrDoenca", new { area = "Sistema" }, new { @class = "" })</a></li>
+                                <li><a href="#">@Html.ActionLink("Pragas e Doenças", "Index", "PragaOrDoenca", new { area = "Sistema" }, new { @class = "" })</a></li>
+                                <li><a href="#">@Html.ActionLink("Controle", "Index", "Controle", new { area = "Sistema" }, new { @class = "" })</a></li>
                             </ul>
                         </div>
                     </li>
@@ -98,9 +99,6 @@
                         <div class="collapse" id="financeiro">
                             <ul class="nav flex-column sub-menu">
                                 <li><a href="#">@Html.ActionLink("Financeiro", "Index", "Financeiro", new { area = "Sistema" }, new { @class = "" })</a></li>
-                                <li><a href="#">@Html.ActionLink("Compras", "Index", "Compra", new { area = "Sistema" }, new { @class = "" })</a></li>
-                                <li><a href="#">@Html.ActionLink("Fornecedor", "Index", "Fornecedor", new { area = "Sistema" }, new { @class = "" })</a></li>
-                                <li><a href="#">@Html.ActionLink("Despesas", "Index", "Despesa", new { area = "Sistema" }, new { @class = "" })</a></li>
                             </ul>
                         </div>
                     </li>
@@ -113,8 +111,7 @@
                         </a>
                         <div class="collapse" id="fazenda">
                             <ul class="nav flex-column sub-menu">
-                                <li><a href="#">@Html.ActionLink("Funcionário", "Index", "Funcionario", new { area = "Sistema" }, new { @class = "" })</a></li>
-                                <li><a href="#">@Html.ActionLink("Áreas", "Index", "Area", new { area = "Sistema" }, new { @class = "" })</a></li>
+                                <li><a href="#">@Html.ActionLink("Fazenda", "Index", "Fazenda", new { area = "Sistema" }, new { @class = "" })</a></li>
                             </ul>
                         </div>
                     </li>

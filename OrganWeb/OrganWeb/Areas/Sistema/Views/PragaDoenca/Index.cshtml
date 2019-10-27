@@ -1,131 +1,52 @@
-﻿
-@model OrganWeb.Areas.Sistema.Models.ViewModels.ViewPragaDoenca
+﻿@model IEnumerable<OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque.VwPragaOrDoenca>
+
 @{
-    ViewBag.Title = "Pragas e Doenças";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<style>
-    .modal-conteudo {
-        width: 350px;
-        height: 200px;
-        background: #FFF;
-        z-index: 1100;
-        border-radius: 3px;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        -webkit-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-        display: none;
-    }
-</style>
 
-<div class="main-body">
-    <div class="row">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="card-title box-title">Pragas e Doenças</h6>
-                    <div class="card-header-right">
-                        <ul class="list-unstyled card-option">
-                            <li><i class="ti-minus minimize-card"></i></li>
-                            <li><i class="icon-refresh"></i></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="card-content">
-                        <div class="card bg-light mb-3" style="max-width: 18rem;">
+<h2>Index</h2>
 
-                            <table class="table">
-                                <thead class="thead-title">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">NomePopular</th>
-                                        <th scope="col">Tipo</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model.PragaOrDoencas)
-                                    {
-                                    <tr class="linha">
-                                        <th scope="row"></th>
-                                        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.PD)</td>
-                                    </tr>
-                                    }
-                                </tbody>
-                                </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <div class="card border-success mb-3" style="max-width: 18rem;">
-                        <div class="card-body text-success">
+<p>
+    @Html.ActionLink("Nova praga ou doença", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Areas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
 
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="modal-placeholder"></div>
-<div class="modal-conteudo"></div>
-<div class="modal fade" id="newmodal" tabindex="-1" role="dialog" data-backdrop="static" />
-
-<environment include="Development">
-    <script src="~/Scripts/crudmodal.js" asp-append-version="true" defer></script>
-</environment>
-
-<environment exclude="Development">
-    <script src="~/js/crudmodal.min.js" asp-append-version="true" defer></script>
-</environment>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"
-        integrity="sha256-F6h55Qw6sweK+t7SiOJX+2bpSAa3b/fnlrVCJvmEj1A="
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.9/jquery.validate.unobtrusive.min.js"
-        integrity="sha256-paoxpct33kY9fpQlvgC8IokjGq8iqYaVFawgFPg8oz0="
-        crossorigin="anonymous"></script>
-
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-
-
-@* jQuery('.linha').on('click', function () {
-        var html = $(this).html();
-        jQuery('.card-header').append(html);
-    });*@
-@section scripts{
-
-    <script>
-
-        jQuery('.linha').on('click', function () {
-            $("#newmodal").modal("show");
-            $(".modal-conteudo").modal("show");
-
-            var html = $(this).html();
-            jQuery('.modal-conteudo').append(html);
-        });
-
-        $(function () {
-
-
-
-            $(".delete").click(function () {
-                var url = $(this).data('url');
-
-                $("#newmodal").load(url, function () {
-                    $("#newmodal").modal("show");
-                    $("#modal-placeholder").modal("show");
-                })
-            });
-
-        })
-    </script>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tipo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Areas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Editar", new { id=item.Id }) |
+            @Html.ActionLink("Detalhes", "Detalhes", new { id=item.Id }) |
+            @Html.ActionLink("Excluir", "Excluir", new { id=item.Id })
+        </td>
+    </tr>
 }
 
-
+</table>
