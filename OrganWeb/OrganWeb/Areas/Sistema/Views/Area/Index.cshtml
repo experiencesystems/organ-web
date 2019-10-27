@@ -1,5 +1,10 @@
 ﻿@model OrganWeb.Areas.Sistema.Models.ViewModels.ViewAreas
 
+@{
+    ViewBag.Title = "Área";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
 <p>
     @Html.ActionLink("Nova área", "Create")
 </p>
@@ -18,19 +23,20 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model.Areas) {
-    <tr>
-        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
-        <td>@Html.DisplayFor(modelItem => item.Disponibilidades.Where(x => x.Value == item.Disp.ToString()).First().Text)</td>
-        <td>@Html.DisplayFor(modelItem => item.Tamanho) ha</td>
-        <td>@Html.DisplayFor(modelItem => item.Solo.Nome)</td>
-        <td>
-            @Html.ActionLink("Editar", "Editar", new { id=item.Id }) |
-            @Html.ActionLink("Detalhes", "Detalhes", new { id=item.Id }) |
-            @Html.ActionLink("Excluir", "Excluir", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model.Areas)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+            <td>@Html.DisplayFor(modelItem => item.Disponibilidades.Where(x => x.Value == item.Disp.ToString()).First().Text)</td>
+            <td>@Html.DisplayFor(modelItem => item.Tamanho) ha</td>
+            <td>@Html.DisplayFor(modelItem => item.Solo.Nome)</td>
+            <td>
+                @Html.ActionLink("Editar", "Editar", new { id = item.Id }) |
+                @Html.ActionLink("Detalhes", "Detalhes", new { id = item.Id }) |
+                @Html.ActionLink("Excluir", "Excluir", new { id = item.Id })
+            </td>
+        </tr>
+    }
 </table>
 
 <!-- SOLOS -->
@@ -45,18 +51,19 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model.Solos) {
-    <tr>
-        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
-        <td>@Html.DisplayFor(modelItem => item.Tipos.Where(x => x.Value == item.Tipo.ToString()).First().Text)</td>
-        <td>@Html.DisplayFor(modelItem => item.IncSolar) %</td>
-        <td>@Html.DisplayFor(modelItem => item.IncVento) %</td>
-        <td>@Html.DisplayFor(modelItem => item.Acidez) %</td>
-        <td>
-            @Html.ActionLink("Editar", "Editar", "Solo", new { id=item.Id }, null) |
-            @Html.ActionLink("Detalhes", "Detalhes", "Solo", new { id=item.Id }, null) |
-            @Html.ActionLink("Excluir", "Excluir", "Solo", new { id=item.Id }, null)
-        </td>
-    </tr>
-}
+    @foreach (var item in Model.Solos)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+            <td>@Html.DisplayFor(modelItem => item.Tipos.Where(x => x.Value == item.Tipo.ToString()).First().Text)</td>
+            <td>@Html.DisplayFor(modelItem => item.IncSolar) %</td>
+            <td>@Html.DisplayFor(modelItem => item.IncVento) %</td>
+            <td>@Html.DisplayFor(modelItem => item.Acidez) %</td>
+            <td>
+                @Html.ActionLink("Editar", "Editar", "Solo", new { id = item.Id }, null) |
+                @Html.ActionLink("Detalhes", "Detalhes", "Solo", new { id = item.Id }, null) |
+                @Html.ActionLink("Excluir", "Excluir", "Solo", new { id = item.Id }, null)
+            </td>
+        </tr>
+    }
 </table>

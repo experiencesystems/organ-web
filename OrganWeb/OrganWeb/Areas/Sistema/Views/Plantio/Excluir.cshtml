@@ -1,58 +1,26 @@
 ﻿@model OrganWeb.Areas.Sistema.Models.Safras.Plantio
 
-<h3>Tem certeza que deseja deletar esse registro?</h3>
+<h3>Deseja deletar esse registro?</h3>
 <div>
-    <h4>Plantio</h4>
-    <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.Nome)</dt>
+        <dd>@Html.DisplayFor(model => model.Nome)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.Sistema)</dt>
+        <dd>@ViewBag.Sistema</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Sistema)
-        </dt>
+        <dt>@Html.DisplayNameFor(model => model.DataColheita)</dt>
+        <dd>@Html.DisplayFor(model => model.DataColheita)</dd>
 
-        <dd>
-            @ViewBag.Sistema
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.DataInicio)</dt>
+        <dd>R$ @Html.DisplayFor(model => model.DataInicio)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DataColheita)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DataColheita)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DataInicio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DataInicio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TipoPlantio)
-        </dt>
-
-        <dd>
-            @ViewBag.Periodo
-        </dd>
-
+        <dt>@Html.DisplayNameFor(model => model.TipoPlantio)</dt>
+        <dd>@ViewBag.Periodo</dd>
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+            <input type="submit" value="Deletar" class="btn btn-addmodal" />
     }
 </div>

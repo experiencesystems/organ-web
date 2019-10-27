@@ -24,9 +24,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         public ActionResult Create()
         {
-           
-            // n sei oq isso aki retornaria sinceramente vo v
-            return View();
+            maquina = new Maquina() { Estoque = new Estoque() };
+            return View(maquina);
         }
 
         [HttpPost]

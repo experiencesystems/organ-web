@@ -8,7 +8,7 @@
 
 <div class="main-body">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col">
             <div class="card">
                 <div class="card-header">
                     <h6 class="card-title box-title">Funcionario</h6>
@@ -20,75 +20,61 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    
 
 
-                    <table class="table">
-                        <thead class="thead-title">
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nome</th>
-                                <th scope="col">Sobrenome</th>
-                                <th scope="col">Cargo</th>
-                                <th scope="col">CPF</th>
-                                <th scope="col">RG</th>
-                                <th scope="col">DataNascimento</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Salario</th>
-                                <th scope="col">GrauInstrucao</th>
-                                <th scope="col">DataContratacao</th>
-                                <th scope="col">TipoContratacao</th>
-                                <th scope="col">PeriodoContratacao</th>
-                                <th scope="col">CEP</th>
-                                <th scope="col">Numero</th>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="thead-title">
+                                <tr>
+                                    <!--<th scope="col">#</th>
+                                    <th scope="col">CEP</th>
+                                    <th scope="col">Numero</th>
+                                    <th scope="col">RG</th>
+                                    <th scope="col">GrauInstrucao</th>-->
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Sobrenome</th>
+                                    <th scope="col">Cargo</th>
+                                    <th scope="col">CPF</th>
+                                    <th scope="col">DataNascimento</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Salario</th>
+                                    <th scope="col">DataContratacao</th>
+                                    <th scope="col">TipoContratacao</th>
+                                    <th scope="col">PeriodoContratacao</th>
+                                </tr>
+                            </thead>
 
-                            </tr>
-
-                        </thead>
-
-                        @*   <tbody>
-        @foreach (var item in Model.Funcionario)
-            {
-        <tr>
-            <th scope="row"></th>
-            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
-            <td>@Html.DisplayFor(modelItem => item.Sobrenome)</td>
-            <td>@Html.DisplayFor(modelItem => item.Cargo)</td>
-            <td>@Html.DisplayFor(modelItem => item.CPF)</td>
-            <td>@Html.DisplayFor(modelItem => item.RG)</td>
-            <td>@Html.DisplayFor(modelItem => item.DataNascimento)</td>
-            <td>@Html.DisplayFor(modelItem => item.Email)</td>
-            <td>@Html.DisplayFor(modelItem => item.Salario)</td>
-            <td>@Html.DisplayFor(modelItem => item.GrauInstrucao)</td>
-            <td>@Html.DisplayFor(modelItem => item.DataContratacao)</td>
-            <td>@Html.DisplayFor(modelItem => item.TipoContratacao)</td>
-            <td>@Html.DisplayFor(modelItem => item.PeriodoContratacao)</td>
-            <td>@Html.DisplayFor(modelItem => item.CEP)</td>
-            <td>@Html.DisplayFor(modelItem => item.Numero)</td>
-
-
-
-
-
-        </tr>
-            }
-                        *@
-
-
-
-</div>
-                </div>
-            </div>
-          
-
-                        </p>
+                                @*   <tbody>
+                    @foreach (var item in Model.Funcionario)
+                        {
+                    <tr>
+                        <th scope="row"></th>
+                        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Sobrenome)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Cargo)</td>
+                        <td>@Html.DisplayFor(modelItem => item.CPF)</td>
+                        <td>@Html.DisplayFor(modelItem => item.RG)</td>
+                        <td>@Html.DisplayFor(modelItem => item.DataNascimento)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Salario)</td>
+                        <td>@Html.DisplayFor(modelItem => item.GrauInstrucao)</td>
+                        <td>@Html.DisplayFor(modelItem => item.DataContratacao)</td>
+                        <td>@Html.DisplayFor(modelItem => item.TipoContratacao)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PeriodoContratacao)</td>
+                        <td>@Html.DisplayFor(modelItem => item.CEP)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Numero)</t
+                    </tr>
+                        }
+                            *@
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div>    
     </div>
 </div>
-</div>
+
 <div id="modal-placeholder"></div>
 <div class="modal fade" id="newmodal" tabindex="-1" role="dialog" data-backdrop="static" />
 

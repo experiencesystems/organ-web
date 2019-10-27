@@ -3,28 +3,20 @@
     ViewBag.Title = "Detalhes";
 }
 
-<h2>Detalhes</h2>
-<div>
-    <h4>Manutenção</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>@Html.DisplayNameFor(model => model.Manutencao.Nome)</dt>
-        <dd>@Html.DisplayFor(model => model.Manutencao.Nome)</dd>
+<h4 class="modal-title">Detalhes</h4>
+<dl class="dl-horizontal">
+    @Html.LabelFor(model => model.Manutencao.Nome, new { htmlAttributes = new { @class = "form-control" } })
+    <dd>@Html.EditorFor(model => model.Manutencao.Nome, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } })</dd>
 
-        <dt>Máquina</dt>
-        <dd>@Html.DisplayFor(model => model.Maquina.Nome)</dd>
+    @Html.LabelFor(model => model.Maquina, new { htmlAttributes = new { @class = "form-control" } })
+    <dd>@Html.EditorFor(model => model.Maquina.Nome, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } })</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.Manutencao.Data)</dt>
-        <dd>@Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.Manutencao.Data))</dd>
+    @Html.LabelFor(model => model.Manutencao.Data, new { htmlAttributes = new { @class = "form-control" } })
+    <dd>@Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.Manutencao.Data))</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.Manutencao.Detalhes)</dt>
-        <dd>@Html.DisplayFor(model => model.Manutencao.Detalhes)</dd>
+    @Html.LabelFor(model => model.Manutencao.Detalhes, new { htmlAttributes = new { @class = "form-control" } })
+    <dd>@Html.EditorFor(model => model.Manutencao.Detalhes, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } })</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.Manutencao.ValorPago)</dt>
-        <dd>R$ @Html.DisplayFor(model => model.Manutencao.ValorPago)</dd>
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Editar", "Editar", new { id = Model.IdManutencao, id2 = Model.IdMaquina }) |
-    @Html.ActionLink("Voltar", "Index")
-</p>
+    @Html.LabelFor(model => model.Manutencao.ValorPago, new { htmlAttributes = new { @class = "form-control" } })
+    <dd>@Html.EditorFor(model => model.Manutencao.ValorPago, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } })</dd>
+</dl>
