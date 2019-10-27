@@ -1,62 +1,150 @@
 ﻿@model OrganWeb.Areas.Sistema.Models.ViewModels.ViewAreas
 
-<p>
-    @Html.ActionLink("Nova área", "Create")
-</p>
-<p>
-    @Html.ActionLink("Novo solo", "Create", "Solo")
-</p>
-
-<!-- ÁREAS -->
-
-<table class="table">
-    <tr>
-        <th>Nome</th>
-        <th>Disponibilidade</th>
-        <th>Tamanho</th>
-        <th>Tipo de solo</th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model.Areas) {
-    <tr>
-        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
-        <td>@Html.DisplayFor(modelItem => item.Disponibilidades.Where(x => x.Value == item.Disp.ToString()).First().Text)</td>
-        <td>@Html.DisplayFor(modelItem => item.Tamanho) ha</td>
-        <td>@Html.DisplayFor(modelItem => item.Solo.Nome)</td>
-        <td>
-            @Html.ActionLink("Editar", "Editar", new { id=item.Id }) |
-            @Html.ActionLink("Detalhes", "Detalhes", new { id=item.Id }) |
-            @Html.ActionLink("Excluir", "Excluir", new { id=item.Id })
-        </td>
-    </tr>
+@{
+    ViewBag.Title = "Áreas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-</table>
 
-<!-- SOLOS -->
+<!--CORRIGIR O PROBLEMAS DAS MODAIS QUE AS VEZES NÃO ABRE-->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
 
-<table class="table">
-    <tr>
-        <th>Nome</th>
-        <th>Tipo</th>
-        <th>Incidência solar</th>
-        <th>Incidência do vento</th>
-        <th>Acidez</th>
-        <th></th>
-    </tr>
+<div class="main-body">
+    <div class="row">
+        <div class="col">
+            <div class="tablecontainer">
 
-@foreach (var item in Model.Solos) {
-    <tr>
-        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
-        <td>@Html.DisplayFor(modelItem => item.Tipos.Where(x => x.Value == item.Tipo.ToString()).First().Text)</td>
-        <td>@Html.DisplayFor(modelItem => item.IncSolar) %</td>
-        <td>@Html.DisplayFor(modelItem => item.IncVento) %</td>
-        <td>@Html.DisplayFor(modelItem => item.Acidez) %</td>
-        <td>
-            @Html.ActionLink("Editar", "Editar", "Solo", new { id=item.Id }, null) |
-            @Html.ActionLink("Detalhes", "Detalhes", "Solo", new { id=item.Id }, null) |
-            @Html.ActionLink("Excluir", "Excluir", "Solo", new { id=item.Id }, null)
-        </td>
-    </tr>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="table-data__tool">
+                            <h6 class="body-title">Áreas</h6>
+                            <div class="selectdropdown">
+                                <select class="js-select2" name="property">
+                                    <option selected="selected">Todas as propriedades</option>
+                                    <option value="">Opção 1</option>
+                                    <option value="">Opção 2</option>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+
+                            <div class="selectdropdown">
+                                <select class="js-select2 ui dropdown" name="time">
+                                    <option selected="selected">Todos</option>
+                                    <option value="">Hoje</option>
+                                    <option value="">Essa semana</option>
+                                    <option value="">Este mês</option>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-6 row">
+                        <div class="col-3">
+                            <a class="popup btn btn-add" href="/Sistema/Area/Create">Nova área</a>
+                        </div>
+                        <div class="col-3">
+                            <a class="popup btn btn-add" href="/Sistema/Solo/Create">Novo solo</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card table-card">
+                            <div class="card-header">
+                                <h6 class="card-title box-title">Áreas cadastradas</h6>
+                                <div class="card-header-right">
+                                    <ul class="list-unstyled card-option">
+                                        <li><i class="ti-minus minimize-card"></i></li>
+                                        <li><i class="icon-refresh"></i></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-block">
+                                <div class="table-responsive">
+                                    <table class="table-hover">
+
+                                        <thead class="thead-title">
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>Disponibilidade</th>
+                                                <th>Tamanho</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            @foreach (var item in Model.Areas)
+                                            {
+                                                <tr>
+                                                    <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                                                    <td>@Html.DisplayFor(modelItem => item.Disponibilidades.Where(x => x.Value == item.Disp.ToString()).First().Text)</td>
+                                                    <td>@Html.DisplayFor(modelItem => item.Tamanho) ha</td>
+                                                    <td>
+                                                        <a class="popup btn" href="@Url.Action("Detalhes", "Area", new { id = item.Id })"><div class="itemback"><i class="item fa fa-info"></i></div></a>
+                                                        <a class="popup btn" href="@Url.Action("Editar", "Area", new { id = item.Id })"><div class="itemback"><i class="item far fa-edit"></i></div></a>
+                                                        <a class="popup btn" href="@Url.Action("Excluir", "Area", new { id = item.Id })"><div class="itemback"><i class="item far fa-trash-alt"></i></div></a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card table-card">
+                            <div class="card-header">
+                                <h6 class="card-title box-title">Solos cadastrados</h6>
+                                <div class="card-header-right">
+                                    <ul class="list-unstyled card-option">
+                                        <li><i class="ti-minus minimize-card"></i></li>
+                                        <li><i class="icon-refresh"></i></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-block">
+                                <div class="table-responsive">
+                                    <table class="table-hover">
+                                        <thead class="thead-title">
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>Tipo</th>
+                                                <th>Acidez</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            @foreach (var item in Model.Solos)
+                                            {
+                                                <tr>
+                                                    <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                                                    <td>@Html.DisplayFor(modelItem => item.Tipos.Where(x => x.Value == item.Tipo.ToString()).First().Text)</td>
+                                                    <td>@Html.DisplayFor(modelItem => item.Acidez) %</td>
+                                                    <td>
+                                                        <a class="popup btn" href="@Url.Action("Detalhes", "Solo", new { id = item.Id })"><div class="itemback"><i class="item fa fa-info"></i></div></a>
+                                                        <a class="popup btn" href="@Url.Action("Editar", "Solo", new { id = item.Id })"><div class="itemback"><i class="item far fa-edit"></i></div></a>
+                                                        <a class="popup btn" href="@Url.Action("Excluir", "Solo", new { id = item.Id })"><div class="itemback"><i class="item far fa-trash-alt"></i></div></a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/modalui.js"></script>
 }
-</table>
