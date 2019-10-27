@@ -17,12 +17,13 @@ namespace OrganWeb.Models.Pessoa
         [Required] 
         [RegularExpression (@"[0-9]{3}[0-9]{3}[0-9]{3}[0-9]{2}", ErrorMessage = "CPF Inválido!")]
         public Int64 CPF { get; set; }
-        //TODO: arrumar o datetime
+
         [Required]
         [StringLength(9, MinimumLength = 6)]
         public string RG { get; set; }
 
         [Required]
+        [DataType(DataType.Date, ErrorMessage = "Data em formato inválido"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DataNasc { get; set; }
 
         [Required]

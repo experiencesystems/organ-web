@@ -9,17 +9,16 @@ using System.Web;
 
 namespace OrganWeb.Areas.Ecommerce.Models
 {
+    [Table("tbWishlist")]
     public class Wishlist
     {
-        [Key]
-        [Column(Order = 1)]
-        [ForeignKey("Anuncio")]
-        public int IdAnuncio { get; set; }
-
-        [Key]
-        [Column(Order = 2)]
+        [Key, Column(Order = 1)]
         [ForeignKey("Usuario")]
         public int IdUsuario { get; set; }
+
+        [Key, Column(Order = 2)]
+        [ForeignKey("Anuncio")]
+        public int IdAnuncio { get; set; }
 
         public virtual Anuncio Anuncio { get; set; }
         public virtual ApplicationUser Usuario { get; set; }

@@ -11,18 +11,16 @@ namespace OrganWeb.Areas.Ecommerce.Models
 {
     public class Avaliacao
     {
-        [Key]
-        [Column(Order = 1)]
+        [Key, Column(Order = 1)]
         [ForeignKey("Anuncio")]
         public int IdAnuncio { get; set; }
 
-        [Key]
-        [Column(Order = 2)]
+        [Key, Column(Order = 2)]
         [ForeignKey("Usuario")]
         public int IdUsuario { get; set; }
 
         public int Nota { get; set; }
-        public int Like { get; set; }
+        public bool Like { get; set; }
 
         public virtual Anuncio Anuncio { get; set; }
         public virtual ApplicationUser Usuario { get; set; }

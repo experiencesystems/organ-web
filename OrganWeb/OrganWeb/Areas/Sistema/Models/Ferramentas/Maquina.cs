@@ -40,8 +40,8 @@ namespace OrganWeb.Areas.Sistema.Models.Ferramentas
         
         [Display(Name = "Depreciação por ano")]
         public double DeprAno { get; set; }
-        
-        [DataType(DataType.DateTime)]
+
+        [DataType(DataType.Date, ErrorMessage = "Data em formato inválido"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data de cadastro")]
         public DateTime DataCadastro { get; set; }
         

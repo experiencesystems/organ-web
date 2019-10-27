@@ -4,7 +4,6 @@ using OrganWeb.Areas.Sistema.Models.Safras;
 using OrganWeb.Areas.Sistema.Models.Armazenamento;
 using OrganWeb.Areas.Sistema.Models.Administrativo;
 using OrganWeb.Areas.Sistema.Models.Ferramentas;
-using OrganWeb.Areas.Sistema.Models.Financas;
 using Microsoft.AspNet.Identity.EntityFramework;
 using OrganWeb.Models.Endereco;
 using OrganWeb.Models.Telefone;
@@ -15,7 +14,7 @@ using OrganWeb.Areas.Sistema.Models.Controles;
 using OrganWeb.Areas.Sistema.Models.Praga_e_Doenca;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque;
-using OrganWeb.Areas.Sistema.Models.ViewsBanco.Financeiro;
+using OrganWeb.Areas.Ecommerce.Models;
 
 namespace OrganWeb.Models.Banco
 {
@@ -24,6 +23,7 @@ namespace OrganWeb.Models.Banco
     {
         public BancoContext() : base("name=BancoContext", throwIfV1Schema: false) { }
 
+        // SISTEMA
         // ADMINISTRATIVO
         public DbSet<Area> Areas { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
@@ -40,6 +40,7 @@ namespace OrganWeb.Models.Banco
         // CONTROLES
         public DbSet<Controle> Controles { get; set; }
         public DbSet<ItensControle> ItensControles { get; set; }
+        public DbSet<FuncControle> FuncControles { get; set; }
 
         // FERRAMENTAS
         public DbSet<Manutencao> Manutencaos { get; set; }
@@ -47,16 +48,8 @@ namespace OrganWeb.Models.Banco
         public DbSet<MaquinaManutencao> MaquinaManutencaos { get; set; }
 
         // FINANCEIRO
-        public DbSet<Compra> Compras { get; set; }
-        public DbSet<Conta> Contas { get; set; }
         public DbSet<DadosBancario> DadosBancarios { get; set; }
-        public DbSet<Despesa> Despesas { get; set; }
-        public DbSet<DespesaAdm> DespesaAdms { get; set; }
-        public DbSet<DespesaFunc> DespesaFuncs { get; set; }
-        public DbSet<ItensComprados> ItensComprados { get; set; }
-        public DbSet<ItensVendidos> ItensVendidos { get; set; }
         public DbSet<Pagamento> Pagamentos { get; set; }
-        public DbSet<Venda> Vendas { get; set; }
 
         // FUNCIONÁRIO
         public DbSet<Cargo> Cargos { get; set; }
@@ -72,6 +65,7 @@ namespace OrganWeb.Models.Banco
         public DbSet<Colheita> Colheitas { get; set; }
         public DbSet<ItensPlantio> ItensPlantios { get; set; }
         public DbSet<Plantio> Plantios { get; set; }
+        public DbSet<FuncPlantio> FuncPlantios { get; set; }
         public DbSet<Semente> Sementes { get; set; }
 
         // VIEWS
@@ -82,11 +76,6 @@ namespace OrganWeb.Models.Banco
         public DbSet<VwPessoaJuridica> VwPessoaJuridicas { get; set; }
         public DbSet<VwFuncionario> VwFuncionarios { get; set; }
         public DbSet<VwItems> VwItems { get; set; }
-        public DbSet<VwCompra> VwCompras { get; set; }
-        public DbSet<VwSaida> VwSaidas { get; set; }
-        public DbSet<VwVenda> VwVendas { get; set; }
-        public DbSet<VwSaldo> VwSaldos { get; set; }
-        public DbSet<VwFluxoDeCaixa> VwFluxoDeCaixas { get; set; }
         public DbSet<VwQtdMa> VwQtdMas { get; set; }
         public DbSet<VwManutencao> VwManutencaos { get; set; }
         public DbSet<VwPragaOrDoenca> VwPragaOrDoencas { get; set; }
@@ -109,6 +98,20 @@ namespace OrganWeb.Models.Banco
         public DbSet<Telefone.Telefone> Telefones { get; set; }
         public DbSet<TipoTel> TipoTels { get; set; }
         public DbSet<DDD> DDDs { get; set; }
+
+        // ECOMMERCE
+        // ANUNCIO
+        public DbSet<Anuncio> Anuncios { get; set; }
+        public DbSet<ItensAnuncio> ItensAnuncios { get; set; }
+        public DbSet<Wishlist> Wishlists { get; set; }
+        public DbSet<Carrinho> Carrinhos { get; set; }
+        public DbSet<Pedido> Pedidos { get; set; }
+        public DbSet<Avaliacao> Avaliacaos { get; set; }
+        public DbSet<Comentario> Comentarios { get; set; }
+        public DbSet<Resposta> Respostas { get; set; }
+        public DbSet<VendaAnuncio> VendaAnuncios { get; set; }
+        public DbSet<Entrega> Entregas { get; set; }
+        public DbSet<Pacote> Pacotes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -151,10 +154,6 @@ namespace OrganWeb.Models.Banco
             modelBuilder.Entity<PragaOrDoenca>()
                 .Property(t => t.PD)
                 .HasColumnName("P/D");
-
-            modelBuilder.Entity<DespesaAdm>()
-                .Property(t => t.IdConta)
-                .HasColumnName("IdDespAdm");
 
             modelBuilder.Entity<VwPessoa>()
                 .Property(t => t.Endereco)
@@ -208,30 +207,6 @@ namespace OrganWeb.Models.Banco
                 .Property(t => t.ValorUnitario)
                 .HasColumnName("Valor Unitário (R$)");
 
-            modelBuilder.Entity<VwCompra>()
-                .Property(t => t.ItensQtd)
-                .HasColumnName("Itens - Quantidade Comprada");
-
-            modelBuilder.Entity<VwCompra>()
-                .Property(t => t.ValorTotal)
-                .HasColumnName("Valor Total");
-
-            modelBuilder.Entity<VwSaida>()
-                .Property(t => t.Saida)
-                .HasColumnName("Saída");
-
-            modelBuilder.Entity<VwFluxoDeCaixa>()
-                .Property(t => t.Saida)
-                .HasColumnName("Saída");
-
-            modelBuilder.Entity<VwFluxoDeCaixa>()
-                .Property(t => t.Mes)
-                .HasColumnName("MÊS");
-
-            modelBuilder.Entity<VwFluxoDeCaixa>()
-                .Property(t => t.Ano)
-                .HasColumnName("ANO");
-
             modelBuilder.Entity<VwQtdMa>()
                 .Property(t => t.Quantidade)
                 .HasColumnName("Quantidade de Manutenções");
@@ -280,9 +255,9 @@ namespace OrganWeb.Models.Banco
                 .Property(t => t.Nome)
                 .HasColumnName("Pragas/Doenças");
 
-            modelBuilder.Entity<VwControle>()
-                .Property(t => t.Itens)
-                .HasColumnName("Itens Usados - Quantidade");
+            modelBuilder.Entity<Comentario>()
+                .Property(t => t.Valor)
+                .HasColumnName("Comentario");
 
             modelBuilder.Entity<ApplicationUser>()
                 .ToTable("tbUsuario")

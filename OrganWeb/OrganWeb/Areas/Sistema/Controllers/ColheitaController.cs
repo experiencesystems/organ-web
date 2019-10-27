@@ -131,31 +131,5 @@ namespace OrganWeb.Areas.Sistema.Controllers
             }
             return View(colheita);
         }
-
-        public ActionResult Excluir(int? id, int? id2)
-        {
-            if (id == null || id2 == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            colheita = colheita.GetByID(id, id2);
-            if (colheita == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Sistema = colheita.Plantio.Sistemas.Where(x => x.Value == colheita.Plantio.Sistema.ToString()).First().Text;
-            ViewBag.Periodo = colheita.Plantio.Periodos.Where(x => x.Value == colheita.Plantio.TipoPlantio.ToString()).First().Text;
-            return View(colheita);
-        }
-
-        [ValidateAntiForgeryToken]
-        [HttpPost, ActionName("Excluir")]
-        public ActionResult ExcluirConfirmado(Colheita colheita)
-        {//TODO: Delete colheita - victor disse nao 
-            colheita.Delete(colheita.IdPlantio, colheita.IdProd);
-            colheita.Save();
-
-            return RedirectToAction("Index");
-        }
     }
 }

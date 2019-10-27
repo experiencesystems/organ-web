@@ -18,7 +18,7 @@ namespace OrganWeb.Models.Financeiro
         [Display(Name = "Quantidade de parcelas")] //TODO: ver se esse int? não da problema TESTA ISSO MILENA
         public int? QtdParcelas { get; set; }
 
-        [Required]
+        [Required]//TODO: tirar valor parcela?
         [Display(Name = "Valor da parcela (se for somente uma, coloque o valor total)")]
         public double VlParcela { get; set; }
 

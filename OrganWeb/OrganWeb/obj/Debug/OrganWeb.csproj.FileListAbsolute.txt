@@ -282,10 +282,6 @@ C:\Users\acer\Source\Repos\Organ Web\OrganWeb\OrganWeb\bin\roslyn\vbc.rsp
 C:\Users\acer\Source\Repos\Organ Web\OrganWeb\OrganWeb\bin\roslyn\VBCSCompiler.exe
 C:\Users\acer\Source\Repos\Organ Web\OrganWeb\OrganWeb\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\acer\Source\Repos\Organ Web\OrganWeb\OrganWeb\bin\pt-br\Microsoft.AspNet.Identity.Core.resources.dll
-C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\SqlServerTypes\x64\msvcr120.dll
-C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\SqlServerTypes\x64\SqlServerSpatial140.dll
-C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\SqlServerTypes\x86\msvcr120.dll
-C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\SqlServerTypes\x86\SqlServerSpatial140.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\OrganWeb.dll.config
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\OrganWeb.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\OrganWeb.pdb
@@ -363,7 +359,6 @@ C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Newtonsof
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Owin.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.ComponentModel.DataAnnotations.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Configuration.dll
-C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Data.DataSetExtensions.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Data.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Drawing.dll
@@ -375,7 +370,6 @@ C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.We
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Web.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Web.DynamicData.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Web.Entity.dll
-C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Web.Extensions.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Web.Helpers.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Web.Mvc.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Web.Optimization.dll
@@ -386,7 +380,6 @@ C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.We
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Web.WebPages.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Web.WebPages.Razor.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Xml.dll
-C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\System.Xml.Linq.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\WebGrease.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft.Owin.xml

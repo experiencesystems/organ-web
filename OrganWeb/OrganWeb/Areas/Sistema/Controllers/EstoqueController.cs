@@ -16,6 +16,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
     public class EstoqueController : Controller
     {   //TODO: arrumar classes bridge
         //TODO: categorias máquina
+        //TODO: histórico estoque
         private Insumo insumo = new Insumo();
         private Estoque estoque = new Estoque();
         private Categoria categoria = new Categoria();

@@ -14,6 +14,10 @@ namespace OrganWeb.Models.Financeiro
         public int Id { get; set; }
 
         [Required]
+        [StringLength(100, MinimumLength = 5)]
+        public string NomeTitular { get; set; }
+
+        [Required]
         [Range(1, 9999)]
         public int CVV { get; set; }
 
@@ -21,11 +25,12 @@ namespace OrganWeb.Models.Financeiro
         public int Banco { get; set; }
 
         [Required]
+        [CreditCard]
         [Display(Name = "Número do cartão")]
         public Int64 NumCartao { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
+        [DataType(DataType.Date, ErrorMessage = "Data em formato inválido"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Validade { get; set; }
 
         [Required]

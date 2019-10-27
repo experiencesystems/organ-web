@@ -23,6 +23,9 @@ namespace OrganWeb.Areas.Sistema.Models.Funcionarios
         [ForeignKey("Cargo")]
         public int IdCargo { get; set; }
 
+        //https://stackoverflow.com/questions/13208349/how-to-insert-blob-datatype
+        public byte[] Foto { get; set; }
+
         public virtual Pessoa Pessoa { get; set; }
         public virtual Cargo Cargo { get; set; }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrganWeb.Models.Usuario;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,11 +8,25 @@ using System.Web;
 
 namespace OrganWeb.Areas.Ecommerce.Models
 {
+    [Table("tbPedido")]
     public class Pedido
     {
         [Key]
         public int Id { get; set; }
+
+        [ForeignKey("Anuncio")]
+        public int IdAnuncio { get; set; }
+
+        [ForeignKey("Usuario")]
+        public int IdUsuario { get; set; }
+
+        [DataType(DataType.Date, ErrorMessage = "Data em formato inválido"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Data { get; set; }
-        public bool Status { get; set; }
+
+        [Required]
+        public int Status { get; set; }
+
+        public virtual Anuncio Anuncio { get; set; }
+        public virtual ApplicationUser Usuario { get; set; }
     }
 }
