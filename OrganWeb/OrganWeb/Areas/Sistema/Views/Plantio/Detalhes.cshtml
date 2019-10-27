@@ -1,41 +1,28 @@
 ﻿@model OrganWeb.Areas.Sistema.Models.Safras.Plantio
 @{
     ViewBag.Title = "Detalhes";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    string Sistema;
+    Sistema = (string)ViewBag.sistema;
+
+    string Periodo;
+    Periodo = (string)ViewBag.periodo;
 }
 
-<h2>Detalhes</h2>
+<h2 class="modal-title">Detalhes</h2>
 
-<div class="main-body">
-    <div class="row">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="card-title box-title">Plantio</h6>
-                    <div class="card-header-right">
-                        <ul class="list-unstyled card-option">
-                            <li><i class="ti-minus minimize-card"></i></li>
-                            <li><i class="icon-refresh"></i></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="card-content">
-                        <div class="card bg-light mb-3" style="max-width: 18rem;">
-                            <div class="card-header">@Html.DisplayFor(model => model.Nome)</div>
-                            <div class="card-body">
-                                Iniciado em: @Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.DataInicio))
-                                <br />Termina em: @Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.DataColheita))
-                                <br />Sistema: @ViewBag.Sistema
-                                <br />Período: @ViewBag.Periodo
-                            </div>
-                            <div class="modal-footer">
-                                <a class="popup btn btn-primary" href="@Url.Action("Editar", "Plantio", new { id = Model.Id })" style="margin-bottom:20px; margin-top:20px;">Editar</a><a class="popup btn btn-danger" href="@Url.Action("Excluir", "Plantio", new { id = Model.Id })" style="margin-bottom:20px; margin-top:20px;">Excluir</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<dl class="dl-horizontal">
+    @Html.LabelFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+    <dd>@Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } })</dd>
+
+    @Html.LabelFor(model => model.DataInicio, new { htmlAttributes = new { @class = "form-control" } })
+    <dd>@Html.EditorFor(model => model.DataInicio, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } })</dd>
+
+    @Html.LabelFor(model => model.DataColheita, new { htmlAttributes = new { @class = "form-control" } })
+    <dd>@Html.EditorFor(model => model.DataColheita, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } })</dd>
+
+    @Html.LabelFor(model => model.Sistema, new { htmlAttributes = new { @class = "form-control" } })
+    <dd>@Html.TextBox("Sistema", Sistema, new { htmlAttributes = new { @disabled = "disabled", @class = "campo campodis" } })</dd>
+
+    @Html.LabelFor(model => model.Periodos, new { htmlAttributes = new { @class = "form-control" } })
+    <dd>@Html.TextBox("Periodo", Periodo, new { htmlAttributes = new { @disabled = "disabled", @class = "campo campodis" } })</dd>
+</dl>
