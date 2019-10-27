@@ -1,49 +1,84 @@
 ﻿@model OrganWeb.Areas.Sistema.Models.ViewModels.ViewManutencao
 @{
-    ViewBag.Title = "Manutenção";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+                /**/
+
+                ViewBag.Title = "Manutenção";
+                Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
 
 <div class="main-body">
     <div class="row">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="card-title box-title">Manutenções recentes</h6>
-                    <div class="card-header-right">
-                        <ul class="list-unstyled card-option">
-                            <li><i class="ti-minus minimize-card"></i></li>
-                            <li><i class="icon-refresh"></i></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="card-content">
-                        <div class="card bg-light mb-3" style="max-width: 18rem;">
-                            @foreach (var item in Model.MaquinaManutencaos)
-                            {
-                                <div class="card-header">
-                                    Manutenção de @Html.DisplayFor(model => item.Maquina.Nome) -
-                                    @Html.ActionLink("Detalhes", "Detalhes", new { id = item.IdManutencao, id2 = item.IdMaquina })
-                                </div>
-                                <div class="card-body">
-                                    Data: @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Manutencao.Data))
-                                    @Html.DisplayFor(model => item.Manutencao.Detalhes)
-                                </div>
-                                <div class="modal-footer">
-                                    <a class="popup btn btn-primary" href="@Url.Action("Editar", "Manutencao", new { id = item.IdManutencao, id2 = item.IdMaquina })" style="margin-bottom:20px; margin-top:20px;">Editar</a><a class="popup btn btn-danger" href="@Url.Action("Excluir", "Manutencao", new { id = item.IdManutencao, id2 = item.IdMaquina })" style="margin-bottom:20px; margin-top:20px;">Excluir</a>
-                                </div>
-                            }
+        <div class="col">
+            <div class="tablecontainer">
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="table-data__tool">
+                            <h6 class="body-title">Manutenções</h6>
+                            <div class="selectdropdown">
+                                <select class="js-select2" name="property">
+                                    <option selected="selected">Todas as propriedades</option>
+                                    <option value="">Opção 1</option>
+                                    <option value="">Opção 2</option>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+
+                            <div class="selectdropdown">
+                                <select class="js-select2 ui dropdown" name="time">
+                                    <option selected="selected">Todos</option>
+                                    <option value="">Hoje</option>
+                                    <option value="">Essa semana</option>
+                                    <option value="">Este mês</option>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+
                         </div>
                     </div>
+                    <div class="col-6">
+                        <p class="card-text">
+                            <a class="popup btn btn-add" href="/Sistema/Manutencao/Create">+ Nova manutenção</a>
+                        </p>
+                    </div>
                 </div>
-                <div class="card-content">
-                    <div class="card border-success mb-3" style="max-width: 18rem;">
-                        <div class="card-body text-success">
-                            <h5 class="card-title"></h5>
-                            <p class="card-text">
-                                <a class="popup btn btn-add" href="/Sistema/Manutencao/Create" style="margin-bottom:20px; margin-top:20px;">Nova manutenção</a>
-                            </p>
+                <div class="card table-card">
+                    <div class="card-block">
+                        <div class="table-responsive">
+                            <table class="table-hover">
+
+                                <thead class="thead-title">
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Máquina</th>
+                                        <th scope="col">Data</th>
+                                        <th scope="col">Valor</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var item in Model.MaquinaManutencaos)
+                                    {
+                                        <tr>
+                                            <td>@Html.DisplayFor(model => item.Manutencao.Nome)</td>
+                                            <td>@Html.DisplayFor(model => item.Maquina.Nome)</td>
+                                            <td>
+                                                @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Manutencao.Data))
+                                            </td>
+                                            <td>@Html.DisplayFor(model => item.Manutencao.ValorPago)</td>
+                                            <td>
+
+                                                <a class="popup btn" href="@Url.Action("Detalhes", "Manutencao", new { id = item.IdManutencao, id2 = item.IdMaquina })"><div class="itemback"><i class="item fa fa-info"></i></div></a>
+                                                <a class="popup btn" href="@Url.Action("Editar", "Manutencao", new { id = item.IdManutencao, id2 = item.IdMaquina })"><div class="itemback"><i class="item far fa-edit"></i></div></a>
+                                                <a class="popup btn" href="@Url.Action("Excluir", "Manutencao", new { id = item.IdManutencao, id2 = item.IdMaquina })"><div class="itemback"><i class="item far fa-trash-alt"></i></div></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -52,21 +87,10 @@
     </div>
 </div>
 
-<environment include="Development">
-    <script src="~/Scripts/crudmodal.js" asp-append-version="true" defer></script>
-</environment>
-
-<environment exclude="Development">
-    <script src="~/js/crudmodal.min.js" asp-append-version="true" defer></script>
-</environment>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"
-        integrity="sha256-F6h55Qw6sweK+t7SiOJX+2bpSAa3b/fnlrVCJvmEj1A="
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.9/jquery.validate.unobtrusive.min.js"
-        integrity="sha256-paoxpct33kY9fpQlvgC8IokjGq8iqYaVFawgFPg8oz0="
-        crossorigin="anonymous"></script>
-
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+@section Scripts {
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/modalui.js"></script>
+}
