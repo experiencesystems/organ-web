@@ -295,29 +295,99 @@ use dbOrgan;
     insert into tbCargo(Nivel, Nome) value(1, 'Carinha que Planta');
     insert into tbFuncionario(Salario, IdPessoa, IdCargo) value(2.000, 1, 1);
 -- ======================================================================================================================= 
-  
+ 
+ -- ========================================================== FORNECEDOR ==============================================  
+	drop table if exists tbFornecedor;
+	create table tbFornecedor(
+		Id int auto_increment,
+         constraint PKFornecedor primary key(Id),
+		`Status` bool not null default true,
+        IdPessoa int not null
+    )engine = InnoDB;
+    alter table tbFornecedor add constraint FKFornecedorPessoa foreign key(IdPessoa) references tbPessoa(Id);
+    
+    insert into tbFornecedor(IdPessoa) value(2);
+-- =======================================================================================================================
+ 
 -- =================================================================== ESTOQUE ============================================  
-	drop table if exists tbEstoque;
+	drop table if exists tbUM;
+    create table tbUM(
+		Id varchar(6) not null,
+         constraint PKUM primary key(Id),
+        `Desc` varchar(20) not null
+    )engine = InnoDB;
+    
+    drop table if exists tbEstoque;
 	create table tbEstoque(
 		Id int auto_increment,
          constraint PKEstoque primary key(Id),
-		Qtd double not null default 0.00,
-        UM int not null,
-        ValorUnit double not null default 0.00
+		Qtd double not null,
+        UM varchar(6),
+        ValorUnit double not null, 
+        IdFornecedor int not null
     )engine = InnoDB;
+    alter table tbEstoque add constraint FKEstoqueFornecedor foreign key(IdFornecedor) references tbFornecedor(Id),
+						  add constraint FKEstoqueUM foreign key(UM) references tbUM(Id);
     
     drop table if exists tbHistEstoque;
 	create table tbHistEstoque(
 		Id int auto_increment,
          constraint PKHistEstoque primary key(Id),
 		QtdAlterada double not null,
-        QtdAntiga double not null default 0.00,
+        QtdAntiga double,
+        VUAntigo double,
+        VUAlterada double not null,
+        UMAntiga varchar(6),
+        UMAlterada varchar(6),
         DataAlteracao datetime not null default current_timestamp,
         `Desc` varchar(300) not null,
-        IdEstoque int not null
+        IdEstoque int not null,
+        IdFornecedorAlterado int not null,
+        IdFornecedorAntigo int not null
     )engine = InnoDB;
     alter table tbHistEstoque add constraint FKHistEstoque foreign key(IdEstoque) references tbEstoque(Id);
-     
+    
+    DELIMITER $
+	drop procedure if exists spVerQtd$
+	CREATE PROCEDURE spVerQtd (IN qtd decimal(7,2))
+	BEGIN
+		IF qtd < 0 THEN
+			SIGNAL SQLSTATE '45000'
+			   SET MESSAGE_TEXT = 'Valor menor que zero!';
+		END IF;
+	END$
+
+	drop trigger if exists trgInsertHistorico$
+	create TRIGGER trgInsertHistorico after insert
+	ON tbEstoque
+	FOR EACH ROW
+	BEGIN            
+			call spVerQtd(NEW.Qtd);
+			insert into tbHistEstoque(QtdAlterada, QtdAntiga, VUAntigo, VUAlterada, UMAntiga, UMAlterada, IdFornecedorAntigo, IdFornecedorAlterado, `Desc`, IdEstoque) values(NEW.Qtd, 0, 0, NEW.ValorUnit, 0, NEW.UM, 0, NEW.IdFornecedor, 'Novo Item', NEW.Id);
+			
+	END$
+
+	drop trigger if exists trgUpdateHistorico$
+	create TRIGGER trgUpdateHistorico after update
+	ON tbEstoque
+	FOR EACH ROW
+	BEGIN   
+			declare Descr varchar(300);
+			call spVerQtd(NEW.Qtd);
+				set Descr = 'Item Alterado';
+
+			insert into tbHistEstoque(QtdAlterada, QtdAntiga, VUAntigo, VUAlterada, UMAntiga, UMAlterada, IdFornecedorAntigo, IdFornecedorAlterado, `Desc`, IdEstoque) values(NEW.Qtd, OLD.Qtd, OLD.ValorUnit, NEW.ValorUnit, OLD.UM, NEW.UM, OLD.IdFornecedor, NEW.IdFornecedor, Descr, OLD.Id);
+			
+	END$
+
+	drop trigger if exists trgDeleteHistorico$ 
+	create TRIGGER trgDeleteHistorico after delete
+	ON tbEstoque
+	FOR EACH ROW
+	BEGIN            
+			insert into tbHistEstoque(QtdAlterada, QtdAntiga, VUAntigo, VUAlterada, UMAntiga, UMAlterada, IdFornecedorAntigo, IdFornecedorAlterado, `Desc`, IdEstoque) values(0, OLD.Qtd, OLD.ValorUnit, 0, OLD.UM, 0, OLD.IdFornecedor, 0, 'Item Excluido-', OLD.Id);
+			END$
+	DELIMITER ;
                       -- ------------------------------- Semente ------------------------------------
     drop table if exists tbSemente;
 	create table tbSemente(
@@ -331,7 +401,7 @@ use dbOrgan;
     )engine = InnoDB;
     alter table tbSemente add constraint FKSementeEstoque foreign key(IdEstoque) references tbEstoque(Id);
     
-    insert into tbEstoque(Qtd, UM, ValorUnit) values(5, 1, 2.50);
+    insert into tbEstoque(Qtd, ValorUnit, IdFornecedor) values(5, 2.50, 1);
     insert into tbSemente(IdEstoque, Nome) values(1, "Semente de Soja");
     
                          -- ------------------------------- Insumo ------------------------------------ 
@@ -354,9 +424,9 @@ use dbOrgan;
     alter table tbInsumo add constraint FKInsumoCategoria foreign key(IdCategoria) references tbCategoria(Id);
     
     
-    insert into tbEstoque(Qtd, UM, ValorUnit) values(1, 2, 0.50), -- UM 2- L, 1 - Kg, 3 - Unidade
-													(2, 3, 23.50),
-                                                    (5, 2, 1.50);
+    insert into tbEstoque(Qtd, ValorUnit, IdFornecedor) values(1, 0.50, 1), -- UM 2- L, 1 - Kg, 3 - Unidade
+															(2, 23.50, 1),
+															(5, 1.50, 1);
     insert into tbCategoria(Categoria) values("Fertilizante"),
 											 ("Ferramenta"),
                                              ("Pesticida");
@@ -380,47 +450,14 @@ use dbOrgan;
     )engine = InnoDB;
     alter table tbMaquina add constraint FKMaquinaEstoque foreign key(IdEstoque) references tbEstoque(Id);
     
-    insert into tbEstoque(Qtd, UM, ValorUnit) values(2, 3, 5000.00),
-													(1, 3, 10000.00); -- Id 5 e 6
+    insert into tbEstoque(Qtd, ValorUnit, IdFornecedor) values(2, 5000.00, 1),
+													(1, 10000.00, 1); -- Id 5 e 6
 	insert into tbMaquina(IdEstoque, Nome, Tipo, Montadora, VidaUtil, ValorInicial, DeprMes, DeprAno) values(5,'TratorX', 1, 'MaquinasBoas', 5, 7000.00, 10.00, 120.00),
 																											(6,'ColhedeiraY', 2, 'MaquinasRuins e Caras', 1, 20000.00, 500.00, 6000.00);
 
-	drop table if exists tbManutencao;
-	create table tbManutencao(
-		Id int auto_increment,
-		 constraint PKManutencao primary key(Id),
-		Nome varchar(30),
-        Detalhes varchar(300),
-        `Data` date not null,
-        ValorPago double not null
-    )engine = InnoDB;
-    
-    insert into tbManutencao(Nome, `Data`, ValorPago) value("Revisão Anual", '01/01/01', 5000.00);
-    
-    drop table if exists tbMaquinaManutencao;
-	create table tbMaquinaManutencao(
-		IdMaquina int not null,
-        IdManutencao int not null,
-		 constraint PKMaquinaManutencao primary key(IdMaquina, IdManutencao)
-    )engine = InnoDB;
-    alter table tbMaquinaManutencao add constraint FKMaquinaManutencao foreign key(IdMaquina) references tbMaquina(IdEstoque),
-									add constraint FKManutencaoMaquina foreign key(IdManutencao) references tbManutencao(Id);
-    
-    insert into tbMaquinaManutencao value(5,1);    
 -- ======================================================================================================================= 
   
--- ========================================================== FORNECEDOR ==============================================  
-	drop table if exists tbFornecedor;
-	create table tbFornecedor(
-		Id int auto_increment,
-         constraint PKFornecedor primary key(Id),
-		`Status` bool not null default true,
-        IdPessoa int not null
-    )engine = InnoDB;
-    alter table tbFornecedor add constraint FKFornecedorPessoa foreign key(IdPessoa) references tbPessoa(Id);
-    
-    insert into tbFornecedor(IdPessoa) value(2);
--- =======================================================================================================================
+
 
 -- =================================================================== CLIENTE ============================================ 
     drop table if exists tbCliente;
@@ -506,7 +543,7 @@ use dbOrgan;
     )engine = InnoDB;
     alter table tbProduto add constraint FKProdutoEstoque foreign key(IdEstoque) references tbEstoque(Id);
     
-    insert into tbEstoque(Qtd, UM, ValorUnit) values(3, 3, 3);
+    insert into tbEstoque(Qtd, ValorUnit, IdFornecedor) values(3, 3, 1);
     insert into tbProduto(IdEstoque, Nome) value(7, 'Soja');
     
     drop table if exists tbColheita;

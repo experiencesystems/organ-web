@@ -30,7 +30,7 @@ select P.Id, P.Nome, P.Email, concat(E.Rua,', ', P.NumeroEndereco,' - ', ifnull(
  
  drop view if exists vwPessoaFisica;
  create view vwPessoaFisica as(
- select P.Id, P.Nome, F.CPF, F.RG, date_format(F.DataNas(c, '%d/%m/%Y')) `Data de Nascimento`, P.Telefones, P.Email, P.`Endereço`
+ select P.Id, P.Nome, F.CPF, F.RG, date_format(F.DataNasc, ('%d/%m/%Y')) `Data de Nascimento`, P.Telefones, P.Email, P.`Endereço`
   from tbPessoaFisica F 
 	inner join vwPessoa P on F.IdPessoa = P.Id
 );
@@ -44,7 +44,7 @@ select P.Id, P.Nome, J.RazaoSocial, J.CNPJ, J.IE, P.Telefones, P.Email, P.`Ender
  
 drop view if exists vwFuncionario;
 create view vwFuncionario as(
-select F.Id, PF.Nome,  C.Nome `Cargo`, F.Salario `Salário`, PF.CPF, PF.RG, PF.`Data de Nas(cimento`, PF.Telefones, PF.Email, PF.`Endereço`
+select F.Id, PF.Nome,  C.Nome `Cargo`, F.Salario `Salário`, PF.CPF, PF.RG, PF.`Data de Nascimento`, PF.Telefones, PF.Email, PF.`Endereço`
  from tbFuncionario F
 	inner join vwPessoaFisica PF on F.IdPessoa = PF.Id
 	inner join tbCargo C on F.IdCargo = C.Id
@@ -53,7 +53,7 @@ select F.Id, PF.Nome,  C.Nome `Cargo`, F.Salario `Salário`, PF.CPF, PF.RG, PF.`
 
 drop view if exists vwFornecedor;
 create view vwFornecedor as(
-select F.Id, PJ.Nome `Nome Fantas(ia`, PJ.RazaoSocial `Razão Social`, PJ.CNPJ, PJ.IE, PJ.Telefones, PJ.Email, PJ.`Endereço`
+select F.Id, PJ.Nome `Nome Fantasia`, PJ.RazaoSocial `Razão Social`, PJ.CNPJ, PJ.IE, PJ.Telefones, PJ.Email, PJ.`Endereço`
  from tbFornecedor F
 	inner join vwPessoaJuridica PJ on PJ.Id = F.IdPessoa
  where F.`Status` = true
@@ -64,95 +64,61 @@ create view vwItems as
 (SELECT S.IdEstoque `Id`,
 			S.Nome `Item`,
             E.Qtd `Quantidade`,
-            E.UM `Unidade de Medida`,
+            -- U.`Desc` `Unidade de Medida`,
             E.ValorUnit `Valor Unitário (R$)`,
-   (E.Qtd * E.ValorUnit) `Valor Total (por Produto)`,
-           'Semente' `Categoria`
+			(E.Qtd * E.ValorUnit) `Valor Total (por Produto)`,
+           'Semente' `Categoria`,
+           F.`Nome Fantasia` `Fornecedor`
 FROM tbEstoque E
-INNER JOIN tbSemente S ON E.Id = S.IdEstoque)
+INNER JOIN tbSemente S ON E.Id = S.IdEstoque
+inner join vwFornecedor F on E.IdFornecedor = F.Id
+-- inner join tbUM U on E.UM = U.Id
+)
 UNION
 (SELECT I.IdEstoque, 
-I.Nome,
-            E.Qtd,
-            E.UM,
-            E.ValorUnit,
-            (E.Qtd * E.ValorUnit),
-            C.Categoria
+		I.Nome,
+		E.Qtd,
+		-- U.`Desc`,
+		E.ValorUnit,
+		(E.Qtd * E.ValorUnit),
+		C.Categoria,
+        F.`Nome Fantasia`
 FROM tbEstoque E
 INNER JOIN tbInsumo I ON E.Id = I.IdEstoque
-INNER JOIN tbCategoria C ON C.Id = I.IdCategoria)
+INNER JOIN tbCategoria C ON C.Id = I.IdCategoria
+inner join vwFornecedor F on E.IdFornecedor = F.Id
+-- inner join tbUM U on E.UM = U.Id
+)
 UNION
 (SELECT M.IdEstoque,
-M.Nome,
-            E.Qtd,
-            E.UM,
-            E.ValorUnit,
-            (E.Qtd * E.ValorUnit),
-            M.Tipo
+		M.Nome,
+		E.Qtd,
+		-- U.`Desc`,
+		E.ValorUnit,
+		(E.Qtd * E.ValorUnit),
+		M.Tipo,
+        F.`Nome Fantasia`
 FROM tbMaquina M
-INNER JOIN tbEstoque E ON M.IdEstoque = E.Id)
-    UNION
+INNER JOIN tbEstoque E ON M.IdEstoque = E.Id
+inner join vwFornecedor F on E.IdFornecedor = F.Id
+-- inner join tbUM U on E.UM = U.Id
+)    UNION
 (SELECT P.IdEstoque,
-P.Nome,
-            E.Qtd,
-            E.UM,
-            E.ValorUnit,
-            (E.Qtd * E.ValorUnit),
-            'Produto'
+		P.Nome,
+		E.Qtd,
+		-- U.`Desc`,
+		E.ValorUnit,
+		(E.Qtd * E.ValorUnit),
+		'Produto',
+        F.`Nome Fantasia`
 FROM tbProduto P
-INNER JOIN tbEstoque E ON P.IdEstoque = E.Id)
+INNER JOIN tbEstoque E ON P.IdEstoque = E.Id
+inner join vwFornecedor F on E.IdFornecedor = F.Id
+-- inner join tbUM U on E.UM = U.Id
+)
     order by `Categoria`;
 
 -- MUDAR VALOR DOS NOMES Das( DATas( PRA PORTUGUES    SET lc_time_names = 'pt_BR';     
-
-DELIMITER $
-drop function if exists spNumMan$
-create function spNumMan(IdMaq int)
-	returns int
-begin
-	declare NumMan int;
-    if(exists(select IdManutencao from tbMaquinaManutencao where IdMaquina = IdMaq)) then
-		set NumMan = (select count(distinct IdManutencao) from tbMaquinaManutencao where IdMaquina = IdMaq);
-    else
-		set NumMan = 0;
-	end if;
-	return NumMan;
-end$
-
-drop function if exists spValMan$
-create function spValMan(IdMaq int)
-	returns double
-begin
-	declare ValMan double;
-    if(exists(select IdManutencao from tbMaquinaManutencao where IdMaquina = IdMaq)) then
-		set ValMan = (select sum(ValorPago)
-						from tbManutencao m
-							inner join tbMaquinaManutencao mm on mm.IdManutencao = m.Id
-						where mm.IdMaquina = IdMaq);
-	else
-		set ValMan = 0;
-	end if;
-    return ValMan;
-end$
-DELIMITER ;
-    
-drop view if exists vwQtdMa;
-create view vwQtdMa as(
-select IdEstoque `Id`
-	   , Nome
-       , spNumMan(IdEstoque) `Quantidade de Manutenções`
-       , spValMan(IdEstoque) `Custo Total`
-from tbMaquina
-order by IdEstoque);
-
-drop view if exists vwManutencao;
-create view vwManutencao as(
-select mm.IdMaquina, mm.IdManutencao, M.Nome `Máquina`, M.Tipo `Tipo de Máquina`, Ma.Nome `Manutenção`, (DATE_FORMAT(Ma.`Data`, '%d/%m/%Y')) `Data da Manutenção`, Ma.ValorPago `Valor da Manutenção`
- from tbMaquina M 
- inner join tbMaquinaManutencao mm 
-on mm.IdMaquina = M.IdEstoque
- inner join tbManutencao Ma 
-on Ma.Id = mm.IdManutencao);
 
 drop view if exists vwPragaOrDoenca ;
 create view vwPragaOrDoenca as(
@@ -179,7 +145,7 @@ select c.Id,
        ifnull(c.`Desc`, 'Sem Descrição') `Descrição`,
        c.Efic `Eficiência(%)`,
 	   c.NumLiberacoes `Número de Liberações`,
-       group_concat(distinct p.Nome separator ', ' ) `Pragas(/Doenças(`,
+       group_concat(distinct p.Nome separator ', ' ) `Pragas/Doenças(`,
        group_concat(distinct concat(i.Item, ' - ', ic.QtdUsada) separator ', ') `Itens Usados - Quantidade`
 from tbControle c
 	inner join tbControlePD cpd on c.Id = cpd.IdControle
@@ -187,4 +153,6 @@ from tbControle c
     inner join tbItensControle ic on c.Id = ic.IdControle
 	inner join vwItems i on ic.IdEstoque = i.Id
 group by c.Id);
-    
+
+
+ 

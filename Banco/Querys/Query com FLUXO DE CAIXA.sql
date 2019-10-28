@@ -280,6 +280,84 @@
 		  
 	end
 	DELIMITER ;
+    
+    
+    
+	drop table if exists tbManutencao;
+	create table tbManutencao(
+		Id int auto_increment,
+		 constraint PKManutencao primary key(Id),
+		Nome varchar(30),
+        Detalhes varchar(300),
+        `Data` date not null,
+        ValorPago double not null
+    )engine = InnoDB;
+    
+    insert into tbManutencao(Nome, `Data`, ValorPago) value("Revisão Anual", '01/01/01', 5000.00);
+    
+    drop table if exists tbMaquinaManutencao;
+	create table tbMaquinaManutencao(
+		IdMaquina int not null,
+        IdManutencao int not null,
+		 constraint PKMaquinaManutencao primary key(IdMaquina, IdManutencao)
+    )engine = InnoDB;
+    alter table tbMaquinaManutencao add constraint FKMaquinaManutencao foreign key(IdMaquina) references tbMaquina(IdEstoque),
+									add constraint FKManutencaoMaquina foreign key(IdManutencao) references tbManutencao(Id);
+    
+    insert into tbMaquinaManutencao value(5,1);    
+    
+    
+DELIMITER $
+drop function if exists spNumMan$
+create function spNumMan(IdMaq int)
+	returns int
+begin
+	declare NumMan int;
+    if(exists(select IdManutencao from tbMaquinaManutencao where IdMaquina = IdMaq)) then
+		set NumMan = (select count(distinct IdManutencao) from tbMaquinaManutencao where IdMaquina = IdMaq);
+    else
+		set NumMan = 0;
+	end if;
+	return NumMan;
+end$
+
+drop function if exists spValMan$
+create function spValMan(IdMaq int)
+	returns double
+begin
+	declare ValMan double;
+    if(exists(select IdManutencao from tbMaquinaManutencao where IdMaquina = IdMaq)) then
+		set ValMan = (select sum(ValorPago)
+						from tbManutencao m
+							inner join tbMaquinaManutencao mm on mm.IdManutencao = m.Id
+						where mm.IdMaquina = IdMaq);
+	else
+		set ValMan = 0;
+	end if;
+    return ValMan;
+end$
+DELIMITER ;
+    
+drop view if exists vwQtdMa;
+create view vwQtdMa as(
+select IdEstoque `Id`
+	   , Nome
+       , spNumMan(IdEstoque) `Quantidade de Manutenções`
+       , spValMan(IdEstoque) `Custo Total`
+from tbMaquina
+order by IdEstoque);
+
+drop view if exists vwManutencao;
+create view vwManutencao as(
+select mm.IdMaquina, mm.IdManutencao, M.Nome `Máquina`, M.Tipo `Tipo de Máquina`, Ma.Nome `Manutenção`, (DATE_FORMAT(Ma.`Data`, '%d/%m/%Y')) `Data da Manutenção`, Ma.ValorPago `Valor da Manutenção`
+ from tbMaquina M 
+ inner join tbMaquinaManutencao mm 
+on mm.IdMaquina = M.IdEstoque
+ inner join tbManutencao Ma 
+on Ma.Id = mm.IdManutencao);
+
+    
+    
     */
 
 
