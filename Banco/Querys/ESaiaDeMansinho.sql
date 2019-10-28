@@ -611,7 +611,7 @@ use dbOrgan;
 		Id int auto_increment,
          constraint PKAnuncio primary key(Id),
 		Nome varchar(75) not null,
-        `Desc` varchar(300),
+        `Desc` varchar(300) not null,
         `Status` bool not null,
         Foto Blob not null,
         Desconto decimal(5,2)
@@ -698,8 +698,8 @@ use dbOrgan;
 		Id int auto_increment,
          constraint PKPagamento primary key(Id),
 		QtdParcelas int not null default 1,
-        -- VlParcela double not null,
-        Tipo int not null -- 1 A Vista Memo, 2 Crédito
+        VlParcela double not null,
+        Tipo int not null 
     )engine = InnoDB;
     
     drop table if exists tbVendaAnuncio;
