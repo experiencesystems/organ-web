@@ -4,62 +4,68 @@
 @Scripts.Render("~/bundles/jqueryval")
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Solo</h4>
-        <hr />
+        <h4 class="modal-title">Solo</h4>
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         <div class="form-group">
-            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col">
+                @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col">
+                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control campo" } })
                 @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Tipo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Tipo, Model.Tipos, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col">
+                @Html.LabelFor(model => model.Tipo, htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col">
+                @Html.DropDownListFor(model => model.Tipo, Model.Tipos, new { htmlAttributes = new { @class = "form-control campo" } })
                 @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IncSolar, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IncSolar, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col">
+                @Html.LabelFor(model => model.IncSolar, htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col">
+                @Html.EditorFor(model => model.IncSolar, new { htmlAttributes = new { @class = "form-control campo" } })
                 @Html.ValidationMessageFor(model => model.IncSolar, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IncVento, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IncVento, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col">
+                @Html.LabelFor(model => model.IncVento, htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col">
+                @Html.EditorFor(model => model.IncVento, new { htmlAttributes = new { @class = "form-control campo" } })
                 @Html.ValidationMessageFor(model => model.IncVento, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Acidez, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Acidez, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col">
+                @Html.LabelFor(model => model.Acidez, htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col">
+                @Html.EditorFor(model => model.Acidez, new { htmlAttributes = new { @class = "form-control campo" } })
                 @Html.ValidationMessageFor(model => model.Acidez, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
     </div>
+    <button type="submit" class="btn btn-addmodal" data-save="ajax-modal">Adicionar</button>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

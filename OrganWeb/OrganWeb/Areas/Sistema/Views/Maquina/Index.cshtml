@@ -5,90 +5,77 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
 
 <div class="main-body">
     <div class="row">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="card-title box-title">Máquinas</h6>
-                    <div class="card-header-right">
-                        <ul class="list-unstyled card-option">
-                            <li><i class="ti-minus minimize-card"></i></li>
-                            <li><i class="icon-refresh"></i></li>
-                        </ul>
+        <div class="col">
+            <div class="tablecontainer">
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="table-data__tool">
+                            <h6 class="body-title">Máquina</h6>
+                            <div class="selectdropdown">
+                                <select class="js-select2" name="property">
+                                    <option selected="selected">Todas as propriedades</option>
+                                    <option value="">Opção 1</option>
+                                    <option value="">Opção 2</option>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+
+                            <div class="selectdropdown">
+                                <select class="js-select2 ui dropdown" name="time">
+                                    <option selected="selected">Todos</option>
+                                    <option value="">Hoje</option>
+                                    <option value="">Essa semana</option>
+                                    <option value="">Este mês</option>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <p class="card-text">
+                            <a class="popup btn btn-add" href="/Sistema/Maquina/Create">Nova maquina</a>
+                        </p>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="card-content">
-                     
-
-                            <table class="table">
+                <div class="card table-card">
+                    <div class="card-block">
+                        <div class="table-responsive">
+                            <table class="table-hover">
                                 <thead class="thead-title">
                                     <tr>
-                                        <th scope="col">#</th>
                                         <th scope="col">Nome</th>
-                                        <th scope="col">Descricao</th>
                                         <th scope="col">DataCadastro</th>
                                         <th scope="col">ValorCadastro</th>
                                         <th scope="col">VidaUtil</th>
                                         <th scope="col">DepreciacaoAno</th>
                                         <th scope="col">DepreciacaoMensal</th>
-                                        <th scope="col">Montadora</th>
-                                        <th scope="col">Fornecedor</th>
-
-
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @* @foreach (var item in Model.Maquina)
-        {
-            <tr>
-                <th scope="row"></th>
-                <td>@Html.DisplayFor(modelItem => item.Nome)</td>
-                <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
-                <td>@Html.DisplayFor(modelItem => item.DataCadastro)</td>
-                <td>@Html.DisplayFor(modelItem => item.ValorCadastro)</td>
-                <td>@Html.DisplayFor(modelItem => item.VidaUtil)</td>
-                <td>@Html.DisplayFor(modelItem => item.DepreciacaoAno)</td>
-                <td>@Html.DisplayFor(modelItem => item.DepreciacaoMensal)</td>
-                <td>@Html.DisplayFor(modelItem => item.Montadora)</td>
-                <td>@Html.DisplayFor(modelItem => item.Fornecedor)</td>
-
-
-
-
-
-            </tr>
-        }
-                                    *@
+                                    @foreach (var item in Model.Maquina)
+                                    {
+                                        <tr>
+                                            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.DataCadastro)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.ValorInicial)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.VidaUtil)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.DeprAno)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.DeprMes)</td>
+                                            <td>
+                                                <a class="popup btn" href="@Url.Action("Detalhes", "Maquina", new { id = item.IdEstoque })"><div class="itemback"><i class="item fa fa-info"></i></div></a>
+                                                <a class="popup btn" href="@Url.Action("Editar", "Maquina", new { id = item.IdEstoque })"><div class="itemback"><i class="item far fa-edit"></i></div></a>
+                                                <a class="popup btn" href="@Url.Action("Excluir", "Maquina", new { id = item.IdEstoque })"><div class="itemback"><i class="item far fa-trash-alt"></i></div></a>
+                                            </td>
+                                        </tr>
+                                    }
                                 </tbody>
-                                @*tabela p teste, quando tiver o banco, descomente a outra e apague esta*@
-                                <tbody>
-
-                                    <tr class="linha">
-                                        <th scope="row"></th>
-                                        <td>Praga1</td>
-                                        <td>Solo</td>
-                                        <td>Incidencia</td>
-                                        <td>Vento</td>
-                                        <td>Acidez</td>
-                                        <td>Estoque</td>
-                                        <td>Fornecedor</td>
-                                        <td>Categoria</td>
-                                        <td>Categoria</td>
-                                    </tr>
-
-                                </tbody>
-
-
-
-</div>
-                    </div>
-                </div>
-              
-
-                            </p>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -96,57 +83,11 @@
         </div>
     </div>
 </div>
-<div id="modal-placeholder"></div>
-<div class="modal fade" id="newmodal" tabindex="-1" role="dialog" data-backdrop="static" />
 
-<environment include="Development">
-    <script src="~/Scripts/crudmodal.js" asp-append-version="true" defer></script>
-</environment>
-
-<environment exclude="Development">
-    <script src="~/js/crudmodal.min.js" asp-append-version="true" defer></script>
-</environment>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"
-        integrity="sha256-F6h55Qw6sweK+t7SiOJX+2bpSAa3b/fnlrVCJvmEj1A="
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.9/jquery.validate.unobtrusive.min.js"
-        integrity="sha256-paoxpct33kY9fpQlvgC8IokjGq8iqYaVFawgFPg8oz0="
-        crossorigin="anonymous"></script>
-
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-
-@section scripts{
-
-    <script>
-     //   jQuery('.linha').on('click', function () {
-     //       var html = $(this).html();
-     //       jQuery('.card-header').append(html);
-    //    });
-       // jQuery('.card-header').on('click', function () {
-      //      $("#newmodal").modal("show");
-       //     $(".modal-conteudo").modal("show");
-
-       //     var html = $(this).html();
-       //     jQuery('.modal-conteudo').append(html);
-     //   });
-
-        $(function () {
-
-
-
-            $(".delete").click(function () {
-                var url = $(this).data('url');
-
-                $("#newmodal").load(url, function () {
-                    $("#newmodal").modal("show");
-                    $("#modal-placeholder").modal("show");
-                })
-            });
-
-        })
-    </script>
+@section Scripts {
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/modalui.js"></script>
 }
-

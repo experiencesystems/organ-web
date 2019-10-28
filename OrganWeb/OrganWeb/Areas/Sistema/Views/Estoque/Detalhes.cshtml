@@ -1,44 +1,24 @@
 ﻿@model OrganWeb.Areas.Sistema.Models.Armazenamento.Insumo
 
-<div>
-    <h4>Insumo</h4>
-    <hr />
+    <h4 class="modal-title">Detalhes</h4>
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
+        @Html.LabelFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+        <dd>@Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } })</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
+        @Html.LabelFor(model => model.Desc, new { htmlAttributes = new { @class = "form-control" } })
+        <dd>@Html.EditorFor(model => model.Desc, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } })</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Desc)
-        </dt>
+        @Html.LabelFor(model => model.Categoria.Nome, new { htmlAttributes = new { @class = "form-control" } })
+        <dd>@Html.EditorFor(model => model.Categoria.Nome, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } })</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Desc)
-        </dd>
+        @Html.LabelFor(model => model.Estoque.Qtd, new { htmlAttributes = new { @class = "form-control" } })
+        <dd>@Html.EditorFor(model => model.Estoque.Qtd, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } })</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Categoria.Nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Categoria.Nome)
-        </dd>
-
-        <dt>@Html.DisplayNameFor(model => model.Estoque.Qtd)</dt>
-        <dd>@Html.DisplayFor(model => model.Estoque.Qtd)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.Estoque.UM)</dt>
+        @Html.LabelFor(model => model.Estoque.UM, new { htmlAttributes = new { @class = "form-control" } })
         <dd>@ViewBag.UnidadeMedida</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.Estoque.ValorUnit)</dt>
-        <dd>R$ @Html.DisplayFor(model => model.Estoque.ValorUnit)</dd>
+        @Html.LabelFor(model => model.Estoque.ValorUnit, new { htmlAttributes = new { @class = "form-control" } })
+        <dd>@Html.EditorFor(model => model.Estoque.ValorUnit, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } })</dd>
+
     </dl>
-</div>
-<p>
-    @Html.ActionLink("Editar", "Editar", new { id = Model.IdEstoque }) |
-    @Html.ActionLink("Voltar", "Index")
-</p>
+

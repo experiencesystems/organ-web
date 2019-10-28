@@ -4,98 +4,125 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link href="https://cdn.datatables.net/1.10.19/css/dataTables.semanticui.min.css" rel="stylesheet" />
-<link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+<!--ARRUMAR AS OPÇÕES PORQUE AS VEZES NÃO ABRE-->
 
-<h2>Estoque</h2>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
 
 <div class="main-body">
     <div class="row">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="card-title box-title">Estoque</h6>
-                    <div class="card-header-right">
-                        <ul class="list-unstyled card-option">
-                            <li><i class="ti-minus minimize-card"></i></li>
-                            <li><i class="icon-refresh"></i></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="card-content">
-                        <div class="card-content">
-                            <div class="tablecontainer">
-                                <div class="teste"></div>
-                                <a class="popup btn btn-add" href="/Sistema/Estoque/Create" style="margin-bottom:20px; margin-top:20px;">Novo Insumo</a>
+        <div class="col">
+            <div class="tablecontainer">
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="table-data__tool">
+                            <h6 class="body-title">Estoque</h6>
+                            <div class="selectdropdown">
+                                <select class="js-select2" name="property">
+                                    <option selected="selected">Todas as propriedades</option>
+                                    <option value="">Opção 1</option>
+                                    <option value="">Opção 2</option>
+                                </select>
+                                <div class="dropDownSelect2"></div>
                             </div>
-                            <table class="table">
-                                <thead class="thead-title">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Item</th>
-                                        <th scope="col">Quantidade</th>
-                                        <th scope="col">Categoria</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model.VwItems)
-                                    {
-                                        <tr>
-                                            <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Item)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Quantidade) @Html.DisplayFor(modelItem => item.UnidadeMedida)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Categoria)</td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
+
+                            <div class="selectdropdown">
+                                <select class="js-select2 ui dropdown" name="time">
+                                    <option selected="selected">Todos</option>
+                                    <option value="">Hoje</option>
+                                    <option value="">Essa semana</option>
+                                    <option value="">Este mês</option>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="card-title box-title">Histórico de alterações</h6>
-                    <div class="card-header-right">
-                        <ul class="list-unstyled card-option">
-                            <li><i class="ti-minus minimize-card"></i></li>
-                            <li><i class="icon-refresh"></i></li>
-                        </ul>
+                    <div class="col-6">
+                        <p class="card-text">
+                            <a class="popup btn btn-add" href="/Sistema/Estoque/Create">Novo item</a>
+                        </p>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="card-content">
-                        <div class="card-content">
-                            <div class="tablecontainer">
+                <div class="row">
+                    <div class="card table-card col-6">
+                        <div class="card-header">
+                            <h6 class="card-title box-title">Itens</h6>
+                            <div class="card-header-right">
+                                <ul class="list-unstyled card-option">
+                                    <li><i class="ti-minus minimize-card"></i></li>
+                                    <li><i class="icon-refresh"></i></li>
+                                </ul>
                             </div>
-                            <table class="table">
-                                <thead class="thead-title">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Data</th>
-                                        <th scope="col">Qtd Antiga</th>
-                                        <th scope="col">Alterado</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model.HistoricoEstoques)
-                                    {
+                        </div>
+                        <div class="card-block">
+                            <div class="table-responsive">
+                                <table class="table-hover">
+                                    <thead class="thead-title">
                                         <tr>
-                                            <td>@Html.DisplayFor(modelItem => item.IdEstoque)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.DataAlteracao)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.QtdAntiga)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.QtdAlterada)</td>
+                                            <th scope="col">Nome</th>
+                                            <th scope="col">Quantidade</th>
+                                            <th scope="col">Categoria</th>
+                                            <th scope="col"></th>
                                         </tr>
-                                    }
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.VwItems)
+                                        {
+                                            <tr>
+                                                <td>@Html.DisplayFor(modelItem => item.Item)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.Quantidade) @Html.DisplayFor(modelItem => item.UnidadeMedida)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.Categoria)</td>
+                                                <td>
+
+                                                    <a class="popup btn" href="@Url.Action("Detalhes", "Estoque", new { id = item.Id  })"><div class="itemback"><i class="item fa fa-info"></i></div></a>
+                                                    <a class="popup btn" href="@Url.Action("Editar", "Estoque", new { id = item.Id })"><div class="itemback"><i class="item far fa-edit"></i></div></a>
+                                                    <a class="popup btn" href="@Url.Action("Excluir", "Estoque", new { id = item.Id })"><div class="itemback"><i class="item far fa-trash-alt"></i></div></a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="card-title box-title">Histórico de alterações</h6>
+                                <div class="card-header-right">
+                                    <ul class="list-unstyled card-option">
+                                        <li><i class="ti-minus minimize-card"></i></li>
+                                        <li><i class="icon-refresh"></i></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card table-card">
+                                <div class="card-block">
+                                    <!--<div class="table-responsive">-->
+                                    <table class="table-hover">
+                                        <thead class="thead-title">
+                                            <tr>
+                                                <th scope="col">Data</th>
+                                                <th scope="col">Qtd Antiga</th>
+                                                <th scope="col">Alterado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.HistoricoEstoques)
+                                            {
+                                                <tr>
+                                                    <td>@Html.DisplayFor(modelItem => item.DataAlteracao)</td>
+                                                    <td>@Html.DisplayFor(modelItem => item.QtdAntiga)</td>
+                                                    <td>@Html.DisplayFor(modelItem => item.QtdAlterada)</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                    <!--</div>-->
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -159,60 +186,6 @@
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.0.5/dist/jBox.all.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.semanticui.min.js"></script>
     <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
-
-    <script>
-        var Popup;
-        $(document).ready(function () {
-            $('.tablecontainer').on('click', 'a.popup', function (e) {
-                e.preventDefault();
-                OpenPopup($(this).attr('href'));
-
-            })
-            function OpenPopup(pageUrl) {
-                var $pageContent = $('<div/>');
-                $pageContent.load(pageUrl, function () {
-                    $('#popupForm', $pageContent).removeData('validator');
-                    $('#popupForm', $pageContent).removeData('unobtrusiveValidation');
-                    $.validator.unobtrusive.parse('form');
-                });
-
-                $dialog = $('<div class="popupWindow" style="overflow:auto"></div>')
-                    .html($pageContent)
-                    .dialog({
-                        draggable: false,
-                        autoOpen: false,
-                        resizable: false,
-                        modal: true,
-                        height: 600,
-                        width: 630,
-                        close: function () {
-                            $('.overlay').hide(),
-                                $dialog.dialog('destroy').remove();
-                        }
-                    })
-
-                $('.popupWindow').on('submit', '#popupForm', function (e) {
-                    var url = $('#popupForm')[0].action;
-                    $.ajax({
-                        type: "POST",
-                        url: url,
-                        data: $('#popupForm').serialize(),
-                        success: function (data) {
-                            if (data.status) {
-                                $dialog.dialog('close');
-                                oTable.ajax.reload();
-                            }
-                        }
-                    })
-
-                    e.preventDefault();
-                })
-                $dialog.dialog('open');
-            }
-        })
-    </script>
+    <script src="~/Scripts/modalui.js"></script>
 }
