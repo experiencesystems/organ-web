@@ -106,6 +106,9 @@
     <Reference Include="System.Drawing">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData">
       <Private>True</Private>
     </Reference>
@@ -226,6 +229,7 @@
     <Compile Include="Areas\Sistema\Controllers\AreaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\ColheitaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\EstoqueController.cs" />
+    <Compile Include="Areas\Sistema\Controllers\FazendaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FinanceiroController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FornecedorController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FuncionarioController.cs" />
@@ -237,6 +241,7 @@
     <Compile Include="Areas\Sistema\Controllers\SoloController.cs" />
     <Compile Include="Areas\Sistema\Models\Administrativo\Area.cs" />
     <Compile Include="Areas\Sistema\Models\Administrativo\Cliente.cs" />
+    <Compile Include="Areas\Sistema\Models\API\ListarUnidades.cs" />
     <Compile Include="Areas\Sistema\Models\Armazenamento\Insumo.cs" />
     <Compile Include="Areas\Sistema\Models\Armazenamento\Produto.cs" />
     <Compile Include="Areas\Sistema\Models\Controles\Controle.cs" />
@@ -260,13 +265,12 @@
     <Compile Include="Areas\Sistema\Models\ViewModels\CreateFornecedorViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\CreateFuncionarioViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\CreatePlantioViewModel.cs" />
-    <Compile Include="Areas\Sistema\Models\ViewModels\CreatePragaOrDoencaViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewAreas.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewMaquina.cs" />
-    <Compile Include="Areas\Sistema\Models\ViewModels\ViewPragaDoenca.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewSementes.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewFuncionario.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewManutencao.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewModels\ViewFazenda.cs" />
     <Compile Include="Areas\Sistema\Models\ViewsBanco\Estoque\VwControle.cs" />
     <Compile Include="Areas\Sistema\Models\ViewsBanco\Estoque\VwManutencao.cs" />
     <Compile Include="Areas\Sistema\Models\ViewsBanco\Estoque\VwPragaOrDoenca.cs" />
@@ -411,12 +415,6 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="Areas\Sistema\Views\Fazenda\Index.cshtml" />
-    <Content Include="Areas\Sistema\Views\PragaDoenca\Create.cshtml" />
-    <Content Include="Areas\Sistema\Views\PragaDoenca\Delete.cshtml" />
-    <Content Include="Areas\Sistema\Views\PragaDoenca\Details.cshtml" />
-    <Content Include="Areas\Sistema\Views\PragaDoenca\Edit.cshtml" />
-    <Content Include="Areas\Sistema\Views\Fazenda\_NovoFuncionario.cshtml" />
     <Content Include="Areas\Sistema\Views\Estoque\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Plantio\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Plantio\Detalhes.cshtml" />
@@ -425,14 +423,11 @@
     <Content Include="Areas\Sistema\Views\Manutencao\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Manutencao\Excluir.cshtml" />
     <Content Include="Areas\Sistema\Views\Manutencao\Editar.cshtml" />
-    <Content Include="Areas\Sistema\Views\Estoque\Fornecedores.cshtml" />
     <Content Include="Areas\Sistema\Views\Semente\Index.cshtml" />
-    <Content Include="Areas\Sistema\Views\PragaDoenca\Index.cshtml" />
     <Content Include="Areas\Ecommerce\Views\web.config" />
     <Content Include="Areas\Ecommerce\Views\Loja\Detalhes.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Loja\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Maquina\Index.cshtml" />
-    <Content Include="Areas\Sistema\Views\Funcionario\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Plantio\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Plantio\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Plantio\Excluir.cshtml" />
@@ -453,16 +448,13 @@
     <Content Include="Areas\Sistema\Views\Maquina\Excluir.cshtml" />
     <Content Include="Areas\Sistema\Views\Maquina\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Fornecedor\Editar.cshtml" />
-    <Content Include="Areas\Sistema\Views\Fornecedor\Excluir.cshtml" />
     <Content Include="Areas\Sistema\Views\Colheita\Detalhes.cshtml" />
     <Content Include="Areas\Sistema\Views\Colheita\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Estoque\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Estoque\Detalhes.cshtml" />
     <Content Include="Areas\Sistema\Views\Estoque\Editar.cshtml" />
-    <Content Include="Areas\Sistema\Views\Estoque\Excluir.cshtml" />
     <Content Include="Areas\Sistema\Views\Funcionario\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\PragaDoenca\Detalhes.cshtml" />
-    <Content Include="Areas\Sistema\Views\PragaDoenca\Excluir.cshtml" />
     <Content Include="Areas\Sistema\Views\Maquina\Detalhes.cshtml" />
     <Content Include="Areas\Sistema\Views\Funcionario\Excluir.cshtml" />
     <Content Include="Areas\Sistema\Views\Funcionario\Editar.cshtml" />
@@ -485,6 +477,10 @@
     <Content Include="fonts\DubaiW23-Regular.ttf" />
     <Content Include="fonts\DubaiW23-Regular.woff" />
     <Content Include="fonts\DubaiW23-Regular.woff2" />
+    <Content Include="Areas\Sistema\Views\Fornecedor\Excluir.cshtml" />
+    <Content Include="Areas\Sistema\Views\Fazenda\Index.cshtml" />
+    <Content Include="Areas\Sistema\Views\PragaDoenca\Index.cshtml" />
+    <Content Include="Areas\Sistema\Views\PragaDoenca\Create.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -564,6 +560,9 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,12 +1,10 @@
-﻿using OrganWeb.Areas.Sistema.Models.Armazenamento;
+﻿using Newtonsoft.Json;
+using OrganWeb.Areas.Sistema.Models.API;
+using OrganWeb.Areas.Sistema.Models.Armazenamento;
 using OrganWeb.Areas.Sistema.Models.Ferramentas;
 using OrganWeb.Areas.Sistema.Models.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace OrganWeb.Areas.Sistema.Controllers
@@ -26,10 +24,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
         }
 
         public ActionResult Create()
-        {
-            maquina = new Maquina() { Estoque = new Estoque() };
-
-            return View(maquina);
+        { 
+            return View(maquina = new Maquina { Estoque = new Estoque() });
         }
 
         [HttpPost]

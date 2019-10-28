@@ -81,6 +81,6 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
             new SelectListItem() { Text = "Muda", Value = "38" },
             new SelectListItem() { Text = "Capsula", Value = "38" }*/
             };
-    }//TODO: verificar se qdo ele usar dois pacote de semente o sistema vai ve bl
+    }
 
 }

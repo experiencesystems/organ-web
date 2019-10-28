@@ -45,7 +45,7 @@
                 @Html.LabelFor(model => model.Maquina, new { htmlAttributes = new { @class = "form-control" } })
             </div>
             <div class="col">
-                @Html.DropDownList("IdMaquina", (MultiSelectList)ViewBag.Maquinas, new { multiple = "multiple", id = "maquinas", @class = "campo" })
+                @Html.DropDownList("IdMaquina", new MultiSelectList(manutencaom.Maquinas, "IdEstoque", "Nome"), new { multiple = "multiple", id = "maquinas", @class = "campo" })
                 @Html.ValidationMessageFor(modelItem => modelItem.IdMaquina, "", new { @class = "text-danger" })
             </div>
         </div>

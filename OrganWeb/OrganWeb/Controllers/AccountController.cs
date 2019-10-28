@@ -30,7 +30,6 @@ namespace OrganWeb.Controllers
         private TipoTel tipotel;
         private Telefone telefone;
         private TelefonePessoa telefonePessoa;
-        private PessoaFisica pessoaFisica;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private DDD ddd = new DDD();

@@ -5,6 +5,7 @@ using System.Web;
 using OrganWeb.Areas.Sistema.Models.Armazenamento;
 using OrganWeb.Areas.Sistema.Models.Safras;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque;
+using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
 
 namespace OrganWeb.Areas.Sistema.Models.ViewModels
 {
@@ -14,6 +15,6 @@ namespace OrganWeb.Areas.Sistema.Models.ViewModels
         public IEnumerable<HistoricoEstoque> HistoricoEstoques { get; set; }
         public IEnumerable<Estoque> Estoques { get; set; }
         public IEnumerable<Semente> Sementes { get; set; }
-        //public IEnumerable<Item> Items { get; set; }
+        public IEnumerable<VwFornecedor> Fornecedors { get; set; }
     }
 }

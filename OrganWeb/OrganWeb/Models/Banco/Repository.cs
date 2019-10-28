@@ -27,6 +27,10 @@ namespace OrganWeb.Models.Banco
 
         public void Delete(int id)
         {
+            if (_context.Entry(DbSet.Find(id)).State == EntityState.Detached)
+            {
+                DbSet.Attach(DbSet.Find(id));
+            }
             DbSet.Remove(DbSet.Find(id));
         }
 
@@ -65,6 +69,10 @@ namespace OrganWeb.Models.Banco
 
         public void Update(T entity)
         {
+            if (_context.Entry(entity).State == EntityState.Detached)
+            {
+                DbSet.Attach(DbSet.Find(entity));
+            }
             _context.Entry(entity).State = EntityState.Modified;
         }
 

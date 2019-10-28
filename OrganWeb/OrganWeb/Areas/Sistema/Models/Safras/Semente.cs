@@ -16,7 +16,6 @@ namespace OrganWeb.Areas.Sistema.Models.Safras
         [Key]
         [ForeignKey("Estoque")]
         public int IdEstoque { get; set; }
-        //TODO: testar se da pra tirar a regex dos numeros
         [Required(ErrorMessage = "O nome é obrigatório.", AllowEmptyStrings = false)]
         [StringLength(50, MinimumLength = 3)]
         public string Nome { get; set; }

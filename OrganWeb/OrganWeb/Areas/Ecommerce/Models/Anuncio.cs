@@ -17,6 +17,7 @@ namespace OrganWeb.Areas.Ecommerce.Models
         [StringLength(75, MinimumLength = 10)]
         public string Nome { get; set; }
 
+        [Required]
         [Display(Name = "Descrição")]
         public string Desc { get; set; }
 

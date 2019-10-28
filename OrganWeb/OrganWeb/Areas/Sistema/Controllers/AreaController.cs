@@ -15,16 +15,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private Area area = new Area();
         private Solo solo = new Solo();
 
-        public async Task<ActionResult> Index()
-        {
-            var select = new ViewAreas
-            {
-                Areas = await area.GetAll(),
-                Solos = await solo.GetAll()
-            };
-            return View(select);
-        }
-
         public async Task<ActionResult> Create()
         {
             return View(new Area { Solos = await solo.GetAll() });

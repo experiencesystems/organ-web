@@ -20,13 +20,12 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private Maquina maquina = new Maquina();
         private Manutencao manutencao = new Manutencao();
         private readonly BancoContext db = new BancoContext();
-
-        // GET: Sistema/Manutencao
+        
         public async Task<ActionResult> Index()
         {
             var select = new ViewManutencao
             {
-                MaquinaManutencaos = await manumaq.GetFew()
+                MaquinaManutencaos = await manumaq.GetAll()
             };
             return View(select);
         }
@@ -52,7 +51,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 Maquinas = await maquina.GetAll()
             };
-            ViewBag.Maquinas = new MultiSelectList(manutencaom.Maquinas, "IdEstoque", "Nome");
             return View(manutencaom);
         }
 
@@ -82,7 +80,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
             }
             //Enviando a dropdownlist caso o formulário não seja preenchido corretamente (NullReferenceException)
             manutencaom.Maquinas = await maquina.GetAll();
-            ViewBag.Maquinas = new MultiSelectList(manutencaom.Maquinas, "IdEstoque", "Nome");
             return View(manutencaom);
         }
 

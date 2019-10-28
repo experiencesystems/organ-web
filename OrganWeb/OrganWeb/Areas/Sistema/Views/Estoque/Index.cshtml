@@ -129,6 +129,57 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title box-title">Fornecedor</h6>
+                    <div class="card-header-right">
+                        <ul class="list-unstyled card-option">
+                            <li><i class="ti-minus minimize-card"></i></li>
+                            <li><i class="icon-refresh"></i></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-content">
+                        <div class="card-content">
+                            <a class="popup btn btn-add" href="/Sistema/Fornecedor/Create" style="margin-bottom:20px; margin-top:20px;">Novo Fornecedor</a>
+                            <div class="tablecontainer">
+                            </div>
+                            <table class="table">
+                                <tr>
+                                    <th>#/th>
+                                    <th>Nome fantasia</th>
+                                    <th>Telefones</th>
+                                    <th>Email</th>
+                                    <th>Endereço</th>
+                                    <th></th>
+                                </tr>
+
+                                @foreach (var item in Model.Fornecedors)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.NomeFantasia)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Telefones)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Endereco)</td>
+                                        <td>
+                                            @Html.ActionLink("Editar", "Editar", "Fornecedor", new { id = item.Id }, null) |
+                                            @Html.ActionLink("Detalhes", "Detalhes", "Fornecedor", new { id = item.Id }, null) |
+                                            @Html.ActionLink("Excluir", "Excluir", "Fornecedor", new { id = item.Id }, null)
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts {

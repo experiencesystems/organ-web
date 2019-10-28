@@ -11,17 +11,18 @@ using OrganWeb.Models.Banco;
 using System.Net;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque;
 using System.Threading.Tasks;
+using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
     public class EstoqueController : Controller
     { 
         //TODO: categorias máquina
-        //TODO: view histórico estoque
         private Insumo insumo = new Insumo();
         private Estoque estoque = new Estoque();
         private Categoria categoria = new Categoria();
         private VwItems vwItems = new VwItems();
+        private VwFornecedor vwFornecedor = new VwFornecedor();
         private HistoricoEstoque historicoEstoque = new HistoricoEstoque();
         private ViewEstoque viewestoque = new ViewEstoque();
 
@@ -31,6 +32,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 VwItems = await vwItems.GetFew(),
                 HistoricoEstoques = await historicoEstoque.GetFew(),
+                Fornecedors = await vwFornecedor.GetAll()
             };
             return View(viewestoque);
         }
@@ -119,30 +121,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
             insumo.Categorias = await categoria.GetAll();
             ViewBag.UnidadeMedida = insumo.Estoque.UnidadesDeMedida.Where(x => x.Value == insumo.Estoque.UM.ToString()).First().Text;
             return View(insumo);
-        }
-
-        public async Task<ActionResult> Excluir(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            insumo = await insumo.GetByID(id);
-            if (insumo == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.UnidadeMedida = insumo.Estoque.UnidadesDeMedida.Where(x => x.Value == insumo.Estoque.UM.ToString()).First().Text;
-            return View(insumo);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Excluir(Insumo insumo)
-        {
-            insumo.Delete(insumo.IdEstoque);
-            await insumo.Save(); //TODO: excluir da tabela estoque conflito itenscontrole
-            return RedirectToAction("Index");
         }
     }
 }

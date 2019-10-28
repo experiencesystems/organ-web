@@ -87,8 +87,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 Sistemas = plantio.Sistemas,
                 Periodos = plantio.Periodos
             };
-            ViewBag.Areas = new MultiSelectList(view.Areas, "Id", "Nome");
-            ViewBag.Sementes = new SelectList(view.Sementes, "IdEstoque", "Nome");
             return View(view);
         }
 
@@ -99,6 +97,12 @@ namespace OrganWeb.Areas.Sistema.Controllers
             if (plantio.Inicio > plantio.Colheita)
             {
                 ModelState.AddModelError("", "Insira uma data de início anterior a da colheita.");
+                return View(plantio);
+            }
+            semente = await semente.GetByID(plantio.IdEstoque);
+            if (semente.Estoque.Qtd < plantio.Quantidade)
+            {
+                ModelState.AddModelError("", "Não há sementes o suficiente no estoque para completar a operação");
                 return View(plantio);
             }
             else if (ModelState.IsValid)
@@ -135,8 +139,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
             // Enviando listas da combobox caso o formulário não seja preenchido corretamente
             plantio.Areas = await area.AreasDisponiveis();
             plantio.Sementes = await semente.GetAll();
-            ViewBag.Areas = new MultiSelectList(plantio.Areas, "Id", "Nome");
-            ViewBag.Sementes = new SelectList(plantio.Sementes, "IdEstoque", "Nome");
             return View(plantio);
         }
 
