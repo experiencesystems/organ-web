@@ -1,4 +1,6 @@
 ﻿using OrganWeb.Areas.Sistema.Models;
+using PagedList;
+using PagedList.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

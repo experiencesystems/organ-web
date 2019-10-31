@@ -7,6 +7,7 @@ using System.Web;
 using OrganWeb.Models;
 using OrganWeb.Areas.Sistema.Models.Armazenamento;
 using OrganWeb.Models.Banco;
+using OrganWeb.Areas.Sistema.Models.API;
 
 namespace OrganWeb.Areas.Sistema.Models.Ferramentas
 {
@@ -46,5 +47,10 @@ namespace OrganWeb.Areas.Sistema.Models.Ferramentas
         public DateTime DataCadastro { get; set; }
         
         public virtual Estoque Estoque { get; set; }
+
+        [NotMapped]
+        public List<UnidadeCadastro> Unidades { get; set; }
+        [NotMapped]
+        public UnidadeCadastro Unini { get; set; }
     }
 }

@@ -3,6 +3,8 @@ using OrganWeb.Areas.Sistema.Models.API;
 using OrganWeb.Areas.Sistema.Models.Armazenamento;
 using OrganWeb.Areas.Sistema.Models.Ferramentas;
 using OrganWeb.Areas.Sistema.Models.ViewModels;
+using RestSharp;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -24,8 +26,13 @@ namespace OrganWeb.Areas.Sistema.Controllers
         }
 
         public ActionResult Create()
-        { 
-            return View(maquina = new Maquina { Estoque = new Estoque() });
+        {
+            var client = new RestClient("https://app.omie.com.br");
+            var request = new RestRequest("/api/v1/geral/unidade/?JSON={\"call\":\"ListarUnidades\",\"app_key\":\"1560731700\",\"app_secret\":\"226dcf372489bb45ceede61bfd98f0f1\",\"param\":[{\"codigo\":\"\"}]}", Method.POST);
+            var response = client.Execute(request);
+            var responseModel = JsonConvert.DeserializeObject<ListarUnidades>(response.Content);
+
+            return View(maquina = new Maquina { Estoque = new Estoque(), Unidades = responseModel.UnidadeCadastros });
         }
 
         [HttpPost]

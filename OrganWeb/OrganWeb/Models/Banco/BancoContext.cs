@@ -196,12 +196,8 @@ namespace OrganWeb.Models.Banco
                 .HasColumnName("Endereço");
 
             modelBuilder.Entity<VwItems>()
-                .Property(t => t.UnidadeMedida)
-                .HasColumnName("Unidade de Medida");
-
-            modelBuilder.Entity<VwItems>()
                 .Property(t => t.ValorTotal)
-                .HasColumnName("Valor Total (p/Produto)");
+                .HasColumnName("Valor Total (por Produto)");
 
             modelBuilder.Entity<VwItems>()
                 .Property(t => t.ValorUnitario)

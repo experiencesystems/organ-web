@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using PagedList;
 using System.Web;
 using OrganWeb.Areas.Sistema.Models;
 using System.Web.Mvc;
@@ -9,6 +10,7 @@ using OrganWeb.Areas.Sistema.Models.Armazenamento;
 using OrganWeb.Areas.Sistema.Models.ViewModels;
 using OrganWeb.Models.Banco;
 using System.Net;
+using PagedList.EntityFramework;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque;
 using System.Threading.Tasks;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
@@ -16,7 +18,7 @@ using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
 namespace OrganWeb.Areas.Sistema.Controllers
 {
     public class EstoqueController : Controller
-    { 
+    {
         //TODO: categorias máquina
         private Insumo insumo = new Insumo();
         private Estoque estoque = new Estoque();
@@ -26,14 +28,50 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private HistoricoEstoque historicoEstoque = new HistoricoEstoque();
         private ViewEstoque viewestoque = new ViewEstoque();
 
-        public async Task<ActionResult> Index()
+        //https://stackoverflow.com/questions/25125329/using-a-pagedlist-with-a-viewmodel-asp-net-mvc
+
+        [HttpGet]
+        public async Task<ViewResult> Index(string filtros, string textoPesquisa, int? page)
         {
+            int pagina = (page ?? 1);
+            var listaFiltros = new List<string>
+            {
+                "Insumo",
+                "Máquina",
+                "Produto",
+                "Semente"
+            };
+
+            ViewBag.filtros = new SelectList(listaFiltros);
+
+            if (textoPesquisa != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                textoPesquisa = filtros;
+            }
+
+            var itens = await vwItems.GetAll();
+
             viewestoque = new ViewEstoque()
             {
-                VwItems = await vwItems.GetFew(),
-                HistoricoEstoques = await historicoEstoque.GetFew(),
+                VwItems = await vwItems.GetPagedAll(pagina),
+                HistoricoEstoques = await historicoEstoque.GetAll(),
                 Fornecedors = await vwFornecedor.GetAll()
             };
+
+            if (!String.IsNullOrEmpty(textoPesquisa))
+            {
+                viewestoque.VwItems = itens.Where(s => s.Item.IndexOf(textoPesquisa, StringComparison.OrdinalIgnoreCase) >= 0 || s.Tipo.IndexOf(textoPesquisa, StringComparison.OrdinalIgnoreCase) >= 0 || s.Categoria.IndexOf(textoPesquisa, StringComparison.OrdinalIgnoreCase) >= 0).ToPagedList(pagina, 5);
+            }
+
+            if (!string.IsNullOrEmpty(filtros))
+            {
+                viewestoque.VwItems = itens.Where(x => x.Tipo == filtros).ToPagedList(pagina, 5);
+            }
+
             return View(viewestoque);
         }
 

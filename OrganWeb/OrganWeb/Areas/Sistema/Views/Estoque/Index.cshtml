@@ -1,7 +1,9 @@
 ﻿@model OrganWeb.Areas.Sistema.Models.ViewModels.ViewEstoque
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Estoque";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    WebGrid grid = new WebGrid(Model.VwItems, rowsPerPage: 5);
 }
 
 <!--ARRUMAR AS OPÇÕES PORQUE AS VEZES NÃO ABRE-->
@@ -57,11 +59,21 @@
                         </div>
                         <div class="card-block">
                             <div class="table-responsive">
+                                @using (Html.BeginForm("Index", "Estoque", FormMethod.Get))
+                                {
+                                    <p>
+                                        Filtro: @Html.DropDownList("filtros", "Todos")
+                                        Nome: @Html.TextBox("textoPesquisa")
+                                        <input type="submit" value="Filtro" />
+                                    </p>
+                                }
                                 <table class="table-hover">
                                     <thead class="thead-title">
                                         <tr>
                                             <th scope="col">Nome</th>
                                             <th scope="col">Quantidade</th>
+                                            <th scope="col">Valor unitário</th>
+                                            <th scope="col">Valor total</th>
                                             <th scope="col">Categoria</th>
                                             <th scope="col"></th>
                                         </tr>
@@ -71,7 +83,9 @@
                                         {
                                             <tr>
                                                 <td>@Html.DisplayFor(modelItem => item.Item)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.Quantidade) @Html.DisplayFor(modelItem => item.UnidadeMedida)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.Quantidade)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.ValorUnitario)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.ValorTotal)</td>
                                                 <td>@Html.DisplayFor(modelItem => item.Categoria)</td>
                                                 <td>
 
@@ -83,6 +97,11 @@
                                         }
                                     </tbody>
                                 </table>
+                                <br />
+                                Página @(Model.VwItems.PageCount < Model.VwItems.PageNumber ? 0 : Model.VwItems.PageNumber) de @Model.VwItems.PageCount
+
+                                @Html.PagedListPager(Model.VwItems, page => Url.Action("Index",
+                                    new { page }))
                             </div>
                         </div>
                     </div>

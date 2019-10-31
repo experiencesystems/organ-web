@@ -1016,3 +1016,13 @@ C:\Users\Natalya Aragão\Desktop\organico7 - Copia (2)\organ-web\OrganWeb\OrganW
 C:\Users\Natalya Aragão\Desktop\organico7 - Copia (2)\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.csproj.CopyComplete
 C:\Users\Natalya Aragão\Desktop\organico7 - Copia (2)\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.dll
 C:\Users\Natalya Aragão\Desktop\organico7 - Copia (2)\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.pdb
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\RestSharp.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\RestSharp.xml
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\PagedList.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\PagedList.Mvc.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\PagedList.xml
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\PagedList.Mvc.xml
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\GridMvc.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\PagedList.EntityFramework.dll
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\PagedList.EntityFramework.pdb
+C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\PagedList.EntityFramework.xml
