@@ -42,7 +42,7 @@
                     </div>
                     <div class="col-6">
                         <p class="card-text">
-                            <a class="popup btn btn-add" href="/Sistema/Estoque/Create">Novo item</a>
+                            <a class="popup btn btn-add" href="/Sistema/Estoque/Create">Novo insumo</a>
                         </p>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                                 {
                                     <p>
                                         Filtro: @Html.DropDownList("filtros", "Todos")
-                                        Nome: @Html.TextBox("textoPesquisa")
+                                        Pesquisa: @Html.TextBox("textoPesquisa")
                                         <input type="submit" value="Filtro" />
                                     </p>
                                 }
@@ -89,9 +89,9 @@
                                                 <td>@Html.DisplayFor(modelItem => item.Categoria)</td>
                                                 <td>
 
-                                                    <a class="popup btn" href="@Url.Action("Detalhes", "Estoque", new { id = item.Id  })"><div class="itemback"><i class="item fa fa-info"></i></div></a>
-                                                    <a class="popup btn" href="@Url.Action("Editar", "Estoque", new { id = item.Id })"><div class="itemback"><i class="item far fa-edit"></i></div></a>
-                                                    <a class="popup btn" href="@Url.Action("Excluir", "Estoque", new { id = item.Id })"><div class="itemback"><i class="item far fa-trash-alt"></i></div></a>
+                                                    <a class="popup btn" href="@Url.Action("Detalhes", "Estoque", new { id = item.Id, tipo = item.Tipo  })"><div class="itemback"><i class="item fa fa-info"></i></div></a>
+                                                    <a class="popup btn" href="@Url.Action("Editar", "Estoque", new { id = item.Id, tipo = item.Tipo })"><div class="itemback"><i class="item far fa-edit"></i></div></a>
+                                                    <a class="popup btn" href="@Url.Action("Excluir", "Estoque", new { id = item.Id, tipo = item.Tipo })"><div class="itemback"><i class="item far fa-trash-alt"></i></div></a>
                                                 </td>
                                             </tr>
                                         }

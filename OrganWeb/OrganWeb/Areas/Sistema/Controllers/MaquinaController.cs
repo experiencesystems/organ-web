@@ -15,6 +15,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
     {
         private Maquina maquina = new Maquina();
         private Estoque estoque = new Estoque();
+        private ListarUnidades unmd = new ListarUnidades();
 
         public async Task<ActionResult> Index()
         {
@@ -25,14 +26,10 @@ namespace OrganWeb.Areas.Sistema.Controllers
             return View(select);
         }
 
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            var client = new RestClient("https://app.omie.com.br");
-            var request = new RestRequest("/api/v1/geral/unidade/?JSON={\"call\":\"ListarUnidades\",\"app_key\":\"1560731700\",\"app_secret\":\"226dcf372489bb45ceede61bfd98f0f1\",\"param\":[{\"codigo\":\"\"}]}", Method.POST);
-            var response = client.Execute(request);
-            var responseModel = JsonConvert.DeserializeObject<ListarUnidades>(response.Content);
-
-            return View(maquina = new Maquina { Estoque = new Estoque(), Unidades = responseModel.UnidadeCadastros });
+            var responseModel = await unmd.GetListarUnidades();
+            return View(maquina = new Maquina { Estoque = new Estoque { Unidades = responseModel.UnidadeCadastros } });
         }
 
         [HttpPost]
@@ -72,7 +69,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExcluirConfirmado(Maquina maquina)
         {
-
             maquina = await maquina.GetByID(maquina.IdEstoque);
             maquina.Delete(maquina.IdEstoque);
             await maquina.Save();
@@ -117,7 +113,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return HttpNotFound();
             }
-
             return View(maquina);
         }
     }

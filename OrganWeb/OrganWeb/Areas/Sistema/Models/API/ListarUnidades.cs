@@ -1,24 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Globalization;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using OrganWeb.Areas.Sistema.Models.zRepositories;
 
 namespace OrganWeb.Areas.Sistema.Models.API
 {
-    public partial class ListarUnidades
+    public partial class ListarUnidades : UnidadeMedidaRepository
     {
         [JsonProperty("unidade_cadastro")]
         public List<UnidadeCadastro> UnidadeCadastros { get; set; }
     }
 
-    public partial class UnidadeCadastro
+    [Table("tbUM")]
+    public partial class UnidadeCadastro : UnidadeMedidaRepository
     {
+        [Key]
         [JsonProperty("codigo")]
-        public string Codigo { get; set; }
+        public string Id { get; set; }
 
         [JsonProperty("descricao")]
-        public string Descricao { get; set; }
+        public string Desc { get; set; }
     }
 }

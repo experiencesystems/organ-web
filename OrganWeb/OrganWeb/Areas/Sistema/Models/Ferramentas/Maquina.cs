@@ -49,8 +49,6 @@ namespace OrganWeb.Areas.Sistema.Models.Ferramentas
         public virtual Estoque Estoque { get; set; }
 
         [NotMapped]
-        public List<UnidadeCadastro> Unidades { get; set; }
-        [NotMapped]
         public UnidadeCadastro Unini { get; set; }
     }
 }

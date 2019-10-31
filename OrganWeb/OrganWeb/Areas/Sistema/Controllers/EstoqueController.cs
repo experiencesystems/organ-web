@@ -14,6 +14,7 @@ using PagedList.EntityFramework;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque;
 using System.Threading.Tasks;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
+using OrganWeb.Areas.Sistema.Models.API;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
@@ -24,6 +25,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private Estoque estoque = new Estoque();
         private Categoria categoria = new Categoria();
         private VwItems vwItems = new VwItems();
+        private ListarUnidades listarUnidades = new ListarUnidades();
+        private UnidadeCadastro unidadeCadastro = new UnidadeCadastro();
         private VwFornecedor vwFornecedor = new VwFornecedor();
         private HistoricoEstoque historicoEstoque = new HistoricoEstoque();
         private ViewEstoque viewestoque = new ViewEstoque();
@@ -41,7 +44,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 "Produto",
                 "Semente"
             };
-
             ViewBag.filtros = new SelectList(listaFiltros);
 
             if (textoPesquisa != null)
@@ -103,31 +105,48 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
                 return RedirectToAction("Index");
             }
+            var ums = await listarUnidades.GetListarUnidades();
             insumo.Categorias = await categoria.GetAll();
-            ViewBag.UnidadeMedida = insumo.Estoque.UnidadesDeMedida.Where(x => x.Value == insumo.Estoque.UM.ToString()).First().Text;
             return View(insumo);
         }
 
-        public async Task<ActionResult> Detalhes(int? id)
+        public async Task<ActionResult> Detalhes(int? id, string tipo)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            switch (tipo)
+            {
+                case "Máquina":
+                    return RedirectToAction("Detalhes", "Maquina", new { id });
+                case "Produto":
+                    return RedirectToAction("Detalhes", "Produto", new { id });
+                case "Semente":
+                    return RedirectToAction("Detalhes", "Semente", new { id });
             }
             insumo = await insumo.GetByID(id);
             if (insumo == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.UnidadeMedida = insumo.Estoque.UnidadesDeMedida.Where(x => x.Value == insumo.Estoque.UM.ToString()).First().Text;
             return View(insumo);
         }
 
-        public async Task<ActionResult> Editar(int? id)
+        public async Task<ActionResult> Editar(int? id, string tipo)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            switch (tipo)
+            {
+                case "Máquina":
+                    return RedirectToAction("Editar", "Maquina", new { id });
+                case "Produto":
+                    return RedirectToAction("Editar", "Produto", new { id });
+                case "Semente":
+                    return RedirectToAction("Editar", "Semente", new { id });
             }
             insumo = await insumo.GetByID(id);
             if (insumo == null)
@@ -135,7 +154,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 return HttpNotFound();
             }
             insumo.Categorias = await categoria.GetAll();
-            ViewBag.UnidadeMedida = insumo.Estoque.UnidadesDeMedida.Where(x => x.Value == insumo.Estoque.UM.ToString()).First().Text;
             return View(insumo);
         }
 
@@ -157,8 +175,9 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 return RedirectToAction("Index");
             }
             insumo.Categorias = await categoria.GetAll();
-            ViewBag.UnidadeMedida = insumo.Estoque.UnidadesDeMedida.Where(x => x.Value == insumo.Estoque.UM.ToString()).First().Text;
             return View(insumo);
         }
+
+        //todo: tentar excluir insumo
     }
 }

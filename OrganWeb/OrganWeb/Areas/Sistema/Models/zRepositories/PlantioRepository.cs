@@ -40,23 +40,17 @@ namespace OrganWeb.Areas.Sistema.Models
             try
             {
                 //agora - começo
-                TimeSpan agoracomeco = (hoje.Subtract(plantio.DataInicio));
-                int diasAgoracomeco = agoracomeco.Days;
+                int diasAgoracomeco = hoje.Subtract(plantio.DataInicio).Days;
 
                 //fim - começo
-                TimeSpan fimcomeco = (plantio.DataColheita.Subtract(plantio.DataInicio));
-                int diasFimcomeco = fimcomeco.Days;
+                int diasFimcomeco = plantio.DataColheita.Subtract(plantio.DataInicio).Days;
 
                 int progresso = ((100 * diasAgoracomeco) / diasFimcomeco);
 
                 if (progresso > 100)
-                {
                     return 100;
-                }
-                else
-                {
-                    return progresso;
-                }
+
+                return progresso;
             }
             catch
             {
