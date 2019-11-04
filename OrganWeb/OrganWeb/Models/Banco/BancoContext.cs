@@ -43,9 +43,7 @@ namespace OrganWeb.Models.Banco
         public DbSet<FuncControle> FuncControles { get; set; }
 
         // FERRAMENTAS
-        public DbSet<Manutencao> Manutencaos { get; set; }
         public DbSet<Maquina> Maquinas { get; set; }
-        public DbSet<MaquinaManutencao> MaquinaManutencaos { get; set; }
 
         // FINANCEIRO
         public DbSet<DadosBancario> DadosBancarios { get; set; }

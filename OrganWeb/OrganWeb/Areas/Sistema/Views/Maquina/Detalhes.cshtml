@@ -41,7 +41,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ValorInicial)
+            R$ @Html.DisplayFor(model => model.ValorInicial)
         </dd>
 
         <dt>
@@ -49,7 +49,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DeprMes)
+            R$ @Html.DisplayFor(model => model.DeprMes)
         </dd>
 
         <dt>
@@ -57,7 +57,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DeprAno)
+            R$ @Html.DisplayFor(model => model.DeprAno)
         </dd>
 
         <dt>
@@ -65,7 +65,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DataCadastro)
+            @Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.DataCadastro))
         </dd>
 
     </dl>

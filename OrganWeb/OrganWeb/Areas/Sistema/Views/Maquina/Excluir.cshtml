@@ -42,7 +42,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ValorInicial)
+            R$ @Html.DisplayFor(model => model.ValorInicial)
         </dd>
 
         <dt>
@@ -50,7 +50,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DeprMes)
+            R$ @Html.DisplayFor(model => model.DeprMes)
         </dd>
 
         <dt>
@@ -58,7 +58,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DeprAno)
+            R$ @Html.DisplayFor(model => model.DeprAno)
         </dd>
 
         <dt>
@@ -66,14 +66,14 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DataCadastro)
+            @Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.DataCadastro))
         </dd>
 
     </dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
-
+        <!--TODO: enviar valores excluir máquina controller-->
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
             @Html.ActionLink("Back to List", "Index")

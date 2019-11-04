@@ -37,9 +37,6 @@ namespace OrganWeb.Areas.Sistema.Models.ViewModels
         public int[] IdArea { get; set; }
 
         [Required]
-        public int Densidade { get; set; }
-
-        [Required]
         [Display(Name = "Semente")]
         public int IdEstoque { get; set; }
 

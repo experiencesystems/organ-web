@@ -21,7 +21,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         
         public async Task<ActionResult> Index()
         {
-            return View(await vwpraga.GetFew());
+            return View(await vwpraga.GetAll());
         }
 
         public async Task<ActionResult> Detalhes(int? id)

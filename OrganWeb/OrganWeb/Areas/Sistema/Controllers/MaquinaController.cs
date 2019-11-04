@@ -17,13 +17,9 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private Estoque estoque = new Estoque();
         private ListarUnidades unmd = new ListarUnidades();
 
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            var select = new ViewMaquina
-            {
-                Maquina = await maquina.GetFew()
-            };
-            return View(select);
+            return RedirectToAction("Index", "Estoque");
         }
 
         public async Task<ActionResult> Create()

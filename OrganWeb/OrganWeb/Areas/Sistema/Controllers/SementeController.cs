@@ -16,13 +16,9 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private Semente semente = new Semente();
         private Estoque estoque = new Estoque();
         
-        public async Task<ActionResult> Sementes()
+        public ActionResult Sementes()
         {
-            var select = new ViewSementes
-            {
-                Semente = await semente.GetFew()
-            };
-            return View(select);
+            return RedirectToAction("Index","Estoque");
         }
 
         public ActionResult Create()

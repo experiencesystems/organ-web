@@ -248,7 +248,6 @@
     <Compile Include="Areas\Sistema\Controllers\FinanceiroController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FornecedorController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FuncionarioController.cs" />
-    <Compile Include="Areas\Sistema\Controllers\ManutencaoController.cs" />
     <Compile Include="Areas\Sistema\Controllers\MaquinaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\PlantioController.cs" />
     <Compile Include="Areas\Sistema\Controllers\PragaDoencaController.cs" />
@@ -265,7 +264,6 @@
     <Compile Include="Areas\Sistema\Models\Praga_e_Doenca\AreaPD.cs" />
     <Compile Include="Areas\Sistema\Models\Praga_e_Doenca\ControlePD.cs" />
     <Compile Include="Areas\Sistema\Models\Praga_e_Doenca\PragaOrDoenca.cs" />
-    <Compile Include="Areas\Sistema\Models\Ferramentas\MaquinaManutencao.cs" />
     <Compile Include="Areas\Sistema\Models\Funcionario\Cargo.cs" />
     <Compile Include="Areas\Sistema\Models\Armazenamento\Categoria.cs" />
     <Compile Include="Areas\Sistema\Models\Armazenamento\Estoque.cs" />
@@ -281,10 +279,8 @@
     <Compile Include="Areas\Sistema\Models\ViewModels\CreateFuncionarioViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\CreatePlantioViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewAreas.cs" />
-    <Compile Include="Areas\Sistema\Models\ViewModels\ViewMaquina.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewSementes.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewFuncionario.cs" />
-    <Compile Include="Areas\Sistema\Models\ViewModels\ViewManutencao.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewFazenda.cs" />
     <Compile Include="Areas\Sistema\Models\ViewsBanco\Estoque\VwControle.cs" />
     <Compile Include="Areas\Sistema\Models\ViewsBanco\Estoque\VwManutencao.cs" />
@@ -303,11 +299,9 @@
     <Compile Include="Areas\Sistema\Models\zRepositories\ColheitaRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\EstoqueRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\ItensPlantioRepository.cs" />
-    <Compile Include="Areas\Sistema\Models\zRepositories\MaquinaManutencaoRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\PlantioRepository.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewEstoque.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewPlantio.cs" />
-    <Compile Include="Areas\Sistema\Models\Ferramentas\Manutencao.cs" />
     <Compile Include="Areas\Sistema\Models\Ferramentas\Maquina.cs" />
     <Compile Include="Areas\Sistema\Models\Safras\Semente.cs" />
     <Compile Include="Areas\Sistema\Models\Administrativo\Solo.cs" />
@@ -437,11 +431,6 @@
     <Content Include="Areas\Sistema\Views\Estoque\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Plantio\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Plantio\Detalhes.cshtml" />
-    <Content Include="Areas\Sistema\Views\Manutencao\Index.cshtml" />
-    <Content Include="Areas\Sistema\Views\Manutencao\Detalhes.cshtml" />
-    <Content Include="Areas\Sistema\Views\Manutencao\Create.cshtml" />
-    <Content Include="Areas\Sistema\Views\Manutencao\Excluir.cshtml" />
-    <Content Include="Areas\Sistema\Views\Manutencao\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Semente\Index.cshtml" />
     <Content Include="Areas\Ecommerce\Views\web.config" />
     <Content Include="Areas\Ecommerce\Views\Loja\Detalhes.cshtml" />

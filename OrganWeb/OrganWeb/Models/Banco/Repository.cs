@@ -12,7 +12,8 @@ using System.Web;
 namespace OrganWeb.Models.Banco
 {
     public class Repository<T> : IDisposable where T : class
-    {
+    {   //https://stackoverflow.com/questions/20308378/configure-multiple-database-entity-framework-6
+        //https://stackoverflow.com/questions/11013372/repository-pattern-to-query-multiple-databases
         protected BancoContext _context;
         protected DbSet<T> DbSet { get; set; }
 
@@ -71,10 +72,6 @@ namespace OrganWeb.Models.Banco
 
         public void Update(T entity)
         {
-            if (_context.Entry(entity).State == EntityState.Detached)
-            {
-                DbSet.Attach(DbSet.Find(entity));
-            }
             _context.Entry(entity).State = EntityState.Modified;
         }
 

@@ -15,7 +15,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         public ActionResult Index()
         {
-            return Redirect("~/Sistema/Fazenda/Index");
+            return RedirectToAction("Index", "Fazenda");
         }
 
         public ActionResult Create()

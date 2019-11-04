@@ -41,8 +41,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Sistema = plantio.Sistemas.Where(x => x.Value == plantio.Sistema.ToString()).First().Text;
-            ViewBag.Periodo = plantio.Periodos.Where(x => x.Value == plantio.TipoPlantio.ToString()).First().Text;
             return View(plantio);
         }
         
@@ -92,54 +90,64 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(CreatePlantioViewModel plantio, int[] IdArea, int Sistema, int Tipo)
+        public async Task<ActionResult> Create(CreatePlantioViewModel crplantio, int[] IdArea, int Sistema, int Tipo)
         {
-            if (plantio.Inicio > plantio.Colheita)
+            if (crplantio.Inicio > crplantio.Colheita)
             {
-                ModelState.AddModelError("", "Insira uma data de início anterior a da colheita.");
-                return View(plantio);
+                ModelState.AddModelError(string.Empty, "Insira uma data de início anterior a da colheita.");
+                crplantio.Areas = await area.AreasDisponiveis();
+                crplantio.Sementes = await semente.GetAll();
+                crplantio.Sistemas = plantio.Sistemas;
+                crplantio.Periodos = plantio.Periodos;
+                return View(crplantio);
             }
-            semente = await semente.GetByID(plantio.IdEstoque);
-            if (semente.Estoque.Qtd < plantio.Quantidade)
+            semente = await semente.GetByID(crplantio.IdEstoque);
+            if (semente.Estoque.Qtd < crplantio.Quantidade)
             {
-                ModelState.AddModelError("", "Não há sementes o suficiente no estoque para completar a operação");
-                return View(plantio);
+                ModelState.AddModelError(string.Empty, "Não há sementes o suficiente no estoque para completar a operação");
+                crplantio.Areas = await area.AreasDisponiveis();
+                crplantio.Sementes = await semente.GetAll();
+                crplantio.Sistema = plantio.Sistema;
+                crplantio.Periodos = plantio.Periodos;
+                return View(crplantio);
             }
             else if (ModelState.IsValid)
             {
                 var pl = new Plantio
                 {
-                    Nome = plantio.Nome,
-                    DataInicio = plantio.Inicio,
-                    DataColheita = plantio.Colheita,
-                    Sistema = plantio.Sistema,
-                    TipoPlantio = plantio.Tipo
+                    Nome = crplantio.Nome,
+                    DataInicio = crplantio.Inicio,
+                    DataColheita = crplantio.Colheita,
+                    Sistema = crplantio.Sistema,
+                    TipoPlantio = crplantio.Tipo
                 };
                 pl.Add(pl);
                 await pl.Save();
 
                 foreach (var item in IdArea)
                 {
-                   areap.Add(new AreaPlantio { IdArea = item, IdPlantio = pl.Id, Densidade = plantio.Densidade });
+                   areap.Add(new AreaPlantio { IdArea = item, IdPlantio = pl.Id });
                    await areap.Save();
                 }
 
-                var itemplantio = new ItensPlantio
+                var itemcrplantio = new ItensPlantio
                 {
-                   IdEstoque = plantio.IdEstoque,
+                   IdEstoque = crplantio.IdEstoque,
                    IdPlantio = pl.Id,
-                   QtdUsada = plantio.Quantidade
+                   QtdUsada = crplantio.Quantidade
                 };
-                itemplantio.Add(itemplantio);
-                await itemplantio.Save();
+                itemcrplantio.Add(itemcrplantio);
+                await itemcrplantio.Save();
 
                 return RedirectToAction("Index");
             }
 
             // Enviando listas da combobox caso o formulário não seja preenchido corretamente
-            plantio.Areas = await area.AreasDisponiveis();
-            plantio.Sementes = await semente.GetAll();
-            return View(plantio);
+            crplantio.Areas = await area.AreasDisponiveis();
+            crplantio.Sementes = await semente.GetAll();
+            crplantio.Sistema = plantio.Sistema;
+            crplantio.Periodos = plantio.Periodos;
+            return View(crplantio);
         }
 
         public async Task<ActionResult> Excluir(int? id)
@@ -153,8 +161,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Sistema = plantio.Sistemas.Where(x => x.Value == plantio.Sistema.ToString()).First().Text;
-            ViewBag.Periodo = plantio.Periodos.Where(x => x.Value == plantio.TipoPlantio.ToString()).First().Text;
             return View(plantio);
         }
 

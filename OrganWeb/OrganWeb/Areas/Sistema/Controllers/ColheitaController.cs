@@ -17,9 +17,9 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private Produto produto = new Produto();
         private Estoque estoque = new Estoque();
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(colheita.GetFew());
+            return View(await colheita.GetAll());
         }
 
         public async Task<ActionResult> Create(int? id) //recebe o id do plantio
@@ -94,7 +94,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
             }
             ViewBag.Sistema = colheita.Plantio.Sistemas.Where(x => x.Value == colheita.Plantio.Sistema.ToString()).First().Text;
             ViewBag.Periodo = colheita.Plantio.Periodos.Where(x => x.Value == colheita.Plantio.TipoPlantio.ToString()).First().Text;
-            ViewBag.UnidadeMedida = colheita.Produto.Estoque.UnidadesDeMedida.Where(x => x.Value == colheita.Produto.Estoque.UM.ToString()).First().Text;
             return View(colheita);
         }
 

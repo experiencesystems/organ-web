@@ -21,9 +21,6 @@ namespace OrganWeb.Areas.Sistema.Models.Safras
         [ForeignKey("Area")]
         public int IdArea { get; set; }
 
-        [Required]
-        public int Densidade { get; set; }
-
         public virtual Plantio Plantio { get; set; }
         public virtual Area Area { get; set; }
 
