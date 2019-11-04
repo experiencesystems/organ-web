@@ -16,8 +16,6 @@ namespace OrganWeb.Models.Usuario
     public class ApplicationUser : IdentityUser
     {
         [Required]
-        public DateTime DataCadastro { get; set; }
-        [Required]
         public bool Confirmacao { get; set; }
         [Required]
         public bool Assinatura { get; set; }

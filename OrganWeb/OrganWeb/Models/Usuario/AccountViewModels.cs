@@ -134,6 +134,26 @@ namespace OrganWeb.Models.Usuario
         [Required]
         public int Estado { get; set; }
 
+        [Required]
+        [StringLength(100, MinimumLength = 5)]
+        public string NomeTitular { get; set; }
+
+        [Required]
+        [Display(Name = "Número do cartão")]
+        public Int64 NumCartao { get; set; }
+
+        [Required]
+        public int Banco { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime Validade { get; set; }
+
+        [Required]
+        [Range(1, 9999)]
+        public int CVV { get; set; }
+
+        public IEnumerable<SelectListItem> Bancos { get; set; }
         public IEnumerable<Estado> Estados { get; set; }
         public IEnumerable<DDD> DDDs { get; set; }
     }
@@ -165,26 +185,6 @@ namespace OrganWeb.Models.Usuario
         [EmailAddress]
         [Display(Name = "E-mail")]
         public string Email { get; set; }
-    }
-
-    public class AssinaturaViewModel
-    {
-        [Required]
-        [Range(1, 9999)]
-        public int CVV { get; set; }
-
-        [Required]
-        public int Banco { get; set; }
-
-        [Required]
-        [Display(Name = "Número do cartão")]
-        public Int64 NumCartao { get; set; }
-
-        [Required]
-        [DataType(DataType.Date)]
-        public DateTime Validade { get; set; }
-
-        public IEnumerable<SelectListItem> Bancos { get; set; }
     }
 
     public class LoginRegisterViewModel

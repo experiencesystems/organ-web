@@ -278,9 +278,6 @@
     <Compile Include="Areas\Sistema\Models\ViewModels\CreateFornecedorViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\CreateFuncionarioViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\CreatePlantioViewModel.cs" />
-    <Compile Include="Areas\Sistema\Models\ViewModels\ViewAreas.cs" />
-    <Compile Include="Areas\Sistema\Models\ViewModels\ViewSementes.cs" />
-    <Compile Include="Areas\Sistema\Models\ViewModels\ViewFuncionario.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewFazenda.cs" />
     <Compile Include="Areas\Sistema\Models\ViewsBanco\Estoque\VwControle.cs" />
     <Compile Include="Areas\Sistema\Models\ViewsBanco\Estoque\VwManutencao.cs" />
@@ -301,7 +298,6 @@
     <Compile Include="Areas\Sistema\Models\zRepositories\ItensPlantioRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\PlantioRepository.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewEstoque.cs" />
-    <Compile Include="Areas\Sistema\Models\ViewModels\ViewPlantio.cs" />
     <Compile Include="Areas\Sistema\Models\Ferramentas\Maquina.cs" />
     <Compile Include="Areas\Sistema\Models\Safras\Semente.cs" />
     <Compile Include="Areas\Sistema\Models\Administrativo\Solo.cs" />

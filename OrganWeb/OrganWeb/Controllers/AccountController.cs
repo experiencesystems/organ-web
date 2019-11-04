@@ -86,8 +86,9 @@ namespace OrganWeb.Controllers
             var selectestados = new RegisterViewModel
             {
                 Estados = await estado.GetAll(),
-                DDDs = await ddd.GetAll()
-            };
+                DDDs = await ddd.GetAll(),
+                Bancos = bancossl
+        };
             return View(selectestados);
         }
 
@@ -99,18 +100,7 @@ namespace OrganWeb.Controllers
             new SelectListItem() { Text = "elo", Value = "4" },
             new SelectListItem() { Text = "Hipercard", Value = "5" }
             };
-
-        //
-        // GET: /Account/Assinatura
-        [AllowAnonymous]
-        public ActionResult Assinatura()
-        {
-            var assist = new AssinaturaViewModel
-            {
-                Bancos = bancossl
-            };
-            return View(assist);
-        }
+        
 
         //
         // POST: /Account/Login
@@ -193,19 +183,7 @@ namespace OrganWeb.Controllers
                     return View(model);
             }
         }
-
-        //
-        // POST: /Account/Assinatura
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult Assinatura(AssinaturaViewModel model)
-        {
-            if (ModelState.IsValid)
-            { }
-            model.Bancos = bancossl;
-            return View(model);
-        }
+        
 
         //
         // POST: /Account/Registro
@@ -299,7 +277,6 @@ namespace OrganWeb.Controllers
                     Email = model.Email,
                     Assinatura = false,
                     Confirmacao = false,
-                    DataCadastro = DateTime.Today,
                     IdPessoa = pessoa.Id
                 };
 

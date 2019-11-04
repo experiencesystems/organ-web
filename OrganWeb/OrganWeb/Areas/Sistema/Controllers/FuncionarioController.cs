@@ -32,13 +32,9 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private Funcionario funcionario = new Funcionario();
         private VwFuncionario vwfuncionario = new VwFuncionario();
 
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            var select = new ViewFuncionario
-            {
-                Funcionario = await funcionario.GetFew()
-            };
-            return View(select);
+            return RedirectToAction("Index", "Fazenda");
         }
 
         public async Task<ActionResult> Create()

@@ -133,8 +133,8 @@
                                             {
                                                 <tr>
                                                     <td>@Html.DisplayFor(modelItem => item.DataAlteracao)</td>
-                                                    <td>@Html.DisplayFor(modelItem => item.QtdAntiga)</td>
-                                                    <td>@Html.DisplayFor(modelItem => item.QtdAlterada)</td>
+                                                    <td>@Html.DisplayFor(modelItem => item.QtdAntiga) @Html.DisplayFor(modelItem => item.Estoque.UM)</td>
+                                                    <td>@Html.DisplayFor(modelItem => item.QtdAlterada) @Html.DisplayFor(modelItem => item.Estoque.UM)</td>
                                                 </tr>
                                             }
                                         </tbody>
@@ -161,22 +161,21 @@
                         </ul>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="card-content">
-                        <div class="card-content">
-                            <a class="popup btn btn-add" href="/Sistema/Fornecedor/Create" style="margin-bottom:20px; margin-top:20px;">Novo Fornecedor</a>
-                            <div class="tablecontainer">
-                            </div>
-                            <table class="table">
+                <div class="card table-card">
+                    <div class="card-block">
+                        <a class="popup btn btn-add" href="/Sistema/Fornecedor/Create" style="margin-bottom:20px; margin-top:20px;">Novo Fornecedor</a>
+                        <table class="table-hover">
+                            <thead class="thead-title">
                                 <tr>
-                                    <th>#/th>
-                                    <th>Nome fantasia</th>
-                                    <th>Telefones</th>
-                                    <th>Email</th>
-                                    <th>Endereço</th>
-                                    <th></th>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nome fantasia</th>
+                                    <th scope="col">Telefones</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Endereço</th>
+                                    <th scope="col"></th>
                                 </tr>
-
+                            </thead>
+                            <tbody>
                                 @foreach (var item in Model.Fornecedors)
                                 {
                                     <tr>
@@ -192,8 +191,8 @@
                                         </td>
                                     </tr>
                                 }
-                            </table>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
