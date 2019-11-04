@@ -1,0 +1,102 @@
+﻿@model OrganWeb.Areas.Sistema.Models.ViewModels.ViewPlantio
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+
+<div class="main-body">
+    <div class="row">
+        <div class="col">
+            <div class="tablecontainer">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="table-data__tool">
+                            <h6 class="body-title">Plantio</h6>
+                            <div class="selectdropdown">
+                                <select class="js-select2" name="property">
+                                    <option selected="selected">Todas as propriedades</option>
+                                    <option value="">Opção 1</option>
+                                    <option value="">Opção 2</option>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+
+                            <div class="selectdropdown">
+                                <select class="js-select2 ui dropdown" name="time">
+                                    <option selected="selected">Todos</option>
+                                    <option value="">Hoje</option>
+                                    <option value="">Essa semana</option>
+                                    <option value="">Este mês</option>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <p class="card-text">
+                            <a class="popup btn btn-add" href="/Sistema/Plantio/Create">Novo plantio</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    @foreach (var item in Model.Plantios)
+                    {
+                        <div class="col-xl-3 col-md-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    @Html.DisplayFor(model => item.Nome) -
+                                    <a class="popup btn" href="@Url.Action("Detalhes", "Plantio", new { id = item.Id })">Detalhes</a>
+                                </div>
+                                <div class="card-header-right">
+                                    <ul class="list-unstyled card-option">
+                                        <li><i class="ti-minus minimize-card"></i></li>
+                                        <li><i class="icon-refresh"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="card-body">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <div class="progress mx-auto" data-value='@Html.DisplayFor(model => item.Porcentagem)'>
+                                                <span class="progress-left">
+                                                    <span class="progress-bar border-primary"></span>
+                                                </span>
+                                                <span class="progress-right">
+                                                    <span class="progress-bar border-primary"></span>
+                                                </span>
+                                                <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                                                    <div class="h2 font-weight-bold">@Html.DisplayFor(model => item.Porcentagem)<sup class="small">%</sup></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-success m-b-0" data-save="ajax-modal">Colher</button>
+                                        <a class="popup btn" href="@Url.Action("Editar", "Plantio", new { id = item.Id })"><div class="itemback"><i class="item far fa-edit"></i></div></a>
+                                        <a class="popup btn" href="@Url.Action("Excluir", "Plantio", new { id = item.Id })"><div class="itemback"><i class="item far fa-trash-alt"></i></div></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ========== NÃO TIRA O PROGRESSCIRCLE.JS ======== -->
+<environment include="Development">
+    <script src="~/Scripts/progressCircle.js" asp-append-version="true" defer></script>
+</environment>
+
+<environment exclude="Development">
+    <script src="~/js/progressCircle.min.js" asp-append-version="true" defer></script>
+</environment>
+<!-- ========== NÃO TIRA O PROGRESSCIRCLE.JS ======== -->
+@section Scripts {
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.0.5/dist/jBox.all.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/modalui.js"></script>
+}

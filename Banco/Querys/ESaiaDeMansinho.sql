@@ -1,4 +1,3 @@
-use sys;
 drop database if exists dbOrgan;
 create database dbOrgan;
 use dbOrgan;

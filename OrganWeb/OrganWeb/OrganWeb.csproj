@@ -487,6 +487,8 @@
     <Content Include="Areas\Sistema\Views\PragaDoenca\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\PragaDoenca\Editar.cshtml" />
     <Content Include="Grid.mvc.readme" />
+    <None Include="Properties\PublishProfiles\organweb - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\organweb - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\gridmvc.js" />
