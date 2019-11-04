@@ -311,7 +311,6 @@
     </Compile>
     <Compile Include="Models\DecimalModelBinder.cs" />
     <Compile Include="Models\Financeiro\DadosBancario.cs" />
-    <Compile Include="Models\OmieAPI.cs" />
     <Compile Include="Models\Pessoa\PessoaFisica.cs" />
     <Compile Include="Models\Pessoa\PessoaJuridica.cs" />
     <Compile Include="Models\Usuario\AccountViewModels.cs" />
@@ -330,6 +329,7 @@
     <Compile Include="Models\Telefone\Telefone.cs" />
     <Compile Include="Models\Telefone\TipoTel.cs" />
     <Compile Include="Models\Usuario\Usuario.cs" />
+    <Compile Include="Models\ValidateCreditCard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

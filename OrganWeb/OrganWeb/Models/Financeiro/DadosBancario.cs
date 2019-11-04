@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrganWeb.Models.Banco;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,7 +9,7 @@ using System.Web;
 namespace OrganWeb.Models.Financeiro
 {
     [Table("tbDadosBancarios")]
-    public class DadosBancario
+    public class DadosBancario : Repository<DadosBancario>
     {
         [Key]
         public int Id { get; set; }
@@ -25,7 +26,6 @@ namespace OrganWeb.Models.Financeiro
         public int Banco { get; set; }
 
         [Required]
-        [CreditCard]
         [Display(Name = "Número do cartão")]
         public Int64 NumCartao { get; set; }
 

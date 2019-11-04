@@ -135,12 +135,14 @@ namespace OrganWeb.Models.Usuario
         public int Estado { get; set; }
 
         [Required]
+        [Display(Name = "Nome do titular")]
         [StringLength(100, MinimumLength = 5)]
         public string NomeTitular { get; set; }
 
         [Required]
         [Display(Name = "Número do cartão")]
-        public Int64 NumCartao { get; set; }
+        [Range(100000000000, 9999999999999999999, ErrorMessage = "Esse campo deve ter entre 12 e 19 dígitos")]
+        public long NumCartao { get; set; }
 
         [Required]
         public int Banco { get; set; }

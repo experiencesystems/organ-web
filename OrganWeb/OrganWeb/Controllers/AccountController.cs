@@ -13,6 +13,7 @@ using Microsoft.Owin.Security;
 using OrganWeb.Models;
 using OrganWeb.Models.Banco;
 using OrganWeb.Models.Endereco;
+using OrganWeb.Models.Financeiro;
 using OrganWeb.Models.Pessoa;
 using OrganWeb.Models.Telefone;
 using OrganWeb.Models.Usuario;
@@ -30,6 +31,7 @@ namespace OrganWeb.Controllers
         private TipoTel tipotel;
         private Telefone telefone;
         private TelefonePessoa telefonePessoa;
+        private DadosBancario dadosBancarios;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private DDD ddd = new DDD();
@@ -88,7 +90,7 @@ namespace OrganWeb.Controllers
                 Estados = await estado.GetAll(),
                 DDDs = await ddd.GetAll(),
                 Bancos = bancossl
-        };
+            };
             return View(selectestados);
         }
 
@@ -100,7 +102,7 @@ namespace OrganWeb.Controllers
             new SelectListItem() { Text = "elo", Value = "4" },
             new SelectListItem() { Text = "Hipercard", Value = "5" }
             };
-        
+
 
         //
         // POST: /Account/Login
@@ -183,7 +185,7 @@ namespace OrganWeb.Controllers
                     return View(model);
             }
         }
-        
+
 
         //
         // POST: /Account/Registro
@@ -192,8 +194,15 @@ namespace OrganWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Registro(RegisterViewModel model)
         {
-            var db = new BancoContext();
             ApplicationUser user = new ApplicationUser();
+            if (!ValidateCreditCard.IsValidCreditCardNumber(model.NumCartao.ToString()))
+            {
+                ModelState.AddModelError(string.Empty, "Digite um número de cartão de crédito válido.");
+            }
+            if (await UserManager.FindByNameAsync(model.UserName) != null)
+            {
+                ModelState.AddModelError(string.Empty, "Esse nome de usuário já foi escolhido!");
+            }
             if (ModelState.IsValid)
             {
                 cidade = new Cidade
@@ -271,6 +280,19 @@ namespace OrganWeb.Controllers
                 telefonePessoa.Add(telefonePessoa);
                 await telefonePessoa.Save();
 
+                dadosBancarios = new DadosBancario
+                {
+                    Banco = model.Banco,
+                    CVV = model.CVV,
+                    NumCartao = model.NumCartao,
+                    NomeTitular = model.NomeTitular,
+                    Validade = model.Validade,
+                    IdPessoa = pessoa.Id
+                };
+
+                dadosBancarios.Add(dadosBancarios);
+                await dadosBancarios.Save();
+
                 user = new ApplicationUser
                 {
                     UserName = model.UserName,
@@ -295,12 +317,14 @@ namespace OrganWeb.Controllers
                 }
                 model.DDDs = await ddd.GetAll();
                 model.Estados = await estado.GetAll();
+                model.Bancos = bancossl;
                 AddErrors(result);
             }
 
             // Se chegamos até aqui e houver alguma falha, exiba novamente o formulário
             model.DDDs = await ddd.GetAll();
             model.Estados = await estado.GetAll();
+            model.Bancos = bancossl;
             return View(model);
         }
 
