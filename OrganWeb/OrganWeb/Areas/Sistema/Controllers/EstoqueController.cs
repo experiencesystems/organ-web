@@ -30,6 +30,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private VwFornecedor vwFornecedor = new VwFornecedor();
         private HistoricoEstoque historicoEstoque = new HistoricoEstoque();
         private ViewEstoque viewestoque = new ViewEstoque();
+        private ListarUnidades unmd = new ListarUnidades();
 
         //https://stackoverflow.com/questions/25125329/using-a-pagedlist-with-a-viewmodel-asp-net-mvc
 
@@ -79,9 +80,13 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         public async Task<ActionResult> Create()
         {
+            var responseModel = await unmd.GetListarUnidades();
             insumo = new Insumo()
             {
-                Estoque = new Estoque(),
+                Estoque = new Estoque
+                {
+                    Unidades = responseModel.UnidadeCadastros
+                },
                 Categorias = await categoria.GetAll()
             };
             return View(insumo);

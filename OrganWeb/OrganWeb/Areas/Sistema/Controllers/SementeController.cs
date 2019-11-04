@@ -1,4 +1,5 @@
-﻿using OrganWeb.Areas.Sistema.Models.Armazenamento;
+﻿using OrganWeb.Areas.Sistema.Models.API;
+using OrganWeb.Areas.Sistema.Models.Armazenamento;
 using OrganWeb.Areas.Sistema.Models.Safras;
 using OrganWeb.Areas.Sistema.Models.ViewModels;
 using System;
@@ -15,18 +16,23 @@ namespace OrganWeb.Areas.Sistema.Controllers
     {
         private Semente semente = new Semente();
         private Estoque estoque = new Estoque();
-        
+        private ListarUnidades unmd = new ListarUnidades();
+
         public ActionResult Sementes()
         {
             return RedirectToAction("Index","Estoque");
         }
 
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
+            var responseModel = await unmd.GetListarUnidades();
             semente = new Semente()
             {
-                Estoque = new Estoque()
-            };
+                Estoque = new Estoque
+                {
+                    Unidades = responseModel.UnidadeCadastros
+                }
+            };//TODO: colocar unidade de medida aqui
             return View(semente);
         }
 
