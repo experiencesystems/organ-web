@@ -22,13 +22,9 @@ use dbOrgan;
    
    drop table if exists tbUsuario;
 	create table tbUsuario (
-		`Id` nvarchar(128)  not null ,
-			DataCadastro datetime default current_timestamp(),
+		`Id` nvarchar(128)  not null,
 			Foto blob,
 			Ativacao bool default true,
-			Assinatura int not null,
-            IdPessoa int not null,
-             constraint UQUsuarioIdPessoa unique(IdPessoa),
 		`Email` varchar(100) ,-- !
 		`Confirmacao` bool not null ,
 		`SenhaHash` longtext,
@@ -135,6 +131,15 @@ use dbOrgan;
 						  add constraint FKFuncTel foreign key(IdFunc) references tbFuncionario(Id);
                                  
 	insert into tbTelFunc value(1,1);
+    
+    drop table if exists tbUsuarioFunc;
+    create table tbUsuarioFunc(
+		IdFunc int not null,
+        IdUsuario nvarchar(128) not null,
+         constraint PKUsuarioFunc primary key(IdFunc, IdUsuario)
+    )engine = InnoDB;
+    alter table tbUsuarioFunc add constraint FKUsuarioFunc foreign key(IdUsuario) references tbUsuario(`Id`),
+							  add constraint FKFuncUsuario foreign key(IdFunc) references tbFuncionario(Id);
 -- ======================================================================================================================= 
  
  -- ========================================================== FORNECEDOR ==============================================  
@@ -320,8 +325,8 @@ use dbOrgan;
 		 constraint PKSolo primary key(Id),
 		Nome varchar(50) not null,
         Tipo int not null,
-        IncSolar decimal(5,2) not null default 0.00,
-        IncVento decimal(5,2) not null default 0.00
+        IncSolar decimal(5,2) default 0.00,
+        IncVento decimal(5,2) default 0.00
     )engine = InnoDB;
     
     insert into tbSolo(Nome, Tipo) values('Arenoso', 1), ('Vermelho', 1);
@@ -330,9 +335,9 @@ use dbOrgan;
 	create table tbArea(
 		Id int auto_increment,
          constraint PKArea primary key(Id),
-		Nome varchar(30) not null,
-        Disp int not null default 1,
-        Tamanho int not null default 1,
+		Nome varchar(15) not null,
+        Disp int default 1,
+        Tamanho int default 1,
         IdSolo int not null
     )engine = InnoDB;
     alter table tbArea add constraint FKAreaSolo foreign key(IdSolo) references tbSolo(Id);
@@ -360,18 +365,18 @@ use dbOrgan;
     alter table tbItensPlantio add constraint FKItensPlantioPlantio foreign key(IdPlantio) references tbPlantio(Id),
 							   add constraint FKItensPlantioEstoque foreign key(IdEstoque) references tbEstoque(Id);
     
-    insert into tbItensPlantio values(1, 1, 1 );
+    insert into tbItensPlantio values(1, 1, 1);
 	
     drop table if exists tbProduto;
 	create table tbProduto(
 		IdEstoque int not null,
          constraint PKProduto primary key(IdEstoque),
-		Nome varchar(50) not null,
-        `Desc` varchar(300)
+		Nome varchar(20) not null,
+        `Desc` varchar(100)
     )engine = InnoDB;
     alter table tbProduto add constraint FKProdutoEstoque foreign key(IdEstoque) references tbEstoque(Id);
     
-    insert into tbEstoque(Qtd, ValorUnit, IdFornecedor) values(3, 3, 1);
+    insert into tbEstoque(Qtd, UM, IdFornecedor) values(3, 'a', 1);
     insert into tbProduto(IdEstoque, Nome) value(7, 'Soja');
     
     drop table if exists tbColheita;
@@ -471,7 +476,10 @@ use dbOrgan;
 -- ========================================================================================================================= 
 
 /* -------------------------------------------------------------	Banco Commerce	------------------------------------------------------------------*/
-
+use sys;
+drop database if exists dbEcommerce;
+create database dbEcommerce;
+use dbEcommerce;
 -- =================================================================== USUÁRIO ============================================     
     drop table if exists `AspNetRoles`;
 	create table `AspNetRoles`(
@@ -493,12 +501,11 @@ use dbOrgan;
    drop table if exists tbUsuario;
 	create table tbUsuario (
 		`Id` nvarchar(128)  not null ,
-			DataCadastro datetime default current_timestamp(),
 			Foto blob,
 			Ativacao bool default true,
 			Assinatura int not null,
-            IdPessoa int not null,
-             constraint UQUsuarioIdPessoa unique(IdPessoa),
+            CPF numeric(12) not null,
+            Email varchar(100) not null,
 		`Email` varchar(100) ,-- !
 		`Confirmacao` bool not null ,
 		`SenhaHash` longtext,
@@ -543,10 +550,10 @@ use dbOrgan;
         Banco int, -- Listinha dos Banco s2 s2
         NumCartao numeric(19) not null,
         Validade date not null, 
-        IdPessoa int not null,
-         constraint UQDadosBancariosIdPessoa unique(IdPessoa)
+        IdUsario nvarchar(128) not null,
+         constraint UQDadosBancariosIdUsuario unique(IdUsuario)
 	)engine = InnoDB;
-    alter table tbDadosBancarios add constraint FKDBPessoa foreign key(IdPessoa) references tbPessoa(Id);
+    alter table tbDadosBancarios add constraint FKDBUsuario foreign key(IdUsuario) references tbUsuario(`Id`);
 	
     insert into tbDadosBancarios(NomeTitular, CVV, Banco, NumCartao, Validade, IdPessoa) values("João Meu Pai", 1111, 1, 11111111111111111, "01/01/01", 1);
 
@@ -768,3 +775,4 @@ use dbOrgan;
     )engine = InnoDB;
     alter table tbPacote add constraint FKPacoteEntrega foreign key(IdEntrega) references tbEntrega(Id);
 -- ================================================================================================================================ alter table tbDespesaFunc add constraint FKDespesaFunc foreign key(IdDespesa) references tbDespesa(Id),           add constraint FKFuncDespesa foreign key(IdFunc) references tbFuncionario(Id)
+use sys;
