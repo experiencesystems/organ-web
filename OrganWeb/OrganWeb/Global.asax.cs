@@ -12,7 +12,7 @@ using System.Web.Routing;
 
 namespace OrganWeb
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         protected void Application_Start()
         {
