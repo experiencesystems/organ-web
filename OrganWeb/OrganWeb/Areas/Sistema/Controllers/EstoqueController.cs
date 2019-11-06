@@ -37,7 +37,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [HttpGet]
         public async Task<ViewResult> Index(string filtros, string textoPesquisa, int? page)
         {
-            int pagina = (page ?? 1);
+            int pagina = page ?? 1;
             var listaFiltros = new List<string>
             {
                 "Insumo",
@@ -65,12 +65,17 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 Fornecedors = await vwFornecedor.GetAll()
             };
 
-            if (!String.IsNullOrEmpty(textoPesquisa))
+            if (!string.IsNullOrEmpty(textoPesquisa) && !string.IsNullOrEmpty(filtros))
             {
-                viewestoque.VwItems = itens.Where(s => s.Item.IndexOf(textoPesquisa, StringComparison.OrdinalIgnoreCase) >= 0 || s.Tipo.IndexOf(textoPesquisa, StringComparison.OrdinalIgnoreCase) >= 0 || s.Categoria.IndexOf(textoPesquisa, StringComparison.OrdinalIgnoreCase) >= 0).ToPagedList(pagina, 5);
+                viewestoque.VwItems = itens.Where(s => s.Tipo == filtros && (s.Item.IndexOf(textoPesquisa, StringComparison.OrdinalIgnoreCase) >= 0)).ToPagedList(pagina, 5);
             }
 
-            if (!string.IsNullOrEmpty(filtros))
+            else if (!string.IsNullOrEmpty(textoPesquisa))
+            {
+                viewestoque.VwItems = itens.Where(s => s.Item.IndexOf(textoPesquisa, StringComparison.OrdinalIgnoreCase) >= 0 || s.Categoria.IndexOf(textoPesquisa, StringComparison.OrdinalIgnoreCase) >= 0).ToPagedList(pagina, 5);
+            }
+
+            else if (!string.IsNullOrEmpty(filtros))
             {
                 viewestoque.VwItems = itens.Where(x => x.Tipo == filtros).ToPagedList(pagina, 5);
             }
@@ -113,7 +118,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
             var ums = await listarUnidades.GetListarUnidades();
             insumo.Categorias = await categoria.GetAll();
             return View(insumo);
-        }
+        }//TODO: máscara nos campos
 
         public async Task<ActionResult> Detalhes(int? id, string tipo)
         {

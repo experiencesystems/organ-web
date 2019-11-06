@@ -40,6 +40,12 @@ namespace OrganWeb.Areas.Sistema.Models.Safras
         public double Porcentagem { get; set; }
 
         [NotMapped]
+        public string NomeAreas { get; set; }
+
+        [NotMapped]
+        public List<AreaPlantio> AreaPlantios { get; set; }
+
+        [NotMapped]
         public readonly List<SelectListItem> Sistemas = new List<SelectListItem>()
             {
             new SelectListItem() { Text = "Convencional", Value = "1" },

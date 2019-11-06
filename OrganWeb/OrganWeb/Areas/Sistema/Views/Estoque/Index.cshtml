@@ -119,7 +119,7 @@
                             </div>
                             <div class="card table-card">
                                 <div class="card-block">
-                                    <!--<div class="table-responsive">-->
+                                   <div class="table-responsive">
                                     <table class="table-hover">
                                         <thead class="thead-title">
                                             <tr>
@@ -139,7 +139,7 @@
                                             }
                                         </tbody>
                                     </table>
-                                    <!--</div>-->
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -164,37 +164,39 @@
                 <div class="card table-card">
                     <div class="card-block">
                         <a class="popup btn btn-add" href="/Sistema/Fornecedor/Create" style="margin-bottom:20px; margin-top:20px;">Novo Fornecedor</a>
-                        <table class="table-hover">
-                            <thead class="thead-title">
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Nome fantasia</th>
-                                    <th scope="col">Telefones</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Endereço</th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.Fornecedors)
-                                {
+                        <div class="table-responsive">
+                            <table class="table-hover">
+                                <thead class="thead-title">
                                     <tr>
-                                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.NomeFantasia)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Telefones)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Endereco)</td>
-                                        <td>
-                                            @Html.ActionLink("Editar", "Editar", "Fornecedor", new { id = item.Id }, null) |
-                                            @Html.ActionLink("Detalhes", "Detalhes", "Fornecedor", new { id = item.Id }, null) |
-                                            @Html.ActionLink("Excluir", "Excluir", "Fornecedor", new { id = item.Id }, null)
-                                        </td>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Nome fantasia</th>
+                                        <th scope="col">Telefones</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Endereço</th>
+                                        <th scope="col"></th>
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Fornecedors)
+                                    {
+                                        <tr>
+                                            <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.NomeFantasia)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Telefones)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Endereco)</td>
+                                            <td>
+                                                @Html.ActionLink("Editar", "Editar", "Fornecedor", new { id = item.Id }, null) |
+                                                @Html.ActionLink("Detalhes", "Detalhes", "Fornecedor", new { id = item.Id }, null) |
+                                                @Html.ActionLink("Excluir", "Excluir", "Fornecedor", new { id = item.Id }, null)
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>

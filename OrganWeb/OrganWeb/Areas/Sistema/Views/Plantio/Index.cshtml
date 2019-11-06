@@ -1,4 +1,4 @@
-﻿@model OrganWeb.Areas.Sistema.Models.ViewModels.ViewPlantio
+﻿@model IEnumerable<OrganWeb.Areas.Sistema.Models.Safras.Plantio>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    @foreach (var item in Model.Plantios)
+                    @foreach (var item in Model)
                     {
                         <div class="col-xl-3 col-md-8">
                             <div class="card">
@@ -56,6 +56,7 @@
                                     </ul>
                                 </div>
                                 <div class="card-body">
+                                    @Html.DisplayFor(model => item.NomeAreas)
                                     <div class="card-content">
                                         <div class="card-body">
                                             <div class="progress mx-auto" data-value='@Html.DisplayFor(model => item.Porcentagem)'>

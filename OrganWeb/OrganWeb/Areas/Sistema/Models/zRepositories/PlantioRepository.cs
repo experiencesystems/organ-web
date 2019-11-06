@@ -6,6 +6,7 @@ using OrganWeb.Models;
 using OrganWeb.Areas.Sistema.Models.Safras;
 using OrganWeb.Models.Banco;
 using System.Threading.Tasks;
+using OrganWeb.Areas.Sistema.Models.Administrativo;
 
 namespace OrganWeb.Areas.Sistema.Models
 {
@@ -14,7 +15,8 @@ namespace OrganWeb.Areas.Sistema.Models
         public async Task<List<Plantio>> GetPlantios()
         {
             var plantios = await GetAll();
-            return plantios.Select(p => new Plantio
+            var areap = await new AreaPlantio().GetAll();
+            return plantios.Select((p) => new Plantio
             {
                 Porcentagem = ProgressoPlantio(p),
                 Id = p.Id,
@@ -22,7 +24,8 @@ namespace OrganWeb.Areas.Sistema.Models
                 Sistema = p.Sistema,
                 TipoPlantio = p.TipoPlantio,
                 DataInicio = p.DataInicio,
-                DataColheita = p.DataColheita
+                DataColheita = p.DataColheita,
+                NomeAreas = GetAreaPlantios(p, areap)
             }).ToList();
         }
 
@@ -34,13 +37,21 @@ namespace OrganWeb.Areas.Sistema.Models
             return plantios;
         }
 
+        public string GetAreaPlantios(Plantio plantio, List<AreaPlantio> areaPlantios)
+        {
+            List<string> nomes = areaPlantios.Where(x => x.Plantio.Id == plantio.Id).Select(a => a.Area.Nome).ToList();
+            return string.Join(", ", nomes.Select(x => x.ToString()).ToArray());
+        }
+
         private double ProgressoPlantio(Plantio plantio)
         {
             DateTime hoje = DateTime.Today;
+            int diasAgoracomeco = 0;
             try
             {
                 //agora - começo
-                int diasAgoracomeco = hoje.Subtract(plantio.DataInicio).Days;
+                if (hoje > plantio.DataInicio)
+                    diasAgoracomeco = hoje.Subtract(plantio.DataInicio).Days;
 
                 //fim - começo
                 int diasFimcomeco = plantio.DataColheita.Subtract(plantio.DataInicio).Days;
