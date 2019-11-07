@@ -254,6 +254,7 @@
     <Compile Include="Areas\Ecommerce\Models\Wishlist.cs" />
     <Compile Include="Areas\Sistema\Controllers\AreaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\ColheitaController.cs" />
+    <Compile Include="Areas\Sistema\Controllers\ControleController.cs" />
     <Compile Include="Areas\Sistema\Controllers\EstoqueController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FazendaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FinanceiroController.cs" />
@@ -286,6 +287,7 @@
     <Compile Include="Areas\Sistema\Models\Safras\FuncPlantio.cs" />
     <Compile Include="Areas\Sistema\Models\Safras\ItensPlantio.cs" />
     <Compile Include="Areas\Sistema\Models\Safras\Plantio.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewModels\CreateControleViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\CreateFornecedorViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\CreateFuncionarioViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\CreatePlantioViewModel.cs" />
@@ -496,6 +498,7 @@
     <Content Include="Areas\Sistema\Views\PragaDoenca\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\PragaDoenca\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\PragaDoenca\Editar.cshtml" />
+    <Content Include="Areas\Sistema\Views\Controle\Create.cshtml" />
     <None Include="Properties\PublishProfiles\organweb - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\organweb - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />

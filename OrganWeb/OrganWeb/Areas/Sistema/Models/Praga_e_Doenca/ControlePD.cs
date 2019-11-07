@@ -1,4 +1,5 @@
 ﻿using OrganWeb.Areas.Sistema.Models.Controles;
+using OrganWeb.Models.Banco;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +10,7 @@ using System.Web;
 namespace OrganWeb.Areas.Sistema.Models.Praga_e_Doenca
 {
     [Table("tbControlePD")]
-    public class ControlePD
+    public class ControlePD : Repository<ControlePD>
     {
         [Key, Column(Order = 1)]
         [ForeignKey("Controle")]

@@ -1,4 +1,5 @@
 ﻿using OrganWeb.Areas.Sistema.Models.Funcionarios;
+using OrganWeb.Models.Banco;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +10,7 @@ using System.Web;
 namespace OrganWeb.Areas.Sistema.Models.Controles
 {
     [Table("tbFuncControle")]
-    public class FuncControle
+    public class FuncControle : Repository<FuncControle>
     {
         [Key, Column(Order = 1)]
         [ForeignKey("Funcionario")]

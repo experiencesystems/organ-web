@@ -13,7 +13,6 @@ namespace OrganWeb.Areas.Sistema.Models.ViewModels
 {
     public class CreateFuncionarioViewModel
     {
-
         [Required]
         public string Nome { get; set; }
         [Required]
@@ -68,9 +67,8 @@ namespace OrganWeb.Areas.Sistema.Models.ViewModels
         public int Estado { get; set; }
         
         public IEnumerable<Estado> Estados { get; set; }
-        public IEnumerable<Funcionario> Funcionarios{ get; set; }
+        public IEnumerable<Funcionario> Funcionarios { get; set; }
         public IEnumerable<Cargo> Cargos { get; set; }
         public IEnumerable<DDD> DDDs { get; set; }
-
     }
 }
