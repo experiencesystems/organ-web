@@ -59,68 +59,7 @@ select F.Id, PJ.Nome `Nome Fantasia`, PJ.RazaoSocial `Razão Social`, PJ.CNPJ, P
  where F.`Status` = true
 );  
 
-drop view if exists vwItems;
-create view vwItems as
-(SELECT S.IdEstoque `Id`,
-			S.Nome `Item`,
-            E.Qtd `Quantidade`,
-            -- U.`Desc` `Unidade de Medida`,
-            E.ValorUnit `Valor Unitário (R$)`,
-			(E.Qtd * E.ValorUnit) `Valor Total (por Produto)`,
-           'Semente' `Categoria`,
-           F.`Nome Fantasia` `Fornecedor`,
-           'Semente' `Tipo`
-FROM tbEstoque E
-INNER JOIN tbSemente S ON E.Id = S.IdEstoque
-inner join vwFornecedor F on E.IdFornecedor = F.Id
--- inner join tbUM U on E.UM = U.Id
-)
-UNION
-(SELECT I.IdEstoque, 
-		I.Nome,
-		E.Qtd,
-		-- U.`Desc`,
-		E.ValorUnit,
-		(E.Qtd * E.ValorUnit),
-		C.Categoria,
-        F.`Nome Fantasia`,
-           'Insumo' `Tipo`
-FROM tbEstoque E
-INNER JOIN tbInsumo I ON E.Id = I.IdEstoque
-INNER JOIN tbCategoria C ON C.Id = I.IdCategoria
-inner join vwFornecedor F on E.IdFornecedor = F.Id
--- inner join tbUM U on E.UM = U.Id
-)
-UNION
-(SELECT M.IdEstoque,
-		M.Nome,
-		E.Qtd,
-		-- U.`Desc`,
-		E.ValorUnit,
-		(E.Qtd * E.ValorUnit),
-		M.Tipo,
-        F.`Nome Fantasia`,
-           'Máquina' `Tipo`
-FROM tbMaquina M
-INNER JOIN tbEstoque E ON M.IdEstoque = E.Id
-inner join vwFornecedor F on E.IdFornecedor = F.Id
--- inner join tbUM U on E.UM = U.Id
-)    UNION
-(SELECT P.IdEstoque,
-		P.Nome,
-		E.Qtd,
-		-- U.`Desc`,
-		E.ValorUnit,
-		(E.Qtd * E.ValorUnit),
-		'Produto',
-        F.`Nome Fantasia`,
-           'Produto' `Tipo`
-FROM tbProduto P
-INNER JOIN tbEstoque E ON P.IdEstoque = E.Id
-inner join vwFornecedor F on E.IdFornecedor = F.Id
--- inner join tbUM U on E.UM = U.Id
-)
-    order by `Categoria`;
+
 
 -- MUDAR VALOR DOS NOMES Das( DATas( PRA PORTUGUES    SET lc_time_names = 'pt_BR';     
 
