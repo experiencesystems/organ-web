@@ -51,14 +51,6 @@ select F.Id, PF.Nome,  C.Nome `Cargo`, F.Salario `Salário`, PF.CPF, PF.RG, PF.`
  where F.`Status` = true
 ); 
 
-drop view if exists vwFornecedor;
-create view vwFornecedor as(
-select F.Id, PJ.Nome `Nome Fantasia`, PJ.RazaoSocial `Razão Social`, PJ.CNPJ, PJ.IE, PJ.Telefones, PJ.Email, PJ.`Endereço`
- from tbFornecedor F
-	inner join vwPessoaJuridica PJ on PJ.Id = F.IdPessoa
- where F.`Status` = true
-);  
-
 
 
 -- MUDAR VALOR DOS NOMES Das( DATas( PRA PORTUGUES    SET lc_time_names = 'pt_BR';     
