@@ -1,3 +1,4 @@
+-- IMAGEM NO BANCO http://www.linhadecodigo.com.br/artigo/100/blob-fields-in-mysql-databases.aspx
 drop database if exists dbOrgan;
 create database dbOrgan;
 use dbOrgan;
@@ -26,7 +27,7 @@ use dbOrgan;
 			Foto blob,
 			Ativacao bool default true,
 		`Email` varchar(100) ,-- !
-		`Confirmacao` bool not null ,
+		`ConfirmacaoEmail` bool not null ,
 		`SenhaHash` longtext,
 		`CarimboSeguranca` longtext,
 		`UserName` varchar(50)  not null ,-- !
@@ -58,6 +59,15 @@ use dbOrgan;
 	alter table `AspNetUserClaims` add constraint `FK_AspNetUserClaims_AspNetUsers_UserId`  foreign key (`UserId`) references tbUsuario ( `Id`)  on update cascade on delete cascade; 
 	alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_UserId`  foreign key (`UserId`) references tbUsuario ( `Id`)  on update cascade on delete cascade;
 
+insert into tbUsuario(`Id`, `Email`, `ConfirmacaoEmail`, `SenhaHash`, `CarimboSeguranca`, `UserName`, Foto)
+			   values('02719894-e4a9-46c8-999e-ba942abd5f8f', 'milenamonteiro@gmail.com', 0, 
+					  'ABecbdkGhzyTR1/t+F8FpUnN+AHXhiXYu4qPCVc4SroxOyzj3p0R+TnWK0p1o6q3Rw==',
+                      'e7aac8f8-7c92-44fb-9850-5f0fb0024c9a', 'Mirena',  LOAD_FILE("/error.gif")),
+                      
+                      ('02719894-e4a9-46c8-999e-ba942abd5f8g', 'moreexpsystems@gmail.com', 0,
+                      'ABecbdkGhzyTR1/t+F8FpUnN+AHXhiXYu4qPCVc4SroxOyzj3p0R+TnWK0p1o6q3Rw=+',
+                      'e7aac8f8-7c92-44fb-9850-5f0fb0024c9b', 'Empresinha', LOAD_FILE("/error.gif"));
+  
 -- =======================================================================================================================
 
 -- =================================================================== TELEFONE ========================================== 
@@ -151,7 +161,6 @@ use dbOrgan;
         Nome varchar(50) not null,
         Email varchar(100) not null
     )engine = InnoDB;
-    alter table tbFornecedor add constraint FKFornecedorPessoa foreign key(IdPessoa) references tbPessoa(Id);
     
     insert into tbFornecedor(Nome, Email) value('Expereince Systems', 'moreexpsystems@gmail.com');
     
@@ -200,7 +209,70 @@ use dbOrgan;
         IdFornecedorAntigo int
     )engine = InnoDB;
     alter table tbHistEstoque add constraint FKHistEstoque foreign key(IdEstoque) references tbEstoque(Id);
-  /*  
+  /*
+	drop view if exists vwItems;
+	create view vwItems as
+	(SELECT S.IdEstoque `Id`,
+				S.Nome `Item`,
+				E.Qtd `Quantidade`,
+				-- U.`Desc` `Unidade de Medida`,
+				E.ValorUnit `Valor Unitário (R$)`,
+				(E.Qtd * E.ValorUnit) `Valor Total (por Produto)`,
+			   'Semente' `Categoria`,
+			   F.`Nome Fantasia` `Fornecedor`,
+			   'Semente' `Tipo`
+	FROM tbEstoque E
+	INNER JOIN tbSemente S ON E.Id = S.IdEstoque
+	inner join vwFornecedor F on E.IdFornecedor = F.Id
+	-- inner join tbUM U on E.UM = U.Id
+	)
+	UNION
+	(SELECT I.IdEstoque, 
+			I.Nome,
+			E.Qtd,
+			-- U.`Desc`,
+			E.ValorUnit,
+			(E.Qtd * E.ValorUnit),
+			C.Categoria,
+			F.`Nome Fantasia`,
+			   'Insumo' `Tipo`
+	FROM tbEstoque E
+	INNER JOIN tbInsumo I ON E.Id = I.IdEstoque
+	INNER JOIN tbCategoria C ON C.Id = I.IdCategoria
+	inner join vwFornecedor F on E.IdFornecedor = F.Id
+	-- inner join tbUM U on E.UM = U.Id
+	)
+	UNION
+	(SELECT M.IdEstoque,
+			M.Nome,
+			E.Qtd,
+			-- U.`Desc`,
+			E.ValorUnit,
+			(E.Qtd * E.ValorUnit),
+			M.Tipo,
+			F.`Nome Fantasia`,
+			   'Máquina' `Tipo`
+	FROM tbMaquina M
+	INNER JOIN tbEstoque E ON M.IdEstoque = E.Id
+	inner join vwFornecedor F on E.IdFornecedor = F.Id
+	-- inner join tbUM U on E.UM = U.Id
+	)    UNION
+	(SELECT P.IdEstoque,
+			P.Nome,
+			E.Qtd,
+			-- U.`Desc`,
+			E.ValorUnit,
+			(E.Qtd * E.ValorUnit),
+			'Produto',
+			F.`Nome Fantasia`,
+			   'Produto' `Tipo`
+	FROM tbProduto P
+	INNER JOIN tbEstoque E ON P.IdEstoque = E.Id
+	inner join vwFornecedor F on E.IdFornecedor = F.Id
+	-- inner join tbUM U on E.UM = U.Id
+	)
+		order by `Categoria`;
+  
     DELIMITER $
 	drop procedure if exists spVerQtd$
 	CREATE PROCEDURE spVerQtd (IN qtd decimal(7,2))
@@ -248,7 +320,7 @@ use dbOrgan;
 	create table tbSemente(
 		IdEstoque int not null,
          constraint PKSemente primary key(IdEstoque),
-		Nome varchar(15) not null,
+		Nome varchar(30) not null,
         `Desc` varchar(100)      
     )engine = InnoDB;
     alter table tbSemente add constraint FKSementeEstoque foreign key(IdEstoque) references tbEstoque(Id);
@@ -262,7 +334,7 @@ use dbOrgan;
 	create table tbInsumo(		
         IdEstoque int not null,
          constraint PKInsumo primary key(IdEstoque),
-		Nome varchar(15) not null,
+		Nome varchar(30) not null,
         `Desc` varchar(100),
         IdCategoria int not null
     )engine = InnoDB;
@@ -291,7 +363,7 @@ use dbOrgan;
 	create table tbMaquina(
 		IdEstoque int not null,
          constraint PKMaquina primary key(IdEstoque),
-		Nome varchar(15) not null,
+		Nome varchar(30) not null,
         Tipo int not null,
 		Montadora varchar(30),
         `Desc` varchar(100)
@@ -335,7 +407,7 @@ use dbOrgan;
 	create table tbArea(
 		Id int auto_increment,
          constraint PKArea primary key(Id),
-		Nome varchar(15) not null,
+		Nome varchar(30) not null,
         Disp int default 1,
         Tamanho int default 1,
         IdSolo int not null
@@ -505,14 +577,23 @@ use dbEcommerce;
 			Ativacao bool default true,
 			Assinatura int not null,
             CPF numeric(12) not null,
-            Email varchar(100) not null,
+             constraint UQUsuarioCPF unique(CPF),
 		`Email` varchar(100) ,-- !
-		`Confirmacao` bool not null ,
+		`ConfirmacaoEmail` bool not null ,
 		`SenhaHash` longtext,
 		`CarimboSeguranca` longtext,
 		`UserName` varchar(50)  not null ,-- !
 	      constraint PKAspNetUsers primary key ( `Id`)
 	)engine = InnoDB;
+    
+    insert into tbUsuario(`Id`, `Email`, `ConfirmacaoEmail`, `SenhaHash`, `CarimboSeguranca`, `UserName`, Foto, CPF, Assinatura)
+			   values('02719894-e4a9-46c8-999e-ba942abd5f8f', 'milenamonteiro@gmail.com', 0, 
+					  'ABecbdkGhzyTR1/t+F8FpUnN+AHXhiXYu4qPCVc4SroxOyzj3p0R+TnWK0p1o6q3Rw==',
+                      'e7aac8f8-7c92-44fb-9850-5f0fb0024c9a', 'Mirena',  LOAD_FILE("/error.gif"), 1111111111111, 0),
+                      
+                      ('02719894-e4a9-46c8-999e-ba942abd5f8g', 'moreexpsystems@gmail.com', 0,
+                      'ABecbdkGhzyTR1/t+F8FpUnN+AHXhiXYu4qPCVc4SroxOyzj3p0R+TnWK0p1o6q3Rw=+',
+                      'e7aac8f8-7c92-44fb-9850-5f0fb0024c9b', 'Empresinha', LOAD_FILE("/error.gif"), 111111111112, 1);
     
     drop table if exists `AspNetUserClaims`;
 	create table `AspNetUserClaims` (
@@ -545,17 +626,16 @@ use dbEcommerce;
 	create table tbDadosBancarios(
 		Id int auto_increment,
          constraint PKDadosBancarios primary key(Id),
-		NomeTitular varchar(100) not null,
+		NomeTitular varchar(30) not null,
 		CVV numeric(4) not null,
         Banco int, -- Listinha dos Banco s2 s2
         NumCartao numeric(19) not null,
         Validade date not null, 
-        IdUsario nvarchar(128) not null,
-         constraint UQDadosBancariosIdUsuario unique(IdUsuario)
+        IdUsario nvarchar(128) not null
 	)engine = InnoDB;
     alter table tbDadosBancarios add constraint FKDBUsuario foreign key(IdUsuario) references tbUsuario(`Id`);
 	
-    insert into tbDadosBancarios(NomeTitular, CVV, Banco, NumCartao, Validade, IdPessoa) values("João Meu Pai", 1111, 1, 11111111111111111, "01/01/01", 1);
+    insert into tbDadosBancarios(NomeTitular, CVV, Banco, NumCartao, Validade, IdUsuario) values("João Meu Pai", 1111, 1, 11111111111111111, "01/01/01", 1);
 
 
 -- ================================================== ENDEREÇO ===========================================================
@@ -571,7 +651,7 @@ use dbEcommerce;
 	create table tbLogradouro(
 		Id int auto_increment,
 		 constraint PKRua primary key (Id),
-		Logradouro varchar(50) not null,
+		Logradouro varchar(40) not null,
 		IdBairro int not null
 	)engine = InnoDB;
     
@@ -595,7 +675,7 @@ use dbEcommerce;
 	create table tbEstado(
 		Id tinyint auto_increment,
 		 constraint PKEstado primary key (Id),
-		Estado varchar(30) not null,
+		Estado varchar(20) not null,
 		UF char(2) not null
 	)engine = InnoDB;
     
@@ -641,6 +721,15 @@ use dbEcommerce;
 -- =======================================================================================================================
 
 -- =================================================================== ANÚNCIO ====================================================
+	drop table if exists tbProduto;
+    create table tbProduto(
+		Id int auto_increment,
+         constraint PKProduto primary key(Id),
+		ValorUnit double not null,
+        Quantidade int not null,
+        Nome varchar(30) not null
+    )engine = InnoDB;
+
 	drop table if exists tbAnuncio;
 	create table tbAnuncio(
 		Id int auto_increment,
