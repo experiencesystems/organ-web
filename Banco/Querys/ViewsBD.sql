@@ -11,36 +11,6 @@ select E.CEP,  R.Logradouro `Rua`, concat(B.Bairro,' - ', C.Cidade,'/', Es.UF) `
 	inner join tbEstado Es on C.IdEstado = Es.Id
 );
 
-drop view if exists vwTelefone;
-create view vwTelefone as(
-select T.Id, concat('(',T.IdDDD,') ',T.Numero,' - ',Ti.Tipo) `Telefone`
- from tbTelefone T
-	inner join tbTipoTel Ti on Ti.Id = T.IdTipo
-); 
-
-drop view if exists vwPessoa;
-create view vwPessoa as(
-select P.Id, P.Nome, P.Email, concat(E.Rua,', ', P.NumeroEndereco,' - ', ifnull(P.CompEndereco, 'Sem Complemento'),' - ',E.BCE,' - ',E.CEP) `Endereço`,  group_concat(T.Telefone separator '; ') `Telefones`
- from tbPessoa P 
-	inner join vwEndereco E on P.CEP = E.CEP
-	inner join tbTelefonePessoa TP on P.Id = TP.IdPessoa
-	inner join vwTelefone T on T.Id = TP.IdTelefone
- group by P.Id
-);
- 
- drop view if exists vwPessoaFisica;
- create view vwPessoaFisica as(
- select P.Id, P.Nome, F.CPF, F.RG, date_format(F.DataNasc, ('%d/%m/%Y')) `Data de Nascimento`, P.Telefones, P.Email, P.`Endereço`
-  from tbPessoaFisica F 
-	inner join vwPessoa P on F.IdPessoa = P.Id
-);
-
-drop view if exists vwPessoaJuridica;
-create view vwPessoaJuridica as(
-select P.Id, P.Nome, J.RazaoSocial, J.CNPJ, J.IE, P.Telefones, P.Email, P.`Endereço`
- from tbPessoaJuridica J 
-	inner join vwPessoa P on J.IdPessoa = P.Id
-);
  
 drop view if exists vwFuncionario;
 create view vwFuncionario as(
