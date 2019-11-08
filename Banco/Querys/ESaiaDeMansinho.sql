@@ -293,8 +293,8 @@ insert into tbUsuario(`Id`, `Email`, `ConfirmacaoEmail`, `SenhaHash`, `CarimboSe
     )engine = InnoDB;
     alter table tbAreaPlantio add constraint FKAreaPlantioPlantio foreign key(IdPlantio) references tbPlantio(Id),
 									 add constraint FKAreaPlantioArea foreign key(IdArea) references tbArea(Id);
-                                     
-	insert into tbAreaPlantio values(1, 1), (1, 2);
+                                   
+	insert into tbAreaPlantio values(1, 1, 3), (1, 2, 3);
     
     drop table if exists tbItensPlantio;
 	create table tbItensPlantio(
