@@ -40,7 +40,7 @@ use dbEcommerce;
     insert into tbUsuario(`Id`, `Email`, `ConfirmacaoEmail`, `SenhaHash`, `CarimboSeguranca`, `UserName`, Foto, CPF, Assinatura)
 			   values('02719894-e4a9-46c8-999e-ba942abd5f8f', 'milenamonteiro@gmail.com', 0, 
 					  'ABecbdkGhzyTR1/t+F8FpUnN+AHXhiXYu4qPCVc4SroxOyzj3p0R+TnWK0p1o6q3Rw==',
-                      'e7aac8f8-7c92-44fb-9850-5f0fb0024c9a', 'Mirena',  LOAD_FILE("/error.gif"), 1111111111111, 0),
+                      'e7aac8f8-7c92-44fb-9850-5f0fb0024c9a', 'Mirena',  LOAD_FILE("/error.gif"), 111111111111, 0),
                       
                       ('02719894-e4a9-46c8-999e-ba942abd5f8g', 'moreexpsystems@gmail.com', 0,
                       'ABecbdkGhzyTR1/t+F8FpUnN+AHXhiXYu4qPCVc4SroxOyzj3p0R+TnWK0p1o6q3Rw=+',
@@ -82,11 +82,11 @@ use dbEcommerce;
         Banco int, -- Listinha dos Banco s2 s2
         NumCartao numeric(19) not null,
         Validade date not null, 
-        IdUsario nvarchar(128) not null
+        IdUsuario nvarchar(128) not null
 	)engine = InnoDB;
     alter table tbDadosBancarios add constraint FKDBUsuario foreign key(IdUsuario) references tbUsuario(`Id`);
 	
-    insert into tbDadosBancarios(NomeTitular, CVV, Banco, NumCartao, Validade, IdUsuario) values("João Meu Pai", 1111, 1, 11111111111111111, "01/01/01", 1);
+    insert into tbDadosBancarios(NomeTitular, CVV, Banco, NumCartao, Validade, IdUsuario) values("João Meu Pai", 1111, 1, 11111111111111111, '01/01/01', '02719894-e4a9-46c8-999e-ba942abd5f8f');
 
 
 -- ================================================== ENDEREÇO ===========================================================
@@ -98,7 +98,6 @@ use dbEcommerce;
 	)engine = InnoDB;
     
     drop table if exists tbLogradouro;
-	drop table if exists tbEstado;
 	create table tbLogradouro(
 		Id int auto_increment,
 		 constraint PKRua primary key (Id),
@@ -114,7 +113,7 @@ use dbEcommerce;
 		IdCidade int not null
 	)engine = InnoDB;
     
-    drop table if exists tbEstado;
+    drop table if exists tbCidade;
 	create table tbCidade(
 		Id int auto_increment,
 		 constraint PKCidade primary key (Id),
@@ -126,7 +125,7 @@ use dbEcommerce;
 	create table tbEstado(
 		Id tinyint auto_increment,
 		 constraint PKEstado primary key (Id),
-		Estado varchar(20) not null,
+		Estado varchar(30) not null,
 		UF char(2) not null
 	)engine = InnoDB;
     
@@ -185,26 +184,17 @@ use dbEcommerce;
 	create table tbAnuncio(
 		Id int auto_increment,
          constraint PKAnuncio primary key(Id),
-		Nome varchar(75) not null,
-        `Desc` varchar(300) not null,
+		Nome varchar(30) not null,
+        `Desc` varchar(100) not null,
         `Status` bool not null,
-        Foto Blob not null,
+        Foto blob not null,
         Desconto decimal(5,2),
-        IdProduto int not null
+        IdProduto int not null,
+        IdUsuario nvarchar(128) not null
     )engine = InnoDB;
-    alter table tbAnuncio add constraint FKAnuncioProduto foreign key(IdProduto) references tbProduto(Id);
-    
-    drop table if exists tbItensAnuncio;
-    create table tbItensAnuncio(
-		IdAnuncio int not null,
-        IdEstoque int not null,
-         constraint PKItensAnuncio primary key(IdAnuncio, IdEstoque),
-		Quantidade int not null,
-        DescontoProd decimal(5,2)
-    )engine = InnoDB;
-    alter table tbItensAnuncio add constraint FKItensAnuncioAnuncio foreign key(IdAnuncio) references tbAnuncio(Id),
-							   add constraint FKItensAnuncioEstoque foreign key(IdEstoque) references tbEstoque(Id);
-	
+    alter table tbAnuncio add constraint FKAnuncioProduto foreign key(IdProduto) references tbProduto(Id),
+						  add constraint FKAnuncioUsuario foreign key(IdUsuario) references tbUsuario(`Id`);
+
 	drop table if exists tbWishlist;
     create table tbWishList(
 		IdUsuario nvarchar(128) not null,
@@ -254,7 +244,7 @@ use dbEcommerce;
 		`Data` datetime default current_timestamp,
         `Like` int,
         Deslike int,
-        Comentario varchar(300) not null,
+        Comentario varchar(100) not null,
         IdAnuncio int not null,
         IdUsuario nvarchar(128) not null
     )engine = InnoDB;
@@ -279,17 +269,19 @@ use dbEcommerce;
         Tipo int not null 
     )engine = InnoDB;
     
-    drop table if exists tbVendaAnuncio;
-    create table tbVendaAnuncio(
+    drop table if exists tbVenda;
+    create table tbVenda(
 		Id int auto_increment,
          constraint PKVendaAnuncio primary key(Id),
 		`Data` datetime default current_timestamp,
-        Contrato Blob,
+        Contrato blob,
         CEP char(8) not null,
+        NumEndereco numeric(4) not null,
+        CompEndereco varchar(50) not null,
         IdPagamento int not null,
         IdPedido int not null
     )engine = InnoDB;
-    alter table tbVendaAnuncio add constraint FKVendaAnuncioEndereco foreign key(CEP) references tbEndereco(CEP),
+    alter table tbVenda add constraint FKVendaAnuncioEndereco foreign key(CEP) references tbEndereco(CEP),
 							   add constraint FKVendaAnuncioPagamento foreign key(IdPagamento) references tbPagamento(Id),
                                add constraint FKVendaAnuncioPedido foreign key(IdPedido) references tbPedido(Id);
 	
@@ -297,11 +289,11 @@ use dbEcommerce;
     create table tbEntrega(
 		Id int auto_increment,
          constraint PKEntrega primary key(Id),
-        IdVA int not null,
+        IdVenda int not null,
         ValorFrete double not null,
         DescFrete double default 0.00
     )engine = InnoDB; 
-    alter table tbEntrega add constraint FKEntregaVA foreign key(IdVA) references tbVendaAnuncio(Id);
+    alter table tbEntrega add constraint FKEntregaVenda foreign key(IdVenda) references tbVenda(Id);
     
     drop table if exists tbPacote;
     create table tbPacote(

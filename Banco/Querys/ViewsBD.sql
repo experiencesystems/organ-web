@@ -1,4 +1,4 @@
-use dbOrgan;
+use dbEcommerce;
 /*SELECT Las(T_INSERT_ID();*/
 
 drop view if exists vwEndereco;
@@ -11,18 +11,7 @@ select E.CEP,  R.Logradouro `Rua`, concat(B.Bairro,' - ', C.Cidade,'/', Es.UF) `
 	inner join tbEstado Es on C.IdEstado = Es.Id
 );
 
- 
-drop view if exists vwFuncionario;
-create view vwFuncionario as(
-select F.Id, PF.Nome,  C.Nome `Cargo`, F.Salario `Salário`, PF.CPF, PF.RG, PF.`Data de Nascimento`, PF.Telefones, PF.Email, PF.`Endereço`
- from tbFuncionario F
-	inner join vwPessoaFisica PF on F.IdPessoa = PF.Id
-	inner join tbCargo C on F.IdCargo = C.Id
- where F.`Status` = true
-); 
-
-
-
+use dbOrgan; 
 -- MUDAR VALOR DOS NOMES Das( DATas( PRA PORTUGUES    SET lc_time_names = 'pt_BR';     
 
 drop view if exists vwPragaOrDoenca ;

@@ -116,6 +116,7 @@ insert into tbUsuario(`Id`, `Email`, `ConfirmacaoEmail`, `SenhaHash`, `CarimboSe
          constraint PKFunc primary key(Id),
 		`Status` bool default true,
         Nome varchar(30) not null,
+        Email varchar(100) not null,
         IdCargo int not null
     )engine = InnoDB;
     
@@ -129,7 +130,7 @@ insert into tbUsuario(`Id`, `Email`, `ConfirmacaoEmail`, `SenhaHash`, `CarimboSe
     alter table tbFuncionario add constraint FKFuncCargo foreign key(IdCargo) references tbCargo(Id);
     
     insert into tbCargo(Nivel, Nome) value(1, 'Operador(a) de trator');
-    insert into tbFuncionario(Nome, IdCargo) value('Joãona', 1);
+    insert into tbFuncionario(Nome, IdCargo, Email) value('Mirena', 1, 'milenamonteiro@gmail.com');
     
 	drop table if exists tbTelFunc;
 	create table tbTelFunc(
@@ -435,6 +436,16 @@ insert into tbUsuario(`Id`, `Email`, `ConfirmacaoEmail`, `SenhaHash`, `CarimboSe
 		inner join vwTelefone T on T.Id = TF.IdTelefone
 	); 
     
+    drop view if exists vwFuncionario;
+	create view vwFuncionario as(
+	select F.Id, F.Nome,  C.Nome `Cargo`, group_concat(T.Telefone separator '; ') `Telefones`, F.Email
+	 from tbFuncionario F
+		inner join tbCargo C on F.IdCargo = C.Id
+		inner join tbTelFunc TF on F.Id = TF.IdFunc
+		inner join vwTelefone T on T.Id = TF.IdTelefone 
+	 where F.`Status` = true
+	); 
+
 	drop view if exists vwItems;
 	create view vwItems as
 	(SELECT S.IdEstoque `Id`,
