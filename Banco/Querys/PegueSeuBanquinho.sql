@@ -27,7 +27,7 @@ use dbEcommerce;
 			Foto blob,
 			Ativacao bool default true,
 			Assinatura int not null,
-            CPF numeric(12) not null,
+            CPF numeric(11) not null,
              constraint UQUsuarioCPF unique(CPF),
 		`Email` varchar(100) ,-- !
 		`ConfirmacaoEmail` bool not null ,

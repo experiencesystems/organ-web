@@ -1,3 +1,4 @@
+use sys;
 -- IMAGEM NO BANCO http://www.linhadecodigo.com.br/artigo/100/blob-fields-in-mysql-databases.aspx
 drop database if exists dbOrgan;
 create database dbOrgan;
@@ -287,7 +288,8 @@ insert into tbUsuario(`Id`, `Email`, `ConfirmacaoEmail`, `SenhaHash`, `CarimboSe
 	create table tbAreaPlantio(
         IdPlantio int not null,
         IdArea int not null,
-         constraint PKAreaPlantio primary key(IdPlantio, IdArea)
+         constraint PKAreaPlantio primary key(IdPlantio, IdArea),
+		Densidade int not null
     )engine = InnoDB;
     alter table tbAreaPlantio add constraint FKAreaPlantioPlantio foreign key(IdPlantio) references tbPlantio(Id),
 									 add constraint FKAreaPlantioArea foreign key(IdArea) references tbArea(Id);
