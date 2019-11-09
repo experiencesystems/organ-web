@@ -40,11 +40,11 @@ use dbEcommerce;
     insert into tbUsuario(`Id`, `Email`, `ConfirmacaoEmail`, `SenhaHash`, `CarimboSeguranca`, `UserName`, Foto, CPF, Assinatura)
 			   values('02719894-e4a9-46c8-999e-ba942abd5f8f', 'milenamonteiro@gmail.com', 0, 
 					  'ABecbdkGhzyTR1/t+F8FpUnN+AHXhiXYu4qPCVc4SroxOyzj3p0R+TnWK0p1o6q3Rw==',
-                      'e7aac8f8-7c92-44fb-9850-5f0fb0024c9a', 'Mirena',  LOAD_FILE("/error.gif"), 11111111111, 0),
+                      'e7aac8f8-7c92-44fb-9850-5f0fb0024c9a', 'Mirena',  LOAD_FILE("/error.gif"), 111111111111, 0),
                       
                       ('02719894-e4a9-46c8-999e-ba942abd5f8g', 'moreexpsystems@gmail.com', 0,
                       'ABecbdkGhzyTR1/t+F8FpUnN+AHXhiXYu4qPCVc4SroxOyzj3p0R+TnWK0p1o6q3Rw=+',
-                      'e7aac8f8-7c92-44fb-9850-5f0fb0024c9b', 'Empresinha', LOAD_FILE("/error.gif"), 11111111112, 1);
+                      'e7aac8f8-7c92-44fb-9850-5f0fb0024c9b', 'Empresinha', LOAD_FILE("/error.gif"), 111111111112, 1);
     
     drop table if exists `AspNetUserClaims`;
 	create table `AspNetUserClaims` (
@@ -176,7 +176,7 @@ use dbEcommerce;
 		Id int auto_increment,
          constraint PKProduto primary key(Id),
 		ValorUnit double not null,
-        Quantidade int not null,
+        Quantidade double not null,
         Nome varchar(30) not null
     )engine = InnoDB;
 
@@ -185,9 +185,9 @@ use dbEcommerce;
 		Id int auto_increment,
          constraint PKAnuncio primary key(Id),
 		Nome varchar(30) not null,
-        `Desc` varchar(100) not null,
+        `Desc` varchar(100),
         `Status` bool not null,
-        Foto blob not null,
+        Foto blob,
         Desconto decimal(5,2),
         IdProduto int not null,
         IdUsuario nvarchar(128) not null
@@ -272,18 +272,18 @@ use dbEcommerce;
     drop table if exists tbVenda;
     create table tbVenda(
 		Id int auto_increment,
-         constraint PKVendaAnuncio primary key(Id),
+         constraint PKVenda primary key(Id),
 		`Data` datetime default current_timestamp,
         Contrato blob,
         CEP char(8) not null,
         NumEndereco numeric(4) not null,
-        CompEndereco varchar(50) not null,
+        CompEndereco varchar(30),
         IdPagamento int not null,
         IdPedido int not null
     )engine = InnoDB;
-    alter table tbVenda add constraint FKVendaAnuncioEndereco foreign key(CEP) references tbEndereco(CEP),
-							   add constraint FKVendaAnuncioPagamento foreign key(IdPagamento) references tbPagamento(Id),
-                               add constraint FKVendaAnuncioPedido foreign key(IdPedido) references tbPedido(Id);
+    alter table tbVenda add constraint FKVendaEndereco foreign key(CEP) references tbEndereco(CEP),
+							   add constraint FKVendaPagamento foreign key(IdPagamento) references tbPagamento(Id),
+                               add constraint FKVendaPedido foreign key(IdPedido) references tbPedido(Id);
 	
     drop table if exists tbEntrega;
     create table tbEntrega(
