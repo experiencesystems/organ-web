@@ -1,4 +1,5 @@
 ﻿using OrganWeb.Areas.Ecommerce.Models;
+using OrganWeb.Areas.Ecommerce.Models.Vendas;
 using System;
 using System.Collections.Generic;
 using System.IO;

@@ -1,4 +1,5 @@
 ﻿using OrganWeb.Areas.Sistema.Models.Usuario;
+using OrganWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,20 +7,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace OrganWeb.Areas.Sistema.Models.Funcionarios
+namespace OrganWeb.Areas.Ecommerce.Models.Vendas
 {
-    [Table("tbUsuarioFunc")]
-    public class UsuarioFunc
+    [Table("tbWishlist")]
+    public class Wishlist
     {
         [Key, Column(Order = 1)]
-        [ForeignKey("Funcionario")]
-        public int IdFunc { get; set; }
-
-        [Key, Column(Order = 2)]
         [ForeignKey("Usuario")]
         public string IdUsuario { get; set; }
 
-        public virtual Funcionario Funcionario { get; set; }
+        [Key, Column(Order = 2)]
+        [ForeignKey("Anuncio")]
+        public int IdAnuncio { get; set; }
+
+        public virtual Anuncio Anuncio { get; set; }
         public virtual ApplicationUser Usuario { get; set; }
     }
 }

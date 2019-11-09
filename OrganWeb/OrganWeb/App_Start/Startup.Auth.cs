@@ -6,8 +6,8 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using OrganWeb.Models;
-using OrganWeb.Models.Usuario;
 using OrganWeb.Models.Banco;
+using OrganWeb.Areas.Sistema.Models.Usuario;
 
 namespace OrganWeb
 {

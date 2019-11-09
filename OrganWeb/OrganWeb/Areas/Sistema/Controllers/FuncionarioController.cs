@@ -1,13 +1,8 @@
-﻿using OrganWeb.Areas.Sistema.Models.Funcionarios;
+﻿using OrganWeb.Areas.Ecommerce.Models.Endereco;
+using OrganWeb.Areas.Sistema.Models.Funcionarios;
+using OrganWeb.Areas.Sistema.Models.Telefone;
 using OrganWeb.Areas.Sistema.Models.ViewModels;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
-using OrganWeb.Models.Banco;
-using OrganWeb.Models.Endereco;
-using OrganWeb.Models.Pessoa;
-using OrganWeb.Models.Telefone;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
@@ -21,11 +16,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private Bairro bairro = new Bairro();
         private Logradouro logradouro = new Logradouro();
         private Endereco endereco = new Endereco();
-        private Pessoa pessoa = new Pessoa();
         private TipoTel tipotel = new TipoTel();
         private Telefone telefone = new Telefone();
-        private TelefonePessoa telefonePessoa = new TelefonePessoa();
-        private PessoaFisica pessoaFisica = new PessoaFisica();
         private Cargo cargo = new Cargo();
         private Estado estado = new Estado();
         private DDD ddd = new DDD();
@@ -89,18 +81,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 endereco.Add(endereco);
                 await endereco.Save();
 
-                pessoa = new Pessoa
-                {
-                    Nome = model.Nome,
-                    Email = model.Email,
-                    NumeroEndereco = model.Numero,
-                    CompEndereco = model.Complemento,
-                    CEP = endereco.CEP
-                };
-
-                pessoa.Add(pessoa);
-                await pessoa.Save();
-
                 tipotel = new TipoTel
                 {
                     Tipo = model.TipoTelefone
@@ -119,27 +99,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 telefone.Add(telefone);
                 await telefone.Save();
 
-                telefonePessoa = new TelefonePessoa
-                {
-                    IdPessoa = pessoa.Id,
-                    IdTelefone = telefone.Id
-                };
-
-                telefonePessoa.Add(telefonePessoa);
-                await telefonePessoa.Save();
-
-                pessoaFisica = new PessoaFisica
-                {
-                    CPF = model.CPF,
-                    DataNasc = model.DataNascimento,
-                    RG = model.RG,
-                    Foto = "",
-                    IdPessoa = pessoa.Id
-                };
-
-                pessoaFisica.Add(pessoaFisica);
-                await pessoaFisica.Save();
-
+                //TODO: não necessariamente ele add cargo
                 cargo = new Cargo
                 {
                     Nome = model.Cargo
@@ -150,9 +110,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
                 funcionario = new Funcionario
                 {
-                    Salario = model.Salario,
                     IdCargo = cargo.Id,
-                    IdPessoa = pessoa.Id,
                     Status = true
                 };
 

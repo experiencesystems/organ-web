@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using OrganWeb.Areas.Sistema.Models.API;
 using OrganWeb.Areas.Sistema.Models.Armazenamento;
-using OrganWeb.Areas.Sistema.Models.Ferramentas;
 using OrganWeb.Areas.Sistema.Models.ViewModels;
 using RestSharp;
 using System.Linq;

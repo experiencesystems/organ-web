@@ -7,15 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using OrganWeb.Areas.Sistema.Models.ViewModels;
-using OrganWeb.Areas.Sistema.Models;
-using OrganWeb.Models;
 using OrganWeb.Areas.Sistema.Models.Armazenamento;
-using OrganWeb.Models.Banco;
-using OrganWeb.Models.Endereco;
-using OrganWeb.Models.Telefone;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
-using OrganWeb.Models.Pessoa;
 using System.Threading.Tasks;
+using OrganWeb.Areas.Ecommerce.Models.Endereco;
+using OrganWeb.Areas.Sistema.Models.Telefone;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
@@ -25,11 +21,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private Bairro bairro = new Bairro();
         private Logradouro logradouro = new Logradouro();
         private Endereco endereco = new Endereco();
-        private Pessoa pessoa = new Pessoa();
         private TipoTel tipotel = new TipoTel();
         private Telefone telefone = new Telefone();
-        private TelefonePessoa telefonePessoa = new TelefonePessoa();
-        private PessoaJuridica pessoaJuridica = new PessoaJuridica();
         private Fornecedor fornecedor = new Fornecedor();
         private Estado estado = new Estado();
         private DDD ddd = new DDD();
@@ -93,18 +86,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 endereco.Add(endereco);
                 await endereco.Save();
 
-                pessoa = new Pessoa
-                {
-                    Nome = model.NomeFantasia,
-                    Email = model.Email,
-                    NumeroEndereco = model.Numero,
-                    CompEndereco = model.Complemento,
-                    CEP = endereco.CEP
-                };
-
-                pessoa.Add(pessoa);
-                await pessoa.Save();
-
                 tipotel = new TipoTel
                 {
                     Tipo = model.TipoTelefone
@@ -123,30 +104,9 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 telefone.Add(telefone);
                 await telefone.Save();
 
-                telefonePessoa = new TelefonePessoa
-                {
-                    IdPessoa = pessoa.Id,
-                    IdTelefone = telefone.Id
-                };
-
-                telefonePessoa.Add(telefonePessoa);
-                await telefonePessoa.Save();
-                
-                pessoaJuridica = new PessoaJuridica
-                {
-                    RazaoSocial = model.RazaoSocial,
-                    CNPJ = model.CNPJ,
-                    IE = model.IE,
-                    IdPessoa = pessoa.Id
-                };
-
-                pessoaJuridica.Add(pessoaJuridica);
-                await pessoaJuridica.Save();
-
                 fornecedor = new Fornecedor
                 {
-                    Status = true,
-                    IdPessoa = pessoa.Id
+                    Status = true
                 };
                 fornecedor.Add(fornecedor);
                 await fornecedor.Save();

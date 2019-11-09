@@ -7,7 +7,6 @@ using System.Web;
 using OrganWeb.Areas.Sistema.Models.zRepositories;
 using OrganWeb.Models;
 using OrganWeb.Models.Banco;
-using OrganWeb.Models.Pessoa;
 
 namespace OrganWeb.Areas.Sistema.Models.Armazenamento
 {

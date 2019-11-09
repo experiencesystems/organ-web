@@ -40,11 +40,11 @@ use dbEcommerce;
     insert into tbUsuario(`Id`, `Email`, `ConfirmacaoEmail`, `SenhaHash`, `CarimboSeguranca`, `UserName`, Foto, CPF, Assinatura)
 			   values('02719894-e4a9-46c8-999e-ba942abd5f8f', 'milenamonteiro@gmail.com', 0, 
 					  'ABecbdkGhzyTR1/t+F8FpUnN+AHXhiXYu4qPCVc4SroxOyzj3p0R+TnWK0p1o6q3Rw==',
-                      'e7aac8f8-7c92-44fb-9850-5f0fb0024c9a', 'Mirena',  LOAD_FILE("/error.gif"), 111111111111, 0),
+                      'e7aac8f8-7c92-44fb-9850-5f0fb0024c9a', 'Mirena',  LOAD_FILE("/error.gif"), 11111111111, 0),
                       
                       ('02719894-e4a9-46c8-999e-ba942abd5f8g', 'moreexpsystems@gmail.com', 0,
                       'ABecbdkGhzyTR1/t+F8FpUnN+AHXhiXYu4qPCVc4SroxOyzj3p0R+TnWK0p1o6q3Rw=+',
-                      'e7aac8f8-7c92-44fb-9850-5f0fb0024c9b', 'Empresinha', LOAD_FILE("/error.gif"), 111111111112, 1);
+                      'e7aac8f8-7c92-44fb-9850-5f0fb0024c9b', 'Empresinha', LOAD_FILE("/error.gif"), 11111111112, 1);
     
     drop table if exists `AspNetUserClaims`;
 	create table `AspNetUserClaims` (

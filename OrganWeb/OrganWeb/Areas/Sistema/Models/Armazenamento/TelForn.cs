@@ -1,10 +1,5 @@
-﻿using OrganWeb.Models.Telefone;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace OrganWeb.Areas.Sistema.Models.Armazenamento
 {
@@ -20,6 +15,6 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
         public int IdTelefone { get; set; }
 
         public virtual Fornecedor Fornecedor { get; set; }
-        public virtual Telefone Telefone { get; set; }
+        public virtual Telefone.Telefone Telefone { get; set; }
     }
 }

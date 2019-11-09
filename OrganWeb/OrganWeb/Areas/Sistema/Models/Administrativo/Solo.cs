@@ -17,7 +17,7 @@ namespace OrganWeb.Areas.Sistema.Models.Administrativo
         public int Id { get; set; }
 
         [Required]
-        [StringLength(50, MinimumLength = 3)]
+        [StringLength(25, MinimumLength = 3)]
         public string Nome { get; set; }
 
         [Required]

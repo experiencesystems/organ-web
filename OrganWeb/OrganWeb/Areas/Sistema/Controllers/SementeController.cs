@@ -45,8 +45,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 var estoque = new Estoque()
                 {
                     Qtd = semente.Estoque.Qtd,
-                    UM = semente.Estoque.UM,
-                    ValorUnit = semente.Estoque.ValorUnit
+                    UM = semente.Estoque.UM
                 };
                 estoque.Add(estoque);
                 await estoque.Save();

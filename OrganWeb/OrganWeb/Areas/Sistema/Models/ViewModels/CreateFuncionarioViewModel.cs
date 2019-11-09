@@ -6,8 +6,8 @@ using OrganWeb.Areas.Sistema.Models.Funcionarios;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using OrganWeb.Models.Endereco;
-using OrganWeb.Models.Telefone;
+using OrganWeb.Areas.Ecommerce.Models.Endereco;
+using OrganWeb.Areas.Sistema.Models.Telefone;
 
 namespace OrganWeb.Areas.Sistema.Models.ViewModels
 {

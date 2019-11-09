@@ -10,9 +10,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
+using OrganWeb.Areas.Sistema.Models.Usuario;
 using OrganWeb.Models;
 using OrganWeb.Models.Banco;
-using OrganWeb.Models.Usuario;
 
 namespace OrganWeb
 {

@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using OrganWeb.Models.Banco;
-using OrganWeb.Models.Pessoa;
 
 namespace OrganWeb.Areas.Sistema.Models.Funcionarios
 {

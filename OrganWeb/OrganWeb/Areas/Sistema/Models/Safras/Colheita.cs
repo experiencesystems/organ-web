@@ -13,23 +13,23 @@ namespace OrganWeb.Areas.Sistema.Models.Safras
     [Table("tbColheita")]
     public class Colheita : ColheitaRepository
     {
+        [Key]
+        public int Id { get; set; }
+
         [Required]
         [DataType(DataType.Date, ErrorMessage = "Data em formato inválido"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Data { get; set; }
         
-        [Required]
         [Display(Name = "Quantidade de perdas")]
         public decimal QtdPerdas { get; set; }
 
         [Required]
         [Display(Name = "Quantidade total")]
         public decimal QtdTotal { get; set; }
-
-        [Key, Column(Order = 1)]
+        
         [ForeignKey("Plantio")]
         public int IdPlantio { get; set; }
-
-        [Key, Column(Order = 2)]
+        
         [ForeignKey("Produto")]
         public int IdProd { get; set; }
 
