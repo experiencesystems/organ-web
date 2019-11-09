@@ -116,7 +116,7 @@ insert into tbUsuario(`Id`, `Email`, `ConfirmacaoEmail`, `SenhaHash`, `CarimboSe
 		Id int auto_increment,
          constraint PKFunc primary key(Id),
 		`Status` bool default true,
-        Nome varchar(30) not null,
+        Nome varchar(50) not null,
         Email varchar(100) not null,
         IdCargo int not null
     )engine = InnoDB;
@@ -263,7 +263,7 @@ insert into tbUsuario(`Id`, `Email`, `ConfirmacaoEmail`, `SenhaHash`, `CarimboSe
 	create table tbSolo(
 		Id int auto_increment,
 		 constraint PKSolo primary key(Id),
-		Nome varchar(50) not null,
+		Nome varchar(25) not null,
         Tipo int not null,
         IncSolar decimal(5,2) default 0.00,
         IncVento decimal(5,2) default 0.00
@@ -293,8 +293,8 @@ insert into tbUsuario(`Id`, `Email`, `ConfirmacaoEmail`, `SenhaHash`, `CarimboSe
     )engine = InnoDB;
     alter table tbAreaPlantio add constraint FKAreaPlantioPlantio foreign key(IdPlantio) references tbPlantio(Id),
 									 add constraint FKAreaPlantioArea foreign key(IdArea) references tbArea(Id);
-                                   
-	insert into tbAreaPlantio values(1, 1, 3), (1, 2, 3);
+                                     
+	insert into tbAreaPlantio values(1, 1), (1, 2);
     
     drop table if exists tbItensPlantio;
 	create table tbItensPlantio(
@@ -317,12 +317,13 @@ insert into tbUsuario(`Id`, `Email`, `ConfirmacaoEmail`, `SenhaHash`, `CarimboSe
 
     drop table if exists tbColheita;
 	create table tbColheita(
-		`Data` date not null,
+	Id int auto_increment,
+	`Data` date not null,
         QtdPerdas double not null default 0,
         QtdTotal double not null,
         IdPlantio int not null,
         IdProd int not null,
-         constraint PKColheita primary key(IdPlantio, IdProd)
+         constraint PKColheita primary key(Id)
     )engine = InnoDB;
     alter table tbColheita add constraint FKColheitaPlantio foreign key(IdPlantio) references tbPlantio(Id),
 						   add constraint FKColheitaProd foreign key(IdProd) references tbProduto(IdEstoque);
