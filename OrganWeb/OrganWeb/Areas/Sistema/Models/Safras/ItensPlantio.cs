@@ -13,7 +13,7 @@ namespace OrganWeb.Areas.Sistema.Models.Safras
     [Table("tbItensPlantio")]
     public class ItensPlantio : ItensPlantioRepository
     {
-        [Required]
+        [Required] //TODO: (controller) mudar colocar qnt usada no plantio e densidade na area
         public double QtdUsada { get; set; }
 
         [Key, Column(Order = 1)]

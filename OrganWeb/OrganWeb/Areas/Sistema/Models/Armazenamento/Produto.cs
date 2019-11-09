@@ -16,13 +16,15 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
         public int IdEstoque { get; set; }
 
         [Required]
-        [StringLength(50, MinimumLength = 2)]
+        public double ValorUnit { get; set; }
+
+        [Required]
+        public int Quantidade { get; set; }
+
+        [Required]
         [Display(Name = "Produto")]
+        [StringLength(30, MinimumLength = 1)]
         public string Nome { get; set; }
-        
-        [StringLength(300, MinimumLength = 2)]
-        [Display(Name = "Descrição")]
-        public string Desc { get; set; }
 
         public virtual Estoque Estoque { get; set; }
     }

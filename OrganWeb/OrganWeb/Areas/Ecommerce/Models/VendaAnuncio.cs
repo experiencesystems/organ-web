@@ -10,8 +10,8 @@ using System.Web;
 
 namespace OrganWeb.Areas.Ecommerce.Models
 {
-    [Table("tbVendaAnuncio")]
-    public class VendaAnuncio
+    [Table("tbVenda")]
+    public class Venda
     {
         [Key]
         public int Id { get; set; }
@@ -26,17 +26,24 @@ namespace OrganWeb.Areas.Ecommerce.Models
         [RegularExpression(@"[0-9]{5}[\d]{3}", ErrorMessage = "Digite um CEP válido somente com números")]
         [StringLength(8, MinimumLength = 8)]
         public string CEP { get; set; }
-
+        
         [Required]
-        [ForeignKey("Anuncio")]
-        public int IdAnuncio { get; set; }
+        [Range(0, 9999)]
+        public int NumEndereco { get; set; }
+        
+        [StringLength(10)]
+        public string CompEndereco { get; set; }
 
         [Required]
         [ForeignKey("Pagamento")]
         public int IdPagamento { get; set; }
 
+        [Required]
+        [ForeignKey("Pedido")]
+        public int IdPedido { get; set; }
+
         public virtual Pagamento Pagamento { get; set; }
-        public virtual Anuncio Anuncio { get; set; }
+        public virtual Pedido Pedido { get; set; }
         public virtual Endereco Endereco { get; set; }
     }
 }

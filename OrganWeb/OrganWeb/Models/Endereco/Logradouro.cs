@@ -15,7 +15,7 @@ namespace OrganWeb.Models.Endereco
         public int Id { get; set; }
 
         [Required]
-        [StringLength(50, MinimumLength = 5)]
+        [StringLength(40, MinimumLength = 5)]
         public string Nome { get; set; }
 
         [Required]

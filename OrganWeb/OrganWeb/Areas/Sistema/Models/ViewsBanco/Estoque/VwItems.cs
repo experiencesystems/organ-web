@@ -16,10 +16,11 @@ namespace OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque
         public int Id { get; set; }
         public string Item { get; set; }
         public int Quantidade { get; set; }
-        //public int UnidadeMedida { get; set; }
-        public double ValorUnitario { get; set; }
-        public double ValorTotal { get; set; }
+        //TODO: mapear nomes um e descrição vwitems
+        public string UnidadeMedida { get; set; }
+        public string Descricao { get; set; }
         public string Categoria { get; set; }
+        public string Fornecedor { get; set; }
         public string Tipo { get; set; }
     }
 }

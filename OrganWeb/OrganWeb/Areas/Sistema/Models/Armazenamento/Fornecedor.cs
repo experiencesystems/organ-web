@@ -20,9 +20,12 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
         public bool Status { get; set; }
 
         [Required]
-        [ForeignKey("Pessoa")]
-        public int IdPessoa { get; set; }
+        [StringLength(50, MinimumLength = 3)]
+        public string Nome { get; set; }
 
-        public virtual Pessoa Pessoa { get; set; }
+        [Required]
+        [EmailAddress]
+        [StringLength(100)]
+        public string Email { get; set; }
     }
 }

@@ -21,11 +21,12 @@ namespace OrganWeb.Areas.Ecommerce.Models
         public int IdAnuncio { get; set; }
         
         [Required]
-        public int Quantidade { get; set; }
+        [Display(Name = "Quantidade")]
+        public int Qtd { get; set; }
 
         [Required]
         public int Status { get; set; }
-
+        //TODO: lista de status para anúncio
         public virtual Anuncio Anuncio { get; set; }
         public virtual ApplicationUser Usuario { get; set; }
     }

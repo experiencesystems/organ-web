@@ -35,11 +35,6 @@ namespace OrganWeb.Areas.Sistema.Models.Administrativo
         [Range(0, 999.99, ErrorMessage = "Esse campo deve conter valores até 999,99")]
         [RegularExpression(@"^\d+(\,\d{1,2})?$", ErrorMessage = "Digite um valor válido com até duas casas decimais, como 99,99")]
         public decimal IncVento { get; set; }
-        
-        [Required]
-        [Range(0, 999.99, ErrorMessage = "Esse campo deve conter valores até 999,99")]
-        [RegularExpression(@"^\d+(\,\d{1,2})?$", ErrorMessage = "Digite um valor válido com até duas casas decimais, como 99,99")]
-        public decimal Acidez { get; set; }
 
         [NotMapped]
         public readonly List<SelectListItem> Tipos = new List<SelectListItem>()

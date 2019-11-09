@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrganWeb.Models.Usuario;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,11 +15,12 @@ namespace OrganWeb.Areas.Ecommerce.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(75, MinimumLength = 10)]
+        [StringLength(30, MinimumLength = 5)]
         public string Nome { get; set; }
 
         [Required]
         [Display(Name = "Descrição")]
+        [StringLength(100, MinimumLength = 10)]
         public string Desc { get; set; }
 
         [Required]
@@ -29,5 +31,14 @@ namespace OrganWeb.Areas.Ecommerce.Models
 
         [Range(0.00, 100.00)]
         public decimal Desconto { get; set; }
+
+        //TODO: ver se vai ter IdProduto no anúncio
+        public int IdProduto { get; set; }
+
+        [Required]
+        [ForeignKey("Usuario")]
+        public string IdUsuario { get; set; }
+
+        public virtual ApplicationUser Usuario { get; set; }
     }
 }

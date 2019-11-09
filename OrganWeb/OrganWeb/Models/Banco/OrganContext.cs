@@ -19,9 +19,9 @@ using OrganWeb.Areas.Ecommerce.Models;
 namespace OrganWeb.Models.Banco
 {
     [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
-    public class BancoContext : IdentityDbContext<ApplicationUser>
+    public class OrganContext : IdentityDbContext<ApplicationUser>
     {
-        public BancoContext() : base("name=BancoContext", throwIfV1Schema: false) { }
+        public OrganContext() : base("name=OrganContext", throwIfV1Schema: false) { }
 
         // SISTEMA
         // ADMINISTRATIVO
@@ -277,9 +277,9 @@ namespace OrganWeb.Models.Banco
                 .Ignore(t => t.TwoFactorEnabled);
         }
 
-        public static BancoContext Create()
+        public static OrganContext Create()
         {
-            return new BancoContext();
+            return new OrganContext();
         }
     }
 }

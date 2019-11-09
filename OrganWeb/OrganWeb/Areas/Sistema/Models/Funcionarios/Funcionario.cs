@@ -7,26 +7,24 @@ namespace OrganWeb.Areas.Sistema.Models.Funcionarios
 {
     [Table("tbFuncionario")]
     public class Funcionario : Repository<Funcionario>
-    {
+    {//TODO: refazer controller funcionário
         [Key]
         public int Id { get; set; }
         public bool Status { get; set; }
 
         [Required]
-        public double Salario { get; set; }
+        [StringLength(30, MinimumLength = 2)]
+        public string Nome { get; set; }
 
         [Required]
-        [ForeignKey("Pessoa")]
-        public int IdPessoa { get; set; }
+        [EmailAddress]
+        [StringLength(100, MinimumLength = 2)]
+        public string Email { get; set; }
 
         [Required]
         [ForeignKey("Cargo")]
         public int IdCargo { get; set; }
-
-        //https://stackoverflow.com/questions/13208349/how-to-insert-blob-datatype
-        public byte[] Foto { get; set; }
-
-        public virtual Pessoa Pessoa { get; set; }
+        
         public virtual Cargo Cargo { get; set; }
     }
 }

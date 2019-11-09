@@ -1,32 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
-using OrganWeb.Models;
 using OrganWeb.Models.Banco;
-using OrganWeb.Areas.Sistema.Models.Armazenamento;
+using OrganWeb.Areas.Sistema.Models.API;
 
-namespace OrganWeb.Areas.Sistema.Models.Safras
+namespace OrganWeb.Areas.Sistema.Models.Armazenamento
 {
-    [Table("tbSemente")]
-    public class Semente : Repository<Semente>
+    [Table("tbMaquina")]
+    public class Maquina : Repository<Maquina>
     {
         [Key]
         [ForeignKey("Estoque")]
         public int IdEstoque { get; set; }
 
-        [Required(ErrorMessage = "O nome é obrigatório.", AllowEmptyStrings = false)]
+        [Required]
         [StringLength(30, MinimumLength = 1)]
         public string Nome { get; set; }
-        
+
+        [Required]
+        public int Tipo { get; set; }
+
+        [Required]
+        [StringLength(30, MinimumLength = 1)]
+        public string Montadora { get; set; }
+
         [Display(Name = "Descrição")]
         [StringLength(100, MinimumLength = 3)]
         public string Desc { get; set; }
-
+        
         public virtual Estoque Estoque { get; set; }
 
-        //http://www.macoratti.net/18/03/mvc5_cadprod1.htm
+        [NotMapped]
+        public UnidadeCadastro Unini { get; set; }
     }
 }

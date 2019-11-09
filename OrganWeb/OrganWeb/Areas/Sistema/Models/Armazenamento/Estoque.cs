@@ -24,12 +24,18 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
         public double Qtd { get; set; }
 
         [Required]
+        [StringLength(6)]
+        [ForeignKey("UnidadeMedida")]
         [Display(Name = "Unidade de medida")]
         public string UM { get; set; }
 
         [Required]
-        [Display(Name = "Valor unitário")]
-        public double ValorUnit { get; set; }
+        [ForeignKey("Fornecedor")]
+        public int IdForn { get; set; }
+
+        public virtual UnidadeCadastro UnidadeMedida { get; set; }
+
+        public virtual Fornecedor Fornecedor { get; set; }
 
         [NotMapped]
         public List<UnidadeCadastro> Unidades { get; set; }

@@ -12,6 +12,9 @@ namespace OrganWeb.Areas.Sistema.Models.Praga_e_Doenca
     [Table("tbAreaPD")]
     public class AreaPD : Repository<AreaPD>
     {
+        [Required]
+        public bool Status { get; set; }
+
         [Key, Column(Order = 1)]
         [ForeignKey("Area")]
         public int IdArea { get; set; }

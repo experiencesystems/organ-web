@@ -14,8 +14,8 @@ namespace OrganWeb.Areas.Ecommerce.Models
         public int Id { get; set; }
 
         [Required]
-        [ForeignKey("VendaAnuncio")]
-        public int IdVA { get; set; }
+        [ForeignKey("Venda")]
+        public int IdVenda{ get; set; }
 
         [Required]
         [Display(Name = "Valor do frete")]
@@ -25,6 +25,6 @@ namespace OrganWeb.Areas.Ecommerce.Models
         [Display(Name = "Desconto do frete")]
         public double DescFrete { get; set; }
 
-        public virtual VendaAnuncio VendaAnuncio { get; set; }
+        public virtual Venda Venda { get; set; }
     }
 }

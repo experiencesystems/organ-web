@@ -25,7 +25,7 @@ namespace OrganWeb.Areas.Ecommerce.Models
 
         [Required]
         public int Status { get; set; }
-
+        //TODO: lista de status pedido
         public virtual Anuncio Anuncio { get; set; }
         public virtual ApplicationUser Usuario { get; set; }
     }

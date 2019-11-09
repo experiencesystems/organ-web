@@ -327,7 +327,7 @@
     <Compile Include="Models\Pessoa\PessoaFisica.cs" />
     <Compile Include="Models\Pessoa\PessoaJuridica.cs" />
     <Compile Include="Models\Usuario\AccountViewModels.cs" />
-    <Compile Include="Models\Banco\BancoContext.cs" />
+    <Compile Include="Models\Banco\OrganContext.cs" />
     <Compile Include="Models\Endereco\Bairro.cs" />
     <Compile Include="Models\Endereco\Cidade.cs" />
     <Compile Include="Models\Endereco\Endereco.cs" />

@@ -20,8 +20,8 @@ namespace OrganWeb.Areas.Ecommerce.Models
         public int Like { get; set; }
         public int Deslike { get; set; }
 
-        [Required]
-        [StringLength(300)]
+        [Required(AllowEmptyStrings = false)]
+        [StringLength(100, ErrorMessage = "Digite um comentário de até 100 caracteres!")]
         public string Valor { get; set; }
 
         [Required]

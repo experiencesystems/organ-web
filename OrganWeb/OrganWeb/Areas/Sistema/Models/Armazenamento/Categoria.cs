@@ -15,7 +15,7 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
 
         [Required]
         [Display(Name = "Categoria")]
-        [StringLength(30, MinimumLength = 2)]
+        [StringLength(15, MinimumLength = 1)]
         public string Nome { get; set; }
     }
 }

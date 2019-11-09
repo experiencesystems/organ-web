@@ -20,7 +20,7 @@ namespace OrganWeb.Areas.Sistema.Models.Funcionarios
 
         [Display(Name = "Cargo")]
         [Required(ErrorMessage = "O nome é obrigatório.", AllowEmptyStrings = false)]
-        [StringLength(75, MinimumLength = 3)]
+        [StringLength(30, MinimumLength = 1)]
         public string Nome { get; set; }
     }
 }

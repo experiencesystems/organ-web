@@ -17,5 +17,6 @@ namespace OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque
         public string Tipo { get; set; }
         public string Areas { get; set; }
         public int Status { get; set; }
+        //TODO: status pragas
     }
 }

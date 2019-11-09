@@ -15,7 +15,7 @@ namespace OrganWeb.Models.Telefone
         public int Id { get; set; }
 
         [Required]
-        [StringLength(20, MinimumLength = 2)]
+        [StringLength(15, MinimumLength = 1)]
         public string Tipo { get; set; }
     }
 }

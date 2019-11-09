@@ -14,16 +14,16 @@ namespace OrganWeb.Models.Banco
     public class Repository<T> : IDisposable where T : class
     {   //https://stackoverflow.com/questions/20308378/configure-multiple-database-entity-framework-6
         //https://stackoverflow.com/questions/11013372/repository-pattern-to-query-multiple-databases
-        protected BancoContext _context;
+        protected OrganContext _context;
         protected DbSet<T> DbSet { get; set; }
 
         public Repository()
         {
-            _context = new BancoContext();
+            _context = new OrganContext();
             DbSet = _context.Set<T>();
         }
 
-        public Repository(BancoContext context)
+        public Repository(OrganContext context)
         {
             _context = context;
         }

@@ -17,11 +17,11 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
         public int IdEstoque { get; set; }
 
         [Required]
-        [StringLength(50, MinimumLength = 2)]
+        [StringLength(30, MinimumLength = 1)]
         public string Nome { get; set; }
         
         [Display(Name = "Descrição")]
-        [StringLength(300, MinimumLength = 10)]
+        [StringLength(100, MinimumLength = 3)]
         public string Desc { get; set; }
 
         [Required]

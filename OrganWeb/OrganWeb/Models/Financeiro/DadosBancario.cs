@@ -1,4 +1,5 @@
 ﻿using OrganWeb.Models.Banco;
+using OrganWeb.Models.Usuario;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,7 +16,7 @@ namespace OrganWeb.Models.Financeiro
         public int Id { get; set; }
 
         [Required]
-        [StringLength(100, MinimumLength = 5)]
+        [StringLength(30, MinimumLength = 5)]
         public string NomeTitular { get; set; }
 
         [Required]
@@ -27,16 +28,16 @@ namespace OrganWeb.Models.Financeiro
 
         [Required]
         [Display(Name = "Número do cartão")]
-        public Int64 NumCartao { get; set; }
+        public long NumCartao { get; set; }
 
         [Required]
         [DataType(DataType.Date, ErrorMessage = "Data em formato inválido"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Validade { get; set; }
 
         [Required]
-        [ForeignKey("Pessoa")]
-        public int IdPessoa { get; set; }
+        [ForeignKey("Usuario")]
+        public string IdUsuario { get; set; }
 
-        public virtual Pessoa.Pessoa Pessoa { get; set; }
+        public virtual ApplicationUser Usuario { get; set; }
     }
 }

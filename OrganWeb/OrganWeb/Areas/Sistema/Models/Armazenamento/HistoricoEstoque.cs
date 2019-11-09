@@ -14,25 +14,18 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
     {
         [Key]
         public int Id { get; set; }
-
-        [Required]
-        public double QtdAlterada { get; set; }
-
-        [Required]
-        [Range(0.01, 99999.99, ErrorMessage = "Esse campo deve conter valores até 99999,99")]
-        [RegularExpression(@"^\d+(\,\d{1,2})?$", ErrorMessage = "Digite um valor válido com até duas casas decimais, como 99,99")]
         public double QtdAntiga { get; set; }
-
-        [Required]
+        public string NomeAntigo { get; set; }
+        public string CategoriaAntiga { get; set; }
+        public string UMAntiga { get; set; }
         public DateTime DataAlteracao { get; set; }
-
-        [Required]
-        [StringLength(300, MinimumLength = 3)]
         public string Desc { get; set; }
                 
         [Required]
         [ForeignKey("Estoque")]
         public int IdEstoque { get; set; }
+
+        public string FornAntigo { get; set; }
 
         public virtual Estoque Estoque { get; set; }
     }
