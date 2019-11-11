@@ -123,6 +123,10 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 {
                    areap.Add(new AreaPlantio { IdArea = item, IdPlantio = pl.Id });
                    await areap.Save();
+                    area = await area.GetByID(item);
+                    area.Disp = 2;
+                    area.Update(area);
+                    await area.Save();
                 }
 
                 var itemcrplantio = new ItensPlantio

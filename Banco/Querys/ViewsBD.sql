@@ -39,7 +39,7 @@ select c.Id,
        ifnull(c.`Desc`, 'Sem Descrição') `Descrição`,
        c.Efic `Eficiência(%)`,
 	   c.NumLiberacoes `Número de Liberações`,
-       group_concat(distinct p.Nome separator ', ' ) `Pragas/Doenças(`,
+       group_concat(distinct p.Nome separator ', ' ) `Pragas/Doenças`,
        group_concat(distinct concat(i.Item, ' - ', ic.QtdUsada) separator ', ') `Itens Usados - Quantidade`
 from tbControle c
 	inner join tbControlePD cpd on c.Id = cpd.IdControle
@@ -47,6 +47,3 @@ from tbControle c
     inner join tbItensControle ic on c.Id = ic.IdControle
 	inner join vwItems i on ic.IdEstoque = i.Id
 group by c.Id);
-
-
- 

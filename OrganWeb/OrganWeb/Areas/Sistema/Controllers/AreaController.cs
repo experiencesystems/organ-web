@@ -15,6 +15,11 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private Area area = new Area();
         private Solo solo = new Solo();
 
+        public ActionResult Index()
+        {
+            return RedirectToAction("Index", "Fazenda");
+        }
+
         public async Task<ActionResult> Create()
         {
             return View(new Area { Solos = await solo.GetAll() });

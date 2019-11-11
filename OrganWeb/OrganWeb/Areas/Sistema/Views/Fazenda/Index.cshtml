@@ -90,7 +90,6 @@
                                         <td>@Html.DisplayFor(modelItem => item.Tipos.Where(x => x.Value == item.Tipo.ToString()).First().Text)</td>
                                         <td>@Html.DisplayFor(modelItem => item.IncSolar) %</td>
                                         <td>@Html.DisplayFor(modelItem => item.IncVento) %</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Acidez) %</td>
                                         <td>
                                             @Html.ActionLink("Editar", "Editar", "Solo", new { id = item.Id }, null) |
                                             @Html.ActionLink("Detalhes", "Detalhes", "Solo", new { id = item.Id }, null) |
@@ -128,13 +127,8 @@
                                 <tr>
                                     <th>Nome</th>
                                     <th>Cargo</th>
-                                    <th>Salário</th>
-                                    <th>CPF</th>
-                                    <th>RG</th>
-                                    <th>Data de nascimento</th>
                                     <th>Telefones</th>
                                     <th>Email</th>
-                                    <th>Endereço</th>
                                     <th></th>
                                 </tr>
 
@@ -143,13 +137,8 @@
                                     <tr>
                                         <td>@Html.DisplayFor(modelItem => item.Nome)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Cargo)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Salario)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.CPF)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.RG)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.DataNascimento)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Telefones)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Endereco)</td>
                                         <td>
                                             @Html.ActionLink("Editar", "Editar", "Funcionario", new { id = item.Id }, null) |
                                             @Html.ActionLink("Detalhes", "Detalhes", "Funcionario", new { id = item.Id }, null) |

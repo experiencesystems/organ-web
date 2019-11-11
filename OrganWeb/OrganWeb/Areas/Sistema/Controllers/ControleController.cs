@@ -16,6 +16,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
     public class ControleController : Controller
     {
         private Controle controle = new Controle();
+        private VwControle vwcontrole = new VwControle();
         private ItensControle itenscontrole = new ItensControle();
         private FuncControle funccontrole = new FuncControle();
         private ControlePD controlepd = new ControlePD();
@@ -28,7 +29,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         public async Task<ActionResult> Index()
         {
-            return View(await controle.GetAll());
+            return View(await vwcontrole.GetAll());
         }
          /* TODO: testar controller controle
           * TODO: CPF tem que ser único

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrganWeb.Areas.Sistema.Models.zBanco;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,7 +9,7 @@ using System.Web;
 namespace OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque
 {
     [Table("vwControle")]
-    public class VwControle
+    public class VwControle : OrganRepository<VwControle>
     {
         [Key]
         public int Id { get; set; }

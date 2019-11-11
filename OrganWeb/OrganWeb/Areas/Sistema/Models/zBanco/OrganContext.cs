@@ -118,6 +118,10 @@ namespace OrganWeb.Areas.Sistema.Models.zBanco
                 .Property(t => t.Nome)
                 .HasColumnName("Pragas/Doenças");
 
+            modelBuilder.Entity<VwControle>()
+                .Property(t => t.Itens)
+                .HasColumnName("Itens Usados - Quantidade");
+
             modelBuilder.Entity<VwItems>()
                 .Property(t => t.UnidadeMedida)
                 .HasColumnName("Unidade de Medida");

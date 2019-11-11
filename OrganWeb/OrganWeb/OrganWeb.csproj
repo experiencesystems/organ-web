@@ -493,6 +493,7 @@
     <Content Include="Areas\Sistema\Views\PragaDoenca\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\PragaDoenca\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Controle\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Controle\Index.cshtml" />
     <None Include="Properties\PublishProfiles\organweb - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\organweb - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -564,7 +565,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Ecommerce\Views\Shared\" />
     <Folder Include="Areas\Sistema\Models\Usuario\" />
-    <Folder Include="Areas\Sistema\Views\Controles\" />
     <Folder Include="Areas\Sistema\Views\Financeiro\" />
     <Folder Include="Areas\Sistema\Views\Shared\" />
   </ItemGroup>
