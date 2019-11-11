@@ -4,17 +4,17 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using OrganWeb.Areas.Sistema.Models.zBanco;
 using OrganWeb.Models;
-using OrganWeb.Models.Banco;
 
 namespace OrganWeb.Areas.Sistema.Models.Armazenamento
 {
     [Table("tbHistEstoque")]
-    public class HistoricoEstoque : Repository<HistoricoEstoque>
+    public class HistoricoEstoque : OrganRepository<HistoricoEstoque>
     {
         [Key]
         public int Id { get; set; }
-        public double QtdAntiga { get; set; }
+        public double? QtdAntiga { get; set; }
         public string NomeAntigo { get; set; }
         public string CategoriaAntiga { get; set; }
         public string UMAntiga { get; set; }

@@ -8,7 +8,6 @@ using System.Web.Mvc;
 using OrganWeb.Models;
 using OrganWeb.Areas.Sistema.Models.Armazenamento;
 using OrganWeb.Areas.Sistema.Models.ViewModels;
-using OrganWeb.Models.Banco;
 using System.Net;
 using PagedList.EntityFramework;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque;
@@ -28,7 +27,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private ListarUnidades listarUnidades = new ListarUnidades();
         private UnidadeCadastro unidadeCadastro = new UnidadeCadastro();
         private VwFornecedor vwFornecedor = new VwFornecedor();
-        private HistoricoEstoque historicoEstoque = new HistoricoEstoque();
+        private VwHistorico vwHistorico = new VwHistorico();
         private ViewEstoque viewestoque = new ViewEstoque();
         private ListarUnidades unmd = new ListarUnidades();
 
@@ -61,7 +60,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
             viewestoque = new ViewEstoque()
             {
                 VwItems = await vwItems.GetPagedAll(pagina),
-                HistoricoEstoques = await historicoEstoque.GetAll(),
+                VwHistoricos = await vwHistorico.GetAll(),
                 Fornecedors = await vwFornecedor.GetAll()
             };
 

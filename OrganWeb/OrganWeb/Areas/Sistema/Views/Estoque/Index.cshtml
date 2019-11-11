@@ -72,8 +72,6 @@
                                         <tr>
                                             <th scope="col">Nome</th>
                                             <th scope="col">Quantidade</th>
-                                            <th scope="col">Valor unitário</th>
-                                            <th scope="col">Valor total</th>
                                             <th scope="col">Categoria</th>
                                             <th scope="col"></th>
                                         </tr>
@@ -84,8 +82,6 @@
                                             <tr>
                                                 <td>@Html.DisplayFor(modelItem => item.Item)</td>
                                                 <td>@Html.DisplayFor(modelItem => item.Quantidade)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.ValorUnitario)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.ValorTotal)</td>
                                                 <td>@Html.DisplayFor(modelItem => item.Categoria)</td>
                                                 <td>
 
@@ -119,26 +115,28 @@
                             </div>
                             <div class="card table-card">
                                 <div class="card-block">
-                                   <div class="table-responsive">
-                                    <table class="table-hover">
-                                        <thead class="thead-title">
-                                            <tr>
-                                                <th scope="col">Data</th>
-                                                <th scope="col">Qtd Antiga</th>
-                                                <th scope="col">Alterado</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach (var item in Model.HistoricoEstoques)
-                                            {
+                                    <div class="table-responsive">
+                                        <table class="table-hover">
+                                            <thead class="thead-title">
                                                 <tr>
-                                                    <td>@Html.DisplayFor(modelItem => item.DataAlteracao)</td>
-                                                    <td>@Html.DisplayFor(modelItem => item.QtdAntiga) @Html.DisplayFor(modelItem => item.Estoque.UM)</td>
-                                                    <td>@Html.DisplayFor(modelItem => item.QtdAlterada) @Html.DisplayFor(modelItem => item.Estoque.UM)</td>
+                                                    <th scope="col">Descrição</th>
+                                                    <th scope="col">Data</th>
+                                                    <th scope="col">Nome</th>
+                                                    <th scope="col">Quantidade</th>
                                                 </tr>
-                                            }
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.VwHistoricos)
+                                                {
+                                                    <tr>
+                                                        <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
+                                                        <td>@Html.DisplayFor(modelItem => item.DataAlteracao)</td>
+                                                        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                                                        <td>@Html.DisplayFor(modelItem => item.Quantidade) @Html.DisplayFor(modelItem => item.UnidadeMedida)</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -169,10 +167,9 @@
                                 <thead class="thead-title">
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Nome fantasia</th>
+                                        <th scope="col">Nome</th>
                                         <th scope="col">Telefones</th>
                                         <th scope="col">Email</th>
-                                        <th scope="col">Endereço</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
@@ -181,10 +178,9 @@
                                     {
                                         <tr>
                                             <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.NomeFantasia)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.RazaoSocial)</td>
                                             <td>@Html.DisplayFor(modelItem => item.Telefones)</td>
                                             <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Endereco)</td>
                                             <td>
                                                 @Html.ActionLink("Editar", "Editar", "Fornecedor", new { id = item.Id }, null) |
                                                 @Html.ActionLink("Detalhes", "Detalhes", "Fornecedor", new { id = item.Id }, null) |
@@ -194,9 +190,9 @@
                                     }
                                 </tbody>
                             </table>
-                            </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>

@@ -3,11 +3,10 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.Google;
 using Owin;
-using OrganWeb.Models;
-using OrganWeb.Models.Banco;
-using OrganWeb.Areas.Sistema.Models.Usuario;
+using OrganWeb.Areas.Sistema.Models.zBanco;
+using OrganWeb.Areas.Ecommerce.Models.zBanco;
+using OrganWeb.Areas.Ecommerce.Models.Usuarios;
 
 namespace OrganWeb
 {
@@ -17,7 +16,7 @@ namespace OrganWeb
         public void ConfigureAuth(IAppBuilder app)
         {
             // Configure o contexto db, gerenciador de usuários e gerenciador de login para usar uma única instância por solicitação
-            app.CreatePerOwinContext(OrganContext.Create);
+            app.CreatePerOwinContext(EcommerceContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
 

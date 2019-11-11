@@ -25,7 +25,6 @@ use dbEcommerce;
 	create table tbUsuario (
 		`Id` nvarchar(128)  not null ,
 			Foto blob,
-			Ativacao bool default true,
 			Assinatura int not null,
             CPF numeric(11) not null,
              constraint UQUsuarioCPF unique(CPF),

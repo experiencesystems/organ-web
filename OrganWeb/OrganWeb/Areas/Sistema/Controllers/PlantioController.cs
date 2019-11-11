@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using OrganWeb.Areas.Sistema.Models.ViewModels;
-using OrganWeb.Models.Banco;
 using OrganWeb.Areas.Sistema.Models.Administrativo;
 using System.Threading.Tasks;
 

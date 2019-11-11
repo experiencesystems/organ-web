@@ -5,69 +5,7 @@ create database dbOrgan;
 use dbOrgan;
 -- Blob Tipo pra foto ou arquivo
 -- =================================================================== USUÁRIO ============================================     
-    drop table if exists `AspNetRoles`;
-	create table `AspNetRoles`(
-	`Id` nvarchar(128)  not null ,
-	`Name` nvarchar(256)  not null ,
-	primary key (`Id`)) engine = InnoDB;
     
-	CREATE UNIQUE index  `RoleNameIndex` on `AspNetRoles` (`Name`);
-
-	drop table if exists `AspNetUserRoles`;
-	create table `AspNetUserRoles` (
-		`UserId` nvarchar(128)  not null ,
-		`RoleId` nvarchar(128)  not null ,
-		primary key ( `UserId`,`RoleId`) ) engine = InnoDB;
-	 
-	CREATE index  `IX_UserId` on `AspNetUserRoles` (`UserId`);
-	CREATE index  `IX_RoleId` on `AspNetUserRoles` (`RoleId`);
-   
-   drop table if exists tbUsuario;
-	create table tbUsuario (
-		`Id` nvarchar(128)  not null,
-			Foto blob,
-			Ativacao bool default true,
-		`Email` varchar(100) ,-- !
-		`ConfirmacaoEmail` bool not null ,
-		`SenhaHash` longtext,
-		`CarimboSeguranca` longtext,
-		`UserName` varchar(50)  not null ,-- !
-	      constraint PKAspNetUsers primary key ( `Id`)
-	)engine = InnoDB;
-    
-    drop table if exists `AspNetUserClaims`;
-	create table `AspNetUserClaims` (
-	`Id` int not null  auto_increment ,
-	`UserId` nvarchar(128)  not null ,
-	`TipoClaim` longtext,
-	`ValorClaim` longtext,
-	primary key ( `Id`) )engine = InnoDB;
-    
-	CREATE index  `IX_UserId` on `AspNetUserClaims` (`UserId`);
-
-	drop table if exists `AspNetUserLogins`;
-	create table `AspNetUserLogins` (
-		`LoginProvider` nvarchar(128)  not null ,
-		`ProviderKey` nvarchar(128)  not null ,
-		`UserId` nvarchar(128)  not null ,
-		primary key ( `LoginProvider`,`ProviderKey`,`UserId`) )
-		engine = InnoDB;
-
-	CREATE index  `IX_UserId` on `AspNetUserLogins` (`UserId`);
-
-	alter table `AspNetUserRoles` add constraint `FK_AspNetUserRoles_AspNetRoles_RoleId`  foreign key (`RoleId`) references `AspNetRoles` ( `Id`)  on update cascade on delete cascade;
-	alter table `AspNetUserRoles` add constraint `FK_AspNetUserRoles_AspNetUsers_UserId`  foreign key (`UserId`) references tbUsuario ( `Id`)  on update cascade on delete cascade;
-	alter table `AspNetUserClaims` add constraint `FK_AspNetUserClaims_AspNetUsers_UserId`  foreign key (`UserId`) references tbUsuario ( `Id`)  on update cascade on delete cascade; 
-	alter table `AspNetUserLogins` add constraint `FK_AspNetUserLogins_AspNetUsers_UserId`  foreign key (`UserId`) references tbUsuario ( `Id`)  on update cascade on delete cascade;
-
-insert into tbUsuario(`Id`, `Email`, `ConfirmacaoEmail`, `SenhaHash`, `CarimboSeguranca`, `UserName`, Foto)
-			   values('02719894-e4a9-46c8-999e-ba942abd5f8f', 'milenamonteiro@gmail.com', 0, 
-					  'ABecbdkGhzyTR1/t+F8FpUnN+AHXhiXYu4qPCVc4SroxOyzj3p0R+TnWK0p1o6q3Rw==',
-                      'e7aac8f8-7c92-44fb-9850-5f0fb0024c9a', 'Mirena',  LOAD_FILE("/error.gif")),
-                      
-                      ('02719894-e4a9-46c8-999e-ba942abd5f8g', 'moreexpsystems@gmail.com', 0,
-                      'ABecbdkGhzyTR1/t+F8FpUnN+AHXhiXYu4qPCVc4SroxOyzj3p0R+TnWK0p1o6q3Rw=+',
-                      'e7aac8f8-7c92-44fb-9850-5f0fb0024c9b', 'Empresinha', LOAD_FILE("/error.gif"));
   
 -- =======================================================================================================================
 
@@ -144,14 +82,6 @@ insert into tbUsuario(`Id`, `Email`, `ConfirmacaoEmail`, `SenhaHash`, `CarimboSe
                                  
 	insert into tbTelFunc value(1,1);
     
-    drop table if exists tbUsuarioFunc;
-    create table tbUsuarioFunc(
-		IdFunc int not null,
-        IdUsuario nvarchar(128) not null,
-         constraint PKUsuarioFunc primary key(IdFunc, IdUsuario)
-    )engine = InnoDB;
-    alter table tbUsuarioFunc add constraint FKUsuarioFunc foreign key(IdUsuario) references tbUsuario(`Id`),
-							  add constraint FKFuncUsuario foreign key(IdFunc) references tbFuncionario(Id);
 -- ======================================================================================================================= 
  
  -- ========================================================== FORNECEDOR ==============================================  
@@ -294,7 +224,7 @@ insert into tbUsuario(`Id`, `Email`, `ConfirmacaoEmail`, `SenhaHash`, `CarimboSe
     alter table tbAreaPlantio add constraint FKAreaPlantioPlantio foreign key(IdPlantio) references tbPlantio(Id),
 									 add constraint FKAreaPlantioArea foreign key(IdArea) references tbArea(Id);
                                      
-	insert into tbAreaPlantio values(1, 1), (1, 2);
+	insert into tbAreaPlantio values(1, 1, 1), (1, 2, 1);
     
     drop table if exists tbItensPlantio;
 	create table tbItensPlantio(
@@ -591,9 +521,9 @@ insert into tbUsuario(`Id`, `Email`, `ConfirmacaoEmail`, `SenhaHash`, `CarimboSe
 	insert into tbEstoque(Qtd, UM, IdFornecedor) values(3, 'a', 1);
     insert into tbProduto(IdEstoque, Nome) value(7, 'Soja');
     
-	insert into tbColheita values('01/01/01',  1, 4, 1, 7);
-	
-    drop view if exists vwHitorico;
+	insert into tbColheita(`Data`, QtdPerdas, QtdTotal, IdPlantio, IdProd) values('01/01/01',  1, 4, 1, 7);
+    
+    drop view if exists vwHistorico;
     create view vwHistorico as(
     select Id, IdEstoque `Id do Item`, ifnull(NomeAntigo, '-') `Nome do Item`, ifnull(CategoriaAntiga, '-') `Categoria`,
 		   ifnull(FornAntigo, '-') `Fornecedor`, ifnull(QtdAntiga, '-') `Quantidade`, ifnull(UMAntiga, '-') `Unidade de Medida`,

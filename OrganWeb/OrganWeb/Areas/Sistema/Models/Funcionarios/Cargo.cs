@@ -4,13 +4,13 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using OrganWeb.Areas.Sistema.Models.zBanco;
 using OrganWeb.Models;
-using OrganWeb.Models.Banco;
 
 namespace OrganWeb.Areas.Sistema.Models.Funcionarios
 {
     [Table("tbCargo")]
-    public class Cargo : Repository<Cargo>
+    public class Cargo : OrganRepository<Cargo>
     {
         [Key]
         public int Id { get; set; }

@@ -13,7 +13,7 @@ namespace OrganWeb.Areas.Sistema.Models.ViewModels
     public class ViewEstoque
     {
         public IPagedList<VwItems> VwItems { get; set; }
-        public IEnumerable<HistoricoEstoque> HistoricoEstoques { get; set; }
+        public IEnumerable<VwHistorico> VwHistoricos { get; set; }
         public IEnumerable<Estoque> Estoques { get; set; }
         public IEnumerable<Semente> Sementes { get; set; }
         public IEnumerable<VwFornecedor> Fornecedors { get; set; }

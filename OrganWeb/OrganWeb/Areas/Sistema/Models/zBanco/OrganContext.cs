@@ -2,24 +2,19 @@
 using OrganWeb.Areas.Sistema.Models.Safras;
 using OrganWeb.Areas.Sistema.Models.Armazenamento;
 using OrganWeb.Areas.Sistema.Models.Administrativo;
-using Microsoft.AspNet.Identity.EntityFramework;
 using OrganWeb.Areas.Sistema.Models.Controles;
 using OrganWeb.Areas.Sistema.Models.Praga_e_Doenca;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque;
 using OrganWeb.Areas.Sistema.Models.Funcionarios;
-using OrganWeb.Areas.Ecommerce.Models.Endereco;
 using OrganWeb.Areas.Sistema.Models.Telefone;
-using OrganWeb.Areas.Ecommerce.Models.Vendas;
-using OrganWeb.Areas.Sistema.Models.Usuario;
-using OrganWeb.Areas.Ecommerce.Models.Financeiro;
 
-namespace OrganWeb.Models.Banco
+namespace OrganWeb.Areas.Sistema.Models.zBanco
 {
     [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
-    public class OrganContext : IdentityDbContext<ApplicationUser>
+    public class OrganContext : DbContext
     {
-        public OrganContext() : base("name=OrganContext", throwIfV1Schema: false) { }
+        public OrganContext() : base("name=OrganContext") { }
 
         // SISTEMA
         // ADMINISTRATIVO
@@ -40,11 +35,7 @@ namespace OrganWeb.Models.Banco
         public DbSet<Controle> Controles { get; set; }
         public DbSet<ItensControle> ItensControles { get; set; }
         public DbSet<FuncControle> FuncControles { get; set; }
-
-        // FINANCEIRO
-        public DbSet<DadosBancario> DadosBancarios { get; set; }
-        public DbSet<Pagamento> Pagamentos { get; set; }
-
+        
         // FUNCIONÁRIO
         public DbSet<Cargo> Cargos { get; set; }
         public DbSet<TelFunc> TelFuncs { get; set; }
@@ -64,7 +55,6 @@ namespace OrganWeb.Models.Banco
         public DbSet<Semente> Sementes { get; set; }
 
         // VIEWS
-        public DbSet<VwEndereco> VwEnderecos { get; set; }
         public DbSet<VwTelefone> VwTelefones { get; set; }
         public DbSet<VwFuncionario> VwFuncionarios { get; set; }
         public DbSet<VwItems> VwItems { get; set; }
@@ -72,30 +62,11 @@ namespace OrganWeb.Models.Banco
         public DbSet<VwHistorico> VwHistoricos { get; set; }
         public DbSet<VwControle> VwControles { get; set; }
 
-        // ENDEREÇO
-        public DbSet<Endereco> Enderecos { get; set; }
-        public DbSet<Logradouro> Logradouros { get; set; }
-        public DbSet<Bairro> Bairros { get; set; }
-        public DbSet<Cidade> Cidades { get; set; }
-        public DbSet<Estado> Estados { get; set; }
-
         // TELEFONE
-        public DbSet<Telefone> Telefones { get; set; }
+        public DbSet<Telefone.Telefone> Telefones { get; set; }
         public DbSet<TipoTel> TipoTels { get; set; }
         public DbSet<DDD> DDDs { get; set; }
 
-        // ECOMMERCE
-        // ANUNCIO
-        public DbSet<Anuncio> Anuncios { get; set; }
-        public DbSet<Wishlist> Wishlists { get; set; }
-        public DbSet<Carrinho> Carrinhos { get; set; }
-        public DbSet<Pedido> Pedidos { get; set; }
-        public DbSet<Avaliacao> Avaliacaos { get; set; }
-        public DbSet<Comentario> Comentarios { get; set; }
-        public DbSet<Resposta> Respostas { get; set; }
-        public DbSet<Venda> Vendas { get; set; }
-        public DbSet<Entrega> Entregas { get; set; }
-        public DbSet<Pacote> Pacotes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -110,22 +81,6 @@ namespace OrganWeb.Models.Banco
             modelBuilder.Entity<Categoria>()
                 .Property(t => t.Nome)
                 .HasColumnName("Categoria");
-
-            modelBuilder.Entity<Logradouro>()
-                .Property(t => t.Nome)
-                .HasColumnName("Logradouro");
-
-            modelBuilder.Entity<Bairro>()
-                .Property(t => t.Nome)
-                .HasColumnName("Bairro");
-
-            modelBuilder.Entity<Cidade>()
-                .Property(t => t.Nome)
-                .HasColumnName("Cidade");
-
-            modelBuilder.Entity<Estado>()
-                .Property(t => t.Nome)
-                .HasColumnName("Estado");
 
             modelBuilder.Entity<DDD>()
                 .Property(t => t.Valor)
@@ -163,40 +118,33 @@ namespace OrganWeb.Models.Banco
                 .Property(t => t.Nome)
                 .HasColumnName("Pragas/Doenças");
 
-            modelBuilder.Entity<Comentario>()
-                .Property(t => t.Valor)
-                .HasColumnName("Comentario");
+            modelBuilder.Entity<VwItems>()
+                .Property(t => t.UnidadeMedida)
+                .HasColumnName("Unidade de Medida");
 
-            modelBuilder.Entity<Resposta>()
-                    .HasRequired(m => m.Comentario)
-                    .WithMany(t => t.Respostas)
-                    .HasForeignKey(m => m.IdComentario)
-                    .WillCascadeOnDelete(false);
+            modelBuilder.Entity<VwItems>()
+                .Property(t => t.Descricao)
+                .HasColumnName("Descrição");
 
-            modelBuilder.Entity<Resposta>()
-                    .HasRequired(m => m.Comentario)
-                    .WithMany(t => t.Respostas)
-                    .HasForeignKey(m => m.IdResposta)
-                    .WillCascadeOnDelete(false);
+            modelBuilder.Entity<VwHistorico>()
+                .Property(t => t.IdItem)
+                .HasColumnName("Id do Item");
 
-            modelBuilder.Entity<Resposta>().HasKey(vf => new { vf.IdComentario, vf.IdResposta });
+            modelBuilder.Entity<VwHistorico>()
+                .Property(t => t.Nome)
+                .HasColumnName("Nome do Item");
 
-            modelBuilder.Entity<ApplicationUser>()
-                .ToTable("tbUsuario")
-                .Ignore(t => t.PhoneNumber)
-                .Ignore(t => t.PhoneNumberConfirmed)
-                .Ignore(t => t.LockoutEndDateUtc)
-                .Ignore(t => t.LockoutEnabled)
-                .Ignore(t => t.AccessFailedCount)
-                .Ignore(t => t.TwoFactorEnabled);
+            modelBuilder.Entity<VwHistorico>()
+                .Property(t => t.UnidadeMedida)
+                .HasColumnName("Unidade de Medida");
 
-            modelBuilder.Entity<ApplicationUser>()
-                .Property(t => t.SecurityStamp)
-                .HasColumnName("CarimboSeguranca");
+            modelBuilder.Entity<VwHistorico>()
+                .Property(t => t.DataAlteracao)
+                .HasColumnName("Data de Alteração");
 
-            modelBuilder.Entity<ApplicationUser>()
-                .Property(t => t.EmailConfirmed)
-                .HasColumnName("ConfirmacaoEmail");
+            modelBuilder.Entity<VwHistorico>()
+                .Property(t => t.Descricao)
+                .HasColumnName("Descrição de Alteração");
         }
 
         public static OrganContext Create()

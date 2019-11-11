@@ -1,15 +1,15 @@
 ﻿using OrganWeb.Areas.Sistema.Models.Safras;
-using OrganWeb.Models.Banco;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
 using System.Threading.Tasks;
+using OrganWeb.Areas.Sistema.Models.zBanco;
 
 namespace OrganWeb.Areas.Sistema.Models.zRepositories
 {
-    public class ColheitaRepository : Repository<Colheita>
+    public class ColheitaRepository : OrganRepository<Colheita>
     {
         public async Task<Colheita> GetByID(int? pl, int? pr)
         {

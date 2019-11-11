@@ -1,5 +1,5 @@
 ﻿using OrganWeb.Areas.Sistema.Models.Administrativo;
-using OrganWeb.Models.Banco;
+using OrganWeb.Areas.Sistema.Models.zBanco;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,7 +9,7 @@ using System.Web;
 
 namespace OrganWeb.Areas.Sistema.Models.zRepositories
 {
-    public class AreaRepository : Repository<Area>
+    public class AreaRepository : OrganRepository<Area>
     {
         public async Task<List<Area>> AreasDisponiveis()
         {

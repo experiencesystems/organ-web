@@ -1,6 +1,4 @@
-﻿using OrganWeb.Models.Banco;
-using System;
-using System.Collections.Generic;
+﻿using OrganWeb.Areas.Sistema.Models.zBanco;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -9,7 +7,7 @@ using System.Web;
 namespace OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa
 {
     [Table("vwFornecedor")]
-    public class VwFornecedor : Repository<VwFornecedor>
+    public class VwFornecedor : OrganRepository<VwFornecedor>
     {
         [Key]
         public int Id { get; set; }

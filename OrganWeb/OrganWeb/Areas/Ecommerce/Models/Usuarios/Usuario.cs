@@ -7,18 +7,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
-using OrganWeb.Areas.Sistema.Models;
-using OrganWeb.Models.Banco;
 
-namespace OrganWeb.Areas.Sistema.Models.Usuario
+namespace OrganWeb.Areas.Ecommerce.Models.Usuarios
 {
     public class ApplicationUser : IdentityUser
     {
         [Required]
-        public bool Confirmacao { get; set; }
+        public byte[] Foto { get; set; }
+
         [Required]
-        public bool Assinatura { get; set; }
+        public int Assinatura { get; set; }
+
+        [Required]
+        public long CPF { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

@@ -6,15 +6,15 @@ using System.Linq;
 using System.Web;
 using OrganWeb.Models;
 using OrganWeb.Areas.Sistema.Models.Safras;
-using OrganWeb.Models.Banco;
 using System.Web.Mvc;
 using OrganWeb.Areas.Sistema.Models.zRepositories;
 using OrganWeb.Areas.Sistema.Models.API;
+using OrganWeb.Areas.Sistema.Models.zBanco;
 
 namespace OrganWeb.Areas.Sistema.Models.Armazenamento
 {
     [Table("tbEstoque")]
-    public class Estoque : Repository<Estoque>
+    public class Estoque : OrganRepository<Estoque>
     {
         [Key]
         public int Id { get; set; }

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa
+namespace OrganWeb.Areas.Ecommerce.Models.Endereco
 {
     [Table("vwEndereco")]
     public class VwEndereco

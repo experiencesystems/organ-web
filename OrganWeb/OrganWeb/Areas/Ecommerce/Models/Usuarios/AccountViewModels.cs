@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using CompareAttribute = System.ComponentModel.DataAnnotations.CompareAttribute;
 
-namespace OrganWeb.Areas.Sistema.Models.Usuario
+namespace OrganWeb.Areas.Ecommerce.Models.Usuarios
 {
     public class ExternalLoginConfirmationViewModel
     {

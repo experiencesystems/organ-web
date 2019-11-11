@@ -12,11 +12,11 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using OrganWeb.Areas.Ecommerce.Models.Endereco;
 using OrganWeb.Areas.Ecommerce.Models.Financeiro;
+using OrganWeb.Areas.Ecommerce.Models.Usuarios;
 using OrganWeb.Areas.Sistema.Models.Telefone;
-using OrganWeb.Areas.Sistema.Models.Usuario;
 using OrganWeb.Models;
 
-namespace OrganWeb.Areas.Sistema.Controllers
+namespace OrganWeb.Areas.Ecommerce.Controllers
 {
     [Authorize]
     public class AccountController : Controller
@@ -271,8 +271,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 {
                     UserName = model.UserName,
                     Email = model.Email,
-                    Assinatura = false,
-                    Confirmacao = false
+                    Assinatura = 1
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);

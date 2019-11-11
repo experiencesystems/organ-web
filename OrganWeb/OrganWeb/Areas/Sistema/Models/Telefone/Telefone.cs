@@ -1,5 +1,5 @@
 ﻿using OrganWeb.Areas.Sistema.Models;
-using OrganWeb.Models.Banco;
+using OrganWeb.Areas.Sistema.Models.zBanco;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,7 +10,7 @@ using System.Web;
 namespace OrganWeb.Areas.Sistema.Models.Telefone
 {
     [Table("tbTelefone")]
-    public class Telefone : Repository<Telefone>
+    public class Telefone : OrganRepository<Telefone>
     {
         [Key]
         public int Id { get; set; }

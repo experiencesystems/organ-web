@@ -1,4 +1,4 @@
-﻿using OrganWeb.Areas.Sistema.Models.Usuario;
+﻿using OrganWeb.Areas.Ecommerce.Models.Usuarios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

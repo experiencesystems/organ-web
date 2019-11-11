@@ -1,11 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using OrganWeb.Areas.Sistema.Models.zBanco;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using OrganWeb.Models.Banco;
 
 namespace OrganWeb.Areas.Sistema.Models.Funcionarios
 {
     [Table("tbFuncionario")]
-    public class Funcionario : Repository<Funcionario>
+    public class Funcionario : OrganRepository<Funcionario>
     {//TODO: refazer controller funcionário
         [Key]
         public int Id { get; set; }

@@ -5,13 +5,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using OrganWeb.Areas.Sistema.Models.zBanco;
 using OrganWeb.Models;
-using OrganWeb.Models.Banco;
 
 namespace OrganWeb.Areas.Sistema.Models.Administrativo
 {
     [Table("tbSolo")]
-    public class Solo : Repository<Solo>
+    public class Solo : OrganRepository<Solo>
     {
         [Key]
         public int Id { get; set; }

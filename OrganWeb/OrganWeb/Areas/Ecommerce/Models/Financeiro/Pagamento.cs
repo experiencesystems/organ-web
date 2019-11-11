@@ -1,4 +1,4 @@
-﻿using OrganWeb.Models.Banco;
+﻿using OrganWeb.Areas.Ecommerce.Models.zBanco;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,7 +10,7 @@ using System.Web.Mvc;
 namespace OrganWeb.Areas.Ecommerce.Models.Financeiro
 {
     [Table("tbPagamento")]
-    public class Pagamento : Repository<Pagamento>
+    public class Pagamento : EcommerceRepository<Pagamento>
     {
         [Key]
         public int Id { get; set; }

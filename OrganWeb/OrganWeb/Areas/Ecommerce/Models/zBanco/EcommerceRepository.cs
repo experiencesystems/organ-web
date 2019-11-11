@@ -1,7 +1,4 @@
-﻿using OrganWeb.Areas.Sistema.Models;
-using PagedList;
-using PagedList.EntityFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
@@ -9,21 +6,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace OrganWeb.Models.Banco
+namespace OrganWeb.Areas.Ecommerce.Models.zBanco
 {
-    public class Repository<T> : IDisposable where T : class
-    {   //https://stackoverflow.com/questions/20308378/configure-multiple-database-entity-framework-6
-        //https://stackoverflow.com/questions/11013372/repository-pattern-to-query-multiple-databases
-        protected OrganContext _context;
+    public class EcommerceRepository<T> : IDisposable where T : class
+    {
+        protected EcommerceContext _context;
         protected DbSet<T> DbSet { get; set; }
 
-        public Repository()
+        public EcommerceRepository()
         {
-            _context = new OrganContext();
+            _context = new EcommerceContext();
             DbSet = _context.Set<T>();
         }
 
-        public Repository(OrganContext context)
+        public EcommerceRepository(EcommerceContext context)
         {
             _context = context;
         }
@@ -61,7 +57,7 @@ namespace OrganWeb.Models.Banco
         {
             try
             {
-               await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
             catch (DbEntityValidationException ex)
             {

@@ -1,5 +1,5 @@
 ﻿using OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque;
-using OrganWeb.Models.Banco;
+using OrganWeb.Areas.Sistema.Models.zBanco;
 using PagedList;
 using PagedList.EntityFramework;
 using System;
@@ -10,7 +10,7 @@ using System.Web;
 
 namespace OrganWeb.Areas.Sistema.Models.zRepositories
 {
-    public class EstoqueRepository : Repository<VwItems>
+    public class EstoqueRepository : OrganRepository<VwItems>
     {
         public async Task<IPagedList<VwItems>> GetPagedAll(int page)
         {

@@ -1,5 +1,5 @@
 ﻿using OrganWeb.Areas.Sistema.Models.Safras;
-using OrganWeb.Models.Banco;
+using OrganWeb.Areas.Sistema.Models.zBanco;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,7 +8,7 @@ using System.Web;
 
 namespace OrganWeb.Areas.Sistema.Models.zRepositories
 {
-    public class ItensPlantioRepository : Repository<ItensPlantio>
+    public class ItensPlantioRepository : OrganRepository<ItensPlantio>
     {
         public async void DeleteByIdPlantio(Plantio plantio)
         {

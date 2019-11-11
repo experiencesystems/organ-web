@@ -1,4 +1,4 @@
-﻿using OrganWeb.Models.Banco;
+﻿using OrganWeb.Areas.Sistema.Models.zBanco;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +9,7 @@ using System.Web;
 namespace OrganWeb.Areas.Sistema.Models.Armazenamento
 {
     [Table("tbProduto")]
-    public class Produto : Repository<Produto>
+    public class Produto : OrganRepository<Produto>
     {
         [Key]
         [ForeignKey("Estoque")]

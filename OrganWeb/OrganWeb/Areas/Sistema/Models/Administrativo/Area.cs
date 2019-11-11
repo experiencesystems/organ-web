@@ -1,5 +1,4 @@
 ﻿using OrganWeb.Areas.Sistema.Models.zRepositories;
-using OrganWeb.Models.Banco;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

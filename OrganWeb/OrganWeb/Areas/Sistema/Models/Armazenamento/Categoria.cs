@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using OrganWeb.Areas.Sistema.Models.zBanco;
 using OrganWeb.Models;
-using OrganWeb.Models.Banco;
 
 namespace OrganWeb.Areas.Sistema.Models.Armazenamento
 {
     [Table("tbCategoria")]
-    public class Categoria : Repository<Categoria>
+    public class Categoria : OrganRepository<Categoria>
     {
         [Key]
         public int Id { get; set; }

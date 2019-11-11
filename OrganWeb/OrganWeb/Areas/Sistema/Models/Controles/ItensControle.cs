@@ -1,5 +1,5 @@
 ﻿using OrganWeb.Areas.Sistema.Models.Armazenamento;
-using OrganWeb.Models.Banco;
+using OrganWeb.Areas.Sistema.Models.zBanco;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,7 +10,7 @@ using System.Web;
 namespace OrganWeb.Areas.Sistema.Models.Controles
 {
     [Table("tbItensControle")]
-    public class ItensControle : Repository<ItensControle>
+    public class ItensControle : OrganRepository<ItensControle>
     {
         [Required]
         public double QtdUsada { get; set; }

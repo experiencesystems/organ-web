@@ -6,7 +6,8 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using OrganWeb.Areas.Sistema.Models.Usuario;
+using OrganWeb.Areas.Ecommerce.Controllers;
+using OrganWeb.Areas.Ecommerce.Models.Usuarios;
 using OrganWeb.Models;
 
 namespace OrganWeb.Areas.Sistema.Controllers

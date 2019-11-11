@@ -1,4 +1,4 @@
-﻿using OrganWeb.Models.Banco;
+﻿using OrganWeb.Areas.Ecommerce.Models.zBanco;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +9,7 @@ using System.Web;
 namespace OrganWeb.Areas.Ecommerce.Models.Endereco
 {
     [Table("tbCidade")]
-    public class Cidade : Repository<Cidade>
+    public class Cidade : EcommerceRepository<Cidade>
     {
         [Key]
         public int Id { get; set; }

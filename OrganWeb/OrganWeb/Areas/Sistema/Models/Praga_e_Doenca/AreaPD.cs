@@ -1,5 +1,5 @@
 ﻿using OrganWeb.Areas.Sistema.Models.Administrativo;
-using OrganWeb.Models.Banco;
+using OrganWeb.Areas.Sistema.Models.zBanco;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,7 +10,7 @@ using System.Web;
 namespace OrganWeb.Areas.Sistema.Models.Praga_e_Doenca
 {
     [Table("tbAreaPD")]
-    public class AreaPD : Repository<AreaPD>
+    public class AreaPD : OrganRepository<AreaPD>
     {
         [Required]
         public bool Status { get; set; }

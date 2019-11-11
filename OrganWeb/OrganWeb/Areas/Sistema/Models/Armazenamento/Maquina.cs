@@ -1,13 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using OrganWeb.Models.Banco;
 using OrganWeb.Areas.Sistema.Models.API;
+using OrganWeb.Areas.Sistema.Models.zBanco;
 
 namespace OrganWeb.Areas.Sistema.Models.Armazenamento
 {
     [Table("tbMaquina")]
-    public class Maquina : Repository<Maquina>
+    public class Maquina : OrganRepository<Maquina>
     {
         [Key]
         [ForeignKey("Estoque")]

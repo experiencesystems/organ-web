@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using OrganWeb.Areas.Sistema.Models.Usuario;
-using OrganWeb.Models;
-using OrganWeb.Models.Banco;
+using OrganWeb.Areas.Ecommerce.Models.Usuarios;
+using OrganWeb.Areas.Ecommerce.Models.zBanco;
 
 namespace OrganWeb
 {
@@ -35,7 +30,7 @@ namespace OrganWeb
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<OrganContext>()));
+            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<EcommerceContext>()));
 
             // Configurar a lógica de validação para nomes de usuário
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)

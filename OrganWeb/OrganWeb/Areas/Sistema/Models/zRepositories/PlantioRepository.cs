@@ -4,13 +4,13 @@ using System.Linq;
 using System.Web;
 using OrganWeb.Models;
 using OrganWeb.Areas.Sistema.Models.Safras;
-using OrganWeb.Models.Banco;
 using System.Threading.Tasks;
 using OrganWeb.Areas.Sistema.Models.Administrativo;
+using OrganWeb.Areas.Sistema.Models.zBanco;
 
 namespace OrganWeb.Areas.Sistema.Models
 {
-    public class PlantioRepository : Repository<Plantio>
+    public class PlantioRepository : OrganRepository<Plantio>
     {
         public async Task<List<Plantio>> GetPlantios()
         {

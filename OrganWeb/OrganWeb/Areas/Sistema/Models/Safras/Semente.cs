@@ -5,13 +5,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using OrganWeb.Models;
-using OrganWeb.Models.Banco;
 using OrganWeb.Areas.Sistema.Models.Armazenamento;
+using OrganWeb.Areas.Sistema.Models.zBanco;
 
 namespace OrganWeb.Areas.Sistema.Models.Safras
 {
     [Table("tbSemente")]
-    public class Semente : Repository<Semente>
+    public class Semente : OrganRepository<Semente>
     {
         [Key]
         [ForeignKey("Estoque")]

@@ -1,4 +1,4 @@
-﻿using OrganWeb.Models.Banco;
+﻿using OrganWeb.Areas.Sistema.Models.zBanco;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +9,7 @@ using System.Web;
 namespace OrganWeb.Areas.Sistema.Models.Telefone
 {
     [Table("tbDDD")]
-    public class DDD : Repository<DDD>
+    public class DDD : OrganRepository<DDD>
     {
         [Key]
         public int Valor { get; set; }
