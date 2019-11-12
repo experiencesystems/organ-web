@@ -25,11 +25,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 body {
     margin: 0;
-<<<<<<< Updated upstream
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-=======
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Dubai, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
->>>>>>> Stashed changes
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", DubaiW23, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -81,15 +77,18 @@ a {
     text-decoration: none;
     background-color: transparent;
 }
-a:hover {
-    color: #12b246;
-    text-decoration: none;
-}
+
+    a:hover {
+        color: #12b246;
+        text-decoration: none;
+    }
+
 body {
     padding: 0;
     margin: 0;
     overflow-x: hidden;
 }
+
 .form-control, .dataTables_wrapper select, .form-control:focus, .dataTables_wrapper select:focus {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
@@ -111,17 +110,22 @@ body {
     font-size: 1.25rem;
     margin-left: 0;
 }
+
 .dropdown .dropdown-menu {
     margin-top: .75rem;
     font-size: 0.875rem;
     box-shadow: 0px 1px 15px 1px rgba(230, 234, 236, 0.35);
     border-radius: 0;
 }
-.dropdown .dropdown-menu .dropdown-item {
-    font-size: .875rem;
-    padding: .25rem 1.5rem;
-}
-.dropdown .dropdown-menu .dropdown-item:active { background: initial; }
+
+    .dropdown .dropdown-menu .dropdown-item {
+        font-size: .875rem;
+        padding: .25rem 1.5rem;
+    }
+
+        .dropdown .dropdown-menu .dropdown-item:active {
+            background: initial;
+        }
 /* Forms */
 .form-group {
     margin-bottom: 1.5rem;
@@ -228,74 +232,14 @@ select.form-control, .dataTables_wrapper select {
 }
 /* Sidebar */
 .sidebar {
-<<<<<<< Updated upstream
-  min-height: calc(100vh - 60px);
-  background: #ffffff;
-  font-family: "Roboto", sans-serif;
-  font-weight: 400;
-  padding: 0;
-  width: 257px;
-  z-index: 11;
-  font-size: 0.9em;
-  transition: width 0.25s ease, background 0.25s ease;
-  -webkit-transition: width 0.25s ease, background 0.25s ease;
-  -moz-transition: width 0.25s ease, background 0.25s ease;
-  /*-ms-transition: width 0.25s ease, background 0.25s ease;*/
-  box-shadow: none;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  /*-ms-box-shadow: none;*/
-  border-right: 1px solid #e3e3e3;
-  box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);
-}
-.sidebar .nav {
-  overflow: hidden;
-  flex-wrap: nowrap;
-  flex-direction: column;
-  margin-bottom: 60px;
-}
-.sidebar .nav .nav-item {
-  -webkit-transition-duration: 0.25s;
-  -moz-transition-duration: 0.25s;
-  -o-transition-duration: 0.25s;
-  transition-duration: 0.25s;
-  transition-property: background;
-  -webkit-transition-property: background;
-}
-
-.sidebar .nav .nav-item .collapse {
-  z-index: 99;
-}
-.sidebar .nav .nav-item .nav-link {
-  display: -webkit-flex;
-  display: flex;
-  -webkit-align-items: center;
-  align-items: center;
-  white-space: nowrap;
-  padding: 0.75rem 2.5rem 0.75rem 1.25rem;
-  color: rgb(105, 105, 105);
-  -webkit-transition-duration: 0.45s;
-  -moz-transition-duration: 0.45s;
-  -o-transition-duration: 0.45s;
-  transition-duration: 0.45s;
-  transition-property: color;
-  -webkit-transition-property: color;
-}
-.sidebar .nav .nav-item .nav-link i { color: inherit; }
-.sidebar .nav .nav-item .nav-link i.menu-icon {
-  font-size: 1.125rem;
-  line-height: 1;
-  margin-right: 1.225rem;
-  color: inherit;
-=======
     min-height: calc(100vh - 60px);
     background: #ffffff;
-    font-family: "DubaiW23", sans-serif;
+    font-family: "Dubai", sans-serif;
     font-weight: 400;
     padding: 0;
     width: 257px;
     z-index: 11;
-    font-size: 0.9em;
+    font-size: 1em;
     transition: width 0.25s ease, background 0.25s ease;
     -webkit-transition: width 0.25s ease, background 0.25s ease;
     -moz-transition: width 0.25s ease, background 0.25s ease;
@@ -306,24 +250,21 @@ select.form-control, .dataTables_wrapper select {
     /*-ms-box-shadow: none;*/
     border-right: 1px solid #e3e3e3;
     box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);
->>>>>>> Stashed changes
 }
-
-    .sidebar .nav {
-        overflow: hidden;
-        flex-wrap: nowrap;
-        flex-direction: column;
-        margin-bottom: 60px;
-    }
-
-        .sidebar .nav .nav-item {
-            -webkit-transition-duration: 0.25s;
-            -moz-transition-duration: 0.25s;
-            -o-transition-duration: 0.25s;
-            transition-duration: 0.25s;
-            transition-property: background;
-            -webkit-transition-property: background;
-        }
+.sidebar .nav {
+    overflow: hidden;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    margin-bottom: 60px;
+}
+.sidebar .nav .nav-item {
+    -webkit-transition-duration: 0.25s;
+    -moz-transition-duration: 0.25s;
+    -o-transition-duration: 0.25s;
+    transition-duration: 0.25s;
+    transition-property: background;
+    -webkit-transition-property: background;
+}
 
             .sidebar .nav .nav-item .collapse {
                 z-index: 99;
@@ -398,24 +339,18 @@ select.form-control, .dataTables_wrapper select {
     -o-transition: all 0.2s ease-in;
     transition: all 0.2s ease-in;
 }
-
 .sidebar .nav .nav-item .nav-link .menu-title {
     color: inherit;
     display: inline-block;
-    font-size: 0.875rem;
+    font-size: 1rem;
     line-height: 1;
     vertical-align: middle;
 }
-
-.sidebar .nav .nav-item .nav-link .badge {
-    margin-left: auto;
-}
-
+.sidebar .nav .nav-item .nav-link .badge { margin-left: auto; }
 .rtl .sidebar .nav .nav-item .nav-link .badge {
     margin-left: 0;
     margin-right: auto;
 }
-
 .sidebar .nav .nav-item .nav-link[aria-expanded="true"] i.menu-arrow:before {
     -moz-transform: rotate(180deg);
     -o-transform: rotate(180deg);
@@ -428,13 +363,9 @@ select.form-control, .dataTables_wrapper select {
     background: initial;
     position: relative;
 }
-
-    .sidebar .nav .nav-item.active > .nav-link i,
-    .sidebar .nav .nav-item.active > .nav-link .menu-title,
-    .sidebar .nav .nav-item.active > .nav-link .menu-arrow {
-        color: #12b246;
-    }
-
+.sidebar .nav .nav-item.active > .nav-link i,
+.sidebar .nav .nav-item.active > .nav-link .menu-title,
+.sidebar .nav .nav-item.active > .nav-link .menu-arrow { color: #12b246; }
 .sidebar .nav:not(.sub-menu) {
     margin-top: .3rem;
 }
@@ -444,26 +375,18 @@ select.form-control, .dataTables_wrapper select {
   margin-top: 0;
 }
 */
-    .sidebar .nav:not(.sub-menu) > .nav-item > .nav-link {
-        margin: 0;
-    }
-
-    .sidebar .nav:not(.sub-menu) > .nav-item:hover > .nav-link {
-        background: transparent;
-        color: #12b246;
-    }
-
+.sidebar .nav:not(.sub-menu) > .nav-item > .nav-link { margin: 0; }
+.sidebar .nav:not(.sub-menu) > .nav-item:hover > .nav-link {
+    background: transparent;
+    color: #12b246;
+}
 .sidebar .nav.sub-menu {
     margin-bottom: 0;
     margin-top: 0;
     list-style: none;
     padding: 0.25rem 0 0.6rem 3.55rem;
 }
-
-    .sidebar .nav.sub-menu .nav-item {
-        padding: 0;
-    }
-
+.sidebar .nav.sub-menu .nav-item { padding: 0; }
         .sidebar .nav.sub-menu .nav-item::before {
             content: '';
             position: absolute;
@@ -518,37 +441,6 @@ select.form-control, .dataTables_wrapper select {
 
 /* Navbar */
 .navbar {
-<<<<<<< Updated upstream
-  font-weight: 400;
-  transition: background 0.25s ease;
-  -webkit-transition: background 0.25s ease;
-  -moz-transition: background 0.25s ease;
-  /*-ms-transition: background 0.25s ease;*/
-}
-
-.navbar .navbar-brand-wrapper {
-  background: #ffffff;
-  border-bottom: 1px solid #e3e3e3;
-  transition: width 0.25s ease, background 0.25s ease;
-  -webkit-transition: width 0.25s ease, background 0.25s ease;
-  -moz-transition: width 0.25s ease, background 0.25s ease;
-  /*-ms-transition: width 0.25s ease, background 0.25s ease;*/
-  width: 257px;
-  height: 60px;
-  border-right: 1px solid #e3e3e3;
-}
-.navbar .navbar-brand-wrapper .navbar-brand-inner-wrapper {
-  margin-left: 1.375rem;
-  margin-right: 1.375rem;
-}
-.navbar .navbar-brand-wrapper .navbar-brand-inner-wrapper .navbar-brand {
-  color: #27367f;
-  font-size: 1.5rem;
-  margin-right: 0;
-  padding: .25rem 0;
-}
-.navbar .navbar-brand-wrapper .navbar-brand-inner-wrapper .navbar-brand.brand-logo-mini { display: none; }
-=======
     font-weight: 400;
     transition: background 0.25s ease;
     -webkit-transition: background 0.25s ease;
@@ -584,7 +476,6 @@ select.form-control, .dataTables_wrapper select {
                     display: none;
                 }
 
->>>>>>> Stashed changes
 @media (max-width: 991px) {
     .navbar .navbar-brand-wrapper .navbar-brand-inner-wrapper .navbar-brand.brand-logo-mini {
         display: inline-block;
@@ -629,20 +520,20 @@ select.form-control, .dataTables_wrapper select {
     }
 
 .navbar .navbar-menu-wrapper {
-  background: #fff;
-  transition: width 0.25s ease;
-  -webkit-transition: width 0.25s ease;
-  -moz-transition: width 0.25s ease;
-  /*-ms-transition: width 0.25s ease;*/
-  color: #9b9b9b;
-  padding-left: 1.062rem;
-  padding-right: 1.062rem;
-  width: calc(100% - 257px);
-  height: 60px;
-  border-bottom: 1px solid #e3e3e3;
-  background: #fff;
-  transition: width 0.25s ease;
-  -webkit-transition: width 0.25s ease;
+    background: #fff;
+    transition: width 0.25s ease;
+    -webkit-transition: width 0.25s ease;
+    -moz-transition: width 0.25s ease;
+    /*-ms-transition: width 0.25s ease;*/
+    color: #9b9b9b;
+    padding-left: 1.062rem;
+    padding-right: 1.062rem;
+    width: calc(100% - 257px);
+    height: 60px;
+    border-bottom: 1px solid #e3e3e3;
+    background: #fff;
+    transition: width 0.25s ease;
+    -webkit-transition: width 0.25s ease;
     -moz-transition: width 0.25s ease;
     /*-ms-transition: width 0.25s ease;*/
     color: #9b9b9b;
@@ -1546,7 +1437,7 @@ select.form-control, .dataTables_wrapper select {
     margin-top: -10px;
     color: #272727;
     font-weight: 500;
-    font-family: Roboto;
+    font-family: "Dubai";
 }
 
 .btn-addmodal {
@@ -1588,7 +1479,7 @@ label {
     box-sizing: border-box;
     padding: 20px;
     color: rgba(0, 0, 0, 0.6);
-    font-family: Roboto;
+    font-family: DubaiW23;
     font-size: inherit;
     font-weight: 300;
     line-height: inherit;
@@ -1605,7 +1496,7 @@ label {
     box-sizing: border-box;
     padding: 10px;
     color: rgba(0, 0, 0, 0.6);
-    font-family: Roboto;
+    font-family: DubaiW23;
     font-size: inherit;
     font-weight: 300;
     line-height: inherit;
@@ -1646,7 +1537,7 @@ input[type=submit] {
 /*Tabelas*/
 table {
     text-align: left;
-    font-family: Roboto;
+    font-family: Dubai;
     width: 100%;
     background: #fff;
     margin: 0;
@@ -1718,7 +1609,7 @@ thead th {
 }
 
 .body-title {
-    font-family: Roboto;
+    font-family: "Dubai";
     font-size: 1.5rem;
     font-weight: 600;
 }
@@ -1751,7 +1642,7 @@ thead th {
     -moz-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    font-family: Roboto;
+    font-family: "Dubai";
 }
 
 .table-data__tool {
@@ -1940,4 +1831,22 @@ thead th {
 
 .update-card {
     padding: 20px;
+}
+/*Paginação*/
+.pagination {
+    padding: 10px 0;
+}
+
+.p1 a {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0;
+    text-align: center;
+}
+
+.p1 page-item a.is-active {
+    background-color: #2ecc71;
+    border-radius: 100%;
+    color: #fff;
 }
