@@ -12,7 +12,7 @@ using OrganWeb.Areas.Ecommerce.Models.Usuarios;
 using OrganWeb.Areas.Ecommerce.Models.zBanco;
 using OrganWeb.Areas.Sistema.Models.Telefone;
 
-namespace OrganWeb.Areas.Ecommerce.Controllers
+namespace OrganWeb.Areas.Sistema.Controllers
 {
     [Authorize]
     public class AccountController : Controller

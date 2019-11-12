@@ -282,6 +282,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Ecommerce\Controllers\AnuncioController.cs" />
     <Compile Include="Areas\Ecommerce\Controllers\CarrinhoController.cs" />
     <Compile Include="Areas\Ecommerce\Controllers\LojaController.cs" />
     <Compile Include="Areas\Ecommerce\EcommerceAreaRegistration.cs" />
@@ -300,6 +301,7 @@
     <Compile Include="Areas\Ecommerce\Models\ViewModels\CarrinhoViewModel.cs" />
     <Compile Include="Areas\Ecommerce\Models\zRepositories\CarrinhoRepository.cs" />
     <Compile Include="Areas\Ecommerce\Models\zRepositories\WishlistRepository.cs" />
+    <Compile Include="Areas\Sistema\Controllers\AccountController.cs" />
     <Compile Include="Areas\Sistema\Controllers\AreaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\ColheitaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\ControleController.cs" />
@@ -360,7 +362,6 @@
     <Compile Include="Areas\Sistema\Models\Administrativo\Solo.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\UnidadeMedidaRepository.cs" />
     <Compile Include="Areas\Sistema\SistemaAreaRegistration.cs" />
-    <Compile Include="Areas\Ecommerce\Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Sistema\Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -550,6 +551,7 @@
     <Content Include="Areas\Ecommerce\Views\Account\ResetPassword.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Account\Registro.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\Anuncio\Create.cshtml" />
     <None Include="Properties\PublishProfiles\organweb - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\organweb - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />

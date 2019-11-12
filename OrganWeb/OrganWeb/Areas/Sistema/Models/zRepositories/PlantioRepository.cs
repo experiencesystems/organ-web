@@ -12,9 +12,9 @@ namespace OrganWeb.Areas.Sistema.Models
 {
     public class PlantioRepository : OrganRepository<Plantio>
     {
-        private List<Plantio> Plantios;
-        private List<Colheita> Colheitas;
-        private List<AreaPlantio> AreaPlantios;
+        private List<Plantio> Plantios = new List<Plantio>();
+        private List<Colheita> Colheitas = new List<Colheita>();
+        private List<AreaPlantio> AreaPlantios = new List<AreaPlantio>();
         public async Task<List<Plantio>> GetPlantios()
         {
             Plantios = await GetAll();

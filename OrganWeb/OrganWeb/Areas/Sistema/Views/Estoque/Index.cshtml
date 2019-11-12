@@ -3,152 +3,133 @@
 @{
     ViewBag.Title = "Estoque";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    WebGrid grid = new WebGrid(Model.VwItems, rowsPerPage: 5);
 }
 
-<!--ARRUMAR AS OPÇÕES PORQUE AS VEZES NÃO ABRE-->
-
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+<script src="~/Scripts/popper.min.js"></script>
 
 <div class="main-body">
     <div class="row">
         <div class="col">
             <div class="tablecontainer">
-
                 <div class="row">
-                    <div class="col-6">
-                        <div class="table-data__tool">
-                            <h6 class="body-title">Estoque</h6>
-                            <div class="selectdropdown">
-                                <select class="js-select2" name="property">
-                                    <option selected="selected">Todas as propriedades</option>
-                                    <option value="">Opção 1</option>
-                                    <option value="">Opção 2</option>
-                                </select>
-                                <div class="dropDownSelect2"></div>
-                            </div>
+                    <h6 class="body-title">Estoque</h6>
+                    @using (Html.BeginForm("Index", "Estoque", FormMethod.Get))
+                    {
+                        <div class="col-6">
+                            <div class="table-data__tool">
+                                Filtro: @Html.DropDownList("filtros", "Todos")
 
-                            <div class="selectdropdown">
-                                <select class="js-select2 ui dropdown" name="time">
-                                    <option selected="selected">Todos</option>
-                                    <option value="">Hoje</option>
-                                    <option value="">Essa semana</option>
-                                    <option value="">Este mês</option>
-                                </select>
-                                <div class="dropDownSelect2"></div>
-                            </div>
+                                Pesquisa: @Html.TextBox("textoPesquisa")
+                                <input type="submit" value="Filtro" />
 
+                            </div>
                         </div>
-                    </div>
+                    }
                     <div class="col-6">
                         <p class="card-text">
                             <a class="popup btn btn-add" href="/Sistema/Estoque/Create">Novo insumo</a>
                         </p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="card table-card col-6">
-                        <div class="card-header">
-                            <h6 class="card-title box-title">Itens</h6>
-                            <div class="card-header-right">
-                                <ul class="list-unstyled card-option">
-                                    <li><i class="ti-minus minimize-card"></i></li>
-                                    <li><i class="icon-refresh"></i></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card-block">
-                            <div class="table-responsive">
-                                @using (Html.BeginForm("Index", "Estoque", FormMethod.Get))
-                                {
-                                    <p>
-                                        Filtro: @Html.DropDownList("filtros", "Todos")
-                                        Pesquisa: @Html.TextBox("textoPesquisa")
-                                        <input type="submit" value="Filtro" class="btn-add">
-                                    </p>
-                                }
-                                <table class="table-hover">
-                                    <thead class="thead-title">
-                                        <tr>
-                                            <th scope="col">Nome</th>
-                                            <th scope="col">Quantidade</th>
-                                            <th scope="col">Categoria</th>
-                                            <th scope="col"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in Model.VwItems)
-                                        {
-                                            <tr>
-                                                <td>@Html.DisplayFor(modelItem => item.Item)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.Quantidade)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.Categoria)</td>
-                                                <td>
 
-                                                    <a class="popup btn" href="@Url.Action("Detalhes", "Estoque", new { id = item.Id, tipo = item.Tipo  })"><div class="itemback"><i class="item fa fa-info"></i></div></a>
-                                                    <a class="popup btn" href="@Url.Action("Editar", "Estoque", new { id = item.Id, tipo = item.Tipo })"><div class="itemback"><i class="item far fa-edit"></i></div></a>
-                                                    <a class="popup btn" href="@Url.Action("Excluir", "Estoque", new { id = item.Id, tipo = item.Tipo })"><div class="itemback"><i class="item far fa-trash-alt"></i></div></a>
-                                                </td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                                <br />
-                                Página @(Model.VwItems.PageCount < Model.VwItems.PageNumber ? 0 : Model.VwItems.PageNumber) de @Model.VwItems.PageCount
-
-                                @Html.PagedListPager(Model.VwItems, page => Url.Action("Index",
-                                    new { page }))
-                            </div>
+                <div class="card table-card col">
+                    <div class="card-header">
+                        <h6 class="card-title box-title">Itens</h6>
+                        <div class="card-header-right">
+                            <ul class="list-unstyled card-option">
+                                <li><i class="ti-minus minimize-card"></i></li>
+                                <li><i class="icon-refresh"></i></li>
+                            </ul>
                         </div>
                     </div>
+                    <div class="card-block">
+                        <div class="table-responsive">
+                            <table class="table-hover">
+                                <thead class="thead-title">
+                                    <tr>
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">Quantidade</th>
+                                        <th scope="col">Categoria</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.VwItems)
+                                    {
+                                        <tr>
+                                            <td>@Html.DisplayFor(modelItem => item.Item)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Quantidade)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Categoria)</td>
+                                            <td>
 
-                    <div class="col-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h6 class="card-title box-title">Histórico de alterações</h6>
-                                <div class="card-header-right">
-                                    <ul class="list-unstyled card-option">
-                                        <li><i class="ti-minus minimize-card"></i></li>
-                                        <li><i class="icon-refresh"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card table-card">
-                                <div class="card-block">
-                                    <div class="table-responsive">
-                                        <table class="table-hover">
-                                            <thead class="thead-title">
-                                                <tr>
-                                                    <th scope="col">Descrição</th>
-                                                    <th scope="col">Data</th>
-                                                    <th scope="col">Nome</th>
-                                                    <th scope="col">Quantidade</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach (var item in Model.VwHistoricos)
-                                                {
-                                                    <tr>
-                                                        <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
-                                                        <td>@Html.DisplayFor(modelItem => item.DataAlteracao)</td>
-                                                        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
-                                                        <td>@Html.DisplayFor(modelItem => item.Quantidade) @Html.DisplayFor(modelItem => item.UnidadeMedida)</td>
-                                                    </tr>
-                                                }
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+                                                <a class="popup btn" href="@Url.Action("Detalhes", "Estoque", new { id = item.Id, tipo = item.Tipo  })"><div class="itemback"><i class="item fa fa-info"></i></div></a>
+                                                <a class="popup btn" href="@Url.Action("Editar", "Estoque", new { id = item.Id, tipo = item.Tipo })"><div class="itemback"><i class="item far fa-edit"></i></div></a>
+                                                <a class="popup btn" href="@Url.Action("Excluir", "Estoque", new { id = item.Id, tipo = item.Tipo })"><div class="itemback"><i class="item far fa-trash-alt"></i></div></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <br />
+                            Página @(Model.VwItems.PageCount < Model.VwItems.PageNumber ? 0 : Model.VwItems.PageNumber) de @Model.VwItems.PageCount
+
+                            @Html.PagedListPager(Model.VwItems, page => Url.Action("Index",
+                                new { page }), new PagedListRenderOptions
+                                {
+                                    LiElementClasses = new string[] { "pagination page-item p1" }
+                                })
                         </div>
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title box-title">Histórico de alterações</h6>
+                    <div class="card-header-right">
+                        <ul class="list-unstyled card-option">
+                            <li><i class="ti-minus minimize-card"></i></li>
+                            <li><i class="icon-refresh"></i></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card table-card">
+                    <div class="card-block">
+                        <!--<div class="table-responsive">-->
+                        <table class="table-hover">
+                            <thead class="thead-title">
+                                <tr>
+                                    <th scope="col">Descrição</th>
+                                    <th scope="col">Data</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Quantidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.VwHistoricos)
+                                {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.DataAlteracao)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Quantidade) @Html.DisplayFor(modelItem => item.UnidadeMedida)</td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
             <div class="card">
                 <div class="card-header">
                     <h6 class="card-title box-title">Fornecedor</h6>
@@ -161,7 +142,9 @@
                 </div>
                 <div class="card table-card">
                     <div class="card-block">
-                        <a class="popup btn btn-add" href="/Sistema/Fornecedor/Create" style="margin-bottom:20px; margin-top:20px;">Novo Fornecedor</a>
+                        <div class="tablecontainer">
+                            <a class="popup btn btn-add" href="/Sistema/Fornecedor/Create" style="margin-bottom:20px; margin-top:20px;">Novo Fornecedor</a>
+                        </div>
                         <div class="table-responsive">
                             <table class="table-hover">
                                 <thead class="thead-title">
