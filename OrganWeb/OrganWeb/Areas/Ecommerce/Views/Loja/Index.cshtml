@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OrganWeb.Areas.Ecommerce.Models.Anuncio>
+﻿@model IEnumerable<OrganWeb.Areas.Ecommerce.Models.Vendas.Anuncio>
 
 @{
     Layout = null;
@@ -13,18 +13,12 @@
 </head>
 <body>
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Novo anúncio", "Create", "Anuncio")
     </p>
     <table class="table">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Foto)
@@ -41,21 +35,15 @@
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Foto)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Desconto)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Edit", "Edit", new { /*id=item.Id*/ }) |
                 @Html.ActionLink("Details", "Detalhes", new { /*id=item.Id*/ }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                @Html.ActionLink("Delete", "Delete", new { /*id=item.Id*/ })
             </td>
         </tr>
     }

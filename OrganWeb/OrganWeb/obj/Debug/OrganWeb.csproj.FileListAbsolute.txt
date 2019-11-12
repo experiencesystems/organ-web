@@ -1024,8 +1024,6 @@ C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\PagedList
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\PagedList.EntityFramework.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\PagedList.EntityFramework.pdb
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\PagedList.EntityFramework.xml
-C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\OrganWeb.dll.CodeAnalysisLog.xml
-C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\OrganWeb.dll.lastcodeanalysissucceeded
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\obj\Debug\OrganWeb.csprojAssemblyReference.cache
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\Microsoft.Win32.Primitives.dll
 C:\Users\milen\Documents\Organ\Sistema\organ-web\OrganWeb\OrganWeb\bin\netstandard.dll

@@ -22,6 +22,7 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
         public double Quantidade { get; set; }
 
         [Required]
+        [Display(Name = "Nome do produto")]
         [StringLength(30, MinimumLength = 2)]
         public string Nome { get; set; }
     }

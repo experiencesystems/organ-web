@@ -102,7 +102,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 ModelState.AddModelError(string.Empty, "Não há sementes o suficiente no estoque para completar a operação");
                 crplantio.Areas = await area.AreasDisponiveis();
                 crplantio.Sementes = await semente.GetAll();
-                crplantio.Sistema = plantio.Sistema;
+                crplantio.Sistemas = plantio.Sistemas;
                 crplantio.Periodos = plantio.Periodos;
                 return View(crplantio);
             }
@@ -144,7 +144,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
             // Enviando listas da combobox caso o formulário não seja preenchido corretamente
             crplantio.Areas = await area.AreasDisponiveis();
             crplantio.Sementes = await semente.GetAll();
-            crplantio.Sistema = plantio.Sistema;
+            crplantio.Sistemas = plantio.Sistemas;
             crplantio.Periodos = plantio.Periodos;
             return View(crplantio);
         }

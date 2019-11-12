@@ -34,11 +34,11 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>DEBUG;CODE_ANALYSIS;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>7.3</LangVersion>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
     <PublishDatabaseSettings>
       <Objects>
         <ObjectGroup Name="BancoContext-Implantação" Order="1">
@@ -50,6 +50,7 @@
         </ObjectGroup>
       </Objects>
     </PublishDatabaseSettings>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -282,6 +283,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Ecommerce\Controllers\AccountController.cs" />
     <Compile Include="Areas\Ecommerce\Controllers\AnuncioController.cs" />
     <Compile Include="Areas\Ecommerce\Controllers\CarrinhoController.cs" />
     <Compile Include="Areas\Ecommerce\Controllers\LojaController.cs" />
@@ -551,6 +553,7 @@
     <Content Include="Areas\Ecommerce\Views\Account\ResetPassword.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Account\Registro.cshtml" />
+    <Content Include="ExpSystems.pfx" />
     <Content Include="Areas\Ecommerce\Views\Anuncio\Create.cshtml" />
     <None Include="Properties\PublishProfiles\organweb - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\organweb - Web Deploy.pubxml" />
@@ -638,6 +641,12 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>ExpSystems.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />

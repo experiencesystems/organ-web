@@ -1,4 +1,4 @@
-﻿@model OrganWeb.Models.Usuario.LoginViewModel
+﻿@model OrganWeb.Areas.Ecommerce.Models.Usuarios.LoginViewModel
 
 @{
     Layout = null;
@@ -21,7 +21,7 @@
         @Html.AntiForgeryToken()
         
         <div class="form-horizontal">
-            <h4>LoginViewModel</h4>
+            <h4>Login</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
