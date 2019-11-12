@@ -1,4 +1,5 @@
 ﻿using OrganWeb.Areas.Ecommerce.Models.Usuarios;
+using OrganWeb.Areas.Ecommerce.Models.zBanco;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +10,7 @@ using System.Web;
 namespace OrganWeb.Areas.Ecommerce.Models.Vendas
 {
     [Table("tbAnuncio")]
-    public class Anuncio
+    public class Anuncio : EcommerceRepository<Anuncio>
     {
         [Key]
         public int Id { get; set; }
@@ -32,13 +33,15 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
         [Range(0.00, 100.00)]
         public decimal Desconto { get; set; }
         
-        //TODO: ver se vai ter IdProduto no anúncio
+        [Required]
+        [ForeignKey("Produto")]
         public int IdProduto { get; set; }
 
         [Required]
         [ForeignKey("Usuario")]
         public string IdUsuario { get; set; }
 
+        public virtual Produto Produto { get; set; }
         public virtual ApplicationUser Usuario { get; set; }
     }
 }

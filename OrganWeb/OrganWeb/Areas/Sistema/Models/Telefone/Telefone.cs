@@ -28,5 +28,8 @@ namespace OrganWeb.Areas.Sistema.Models.Telefone
 
         public virtual TipoTel TipoTel { get; set; }
         public virtual DDD DDD { get; set; }
+
+        [NotMapped]
+        public List<DDD> DDDs { get; set; }
     }
 }

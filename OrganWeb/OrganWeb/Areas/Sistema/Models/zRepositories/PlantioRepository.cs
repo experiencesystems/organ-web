@@ -12,11 +12,15 @@ namespace OrganWeb.Areas.Sistema.Models
 {
     public class PlantioRepository : OrganRepository<Plantio>
     {
+        private List<Plantio> Plantios;
+        private List<Colheita> Colheitas;
+        private List<AreaPlantio> AreaPlantios;
         public async Task<List<Plantio>> GetPlantios()
         {
-            var plantios = await GetAll();
-            var areap = await new AreaPlantio().GetAll();
-            return plantios.Select((p) => new Plantio
+            Plantios = await GetAll();
+            Colheitas = await new Colheita().GetAll();
+            AreaPlantios = await new AreaPlantio().GetAll();
+            return Plantios.Select((p) => new Plantio
             {
                 Porcentagem = ProgressoPlantio(p),
                 Id = p.Id,
@@ -25,16 +29,14 @@ namespace OrganWeb.Areas.Sistema.Models
                 TipoPlantio = p.TipoPlantio,
                 DataInicio = p.DataInicio,
                 DataColheita = p.DataColheita,
-                NomeAreas = GetAreaPlantios(p, areap)
+                NomeAreas = GetAreaPlantios(p, AreaPlantios)
             }).ToList();
         }
 
-        public async Task<List<Plantio>> GetPlantiosIncompletos()
+        public List<Plantio> GetPlantiosIncompletos()
         {
-            var plantios = await GetPlantios();
-            var colheitas = await new Colheita().GetAll();
-            plantios.RemoveAll(p => colheitas.Any(c => c.IdPlantio == p.Id));
-            return plantios;
+            Plantios.RemoveAll(p => Colheitas.Any(c => c.IdPlantio == p.Id));
+            return Plantios;
         }
 
         public string GetAreaPlantios(Plantio plantio, List<AreaPlantio> areaPlantios)

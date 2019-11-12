@@ -81,25 +81,9 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Registro()
         {
-            var selectestados = new RegisterViewModel
-            {
-                Estados = await estado.GetAll(),
-                DDDs = await ddd.GetAll(),
-                Bancos = bancossl
-            };
-            return View(selectestados);
+            return View();
         }
-
-        private List<SelectListItem> bancossl = new List<SelectListItem>()
-            {
-            new SelectListItem() { Text = "VISA", Value = "1" },
-            new SelectListItem() { Text = "MasterCard", Value = "2" },
-            new SelectListItem() { Text = "AMEX", Value = "3" },
-            new SelectListItem() { Text = "elo", Value = "4" },
-            new SelectListItem() { Text = "Hipercard", Value = "5" }
-            };
-
-
+        
         //
         // POST: /Account/Login
         //https://stackoverflow.com/questions/27498840/how-to-login-using-email-in-identity-2
@@ -191,87 +175,17 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
         public async Task<ActionResult> Registro(RegisterViewModel model)
         {
             ApplicationUser user = new ApplicationUser();
-            if (!ValidateCreditCard.IsValidCreditCardNumber(model.NumCartao.ToString()))
-            {
-                ModelState.AddModelError(string.Empty, "Digite um número de cartão de crédito válido.");
-            }
             if (await UserManager.FindByNameAsync(model.UserName) != null)
             {
                 ModelState.AddModelError(string.Empty, "Esse nome de usuário já foi escolhido!");
             }
             if (ModelState.IsValid)
             {
-                cidade = new Cidade
-                {
-                    Nome = model.Cidade,
-                    IdEstado = model.Estado
-                };
-
-                cidade.Add(cidade);
-                await cidade.Save();
-
-                bairro = new Bairro
-                {
-                    Nome = model.Bairro,
-                    IdCidade = cidade.Id
-                };
-
-                bairro.Add(bairro);
-                await bairro.Save();
-
-                logradouro = new Logradouro
-                {
-                    Nome = model.Rua,
-                    IdBairro = bairro.Id
-                };
-
-                logradouro.Add(logradouro);
-                await logradouro.Save();
-
-                endereco = new Endereco
-                {
-                    CEP = model.CEP,
-                    IdRua = logradouro.Id
-                };
-
-                endereco.Add(endereco);
-                await endereco.Save();
-
-                tipotel = new TipoTel
-                {
-                    Tipo = model.TipoTelefone
-                };
-
-                tipotel.Add(tipotel);
-                await tipotel.Save();
-
-                telefone = new Telefone
-                {
-                    Numero = model.Numero,
-                    IdDDD = model.DDD,
-                    IdTipo = tipotel.Id
-                };
-
-                telefone.Add(telefone);
-                await telefone.Save();
-
-                dadosBancarios = new DadosBancario
-                {
-                    Banco = model.Banco,
-                    CVV = model.CVV,
-                    NumCartao = model.NumCartao,
-                    NomeTitular = model.NomeTitular,
-                    Validade = model.Validade
-                };
-
-                dadosBancarios.Add(dadosBancarios);
-                await dadosBancarios.Save();
-
                 user = new ApplicationUser
                 {
                     UserName = model.UserName,
                     Email = model.Email,
-                    Assinatura = 1
+                    Assinatura = 4
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -287,16 +201,8 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
-                model.DDDs = await ddd.GetAll();
-                model.Estados = await estado.GetAll();
-                model.Bancos = bancossl;
                 AddErrors(result);
             }
-
-            // Se chegamos até aqui e houver alguma falha, exiba novamente o formulário
-            model.DDDs = await ddd.GetAll();
-            model.Estados = await estado.GetAll();
-            model.Bancos = bancossl;
             return View(model);
         }
 

@@ -20,9 +20,9 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private Area area = new Area();
         private Semente semente = new Semente();
         
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            return View(await plantio.GetPlantiosIncompletos());
+            return View(plantio.GetPlantiosIncompletos());
         }
 
         public async Task<ActionResult> Detalhes(int? id)

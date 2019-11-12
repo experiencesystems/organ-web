@@ -62,11 +62,35 @@
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Http.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.WebUtilities, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.WebUtilities.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.WebUtilities.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp">
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=3.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.3.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=3.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.3.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.ObjectPool, Version=3.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.ObjectPool.3.0.0\lib\netstandard2.0\Microsoft.Extensions.ObjectPool.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=3.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.3.0.0\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=3.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.3.0.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Net.Http.Headers, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.Headers.2.2.0\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.4.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
@@ -108,7 +132,7 @@
       <HintPath>..\..\..\..\..\Program Files (x86)\MySQL\MySQL Connector Net 6.9.10\Assemblies\v4.5\MySql.Web.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
@@ -125,6 +149,12 @@
     <Reference Include="System">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.6.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data">
       <Private>True</Private>
     </Reference>
@@ -133,8 +163,21 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.6.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData">
       <Private>True</Private>
     </Reference>
@@ -239,6 +282,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Ecommerce\Controllers\CarrinhoController.cs" />
     <Compile Include="Areas\Ecommerce\Controllers\LojaController.cs" />
     <Compile Include="Areas\Ecommerce\EcommerceAreaRegistration.cs" />
     <Compile Include="Areas\Ecommerce\Models\Usuarios\Usuario.cs" />
@@ -249,9 +293,13 @@
     <Compile Include="Areas\Ecommerce\Models\Vendas\Entrega.cs" />
     <Compile Include="Areas\Ecommerce\Models\Vendas\Pacote.cs" />
     <Compile Include="Areas\Ecommerce\Models\Vendas\Pedido.cs" />
+    <Compile Include="Areas\Ecommerce\Models\Vendas\Produto.cs" />
     <Compile Include="Areas\Ecommerce\Models\Vendas\Resposta.cs" />
     <Compile Include="Areas\Ecommerce\Models\Vendas\Venda.cs" />
     <Compile Include="Areas\Ecommerce\Models\Vendas\Wishlist.cs" />
+    <Compile Include="Areas\Ecommerce\Models\ViewModels\CarrinhoViewModel.cs" />
+    <Compile Include="Areas\Ecommerce\Models\zRepositories\CarrinhoRepository.cs" />
+    <Compile Include="Areas\Ecommerce\Models\zRepositories\WishlistRepository.cs" />
     <Compile Include="Areas\Sistema\Controllers\AreaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\ColheitaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\ControleController.cs" />
@@ -289,9 +337,8 @@
     <Compile Include="Areas\Sistema\Models\Safras\FuncPlantio.cs" />
     <Compile Include="Areas\Sistema\Models\Safras\ItensPlantio.cs" />
     <Compile Include="Areas\Sistema\Models\Safras\Plantio.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\CreateControleViewModel.cs" />
-    <Compile Include="Areas\Sistema\Models\ViewModels\CreateFornecedorViewModel.cs" />
-    <Compile Include="Areas\Sistema\Models\ViewModels\CreateFuncionarioViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\CreatePlantioViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewFazenda.cs" />
     <Compile Include="Areas\Sistema\Models\ViewsBanco\Estoque\VwControle.cs" />
@@ -448,7 +495,6 @@
     <Content Include="Areas\Sistema\Views\Solo\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Solo\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Solo\Detalhes.cshtml" />
-    <Content Include="Areas\Sistema\Views\Fornecedor\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Semente\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Semente\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Semente\Excluir.cshtml" />
@@ -463,7 +509,6 @@
     <Content Include="Areas\Sistema\Views\Estoque\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Estoque\Detalhes.cshtml" />
     <Content Include="Areas\Sistema\Views\Estoque\Editar.cshtml" />
-    <Content Include="Areas\Sistema\Views\Funcionario\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\PragaDoenca\Detalhes.cshtml" />
     <Content Include="Areas\Sistema\Views\Maquina\Detalhes.cshtml" />
     <Content Include="Areas\Sistema\Views\Funcionario\Excluir.cshtml" />
@@ -494,6 +539,17 @@
     <Content Include="Areas\Sistema\Views\PragaDoenca\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Controle\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Controle\Index.cshtml" />
+    <Content Include="Areas\Sistema\Views\Fornecedor\Create.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\Carrinho\Index.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\Account\Login.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\Account\ResetPassword.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\Account\Registro.cshtml" />
     <None Include="Properties\PublishProfiles\organweb - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\organweb - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -559,12 +615,9 @@
     <Content Include="Views\Shared\_LoginStart.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Registro.cshtml" />
-    <Content Include="Views\Account\Assinatura.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Ecommerce\Views\Shared\" />
-    <Folder Include="Areas\Sistema\Models\Usuario\" />
     <Folder Include="Areas\Sistema\Views\Financeiro\" />
     <Folder Include="Areas\Sistema\Views\Shared\" />
   </ItemGroup>

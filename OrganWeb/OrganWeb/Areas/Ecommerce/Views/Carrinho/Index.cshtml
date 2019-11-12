@@ -1,0 +1,81 @@
+﻿@model OrganWeb.Areas.Ecommerce.Models.ViewModels.CarrinhoViewModel
+@{
+    ViewData["Title"] = "Cart";
+}
+<h2>Carrinho <i class="fa fa-shopping-cart" aria-hidden="true"></i> </h2>
+
+@if (!Request.IsAuthenticated)
+{
+    <br />
+    <h6>Faça login para adicionar itens ao carrinho!</h6>
+    return;
+}
+
+@if (Model.ItensTotal <= 0)
+{
+    <br />
+    <h6>Seu carrinho está vazio!</h6>
+    return;
+}
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Anúncio</th>
+            <th>Quantidade</th>
+            <th>Preço</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Carrinhos)
+        {
+            <tr>
+                <td>@item.Anuncio.Nome</td>
+                <td>
+                    <form class="d-inline align-middle" asp-action="RemoverDoCarrinho"
+                          asp-controller="Carrinho"
+                          asp-route-idAnuncio="@item.IdAnuncio"
+                          method="post">
+                        <button class="btn fa fa-minus fa-small" aria-hidden="true"></button>
+                    </form>
+                    <span style="padding:1px 10px">@item.Qtd</span>
+                    <form class="d-inline align-middle" asp-action="AddAoCarrinho"
+                          asp-controller="ShoppingCart"
+                          asp-route-idAnuncio="@item.IdAnuncio"
+                          method="post">
+                        <button class="btn fa fa-plus fa-small" aria-hidden="true"></button>
+                    </form>
+
+                </td>
+                <td>@item.Anuncio.Produto.ValorUnit.ToString("c")</td>
+                <td>@((item.Anuncio.Produto.ValorUnit * item.Qtd).ToString("c"))</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3">Total: </td>
+            <td>@Model.ValorTotal.ToString("c")</td>
+        </tr>
+        <tr style="border:0">
+            <td>
+                <form asp-action="ApagarCarrinho" method="post">
+                    <button class="btn btn-link text-dark" asp-action="ApagarCarrinho">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                        Clear Cart
+                    </button>
+                </form>
+
+            </td>
+            <td colspan="2"></td>
+            <td class="text-center">
+                <a class="btn buy-now-btn float-right" asp-action="checkout" asp-controller="order">
+                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                    Checkout
+                </a>
+            </td>
+        </tr>
+    </tfoot>
+</table>

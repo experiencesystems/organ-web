@@ -1,4 +1,5 @@
 ﻿using OrganWeb.Areas.Ecommerce.Models.Usuarios;
+using OrganWeb.Areas.Ecommerce.Models.zRepositories;
 using OrganWeb.Models;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Web;
 namespace OrganWeb.Areas.Ecommerce.Models.Vendas
 {
     [Table("tbWishlist")]
-    public class Wishlist
+    public class Wishlist : WishlistRepository
     {
         [Key, Column(Order = 1)]
         [ForeignKey("Usuario")]

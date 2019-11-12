@@ -33,7 +33,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
         }
          /* TODO: testar controller controle
           * TODO: CPF tem que ser único
-          * TODO: inserir praga com área
           * TODO: RadioButton status controle
          */
         public async Task<ActionResult> Create()

@@ -12,14 +12,9 @@ namespace OrganWeb.Areas.Sistema.Controllers
 {
     public class FuncionarioController : Controller
     {
-        private Cidade cidade = new Cidade();
-        private Bairro bairro = new Bairro();
-        private Logradouro logradouro = new Logradouro();
-        private Endereco endereco = new Endereco();
         private TipoTel tipotel = new TipoTel();
         private Telefone telefone = new Telefone();
         private Cargo cargo = new Cargo();
-        private Estado estado = new Estado();
         private DDD ddd = new DDD();
         private Funcionario funcionario = new Funcionario();
         private VwFuncionario vwfuncionario = new VwFuncionario();
@@ -31,59 +26,24 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         public async Task<ActionResult> Create()
         {
-            var select = new CreateFuncionarioViewModel
+            return View(new Funcionario
             {
-                Estados = await estado.GetAll(),
-                DDDs = await ddd.GetAll()
-            };
-            return View(funcionario);
+                Telefone = new Telefone
+                {
+                    DDDs = await ddd.GetAll()
+                }
+            });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(CreateFuncionarioViewModel model)
+        public async Task<ActionResult> Create(Funcionario model)
         {
             if (ModelState.IsValid)
             {
-                cidade = new Cidade
-                {
-                    Nome = model.Cidade,
-                    IdEstado = model.Estado
-                };
-
-                cidade.Add(cidade);
-                await cidade.Save();
-
-                bairro = new Bairro
-                {
-                    Nome = model.Bairro,
-                    IdCidade = cidade.Id
-                };
-
-                bairro.Add(bairro);
-                await bairro.Save();
-
-                logradouro = new Logradouro
-                {
-                    Nome = model.Rua,
-                    IdBairro = bairro.Id
-                };
-
-                logradouro.Add(logradouro);
-                await logradouro.Save();
-
-                endereco = new Endereco
-                {
-                    CEP = model.CEP,
-                    IdRua = logradouro.Id
-                };
-
-                endereco.Add(endereco);
-                await endereco.Save();
-
                 tipotel = new TipoTel
                 {
-                    Tipo = model.TipoTelefone
+                    Tipo = model.Telefone.TipoTel.Tipo
                 };
 
                 tipotel.Add(tipotel);
@@ -91,22 +51,15 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
                 telefone = new Telefone
                 {
-                    Numero = model.Numero,
-                    IdDDD = model.DDD,
+                    Numero = model.Telefone.Numero,
+                    IdDDD = model.Telefone.IdDDD,
                     IdTipo = tipotel.Id
                 };
 
                 telefone.Add(telefone);
                 await telefone.Save();
 
-                //TODO: não necessariamente ele add cargo
-                cargo = new Cargo
-                {
-                    Nome = model.Cargo
-                };
-
-                cargo.Add(cargo);
-                await cargo.Save();
+                //TODO: trocar depois pra cargo int
 
                 funcionario = new Funcionario
                 {

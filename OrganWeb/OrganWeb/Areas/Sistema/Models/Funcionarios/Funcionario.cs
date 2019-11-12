@@ -6,7 +6,7 @@ namespace OrganWeb.Areas.Sistema.Models.Funcionarios
 {
     [Table("tbFuncionario")]
     public class Funcionario : OrganRepository<Funcionario>
-    {//TODO: refazer controller funcionário
+    {
         [Key]
         public int Id { get; set; }
         public bool Status { get; set; }
@@ -25,5 +25,8 @@ namespace OrganWeb.Areas.Sistema.Models.Funcionarios
         public int IdCargo { get; set; }
         
         public virtual Cargo Cargo { get; set; }
+
+        [NotMapped]
+        public Telefone.Telefone Telefone { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace OrganWeb.Areas.Ecommerce.Models.zBanco
 {
     public class EcommerceRepository<T> : IDisposable where T : class
     {
-        protected EcommerceContext _context;
+        protected readonly EcommerceContext _context;
         protected DbSet<T> DbSet { get; set; }
 
         public EcommerceRepository()

@@ -28,6 +28,7 @@ namespace OrganWeb.Areas.Ecommerce.Models.zBanco
         public DbSet<Venda> Vendas { get; set; }
         public DbSet<Entrega> Entregas { get; set; }
         public DbSet<Pacote> Pacotes { get; set; }
+        public DbSet<Produto> Produtos { get; set; }
 
         // FINANCEIRO
         public DbSet<DadosBancario> DadosBancarios { get; set; }
@@ -93,6 +94,10 @@ namespace OrganWeb.Areas.Ecommerce.Models.zBanco
             modelBuilder.Entity<ApplicationUser>()
                 .Property(t => t.SecurityStamp)
                 .HasColumnName("CarimboSeguranca");
+
+            modelBuilder.Entity<ApplicationUser>()
+                .Property(t => t.PasswordHash)
+                .HasColumnName("SenhaHash");
 
             modelBuilder.Entity<ApplicationUser>()
                 .Property(t => t.EmailConfirmed)

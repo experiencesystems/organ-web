@@ -1,4 +1,5 @@
 ﻿using OrganWeb.Areas.Ecommerce.Models.Usuarios;
+using OrganWeb.Areas.Ecommerce.Models.zRepositories;
 using OrganWeb.Models;
 using System;
 using System.Collections.Generic;
@@ -6,11 +7,12 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace OrganWeb.Areas.Ecommerce.Models.Vendas
 {
     [Table("tbCarrinho")]
-    public class Carrinho
+    public class Carrinho : CarrinhoRepository
     {
         [Key, Column(Order = 1)]
         [ForeignKey("Usuario")]
@@ -26,8 +28,16 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
 
         [Required]
         public int Status { get; set; }
-        //TODO: lista de status para anúncio
+
         public virtual Anuncio Anuncio { get; set; }
         public virtual ApplicationUser Usuario { get; set; }
+
+        [NotMapped]
+        public readonly List<SelectListItem> StatusList = new List<SelectListItem>()
+            {
+            new SelectListItem() { Text = "Ativo", Value = "1" },
+            new SelectListItem() { Text = "Compra realizada", Value = "2" },
+            new SelectListItem() { Text = "Inativo", Value = "3" }
+            };
     }
 }

@@ -26,5 +26,8 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
         [EmailAddress]
         [StringLength(100)]
         public string Email { get; set; }
+
+        [NotMapped]
+        public Telefone.Telefone Telefone { get; set; }
     }
 }

@@ -92,7 +92,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 
                 foreach (var item in pragadoenca.IdArea)
                 {
-                    areapd.Add(new AreaPD { IdArea = item, IdPd = pd.Id });
+                    areapd.Add(new AreaPD { IdArea = item, IdPd = pd.Id, Status = true });
                     await areapd.Save();
                 }
                 return RedirectToAction("Index");

@@ -17,14 +17,10 @@ namespace OrganWeb.Areas.Sistema.Controllers
 {
     public class FornecedorController : Controller
     {
-        private Cidade cidade = new Cidade();
-        private Bairro bairro = new Bairro();
-        private Logradouro logradouro = new Logradouro();
-        private Endereco endereco = new Endereco();
         private TipoTel tipotel = new TipoTel();
         private Telefone telefone = new Telefone();
+        private TelForn telForn = new TelForn();
         private Fornecedor fornecedor = new Fornecedor();
-        private Estado estado = new Estado();
         private DDD ddd = new DDD();
         private VwFornecedor vwfornecedor = new VwFornecedor();
 
@@ -35,82 +31,52 @@ namespace OrganWeb.Areas.Sistema.Controllers
         
         public async Task<ActionResult> Create()
         {
-            var select = new CreateFornecedorViewModel
+            return View(new Fornecedor
             {
-                Estados = await estado.GetAll(),
-                DDDs = await ddd.GetAll()
-            };
-            // aqui ele tá enviando os estados e ddds pro usuário selecionar qnd ele for criar um fornecedor
-            return View(select);
+                Telefone = new Telefone
+                {
+                    DDDs = await ddd.GetAll()
+                }
+            });
         }
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(CreateFornecedorViewModel model)
+        public async Task<ActionResult> Create(Fornecedor model)
         {
             if (ModelState.IsValid)
             {
-                cidade = new Cidade
-                {
-                    Nome = model.Cidade,
-                    IdEstado = model.Estado
-                };
-
-                cidade.Add(cidade);
-                await cidade.Save();
-
-                bairro = new Bairro
-                {
-                    Nome = model.Bairro,
-                    IdCidade = cidade.Id
-                };
-
-                bairro.Add(bairro);
-                await bairro.Save();
-
-                logradouro = new Logradouro
-                {
-                    Nome = model.Rua,
-                    IdBairro = bairro.Id
-                };
-
-                logradouro.Add(logradouro);
-                await logradouro.Save();
-
-                endereco = new Endereco
-                {
-                    CEP = model.CEP,
-                    IdRua = logradouro.Id
-                };
-
-                endereco.Add(endereco);
-                await endereco.Save();
-
                 tipotel = new TipoTel
                 {
-                    Tipo = model.TipoTelefone
+                    Tipo = model.Telefone.TipoTel.Tipo
                 };
-
                 tipotel.Add(tipotel);
                 await tipotel.Save();
 
                 telefone = new Telefone
                 {
-                    Numero = model.Numero,
-                    IdDDD = model.DDD,
+                    Numero = model.Telefone.Numero,
+                    IdDDD = model.Telefone.IdDDD,
                     IdTipo = tipotel.Id
                 };
-
                 telefone.Add(telefone);
                 await telefone.Save();
 
-                fornecedor = new Fornecedor
+                model.Status = true;
+                model.Add(model);
+                await model.Save();
+
+                telForn = new TelForn
                 {
-                    Status = true
+                    IdForn = model.Id,
+                    IdTelefone = telefone.Id
                 };
-                fornecedor.Add(fornecedor);
-                await fornecedor.Save();
+                telForn.Add(telForn);
+                await telForn.Save();
+
+                return RedirectToAction("Index");
             }
+            fornecedor.Telefone.DDDs = await ddd.GetAll();
             return View(fornecedor);
         }
         
@@ -156,7 +122,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Editar(Fornecedor fornecedor)
-        {//TODO: ver se é createfornecedorviewmodel
+        {
             if (ModelState.IsValid)
             {
                 fornecedor.Update(fornecedor);

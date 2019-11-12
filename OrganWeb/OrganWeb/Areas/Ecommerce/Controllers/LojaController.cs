@@ -14,15 +14,11 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
 {
     public class LojaController : Controller
     {
-        public ActionResult Index()
+        private Anuncio anuncio = new Anuncio();
+
+        public async Task<ActionResult> Index()
         {
-            var anuncios = new List<Anuncio>
-            {
-                new Anuncio { Id = 1, Nome = "Milho"},
-                new Anuncio { Id = 2, Nome = "Soja"},
-                new Anuncio { Id = 3, Nome = "Ervilha"}
-            };
-            return View(anuncios);
+            return View(await anuncio.GetAll());
         }
         
         public async Task<string> Detalhes()

@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using OrganWeb.Areas.Sistema.Models.zBanco;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OrganWeb.Areas.Sistema.Models.Armazenamento
 {
     [Table("tbTelForn")]
-    public class TelForn
+    public class TelForn : OrganRepository<TelForn>
     {
         [Key, Column(Order = 1)]
         [ForeignKey("Fornecedor")]
