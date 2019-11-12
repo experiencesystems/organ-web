@@ -69,6 +69,8 @@ namespace OrganWeb.Areas.Ecommerce.Models.Usuarios
 
     public class RegisterViewModel
     {
+        public byte[] Foto { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -79,8 +81,8 @@ namespace OrganWeb.Areas.Ecommerce.Models.Usuarios
         public string UserName { get; set; }
 
         [Required]
-        //TODO: verificação cpf
-        public string CPF { get; set; }
+        [RegularExpression(@"([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})", ErrorMessage = "Digite um CPF válido!")]
+        public long CPF { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "O/A {0} deve ter no mínimo {2} caracteres.", MinimumLength = 6)]

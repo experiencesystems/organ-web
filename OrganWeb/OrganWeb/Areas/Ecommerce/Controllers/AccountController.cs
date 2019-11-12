@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.IO;
 using System.Linq;
-using System.Security.Claims;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -13,25 +9,16 @@ using Microsoft.Owin.Security;
 using OrganWeb.Areas.Ecommerce.Models.Endereco;
 using OrganWeb.Areas.Ecommerce.Models.Financeiro;
 using OrganWeb.Areas.Ecommerce.Models.Usuarios;
+using OrganWeb.Areas.Ecommerce.Models.zBanco;
 using OrganWeb.Areas.Sistema.Models.Telefone;
-using OrganWeb.Models;
 
 namespace OrganWeb.Areas.Ecommerce.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {//TODO: refazer registro
-        private Cidade cidade;
-        private Bairro bairro;
-        private Logradouro logradouro;
-        private Endereco endereco;
-        private TipoTel tipotel;
-        private Telefone telefone;
-        private DadosBancario dadosBancarios;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private DDD ddd = new DDD();
-        private Estado estado = new Estado();
 
         public AccountController()
         {
@@ -83,7 +70,7 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
         {
             return View();
         }
-        
+
         //
         // POST: /Account/Login
         //https://stackoverflow.com/questions/27498840/how-to-login-using-email-in-identity-2
@@ -172,20 +159,36 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Registro(RegisterViewModel model)
+        public async Task<ActionResult> Registro([Bind(Exclude = "Foto")]RegisterViewModel model)
         {
             ApplicationUser user = new ApplicationUser();
+            var allUsers = new EcommerceContext().Users.Where(x => x.CPF == model.CPF).ToList();
             if (await UserManager.FindByNameAsync(model.UserName) != null)
             {
                 ModelState.AddModelError(string.Empty, "Esse nome de usuário já foi escolhido!");
             }
+            if (new EcommerceContext().Users.Where(x => x.CPF == model.CPF).First() != null)
+            {
+                ModelState.AddModelError(string.Empty, "Esse CPF já foi cadastrado!");
+            }
             if (ModelState.IsValid)
             {
+                byte[] imageData = null;
+                if (Request.Files.Count > 0)
+                {
+                    HttpPostedFileBase poImgFile = Request.Files["Foto"];
+                    using (var binary = new BinaryReader(poImgFile.InputStream))
+                    {
+                        imageData = binary.ReadBytes(poImgFile.ContentLength);
+                    }
+                }
                 user = new ApplicationUser
                 {
                     UserName = model.UserName,
                     Email = model.Email,
-                    Assinatura = 4
+                    Assinatura = 4,
+                    Foto = imageData,
+                    CPF = model.CPF
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -205,6 +208,44 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             }
             return View(model);
         }
+
+        public FileContentResult FotoDoUsuario()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                string userId = User.Identity.GetUserId();
+                if (userId == null)
+                {
+                    string fileName = HttpContext.Server.MapPath(@"~/Images/noImg.png");
+
+                    byte[] imageData = null;
+                    FileInfo fileInfo = new FileInfo(fileName);
+                    long imageFileLength = fileInfo.Length;
+                    FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                    BinaryReader br = new BinaryReader(fs);
+                    imageData = br.ReadBytes((int)imageFileLength);
+
+                    return File(imageData, "image/png");
+
+                }
+                // to get the user details to load user Image    
+                var bdUsers = HttpContext.GetOwinContext().Get<EcommerceContext>();
+                var userImage = bdUsers.Users.Where(x => x.Id == userId).FirstOrDefault();
+                return new FileContentResult(userImage.Foto, "image/jpeg");
+            }
+            else
+            {
+                string fileName = HttpContext.Server.MapPath(@"~/Images/noImg.png");
+                byte[] imageData = null;
+                FileInfo fileInfo = new FileInfo(fileName);
+                long imageFileLength = fileInfo.Length;
+                FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fs);
+                imageData = br.ReadBytes((int)imageFileLength);
+                return File(imageData, "image/png");
+            }
+        }
+
 
         //
         // GET: /Account/ConfirmEmail

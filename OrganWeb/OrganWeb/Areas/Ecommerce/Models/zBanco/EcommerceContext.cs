@@ -102,6 +102,14 @@ namespace OrganWeb.Areas.Ecommerce.Models.zBanco
             modelBuilder.Entity<ApplicationUser>()
                 .Property(t => t.EmailConfirmed)
                 .HasColumnName("ConfirmacaoEmail");
+
+            modelBuilder.Entity<IdentityUserClaim>()
+                .Property(t => t.ClaimType)
+                .HasColumnName("TipoClaim");
+
+            modelBuilder.Entity<IdentityUserClaim>()
+                .Property(t => t.ClaimValue)
+                .HasColumnName("ValorClaim");
         }
 
         public static EcommerceContext Create()

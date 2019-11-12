@@ -24,7 +24,7 @@ use dbEcommerce;
    drop table if exists tbUsuario;
 	create table tbUsuario (
 		`Id` nvarchar(128)  not null ,
-			Foto blob,
+			Foto mediumblob,
 			Assinatura int not null,
             CPF numeric(11) not null,
              constraint UQUsuarioCPF unique(CPF),
