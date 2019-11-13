@@ -1,0 +1,28 @@
+﻿@model OrganWeb.Areas.Ecommerce.Models.Vendas.Wishlist
+
+@{
+    Layout = null;
+}
+
+@if (!Request.IsAuthenticated)
+{
+    <br />
+    <h6>É necessário fazer login para salvar anúncios!</h6>
+    <div>
+        @Html.ActionLink("Login", "Login", "Account")
+    </div>
+    return;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+    </div>
+</body>
+</html>

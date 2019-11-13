@@ -8,6 +8,9 @@
 {
     <br />
     <h6>Faça login para adicionar itens ao carrinho!</h6>
+    <div>
+        @Html.ActionLink("Login", "Login", "Account")
+    </div>
     return;
 }
 
@@ -64,7 +67,7 @@
                 <form asp-action="ApagarCarrinho" method="post">
                     <button class="btn btn-link text-dark" asp-action="ApagarCarrinho">
                         <i class="fa fa-times" aria-hidden="true"></i>
-                        Clear Cart
+                        Limpar carrinho
                     </button>
                 </form>
 
@@ -73,7 +76,7 @@
             <td class="text-center">
                 <a class="btn buy-now-btn float-right" asp-action="checkout" asp-controller="order">
                     <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                    Checkout
+                    Realizar pedido
                 </a>
             </td>
         </tr>

@@ -217,6 +217,8 @@
     <Compile Include="Areas\Ecommerce\Controllers\AnuncioController.cs" />
     <Compile Include="Areas\Ecommerce\Controllers\CarrinhoController.cs" />
     <Compile Include="Areas\Ecommerce\Controllers\LojaController.cs" />
+    <Compile Include="Areas\Ecommerce\Controllers\PedidoController.cs" />
+    <Compile Include="Areas\Ecommerce\Controllers\WishlistController.cs" />
     <Compile Include="Areas\Ecommerce\EcommerceAreaRegistration.cs" />
     <Compile Include="Areas\Ecommerce\Models\Endereco\Bairro.cs" />
     <Compile Include="Areas\Ecommerce\Models\Endereco\Cidade.cs" />
@@ -244,7 +246,6 @@
     <Compile Include="Areas\Ecommerce\Models\zBanco\EcommerceContext.cs" />
     <Compile Include="Areas\Ecommerce\Models\zBanco\EcommerceRepository.cs" />
     <Compile Include="Areas\Ecommerce\Models\zRepositories\CarrinhoRepository.cs" />
-    <Compile Include="Areas\Ecommerce\Models\zRepositories\PedidoRepository.cs" />
     <Compile Include="Areas\Ecommerce\Models\zRepositories\WishlistRepository.cs" />
     <Compile Include="Areas\Sistema\Controllers\AccountController.cs" />
     <Compile Include="Areas\Sistema\Controllers\AreaController.cs" />
@@ -445,6 +446,8 @@
     <Content Include="Areas\Ecommerce\Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Anuncio\Excluir.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Anuncio\Editar.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\Wishlist\Index.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\Pedido\Checkout.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\hoverable-collapse.js" />
