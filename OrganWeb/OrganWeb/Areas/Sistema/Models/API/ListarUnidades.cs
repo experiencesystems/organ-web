@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Globalization;
-using System.Web.Mvc;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using OrganWeb.Areas.Sistema.Models.zRepositories;
 
 namespace OrganWeb.Areas.Sistema.Models.API

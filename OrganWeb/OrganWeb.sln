@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.28307.757
+VisualStudioVersion = 15.0.28307.779
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganWeb", "OrganWeb\OrganWeb.csproj", "{4315AE41-7BD9-44E4-AC49-E1866E56C2FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganWeb", "OrganWeb\OrganWeb.csproj", "{535EF113-E5D8-4CDD-BF08-603FD5503ADC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4315AE41-7BD9-44E4-AC49-E1866E56C2FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4315AE41-7BD9-44E4-AC49-E1866E56C2FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4315AE41-7BD9-44E4-AC49-E1866E56C2FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4315AE41-7BD9-44E4-AC49-E1866E56C2FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{535EF113-E5D8-4CDD-BF08-603FD5503ADC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{535EF113-E5D8-4CDD-BF08-603FD5503ADC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{535EF113-E5D8-4CDD-BF08-603FD5503ADC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{535EF113-E5D8-4CDD-BF08-603FD5503ADC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {47356F61-344C-4C01-B28F-9DCB9BD2B7A0}
+		SolutionGuid = {ADB8F2CD-C809-417B-B7CC-856913FC4D04}
 	EndGlobalSection
 EndGlobal

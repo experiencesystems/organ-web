@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using OrganWeb.Areas.Ecommerce.Models.Usuarios;
 using OrganWeb.Areas.Ecommerce.Models.Vendas;
-using OrganWeb.Areas.Ecommerce.Models.zBanco;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,27 +9,18 @@ using System.Web.Mvc;
 
 namespace OrganWeb.Areas.Ecommerce.Controllers
 {
-    [Authorize]
     public class AnuncioController : Controller
     {
-        protected Produto produto = new Produto();
-        protected EcommerceContext EcommerceContext { get; set; }
-        protected UserManager<ApplicationUser> UserManager { get; set; }
+        private Produto produto = new Produto();
 
-        public AnuncioController()
-        {
-            this.EcommerceContext = new EcommerceContext();
-            this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.EcommerceContext));
-        }
-
-        public ActionResult Create()
+        public ActionResult Novo()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Anuncio anuncio)
+        public async Task<ActionResult> Novo(Anuncio anuncio)
         {
             if (ModelState.IsValid)
             {
@@ -44,6 +32,7 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
                 });
                 await produto.Save();
 
+                anuncio.Status = true;
                 anuncio.IdProduto = produto.Id;
                 anuncio.IdUsuario = User.Identity.GetUserId();
                 anuncio.Add(anuncio);

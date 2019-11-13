@@ -1,16 +1,3 @@
-use dbEcommerce;
-/*SELECT Las(T_INSERT_ID();*/
-
-drop view if exists vwEndereco;
-create view vwEndereco as(
-select E.CEP,  R.Logradouro `Rua`, concat(B.Bairro,' - ', C.Cidade,'/', Es.UF) `BCE` 
- from tbEndereco E 
-	inner join tbLogradouro R on E.IdRua = R.Id
-	inner join tbBairro B on R.IdBairro = B.Id
-	inner join tbCidade C on B.IdCidade = C.Id
-	inner join tbEstado Es on C.IdEstado = Es.Id
-);
-
 use dbOrgan; 
 -- MUDAR VALOR DOS NOMES Das( DATas( PRA PORTUGUES    SET lc_time_names = 'pt_BR';     
 

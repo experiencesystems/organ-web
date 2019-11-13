@@ -1,4 +1,4 @@
-use sys;
+
 -- IMAGEM NO BANCO http://www.linhadecodigo.com.br/artigo/100/blob-fields-in-mysql-databases.aspx
 drop database if exists dbOrgan;
 create database dbOrgan;

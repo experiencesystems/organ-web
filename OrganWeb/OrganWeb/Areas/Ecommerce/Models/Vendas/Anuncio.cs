@@ -24,22 +24,17 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
         [Display(Name = "Descrição")]
         [StringLength(100, MinimumLength = 10)]
         public string Desc { get; set; }
-
-        [Required]
+        
         public bool Status { get; set; }
-
-        [Required]
         public byte[] Foto { get; set; }
 
         [Range(0.00, 100.00)]
         [Display(Name = "Desconto (%)")]
         public decimal Desconto { get; set; }
         
-        [Required]
         [ForeignKey("Produto")]
         public int IdProduto { get; set; }
-
-        [Required]
+        
         [ForeignKey("Usuario")]
         public string IdUsuario { get; set; }
 

@@ -1,8 +1,7 @@
 /* -------------------------------------------------------------	Banco Commerce	------------------------------------------------------------------*/
-use sys;
-drop database if exists dbEcommerce;
-create database dbEcommerce;
-use dbEcommerce;
+drop database if exists dbecommercee;
+create database dbecommercee;
+use dbecommercee;
 -- =================================================================== USUÁRIO ============================================     
     drop table if exists `AspNetRoles`;
 	create table `AspNetRoles`(
@@ -307,4 +306,15 @@ use dbEcommerce;
         eFragil bool default false
     )engine = InnoDB;
     alter table tbPacote add constraint FKPacoteEntrega foreign key(IdEntrega) references tbEntrega(Id);
+    
+    drop view if exists vwEndereco;
+create view vwEndereco as(
+select E.CEP,  R.Logradouro `Rua`, concat(B.Bairro,' - ', C.Cidade,'/', Es.UF) `BCE` 
+ from tbEndereco E 
+	inner join tbLogradouro R on E.IdRua = R.Id
+	inner join tbBairro B on R.IdBairro = B.Id
+	inner join tbCidade C on B.IdCidade = C.Id
+	inner join tbEstado Es on C.IdEstado = Es.Id
+);
+
 -- ================================================================================================================================ alter table tbDespesaFunc add constraint FKDespesaFunc foreign key(IdDespesa) references tbDespesa(Id),           add constraint FKFuncDespesa foreign key(IdFunc) references tbFuncionario(Id)

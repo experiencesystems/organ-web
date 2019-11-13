@@ -9,13 +9,13 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4315AE41-7BD9-44E4-AC49-E1866E56C2FE}</ProjectGuid>
+    <ProjectGuid>{535EF113-E5D8-4CDD-BF08-603FD5503ADC}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OrganWeb</RootNamespace>
     <AssemblyName>OrganWeb</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -27,30 +27,15 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\</OutputPath>
-    <DefineConstants>DEBUG;CODE_ANALYSIS;TRACE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>7.3</LangVersion>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
-    <PublishDatabaseSettings>
-      <Objects>
-        <ObjectGroup Name="BancoContext-Implantação" Order="1">
-          <Destination Path="" />
-          <Object Type="DbFullSql">
-            <PreSource Path="server=den1.mysql6.gear.host%3bdatabase=dborgan%3buser id=dborgan%3bpassword=Mayro!2018" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
-            <Source Path="obj\Debug\AutoScripts\BancoContext-Implantação_SchemaOnly.sql" Transacted="True" />
-          </Object>
-        </ObjectGroup>
-      </Objects>
-    </PublishDatabaseSettings>
-    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -60,38 +45,17 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.AspNetCore.Http.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNetCore.Http.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNetCore.WebUtilities, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNetCore.WebUtilities.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.WebUtilities.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CSharp">
-      <Private>True</Private>
-    </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Extensions.DependencyInjection, Version=3.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.3.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=3.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.3.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.ObjectPool, Version=3.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.ObjectPool.3.0.0\lib\netstandard2.0\Microsoft.Extensions.ObjectPool.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Options, Version=3.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Options.3.0.0\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Primitives, Version=3.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Primitives.3.0.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Net.Http.Headers, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Net.Http.Headers.2.2.0\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.4.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
@@ -120,17 +84,21 @@
     <Reference Include="Microsoft.Owin.Security.Twitter, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.Twitter.4.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.1016.290\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
-    </Reference>
     <Reference Include="MySql.Data, Version=6.9.10.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\Program Files (x86)\MySQL\MySQL Connector Net 6.9.10\Assemblies\v4.5\MySql.Data.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Program Files (x86)\MySQL\MySQL Connector Net 6.9.10\Assemblies\v4.5\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data.Entity.EF6, Version=6.9.10.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\Program Files (x86)\MySQL\MySQL Connector Net 6.9.10\Assemblies\v4.5\MySql.Data.Entity.EF6.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Program Files (x86)\MySQL\MySQL Connector Net 6.9.10\Assemblies\v4.5\MySql.Data.Entity.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Fabric.Plugin, Version=6.9.10.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Program Files (x86)\MySQL\MySQL Connector Net 6.9.10\Assemblies\v4.5\MySql.Fabric.Plugin.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Web, Version=6.9.10.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\Program Files (x86)\MySQL\MySQL Connector Net 6.9.10\Assemblies\v4.5\MySql.Web.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Program Files (x86)\MySQL\MySQL Connector Net 6.9.10\Assemblies\v4.5\MySql.Web.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -147,53 +115,26 @@
     <Reference Include="RestSharp, Version=106.6.10.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.106.6.10\lib\net452\RestSharp.dll</HintPath>
     </Reference>
-    <Reference Include="System">
-      <Private>True</Private>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
-    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ComponentModel.Annotations.4.6.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data">
-      <Private>True</Private>
-    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Drawing">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.IdentityModel" />
-    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Text.Encodings.Web, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Encodings.Web.4.6.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.DynamicData">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.Entity">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.ApplicationServices">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.ComponentModel.DataAnnotations">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
@@ -210,41 +151,26 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.Abstractions">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.Routing">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Xml">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Configuration">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.Services">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.EnterpriseServices">
-      <Private>True</Private>
-    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
-      <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
-      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -255,6 +181,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -283,11 +212,22 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Ecommerce\Controllers\AccountController.cs" />
     <Compile Include="Areas\Ecommerce\Controllers\AnuncioController.cs" />
     <Compile Include="Areas\Ecommerce\Controllers\CarrinhoController.cs" />
     <Compile Include="Areas\Ecommerce\Controllers\LojaController.cs" />
     <Compile Include="Areas\Ecommerce\EcommerceAreaRegistration.cs" />
+    <Compile Include="Areas\Ecommerce\Models\Endereco\Bairro.cs" />
+    <Compile Include="Areas\Ecommerce\Models\Endereco\Cidade.cs" />
+    <Compile Include="Areas\Ecommerce\Models\Endereco\Endereco.cs" />
+    <Compile Include="Areas\Ecommerce\Models\Endereco\Estado.cs" />
+    <Compile Include="Areas\Ecommerce\Models\Endereco\Logradouro.cs" />
+    <Compile Include="Areas\Ecommerce\Models\Endereco\VwEndereco.cs" />
+    <Compile Include="Areas\Ecommerce\Models\Financeiro\DadosBancario.cs" />
+    <Compile Include="Areas\Ecommerce\Models\Financeiro\Pagamento.cs" />
+    <Compile Include="Areas\Ecommerce\Models\Usuarios\AccountViewModels.cs" />
+    <Compile Include="Areas\Ecommerce\Models\Usuarios\ManageViewModels.cs" />
     <Compile Include="Areas\Ecommerce\Models\Usuarios\Usuario.cs" />
     <Compile Include="Areas\Ecommerce\Models\Vendas\Anuncio.cs" />
     <Compile Include="Areas\Ecommerce\Models\Vendas\Avaliacao.cs" />
@@ -301,6 +241,8 @@
     <Compile Include="Areas\Ecommerce\Models\Vendas\Venda.cs" />
     <Compile Include="Areas\Ecommerce\Models\Vendas\Wishlist.cs" />
     <Compile Include="Areas\Ecommerce\Models\ViewModels\CarrinhoViewModel.cs" />
+    <Compile Include="Areas\Ecommerce\Models\zBanco\EcommerceContext.cs" />
+    <Compile Include="Areas\Ecommerce\Models\zBanco\EcommerceRepository.cs" />
     <Compile Include="Areas\Ecommerce\Models\zRepositories\CarrinhoRepository.cs" />
     <Compile Include="Areas\Ecommerce\Models\zRepositories\WishlistRepository.cs" />
     <Compile Include="Areas\Sistema\Controllers\AccountController.cs" />
@@ -309,16 +251,21 @@
     <Compile Include="Areas\Sistema\Controllers\ControleController.cs" />
     <Compile Include="Areas\Sistema\Controllers\EstoqueController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FazendaController.cs" />
-    <Compile Include="Areas\Sistema\Controllers\FinanceiroController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FornecedorController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FuncionarioController.cs" />
+    <Compile Include="Areas\Sistema\Controllers\ManageController.cs" />
     <Compile Include="Areas\Sistema\Controllers\MaquinaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\PlantioController.cs" />
     <Compile Include="Areas\Sistema\Controllers\PragaDoencaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\SementeController.cs" />
     <Compile Include="Areas\Sistema\Controllers\SoloController.cs" />
     <Compile Include="Areas\Sistema\Models\Administrativo\Area.cs" />
+    <Compile Include="Areas\Sistema\Models\Administrativo\Solo.cs" />
     <Compile Include="Areas\Sistema\Models\API\ListarUnidades.cs" />
+    <Compile Include="Areas\Sistema\Models\Armazenamento\Categoria.cs" />
+    <Compile Include="Areas\Sistema\Models\Armazenamento\Estoque.cs" />
+    <Compile Include="Areas\Sistema\Models\Armazenamento\Fornecedor.cs" />
+    <Compile Include="Areas\Sistema\Models\Armazenamento\HistoricoEstoque.cs" />
     <Compile Include="Areas\Sistema\Models\Armazenamento\Insumo.cs" />
     <Compile Include="Areas\Sistema\Models\Armazenamento\Maquina.cs" />
     <Compile Include="Areas\Sistema\Models\Armazenamento\Produto.cs" />
@@ -332,61 +279,42 @@
     <Compile Include="Areas\Sistema\Models\Praga_e_Doenca\AreaPD.cs" />
     <Compile Include="Areas\Sistema\Models\Praga_e_Doenca\ControlePD.cs" />
     <Compile Include="Areas\Sistema\Models\Praga_e_Doenca\PragaOrDoenca.cs" />
-    <Compile Include="Areas\Sistema\Models\Armazenamento\Categoria.cs" />
-    <Compile Include="Areas\Sistema\Models\Armazenamento\Estoque.cs" />
-    <Compile Include="Areas\Sistema\Models\Armazenamento\Fornecedor.cs" />
-    <Compile Include="Areas\Sistema\Models\Armazenamento\HistoricoEstoque.cs" />
     <Compile Include="Areas\Sistema\Models\Safras\AreaPlantio.cs" />
     <Compile Include="Areas\Sistema\Models\Safras\Colheita.cs" />
     <Compile Include="Areas\Sistema\Models\Safras\FuncPlantio.cs" />
     <Compile Include="Areas\Sistema\Models\Safras\ItensPlantio.cs" />
     <Compile Include="Areas\Sistema\Models\Safras\Plantio.cs" />
+    <Compile Include="Areas\Sistema\Models\Safras\Semente.cs" />
+    <Compile Include="Areas\Sistema\Models\Telefone\DDD.cs" />
+    <Compile Include="Areas\Sistema\Models\Telefone\Telefone.cs" />
+    <Compile Include="Areas\Sistema\Models\Telefone\TipoTel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\CreateControleViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\CreatePlantioViewModel.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewModels\ViewEstoque.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewFazenda.cs" />
     <Compile Include="Areas\Sistema\Models\ViewsBanco\Estoque\VwControle.cs" />
     <Compile Include="Areas\Sistema\Models\ViewsBanco\Estoque\VwHistorico.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewsBanco\Estoque\VwItems.cs" />
     <Compile Include="Areas\Sistema\Models\ViewsBanco\Estoque\VwPragaOrDoenca.cs" />
-    <Compile Include="Areas\Ecommerce\Models\Endereco\VwEndereco.cs" />
     <Compile Include="Areas\Sistema\Models\ViewsBanco\Pessoa\VwFornecedor.cs" />
     <Compile Include="Areas\Sistema\Models\ViewsBanco\Pessoa\VwFuncionario.cs" />
-    <Compile Include="Areas\Sistema\Models\ViewsBanco\Estoque\VwItems.cs" />
     <Compile Include="Areas\Sistema\Models\ViewsBanco\Pessoa\VwTelefone.cs" />
+    <Compile Include="Areas\Sistema\Models\zBanco\OrganContext.cs" />
+    <Compile Include="Areas\Sistema\Models\zBanco\OrganRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\AreaPlantioRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\AreaRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\ColheitaRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\EstoqueRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\ItensPlantioRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\PlantioRepository.cs" />
-    <Compile Include="Areas\Sistema\Models\ViewModels\ViewEstoque.cs" />
-    <Compile Include="Areas\Sistema\Models\Safras\Semente.cs" />
-    <Compile Include="Areas\Sistema\Models\Administrativo\Solo.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\UnidadeMedidaRepository.cs" />
     <Compile Include="Areas\Sistema\SistemaAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Areas\Sistema\Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Ecommerce\Models\zBanco\EcommerceRepository.cs" />
-    <Compile Include="Areas\Ecommerce\Models\zBanco\EcommerceContext.cs" />
     <Compile Include="Models\DecimalModelBinder.cs" />
-    <Compile Include="Areas\Ecommerce\Models\Financeiro\DadosBancario.cs" />
-    <Compile Include="Areas\Ecommerce\Models\Usuarios\AccountViewModels.cs" />
-    <Compile Include="Areas\Sistema\Models\zBanco\OrganContext.cs" />
-    <Compile Include="Areas\Ecommerce\Models\Endereco\Bairro.cs" />
-    <Compile Include="Areas\Ecommerce\Models\Endereco\Cidade.cs" />
-    <Compile Include="Areas\Ecommerce\Models\Endereco\Endereco.cs" />
-    <Compile Include="Areas\Ecommerce\Models\Endereco\Estado.cs" />
-    <Compile Include="Areas\Ecommerce\Models\Endereco\Logradouro.cs" />
-    <Compile Include="Areas\Ecommerce\Models\Usuarios\ManageViewModels.cs" />
-    <Compile Include="Areas\Ecommerce\Models\Financeiro\Pagamento.cs" />
-    <Compile Include="Areas\Sistema\Models\zBanco\OrganRepository.cs" />
-    <Compile Include="Areas\Sistema\Models\Telefone\DDD.cs" />
-    <Compile Include="Areas\Sistema\Models\Telefone\Telefone.cs" />
-    <Compile Include="Areas\Sistema\Models\Telefone\TipoTel.cs" />
-    <Compile Include="Models\ValidateCreditCard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -397,55 +325,14 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\font-awesome.css" />
-    <Content Include="Content\font-awesome.min.css" />
-    <Content Include="Content\login.css" />
     <Content Include="Content\PagedList.css" />
-    <Content Include="Content\themes\base\accordion.css" />
-    <Content Include="Content\themes\base\all.css" />
-    <Content Include="Content\themes\base\autocomplete.css" />
-    <Content Include="Content\themes\base\base.css" />
-    <Content Include="Content\themes\base\button.css" />
-    <Content Include="Content\themes\base\core.css" />
-    <Content Include="Content\themes\base\datepicker.css" />
-    <Content Include="Content\themes\base\dialog.css" />
-    <Content Include="Content\themes\base\draggable.css" />
-    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
-    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
-    <Content Include="Content\themes\base\jquery-ui.css" />
-    <Content Include="Content\themes\base\jquery-ui.min.css" />
-    <Content Include="Content\themes\base\menu.css" />
-    <Content Include="Content\themes\base\progressbar.css" />
-    <Content Include="Content\themes\base\resizable.css" />
-    <Content Include="Content\themes\base\selectable.css" />
-    <Content Include="Content\themes\base\selectmenu.css" />
-    <Content Include="Content\themes\base\slider.css" />
-    <Content Include="Content\themes\base\sortable.css" />
-    <Content Include="Content\themes\base\spinner.css" />
-    <Content Include="Content\themes\base\tabs.css" />
-    <Content Include="Content\themes\base\theme.css" />
-    <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\materialdesignicons-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Areas\Sistema\Views\web.config" />
+    <Content Include="Areas\Ecommerce\Views\web.config" />
     <Content Include="Imagens\admin.jpg" />
     <Content Include="Imagens\icon2.ico" />
     <Content Include="Imagens\icone.png" />
@@ -474,51 +361,55 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
-    <Content Include="Areas\Sistema\Views\web.config" />
-    <Content Include="fonts\FontAwesome.otf" />
-    <Content Include="fonts\fontawesome-webfont.woff2" />
-    <Content Include="fonts\fontawesome-webfont.woff" />
-    <Content Include="fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="Areas\Sistema\Views\Estoque\Index.cshtml" />
-    <Content Include="Areas\Sistema\Views\Plantio\Index.cshtml" />
-    <Content Include="Areas\Sistema\Views\Plantio\Detalhes.cshtml" />
-    <Content Include="Areas\Sistema\Views\Semente\Index.cshtml" />
-    <Content Include="Areas\Ecommerce\Views\web.config" />
+    <Content Include="Areas\Ecommerce\Views\Anuncio\Novo.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\Carrinho\Index.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Loja\Detalhes.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Loja\Index.cshtml" />
-    <Content Include="Areas\Sistema\Views\Maquina\Index.cshtml" />
-    <Content Include="Areas\Sistema\Views\Plantio\Create.cshtml" />
-    <Content Include="Areas\Sistema\Views\Plantio\Editar.cshtml" />
-    <Content Include="Areas\Sistema\Views\Plantio\Excluir.cshtml" />
-    <Content Include="Areas\Sistema\Views\Area\Index.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Sistema\Views\Area\Create.cshtml" />
-    <Content Include="Areas\Sistema\Views\Area\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Area\Detalhes.cshtml" />
-    <Content Include="Areas\Sistema\Views\Solo\Create.cshtml" />
-    <Content Include="Areas\Sistema\Views\Solo\Editar.cshtml" />
-    <Content Include="Areas\Sistema\Views\Solo\Detalhes.cshtml" />
-    <Content Include="Areas\Sistema\Views\Semente\Create.cshtml" />
-    <Content Include="Areas\Sistema\Views\Semente\Editar.cshtml" />
-    <Content Include="Areas\Sistema\Views\Semente\Excluir.cshtml" />
-    <Content Include="Areas\Sistema\Views\Colheita\Index.cshtml" />
+    <Content Include="Areas\Sistema\Views\Area\Editar.cshtml" />
+    <Content Include="Areas\Sistema\Views\Area\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Colheita\Create.cshtml" />
-    <Content Include="Areas\Sistema\Views\Maquina\Create.cshtml" />
-    <Content Include="Areas\Sistema\Views\Maquina\Excluir.cshtml" />
-    <Content Include="Areas\Sistema\Views\Maquina\Editar.cshtml" />
-    <Content Include="Areas\Sistema\Views\Fornecedor\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Colheita\Detalhes.cshtml" />
     <Content Include="Areas\Sistema\Views\Colheita\Editar.cshtml" />
+    <Content Include="Areas\Sistema\Views\Colheita\Index.cshtml" />
+    <Content Include="Areas\Sistema\Views\Controle\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Controle\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Estoque\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Estoque\Detalhes.cshtml" />
     <Content Include="Areas\Sistema\Views\Estoque\Editar.cshtml" />
-    <Content Include="Areas\Sistema\Views\PragaDoenca\Detalhes.cshtml" />
-    <Content Include="Areas\Sistema\Views\Maquina\Detalhes.cshtml" />
-    <Content Include="Areas\Sistema\Views\Funcionario\Excluir.cshtml" />
-    <Content Include="Areas\Sistema\Views\Funcionario\Editar.cshtml" />
-    <Content Include="Areas\Sistema\Views\Funcionario\Detalhes.cshtml" />
+    <Content Include="Areas\Sistema\Views\Estoque\Index.cshtml" />
+    <Content Include="Areas\Sistema\Views\Fazenda\Index.cshtml" />
+    <Content Include="Areas\Sistema\Views\Fornecedor\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Fornecedor\Detalhes.cshtml" />
+    <Content Include="Areas\Sistema\Views\Fornecedor\Editar.cshtml" />
+    <Content Include="Areas\Sistema\Views\Fornecedor\Excluir.cshtml" />
+    <Content Include="Areas\Sistema\Views\Funcionario\Detalhes.cshtml" />
+    <Content Include="Areas\Sistema\Views\Funcionario\Editar.cshtml" />
+    <Content Include="Areas\Sistema\Views\Funcionario\Excluir.cshtml" />
+    <Content Include="Areas\Sistema\Views\Maquina\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Maquina\Detalhes.cshtml" />
+    <Content Include="Areas\Sistema\Views\Maquina\Editar.cshtml" />
+    <Content Include="Areas\Sistema\Views\Maquina\Excluir.cshtml" />
+    <Content Include="Areas\Sistema\Views\Maquina\Index.cshtml" />
+    <Content Include="Areas\Sistema\Views\Plantio\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Plantio\Detalhes.cshtml" />
+    <Content Include="Areas\Sistema\Views\Plantio\Editar.cshtml" />
+    <Content Include="Areas\Sistema\Views\Plantio\Excluir.cshtml" />
+    <Content Include="Areas\Sistema\Views\Plantio\Index.cshtml" />
+    <Content Include="Areas\Sistema\Views\PragaDoenca\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\PragaDoenca\Detalhes.cshtml" />
+    <Content Include="Areas\Sistema\Views\PragaDoenca\Editar.cshtml" />
+    <Content Include="Areas\Sistema\Views\PragaDoenca\Index.cshtml" />
+    <Content Include="Areas\Sistema\Views\Semente\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Semente\Detalhes.cshtml" />
+    <Content Include="Areas\Sistema\Views\Semente\Editar.cshtml" />
+    <Content Include="Areas\Sistema\Views\Semente\Excluir.cshtml" />
+    <Content Include="Areas\Sistema\Views\Semente\Index.cshtml" />
+    <Content Include="Areas\Sistema\Views\Solo\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Solo\Detalhes.cshtml" />
+    <Content Include="Areas\Sistema\Views\Solo\Editar.cshtml" />
     <Content Include="fonts\DubaiW23-Bold.eot" />
     <Content Include="fonts\DubaiW23-Bold.ttf" />
     <Content Include="fonts\DubaiW23-Bold.woff" />
@@ -535,36 +426,29 @@
     <Content Include="fonts\DubaiW23-Regular.ttf" />
     <Content Include="fonts\DubaiW23-Regular.woff" />
     <Content Include="fonts\DubaiW23-Regular.woff2" />
-    <Content Include="Areas\Sistema\Views\Fornecedor\Excluir.cshtml" />
-    <Content Include="Areas\Sistema\Views\Fazenda\Index.cshtml" />
-    <Content Include="Areas\Sistema\Views\PragaDoenca\Index.cshtml" />
-    <Content Include="Areas\Sistema\Views\PragaDoenca\Create.cshtml" />
-    <Content Include="Areas\Sistema\Views\PragaDoenca\Editar.cshtml" />
-    <Content Include="Areas\Sistema\Views\Controle\Create.cshtml" />
-    <Content Include="Areas\Sistema\Views\Controle\Index.cshtml" />
-    <Content Include="Areas\Sistema\Views\Fornecedor\Create.cshtml" />
-    <Content Include="Areas\Ecommerce\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Ecommerce\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Ecommerce\Views\Carrinho\Index.cshtml" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\materialdesignicons-webfont.eot" />
+    <Content Include="fonts\materialdesignicons-webfont.ttf" />
+    <Content Include="fonts\materialdesignicons-webfont.woff" />
+    <Content Include="fonts\materialdesignicons-webfont.woff2" />
     <Content Include="Areas\Ecommerce\Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Account\ForgotPassword.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Account\Login.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\Account\Registro.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Account\ResetPassword.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Areas\Ecommerce\Views\Account\Registro.cshtml" />
-    <Content Include="ExpSystems.pfx" />
-    <Content Include="Areas\Ecommerce\Views\Anuncio\Create.cshtml" />
-    <None Include="Properties\PublishProfiles\organweb - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\organweb - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
+    <Content Include="Scripts\hoverable-collapse.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.4.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
@@ -574,19 +458,21 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modal.js" />
+    <Content Include="Scripts\modalui.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\off-canvas.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\progressCircle.js" />
+    <Content Include="Scripts\template.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -597,15 +483,24 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -617,17 +512,18 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Shared\_LoginStart.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Registro.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Ecommerce\Views\Shared\" />
     <Folder Include="Areas\Sistema\Views\Financeiro\" />
     <Folder Include="Areas\Sistema\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
@@ -635,18 +531,9 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>ExpSystems.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
@@ -661,9 +548,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>58641</DevelopmentServerPort>
+          <DevelopmentServerPort>53709</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:58640/</IISUrl>
+          <IISUrl>http://localhost:53709/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
