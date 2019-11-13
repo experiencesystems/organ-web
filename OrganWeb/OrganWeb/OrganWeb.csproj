@@ -244,6 +244,7 @@
     <Compile Include="Areas\Ecommerce\Models\zBanco\EcommerceContext.cs" />
     <Compile Include="Areas\Ecommerce\Models\zBanco\EcommerceRepository.cs" />
     <Compile Include="Areas\Ecommerce\Models\zRepositories\CarrinhoRepository.cs" />
+    <Compile Include="Areas\Ecommerce\Models\zRepositories\PedidoRepository.cs" />
     <Compile Include="Areas\Ecommerce\Models\zRepositories\WishlistRepository.cs" />
     <Compile Include="Areas\Sistema\Controllers\AccountController.cs" />
     <Compile Include="Areas\Sistema\Controllers\AreaController.cs" />
@@ -442,6 +443,8 @@
     <Content Include="Areas\Ecommerce\Views\Account\Registro.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Account\ResetPassword.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\Anuncio\Excluir.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\Anuncio\Editar.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\hoverable-collapse.js" />

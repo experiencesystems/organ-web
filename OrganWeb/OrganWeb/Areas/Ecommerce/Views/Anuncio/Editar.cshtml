@@ -4,41 +4,26 @@
     Layout = null;
 }
 
-@if (!Request.IsAuthenticated)
-{
-    <br />
-    <h6>Faça login para criar um anúncio!</h6>
-    <div>
-        @Html.ActionLink("Login", "Login", "Account")
-    </div>
-    return;
-}
-
-@if (Request.IsAuthenticated && Model.Usuario.Assinatura == 4)
-{
-    <br />
-    <h6>Você precisa ter uma conta no Organ Web para criar anúncios!</h6>
-    <div>
-        Adquira o Organ Web agora mesmo! @Html.ActionLink("Registre-se", "Registro", "Account")
-    </div>
-    return;
-}
-
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Novo</title>
+    <title>Editar</title>
 </head>
 <body>
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
+
         <div class="form-horizontal">
             <h4>Anúncio</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.IdProduto)
+            @Html.HiddenFor(model => model.IdUsuario)
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -89,14 +74,22 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="submit" value="Save" class="btn btn-default" />
                 </div>
             </div>
         </div>
     }
-
+    @{
+        if (ViewBag.SuccessMessage != null)
+        {
+            <div>
+                @ViewBag.SuccessMessage
+                @Html.ActionLink("Ir para o anúncio", "Detalhes", new { id = ViewBag.Id })
+            </div>
+        }
+    }
     <div>
-        @Html.ActionLink("Voltar", "Index", "Loja")
+        @Html.ActionLink("Voltar para o anúncio", "Detalhes", new { id = Model.Id })
     </div>
 </body>
 </html>

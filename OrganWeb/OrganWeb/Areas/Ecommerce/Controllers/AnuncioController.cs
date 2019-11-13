@@ -3,6 +3,7 @@ using OrganWeb.Areas.Ecommerce.Models.Vendas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -12,6 +13,7 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
     public class AnuncioController : Controller
     {
         private Produto produto = new Produto();
+        private Anuncio anuncio = new Anuncio();
 
         public ActionResult Novo()
         {
@@ -38,9 +40,79 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
                 anuncio.Add(anuncio);
                 await anuncio.Save();
 
-                return RedirectToAction("Index", "Loja");
+                return RedirectToAction("Detalhes", new { id = anuncio.Id });
             }
             return View(anuncio);
+        }
+
+        public async Task<ActionResult> Detalhes(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            anuncio = await anuncio.GetByID(id);
+            if (anuncio == null)
+            {
+                return HttpNotFound();
+            }
+            return View(anuncio);
+        }
+
+        public async Task<ActionResult> Editar(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            anuncio = await anuncio.GetByID(id);
+            if (anuncio == null)
+            {
+                return HttpNotFound();
+            }
+            return View(anuncio);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Editar(Anuncio anuncio)
+        {
+            if (ModelState.IsValid)
+            {
+                anuncio.Update(anuncio);
+                await anuncio.Save();
+                ViewBag.SuccessMessage = "Seu anúncio " + anuncio.Nome + " foi alterado com sucesso.";
+                ViewBag.Id = anuncio.Id;
+                ModelState.Clear();
+                return View();
+            }
+            return View(anuncio);
+        }
+
+        public async Task<ActionResult> Excluir(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            anuncio = await anuncio.GetByID(id);
+            if (anuncio == null)
+            {
+                return HttpNotFound();
+            }
+            return View(anuncio);
+        }
+
+        [HttpPost, ActionName("Excluir")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ExcluirConfirmado(Anuncio anuncio)
+        {
+            anuncio.Status = false;
+            anuncio.Update(anuncio);
+            await anuncio.Save();
+            ViewBag.SuccessMessage = "Seu anúncio " + anuncio.Nome + " foi desativado.";
+            ModelState.Clear();
+            return View();
         }
     }
 }
