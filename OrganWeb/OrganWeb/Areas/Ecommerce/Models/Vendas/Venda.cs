@@ -1,4 +1,5 @@
 ﻿using OrganWeb.Areas.Ecommerce.Models.Financeiro;
+using OrganWeb.Areas.Ecommerce.Models.zRepositories;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace OrganWeb.Areas.Ecommerce.Models.Vendas
 {
     [Table("tbVenda")]
-    public class Venda
+    public class Venda : VendaRepository
     {
         [Key]
         public int Id { get; set; }

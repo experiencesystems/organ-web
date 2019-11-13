@@ -246,6 +246,8 @@
     <Compile Include="Areas\Ecommerce\Models\zBanco\EcommerceContext.cs" />
     <Compile Include="Areas\Ecommerce\Models\zBanco\EcommerceRepository.cs" />
     <Compile Include="Areas\Ecommerce\Models\zRepositories\CarrinhoRepository.cs" />
+    <Compile Include="Areas\Ecommerce\Models\zRepositories\PedidoRepository.cs" />
+    <Compile Include="Areas\Ecommerce\Models\zRepositories\VendaRepository.cs" />
     <Compile Include="Areas\Ecommerce\Models\zRepositories\WishlistRepository.cs" />
     <Compile Include="Areas\Sistema\Controllers\AccountController.cs" />
     <Compile Include="Areas\Sistema\Controllers\AreaController.cs" />
@@ -261,6 +263,7 @@
     <Compile Include="Areas\Sistema\Controllers\PragaDoencaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\SementeController.cs" />
     <Compile Include="Areas\Sistema\Controllers\SoloController.cs" />
+    <Compile Include="Areas\Sistema\Controllers\VendasController.cs" />
     <Compile Include="Areas\Sistema\Models\Administrativo\Area.cs" />
     <Compile Include="Areas\Sistema\Models\Administrativo\Solo.cs" />
     <Compile Include="Areas\Sistema\Models\API\ListarUnidades.cs" />
@@ -295,6 +298,7 @@
     <Compile Include="Areas\Sistema\Models\ViewModels\CreatePlantioViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewEstoque.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewFazenda.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewModels\ViewVendas.cs" />
     <Compile Include="Areas\Sistema\Models\ViewsBanco\Estoque\VwControle.cs" />
     <Compile Include="Areas\Sistema\Models\ViewsBanco\Estoque\VwHistorico.cs" />
     <Compile Include="Areas\Sistema\Models\ViewsBanco\Estoque\VwItems.cs" />
@@ -523,8 +527,10 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Ecommerce\Views\Shared\" />
+    <Folder Include="Areas\Ecommerce\Views\Venda\" />
     <Folder Include="Areas\Sistema\Views\Financeiro\" />
     <Folder Include="Areas\Sistema\Views\Shared\" />
+    <Folder Include="Areas\Sistema\Views\Vendas\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
