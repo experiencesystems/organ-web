@@ -35,9 +35,10 @@ namespace OrganWeb.Areas.Sistema.Controllers
         //https://stackoverflow.com/questions/25125329/using-a-pagedlist-with-a-viewmodel-asp-net-mvc
 
         [HttpGet]
-        public async Task<ViewResult> Index(string filtros, string textoPesquisa, int? page)
+        public async Task<ViewResult> Index(string filtros, string textoPesquisa, int? page, int? pagehist)
         {
             int pagina = page ?? 1;
+            int paginahist = pagehist ?? 1;
             var listaFiltros = new List<string>
             {
                 "Insumo",
@@ -61,7 +62,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
             viewestoque = new ViewEstoque()
             {
                 VwItems = await vwItems.GetPagedAll(pagina),
-                VwHistoricos = await vwHistorico.GetAll(),
+                VwHistoricos = await vwHistorico.GetPagedAll(paginahist),
                 Fornecedors = await vwFornecedor.GetAll()
             };
 

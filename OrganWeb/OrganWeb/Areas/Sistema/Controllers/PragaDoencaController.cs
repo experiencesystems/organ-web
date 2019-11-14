@@ -18,10 +18,13 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private AreaPD areapd = new AreaPD();
         private PragaOrDoenca praga = new PragaOrDoenca();
         private VwPragaOrDoenca vwpraga = new VwPragaOrDoenca();
+        private VwControle vwControle = new VwControle();
         
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? pagedoenca, int? pagecont)
         {
-            return View(await vwpraga.GetAll());
+            int pdoenca = pagedoenca ?? 1;
+            int pcont = pagecont ?? 1;
+            return View(new ViewPragaControle { PragaOrDoencas = await vwpraga.GetPagedAll(pdoenca), Controles = await vwControle.GetPagedAll(pcont)});
         }
 
         public async Task<ActionResult> Detalhes(int? id)

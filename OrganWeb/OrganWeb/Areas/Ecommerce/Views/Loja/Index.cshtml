@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<OrganWeb.Areas.Ecommerce.Models.Vendas.Anuncio>
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_LayoutEcommerce.cshtml";
 }
 
 <!DOCTYPE html>
@@ -15,39 +15,48 @@
     <p>
         @Html.ActionLink("Novo anúncio", "Novo", "Anuncio")
     </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Foto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Desconto)
-            </th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Foto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Desconto)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /*id=item.Id*/ }) |
-                @Html.ActionLink("Details", "Detalhes", new { /*id=item.Id*/ }) |
-                @Html.ActionLink("Delete", "Delete", new { /*id=item.Id*/ })
-            </td>
-        </tr>
-    }
-    
-    </table>
+
+    <!--PRODUTOS-->
+    <!-- Products tab & slick -->
+    <div class="container">
+        <div class="row">
+            <!-- product -->
+
+            @foreach (var item in Model)
+            {
+                <div class="col-md-6 col-lg-3">
+                    <div class="product">
+                        <div class="product-img">
+                            <img src="~/Imagens/milho.png" alt="">
+                            <div class="product-label">
+                                <span class="sale">-@Html.DisplayFor(modelItem => item.Desconto)%</span>
+                                <span class="new">NOVO</span>
+                            </div>
+                        </div>
+                        <div class="product-body">
+                            <p class="product-category">Sementes</p>
+                            <h3 class="product-name"><a href="#">@Html.DisplayFor(modelItem => item.Nome) / <i class="icon-room"></i>Sorriso, MT</a></h3>
+                            <h4 class="product-price">R$@Html.DisplayFor(modelItem => item.Produto.ValorUnit) <del class="product-old-price">R$15,00</del></h4>
+                            <div class="product-rating">
+                                <i class="icon-star2"></i>
+                                <i class="icon-star2"></i>
+                                <i class="icon-star2"></i>
+                                <i class="icon-star2"></i>
+                                <i class="icon-star_border"></i>
+                            </div>
+                            <div class="product-btns">
+                                <button class="add-to-wishlist"><i class="icon-heart-o"></i><span class="tooltipp">Adicionar na wishlist</span></button>
+                                <button class="add-to-compare"><i class="icon-add_shopping_cart"></i><span class="tooltipp">Adicionar no carrinho</span></button>
+                                <button class="quick-view"><i class="icon-info_outline"></i><span class="tooltipp">Detalhes</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /product -->
+            }
+
+        </div>
+    </div>
+
 </body>
 </html>

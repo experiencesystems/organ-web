@@ -1,52 +1,82 @@
-﻿@model IEnumerable<OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque.VwPragaOrDoenca>
-
+﻿@model OrganWeb.Areas.Sistema.Models.ViewModels.ViewPragaControle
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Controle de pragas e doenças</h2>
 
 <p>
     @Html.ActionLink("Nova praga ou doença", "Create")
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tipo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Areas)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
+        <th>Nome</th>
+        <th>Tipo</th>
+        <th>Áreas</th>
+        <th>Status</th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tipo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Areas)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "Editar", new { id=item.Id }) |
-            @Html.ActionLink("Detalhes", "Detalhes", new { id=item.Id }) |
-            @Html.ActionLink("Excluir", "Excluir", new { id=item.Id })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model.PragaOrDoencas)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+            <td>@Html.DisplayFor(modelItem => item.Tipo)</td>
+            <td>@Html.DisplayFor(modelItem => item.Areas)</td>
+            <td>@Html.DisplayFor(modelItem => item.Status)</td>
+            <td>
+                @Html.ActionLink("Editar", "Editar", new { id = item.Id }) |
+                @Html.ActionLink("Detalhes", "Detalhes", new { id = item.Id }) |
+                @Html.ActionLink("Excluir", "Excluir", new { id = item.Id })
+            </td>
+        </tr>
+    }
 </table>
+<br />
+<div>
+    Página @(Model.PragaOrDoencas.PageCount < Model.PragaOrDoencas.PageNumber ? 0 : Model.PragaOrDoencas.PageNumber) de @Model.PragaOrDoencas.PageCount
+    @Html.PagedListPager(Model.PragaOrDoencas, pagedoenca => Url.Action("Index",
+    new { pagedoenca }), new PagedListRenderOptions
+     {
+     LiElementClasses = new string[] { "pagination page-item p1" }
+     })
+</div>
+<p>
+    @Html.ActionLink("Novo controle", "Create", "Controle")
+</p>
+<table class="table">
+    <tr>
+        <th>Data</th>
+        <th>Nome</th>
+        <th>Status</th>
+        <th>Eficiência</th>
+        <th>Liberações</th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model.Controles)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Data)</td>
+            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+            <td>@Html.DisplayFor(modelItem => item.Status)</td>
+            <td>@Html.DisplayFor(modelItem => item.Eficiencia)</td>
+            <td>@Html.DisplayFor(modelItem => item.Liberacoes)</td>
+            <td>
+                @Html.ActionLink("Editar", "Editar", "Controle", new { id = item.Id }) |
+                @Html.ActionLink("Detalhes", "Detalhes", "Controle", new { id = item.Id }) |
+                @Html.ActionLink("Excluir", "Excluir", "Controle", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
+<br />
+<br />
+<div>
+    Página @(Model.Controles.PageCount < Model.Controles.PageNumber ? 0 : Model.Controles.PageNumber) de @Model.Controles.PageCount
+    @Html.PagedListPager(Model.Controles, pagecont => Url.Action("Index",
+    new { pagecont }), new PagedListRenderOptions
+     {
+     LiElementClasses = new string[] { "pagination page-item p1" }
+     })
+</div>

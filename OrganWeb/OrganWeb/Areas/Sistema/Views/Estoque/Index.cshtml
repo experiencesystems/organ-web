@@ -92,7 +92,7 @@
         <div class="col-6">
             <div class="card">
                 <div class="card-header">
-                    <h6 class="card-title box-title">Histórico de alterações</h6>
+                    <h6 class="card-title box-title">Histórico de alterações do estoque</h6>
                     <div class="card-header-right">
                         <ul class="list-unstyled card-option">
                             <li><i class="ti-minus minimize-card"></i></li>
@@ -115,15 +115,23 @@
                             <tbody>
                                 @foreach (var item in Model.VwHistoricos)
                                 {
-                                <tr>
-                                    <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.DataAlteracao)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Nome)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Quantidade) @Html.DisplayFor(modelItem => item.UnidadeMedida)</td>
-                                </tr>
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.DataAlteracao)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Quantidade) @Html.DisplayFor(modelItem => item.UnidadeMedida)</td>
+                                    </tr>
                                 }
                             </tbody>
                         </table>
+                        <br />
+                        Página @(Model.VwHistoricos.PageCount < Model.VwHistoricos.PageNumber ? 0 : Model.VwHistoricos.PageNumber) de @Model.VwHistoricos.PageCount
+
+                        @Html.PagedListPager(Model.VwHistoricos, pagehist => Url.Action("Index",
+                            new { pagehist }), new PagedListRenderOptions
+                            {
+                                LiElementClasses = new string[] { "pagination page-item p1" }
+                            })
                         <!--</div>-->
                     </div>
                 </div>
@@ -132,19 +140,23 @@
         <div class="col-6">
             <div class="card">
                 <div class="card-header">
-                    <h6 class="card-title box-title">Fornecedor</h6>
-                    <div class="card-header-right">
-                        <ul class="list-unstyled card-option">
-                            <li><i class="ti-minus minimize-card"></i></li>
-                            <li><i class="icon-refresh"></i></li>
-                        </ul>
+                    <div class="row">
+                        <div class="col-6">
+                            <h6 class="card-title box-title">Fornecedor</h6>
+                        </div>
+                        <div class="col-6">
+                            <a class="popup btn btn-add" href="/Sistema/Fornecedor/Create" style="margin-bottom:20px; margin-top:20px;">Novo Fornecedor</a>
+                        </div>
+                        <div class="card-header-right">
+                            <ul class="list-unstyled card-option">
+                                <li><i class="ti-minus minimize-card"></i></li>
+                                <li><i class="icon-refresh"></i></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="card table-card">
                     <div class="card-block">
-                        <div class="tablecontainer">
-                            <a class="popup btn btn-add" href="/Sistema/Fornecedor/Create" style="margin-bottom:20px; margin-top:20px;">Novo Fornecedor</a>
-                        </div>
                         <div class="table-responsive">
                             <table class="table-hover">
                                 <thead class="thead-title">

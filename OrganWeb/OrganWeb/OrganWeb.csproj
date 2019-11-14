@@ -216,6 +216,7 @@
     <Compile Include="Areas\Ecommerce\Controllers\AccountController.cs" />
     <Compile Include="Areas\Ecommerce\Controllers\AnuncioController.cs" />
     <Compile Include="Areas\Ecommerce\Controllers\CarrinhoController.cs" />
+    <Compile Include="Areas\Ecommerce\Controllers\HomeController.cs" />
     <Compile Include="Areas\Ecommerce\Controllers\LojaController.cs" />
     <Compile Include="Areas\Ecommerce\Controllers\PedidoController.cs" />
     <Compile Include="Areas\Ecommerce\Controllers\WishlistController.cs" />
@@ -298,6 +299,7 @@
     <Compile Include="Areas\Sistema\Models\ViewModels\CreatePlantioViewModel.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewEstoque.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewFazenda.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewModels\ViewPragaControle.cs" />
     <Compile Include="Areas\Sistema\Models\ViewModels\ViewVendas.cs" />
     <Compile Include="Areas\Sistema\Models\ViewsBanco\Estoque\VwControle.cs" />
     <Compile Include="Areas\Sistema\Models\ViewsBanco\Estoque\VwHistorico.cs" />
@@ -311,9 +313,12 @@
     <Compile Include="Areas\Sistema\Models\zRepositories\AreaPlantioRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\AreaRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\ColheitaRepository.cs" />
+    <Compile Include="Areas\Sistema\Models\zRepositories\ControleRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\EstoqueRepository.cs" />
+    <Compile Include="Areas\Sistema\Models\zRepositories\HistoricoRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\ItensPlantioRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\PlantioRepository.cs" />
+    <Compile Include="Areas\Sistema\Models\zRepositories\PragaOrDoencaRepository.cs" />
     <Compile Include="Areas\Sistema\Models\zRepositories\UnidadeMedidaRepository.cs" />
     <Compile Include="Areas\Sistema\SistemaAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -345,6 +350,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Areas\Sistema\Views\web.config" />
     <Content Include="Areas\Ecommerce\Views\web.config" />
+    <Content Include="Imagens\accross-devices.png" />
     <Content Include="Imagens\admin.jpg" />
     <Content Include="Imagens\bg_3.jpg" />
     <Content Include="Imagens\icon2.ico" />
@@ -391,7 +397,6 @@
     <Content Include="Areas\Sistema\Views\Colheita\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Colheita\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Controle\Create.cshtml" />
-    <Content Include="Areas\Sistema\Views\Controle\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Estoque\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Estoque\Detalhes.cshtml" />
     <Content Include="Areas\Sistema\Views\Estoque\Editar.cshtml" />
@@ -465,6 +470,7 @@
     <Content Include="fonts\icomoon.eot" />
     <Content Include="fonts\icomoon.ttf" />
     <Content Include="fonts\icomoon.woff" />
+    <Content Include="Areas\Ecommerce\Views\Shared\_Layout.cshtml" />
     <None Include="Properties\PublishProfiles\organweb - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\organweb - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -548,7 +554,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Ecommerce\Views\Home\" />
-    <Folder Include="Areas\Ecommerce\Views\Shared\" />
     <Folder Include="Areas\Ecommerce\Views\Venda\" />
     <Folder Include="Areas\Sistema\Views\Financeiro\" />
     <Folder Include="Areas\Sistema\Views\Shared\" />
