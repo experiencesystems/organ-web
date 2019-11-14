@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -81,33 +83,25 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                try
-                {
-                    var user = UserManager.FindByEmail(model.Email);
-                    var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: false);
-                    switch (result)
-                    {
-                        case SignInStatus.Success:
-                            return RedirectToLocal(returnUrl);
-                        case SignInStatus.LockedOut:
-                            return View("Lockout");
-                        case SignInStatus.RequiresVerification:
-                            return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, model.RememberMe });
-                        case SignInStatus.Failure:
-                        default:
-                            ModelState.AddModelError("", "Tentativa de login inválida.");
-                            return View(model);
-                    }
-                }
-                catch
-                {
+                return View(model);
+            }
+            var user = await UserManager.FindByEmailAsync(model.Email);
+            var result = user == null ? SignInStatus.Failure : await SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: false);
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    return RedirectToLocal(returnUrl);
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
+                case SignInStatus.RequiresVerification:
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, model.RememberMe });
+                case SignInStatus.Failure:
+                default:
                     ModelState.AddModelError("", "Tentativa de login inválida.");
                     return View(model);
-                }
             }
-            return View(model);
         }
 
         //
@@ -167,7 +161,7 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             {
                 ModelState.AddModelError(string.Empty, "Esse nome de usuário já foi escolhido!");
             }
-            if (new EcommerceContext().Users.Where(x => x.CPF == model.CPF).First() != null)
+            if (await new EcommerceContext().Users.Where(x => x.CPF == model.CPF).FirstOrDefaultAsync() != null)
             {
                 ModelState.AddModelError(string.Empty, "Esse CPF já foi cadastrado!");
             }
@@ -202,7 +196,7 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirmar sua conta", "Confirme sua conta clicando <a href=\"" + callbackUrl + "\">aqui</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Loja");
                 }
                 AddErrors(result);
             }

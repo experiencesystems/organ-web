@@ -1,4 +1,4 @@
-﻿@model OrganWeb.Areas.Ecommerce.Models.Anuncio
+﻿@model OrganWeb.Areas.Ecommerce.Models.Vendas.Anuncio
 
 @{
     ViewBag.Title = "Detalhes";
@@ -19,19 +19,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Descricao)
+            @Html.DisplayNameFor(model => model.Desc)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
+            @Html.DisplayFor(model => model.Desc)
         </dd>
 
         <dt>
@@ -53,6 +45,5 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /*id = Model.Id*/ }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Voltar", "Index", "Loja")
 </p>

@@ -369,7 +369,7 @@
     <Content Include="Scripts\esm\popper-utils.js.map" />
     <Content Include="Areas\Ecommerce\Views\Anuncio\Novo.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Carrinho\Index.cshtml" />
-    <Content Include="Areas\Ecommerce\Views\Loja\Detalhes.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\Anuncio\Detalhes.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Loja\Index.cshtml" />
     <Content Include="Areas\Ecommerce\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Sistema\Views\Area\Create.cshtml" />
@@ -530,6 +530,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Ecommerce\Views\Home\" />
     <Folder Include="Areas\Ecommerce\Views\Shared\" />
     <Folder Include="Areas\Ecommerce\Views\Venda\" />
     <Folder Include="Areas\Sistema\Views\Financeiro\" />

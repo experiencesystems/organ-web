@@ -17,7 +17,8 @@ namespace OrganWeb.Areas.Ecommerce
             context.MapRoute(
                 "Ecommerce_default",
                 "Ecommerce/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { controller = "Loja", action = "Index", id = UrlParameter.Optional },
+                new[] { "OrganWeb.Areas.Ecommerce.Controllers" }
             );
         }
     }
