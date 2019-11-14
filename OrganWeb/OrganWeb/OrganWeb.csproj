@@ -452,6 +452,8 @@
     <Content Include="Areas\Ecommerce\Views\Anuncio\Editar.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Wishlist\Index.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Pedido\Checkout.cshtml" />
+    <None Include="Properties\PublishProfiles\organweb - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\organweb - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\hoverable-collapse.js" />
@@ -482,7 +484,9 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

@@ -31,6 +31,8 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
 
         public virtual Anuncio Anuncio { get; set; }
         public virtual ApplicationUser Usuario { get; set; }
+        
+        public List<Pedido> Pedidos { get; set; }
 
         [NotMapped]
         public readonly List<SelectListItem> StatusList = new List<SelectListItem>()

@@ -82,6 +82,12 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return HttpNotFound();
             }
+            var responseModel = await unmd.GetListarUnidades();
+            maquina.Estoque = new Estoque
+            {
+                Unidades = responseModel.UnidadeCadastros,
+                Fornecedores = await new Fornecedor().GetAll()
+            };
             return View(maquina);
         }
 
@@ -89,13 +95,14 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Editar(Maquina maquina)
         {
+            var responseModel = await unmd.GetListarUnidades();
+            maquina.Estoque.Unidades = responseModel.UnidadeCadastros;
             if (ModelState.IsValid)
             {
                 maquina.Update(maquina);
                 await maquina.Save();
                 if (await unmd.GetByID(maquina.Estoque.UM) == null)
                 {
-                    var responseModel = await unmd.GetListarUnidades();
                     maquina.Estoque.Unidades = responseModel.UnidadeCadastros;
                     uncd = new UnidadeCadastro()
                     {
@@ -109,6 +116,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 await estoque.Save();
                 return RedirectToAction("Index", "Estoque");
             }
+            maquina.Estoque.Fornecedores = await new Fornecedor().GetAll();
             return View(maquina);
         }
 

@@ -20,9 +20,9 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private Area area = new Area();
         private Semente semente = new Semente();
         
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(plantio.GetPlantiosIncompletos());
+            return View(await plantio.GetPlantiosIncompletos());
         }
 
         public async Task<ActionResult> Detalhes(int? id)
@@ -118,7 +118,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 };
                 pl.Add(pl);
                 await pl.Save();
-
+                /*
                 foreach (var item in IdArea)
                 {
                    areap.Add(new AreaPlantio { IdArea = item, IdPlantio = pl.Id });
@@ -127,8 +127,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                     area.Disp = 2;
                     area.Update(area);
                     await area.Save();
-                }
-
+                }*/
                 var itemcrplantio = new ItensPlantio
                 {
                    IdEstoque = crplantio.IdEstoque,

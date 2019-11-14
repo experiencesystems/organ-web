@@ -16,11 +16,8 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
     {
         [Key]
         public int Id { get; set; }
-
-        [ForeignKey("Carrinho")]
+        
         public int IdAnuncio { get; set; }
-
-        [ForeignKey("Carrinho")]
         public string IdUsuario { get; set; }
 
         [DataType(DataType.Date, ErrorMessage = "Data em formato inválido"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -32,6 +29,7 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
         [Required]
         public int Status { get; set; }
         //TODO: lista de status pedido
+        
         [NotMapped]
         public virtual Anuncio Anuncio { get; set; }
         public virtual Carrinho Carrinho { get; set; }

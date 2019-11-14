@@ -101,13 +101,14 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Editar(Semente semente)
         {
+            var responseModel = await unmd.GetListarUnidades();
+            semente.Estoque.Unidades = responseModel.UnidadeCadastros;
             if (ModelState.IsValid)
             {
                 semente.Update(semente);
                 await semente.Save();
                 if (await unmd.GetByID(semente.Estoque.UM) == null)
                 {
-                    var responseModel = await unmd.GetListarUnidades();
                     semente.Estoque.Unidades = responseModel.UnidadeCadastros;
                     uncd = new UnidadeCadastro()
                     {
@@ -121,6 +122,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 await estoque.Save();
                 return RedirectToAction("Index", "Estoque");
             }
+            semente.Estoque.Fornecedores = await new Fornecedor().GetAll();
             return View(semente);
         }
 

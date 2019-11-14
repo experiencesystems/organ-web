@@ -10,12 +10,15 @@
         <dd>
             @Html.DisplayFor(model => model.Nome)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Desc)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Desc)
-        </dd>
+        @if (Model.Desc != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Desc)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Desc)
+            </dd>
+        }
         <dt>
             @Html.DisplayNameFor(model => model.Estoque.Qtd)
         </dt>
@@ -30,7 +33,3 @@
         </dd>
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Editar", "Editar", new { id = Model.IdEstoque }) |
-    @Html.ActionLink("Voltar", "Index", "Estoque")
-</p>

@@ -69,6 +69,7 @@ namespace OrganWeb.Areas.Ecommerce.Models.zBanco
                 .HasColumnName("Comentario");
 
             modelBuilder.Entity<Resposta>().HasKey(vf => new { vf.IdComentario, vf.IdResposta });
+            modelBuilder.Entity<Carrinho>().HasKey(c => new { c.IdUsuario, c.IdAnuncio });
 
             modelBuilder.Entity<Resposta>()
                     .HasRequired(m => m.Comentario)
@@ -80,6 +81,14 @@ namespace OrganWeb.Areas.Ecommerce.Models.zBanco
                     .HasRequired(m => m.Comentario)
                     .WithMany(t => t.Respostas)
                     .HasForeignKey(m => m.IdResposta)
+                    .WillCascadeOnDelete(false);
+            
+            modelBuilder.Entity<Pedido>().HasKey(e => e.Id);
+
+            modelBuilder.Entity<Pedido>()
+                    .HasRequired(m => m.Carrinho)
+                    .WithMany(t => t.Pedidos)
+                    .HasForeignKey(m => new { m.IdUsuario, m.IdAnuncio })
                     .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ApplicationUser>()

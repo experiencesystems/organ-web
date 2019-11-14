@@ -90,7 +90,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 Estoque = new Estoque
                 {
-                    Unidades = responseModel.UnidadeCadastros
+                    Unidades = responseModel.UnidadeCadastros,
+                    Fornecedores = await new Fornecedor().GetAll()
                 },
                 Categorias = await categoria.GetAll()
             };
@@ -163,6 +164,9 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 return HttpNotFound();
             }
             insumo.Categorias = await categoria.GetAll();
+            var responseModel = await unmd.GetListarUnidades();
+            insumo.Estoque.Unidades = responseModel.UnidadeCadastros;
+            insumo.Estoque.Fornecedores = await new Fornecedor().GetAll();
             return View(insumo);
         }
 
@@ -172,11 +176,12 @@ namespace OrganWeb.Areas.Sistema.Controllers
         {
             if (ModelState.IsValid)
             {
+                var responseModel = await unmd.GetListarUnidades();
+                insumo.Estoque.Unidades = responseModel.UnidadeCadastros;
                 insumo.Update(insumo);
                 await insumo.Save();
                 if (await unmd.GetByID(insumo.Estoque.UM) == null)
                 {
-                    var responseModel = await unmd.GetListarUnidades();
                     insumo.Estoque.Unidades = responseModel.UnidadeCadastros;
                     uncd = new UnidadeCadastro()
                     {
@@ -191,6 +196,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 return RedirectToAction("Index");
             }
             insumo.Categorias = await categoria.GetAll();
+            insumo.Estoque.Fornecedores = await new Fornecedor().GetAll();
             return View(insumo);
         }
 
