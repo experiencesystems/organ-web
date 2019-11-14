@@ -15,6 +15,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private Maquina maquina = new Maquina();
         private Estoque estoque = new Estoque();
         private ListarUnidades unmd = new ListarUnidades();
+        private UnidadeCadastro uncd = new UnidadeCadastro();
 
         public ActionResult Index()
         {
@@ -92,7 +93,21 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 maquina.Update(maquina);
                 await maquina.Save();
-                return RedirectToAction("Index");
+                if (await unmd.GetByID(maquina.Estoque.UM) == null)
+                {
+                    var responseModel = await unmd.GetListarUnidades();
+                    maquina.Estoque.Unidades = responseModel.UnidadeCadastros;
+                    uncd = new UnidadeCadastro()
+                    {
+                        Id = maquina.Estoque.UM,
+                        Desc = maquina.Estoque.Unidades.Where(x => x.Id == maquina.Estoque.UM).Select(x => x.Desc).FirstOrDefault().ToString()
+                    };
+                    unmd.Add(uncd);
+                    await unmd.Save();
+                }
+                estoque.Update(maquina.Estoque);
+                await estoque.Save();
+                return RedirectToAction("Index", "Estoque");
             }
             return View(maquina);
         }

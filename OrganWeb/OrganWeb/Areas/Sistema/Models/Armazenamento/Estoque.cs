@@ -39,6 +39,9 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
 
         [NotMapped]
         public List<UnidadeCadastro> Unidades { get; set; }
+
+        [NotMapped]
+        public List<Fornecedor> Fornecedores { get; set; }
     }
 
 }

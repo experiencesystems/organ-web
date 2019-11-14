@@ -7,46 +7,30 @@
         <dt>
             @Html.DisplayNameFor(model => model.Nome)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Nome)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.Solo)
+            @Html.DisplayNameFor(model => model.Desc)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Solo)
+            @Html.DisplayFor(model => model.Desc)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.IncSol)
+            @Html.DisplayNameFor(model => model.Estoque.Qtd)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.IncSol)
+            @Html.DisplayFor(model => model.Estoque.Qtd) @Html.DisplayFor(model => model.Estoque.UM)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.IncVento)
+            @Html.DisplayNameFor(model => model.Estoque.Fornecedor.Nome)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.IncVento)
+            @Html.DisplayFor(model => model.Estoque.Fornecedor.Nome)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Acidez)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Acidez)
-        </dd>
-
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IdEstoque }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Editar", new { id = Model.IdEstoque }) |
+    @Html.ActionLink("Voltar", "Index", "Estoque")
 </p>

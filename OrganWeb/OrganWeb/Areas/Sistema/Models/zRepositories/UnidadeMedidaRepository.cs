@@ -1,16 +1,15 @@
 ﻿using Newtonsoft.Json;
 using OrganWeb.Areas.Sistema.Models.API;
+using OrganWeb.Areas.Sistema.Models.zBanco;
 using RestSharp;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
+using System.Data.Entity;
 
 namespace OrganWeb.Areas.Sistema.Models.zRepositories
 {
-    public class UnidadeMedidaRepository
+    public class UnidadeMedidaRepository : OrganRepository<UnidadeCadastro>
     {
         public async Task<ListarUnidades> GetListarUnidades()
         {
@@ -19,6 +18,19 @@ namespace OrganWeb.Areas.Sistema.Models.zRepositories
             var cancellationTokenSource = new CancellationTokenSource();
             var response = await client.ExecuteTaskAsync(request);
             return JsonConvert.DeserializeObject<ListarUnidades>(response.Content);
+        }
+
+        public async Task<UnidadeCadastro> GetByID(string id)
+        {
+            try
+            {
+                return await DbSet.Where(x => x.Id == id).FirstAsync();
+            }
+            catch
+            {
+                return null;
+            }
+            
         }
     }
 }
