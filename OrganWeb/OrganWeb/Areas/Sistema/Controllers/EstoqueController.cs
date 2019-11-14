@@ -30,6 +30,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private VwHistorico vwHistorico = new VwHistorico();
         private ViewEstoque viewestoque = new ViewEstoque();
         private ListarUnidades unmd = new ListarUnidades();
+        private UnidadeCadastro uncd = new UnidadeCadastro();
 
         //https://stackoverflow.com/questions/25125329/using-a-pagedlist-with-a-viewmodel-asp-net-mvc
 
@@ -89,7 +90,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 Estoque = new Estoque
                 {
-                    Unidades = responseModel.UnidadeCadastros
+                    Unidades = responseModel.UnidadeCadastros,
+                    Fornecedores = await new Fornecedor().GetAll()
                 },
                 Categorias = await categoria.GetAll()
             };
@@ -102,8 +104,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         {
             if (ModelState.IsValid)
             {
-                estoque = insumo.Estoque;
-                estoque.Add(estoque);
+                estoque.Add(insumo.Estoque);
                 await estoque.Save();
 
                 insumo.IdEstoque = estoque.Id;
@@ -163,6 +164,9 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 return HttpNotFound();
             }
             insumo.Categorias = await categoria.GetAll();
+            var responseModel = await unmd.GetListarUnidades();
+            insumo.Estoque.Unidades = responseModel.UnidadeCadastros;
+            insumo.Estoque.Fornecedores = await new Fornecedor().GetAll();
             return View(insumo);
         }
 
@@ -172,18 +176,27 @@ namespace OrganWeb.Areas.Sistema.Controllers
         {
             if (ModelState.IsValid)
             {
-                estoque = await estoque.GetByID(insumo.IdEstoque);
-                estoque.Update(estoque);
-                await estoque.Save();
-
-                insumo.Estoque = null;
-                estoque = null;
+                var responseModel = await unmd.GetListarUnidades();
+                insumo.Estoque.Unidades = responseModel.UnidadeCadastros;
                 insumo.Update(insumo);
                 await insumo.Save();
-
+                if (await unmd.GetByID(insumo.Estoque.UM) == null)
+                {
+                    insumo.Estoque.Unidades = responseModel.UnidadeCadastros;
+                    uncd = new UnidadeCadastro()
+                    {
+                        Id = insumo.Estoque.UM,
+                        Desc = insumo.Estoque.Unidades.Where(x => x.Id == insumo.Estoque.UM).Select(x => x.Desc).FirstOrDefault().ToString()
+                    };
+                    unmd.Add(uncd);
+                    await unmd.Save();
+                }
+                estoque.Update(insumo.Estoque);
+                await estoque.Save();
                 return RedirectToAction("Index");
             }
             insumo.Categorias = await categoria.GetAll();
+            insumo.Estoque.Fornecedores = await new Fornecedor().GetAll();
             return View(insumo);
         }
 

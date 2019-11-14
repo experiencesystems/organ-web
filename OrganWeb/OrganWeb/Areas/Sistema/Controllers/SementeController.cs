@@ -17,10 +17,11 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private Semente semente = new Semente();
         private Estoque estoque = new Estoque();
         private ListarUnidades unmd = new ListarUnidades();
+        private UnidadeCadastro uncd = new UnidadeCadastro();
 
         public ActionResult Sementes()
         {
-            return RedirectToAction("Index","Estoque");
+            return RedirectToAction("Index", "Estoque");
         }
 
         public async Task<ActionResult> Create()
@@ -30,9 +31,10 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 Estoque = new Estoque
                 {
-                    Unidades = responseModel.UnidadeCadastros
+                    Unidades = responseModel.UnidadeCadastros,
+                    Fornecedores = await new Fornecedor().GetAll()
                 }
-            };//TODO: colocar unidade de medida aqui
+            };
             return View(semente);
         }
 
@@ -45,7 +47,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 var estoque = new Estoque()
                 {
                     Qtd = semente.Estoque.Qtd,
-                    UM = semente.Estoque.UM
+                    UM = semente.Estoque.UM,
+                    IdFornecedor = semente.Estoque.IdFornecedor
                 };
                 estoque.Add(estoque);
                 await estoque.Save();
@@ -88,6 +91,9 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return HttpNotFound();
             }
+            var responseModel = await unmd.GetListarUnidades();
+            semente.Estoque.Unidades = responseModel.UnidadeCadastros;
+            semente.Estoque.Fornecedores = await new Fornecedor().GetAll();
             return View(semente);
         }
 
@@ -95,12 +101,28 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Editar(Semente semente)
         {
+            var responseModel = await unmd.GetListarUnidades();
+            semente.Estoque.Unidades = responseModel.UnidadeCadastros;
             if (ModelState.IsValid)
             {
                 semente.Update(semente);
                 await semente.Save();
-                return RedirectToAction("Index");
+                if (await unmd.GetByID(semente.Estoque.UM) == null)
+                {
+                    semente.Estoque.Unidades = responseModel.UnidadeCadastros;
+                    uncd = new UnidadeCadastro()
+                    {
+                        Id = semente.Estoque.UM,
+                        Desc = semente.Estoque.Unidades.Where(x => x.Id == semente.Estoque.UM).Select(x => x.Desc).FirstOrDefault().ToString()
+                    };
+                    unmd.Add(uncd);
+                    await unmd.Save();
+                }
+                estoque.Update(semente.Estoque);
+                await estoque.Save();
+                return RedirectToAction("Index", "Estoque");
             }
+            semente.Estoque.Fornecedores = await new Fornecedor().GetAll();
             return View(semente);
         }
 
@@ -125,7 +147,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
             semente.Delete(semente.IdEstoque);
             await semente.Save();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Estoque");
         }
     }
 }

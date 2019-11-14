@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using OrganWeb.Areas.Ecommerce.Models.Vendas;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,32 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
     {
         private Produto produto = new Produto();
         private Anuncio anuncio = new Anuncio();
+        private ApplicationUserManager _userManager;
 
-        public ActionResult Novo()
+        public AnuncioController()
         {
-            return View();
+        }
+
+        public AnuncioController(ApplicationUserManager userManager)
+        {
+            UserManager = userManager;
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
+        public async Task<ActionResult> Novo()
+        {
+            return View(new Anuncio { Usuario = await UserManager.FindByIdAsync(User.Identity.GetUserId()) });
         }
 
         [HttpPost]

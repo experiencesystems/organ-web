@@ -1,4 +1,4 @@
-﻿@model OrganWeb.Areas.Sistema.Models.Ferramentas.Maquina
+﻿@model OrganWeb.Areas.Sistema.Models.Armazenamento.Maquina
 
 <div>
     <h4>Máquina</h4>
@@ -19,58 +19,27 @@
         <dd>
             @Html.DisplayFor(model => model.Tipo)
         </dd>
-
+        @if (Model.Desc != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Desc)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Desc)
+            </dd>
+        }
         <dt>
-            @Html.DisplayNameFor(model => model.Desc)
+            @Html.DisplayNameFor(model => model.Estoque.Qtd)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Desc)
+            @Html.DisplayFor(model => model.Estoque.Qtd)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.VidaUtil)
+            @Html.DisplayNameFor(model => model.Estoque.UM)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.VidaUtil)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ValorInicial)
-        </dt>
-
-        <dd>
-            R$ @Html.DisplayFor(model => model.ValorInicial)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DeprMes)
-        </dt>
-
-        <dd>
-            R$ @Html.DisplayFor(model => model.DeprMes)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DeprAno)
-        </dt>
-
-        <dd>
-            R$ @Html.DisplayFor(model => model.DeprAno)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DataCadastro)
-        </dt>
-
-        <dd>
-            @Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.DataCadastro))
+            @Html.DisplayFor(model => model.Estoque.UM)
         </dd>
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Editar", "Editar", new { id = Model.IdEstoque }) |
-    @Html.ActionLink("Voltar", "Index")
-</p>

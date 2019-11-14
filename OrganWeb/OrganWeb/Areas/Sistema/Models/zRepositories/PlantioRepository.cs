@@ -33,8 +33,9 @@ namespace OrganWeb.Areas.Sistema.Models
             }).ToList();
         }
 
-        public List<Plantio> GetPlantiosIncompletos()
+        public async Task<List<Plantio>> GetPlantiosIncompletos()
         {
+            Plantios = await GetPlantios();
             Plantios.RemoveAll(p => Colheitas.Any(c => c.IdPlantio == p.Id));
             return Plantios;
         }

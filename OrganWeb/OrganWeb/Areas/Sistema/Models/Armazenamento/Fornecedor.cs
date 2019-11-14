@@ -19,6 +19,7 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
         public bool Status { get; set; }
 
         [Required]
+        [Display(Name = "Nome do fornecedor")]
         [StringLength(50, MinimumLength = 3)]
         public string Nome { get; set; }
 

@@ -9,7 +9,7 @@
     <br />
     <h6>Faça login para criar um anúncio!</h6>
     <div>
-        @Html.ActionLink("Login", "Login", "Account")
+        @Html.ActionLink("Login", "Login", new { controller = "Account", returnUrl = HttpContext.Current.Request.RawUrl })
     </div>
     return;
 }

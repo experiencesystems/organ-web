@@ -66,7 +66,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         //
         // GET: /Account/Registro
         [AllowAnonymous]
-        public async Task<ActionResult> Registro()
+        public ActionResult Registro()
         {
             return View();
         }

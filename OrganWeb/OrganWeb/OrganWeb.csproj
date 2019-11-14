@@ -18,7 +18,7 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress />
+    <Use64BitIISExpress>true</Use64BitIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -379,7 +379,7 @@
     <Content Include="Scripts\esm\popper-utils.js.map" />
     <Content Include="Areas\Ecommerce\Views\Anuncio\Novo.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Carrinho\Index.cshtml" />
-    <Content Include="Areas\Ecommerce\Views\Loja\Detalhes.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\Anuncio\Detalhes.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Loja\Index.cshtml" />
     <Content Include="Areas\Ecommerce\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Sistema\Views\Area\Create.cshtml" />
@@ -465,6 +465,8 @@
     <Content Include="fonts\icomoon.eot" />
     <Content Include="fonts\icomoon.ttf" />
     <Content Include="fonts\icomoon.woff" />
+    <None Include="Properties\PublishProfiles\organweb - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\organweb - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\hoverable-collapse.js" />
@@ -497,7 +499,9 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -543,6 +547,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Ecommerce\Views\Home\" />
     <Folder Include="Areas\Ecommerce\Views\Shared\" />
     <Folder Include="Areas\Ecommerce\Views\Venda\" />
     <Folder Include="Areas\Sistema\Views\Financeiro\" />
