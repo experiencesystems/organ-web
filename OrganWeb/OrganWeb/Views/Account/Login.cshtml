@@ -1,63 +1,75 @@
 ﻿@using OrganWeb.Models
-@model LoginViewModel
+@model OrganWeb.Areas.Sistema.Models.ViewModels.LoginViewModel
 @{
     ViewBag.Title = "Efetuar login";
+    Layout = null;
 }
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Usar uma conta local para efetuar login.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Efetuar login" class="btn btn-default" />
-                    </div>
-                </div>
-                <p>
-                    @Html.ActionLink("Registrar-se como novo usuário", "Register")
-                </p>
-                @* Ativar isso assim que você tiver a confirmação de conta ativada para a funcionalidade de redefinição de senha
-                    <p>
-                        @Html.ActionLink("Esqueceu sua senha?", "ForgotPassword")
-                    </p>*@
-            }
-        </section>
-    </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
-</div>
+<!DOCTYPE html>
 
-@section Scripts {
+<html>
+<head>
+
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+
+    @Styles.Render("~/Content/bootstrap.css")
+    @Styles.Render("~/Content/Site.css")
+
+
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
-}
+
+</head>
+<body>
+    <div class="form-horizontal float-left col-6"></div>
+    <div class="form-group">
+        <img src="~/Imagens/logo.png" class="img-fluid" alt="Logo" />
+    </div>
+
+    <div class="form-group float-left text-center col-md-6">
+        <img src="#" class="img-responsive" alt="Imagem Aleatória" />
+    </div>
+
+    <div class="form-horizontal float-right col-6 offset-md-3">
+
+        <h4 class="body-title text-center col-md-10">Bem vindo(a) de volta!</h4>
+        <h6 class="body-title text-center text-secondary col-md-10">Entre para acessar o [INSIRA NOME AQUI]</h6>
+        <div class="form-group">
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10 row">
+            <div class="checkbox col-md-6">
+                @Html.EditorFor(model => model.RememberMe)
+                @Html.ValidationMessageFor(model => model.RememberMe, "", new { @class = "text-danger" })
+            </div>
+            @Html.ActionLink("Esqueceu a Senha?", "ForgotPassword", new { @class = "col-md-6 text-right" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+
+
+        <div class="col-md-offset-2 col-md-10  text-center">
+            <input type="submit" value="Entrar" class="mx-xl-5 text-center" />
+        </div>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</body>
+</html>
