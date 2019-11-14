@@ -1,4 +1,11 @@
-﻿/* Base */
+﻿@font-face {
+    font-family: "icomoon";
+    src: url("~/fonts/icomoon.eot");
+    src: url("~/fonts/icomoon.eot") format("embedded-opentype"),url("~/fonts/icomoon.woff") format("woff"),url("~/fonts/icomoon.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+/* Base */
 body {
   line-height: 1.7;
   color: #8c92a0;
