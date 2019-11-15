@@ -31,9 +31,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private ViewEstoque viewestoque = new ViewEstoque();
         private ListarUnidades unmd = new ListarUnidades();
         private UnidadeCadastro uncd = new UnidadeCadastro();
-
-        //https://stackoverflow.com/questions/25125329/using-a-pagedlist-with-a-viewmodel-asp-net-mvc
-
+        
         [HttpGet]
         public async Task<ViewResult> Index(string filtros, string textoPesquisa, int? page, int? pagehist)
         {

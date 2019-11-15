@@ -15,9 +15,12 @@ namespace OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque
         [Key]
         public int Id { get; set; }
         public string Data { get; set; }
-        public int Status { get; set; }
+        public string Status { get; set; }
+        [Display(Name = "Descrição")]
         public string Descricao { get; set; }
+        [Display(Name = "Eficiência")]
         public double Eficiencia { get; set; }
+        [Display(Name = "Liberações")]
         public int Liberacoes { get; set; }
         public string Nome { get; set; }
         public string Itens { get; set; }

@@ -37,12 +37,12 @@ use dbecommercee;
     
     insert into tbUsuario(`Id`, `Email`, `ConfirmacaoEmail`, `SenhaHash`, `CarimboSeguranca`, `UserName`, Foto, CPF, Assinatura)
 			   values('02719894-e4a9-46c8-999e-ba942abd5f8f', 'milenamonteiro@gmail.com', 0, 
-					  'AEdqTpu95T8rSPqjtoiK57848w6E1ho3oiwRjfaOecrGe2uZjIjKMN7cGHVZqy9Rng==',
-                      'e7aac8f8-7c92-44fb-9850-5f0fb0024c9a', 'Mirena',  LOAD_FILE("/error.gif"), 11111111111, 0),
+					  'AKM33xpM5jcwZ/ojFJuuWBOvPQOiROAQmhfZwupekFSTAGpmW5+O7iPmj7cUuM/r6w==',
+                      '1a38cc85-3bd4-400b-9fd6-39f7c6a99a52', 'Mirena',  LOAD_FILE("/error.gif"), 11111111111, 0),
                       
                       ('02719894-e4a9-46c8-999e-ba942abd5f8g', 'moreexpsystems@gmail.com', 0,
-                      'AEdqTpu95T8rSPqjtoiK57848w6E1ho3oiwRjfaOecrGe2uZjIjKMN7cGHVZqy9Rng==',
-                      'e7aac8f8-7c92-44fb-9850-5f0fb0024c9b', 'Empresinha', LOAD_FILE("/error.gif"), 11111111112, 1);
+                      'AKM33xpM5jcwZ/ojFJuuWBOvPQOiROAQmhfZwupekFSTAGpmW5+O7iPmj7cUuM/r6w==',
+                      'e7aac8f8-7c92-44fb-9850-5f0fb0024c9a', 'Empresinha', LOAD_FILE("/error.gif"), 11111111112, 1);
     
     drop table if exists `AspNetUserClaims`;
 	create table `AspNetUserClaims` (

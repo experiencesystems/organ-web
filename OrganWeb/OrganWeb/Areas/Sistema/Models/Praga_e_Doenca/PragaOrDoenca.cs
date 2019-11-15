@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace OrganWeb.Areas.Sistema.Models.Praga_e_Doenca
 {
@@ -20,14 +21,10 @@ namespace OrganWeb.Areas.Sistema.Models.Praga_e_Doenca
         public string Nome { get; set; }
 
         [Required]
-        //praga ou doenca 
+        //praga = true ou doenca = false
         public bool PD { get; set; }
 
         [NotMapped]
         public IEnumerable<Area> Areas { get; set; }
-
-        [NotMapped]
-        [Required]
-        public int[] IdArea { get; set; }
     }
 }

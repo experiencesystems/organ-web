@@ -16,7 +16,8 @@ namespace OrganWeb.Areas.Sistema.Models.ViewModels
         [Display(Name = "Descrição")]
         [StringLength(300, MinimumLength = 10)]
         public string Desc { get; set; }
-        
+
+        [Display(Name = "Foi controlado?")]
         public bool Status { get; set; }
 
         [Required]

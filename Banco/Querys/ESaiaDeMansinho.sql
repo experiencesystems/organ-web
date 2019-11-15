@@ -272,7 +272,7 @@ use dbOrgan;
 	create table tbControle(
 		Id int auto_increment,
 			constraint PKControle primary key(Id),
-		`Status` int,
+		`Status` bool,
         `Desc` varchar(300),
         Efic decimal(5,2) not null,
         NumLiberacoes int not null,
@@ -367,6 +367,7 @@ use dbOrgan;
 	 from tbFornecedor F
 		inner join tbTelForn TF on F.Id = TF.IdForn
 		inner join vwTelefone T on T.Id = TF.IdTelefone
+        group by F.Id
 	); 
     
     drop view if exists vwFuncionario;
@@ -529,6 +530,7 @@ use dbOrgan;
 		   ifnull(FornAntigo, '-') `Fornecedor`, ifnull(QtdAntiga, '-') `Quantidade`, ifnull(UMAntiga, '-') `Unidade de Medida`,
 		   DataAlteracao `Data de Alteração`, `Desc` `Descrição de Alteração`
      from tbHistEstoque
+     order by `Data de Alteração` desc
     );
     
     DELIMITER $

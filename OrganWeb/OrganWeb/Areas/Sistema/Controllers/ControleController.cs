@@ -10,6 +10,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
@@ -27,12 +28,11 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private List<double> Quantidades = new List<double>();
         private Dictionary<int, double> ItensQuantidade = new Dictionary<int, double>();
 
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            return View(await vwcontrole.GetAll());
+            return RedirectToAction("Index", "PragaDoenca");
         }
          /* TODO: testar controller controle
-          * TODO: CPF tem que ser único
           * TODO: RadioButton status controle
          */
         public async Task<ActionResult> Create()
@@ -49,8 +49,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(CreateControleViewModel model)
-            //TODO: ver se não precisa mandar os int[] nos parâmetros
+        public async Task<ActionResult> Create(CreateControleViewModel model, int[] IdPD, int[] IdFunc, int[] IdEstoque, int[] QtdUsada)
         {
             if (ModelState.IsValid)
             {
@@ -101,22 +100,26 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
                 return RedirectToAction("Index");
             }
+            var itens = await vwItems.GetAll();
+            model.VwItems = await itens.AsQueryable().Where(x => x.Tipo != "Semente" && x.Tipo != "Produto").ToListAsync();
+            model.Funcionarios = await func.GetAll();
+            model.PragaOrDoencas = await pd.GetAll();
             return View(model);
         }
         
-        //TODO: views detalhes editar excluir controle
+        //TODO: views editar excluir controle
         public async Task<ActionResult> Detalhes(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            controle = await controle.GetByID(id);
-            if (controle == null)
+            vwcontrole = await vwcontrole.GetByID(id);
+            if (vwcontrole == null)
             {
                 return HttpNotFound();
             }
-            return View(controle);
+            return View(vwcontrole);
         }
 
         public async Task<ActionResult> Editar(int? id)

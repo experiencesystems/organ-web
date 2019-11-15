@@ -35,12 +35,14 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
 
         public virtual UnidadeCadastro UnidadeMedida { get; set; }
 
+        [ForeignKey("Fornecedor")]
         public virtual Fornecedor Fornecedor { get; set; }
 
         [NotMapped]
         public List<UnidadeCadastro> Unidades { get; set; }
 
         [NotMapped]
+        [ForeignKey("Fornecedor")]
         public List<Fornecedor> Fornecedores { get; set; }
     }
 

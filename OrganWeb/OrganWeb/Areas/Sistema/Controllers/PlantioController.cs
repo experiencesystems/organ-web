@@ -86,7 +86,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(CreatePlantioViewModel crplantio, int[] IdArea, int Sistema, int Tipo)
-        {
+        {//TODO: mudar colocar qnt usada no plantio e densidade na area
             if (crplantio.Inicio > crplantio.Colheita)
             {
                 ModelState.AddModelError(string.Empty, "Insira uma data de início anterior a da colheita.");
@@ -118,16 +118,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 };
                 pl.Add(pl);
                 await pl.Save();
-                /*
-                foreach (var item in IdArea)
-                {
-                   areap.Add(new AreaPlantio { IdArea = item, IdPlantio = pl.Id });
-                   await areap.Save();
-                    area = await area.GetByID(item);
-                    area.Disp = 2;
-                    area.Update(area);
-                    await area.Save();
-                }*/
+
                 var itemcrplantio = new ItensPlantio
                 {
                    IdEstoque = crplantio.IdEstoque,

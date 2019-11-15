@@ -80,11 +80,10 @@ namespace OrganWeb.Areas.Sistema.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(PragaOrDoenca pragadoenca)
+        public async Task<ActionResult> Create(PragaOrDoenca pragadoenca, int[] IdArea)
         {
             if (ModelState.IsValid)
             {
-                //ACTION NÃO FUNCIONANDO!!
                 var pd = new PragaOrDoenca
                 {
                     Nome = pragadoenca.Nome,
@@ -93,13 +92,14 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 pd.Add(pd);
                 await pd.Save();
                 
-                foreach (var item in pragadoenca.IdArea)
+                foreach (var item in IdArea)
                 {
                     areapd.Add(new AreaPD { IdArea = item, IdPd = pd.Id, Status = true });
                     await areapd.Save();
                 }
                 return RedirectToAction("Index");
             }
+            pragadoenca.Areas = await area.GetAll();
             return View(pragadoenca);
         }
     }

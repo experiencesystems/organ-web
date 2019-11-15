@@ -12,7 +12,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
 {
     public class FazendaController : Controller
     {   //TODO: mais de uma colheita
-        //TODO: plantios incompletos + com mais de uma colheita
         private Solo solo = new Solo();
         private ViewFazenda vwFazenda = new ViewFazenda();
         private VwFuncionario vwFuncionario = new VwFuncionario();

@@ -32,13 +32,12 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IdArea, htmlAttributes: new { @class = "control-label col-md-2" })
+            Áreas
             <div class="col-md-10">
                 <div class="col-md-10">
                     @Html.DropDownList("IdArea", new MultiSelectList(Model.Areas,
            "Id", "Nome"), new { multiple =
     "multiple", id = "areas" })
-                    @Html.ValidationMessageFor(model => model.IdArea, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
