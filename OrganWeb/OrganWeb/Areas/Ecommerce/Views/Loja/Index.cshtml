@@ -29,25 +29,38 @@
                         <div class="product-img">
                             <img src="~/Imagens/milho.png" alt="">
                             <div class="product-label">
-                                <span class="sale">-@Html.DisplayFor(modelItem => item.Desconto)%</span>
-                                <span class="new">NOVO</span>
+                                @if (item.Desconto > 0)
+                                {
+                                    <span class="sale">-@Html.DisplayFor(modelItem => item.Desconto)%</span>
+                                }
                             </div>
                         </div>
                         <div class="product-body">
                             <p class="product-category">Sementes</p>
                             <h3 class="product-name"><a href="#">@Html.DisplayFor(modelItem => item.Nome) / <i class="icon-room"></i>Sorriso, MT</a></h3>
-                            <h4 class="product-price">R$@Html.DisplayFor(modelItem => item.Produto.ValorUnit) <del class="product-old-price">R$15,00</del></h4>
+                            <h4 class="product-price">
+                                R$@Html.DisplayFor(modelItem => item.Produto.ValorUnit)
+                                @if (item.Desconto > 0)
+                                {<del class="product-old-price">R$@Html.DisplayFor(modelItem => item.Produto.ValorUnit + (item.Produto.ValorUnit * item.Desconto))</del>
+                            }
+                            </h4>
                             <div class="product-rating">
-                                <i class="icon-star2"></i>
-                                <i class="icon-star2"></i>
-                                <i class="icon-star2"></i>
-                                <i class="icon-star2"></i>
-                                <i class="icon-star_border"></i>
+                                @for (var i = 0; i <= item.Estrelas; i++)
+                                {
+                                    <i class="icon-star2"></i>
+                                }
+                                @if (item.Estrelas < 5)
+                                {
+                                    for (var i = 0; i <= (5 - item.Estrelas); i++)
+                                    {
+                                        <i class="icon-star_border"></i>
+                                    }
+                                }
                             </div>
                             <div class="product-btns">
-                                <button class="add-to-wishlist"><i class="icon-heart-o"></i><span class="tooltipp">Adicionar na wishlist</span></button>
-                                <button class="add-to-compare"><i class="icon-add_shopping_cart"></i><span class="tooltipp">Adicionar no carrinho</span></button>
-                                <button class="quick-view"><i class="icon-info_outline"></i><span class="tooltipp">Detalhes</span></button>
+                                <a class="add-to-wishlist" href="@Url.Action("AddWishlist", "Wishlist", new { id = item.Id })"><i class="icon-heart-o"></i><span class="tooltipp" value="Adicionar na wishlist"></span></a>
+                                <a class="add-to-compare" href="@Url.Action("AddAoCarrinho", "Carrinho", new { id = item.Id })"><i class="icon-add_shopping_cart"></i><span class="tooltipp" value="Adicionar no carrinho"></span></a>
+                                <a class="quick-view" href="@Url.Action("Detalhes", "Anuncio", new { id = item.Id })"><i class="icon-info_outline"></i><span class="tooltipp" value="Detalhes"></span></a>
                             </div>
                         </div>
                     </div>

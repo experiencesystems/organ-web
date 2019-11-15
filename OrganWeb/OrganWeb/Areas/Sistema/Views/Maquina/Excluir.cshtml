@@ -1,4 +1,4 @@
-﻿@model OrganWeb.Areas.Sistema.Models.Ferramentas.Maquina
+﻿@model OrganWeb.Areas.Sistema.Models.Armazenamento.Maquina
 
 <h3>Tem certeza que deseja deletar esse registro?</h3>
 <div>
@@ -18,7 +18,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Tipo)
+            @Html.DisplayFor(model => model.Tipos.Where(x => x.Value == model.Tipo.ToString()).First().Text)
         </dd>
 
         <dt>

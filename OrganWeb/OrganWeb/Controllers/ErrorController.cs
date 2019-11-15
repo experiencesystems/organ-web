@@ -8,14 +8,20 @@ namespace OrganWeb.Controllers
 {
     public class ErrorController : Controller
     {
-        public ViewResult Index()
+        public ActionResult Index()
         {
-            return View("Error");
+            return RedirectToAction("GenericError", new HandleErrorInfo(new HttpException(403, "Dont allow access the error pages"), "ErrorController", "Index"));
         }
-        public ViewResult NotFound()
+
+        public ViewResult GenericError(HandleErrorInfo exception)
         {
-            Response.StatusCode = 404;
-            return View("NotFound");
+            return View("NotFound", exception);
+        }
+
+        public ViewResult NotFound(HandleErrorInfo exception)
+        {
+            ViewBag.Title = "Page Not Found";
+            return View("NotFound", exception);
         }
     }
 }

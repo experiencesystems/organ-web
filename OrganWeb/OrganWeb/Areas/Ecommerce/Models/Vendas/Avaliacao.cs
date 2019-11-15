@@ -6,10 +6,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using OrganWeb.Areas.Ecommerce.Models.Usuarios;
+using OrganWeb.Areas.Ecommerce.Models.zRepositories;
 
 namespace OrganWeb.Areas.Ecommerce.Models.Vendas
 {
-    public class Avaliacao
+    [Table("tbAvaliacao")]
+    public class Avaliacao : AvaliacaoRepository
     {
         [Key, Column(Order = 1)]
         [ForeignKey("Anuncio")]

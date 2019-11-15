@@ -1,5 +1,6 @@
 ﻿using OrganWeb.Areas.Ecommerce.Models.Usuarios;
 using OrganWeb.Areas.Ecommerce.Models.zBanco;
+using OrganWeb.Areas.Ecommerce.Models.zRepositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,7 +11,7 @@ using System.Web;
 namespace OrganWeb.Areas.Ecommerce.Models.Vendas
 {
     [Table("tbAnuncio")]
-    public class Anuncio : EcommerceRepository<Anuncio>
+    public class Anuncio : AnuncioRepository
     {
         [Key]
         public int Id { get; set; }
@@ -30,7 +31,7 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
 
         [Range(0.00, 100.00)]
         [Display(Name = "Desconto (%)")]
-        public decimal Desconto { get; set; }
+        public double Desconto { get; set; }
         
         [ForeignKey("Produto")]
         public int IdProduto { get; set; }
@@ -40,5 +41,17 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
 
         public virtual Produto Produto { get; set; }
         public virtual ApplicationUser Usuario { get; set; }
+
+        [NotMapped]
+        public List<Avaliacao> Avaliacoes { get; set; }
+
+        [NotMapped]
+        public Avaliacao Avaliacao { get; set; }
+
+        [NotMapped]
+        public int? Estrelas { get; set; }
+
+        [NotMapped]
+        public double MediaAvaliacoes { get; set; }
     }
 }

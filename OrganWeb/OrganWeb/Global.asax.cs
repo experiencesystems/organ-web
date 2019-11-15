@@ -1,4 +1,5 @@
-﻿using OrganWeb.Models;
+﻿using OrganWeb.Controllers;
+using OrganWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,43 +25,54 @@ namespace OrganWeb
 
         protected void Application_Error(object sender, EventArgs e)
         {
-            Exception exception = Server.GetLastError();
-            Response.Clear();
-            if (exception is HttpException httpException)
-            {
-                string action;
+            var httpContext = ((MvcApplication)sender).Context;
+            var currentController = " ";
+            var currentAction = " ";
+            var currentRouteData = RouteTable.Routes.GetRouteData(new HttpContextWrapper(httpContext));
 
-                switch (httpException.GetHttpCode())
+            if (currentRouteData != null)
+            {
+                if (currentRouteData.Values["controller"] != null && !String.IsNullOrEmpty(currentRouteData.Values["controller"].ToString()))
+                {
+                    currentController = currentRouteData.Values["controller"].ToString();
+                }
+
+                if (currentRouteData.Values["action"] != null && !String.IsNullOrEmpty(currentRouteData.Values["action"].ToString()))
+                {
+                    currentAction = currentRouteData.Values["action"].ToString();
+                }
+            }
+
+            var ex = Server.GetLastError();
+            //var controller = new ErrorController();
+            var routeData = new RouteData();
+            var action = "GenericError";
+
+            if (ex is HttpException)
+            {
+                var httpEx = ex as HttpException;
+
+                switch (httpEx.GetHttpCode())
                 {
                     case 404:
-                        // page not found
-                        action = "NotFound";
-                        break;
-                    case 403:
-                        // forbidden
-                        //action = "Forbidden";
-                        action = "NotFound";
-                        break;
-                    case 500:
-                        // server error
-                        //action = "HttpError500";
-                        action = "NotFound";
-                        break;
-                    default:
-                        //action = "Unknown";
                         action = "NotFound";
                         break;
                 }
-                // clear error on server
-                Server.ClearError();
+            }
 
-                Response.Redirect(String.Format("~/Error/{0}", action));
-            }
-            else
-            {
-                // this is my modification, which handles any type of an exception.
-                Response.Redirect(String.Format("~/Error/NotFound"));
-            }
+            httpContext.ClearError();
+            httpContext.Response.Clear();
+            httpContext.Response.StatusCode = ex is HttpException ? ((HttpException)ex).GetHttpCode() : 500;
+            httpContext.Response.TrySkipIisCustomErrors = true;
+
+            routeData.Values["controller"] = "Error";
+            routeData.Values["action"] = action;
+            routeData.Values["exception"] = new HandleErrorInfo(ex, currentController, currentAction);
+
+            IController errormanagerController = new ErrorController();
+            HttpContextWrapper wrapper = new HttpContextWrapper(httpContext);
+            var rc = new RequestContext(wrapper, routeData);
+            errormanagerController.Execute(rc);
         }
     }
 }

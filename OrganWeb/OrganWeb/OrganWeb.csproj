@@ -246,6 +246,8 @@
     <Compile Include="Areas\Ecommerce\Models\ViewModels\CarrinhoViewModel.cs" />
     <Compile Include="Areas\Ecommerce\Models\zBanco\EcommerceContext.cs" />
     <Compile Include="Areas\Ecommerce\Models\zBanco\EcommerceRepository.cs" />
+    <Compile Include="Areas\Ecommerce\Models\zRepositories\AnuncioRepository.cs" />
+    <Compile Include="Areas\Ecommerce\Models\zRepositories\AvaliacaoRepository.cs" />
     <Compile Include="Areas\Ecommerce\Models\zRepositories\CarrinhoRepository.cs" />
     <Compile Include="Areas\Ecommerce\Models\zRepositories\PedidoRepository.cs" />
     <Compile Include="Areas\Ecommerce\Models\zRepositories\VendaRepository.cs" />

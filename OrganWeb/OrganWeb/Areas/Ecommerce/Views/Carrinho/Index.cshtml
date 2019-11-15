@@ -1,6 +1,6 @@
 ﻿@model OrganWeb.Areas.Ecommerce.Models.ViewModels.CarrinhoViewModel
 @{
-    ViewData["Title"] = "Cart";
+    Layout = "~/Views/Shared/_LayoutEcommerce.cshtml";
 }
 <h2>Carrinho <i class="fa fa-shopping-cart" aria-hidden="true"></i> </h2>
 
@@ -20,7 +20,6 @@
     <h6>Seu carrinho está vazio!</h6>
     return;
 }
-
 
 <table class="table table-striped">
     <thead>

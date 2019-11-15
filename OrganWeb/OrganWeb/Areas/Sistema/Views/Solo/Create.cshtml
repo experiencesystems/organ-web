@@ -9,7 +9,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4 class="modal-title">Solo</h4>
+        <h4 class="modal-title">Novo solo</h4>
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -50,16 +50,6 @@
             <div class="col">
                 @Html.EditorFor(model => model.IncVento, new { htmlAttributes = new { @class = "form-control campo" } })
                 @Html.ValidationMessageFor(model => model.IncVento, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col">
-                @Html.LabelFor(model => model.Acidez, htmlAttributes: new { @class = "control-label" })
-            </div>
-            <div class="col">
-                @Html.EditorFor(model => model.Acidez, new { htmlAttributes = new { @class = "form-control campo" } })
-                @Html.ValidationMessageFor(model => model.Acidez, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>

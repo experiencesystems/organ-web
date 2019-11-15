@@ -18,7 +18,8 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
 
         public async Task<ActionResult> Index()
         {
-            return View(await anuncio.GetAll());
+            var anuncios = await anuncio.GetAnuncios();
+            return View(anuncios);
         }
         
         public async Task<string> Detalhes()

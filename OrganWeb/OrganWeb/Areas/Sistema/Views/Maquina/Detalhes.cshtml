@@ -1,7 +1,7 @@
 ﻿@model OrganWeb.Areas.Sistema.Models.Armazenamento.Maquina
 
 <div>
-    <h4>Máquina</h4>
+    <h4>Detalhes</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -17,7 +17,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Tipo)
+            @Html.DisplayFor(model => model.Tipos.Where(x => x.Value == model.Tipo.ToString()).First().Text)
         </dd>
         @if (Model.Desc != null)
         {

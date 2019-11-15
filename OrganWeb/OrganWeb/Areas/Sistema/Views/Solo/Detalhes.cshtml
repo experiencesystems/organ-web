@@ -1,7 +1,7 @@
 ﻿@model OrganWeb.Areas.Sistema.Models.Administrativo.Solo
 
 <div>
-    <h4>Solo</h4>
+    <h4>Detalhes</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>@Html.DisplayNameFor(model => model.Nome)</dt>
@@ -15,13 +15,5 @@
 
         <dt>@Html.DisplayNameFor(model => model.IncVento)</dt>
         <dd>@Html.DisplayFor(model => model.IncVento)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.Acidez)</dt>
-        <dd>@Html.DisplayFor(model => model.Acidez)</dd>
-
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Editar", "Editar", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

@@ -38,7 +38,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return HttpNotFound();
             }
-
             return View(vwpraga);
         }
 
@@ -58,16 +57,30 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Editar(PragaOrDoenca praga)
+        public async Task<ActionResult> Editar(PragaOrDoenca pragadoenca)
         {
-            //TODO: editar pragadoenca
             if (ModelState.IsValid)
             {
+                switch (pragadoenca.PragDoe)
+                {
+                    case "Praga":
+                        pragadoenca.PD = true;
+                        break;
+                    default:
+                        pragadoenca.PD = false;
+                        break;
+                }
+                praga = new PragaOrDoenca
+                {
+                    Id = pragadoenca.Id,
+                    Nome = pragadoenca.Nome,
+                    PD = pragadoenca.PD
+                };
                 praga.Update(praga);
                 await praga.Save();
                 return RedirectToAction("Index");
             }
-            return View(praga);
+            return View(pragadoenca);
         }
 
         public async Task<ActionResult> Create()
@@ -87,10 +100,10 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 switch(pragadoenca.PragDoe)
                 {
                     case "Praga":
-                        praga.PD = true;
+                        pragadoenca.PD = true;
                         break;
                     default:
-                        praga.PD = false;
+                        pragadoenca.PD = false;
                         break;
                 }
                 var pd = new PragaOrDoenca

@@ -9,7 +9,7 @@
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
-    <h4>Editar praga ou doença</h4>
+    <h4>Editar</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.Id)
@@ -25,24 +25,16 @@
     </div>
 
     <div class="form-group row">
-        <div class="col-sm-6">
-            @{string Praga = ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldId("Praga");}
-            @Html.RadioButtonFor(model => model.PD, "Praga", new { id = Praga, name = "PD", value = "Praga", @class = "with-gap" })
-            <label for="Praga">Praga</label>
-        </div>
-        <div class="col-sm-6">
-            @{string Doenca = ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldId("Doença");}
-            @Html.RadioButtonFor(model => model.PD, "Doença", new { id = Doenca, name = "PD", value = "Doença", @class = "with-gap" })
-            <label for="Doenca">Doença</label>
-        </div>
-
-        @Html.LabelFor(model => model.PD, htmlAttributes: new { @class = "control-label col-md-2" })
-
-        <div class="col-md-10">
-            <div class="checkbox">
-                @Html.EditorFor(model => model.PD)
-                @Html.ValidationMessageFor(model => model.PD, "", new { @class = "text-danger" })
+        <div class="form-group row">
+            <div class="col-sm-6">
+                @Html.RadioButtonFor(model => model.PragDoe, "Praga", new { @class = "with-gap" })
+                <label for="Praga">Praga</label>
             </div>
+            <div class="col-sm-6">
+                @Html.RadioButtonFor(model => model.PragDoe, "Doença", new { @class = "with-gap" })
+                <label for="Doenca">Doença</label>
+            </div>
+            @Html.ValidationMessageFor(model => model.PragDoe, "", new { @class = "text-danger" })
         </div>
     </div>
 
