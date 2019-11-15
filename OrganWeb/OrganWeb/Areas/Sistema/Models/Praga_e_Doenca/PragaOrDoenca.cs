@@ -19,10 +19,13 @@ namespace OrganWeb.Areas.Sistema.Models.Praga_e_Doenca
         [Required]
         [StringLength(30, MinimumLength = 2)]
         public string Nome { get; set; }
-
-        [Required]
+        
         //praga = true ou doenca = false
         public bool PD { get; set; }
+
+        [Required]
+        [NotMapped]
+        public string PragDoe { get; set; }
 
         [NotMapped]
         public IEnumerable<Area> Areas { get; set; }

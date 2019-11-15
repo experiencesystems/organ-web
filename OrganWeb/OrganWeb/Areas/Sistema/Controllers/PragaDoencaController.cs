@@ -84,14 +84,22 @@ namespace OrganWeb.Areas.Sistema.Controllers
         {
             if (ModelState.IsValid)
             {
+                switch(pragadoenca.PragDoe)
+                {
+                    case "Praga":
+                        praga.PD = true;
+                        break;
+                    default:
+                        praga.PD = false;
+                        break;
+                }
                 var pd = new PragaOrDoenca
                 {
                     Nome = pragadoenca.Nome,
                     PD = pragadoenca.PD
-                }; //TODO: preencher de acordo com radiobutton
+                };
                 pd.Add(pd);
                 await pd.Save();
-                
                 foreach (var item in IdArea)
                 {
                     areapd.Add(new AreaPD { IdArea = item, IdPd = pd.Id, Status = true });

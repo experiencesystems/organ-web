@@ -254,7 +254,7 @@
     <Compile Include="Areas\Sistema\Controllers\AreaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\ColheitaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\ControleController.cs" />
-    <Compile Include="Areas\Sistema\Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Areas\Sistema\Controllers\EstoqueController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FazendaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FornecedorController.cs" />
@@ -602,7 +602,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Ecommerce\Views\Home\" />
     <Folder Include="Areas\Ecommerce\Views\Venda\" />
-    <Folder Include="Areas\Sistema\Views\Error\" />
     <Folder Include="Areas\Sistema\Views\Financeiro\" />
     <Folder Include="Areas\Sistema\Views\Shared\" />
     <Folder Include="Areas\Sistema\Views\Vendas\" />

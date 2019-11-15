@@ -21,5 +21,46 @@ namespace OrganWeb
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 	        ModelBinders.Binders.Add(typeof(decimal?), new DecimalModelBinder());
         }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            Exception exception = Server.GetLastError();
+            Response.Clear();
+            if (exception is HttpException httpException)
+            {
+                string action;
+
+                switch (httpException.GetHttpCode())
+                {
+                    case 404:
+                        // page not found
+                        action = "NotFound";
+                        break;
+                    case 403:
+                        // forbidden
+                        //action = "Forbidden";
+                        action = "NotFound";
+                        break;
+                    case 500:
+                        // server error
+                        //action = "HttpError500";
+                        action = "NotFound";
+                        break;
+                    default:
+                        //action = "Unknown";
+                        action = "NotFound";
+                        break;
+                }
+                // clear error on server
+                Server.ClearError();
+
+                Response.Redirect(String.Format("~/Error/{0}", action));
+            }
+            else
+            {
+                // this is my modification, which handles any type of an exception.
+                Response.Redirect(String.Format("~/Error/NotFound"));
+            }
+        }
     }
 }

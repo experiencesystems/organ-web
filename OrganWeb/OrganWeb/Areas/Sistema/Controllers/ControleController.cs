@@ -33,7 +33,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
             return RedirectToAction("Index", "PragaDoenca");
         }
          /* TODO: testar controller controle
-          * TODO: RadioButton status controle
          */
         public async Task<ActionResult> Create()
         {
