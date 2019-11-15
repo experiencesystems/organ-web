@@ -26,11 +26,11 @@
                 @Html.LabelFor(model => model.TipoPlantio, htmlAttributes: new { @class = "control-label" })
             </div>
             <div class="col-sm-6">
-                @Html.DropDownListFor(model => model.Sistema, Model.Sistemas, new { htmlAttributes = new { @class = "form-control campo" } })
+                @Html.DropDownListFor(model => model.Sistema, Model.Sistemas, new { @class = "form-control campo" } )
                 @Html.ValidationMessageFor(model => model.Sistema, "", new { @class = "text-danger" })
             </div>
             <div class="col-sm-6">
-                @Html.DropDownListFor(model => model.TipoPlantio, Model.Periodos, new { htmlAttributes = new { @class = "form-control campo" } })
+                @Html.DropDownListFor(model => model.TipoPlantio, Model.Periodos, new { @class = "form-control campo" } )
                 @Html.ValidationMessageFor(model => model.TipoPlantio, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -43,11 +43,11 @@
                 @Html.LabelFor(model => model.DataColheita, htmlAttributes: new { @class = "control-label" })
             </div>
             <div class="col-sm-6">
-                @Html.EditorFor(model => model.DataInicio, new { @class = "form-control campo" })
+                @Html.EditorFor(model => model.DataInicio, new { htmlAttributes = new { @class = "form-control campo" } })
                 @Html.ValidationMessageFor(model => model.DataInicio, "", new { @class = "text-danger" })
             </div>
             <div class="col-sm-6">
-                @Html.EditorFor(model => model.DataColheita, new { @class = "form-control campo" })
+                @Html.EditorFor(model => model.DataColheita, new { htmlAttributes = new { @class = "form-control campo" } })
                 @Html.ValidationMessageFor(model => model.DataColheita, "", new { @class = "text-danger" })
             </div>
         </div>

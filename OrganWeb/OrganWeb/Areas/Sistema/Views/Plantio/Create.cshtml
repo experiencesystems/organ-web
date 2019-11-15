@@ -26,11 +26,11 @@
         </div>
 
         <div class="col-sm-6">
-            @Html.DropDownListFor(model => model.Sistema, Model.Sistemas, new { htmlAttributes = new { @class = "form-control campo" } })
+            @Html.DropDownListFor(model => model.Sistema, Model.Sistemas, new { @class = "form-control campo" })
             @Html.ValidationMessageFor(model => model.Sistema, "", new { @class = "text-danger" })
         </div>
         <div class="col-sm-6">
-            @Html.DropDownListFor(model => model.Tipo, Model.Periodos, new { htmlAttributes = new { @class = "form-control campo" } })
+            @Html.DropDownListFor(model => model.Tipo, Model.Periodos, new { @class = "form-control campo" })
             @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -45,19 +45,21 @@
         </div>
 
         <div class="col-sm-6">
-            @Html.EditorFor(model => model.Inicio, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.Inicio, new { htmlAttributes = new { @class = "form-control campo" } })
             @Html.ValidationMessageFor(model => model.Inicio, "", new { @class = "text-danger" })
         </div>
         <div class="col-sm-6">
-            @Html.EditorFor(model => model.Colheita, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.Colheita, new { htmlAttributes = new { @class = "form-control campo" } })
             @Html.ValidationMessageFor(model => model.Colheita, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.IdArea, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("IdArea", new MultiSelectList(Model.Areas, "Id", "Nome"), new { multiple = "multiple", id = "areas" })
+        <div class="col">
+            @Html.LabelFor(model => model.IdArea, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col">
+            @Html.DropDownList("IdArea", new MultiSelectList(Model.Areas, "Id", "Nome"), new { multiple = "multiple", id = "areas", @class = "campo" })
             @Html.ValidationMessageFor(model => model.IdArea, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -66,8 +68,8 @@
         <div class="col">
             @Html.LabelFor(model => model.IdEstoque, htmlAttributes: new { @class = "control-label" })
         </div>
-        <div class="col-md-10">
-            @Html.DropDownList("IdEstoque", new SelectList(Model.Sementes, "IdEstoque", "Nome"))
+        <div class="col">
+            @Html.DropDownList("IdEstoque", new SelectList(Model.Sementes, "IdEstoque", "Nome"), new { @class = "form-control campo" } )
             @Html.ValidationMessageFor(model => model.IdEstoque, "", new { @class = "text-danger" })
         </div>
     </div>
