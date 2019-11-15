@@ -5,78 +5,145 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Controle de pragas e doenças</h2>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
 
-<p>
-    @Html.ActionLink("Nova praga ou doença", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>Nome</th>
-        <th>Tipo</th>
-        <th>Áreas</th>
-        <th>Status</th>
-        <th></th>
-    </tr>
-    @foreach (var item in Model.PragaOrDoencas)
-    {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
-            <td>@Html.DisplayFor(modelItem => item.Tipo)</td>
-            <td>@Html.DisplayFor(modelItem => item.Areas)</td>
-            <td>@Html.DisplayFor(modelItem => item.Status)</td>
-            <td>
-                @Html.ActionLink("Editar", "Editar", new { id = item.Id }) |
-                @Html.ActionLink("Detalhes", "Detalhes", new { id = item.Id }) |
-                @Html.ActionLink("Excluir", "Excluir", new { id = item.Id })
-            </td>
-        </tr>
-    }
-</table>
-<br />
-<div>
-    Página @(Model.PragaOrDoencas.PageCount < Model.PragaOrDoencas.PageNumber ? 0 : Model.PragaOrDoencas.PageNumber) de @Model.PragaOrDoencas.PageCount
-    @Html.PagedListPager(Model.PragaOrDoencas, pagedoenca => Url.Action("Index",
-    new { pagedoenca }), new PagedListRenderOptions
-     {
-     LiElementClasses = new string[] { "pagination page-item p1" }
-     })
+<div class="main-body">
+    <div class="row">
+        <div class="col">
+            <div class="tablecontainer">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="table-data__tool">
+                            <h6 class="body-title">Controle de pragas e doenças</h6>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <p class="card-text">
+                            <a class="popup btn btn-add" href="/Sistema/PragaDoenca/Create">Nova praga/doença</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="card table-card col">
+                        <div class="card-header">
+                            <h6 class="card-title box-title">Doenças e pragas</h6>
+                            <div class="card-header-right">
+                                <ul class="list-unstyled card-option">
+                                    <li><i class="ti-minus minimize-card"></i></li>
+                                    <li><i class="icon-refresh"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            <div class="table-responsive">
+                                <table class="table-hover">
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Tipo</th>
+                                        <th>Áreas</th>
+                                        <th>Status</th>
+                                        <th></th>
+                                    </tr>
+                                    @foreach (var item in Model.PragaOrDoencas)
+                                    {
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Tipo)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Areas)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                                        <td>
+                                        <td>
+                                            <a class="popup btn" href="@Url.Action("Detalhes", "PragaDoenca", new { id = item.Id })"><div class="itemback"><i class="item fa fa-info"></i></div></a>
+                                            <a class="popup btn" href="@Url.Action("Editar", "PragaDoenca", new { id = item.Id})"><div class="itemback"><i class="item far fa-edit"></i></div></a>
+                                            <a class="popup btn" href="@Url.Action("Excluir", "PragaDoenca", new { id = item.Id})"><div class="itemback"><i class="item far fa-trash-alt"></i></div></a>
+                                        </td>
+                                    </tr>
+                                    }
+                                </table>
+
+                                <br />
+                                <div>
+                                    Página @(Model.PragaOrDoencas.PageCount < Model.PragaOrDoencas.PageNumber ? 0 : Model.PragaOrDoencas.PageNumber) de @Model.PragaOrDoencas.PageCount
+                                    @Html.PagedListPager(Model.PragaOrDoencas, pagedoenca => Url.Action("Index",
+                                    new { pagedoenca }), new PagedListRenderOptions
+                                     {
+                                     LiElementClasses = new string[] { "pagination page-item p1" }
+                                     })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="card table-card col">
+                        <div class="card-header">
+                            <h6 class="card-title box-title">Controles</h6>
+                            <p class="card-text">
+                                <a class="popup btn btn-add" href="/Sistema/Controle/Create">Novo controle</a>
+                            </p>
+                            <div class="card-header-right">
+                                <ul class="list-unstyled card-option">
+                                    <li><i class="ti-minus minimize-card"></i></li>
+                                    <li><i class="icon-refresh"></i></li>
+                                </ul>
+                                    
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            <div class="table-responsive">
+                                <table class="table-hover">
+                                    <tr>
+                                        <th>Data</th>
+                                        <th>Nome</th>
+                                        <th>Status</th>
+                                        <th>Eficiência</th>
+                                        <th>Liberações</th>
+                                        <th></th>
+                                    </tr>
+                                    @foreach (var item in Model.Controles)
+                                    {
+                                        <tr>
+                                            <td>@Html.DisplayFor(modelItem => item.Data)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Eficiencia)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Liberacoes)</td>
+                                            <td>
+                                                <a class="popup btn" href="@Url.Action("Detalhes", "Controle", new { id = item.Id })"><div class="itemback"><i class="item fa fa-info"></i></div></a>
+                                                <a class="popup btn" href="@Url.Action("Editar", "Controle", new { id = item.Id})"><div class="itemback"><i class="item far fa-edit"></i></div></a>
+                                                <a class="popup btn" href="@Url.Action("Excluir", "Controle", new { id = item.Id})"><div class="itemback"><i class="item far fa-trash-alt"></i></div></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </table>
+
+                                <br />
+                                <br />
+                                <div>
+                                    Página @(Model.Controles.PageCount < Model.Controles.PageNumber ? 0 : Model.Controles.PageNumber) de @Model.Controles.PageCount
+                                    @Html.PagedListPager(Model.Controles, pagecont => Url.Action("Index",
+                                    new { pagecont }), new PagedListRenderOptions
+                                     {
+                                     LiElementClasses = new string[] { "pagination page-item p1" }
+                                     })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Novo controle", "Create", "Controle")
-</p>
-<table class="table">
-    <tr>
-        <th>Data</th>
-        <th>Nome</th>
-        <th>Status</th>
-        <th>Eficiência</th>
-        <th>Liberações</th>
-        <th></th>
-    </tr>
-    @foreach (var item in Model.Controles)
-    {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.Data)</td>
-            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
-            <td>@Html.DisplayFor(modelItem => item.Status)</td>
-            <td>@Html.DisplayFor(modelItem => item.Eficiencia)</td>
-            <td>@Html.DisplayFor(modelItem => item.Liberacoes)</td>
-            <td>
-                @Html.ActionLink("Editar", "Editar", "Controle", new { id = item.Id }) |
-                @Html.ActionLink("Detalhes", "Detalhes", "Controle", new { id = item.Id }) |
-                @Html.ActionLink("Excluir", "Excluir", "Controle", new { id = item.Id })
-            </td>
-        </tr>
-    }
-</table>
-<br />
-<br />
-<div>
-    Página @(Model.Controles.PageCount < Model.Controles.PageNumber ? 0 : Model.Controles.PageNumber) de @Model.Controles.PageCount
-    @Html.PagedListPager(Model.Controles, pagecont => Url.Action("Index",
-    new { pagecont }), new PagedListRenderOptions
-     {
-     LiElementClasses = new string[] { "pagination page-item p1" }
-     })
-</div>
+
+@section Scripts {
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.0.5/dist/jBox.all.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/modalui.js"></script>
+}
