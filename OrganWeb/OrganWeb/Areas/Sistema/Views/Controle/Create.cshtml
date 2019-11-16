@@ -1,90 +1,137 @@
 ﻿@model OrganWeb.Areas.Sistema.Models.ViewModels.CreateControleViewModel
 
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/jqueryval")
+<html>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Novo controle</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Desc, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Desc, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Desc, "", new { @class = "text-danger" })
+        <div class="form-horizontal">
+            <h4>Novo controle</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Desc, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Desc, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Desc, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Status)
-                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Status)
+                        @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Efic, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Efic, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Efic, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NumLiberacoes, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NumLiberacoes, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NumLiberacoes, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IdPD, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("IdPD", new MultiSelectList(Model.PragaOrDoencas, "Id", "Nome"), new { multiple = "multiple", id = "areas" })
+                    @Html.ValidationMessageFor(model => model.IdPD, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IdEstoque, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("IdEstoque", new MultiSelectList(Model.VwItems, "Id", "Item"), new { multiple = "multiple", id = "areas" })
+                    @Html.ValidationMessageFor(model => model.IdEstoque, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.QtdUsada, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <!--TODO: (natthy) CRIAR CAMPOS CONFORME SELECIONA ITENS DO ESTOQUE-->
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IdFunc, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("IdFunc", new MultiSelectList(Model.Funcionarios, "Id", "Nome"), new { multiple = "multiple", id = "areas" })
+                    @Html.ValidationMessageFor(model => model.IdFunc, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row fieldGroup">
+                <div class="col-sm-6">
+                    @Html.LabelFor(model => model.QtdUsada, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+
+                <div class="col-sm-6">
+                    @Html.LabelFor(model => model.QtdUsada, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+
+                <div class="col-sm-6">
+                    @Html.EditorFor(model => model.QtdUsada, new { htmlAttributes = new { @class = "form-control campo" } })
+                    @Html.ValidationMessageFor(model => model.QtdUsada, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-6">
+                    @Html.EditorFor(model => model.QtdUsada, new { htmlAttributes = new { @class = "form-control campo" } })
+                    @Html.ValidationMessageFor(model => model.QtdUsada, "", new { @class = "text-danger" })
+                </div>
+                <div class="input-group-addon">
+                    <a href="javascript:void(0)" class="btn btn-success addMore"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span>Adicionar</a>
+                </div>
+            </div>
+
+            <!-- copy of input fields group -->
+            <div class="form-group fieldGroupCopy" style="display: none;">
+                <div class="row">
+                    <div class="col-sm-6">
+                        @Html.LabelFor(model => model.QtdUsada, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+
+                    <div class="col-sm-6">
+                        @Html.LabelFor(model => model.QtdUsada, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.EditorFor(model => model.QtdUsada, new { htmlAttributes = new { @class = "form-control campo" } })
+                        @Html.ValidationMessageFor(model => model.QtdUsada, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.EditorFor(model => model.QtdUsada, new { htmlAttributes = new { @class = "form-control campo" } })
+                        @Html.ValidationMessageFor(model => model.QtdUsada, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="input-group-addon">
+                        <a href="javascript:void(0)" class="btn btn-danger remove"><span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span>Remover</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
                 </div>
             </div>
         </div>
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Efic, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Efic, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Efic, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.NumLiberacoes, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NumLiberacoes, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NumLiberacoes, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/btndinamico.js"></script>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdPD, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("IdPD", new MultiSelectList(Model.PragaOrDoencas, "Id", "Nome"), new { multiple = "multiple", id = "areas" })
-                @Html.ValidationMessageFor(model => model.IdPD, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdEstoque, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("IdEstoque", new MultiSelectList(Model.VwItems, "Id", "Item"), new { multiple = "multiple", id = "areas" })
-                @Html.ValidationMessageFor(model => model.IdEstoque, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.QtdUsada, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <!--TODO: (natthy) CRIAR CAMPOS CONFORME SELECIONA ITENS DO ESTOQUE-->
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdFunc, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("IdFunc", new MultiSelectList(Model.Funcionarios, "Id", "Nome"), new { multiple = "multiple", id = "areas" })
-                @Html.ValidationMessageFor(model => model.IdFunc, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Voltar", "Index")
-</div>
+</body>
+</html>
