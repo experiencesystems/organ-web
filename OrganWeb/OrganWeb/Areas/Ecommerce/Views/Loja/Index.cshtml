@@ -47,20 +47,20 @@
                             <div class="product-rating">
                                 @for (var i = 0; i <= item.Estrelas; i++)
                                 {
-                                    <i class="icon-star2"></i>
+                                    <i class="mdi mdi-star"></i>
                                 }
                                 @if (item.Estrelas < 5)
                                 {
                                     for (var i = 0; i <= (5 - item.Estrelas); i++)
                                     {
-                                        <i class="icon-star_border"></i>
+                                        <i class="mdi mdi-star-outline"></i>
                                     }
                                 }
                             </div>
                             <div class="product-btns">
-                                <a class="add-to-wishlist" href="@Url.Action("AddWishlist", "Wishlist", new { id = item.Id })"><i class="icon-heart-o"></i><span class="tooltipp" value="Adicionar na wishlist"></span></a>
-                                <a class="add-to-compare" href="@Url.Action("AddAoCarrinho", "Carrinho", new { id = item.Id })"><i class="icon-add_shopping_cart"></i><span class="tooltipp" value="Adicionar no carrinho"></span></a>
-                                <a class="quick-view" href="@Url.Action("Detalhes", "Anuncio", new { id = item.Id })"><i class="icon-info_outline"></i><span class="tooltipp" value="Detalhes"></span></a>
+                                <a class="add-to-wishlist" href="@Url.Action("AddWishlist", "Wishlist", new { id = item.Id })"><i class="mdi mdi-cards-heart"></i><span class="tooltipp" value="Adicionar na wishlist"></span></a>
+                                <a class="add-to-compare" href="@Url.Action("AddAoCarrinho", "Carrinho", new { id = item.Id })"><i class="mdi mdi-cart-plus"></i><span class="tooltipp" value="Adicionar no carrinho"></span></a>
+                                <a class="quick-view" href="@Url.Action("Detalhes", "Anuncio", new { id = item.Id })"><i class="mdi mdi-information-outline"></i><span class="tooltipp" value="Detalhes"></span></a>
                             </div>
                         </div>
                     </div>
