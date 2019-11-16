@@ -5,46 +5,152 @@
     Layout = "~/Views/Shared/_LayoutEcommerce.cshtml";
 }
 
-<h2>Detalhes</h2>
-
-<div>
-    <h4>Anuncio</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Desc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Desc)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Foto)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Foto)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Desconto)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Desconto)
-        </dd>
-
-    </dl>
+<div class="container">
+    <div class="row">
+        <div class="col-7">
+            <div class="details">
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="details">
+                <div class="product-details">
+                    <h2 class="product-name">@Html.DisplayFor(model => model.Nome)</h2>
+                    <div>
+                        <div class="product-rating">
+                            <i class="icon-star2"></i>
+                            <i class="icon-star2"></i>
+                            <i class="icon-star2"></i>
+                            <i class="icon-star2"></i>
+                            <i class="icon-star_border"></i>
+                        </div>
+                        <a class="review-link" href="#">10 Review(s) | Add your review</a>
+                    </div>
+                    <div>
+                        <h3 class="product-price">R$100,00</h3>
+                        <span class="product-size">/ SACA 50 KG</span>
+                    </div>
+                    <a><i class="icon-room"></i>Sorriso, MT</a>
+                    <p>@Html.DisplayFor(model => model.Desc)</p>
+                    <p>@Html.DisplayFor(model => model.Desconto)</p>
+                    <div class="row">
+                        <div class="input-group col-md-6 mb-3">
+                            <span class="input-group-btn mr-2">
+                                <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
+                                    <i class="mdi mdi-minus"></i>
+                                </button>
+                            </span>
+                            <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
+                            <span class="input-group-btn ml-2">
+                                <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
+                                    <i class="mdi mdi-plus"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <select name="" id="" class="form-control">
+                                <option value="">Pequeno</option>
+                                <option value="">Médio</option>
+                                <option value="">Grande</option>
+                                <option value="">Muito grande</option>
+                            </select>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-md-12">
+                            <p style="color: #000;">600 kg available</p>
+                        </div>
+                    </div>
+                    <ul class="product-btns">
+                        <li><a href="#"><i class="mdi mdi-heart-outline"></i> add to wishlist</a></li>
+                       <!--<li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>-->
+                    </ul>
+                    <ul class="product-links">
+                        <li>Categoria:</li>
+                        <li><a href="#">Semente</a></li>
+                    </ul>
+                </div>
+                <!-- /Product details -->
+            </div>
+        </div>
+    </div> <!--row-->
+    <div class="row">
+        <div class="col-8">
+            <div class="details">
+                <div class="card-block">
+                    <!-- Row start -->
+                    <div class="row">
+                        <div class="col">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs  tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#home1" role="tab">Descrição do produto</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#profile1" role="tab">Detalhes do anunciante</a>
+                                </li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content tabs card-block">
+                                <div class="tab-pane active" id="home1" role="tabpanel">
+                                    <p class="m-0">1. This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....</p>
+                                </div>
+                                <div class="tab-pane" id="profile1" role="tabpanel">
+                                    <p class="m-0">2.Cras consequat in enim ut efficitur. Nulla posuere elit quis auctor interdum praesent sit amet nulla vel enim amet. Donec convallis tellus neque, et imperdiet felis amet.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Row end -->
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="details">
+                <div class="card-block">
+                    <!-- Row start -->
+                    <div class="row">
+                        <div class="col">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs  tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#pergunta" role="tab">Perguntas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#analise" role="tab">Análises</a>
+                                </li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content tabs card-block">
+                                <div class="tab-pane active" id="pergunta" role="tabpanel">
+                                    <!-- Review Form -->
+                                    <div id="review-form">
+                                        <form class="review-form">
+                                            <input class="input" type="text" placeholder="Nome">
+                                            <input class="input" type="email" placeholder="Email">
+                                            <textarea class="input" placeholder="Comentário"></textarea>
+                                            <div class="input-rating">
+                                                <span>Avaliação: </span>
+                                                <div class="stars">
+                                                    <input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
+                                                    <input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
+                                                    <input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
+                                                    <input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
+                                                    <input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
+                                                </div>
+                                            </div>
+                                            <button class="primary-btn">Submit</button>
+                                        </form>
+                                    </div>
+                                    <!-- /Review Form -->
+                                </div>
+                                <div class="tab-pane" id="analise" role="tabpanel">
+                                    <p class="m-0">2.Cras consequat in enim ut efficitur. Nulla posuere elit quis auctor interdum praesent sit amet nulla vel enim amet. Donec convallis tellus neque, et imperdiet felis amet.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Row end -->
+                </div>
+            </div>
+        </div>
+    </div> <!--row-->
 </div>
-<p>
-    @Html.ActionLink("Voltar", "Index", "Loja")
-</p>
