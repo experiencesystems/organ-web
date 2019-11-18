@@ -6,8 +6,7 @@ drop procedure if exists spInsertEstoque$$
 create procedure spInsertEstoque(
 in
 	Qnt double,
-    UnM int,
-    ValUnit double
+    UnM int
 )
 begin
 	if Qnt < 0 then
@@ -15,7 +14,7 @@ begin
 		   set message_text = 'Valor menor que zero!';
 	else
       
-      insert into tbEstoque(Qtd, UM, ValorUnit) values(Qnt, UnM, ValUnit);
+      insert into tbEstoque(Qtd, UM) values(Qnt, UnM);
     end if;
 end$$
     
@@ -24,12 +23,8 @@ create procedure spInsertSemente(
 in 
 	Qnt double,
     UnM int,
-    ValUnit double,
-	Nome varchar(50),
-    Solo varchar(50),
-    IncSol decimal(5,2),
-    IncVento decimal(5,2),
-    Acidez decimal(5,2)
+	Nome1 varchar(30),
+    `Desc1` varchar(100)
 )
 begin
 	declare conta1 int;
@@ -37,13 +32,13 @@ begin
     declare idE int;
     set conta1 = (select count(*) from tbEstoque); 
         
-	call spInsertEstoque(Qnt, UnM, ValUnit);
+	call spInsertEstoque(Qnt, UnM);
     
     set conta2 = (select count(*) from tbEstoque); 
       
     if (conta2 = conta1 + 1) then
 		set idE = (select Id from tbEstoque order by Id desc limit 1 );
-		insert into tbSemente(IdEstoque, Nome, Solo, IncSol, IncVento, Acidez) value(IdE, Nome, Solo, IncSol, IncVento, Acidez);
+		insert into tbSemente(IdEstoque, Nome, `Desc`) value(IdE, Nome1, `Desc1`);
 	end if;
 end$$
 
@@ -52,15 +47,10 @@ create procedure spInsertMaquina(
 in 
 	Qnt double,
     UnM int,
-    ValUnit double,
-    Nome varchar(50),
-    Tipo int,
-    Montadora varchar(75),
-    `Desc` varchar(300),
-    VidaUtil int,
-    ValorInicial double,
-    DeprMes double,
-    DeprAno double
+    Nome1 varchar(30),
+    Tipo1 int,
+    Montadora1 varchar(50),
+    `Desc1` varchar(100)
 )
 begin
 	declare conta1 int;
@@ -68,14 +58,14 @@ begin
     declare idE int;
     set conta1 = (select count(*) from tbEstoque); 
     
-	call spInsertEstoque(Qnt, UnM, ValUnit);
+	call spInsertEstoque(Qnt, UnM);
     
     set conta2 = (select count(*) from tbEstoque); 
         
     if (conta2 = conta1 + 1) then
 		set idE = (select Id from tbEstoque order by Id desc limit 1 );
-		insert into tbMaquina(IdEstoque, Nome, Tipo, Montadora, `Desc`, VidaUtil, ValorInicial, DeprMes, DeprAno)
-						value(IdE, Nome, Tipo, Montadora, `Desc`, VidaUtil, ValorInicial, DeprMes, DeprAno);
+		insert into tbMaquina(IdEstoque, Nome, Tipo, Montadora, `Desc`)
+						value(IdE, Nome1, Tipo1, Montadora1, `Desc1`);
 	end if;
 end$$
 
@@ -84,22 +74,21 @@ create procedure spInsertInsumo(
 in 
 	Qnt double,
     UnM int,
-    ValUnit double,
-    Nome varchar(50),
-    `Desc` varchar(300),
-    IdCategoria int
+    Nome1 varchar(30),
+    `Desc1` varchar(100),
+    Categoria1 int
 )
 begin
 	declare conta1, conta2, idE int;
     set conta1 = (select count(*) from tbEstoque); 
        
-	call spInsertEstoque(Qnt, UnM, ValUnit);
+	call spInsertEstoque(Qnt, UnM);
 
     set conta2 = (select count(*) from tbEstoque); 
         
     if (conta2 = conta1 + 1) then
 		set idE = (select Id from tbEstoque order by Id desc limit 1 );
-		insert into tbInsumo(IdEstoque, Nome, `Desc`, IdCategoria) value(IdE, Nome, `Desc`, IdCategoria);
+		insert into tbInsumo(IdEstoque, Nome, `Desc`, Categoria) value(IdE, Nome1, `Desc1`, Categoria1);
 	end if;
 end$$
 
@@ -108,27 +97,47 @@ create procedure spInsertProduto(
 in 
 	Qnt double,
     UnM int,
-    ValUnit double,
-    Nome varchar(50),
-    `Desc` varchar(300)
+    Nome1 varchar(30),
+    `Desc1` varchar(100)
 )
 begin
     declare conta1, conta2, idE int;
         
     set conta1 = (select count(*) from tbEstoque); 
         
-	call spInsertEstoque(Qnt, UnM, ValUnit);
+	call spInsertEstoque(Qnt, UnM);
 
     set conta2 = (select count(*) from tbEstoque); 
         
     if (conta2 = conta1 + 1) then
 		set idE = (select Id from tbEstoque order by Id desc limit 1 );
-		insert into tbProduto(IdEstoque, Nome, `Desc`) value(IdE, Nome, `Desc`);
+		insert into tbProduto(IdEstoque, Nome, `Desc`) value(IdE, Nome1, `Desc1`);
 	end if;
 end$$
-/*
-    call spInsertSemente(2, 1, 1.50, 'Semente de Milho', null, null, null, null)$$
-    call spInsertProduto(1, 1, 5.0, 'Milho', null)$$
-    call spInsertInsumo(1, 3, 2.0, 'Pá', null, 2)$$
-    call spInsertMaquina(1, 3, 2500, 'Tratorzinho', 1, 'Joana Motors', null, 2, 2300, 20, 240)$$*/
+
+drop procedure if exists spVerQtd$
+CREATE PROCEDURE spVerQtd (IN qtd double)
+BEGIN
+IF qtd < 0 THEN
+SIGNAL SQLSTATE '45000'
+   SET MESSAGE_TEXT = 'Valor menor que zero!';
+END IF;
+END$
+ 
+drop procedure if exists spCertQtd$
+CREATE PROCEDURE spCertQtd (IN qtd double, IdE int)
+BEGIN
+declare qtdE double;
+set qtdE = (select Qtd from tbEstoque where Id = IdE);
+
+IF qtd > qtdE THEN
+SIGNAL SQLSTATE '45001'
+   SET MESSAGE_TEXT = 'Quantidade maior do que a presente no estoque';
+END IF;
+END$
+
+
+
+use dbEcommerce;
+
 DELIMITER ;
