@@ -103,14 +103,14 @@ Categoria int not null
 alter table tbInsumo add constraint FKInsumoEstoque foreign key(IdEstoque) references tbEstoque(Id);
 
 drop table if exists tbMaquina;
-CREATE TABLE tbMaquina (
-    IdEstoque INT NOT NULL,
-    CONSTRAINT PKMaquina PRIMARY KEY (IdEstoque),
-    Nome VARCHAR(30) NOT NULL,
-    Tipo INT NOT NULL,
-    Montadora VARCHAR(50),
-    `Desc` VARCHAR(100)
-)  ENGINE=INNODB;
+create table tbMaquina (
+    IdEstoque int not null,
+    constraint PKMaquina primary key (IdEstoque),
+    Nome varchar(30) not null,
+    Tipo int not null,
+    Montadora varchar(50),
+    `Desc` varchar(100)
+)  engine=InnoDB;
 alter table tbMaquina add constraint FKMaquinaEstoque foreign key(IdEstoque) references tbEstoque(Id);
 
 drop table if exists tbPlantio;
@@ -122,6 +122,15 @@ Sistema int not null,
 DataColheita date not null,
 DataInicio date not null,
 TipoPlantio int not null
+)engine = InnoDB;
+
+drop table if exists tbHistPlantio;
+create table tbHistPlantio(
+	Id int,
+     constraint PKHistPlantio primary key(Id),
+	Nome varchar(50) not null,
+    DataAlteracao datetime default current_timestamp,
+    `Desc` varchar(30) default 'Item Deletado'
 )engine = InnoDB;
 
 drop table if exists tbSolo;
@@ -200,7 +209,7 @@ create table tbControle(
 Id int auto_increment,
 constraint PKControle primary key(Id),
 `Status` bool,
-`Desc` varchar(300),
+`Desc` varchar(100),
 Efic decimal(5,2) not null,
 NumLiberacoes int not null,
 `Data` date not null
@@ -260,7 +269,7 @@ NomeAntigo varchar(30),
 CategoriaAntiga varchar(15),
 UMAntiga varchar(6),
 DataAlteracao datetime default current_timestamp,
-`Desc` varchar(100),
+`Desc` varchar(50),
 IdEstoque int,
 FornAntigo varchar(50)
 )engine = InnoDB;
