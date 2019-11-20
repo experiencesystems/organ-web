@@ -1,4 +1,6 @@
-﻿using OrganWeb.Areas.Ecommerce.Models;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using OrganWeb.Areas.Ecommerce.Models;
 using OrganWeb.Areas.Ecommerce.Models.Vendas;
 using System;
 using System.Collections.Generic;
@@ -15,11 +17,38 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
     public class LojaController : Controller
     {
         private Anuncio anuncio = new Anuncio();
+        private ApplicationUserManager _userManager;
+
+        public LojaController()
+        {
+        }
+
+        public LojaController(ApplicationUserManager userManager)
+        {
+            UserManager = userManager;
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         public async Task<ActionResult> Index()
         {
-            var anuncios = await anuncio.GetAnuncios();
-            return View(anuncios);
+            ViewBag.Assinatura = null;
+            var usuario = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if (usuario.Assinatura == 4)
+            {
+                ViewBag.Assinatura = "Sem assinatura";
+            }
+            return View(await anuncio.GetAnuncios());
         }
         
         public async Task<string> Detalhes()

@@ -50,11 +50,6 @@ namespace OrganWeb.Areas.Ecommerce.Models.zBanco
             }
         }
 
-        public async Task<List<T>> GetFew()
-        {
-            return await DbSet.Take(10).ToListAsync();
-        }
-
         public async Task<T> GetByID(int? id)
         {
             return await DbSet.FindAsync(id);

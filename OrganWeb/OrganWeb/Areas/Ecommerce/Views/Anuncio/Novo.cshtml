@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_LayoutEcommerce.cshtml";
 }
 
-@if (!Request.IsAuthenticated || Model.Usuario == null)
+@if (!Request.IsAuthenticated || Model.Anunciante.Usuario == null)
 {
     <br />
     <h6>Faça login para criar um anúncio!</h6>
@@ -14,7 +14,7 @@
     return;
 }
 
-@if (Request.IsAuthenticated && Model.Usuario.Assinatura == 4)
+@if (Request.IsAuthenticated && Model.Anunciante.Usuario.Assinatura == 4)
 {
     <br />
     <h6>Você precisa ter uma conta no Organ Web para criar anúncios!</h6>

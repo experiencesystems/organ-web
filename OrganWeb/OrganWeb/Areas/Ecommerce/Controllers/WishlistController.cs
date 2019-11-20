@@ -14,9 +14,10 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
         private Wishlist wishlist = new Wishlist();
         private Anuncio anuncio = new Anuncio();
 
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? page)
         {
-            return View(await wishlist.GetWishlist());
+            int pagina = page ?? 1;
+            return View(await wishlist.GetPagedAll(pagina));
         }
 
         [HttpPost]

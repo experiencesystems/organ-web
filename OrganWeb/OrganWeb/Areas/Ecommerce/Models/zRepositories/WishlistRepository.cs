@@ -7,11 +7,18 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity;
+using PagedList.EntityFramework;
+using PagedList;
 
 namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
 {
     public class WishlistRepository : EcommerceRepository<Wishlist>
     {
+        public async Task<IPagedList<Wishlist>> GetPagedAll(int page)
+        {
+            return await DbSet.OrderBy(p => p.Id).ToPagedListAsync(page, 5);
+        }
+
         public async Task<List<Wishlist>> GetWishlist()
         {
             return await DbSet.Include(a => a.Anuncio).Include(u => u.Usuario).Where(x => x.IdUsuario == HttpContext.Current.User.Identity.GetUserId()).ToListAsync();

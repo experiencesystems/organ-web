@@ -12,10 +12,12 @@
     <title>Index</title>
 </head>
 <body>
-    <p>
-        @Html.ActionLink("Novo anúncio", "Novo", "Anuncio")
-    </p>
-
+    @if (Request.IsAuthenticated && ViewBag.Assinatura == null)
+    {
+        <p>
+            @Html.ActionLink("Novo anúncio", "Novo", "Anuncio")
+        </p>
+    }
     <!--PRODUTOS-->
     <!-- Products tab & slick -->
     <div class="container">
@@ -37,7 +39,7 @@
                         </div>
                         <div class="product-body">
                             <p class="product-category">Sementes</p>
-                            <h3 class="product-name"><a href="#">@Html.DisplayFor(modelItem => item.Nome) / <i class="icon-room"></i>Sorriso, MT</a></h3>
+                            <h3 class="product-name"><a href="#">@Html.DisplayFor(modelItem => item.Nome)<br /><i class="icon-room"></i>@Html.DisplayFor(modelItem => item.Anunciante.Endereco.Logradouro.Bairro.Cidade.Nome) - @Html.DisplayFor(modelItem => item.Anunciante.Endereco.Logradouro.Bairro.Cidade.Estado.UF)</a></h3>
                             @if (item.Desconto > 0)
                             {
                                 double valornovo = Math.Round(item.Produto.ValorUnit - ((item.Produto.ValorUnit * item.Desconto) / 100), 2, MidpointRounding.ToEven);
@@ -66,12 +68,15 @@
                                 }
                             </div>
                             <div class="product-btns">
-                                <a class="add-to-wishlist" href="@Url.Action("AddWishlist", "Wishlist", new { idAnuncio = item.Id })"><i class="mdi mdi-cards-heart"></i><span class="tooltipp" value="Adicionar na wishlist"></span></a>
-
+                                @using (Html.BeginForm("AddWishlist", "Wishlist", new { idAnuncio = item.Id }, FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken();
+                                    <button class="add-to-wishlist" type="submit" value="@item.Id"><i class="mdi mdi-cards-heart"></i><span class="tooltipp" value="Adicionar na lista de desejos"></span></button>
+                                }
                                 @using (Html.BeginForm("AddAoCarrinho", "Carrinho", new { idAnuncio = item.Id }, FormMethod.Post))
                                 {
                                     @Html.AntiForgeryToken();
-                                <button class="add-to-compare" type="submit" value="@item.Id"><i class="mdi mdi-cart-plus"></i><span class="tooltipp">Adicionar no carrinho</span></button>
+                                    <button class="add-to-compare" type="submit" value="@item.Id"><i class="mdi mdi-cart-plus"></i><span class="tooltipp" value="Adicionar no carrinho"></span></button>
                                 }
                                 <a class="quick-view" href="@Url.Action("Detalhes", "Anuncio", new { id = item.Id })"><i class="mdi mdi-information-outline"></i><span class="tooltipp" value="Detalhes"></span></a>
                             </div>
@@ -79,7 +84,7 @@
                     </div>
                 </div>
                 <!-- /product -->
-                                }
+            }
         </div>
     </div>
 </body>

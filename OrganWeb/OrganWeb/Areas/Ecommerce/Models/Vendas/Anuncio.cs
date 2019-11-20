@@ -37,11 +37,11 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
         [ForeignKey("Produto")]
         public int IdProduto { get; set; }
         
-        [ForeignKey("Usuario")]
+        [ForeignKey("Anunciante")]
         public string IdAnunciante { get; set; }
 
         public virtual Produto Produto { get; set; }
-        public virtual ApplicationUser Usuario { get; set; }
+        public virtual Anunciante Anunciante { get; set; }
 
         [NotMapped]
         public List<Avaliacao> Avaliacoes { get; set; }

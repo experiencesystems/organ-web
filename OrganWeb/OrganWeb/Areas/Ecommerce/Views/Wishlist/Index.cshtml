@@ -1,7 +1,7 @@
-﻿@model OrganWeb.Areas.Ecommerce.Models.Vendas.Wishlist
-
+﻿@model PagedList.IPagedList<OrganWeb.Areas.Ecommerce.Models.Vendas.Wishlist>
+@using PagedList.Mvc;
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_LayoutEcommerce.cshtml";
 }
 
 @if (!Request.IsAuthenticated)
@@ -14,15 +14,54 @@
     return;
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div>
-    </div>
-</body>
-</html>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Anúncio</th>
+            <th>Preço</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Anuncio.Nome</td>
+                <td>@item.Anuncio.Produto.ValorUnit</td>
+                <td>
+                    <form class="d-inline align-middle" asp-action="RemoverDoCarrinho"
+                          asp-controller="Carrinho"
+                          asp-route-idAnuncio="@item.IdAnuncio"
+                          method="post">
+                        <button class="btn fa fa-minus fa-small" aria-hidden="true"></button>
+                    </form>
+                    <form class="d-inline align-middle" asp-action="AddAoCarrinho"
+                          asp-controller="ShoppingCart"
+                          asp-route-idAnuncio="@item.IdAnuncio"
+                          method="post">
+                        <button class="btn fa fa-plus fa-small" aria-hidden="true"></button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr style="border:0">
+            <td>
+                <form asp-action="ApagarCarrinho" method="post">
+                    <button class="btn btn-link text-dark" asp-action="ApagarCarrinho">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                        Limpar lista de desejos
+                    </button>
+                </form>
+            </td>
+        </tr>
+    </tfoot>
+</table><br />
+<div>
+    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page }), new PagedListRenderOptions
+     {
+     LiElementClasses = new string[] { "pagination page-item p1" }
+     })
+</div>
