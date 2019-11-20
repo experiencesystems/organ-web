@@ -32,7 +32,7 @@ create table tbUsuario (
 	`ConfirmacaoEmail` bool not null ,
 	`SenhaHash` longtext,
 	`CarimboSeguranca` longtext,
-	`UserName` varchar(50)  not null ,-- !
+	`UserName` varchar(50) not null,-- !
 	  constraint PKAspNetUsers primary key ( `Id`)
 )engine = InnoDB;
 
@@ -161,8 +161,7 @@ drop table if exists tbWishlist;
 create table tbWishList(
 	IdUsuario nvarchar(128) not null,
 	IdAnuncio int not null,
-    Id int auto_increment,
-	 constraint PKWishList primary key(Id)
+	 constraint PKWishList primary key(IdUsuario, IdAnuncio)
 )engine = InnoDB;
 alter table tbWishlist add constraint FKWishlistAnuncio foreign key(IdAnuncio) references tbAnuncio(Id),
 					   add constraint FKWishlistUsuario foreign key(IdUsuario) references tbUsuario(Id);
@@ -205,8 +204,7 @@ drop table if exists tbCarrinho;
 create table tbCarrinho(
 	IdUsuario nvarchar(128) not null,
 	IdAnuncio int not null,
-	Id int auto_increment,
-	 constraint PKCarrinho primary key(Id),
+	 constraint PKCarrinho primary key(IdUsuario, IdAnuncio),
 	Qtd int not null
 )engine = InnoDB;
 alter table tbCarrinho add constraint FKCarrinhoAnuncio foreign key(IdAnuncio) references tbAnuncio(Id),
