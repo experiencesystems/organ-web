@@ -133,14 +133,23 @@ alter table tbEndereco add constraint FKEnderecoRua foreign key(IdRua) reference
 
 alter table tbAnunciante add constraint FKAnuncianteEndereco foreign key(CEP) references tbEndereco(CEP);
 
+drop table if exists tbUM;
+create table tbUM(
+Id varchar(6) not null,
+ constraint PKUM primary key(Id),
+`Desc` varchar(20) not null
+)engine = InnoDB;
+
 drop table if exists tbProduto;
 create table tbProduto(
 	Id int auto_increment,
 	 constraint PKProduto primary key(Id),
 	ValorUnit double not null,
-	Quantidade double not null,
-	Nome varchar(30) not null
+    UM varchar(6),
+	Nome varchar(30) not null,
+    Categoria int not null
 )engine = innodb;
+alter table tbProduto add constraint FKProdutoUM foreign key(UM) references tbUM(Id);
 
 drop table if exists tbAnuncio;
 create table tbAnuncio(
@@ -148,11 +157,13 @@ create table tbAnuncio(
 	 constraint PKAnuncio primary key(Id),
 	Nome varchar(30) not null,
 	`Desc` varchar(100),
-	`Status` bool not null,
+	`Status` bool default true,
 	Foto blob,
-	Desconto decimal(5,2),
+	Quantidade double not null,
+	Desconto decimal(5,2) default 0,
 	IdProduto int not null,
-	IdAnunciante nvarchar(128) not null
+	IdAnunciante nvarchar(128) not null,
+    `Data` datetime default current_timestamp 
 )engine = innodb;
 alter table tbAnuncio add constraint FKAnuncioProduto foreign key(IdProduto) references tbProduto(Id),
 					  add constraint FKAnuncioAnunciante foreign key(IdAnunciante) references tbAnunciante(IdUsuario);
@@ -162,7 +173,7 @@ create table tbWishList(
 	IdUsuario nvarchar(128) not null,
 	IdAnuncio int not null,
 	 constraint PKWishList primary key(IdUsuario, IdAnuncio)
-)engine = InnoDB;
+)engine = innodb;
 alter table tbWishlist add constraint FKWishlistAnuncio foreign key(IdAnuncio) references tbAnuncio(Id),
 					   add constraint FKWishlistUsuario foreign key(IdUsuario) references tbUsuario(Id);
 
@@ -172,7 +183,7 @@ create table tbAvaliacao(
 	IdUsuario nvarchar(128) not null,
 	 constraint PKAvaliacao primary key(IdAnuncio, IdUsuario),
 	`Like` bool default false,
-	Nota int
+	Nota int 
 ) engine = innodb;
 alter table tbAvaliacao add constraint FKAvaliacaoAnuncio foreign key(IdAnuncio) references tbAnuncio(Id),
 						add constraint FKAvaliacaoUsuario foreign key(IdUsuario) references tbUsuario(Id);
@@ -214,6 +225,7 @@ drop table if exists tbHistCarrinho;
 create table tbHistCarrinho(
 	IdUsuario nvarchar(128) not null,
 	NomeAnuncio varchar(30) not null,
+    CategoriaAnuncio varchar(30) not null,
 	Id int not null,
 	 constraint PKHistCarrinho primary key(Id),
 	Qtd int not null
@@ -225,8 +237,7 @@ create table tbPedido(
 	 constraint PKPedido primary key(Id),
 	IdUsuario nvarchar(128) not null,
 	`Data` datetime default current_timestamp,
-	`Status` int not null,
-	Qtd int not null,
+	`Status` int default 0,
     ValFrete double not null,
     CEPEntrega char(8) not null,
     NumEntrega int not null,
@@ -237,7 +248,8 @@ alter table tbPedido add constraint FKPedidoUsuario foreign key(IdUsuario) refer
 create table tbPedidoAnuncio(
 	IdPedido int not null,
     IdAnuncio int not null,
-     constraint PKPedidoAnuncio primary key(IdPedido, IdAnuncio)
+     constraint PKPedidoAnuncio primary key(IdPedido, IdAnuncio),
+	Qtd int not null
 )engine = innodb;
 alter table tbPedidoAnuncio add constraint FKPedidoAnuncio foreign key(IdAnuncio) references tbAnuncio(Id),
 							add constraint FKAnuncioPedido foreign key(IdPedido) references tbPedido(Id);
@@ -257,15 +269,11 @@ create table tbVenda(
 	 constraint PKVenda primary key(Id),
 	`Data` datetime default current_timestamp,
 	Contrato blob,
-	IdPagamento int not null
+	IdPagamento int not null,
+    IdPedido int not null,
+    `Status` bool default false
 )engine = innodb;
-alter table tbVenda add constraint FKVendaPagamento foreign key(IdPagamento) references tbPagamento(Id);
+alter table tbVenda add constraint FKVendaPagamento foreign key(IdPagamento) references tbPagamento(Id),
+					add constraint FKVendaPedido foreign key(IdPedido) references tbPedido(Id);
 
-create table tbPedidoVenda(
-	IdPedido int not null,
-    IdVenda int not null,
-     constraint PKPedidoVenda primary key(IdPedido, IdVenda)
-)engine = innodb;
-alter table tbPedidoVenda add constraint FKPedidoVenda foreign key(IdVenda) references tbVenda(Id),
-						  add constraint FKVendaPedido foreign key(IdPedido) references tbPedido(Id);
   

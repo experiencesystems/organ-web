@@ -2,8 +2,8 @@ use dbOrgan;
 -- MUDAR VALOR DOS NOMES Das( DATas( PRA PORTUGUESSET lc_time_names = 'pt_BR'; 
 
 drop view if exists vwPragaOrDoenca ;
-create view vwPragaOrDoenca as
-    (select 
+create view vwPragaOrDoenca as(
+	select 
         pd.Id,
         pd.Nome `Nome`,
         case
@@ -28,8 +28,8 @@ create view vwPragaOrDoenca as
     group by pd.Id , c.`Status`);
 
 drop view if exists vwTelefone;
-create view vwTelefone as
-    (select 
+create view vwTelefone as(
+	select 
         T.Id,
         concat('(',
                 T.IdDDD,
@@ -77,10 +77,9 @@ create view vwFuncionario as
         F.`Status` = true); 
   
 
-
 drop view if exists vwItems;
-create view vwItems as
-    (select 
+create view vwItems as(
+	select 
         S.IdEstoque `Id`,
         S.Nome `Item`,
         E.Qtd `Quantidade`,
@@ -97,8 +96,8 @@ create view vwItems as
         vwFornecedor F on E.IdFornecedor = F.Id
             inner join
         tbUM U on E.UM = U.Id)
-union 
-		(select 
+union(
+	select 
         I.IdEstoque,
         I.Nome,
         E.Qtd,
@@ -115,8 +114,8 @@ union
         vwFornecedor F on E.IdFornecedor = F.Id
             inner join
         tbUM U on E.UM = U.Id)
-union
-		(select 
+union(
+	select 
         M.IdEstoque,
         M.Nome,
         E.Qtd,
@@ -133,8 +132,8 @@ union
         vwFornecedor F on E.IdFornecedor = F.Id
             inner join
         tbUM U on E.UM = U.Id)
-union
-		(select 
+union(
+	select 
         P.IdEstoque,
         P.Nome,
         E.Qtd,
@@ -155,8 +154,8 @@ union
 
 
 drop view if exists vwControle;
-create view vwControle as
-    (select 
+create view vwControle as(
+	select 
         c.Id,
         date_format(c.`Data`, '%d/%m/%Y') `Data`,
         case
@@ -340,6 +339,7 @@ set Disp = 2
 where Id = NEW.IdArea;
 end$
 DELIMITER ; 
+
    
 use dbEcommerce;
 drop view if exists vwEndereco;
@@ -352,26 +352,116 @@ select E.CEP,  R.Logradouro `Rua`, concat(B.Bairro,' - ', C.Cidade,'/', Es.UF) `
 	inner join tbEstado Es on C.IdEstado = Es.Id
 );
 
-DELIMITER $
+drop view if exists vwAnuncio;
+create view vwAnuncio as(
+select 
+	A.Id `Id`,
+    A.Nome `Anúncio`,
+    A.Foto `Foto`,
+    A.`Data` `Data de Postagem`,
+    AN.NomeFazenda `Anunciante`,
+    concat(E.Rua,', ', AN.NumEnd,' - ', ifnull(AN.CompEnd, 'Sem Complemento'),' - ',E.BCE,' - ',E.CEP) `Endereço do Anunciante`,
+    A.`Desc` `Descrição`,
+    A.Desconto `Desconto(%)`,
+    P.Nome `Produto`,
+    concat(A.Quantidade, ' ', P.UM ) `Quantidade`,
+    (P.ValorUnit * A.Quantidade) `Preço`,
+    P.Categoria `Categoria`,
+    spNota(A.Id) `Nota`,
+    ifnull((select count(`Like`) from tbAvaliacao where IdAnuncio = A.Id), '0') `Likes`
+from tbAnuncio A
+	inner join tbProduto P on P.Id = A.IdProduto
+    inner join tbAnunciante AN on AN.IdUsuario = A.IdAnunciante
+    inner join vwEndereco E on E.CEP = AN.CEP
+);
 
+drop view if exists vwPedido;
+create view vwPedido as(
+select 
+	P.Id `Id`,
+    A.IdAnunciante `Anunciante`,
+    A.Nome `Anúncio`, 
+	group_concat(distinct concat(A.Nome, ' - ', PA.Qtd)separator ', ') `Nome do Anúncio - Quantidade Pedida`,
+	sum(Pr.ValorUnit * PA.Qtd) `Valor Total s/Desconto`,
+    sum((Pr.ValorUnit * PA.Qtd)-((Pr.ValORUnit * PA.Qtd)*(A.Desconto/100))) `Valor Total c/Desconto`,
+	concat(U.`UserName`, '-', U.CPF) `Comprador - CPF`,
+    concat(E.Rua,', ', P.NumEntrega,' - ', ifnull(P.CompEntrega, 'Sem Complemento'),' - ',E.BCE,' - ',E.CEP) `Endereço de Entrega`,
+    P.ValFrete `Valor do Frete`,
+    P.`Status` `Situação do Pedido`,
+    P.`Data` `Data do Pedido`
+from tbPedido P
+	inner join vwEndereco E on E.CEP = P.CEPEntrega
+    inner join tbUsuario U on U.`Id` = P.IdUsuario
+    inner join tbPedidoAnuncio PA on PA.IdPedido = P.Id
+    inner join tbAnuncio A on A.Id = PA.IdAnuncio
+    inner join tbProduto Pr on Pr.Id = A.IdProduto
+);
+
+drop view if exists vwComentario;
+create view vwComentario as(
+select 
+	C.Id `Id`,
+    C.Comentario `Comentário`,
+    spUsuario(C.IdUsuario) `Usuário`,
+    A.Nome `Anúncio`, 
+    ifnull(C.`Like`, 0) `Likes`,
+    ifnull(C.Deslike, 0) `Deslikes`,
+    C.`Data` `Data de Postagem`
+from tbComentario C
+	inner join tbAnuncio A on A.Id = C.IdAnuncio
+);
+
+drop view if exists vwCarrinho;
+create view vwCarrinho as(
+select 
+	C.IdUsuario `Id`,
+    A.Nome `Anúncio`,
+    C.Qtd `Quantidade adicionada`
+from tbCarrinho C
+	inner join tbAnuncio A on A.Id = C.IdAnuncio
+);
+
+drop view if exists vwVenda;
+create view vwVenda as(
+select 
+	V.Id `Id`,
+    V.`Data` `Data`,
+	group_concat(distinct concat(A.Nome, ' - ', PA.Qtd)separator ', ') `Nome do Anúncio - Quantidade Pedida`,
+	(sum((Pr.ValorUnit * PA.Qtd)-((Pr.ValorUnit * PA.Qtd)*(A.Desconto/100))) + P.ValFrete) `Valor Total`,
+	concat(E.Rua,', ', P.NumEntrega,' - ', ifnull(P.CompEntrega, 'Sem Complemento'),' - ',E.BCE,' - ',E.CEP) `Endereço de Entrega`,
+    An.NomeFazenda `Anunciante`,
+    V.`Status`
+from tbVenda V
+	inner join tbPedido P on P.Id = V.IdPedido
+	inner join vwEndereco E on E.CEP = P.CEPEntrega
+    inner join tbUsuario U on U.`Id` = P.IdUsuario
+    inner join tbPedidoAnuncio PA on PA.IdPedido = P.Id
+    inner join tbAnuncio A on A.Id = PA.IdAnuncio
+    inner join tbProduto Pr on Pr.Id = A.IdProduto
+    inner join tbAnunciante An on An.IdUsuario = A.IdAnunciante
+);
+
+DELIMITER $
 drop trigger if exists trgHistCarrinho$
 create trigger trgHistCarrinho
 before delete
 on tbCarrinho
 for each row
 begin
-	declare nome varchar(30);
+	declare nome, cat varchar(30);
     set nome = (select nome from tbAnuncio where Id = OLD.IdAnuncio);
-    set FOREIGN_KEY_CHECKS=0;
-	insert into tbHistCarrinho value(OLD.IdUsuario, nome, OLD.Id, OLD.Qtd);
+    set cat = (select Categoria from tbAnuncio where Id = OLD.IdAnuncio);
+	insert into tbHistCarrinho value(OLD.IdUsuario, nome, cat, OLD.Qtd);
 end$
 
-drop trigger if exists trgCarrinhoDelete$
-create trigger trgCarrinhoDelete
-after delete
-on tbCarrinho
+drop trigger if exists trgPedidoNovo$
+create trigger trgPedidoNovo
+after insert
+on tbPedido
 for each row
 begin
-    set FOREIGN_KEY_CHECKS=1;
+	declare idanu int;
+    set idanu = (select IdAnuncio from tbPedidoAnuncio where IdPedido = NEW.Id);
+	delete from tbCarrinho where ((IdAnuncio = idanu) and (IdUsuario = NEW.IdUsuario));
 end$
 DELIMITER ;

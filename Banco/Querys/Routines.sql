@@ -135,9 +135,39 @@ SIGNAL SQLSTATE '44001'
    SET MESSAGE_TEXT = 'Quantidade maior do que a presente no estoque';
 END IF;
 END$
+DELIMITER ;
 
 
 
 use dbEcommerce;
+DELIMITER $
+drop function if exists spNota$
+create function spNota(IdAn int)
+	returns double
+begin
+	declare nota, notas, tot int;
+    
+    if(exists(select * from tbAvaliacao where IdAnuncio = IdAn)) then
+		set notas = (select sum(Nota) from tbAvaliacao where ((IdAnuncio = IdAn) and (Nota is not null)));
+        set tot = (select count(*) from tbAvaliação where (IdAnuncio = IdAn));
+        set nota = notas/tot;
+	else
+		set nota = 0;
+	end if;
+    return nota;
+end$
 
+drop function if exists spUsuario$
+create function spUsuario(IdU nvarchar(128))
+	returns varchar(50)
+begin
+	declare nome varchar(50);
+    
+    if(exists(select * from tbAnunciante where IdUsuario = IdU)) then
+		set nome = (select NomeFazenda from tbAnunciante where IdUsuario = IdU);
+	else
+		set nome = (select `UserName` from tbUsuario where Id = IdU);
+	end if;
+    return nome;
+end$
 DELIMITER ;
