@@ -14,12 +14,12 @@ namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
     {
         public async Task<List<Pedido>> GetPedidosAnunciante()
         {
-            return await DbSet.Include(a => a.Carrinho).Where(x => x.Anuncio.IdUsuario == HttpContext.Current.User.Identity.GetUserId()).ToListAsync();
+            return await DbSet.Where(x => x.Anuncio.IdAnunciante == HttpContext.Current.User.Identity.GetUserId()).ToListAsync();
         }
 
         public async Task<List<Pedido>> GetPedidosCliente()
         {
-            return await DbSet.Include(a => a.Carrinho).Where(x => x.Carrinho.IdUsuario == HttpContext.Current.User.Identity.GetUserId()).ToListAsync();
+            return await DbSet.Where(x => x.IdUsuario == HttpContext.Current.User.Identity.GetUserId()).ToListAsync();
         }
     }
 }

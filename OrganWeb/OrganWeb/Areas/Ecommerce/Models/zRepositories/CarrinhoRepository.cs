@@ -9,6 +9,8 @@ using System.Data.Entity;
 using Microsoft.AspNet.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNet.Identity.Owin;
+using OrganWeb.Areas.Ecommerce.Models.Usuarios;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
 {
@@ -23,19 +25,27 @@ namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
                 id = HttpContext.Current.User.Identity.GetUserId();
             }
 
-            return await DbSet.Include(a => a.Anuncio).Include(u => u.Usuario).Where(x => x.IdUsuario == id && x.Status == 1).ToListAsync();
+            return await DbSet.Include(a => a.Anuncio).Include(u => u.Usuario).Where(x => x.IdUsuario == id).ToListAsync();
         }
 
         public async Task<Carrinho> GetItemCarrinho(Anuncio anuncio)
         {
-            string id = "";
-            if (HttpContext.Current != null && HttpContext.Current.User != null
-                  && HttpContext.Current.User.Identity.Name != null)
+            try
             {
-                id = HttpContext.Current.User.Identity.GetUserId();
-            }
+                string id = "";
+                if (HttpContext.Current != null && HttpContext.Current.User != null
+                      && HttpContext.Current.User.Identity.Name != null)
+                {
+                    id = HttpContext.Current.User.Identity.GetUserId();
+                }
 
-            return await DbSet.Include(a => a.Anuncio).Include(u => u.Usuario).Where(x => x.IdAnuncio == anuncio.Id && x.IdUsuario == "" && x.Status == 1).FirstOrDefaultAsync();
+                return await DbSet.Include(a => a.Anuncio).Include(u => u.Usuario).Where(x => x.IdAnuncio == anuncio.Id && x.IdUsuario == id).AsNoTracking().FirstOrDefaultAsync();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return null;
         }
 
         public async Task<int> AddAoCarrinho(Anuncio anuncio, int qtd = 1)
@@ -53,13 +63,12 @@ namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
             var carrinho = await GetCarrinho();
             foreach (var item in carrinho)
             {
-                item.Status = 3;
                 item.Update(item);
                 await Save();
             }
             carrinho = null;
         }
-        
+
         public async Task<(int QtdItens, double ValorTotal)> GetQtdETotalCarrinho()
         {
             var carrinho = await GetCarrinho();
@@ -74,26 +83,30 @@ namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
         private async Task<int> AddOuRemoverCarrinho(Anuncio anuncio, int qtd)
         {
             var carrinho = await GetItemCarrinho(anuncio);
-
             if (carrinho == null)
             {
+                var store = new UserStore<ApplicationUser>(_context);
+                var manager = new ApplicationUserManager(store);
                 carrinho = new Carrinho
                 {
                     IdAnuncio = anuncio.Id,
                     IdUsuario = HttpContext.Current.User.Identity.GetUserId(),
-                    Qtd = qtd
+                    Qtd = qtd,
+                    Usuario = manager.FindById(HttpContext.Current.User.Identity.GetUserId())
                 };
                 Add(carrinho);
             }
-
-            carrinho.Qtd += qtd;
-
+            else
+            {
+                carrinho.Qtd += qtd;
+                Update(carrinho);
+            }
             if (carrinho.Qtd <= 0)
             {
                 carrinho.Qtd = 0;
-                DbSet.Remove(carrinho);
+                Update(carrinho);
             }
-            await Save();
+            SaveSync();
             carrinho = null;
             return await Task.FromResult(carrinho.Qtd);
         }

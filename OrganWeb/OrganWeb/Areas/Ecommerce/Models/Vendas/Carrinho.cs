@@ -26,13 +26,8 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
         [Display(Name = "Quantidade")]
         public int Qtd { get; set; }
 
-        [Required]
-        public int Status { get; set; }
-
         public virtual Anuncio Anuncio { get; set; }
-        public virtual ApplicationUser Usuario { get; set; }
-        
-        public List<Pedido> Pedidos { get; set; }
+        public virtual ApplicationUser Usuario { get; set; } = new ApplicationUser();
 
         [NotMapped]
         public readonly List<SelectListItem> StatusList = new List<SelectListItem>()

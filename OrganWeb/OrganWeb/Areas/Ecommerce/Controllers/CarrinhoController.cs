@@ -28,8 +28,9 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             };
             return View(carrinhoViewModel);
         }
-
+        
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddAoCarrinho(int? idAnuncio)
         {
             if (idAnuncio == null)
@@ -44,8 +45,7 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             await carrinho.AddAoCarrinho(anuncio);
             return RedirectToAction("Index");
         }
-
-        [HttpPost]
+        
         public async Task<ActionResult> RemoverDoCarrinho(int? idAnuncio)
         {
             if (idAnuncio == null)
@@ -60,8 +60,7 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             await carrinho.RemoverDoCarrinho(anuncio);
             return RedirectToAction("Index");
         }
-
-        [HttpPost]
+        
         public async Task<ActionResult> ApagarCarrinho()
         {
             await carrinho.LimparCarrinho();

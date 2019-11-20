@@ -29,11 +29,28 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
         [Required]
         public int Status { get; set; }
         //TODO: lista de status pedido
-        
+
+        [Required]
+        public int Qtd { get; set; }
+
+        [Required]
+        public double ValFrete { get; set; }
+
+        [Required]
+        [ForeignKey("Endereco")]
+        [RegularExpression(@"[0-9]{5}[\d]{3}", ErrorMessage = "Digite um CEP válido somente com números")]
+        [StringLength(8, MinimumLength = 8)]
+        public string CEPEntrega { get; set; }
+
+        [Required]
+        public int NumEntrega { get; set; }
+
+        [StringLength(50)]
+        public string CompEntrega { get; set; }
+
         [NotMapped]
         public virtual Anuncio Anuncio { get; set; }
-        public virtual Carrinho Carrinho { get; set; }
-        [NotMapped]
+        public virtual Endereco.Endereco Endereco { get; set; }
         public virtual ApplicationUser Usuario { get; set; }
         [NotMapped]
         public List<Carrinho> Carrinhos { get; set; }

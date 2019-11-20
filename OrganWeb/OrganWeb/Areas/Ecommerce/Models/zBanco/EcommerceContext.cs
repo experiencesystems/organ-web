@@ -19,6 +19,7 @@ namespace OrganWeb.Areas.Ecommerce.Models.zBanco
         // ECOMMERCE
         // ANUNCIO
         public DbSet<Anuncio> Anuncios { get; set; }
+        public DbSet<Anunciante> Anunciantes { get; set; }
         public DbSet<Wishlist> Wishlists { get; set; }
         public DbSet<Carrinho> Carrinhos { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
@@ -29,6 +30,9 @@ namespace OrganWeb.Areas.Ecommerce.Models.zBanco
         public DbSet<Entrega> Entregas { get; set; }
         public DbSet<Pacote> Pacotes { get; set; }
         public DbSet<Produto> Produtos { get; set; }
+        public DbSet<PedidoAnuncio> PedidoAnuncios { get; set; }
+        public DbSet<PedidoVenda> PedidoVendas { get; set; }
+        public DbSet<HistCarrinho> HistCarrinhos { get; set; }
 
         // FINANCEIRO
         public DbSet<DadosBancario> DadosBancarios { get; set; }
@@ -69,7 +73,6 @@ namespace OrganWeb.Areas.Ecommerce.Models.zBanco
                 .HasColumnName("Comentario");
 
             modelBuilder.Entity<Resposta>().HasKey(vf => new { vf.IdComentario, vf.IdResposta });
-            modelBuilder.Entity<Carrinho>().HasKey(c => new { c.IdUsuario, c.IdAnuncio });
 
             modelBuilder.Entity<Resposta>()
                     .HasRequired(m => m.Comentario)
@@ -82,14 +85,6 @@ namespace OrganWeb.Areas.Ecommerce.Models.zBanco
                     .WithMany(t => t.Respostas)
                     .HasForeignKey(m => m.IdResposta)
                     .WillCascadeOnDelete(false);
-            
-            modelBuilder.Entity<Pedido>().HasKey(e => e.Id);
-
-            modelBuilder.Entity<Pedido>()
-                    .HasRequired(m => m.Carrinho)
-                    .WithMany(t => t.Pedidos)
-                    .HasForeignKey(m => new { m.IdUsuario, m.IdAnuncio })
-                    .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ApplicationUser>()
                     .ToTable("tbUsuario")
@@ -99,6 +94,10 @@ namespace OrganWeb.Areas.Ecommerce.Models.zBanco
                     .Ignore(t => t.LockoutEnabled)
                     .Ignore(t => t.AccessFailedCount)
                     .Ignore(t => t.TwoFactorEnabled);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .Property(t => t.UserName)
+                .IsRequired();
 
             modelBuilder.Entity<ApplicationUser>()
                 .Property(t => t.SecurityStamp)

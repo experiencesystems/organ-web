@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_LayoutEcommerce.cshtml";
 }
 
-@if (!Request.IsAuthenticated)
+@if (!Request.IsAuthenticated || Model.Usuario == null)
 {
     <br />
     <h6>Faça login para criar um anúncio!</h6>

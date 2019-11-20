@@ -14,7 +14,7 @@ namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
     {
         public async Task<List<Venda>> GetVendasDoAnunciante()
         {
-            return await DbSet.Include(a => a.Pedido).Include(u => u.Pagamento).Include(e => e.Endereco).Where(x => x.Pedido.Anuncio.IdUsuario == HttpContext.Current.User.Identity.GetUserId()).ToListAsync();
+            return await DbSet.Include(a => a.Pedido).Include(u => u.Pagamento).Include(e => e.Endereco).Where(x => x.Pedido.Anuncio.IdAnunciante == HttpContext.Current.User.Identity.GetUserId()).ToListAsync();
         }
     }
 }

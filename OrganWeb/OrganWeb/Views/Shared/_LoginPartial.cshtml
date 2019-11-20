@@ -26,6 +26,6 @@ else
 {
     <ul class="nav navbar-nav navbar-right">
         <li>@Html.ActionLink("Registre-se", "Registro", "Account", new { Area = "Ecommerce" }, new { })</li>
-        <li>@Html.ActionLink("Login", "Login", "Account", new { Area = "Ecommerce" }, new { })</li>
+        <li>@Html.ActionLink("Login", "Login", "Account", new { Area = "Ecommerce" }, new { returnUrl = this.Request.RawUrl })</li>
     </ul>
 }

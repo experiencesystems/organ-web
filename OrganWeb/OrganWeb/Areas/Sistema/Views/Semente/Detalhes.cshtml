@@ -33,3 +33,9 @@
         </dd>
     </dl>
 </div>
+
+@using (Html.BeginForm("NovoDeEstoque", "Anuncio", new { area = "Ecommerce", Nome = Model.Nome, Qtd = Model.Estoque.Qtd }, FormMethod.Post, new { @class = "" }))
+{
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-addmodal" data-save="ajax-modal">Criar venda no ecommerce</button>
+}

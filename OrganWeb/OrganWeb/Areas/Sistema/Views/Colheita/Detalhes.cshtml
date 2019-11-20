@@ -35,20 +35,10 @@
         <dt>@Html.DisplayNameFor(model => model.Produto.Nome)</dt>
         <dd>@Html.DisplayFor(model => model.Produto.Nome)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.Produto.Desc)</dt>
-        <dd>@Html.DisplayFor(model => model.Produto.Desc)</dd>
-
         <dt>@Html.DisplayNameFor(model => model.Produto.Estoque.Qtd)</dt>
         <dd>@Html.DisplayFor(model => model.Produto.Estoque.Qtd)</dd>
 
         <dt>@Html.DisplayNameFor(model => model.Produto.Estoque.UM)</dt>
         <dd>@Html.DisplayFor(model => model.Produto.Estoque.UM)</dd>
-
-        <dt>@Html.DisplayNameFor(model => model.Produto.Estoque.ValorUnit)</dt>
-        <dd>R$ @Html.DisplayFor(model => model.Produto.Estoque.ValorUnit)</dd>
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Editar", "Editar", new { id=Model.IdPlantio, id2=Model.IdProd }) |
-    @Html.ActionLink("Voltar", "Index")
-</p>

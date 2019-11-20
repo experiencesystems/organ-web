@@ -38,9 +38,18 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             }
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NovoDeEstoque(string Nome, double Qtd)
+        {
+            return View("Novo", new Anuncio { Usuario = await UserManager.FindByIdAsync(User.Identity.GetUserId()), Produto = new Produto { Nome = Nome, Quantidade = Qtd } });
+        }
+
         public async Task<ActionResult> Novo()
         {
-            return View(new Anuncio { Usuario = await UserManager.FindByIdAsync(User.Identity.GetUserId()) });
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            anuncio = new Anuncio { Usuario = user };
+            return View(anuncio);
         }
 
         [HttpPost]
@@ -59,7 +68,7 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
 
                 anuncio.Status = true;
                 anuncio.IdProduto = produto.Id;
-                anuncio.IdUsuario = User.Identity.GetUserId();
+                anuncio.IdAnunciante = User.Identity.GetUserId();
                 anuncio.Add(anuncio);
                 await anuncio.Save();
 

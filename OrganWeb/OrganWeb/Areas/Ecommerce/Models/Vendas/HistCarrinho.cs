@@ -1,6 +1,4 @@
 ﻿using OrganWeb.Areas.Ecommerce.Models.Usuarios;
-using OrganWeb.Areas.Ecommerce.Models.zRepositories;
-using OrganWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,8 +8,8 @@ using System.Web;
 
 namespace OrganWeb.Areas.Ecommerce.Models.Vendas
 {
-    [Table("tbWishlist")]
-    public class Wishlist : WishlistRepository
+    [Table("tbHistCarrinho")]
+    public class HistCarrinho
     {
         [Key]
         public int Id { get; set; }
@@ -20,11 +18,13 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
         [ForeignKey("Usuario")]
         public string IdUsuario { get; set; }
 
-        [Required]
-        [ForeignKey("Anuncio")]
-        public int IdAnuncio { get; set; }
+        [StringLength(30)]
+        [Required(AllowEmptyStrings = false)]
+        public string NomeAnuncio { get; set; }
 
-        public virtual Anuncio Anuncio { get; set; }
+        [Required]
+        public int Qtd { get; set; }
+
         public virtual ApplicationUser Usuario { get; set; }
     }
 }

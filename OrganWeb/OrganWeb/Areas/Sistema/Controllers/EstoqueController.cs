@@ -14,6 +14,9 @@ using OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque;
 using System.Threading.Tasks;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
 using OrganWeb.Areas.Sistema.Models.API;
+using OrganWeb.Areas.Ecommerce.Models.Vendas;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
@@ -30,7 +33,29 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private ViewEstoque viewestoque = new ViewEstoque();
         private ListarUnidades unmd = new ListarUnidades();
         private UnidadeCadastro uncd = new UnidadeCadastro();
-        
+        private ApplicationUserManager _userManager;
+
+        public EstoqueController()
+        {
+        }
+
+        public EstoqueController(ApplicationUserManager userManager)
+        {
+            UserManager = userManager;
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
         [HttpGet]
         public async Task<ViewResult> Index(string filtros, string textoPesquisa, int? page, int? pagehist)
         {
@@ -139,6 +164,13 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 return HttpNotFound();
             }
             return View(insumo);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NovoAnuncio(Insumo insumo)
+        {
+            return RedirectToAction("Novo", "Anuncio", new Anuncio { Usuario = await UserManager.FindByIdAsync(User.Identity.GetUserId()), Produto = new Ecommerce.Models.Vendas.Produto { Nome = insumo.Nome, Quantidade = insumo.Estoque.Qtd } });
         }
 
         public async Task<ActionResult> Editar(int? id, string tipo)

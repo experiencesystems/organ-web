@@ -1,18 +1,24 @@
 ﻿@model OrganWeb.Areas.Sistema.Models.Armazenamento.Insumo
 
-    <h4 class="modal-title">Detalhes</h4>
-    <dl class="dl-horizontal">
-        @Html.LabelFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
-        <dd>@Html.DisplayFor(model => model.Nome, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } })</dd>
-        @if (Model.Desc != null)
-        {
-            @Html.LabelFor(model => model.Desc, new { htmlAttributes = new { @class = "form-control" } })
-            <dd>@Html.DisplayFor(model => model.Desc, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } })</dd>
-        }
-        @Html.LabelFor(model => model.Categoria.Nome, new { htmlAttributes = new { @class = "form-control" } })
-        <dd>@Html.DisplayFor(model => model.Categoria.Nome, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } })</dd>
+<h4 class="modal-title">Detalhes</h4>
+<dl class="dl-horizontal">
+    @Html.LabelFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+    <dd>@Html.DisplayFor(model => model.Nome, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } })</dd>
+    @if (Model.Desc != null)
+    {
+        @Html.LabelFor(model => model.Desc, new { htmlAttributes = new { @class = "form-control" } })
+        <dd>@Html.DisplayFor(model => model.Desc, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } })</dd>
+    }
+    @Html.LabelFor(model => model.Categoria.Nome, new { htmlAttributes = new { @class = "form-control" } })
+    <dd>@Html.DisplayFor(model => model.Categoria.Nome, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } })</dd>
 
-        @Html.LabelFor(model => model.Estoque.Qtd, new { htmlAttributes = new { @class = "form-control" } })
-        <dd>@Html.DisplayFor(model => model.Estoque.Qtd, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } }) @Html.DisplayFor(model => model.Estoque.UM, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } })</dd>
-    </dl>
+    @Html.LabelFor(model => model.Estoque.Qtd, new { htmlAttributes = new { @class = "form-control" } })
+    <dd>@Html.DisplayFor(model => model.Estoque.Qtd, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } }) @Html.DisplayFor(model => model.Estoque.UM, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } })</dd>
+</dl>
 
+@*https://stackoverflow.com/questions/5283518/mvc-html-beginform-using-areas*@
+@using (Html.BeginForm("NovoDeEstoque", "Anuncio", new { area = "Ecommerce", Nome = Model.Nome, Qtd = Model.Estoque.Qtd }, FormMethod.Post, new { @class = "" }))
+{
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-addmodal" data-save="ajax-modal">Criar venda no ecommerce</button>
+}

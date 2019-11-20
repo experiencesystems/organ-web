@@ -27,6 +27,7 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
         public string Desc { get; set; }
         
         public bool Status { get; set; }
+        
         public byte[] Foto { get; set; }
 
         [Range(0.00, 100.00)]
@@ -37,7 +38,7 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
         public int IdProduto { get; set; }
         
         [ForeignKey("Usuario")]
-        public string IdUsuario { get; set; }
+        public string IdAnunciante { get; set; }
 
         public virtual Produto Produto { get; set; }
         public virtual ApplicationUser Usuario { get; set; }
