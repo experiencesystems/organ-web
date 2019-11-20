@@ -38,7 +38,6 @@ insert into tbProduto(IdEstoque, Nome) value(7, 'Soja');
 insert into tbColheita(`Data`, QtdPerdas, QtdTotal, IdPlantio, IdProd) values('01/01/01',  1, 4, 1, 7);
 
 insert into tbItensPlantio values(1, 1, 1);
-insert into tbItensControle values(0.25, 1, 4), (0.25, 2, 4);
 
 insert into tbSolo(Nome, Tipo) values('Arenoso', 1), ('Vermelho', 1);
 
@@ -53,3 +52,5 @@ insert into tbPragaOrDoenca(Nome, `P/D`) values('Praga do Mal', true), ('Doença
 insert into tbControlePD values(1, 1), (2,2); 
    
 insert into tbAreaPD values(true, 2, 1), (true, 3, 2);
+
+insert into tbItensControle values(0.25, 1, 4), (0.25, 2, 4);

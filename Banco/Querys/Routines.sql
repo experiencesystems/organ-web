@@ -1,8 +1,8 @@
 use dbOrgan;
 
-DELIMITER $$
+DELIMITER $
     
-drop procedure if exists spInsertEstoque$$
+drop procedure if exists spInsertEstoque$
 create procedure spInsertEstoque(
 in
 	Qnt double,
@@ -16,9 +16,9 @@ begin
       
       insert into tbEstoque(Qtd, UM) values(Qnt, UnM);
     end if;
-end$$
+end$
     
-drop procedure if exists spInsertSemente$$
+drop procedure if exists spInsertSemente$
 create procedure spInsertSemente(
 in 
 	Qnt double,
@@ -40,9 +40,9 @@ begin
 		set idE = (select Id from tbEstoque order by Id desc limit 1 );
 		insert into tbSemente(IdEstoque, Nome, `Desc`) value(IdE, Nome1, `Desc1`);
 	end if;
-end$$
+end$
 
-drop procedure if exists spInsertMaquina$$
+drop procedure if exists spInsertMaquina$
 create procedure spInsertMaquina(
 in 
 	Qnt double,
@@ -67,9 +67,9 @@ begin
 		insert into tbMaquina(IdEstoque, Nome, Tipo, Montadora, `Desc`)
 						value(IdE, Nome1, Tipo1, Montadora1, `Desc1`);
 	end if;
-end$$
+end$
 
-drop procedure if exists spInsertInsumo$$
+drop procedure if exists spInsertInsumo$
 create procedure spInsertInsumo(
 in 
 	Qnt double,
@@ -90,9 +90,9 @@ begin
 		set idE = (select Id from tbEstoque order by Id desc limit 1 );
 		insert into tbInsumo(IdEstoque, Nome, `Desc`, Categoria) value(IdE, Nome1, `Desc1`, Categoria1);
 	end if;
-end$$
+end$
 
-drop procedure if exists spInsertProduto$$
+drop procedure if exists spInsertProduto$
 create procedure spInsertProduto(
 in 
 	Qnt double,
@@ -113,7 +113,7 @@ begin
 		set idE = (select Id from tbEstoque order by Id desc limit 1 );
 		insert into tbProduto(IdEstoque, Nome, `Desc`) value(IdE, Nome1, `Desc1`);
 	end if;
-end$$
+end$
 
 drop procedure if exists spVerQtd$
 CREATE PROCEDURE spVerQtd (IN qtd double)
@@ -131,7 +131,7 @@ declare qtdE double;
 set qtdE = (select Qtd from tbEstoque where Id = IdE);
 
 IF qtd > qtdE THEN
-SIGNAL SQLSTATE '45001'
+SIGNAL SQLSTATE '44001'
    SET MESSAGE_TEXT = 'Quantidade maior do que a presente no estoque';
 END IF;
 END$

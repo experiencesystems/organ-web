@@ -7,19 +7,19 @@ create table `AspNetRoles`(
 	`Id` nvarchar(128)  not null ,
 	`Name` nvarchar(256)  not null ,
 	 constraint PKAspNetRoles primary key (`Id`)
-) engine = InnoDB;
+) engine = innodb;
 
-CREATE UNIQUE index  `RoleNameIndex` on `AspNetRoles` (`Name`);
+create unique index  `RoleNameIndex` on `AspNetRoles` (`Name`);
 
 drop table if exists `AspNetUserRoles`;
 create table `AspNetUserRoles` (
 	`UserId` nvarchar(128)  not null ,
 	`RoleId` nvarchar(128)  not null ,
 	constraint PKAspNetUserRoles primary key ( `UserId`,`RoleId`)
-) engine = InnoDB;
+) engine = innodb;
  
-CREATE index  `IX_UserId` on `AspNetUserRoles` (`UserId`);
-CREATE index  `IX_RoleId` on `AspNetUserRoles` (`RoleId`);
+create index  `IX_UserId` on `AspNetUserRoles` (`UserId`);
+create index  `IX_RoleId` on `AspNetUserRoles` (`RoleId`);
 
 drop table if exists tbUsuario;
 create table tbUsuario (
@@ -34,7 +34,7 @@ create table tbUsuario (
 	`CarimboSeguranca` longtext,
 	`UserName` varchar(50) not null,-- !
 	  constraint PKAspNetUsers primary key ( `Id`)
-)engine = InnoDB;
+)engine = innodb;
 
 drop table if exists `AspNetUserClaims`;
 create table `AspNetUserClaims` (
@@ -43,9 +43,9 @@ create table `AspNetUserClaims` (
 	`TipoClaim` longtext,
 	`ValorClaim` longtext,
 	constraint PKAspNetUserClaims primary key ( `Id`)
-)engine = InnoDB;
+)engine = innodb;
 
-CREATE index  `IX_UserId` on `AspNetUserClaims` (`UserId`);
+create index  `IX_UserId` on `AspNetUserClaims` (`UserId`);
 
 drop table if exists `AspNetUserLogins`;
 create table `AspNetUserLogins` (
@@ -53,9 +53,9 @@ create table `AspNetUserLogins` (
 	`ProviderKey` nvarchar(128)  not null ,
 	`UserId` nvarchar(128)  not null ,
 	constraint PKAspNetUserLogins primary key ( `LoginProvider`,`ProviderKey`,`UserId`)
-)engine = InnoDB;
+)engine = innodb;
 
-CREATE index  `IX_UserId` on `AspNetUserLogins` (`UserId`);
+create index  `IX_UserId` on `AspNetUserLogins` (`UserId`);
 
 alter table `AspNetUserRoles` add constraint `FK_AspNetUserRoles_AspNetRoles_RoleId`  foreign key (`RoleId`) references `AspNetRoles` ( `Id`)  on update cascade on delete cascade,
 							  add constraint `FK_AspNetUserRoles_AspNetUsers_UserId`  foreign key (`UserId`) references tbUsuario ( `Id`)  on update cascade on delete cascade;
@@ -72,7 +72,7 @@ create table tbDadosBancarios(
 	NumCartao numeric(19) not null,
 	Validade date not null, 
 	IdUsuario nvarchar(128) not null
-)engine = InnoDB;
+)engine = innodb;
 alter table tbDadosBancarios add constraint FKDBUsuario foreign key(IdUsuario) references tbUsuario(`Id`);
 
 drop table if exists tbAnunciante;
@@ -84,7 +84,7 @@ create table tbAnunciante(
     NumEnd int not null,
     CompEnd varchar(50),
     CEP char(8) not null
-)engine = InnoDB;
+)engine = innodb;
 alter table tbAnunciante add constraint FKAnuncianteUsuario foreign key(IdUsuario) references tbUsuario(`Id`);
 
 drop table if exists tbEndereco;
@@ -92,7 +92,7 @@ create table tbEndereco(
 	CEP char(8),
 	 constraint PKLocalizacao primary key (CEP),
 	IdRua int not null
-)engine = InnoDB;
+)engine = innodb;
 
 drop table if exists tbLogradouro;
 create table tbLogradouro(
@@ -100,7 +100,7 @@ create table tbLogradouro(
 	 constraint PKRua primary key (Id),
 	Logradouro varchar(40) not null,
 	IdBairro int not null
-)engine = InnoDB;
+)engine = innodb;
 
 drop table if exists tbBairro;
 create table tbBairro(
@@ -108,7 +108,7 @@ create table tbBairro(
 	 constraint PKBairro primary key (Id),
 	Bairro varchar(30) not null,
 	IdCidade int not null
-)engine = InnoDB;
+)engine = innodb;
 
 drop table if exists tbCidade;
 create table tbCidade(
@@ -116,7 +116,7 @@ create table tbCidade(
 	 constraint PKCidade primary key (Id),
 	Cidade varchar(30) not null,
 	IdEstado tinyint not null
-)engine = InnoDB;
+)engine = innodb;
 
 drop table if exists tbEstado;
 create table tbEstado(
@@ -124,7 +124,7 @@ create table tbEstado(
 	 constraint PKEstado primary key (Id),
 	Estado varchar(30) not null,
 	UF char(2) not null
-)engine = InnoDB;
+)engine = innodb;
 
 alter table tbCidade add constraint FKCidadeEstado foreign key(IdEstado) references tbEstado(Id);
 alter table tbBairro add constraint FKBairroCidade foreign key(IdCidade) references tbCidade(Id);
@@ -140,7 +140,7 @@ create table tbProduto(
 	ValorUnit double not null,
 	Quantidade double not null,
 	Nome varchar(30) not null
-)engine = InnoDB;
+)engine = innodb;
 
 drop table if exists tbAnuncio;
 create table tbAnuncio(
@@ -153,7 +153,7 @@ create table tbAnuncio(
 	Desconto decimal(5,2),
 	IdProduto int not null,
 	IdAnunciante nvarchar(128) not null
-)engine = InnoDB;
+)engine = innodb;
 alter table tbAnuncio add constraint FKAnuncioProduto foreign key(IdProduto) references tbProduto(Id),
 					  add constraint FKAnuncioAnunciante foreign key(IdAnunciante) references tbAnunciante(IdUsuario);
 
@@ -173,7 +173,7 @@ create table tbAvaliacao(
 	 constraint PKAvaliacao primary key(IdAnuncio, IdUsuario),
 	`Like` bool default false,
 	Nota int
-) engine = InnoDB;
+) engine = innodb;
 alter table tbAvaliacao add constraint FKAvaliacaoAnuncio foreign key(IdAnuncio) references tbAnuncio(Id),
 						add constraint FKAvaliacaoUsuario foreign key(IdUsuario) references tbUsuario(Id);
 
@@ -187,16 +187,16 @@ create table tbComentario(
 	Comentario varchar(100) not null,
 	IdAnuncio int not null,
 	IdUsuario nvarchar(128) not null
-)engine = InnoDB;
+)engine = innodb;
 alter table tbComentario add constraint FKComentarioAnuncio foreign key(IdAnuncio) references tbAnuncio(Id),
 						 add constraint FKComentarioUsuario foreign key(IdUsuario) references tbUsuario(Id);
 
 drop table if exists tbResposta;
-CREATE TABLE tbResposta (
-    IdComentario INT NOT NULL,
-    IdResposta INT NOT NULL,
-    CONSTRAINT PKResposta PRIMARY KEY (IdComentario , IdResposta)
-)  ENGINE=INNODB;
+create table tbResposta (
+    IdComentario int not null,
+    IdResposta int not null,
+    constraint PKResposta primary key (IdComentario , IdResposta)
+)  engine=innodb;
 alter table tbResposta add constraint FKRespostaComentario foreign key(IdComentario) references tbComentario(Id),
 					   add constraint FKResposta foreign key(IdResposta) references tbComentario(Id);
 
@@ -206,7 +206,7 @@ create table tbCarrinho(
 	IdAnuncio int not null,
 	 constraint PKCarrinho primary key(IdUsuario, IdAnuncio),
 	Qtd int not null
-)engine = InnoDB;
+)engine = innodb;
 alter table tbCarrinho add constraint FKCarrinhoAnuncio foreign key(IdAnuncio) references tbAnuncio(Id),
 					   add constraint FKCarrinhoUsuario foreign key(IdUsuario) references tbUsuario(Id);
 
@@ -231,14 +231,14 @@ create table tbPedido(
     CEPEntrega char(8) not null,
     NumEntrega int not null,
     CompEntrega varchar(50)
-)engine = InnoDB;
+)engine = innodb;
 alter table tbPedido add constraint FKPedidoUsuario foreign key(IdUsuario) references tbUsuario(`Id`);
 
 create table tbPedidoAnuncio(
 	IdPedido int not null,
     IdAnuncio int not null,
      constraint PKPedidoAnuncio primary key(IdPedido, IdAnuncio)
-)engine = InnoDB;
+)engine = innodb;
 alter table tbPedidoAnuncio add constraint FKPedidoAnuncio foreign key(IdAnuncio) references tbAnuncio(Id),
 							add constraint FKAnuncioPedido foreign key(IdPedido) references tbPedido(Id);
 
@@ -249,7 +249,7 @@ create table tbPagamento(
 	QtdParcelas int not null default 1,
 	VlParcela double not null,
 	Tipo int not null 
-)engine = InnoDB;
+)engine = innodb;
 
 drop table if exists tbVenda;
 create table tbVenda(
@@ -258,14 +258,14 @@ create table tbVenda(
 	`Data` datetime default current_timestamp,
 	Contrato blob,
 	IdPagamento int not null
-)engine = InnoDB;
+)engine = innodb;
 alter table tbVenda add constraint FKVendaPagamento foreign key(IdPagamento) references tbPagamento(Id);
 
 create table tbPedidoVenda(
 	IdPedido int not null,
     IdVenda int not null,
      constraint PKPedidoVenda primary key(IdPedido, IdVenda)
-)engine = InnoDB;
+)engine = innodb;
 alter table tbPedidoVenda add constraint FKPedidoVenda foreign key(IdVenda) references tbVenda(Id),
 						  add constraint FKVendaPedido foreign key(IdPedido) references tbPedido(Id);
   
