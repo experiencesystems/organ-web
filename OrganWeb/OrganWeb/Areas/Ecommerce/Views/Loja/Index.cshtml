@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<OrganWeb.Areas.Ecommerce.Models.Vendas.Anuncio>
 
 @{
+    ViewBag.Title = "Ecommerce";
     Layout = "~/Views/Shared/_LayoutEcommerce.cshtml";
 }
 
@@ -9,15 +10,9 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>Ecommerce</title>
 </head>
 <body>
-    @if (Request.IsAuthenticated && ViewBag.Assinatura == null)
-    {
-        <p>
-            @Html.ActionLink("Novo anúncio", "Novo", "Anuncio")
-        </p>
-    }
     <!--PRODUTOS-->
     <!-- Products tab & slick -->
     <div class="container">

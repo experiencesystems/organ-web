@@ -42,12 +42,6 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
 
         public async Task<ActionResult> Index()
         {
-            ViewBag.Assinatura = null;
-            var usuario = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            if (usuario.Assinatura == 4)
-            {
-                ViewBag.Assinatura = "Sem assinatura";
-            }
             return View(await anuncio.GetAnuncios());
         }
         

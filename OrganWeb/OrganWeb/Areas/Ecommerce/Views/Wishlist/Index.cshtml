@@ -1,6 +1,7 @@
 ﻿@model PagedList.IPagedList<OrganWeb.Areas.Ecommerce.Models.Vendas.Wishlist>
 @using PagedList.Mvc;
 @{
+    ViewBag.Title = "Lista de desejos";
     Layout = "~/Views/Shared/_LayoutEcommerce.cshtml";
 }
 
@@ -9,7 +10,7 @@
     <br />
     <h6>É necessário fazer login para salvar anúncios!</h6>
     <div>
-        @Html.ActionLink("Login", "Login", "Account")
+        @Html.ActionLink("Login", "Login", "Account", new { Area = "Ecommerce" }, new { returnUrl = this.Request.RawUrl })
     </div>
     return;
 }

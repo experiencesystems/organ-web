@@ -530,6 +530,8 @@
     <Content Include="fonts\icomoon.woff" />
     <Content Include="Areas\Ecommerce\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Sistema\Views\Controle\Detalhes.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\Shared\_PartialLogin.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\Carrinho\SumarioCarrinho.cshtml" />
     <None Include="Properties\PublishProfiles\organweb - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\organweb - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />

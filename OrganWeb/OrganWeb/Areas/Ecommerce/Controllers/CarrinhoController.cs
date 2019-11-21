@@ -66,5 +66,14 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             await carrinho.LimparCarrinho();
             return RedirectToAction("Index");
         }
+
+        [ChildActionOnly]
+        public async Task<ActionResult> SumarioCarrinho()
+        {
+            (int QtdItens, double ValorTotal) = await carrinho.GetQtdETotalCarrinho();
+
+            ViewData["CartCount"] = QtdItens;
+            return PartialView("SumarioCarrinho");
+        }
     }
 }

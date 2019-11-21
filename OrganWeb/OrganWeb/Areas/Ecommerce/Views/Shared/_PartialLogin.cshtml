@@ -3,7 +3,8 @@
         <li>
             <a href="cart.html" class="site-cart">
                 <span class="fa fa-cart-plus"></span>
-                <span class="count">2</span>
+                <span class="count">@ViewData["CartCount"]</span>
+                @Html.ActionLink("Cart(" + ViewData["CartCount"] + ")","Index","Carrinho")
             </a>
         </li>
         <li><a href="#"><span class="fa fa-heart"></span></a></li>

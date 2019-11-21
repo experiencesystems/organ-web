@@ -1,5 +1,6 @@
 ﻿@model OrganWeb.Areas.Ecommerce.Models.ViewModels.CarrinhoViewModel
 @{
+    ViewBag.Title = "Carrinho";
     Layout = "~/Views/Shared/_LayoutEcommerce.cshtml";
 }
 <h2>Carrinho <i class="fa fa-shopping-cart" aria-hidden="true"></i> </h2>
@@ -9,7 +10,7 @@
     <br />
     <h6>Faça login para adicionar itens ao carrinho!</h6>
     <div>
-        @Html.ActionLink("Login", "Login", "Account")
+        @Html.ActionLink("Login", "Login", "Account", new { Area = "Ecommerce" }, new { returnUrl = this.Request.RawUrl })
     </div>
     return;
 }
@@ -41,11 +42,21 @@
                         @Html.AntiForgeryToken()
                         <input type="submit" value="Adicionar" />
                     }
-                    <span style="padding:1px 10px">@item.Qtd</span>
+                    @if (item.Qtd > 0)
+                    {
+                        <span style="padding:1px 10px">@item.Qtd</span>
+                    }
                     @using (Ajax.BeginForm("RemoverDoCarrinho", new { idAnuncio = item.IdAnuncio }, new AjaxOptions { HttpMethod = "POST" }))
                     {
                         @Html.AntiForgeryToken()
-                        <input type="submit" value="Remover" />
+                        if (item.Qtd > 1)
+                        {
+                            <input type="submit" value="Remover" />
+                        }
+                        else
+                        {
+                            <input type="submit" value="Remover anúncio do carrinho" />
+                        }
                     }
                 </td>
                 <td>@item.Anuncio.Produto.ValorUnit.ToString("c")</td>

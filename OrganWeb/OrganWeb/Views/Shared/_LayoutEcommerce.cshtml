@@ -26,7 +26,7 @@
                         <div class="col-lg-2 text-center text-lg-left site-search-icon">
                             <div class="site-logo">
                                 <img src="~/Imagens/icone.png">
-                                <a href="index.html" class="js-logo-clone">Organ Ecommerce</a>
+                                <a href="~/Ecommerce">Organ</a>
                             </div>
                         </div>
                         <div class="col-xl-8 col-lg-2">
@@ -36,7 +36,21 @@
                             </form>
                         </div>
                         <div class="text-right">
-                            @Html.Partial("_PartialLogin")
+                            @{Html.RenderAction("SumarioCarrinho", "Carrinho");}
+                            <div class="site-top-icons">
+                                <ul>
+                                    <li>
+                                        <a href="cart.html" class="site-cart">
+                                            <span class="fa fa-cart-plus"></span>
+                                            <span class="count">@{Html.RenderAction("SumarioCarrinho", "Carrinho");}</span>
+                                        </a>
+                                    </li>
+                                    <li><a href="#"><span class="fa fa-heart"></span></a></li>
+                                    <li><a href="#"><span class="fa fa-user"></span></a></li>
+                                    <!--<i class="icon icon-room"></i><span>02548-120</span>-->
+                                    <li class="d-inline-block d-md-none ml-md-0"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -69,7 +83,7 @@
                             </ul>
                         </li>
                         <li><a href="shop.html">Ofertas</a></li>
-                        <li><a href="#">Vender</a></li>
+                        <li>@Html.ActionLink("Vender", "Novo", "Anuncio")</li>
                         <li><a href="contact.html">Contato</a></li>
                     </ul>
                 </div>

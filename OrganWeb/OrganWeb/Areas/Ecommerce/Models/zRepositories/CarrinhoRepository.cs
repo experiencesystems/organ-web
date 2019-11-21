@@ -53,7 +53,6 @@ namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
 
         public async Task LimparCarrinho()
         {
-            //TODO: refazer pra mudar qnd pra zero pra ajudar a trigger
             var carrinho = await GetCarrinho();
             foreach (var item in carrinho)
             {
@@ -98,8 +97,8 @@ namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
             }
             if (carrinho.Qtd <= 0)
             {
-                carrinho.Qtd = 0;
-                Update(carrinho);
+                DbSet.Attach(carrinho);
+                DbSet.Remove(carrinho);
             }
             SaveSync();
             return await Task.FromResult(carrinho.Qtd);
