@@ -28,18 +28,12 @@
                 <td>@item.Anuncio.Nome</td>
                 <td>@item.Anuncio.Produto.ValorUnit</td>
                 <td>
-                    <form class="d-inline align-middle" asp-action="RemoverDoCarrinho"
-                          asp-controller="Carrinho"
-                          asp-route-idAnuncio="@item.IdAnuncio"
-                          method="post">
-                        <button class="btn fa fa-minus fa-small" aria-hidden="true"></button>
-                    </form>
-                    <form class="d-inline align-middle" asp-action="AddAoCarrinho"
-                          asp-controller="ShoppingCart"
-                          asp-route-idAnuncio="@item.IdAnuncio"
-                          method="post">
-                        <button class="btn fa fa-plus fa-small" aria-hidden="true"></button>
-                    </form>
+                    @using (Ajax.BeginForm("RemoverDaWishlist", new { idAnuncio = item.IdAnuncio }, new AjaxOptions { HttpMethod = "POST" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="submit" value="Remover" />
+                    }
+                    @*<a class="btn fa fa-minus fa-small" value="@item.IdAnuncio"><i class="btn fa fa-minus fa-small"></i><span class="tooltipp" value="Remover da lista de desejos"></span></a>*@
                 </td>
             </tr>
         }
@@ -47,12 +41,11 @@
     <tfoot>
         <tr style="border:0">
             <td>
-                <form asp-action="ApagarCarrinho" method="post">
-                    <button class="btn btn-link text-dark" asp-action="ApagarCarrinho">
-                        <i class="fa fa-times" aria-hidden="true"></i>
-                        Limpar lista de desejos
-                    </button>
-                </form>
+                @using (Html.BeginForm("ApagarWishlist", "Wishlist", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken();
+                    <button class="btn btn-link text-dark" type="submit"><i class="fa fa-times"></i><span class="tooltipp" value="Limpar lista de desejos"></span></button>
+                }
             </td>
         </tr>
     </tfoot>

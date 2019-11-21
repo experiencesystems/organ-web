@@ -32,20 +32,13 @@ namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
         {
             try
             {
-                string id = "";
-                if (HttpContext.Current != null && HttpContext.Current.User != null
-                      && HttpContext.Current.User.Identity.Name != null)
-                {
-                    id = HttpContext.Current.User.Identity.GetUserId();
-                }
-
+                string id = HttpContext.Current.User.Identity.GetUserId();
                 return await DbSet.Include(a => a.Anuncio).Include(u => u.Usuario).Where(x => x.IdAnuncio == anuncio.Id && x.IdUsuario == id).AsNoTracking().FirstOrDefaultAsync();
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-
+                throw e;
             }
-            return null;
         }
 
         public async Task<int> AddAoCarrinho(Anuncio anuncio, int qtd = 1)
@@ -60,10 +53,12 @@ namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
 
         public async Task LimparCarrinho()
         {
+            //TODO: refazer pra mudar qnd pra zero pra ajudar a trigger
             var carrinho = await GetCarrinho();
             foreach (var item in carrinho)
             {
-                item.Update(item);
+                DbSet.Attach(item);
+                DbSet.Remove(item);
                 await Save();
             }
             carrinho = null;
@@ -107,7 +102,6 @@ namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
                 Update(carrinho);
             }
             SaveSync();
-            carrinho = null;
             return await Task.FromResult(carrinho.Qtd);
         }
     }

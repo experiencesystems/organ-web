@@ -18,25 +18,14 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
         public byte[] Contrato { get; set; }
 
         [Required]
-        [ForeignKey("Endereco")]
-        [RegularExpression(@"[0-9]{5}[\d]{3}", ErrorMessage = "Digite um CEP válido somente com números")]
-        [StringLength(8, MinimumLength = 8)]
-        public string CEP { get; set; }
-        
-        [Required]
-        [Range(0, 9999)]
-        public int NumEndereco { get; set; }
-        
-        [StringLength(30)]
-        public string CompEndereco { get; set; }
-
-        [Required]
         [ForeignKey("Pagamento")]
         public int IdPagamento { get; set; }
 
         [Required]
         [ForeignKey("Pedido")]
         public int IdPedido { get; set; }
+
+        public bool Status { get; set; }
 
         public virtual Pagamento Pagamento { get; set; }
         public virtual Pedido Pedido { get; set; }

@@ -14,6 +14,7 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
     {
         private Carrinho carrinho = new Carrinho();
         private Anuncio anuncio = new Anuncio();
+        private PedidoAnuncio pedidoAnuncio = new PedidoAnuncio();
 
         public ActionResult Index()
         {
@@ -63,11 +64,18 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
                 pedido.Data = DateTime.Today;
                 foreach (var item in pedido.Carrinhos)
                 {
-                    pedido.IdAnuncio = item.IdAnuncio;
                     pedido.Add(pedido);
                     await pedido.Save();
+                    //TODO: colocar campos de endereço no pedido
+                    pedidoAnuncio = new PedidoAnuncio
+                    {
+                        IdAnuncio = item.IdAnuncio,
+                        IdPedido = pedido.Id
+                    };
+                    pedidoAnuncio.Add(pedidoAnuncio);
+                    await pedidoAnuncio.Save();
                 }
-                ViewBag.SuccessMessage = "Seu pedido foi efetuado com sucesso! Ele será enviado para o anunciante, que retornará com os preços da transportadora e detalhes do contrato.";
+                ViewBag.SuccessMessage = "Seu pedido foi efetuado com sucesso! Aguarde a confirmação do anunciante.";
                 ModelState.Clear();
                 return View();
             }

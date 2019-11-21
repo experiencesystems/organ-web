@@ -9,6 +9,7 @@ using System.Data.Entity;
 using Microsoft.AspNet.Identity;
 using PagedList.EntityFramework;
 using PagedList;
+using System.Web.Http;
 
 namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
 {
@@ -16,43 +17,55 @@ namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
     {
         public async Task<IPagedList<Wishlist>> GetPagedAll(int page)
         {
-            return await DbSet.OrderBy(p => p.Id).ToPagedListAsync(page, 5);
+            var id = HttpContext.Current.User.Identity.GetUserId();
+            return await DbSet.Include(a => a.Anuncio).Include(u => u.Usuario).Where(x => x.IdUsuario == id).OrderBy(p => p.IdAnuncio).ToPagedListAsync(page, 5);
         }
 
         public async Task<List<Wishlist>> GetWishlist()
         {
-            return await DbSet.Include(a => a.Anuncio).Include(u => u.Usuario).Where(x => x.IdUsuario == HttpContext.Current.User.Identity.GetUserId()).ToListAsync();
+            var id = HttpContext.Current.User.Identity.GetUserId();
+            return await DbSet.Include(a => a.Anuncio).Include(u => u.Usuario).Where(x => x.IdUsuario == id).AsNoTracking().ToListAsync();
         }
 
         public async Task<Wishlist> GetWishlist(Anuncio anuncio)
         {
-            return await DbSet.Include(a => a.Anuncio).Include(u => u.Usuario).Where(x => x.IdUsuario == HttpContext.Current.User.Identity.GetUserId() && x.IdAnuncio == anuncio.Id).FirstAsync();
+            var id = HttpContext.Current.User.Identity.GetUserId();
+            return await DbSet.Include(a => a.Anuncio).Include(u => u.Usuario).Where(x => x.IdUsuario == id && x.IdAnuncio == anuncio.Id).AsNoTracking().FirstOrDefaultAsync();
         }
 
         public async Task AddWishlist(Anuncio anuncio)
         {
-            var wishlist = new Wishlist
+            if (await GetWishlist(anuncio) == null)
             {
-                IdAnuncio = anuncio.Id,
-                IdUsuario = HttpContext.Current.User.Identity.GetUserId()
-            };
-            Add(wishlist);
-            await Save();
-            wishlist = null;
+                var wishlist = new Wishlist
+                {
+                    IdAnuncio = anuncio.Id,
+                    IdUsuario = HttpContext.Current.User.Identity.GetUserId()
+                };
+                Add(wishlist);
+                await Save();
+                wishlist = null;
+            }
         }
 
         public async Task DeleteItemWishlist(Anuncio anuncio)
         {
-            DbSet.Remove(await GetWishlist(anuncio));
+            var wishlist = await GetWishlist(anuncio);
+            DbSet.Attach(wishlist);
+            DbSet.Remove(wishlist);
             await Save();
         }
-
+        
         public async Task LimparWishlist()
         {
             var wishlist = await GetWishlist();
-            DbSet.RemoveRange(wishlist);
+            foreach (var item in wishlist)
+            {
+                DbSet.Attach(item);
+                DbSet.Remove(item);
+                await Save();
+            }
             wishlist = null;
-            await Save();
         }
     }
 }

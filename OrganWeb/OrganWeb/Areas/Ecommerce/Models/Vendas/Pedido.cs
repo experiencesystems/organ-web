@@ -17,21 +17,16 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
         [Key]
         public int Id { get; set; }
         
-        public int IdAnuncio { get; set; }
+        [Required]
+        [ForeignKey("Usuario")]
         public string IdUsuario { get; set; }
 
         [DataType(DataType.Date, ErrorMessage = "Data em formato inválido"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Data { get; set; }
 
-        [NotMapped]
-        public double Subtotal { get; set; }
-
         [Required]
         public int Status { get; set; }
         //TODO: lista de status pedido
-
-        [Required]
-        public int Qtd { get; set; }
 
         [Required]
         public double ValFrete { get; set; }
@@ -54,6 +49,9 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
         public virtual ApplicationUser Usuario { get; set; }
         [NotMapped]
         public List<Carrinho> Carrinhos { get; set; }
+
+        [NotMapped]
+        public double Subtotal { get; set; }
 
         [NotMapped]
         public readonly List<SelectListItem> StatusPedido = new List<SelectListItem>()

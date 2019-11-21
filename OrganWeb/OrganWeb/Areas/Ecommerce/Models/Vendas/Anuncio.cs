@@ -33,7 +33,9 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
         [Range(0.00, 100.00)]
         [Display(Name = "Desconto (%)")]
         public double Desconto { get; set; }
-        
+
+        public double Quantidade { get; set; }
+
         [ForeignKey("Produto")]
         public int IdProduto { get; set; }
         

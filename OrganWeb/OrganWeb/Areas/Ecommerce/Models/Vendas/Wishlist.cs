@@ -13,14 +13,11 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
     [Table("tbWishlist")]
     public class Wishlist : WishlistRepository
     {
-        [Key]
-        public int Id { get; set; }
-
-        [Required]
+        [Key, Column(Order = 1)]
         [ForeignKey("Usuario")]
         public string IdUsuario { get; set; }
 
-        [Required]
+        [Key, Column(Order = 2)]
         [ForeignKey("Anuncio")]
         public int IdAnuncio { get; set; }
 

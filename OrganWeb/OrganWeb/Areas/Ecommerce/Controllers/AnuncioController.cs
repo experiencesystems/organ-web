@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using OrganWeb.Areas.Ecommerce.Models.Vendas;
+using OrganWeb.Areas.Sistema.Models.API;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
     {
         private Produto produto = new Produto();
         private Anuncio anuncio = new Anuncio();
+        private ListarUnidades unmd = new ListarUnidades();
         private ApplicationUserManager _userManager;
 
         public AnuncioController()
@@ -42,13 +44,15 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> NovoDeEstoque(string Nome, double Qtd)
         {
-            return View("Novo", new Anuncio { Anunciante = new Anunciante { Usuario = await UserManager.FindByIdAsync(User.Identity.GetUserId()) }, Produto = new Produto { Nome = Nome, Quantidade = Qtd } });
+            unmd = await unmd.GetListarUnidades();
+            return View("Novo", new Anuncio { Anunciante = new Anunciante { Usuario = await UserManager.FindByIdAsync(User.Identity.GetUserId()) }, Produto = new Produto { Nome = Nome, Unidades = unmd.UnidadeCadastros }, Quantidade = Qtd });
         }
 
         public async Task<ActionResult> Novo()
         {
+            unmd = await unmd.GetListarUnidades();
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            anuncio = new Anuncio { Anunciante = new Anunciante { Usuario = user } };
+            anuncio = new Anuncio { Anunciante = new Anunciante { Usuario = user }, Produto = new Produto { Unidades = unmd.UnidadeCadastros } };
             return View(anuncio);
         }
 
@@ -58,12 +62,7 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
         {
             if (ModelState.IsValid)
             {
-                produto.Add(new Produto
-                {
-                    Nome = anuncio.Produto.Nome,
-                    ValorUnit = anuncio.Produto.ValorUnit,
-                    Quantidade = anuncio.Produto.Quantidade
-                });
+                produto.Add(anuncio.Produto);
                 await produto.Save();
 
                 anuncio.Status = true;
@@ -74,6 +73,7 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
 
                 return RedirectToAction("Detalhes", new { id = anuncio.Id });
             }
+            anuncio.Produto.Unidades = unmd.UnidadeCadastros;
             return View(anuncio);
         }
 
@@ -102,6 +102,8 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             {
                 return HttpNotFound();
             }
+            unmd = await unmd.GetListarUnidades();
+            anuncio.Produto.Unidades = unmd.UnidadeCadastros;
             return View(anuncio);
         }
 
@@ -113,11 +115,26 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             {
                 anuncio.Update(anuncio);
                 await anuncio.Save();
+                if (await unmd.GetByID(anuncio.Produto.UM) == null)
+                {
+                    anuncio.Produto.Unidades = unmd.UnidadeCadastros;
+                    var uncd = new UnidadeCadastro()
+                    {
+                        Id = anuncio.Produto.UM,
+                        Desc = anuncio.Produto.Unidades.Where(x => x.Id == anuncio.Produto.UM).Select(x => x.Desc).FirstOrDefault().ToString()
+                    };
+                    unmd.Add(uncd);
+                    await unmd.Save();
+                }
+                anuncio.Produto.Update(anuncio.Produto);
+                await anuncio.Produto.Save();
+                //TODO: testar alteração de anúncio
                 ViewBag.SuccessMessage = "Seu anúncio " + anuncio.Nome + " foi alterado com sucesso.";
                 ViewBag.Id = anuncio.Id;
                 ModelState.Clear();
                 return View();
             }
+            anuncio.Produto.Unidades = unmd.UnidadeCadastros;
             return View(anuncio);
         }
 

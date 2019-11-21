@@ -170,7 +170,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> NovoAnuncio(Insumo insumo)
         {
-            return RedirectToAction("Novo", "Anuncio", new Anuncio { Anunciante = new Anunciante { Usuario = await UserManager.FindByIdAsync(User.Identity.GetUserId()) }, Produto = new Ecommerce.Models.Vendas.Produto { Nome = insumo.Nome, Quantidade = insumo.Estoque.Qtd } });
+            return RedirectToAction("Novo", "Anuncio", new Anuncio { Anunciante = new Anunciante { Usuario = await UserManager.FindByIdAsync(User.Identity.GetUserId()) }, Produto = new Ecommerce.Models.Vendas.Produto { Nome = insumo.Nome }, Quantidade = insumo.Estoque.Qtd });
         }
 
         public async Task<ActionResult> Editar(int? id, string tipo)

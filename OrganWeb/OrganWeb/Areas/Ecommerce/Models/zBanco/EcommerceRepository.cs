@@ -100,7 +100,7 @@ namespace OrganWeb.Areas.Ecommerce.Models.zBanco
             }
             catch(Exception exx)
             {
-
+                throw exx;
             }
         }
 

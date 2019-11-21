@@ -36,20 +36,17 @@
             <tr>
                 <td>@item.Anuncio.Nome</td>
                 <td>
-                    <form class="d-inline align-middle" asp-action="RemoverDoCarrinho"
-                          asp-controller="Carrinho"
-                          asp-route-idAnuncio="@item.IdAnuncio"
-                          method="post">
-                        <button class="btn fa fa-minus fa-small" aria-hidden="true"></button>
-                    </form>
+                    @using (Ajax.BeginForm("AddAoCarrinho", new { idAnuncio = item.IdAnuncio }, new AjaxOptions { HttpMethod = "POST" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="submit" value="Adicionar" />
+                    }
                     <span style="padding:1px 10px">@item.Qtd</span>
-                    <form class="d-inline align-middle" asp-action="AddAoCarrinho"
-                          asp-controller="ShoppingCart"
-                          asp-route-idAnuncio="@item.IdAnuncio"
-                          method="post">
-                        <button class="btn fa fa-plus fa-small" aria-hidden="true"></button>
-                    </form>
-
+                    @using (Ajax.BeginForm("RemoverDoCarrinho", new { idAnuncio = item.IdAnuncio }, new AjaxOptions { HttpMethod = "POST" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="submit" value="Remover" />
+                    }
                 </td>
                 <td>@item.Anuncio.Produto.ValorUnit.ToString("c")</td>
                 <td>@((item.Anuncio.Produto.ValorUnit * item.Qtd).ToString("c"))</td>
@@ -63,13 +60,14 @@
         </tr>
         <tr style="border:0">
             <td>
-                <form asp-action="ApagarCarrinho" method="post">
+                @using (Html.BeginForm("ApagarCarrinho", "Carrinho", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken();
                     <button class="btn btn-link text-dark" asp-action="ApagarCarrinho">
                         <i class="fa fa-times" aria-hidden="true"></i>
                         Limpar carrinho
                     </button>
-                </form>
-
+                }
             </td>
             <td colspan="2"></td>
             <td class="text-center">
