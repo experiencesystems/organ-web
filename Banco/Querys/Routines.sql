@@ -143,7 +143,7 @@ use dbEcommerce;
 DELIMITER $
 drop function if exists spNota$
 create function spNota(IdAn int)
-	returns double
+	returns double DETERMINISTIC
 begin
 	declare nota, notas, tot int;
     
@@ -157,17 +157,31 @@ begin
     return nota;
 end$
 
+drop function if exists spIsAn$
+create function spIsAn(IdU nvarchar(128))
+	returns boolean DETERMINISTIC
+begin
+	declare resp boolean;
+	
+	if(exists(select * from tbAnunciante where IdUsuario = IdU)) then
+	 set resp = true;
+	else
+	 set resp = false;
+	end if;
+	returns resp;
+end
+
 drop function if exists spUsuario$
 create function spUsuario(IdU nvarchar(128))
-	returns varchar(50)
+	returns varchar(50) DETERMINISTIC
 begin
 	declare nome varchar(50);
     
-    if(exists(select * from tbAnunciante where IdUsuario = IdU)) then
+    if(spIsAn(IdU)) then
 		set nome = (select NomeFazenda from tbAnunciante where IdUsuario = IdU);
 	else
 		set nome = (select `UserName` from tbUsuario where Id = IdU);
 	end if;
-    return nome;
+    returns nome;
 end$
 DELIMITER ;

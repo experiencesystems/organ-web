@@ -464,4 +464,17 @@ begin
     set idanu = (select IdAnuncio from tbPedidoAnuncio where IdPedido = NEW.Id);
 	delete from tbCarrinho where ((IdAnuncio = idanu) and (IdUsuario = NEW.IdUsuario));
 end$
+
+drop trigger if exists trgPedidoAprov$
+create trigger trgPedidoAprov
+after update
+on tbPedido
+for each row
+begin
+	declare idanu int;
+	
+	if(NEW.`Status` = 1) then
+    insert into tbVenda(IdPedido) value(NEW.IdPedido);
+	end if;
+end$
 DELIMITER ;

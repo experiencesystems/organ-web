@@ -237,7 +237,8 @@ create table tbPedido(
 	 constraint PKPedido primary key(Id),
 	IdUsuario nvarchar(128) not null,
 	`Data` datetime default current_timestamp,
-	`Status` int default 0,
+	`Status` int default 0,	
+	IdPagamento int not null,
     ValFrete double not null,
     CEPEntrega char(8) not null,
     NumEntrega int not null,
@@ -262,18 +263,16 @@ create table tbPagamento(
 	VlParcela double not null,
 	Tipo int not null 
 )engine = innodb;
+alter table tbPedido add constraint add constraint FKPedidoPagamento foreign key(IdPagamento) references tbPagamento(Id);
 
 drop table if exists tbVenda;
 create table tbVenda(
 	Id int auto_increment,
 	 constraint PKVenda primary key(Id),
 	`Data` datetime default current_timestamp,
-	Contrato blob,
-	IdPagamento int not null,
     IdPedido int not null,
     `Status` bool default false
 )engine = innodb;
-alter table tbVenda add constraint FKVendaPagamento foreign key(IdPagamento) references tbPagamento(Id),
-					add constraint FKVendaPedido foreign key(IdPedido) references tbPedido(Id);
+alter table tbVenda add constraint FKVendaPedido foreign key(IdPedido) references tbPedido(Id);
 
   
