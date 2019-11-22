@@ -27,12 +27,13 @@ insert into tbEstado(Estado, UF) values("São Paulo", "SP"),
 									("Sergipe", "SE"),
 									("Tocantins", "TO");
 
-insert into tbCidade(Cidade, IdEstado) values("Osasco", 1);
-insert into tbBairro(Bairro, IdCidade) values("Vila Yara (Real)", 1);
-insert into tbLogradouro(Logradouro, IdBairro) values("Rua das Flores", 1),
-													 ("Rua das Árvores", 1);
-insert into tbEndereco(CEP, IdRua) values("00000000", 1),
-										 ("11111111", 2);
+insert into tbCidade(Cidade, IdEstado) values("Cuiabá", 12);
+insert into tbBairro(Bairro, IdCidade) values("Baú", 1);
+insert into tbEndereco(CEP) values("78008-105"),
+										 ("78008-000", 2);
+										 
+insert into tbLogradouro(Logradouro, IdBairro, CEP) values("Avenida Bosque da Saúde - até 161/162", 1, "78008-105"),
+													 ("Avenida Historiador Rubens de Mendonça - até 1250 - lado par", 1, "78008-000");
                                          
 insert into tbUsuario(`Id`, `Email`, `ConfirmacaoEmail`, `SenhaHash`, `CarimboSeguranca`, `UserName`, Foto, CPF, Assinatura)
 values('02719894-e4a9-46c8-999e-ba942abd5f8f', 'milenamonteiro@gmail.com', 0, 

@@ -169,7 +169,7 @@ begin
 	 set resp = false;
 	end if;
 	returns resp;
-end
+end$
 
 drop function if exists spUsuario$
 create function spUsuario(IdU nvarchar(128))
