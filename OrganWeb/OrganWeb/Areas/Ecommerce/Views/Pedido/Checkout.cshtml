@@ -1,7 +1,10 @@
 ﻿@model OrganWeb.Areas.Ecommerce.Models.Vendas.Pedido
+@using OrganWeb.Areas.Ecommerce.Models.API;
+@using System.Threading.Tasks;
+@using OrganWeb.Models;
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_LayoutEcommerce.cshtml";
 }
 
 @if (!Request.IsAuthenticated)
@@ -9,7 +12,7 @@
     <br />
     <h6>Faça login para finalizar sua compra!</h6>
     <div>
-        @Html.ActionLink("Login", "Login", "Account")
+        @Html.ActionLink("Login", "Login", "Account", new { area = "Ecommerce" }, new { returnUrl = this.Request.RawUrl })
     </div>
     return;
 }
@@ -28,7 +31,6 @@
 
         @Html.HiddenFor(model => model.Data)
         @Html.HiddenFor(model => model.Status)
-        @Html.HiddenFor(model => model.IdAnuncio)
         @Html.HiddenFor(model => model.IdUsuario)
 
         <div class="form-horizontal">
@@ -63,7 +65,66 @@
                     </tr>
                 }
             </table>
-            @Html.DisplayFor(model => model.Subtotal)
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Subtotal)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Subtotal)
+                </dd>
+            </dl>
+            <div class="form-group">
+                @Html.LabelFor(model => model.CEPEntrega, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CEPEntrega, new { htmlAttributes = new { @class = "form-control", @id = "cepe" } })
+                    @Html.ValidationMessageFor(model => model.CEPEntrega, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <input type="button" id="valorcepe" value="Calcular valor do frete" />
+            <p></p>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Endereco.Logradouro.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Endereco.Logradouro.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Endereco.Logradouro.Nome, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.NumEntrega, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NumEntrega, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NumEntrega, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.CompEntrega, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CompEntrega, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CompEntrega, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Endereco.Logradouro.Bairro.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Endereco.Logradouro.Bairro.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Endereco.Logradouro.Bairro.Nome, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Endereco.Logradouro.Bairro.Cidade.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Endereco.Logradouro.Bairro.Cidade.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Endereco.Logradouro.Bairro.Cidade.Nome, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Endereco.Logradouro.Bairro.Cidade.IdEstado, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Endereco.Logradouro.Bairro.Cidade.IdEstado, new SelectList(Model.Endereco.Logradouro.Bairro.Cidade.Estados, "Id", "UF"), new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Endereco.Logradouro.Bairro.Cidade.IdEstado, "", new { @class = "text-danger" })
+                </div>
+            </div>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Criar pedido" class="btn btn-default" />
@@ -79,11 +140,41 @@
                 @ViewBag.SuccessMessage
                 @Html.ActionLink("Acompanhe seu pedido", "Index", "Pedido")
             </div>
+            return;
         }
     }
 
     <div>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Voltar ao carrinho", "Index", "Carrinho")
     </div>
+
+    @section Scripts
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var button = document.getElementById('valorcepe');
+                button.addEventListener('click', function () {
+                    var cepe = document.getElementById('cepe').value;
+                    var check = $(".cepe").val();
+                    if (check != "") {
+                        $.ajax({
+                            url: '@Url.Action("PostFrete", "Pedido")',
+                            type: "POST",
+                            cache: false,
+                            data: { "cep": cepe },
+                            success: function (data) {
+                                if (data.result == true)
+                                {
+                                    $("p").html(data.frete);
+                                } else {
+                                    alert('Não foi possível completar seu pedido.');
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
+    }
 </body>
 </html>

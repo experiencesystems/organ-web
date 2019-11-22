@@ -7,6 +7,8 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using OrganWeb.Areas.Ecommerce.Models.API;
+using OrganWeb.Areas.Ecommerce.Models.Endereco;
 
 namespace OrganWeb.Areas.Ecommerce.Controllers
 {
@@ -14,6 +16,7 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
     {
         private Carrinho carrinho = new Carrinho();
         private Anuncio anuncio = new Anuncio();
+        private Estado estado = new Estado();
         private PedidoAnuncio pedidoAnuncio = new PedidoAnuncio();
 
         public ActionResult Index()
@@ -21,27 +24,8 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             return View();
         }
 
-        public async Task<ActionResult> Checkout(int? idAnuncio)
+        public async Task<ActionResult> Checkout()
         {
-            //Recebe o anúncio que quer comprar
-            if (idAnuncio == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            //Verifica se ele existe
-            anuncio = await anuncio.GetByID(idAnuncio);
-            if (anuncio == null)
-            {
-                return HttpNotFound();
-            }
-            //Vê se ele ta no carrinho
-            var itemcarrinho = await carrinho.GetItemCarrinho(anuncio);
-            if (itemcarrinho == null)
-            {
-                //Se não estiver ele adiciona e manda o usuário pro carrinho
-                await carrinho.AddAoCarrinho(anuncio, 1);
-                return RedirectToAction("Index", "Carrinho");
-            }
             //Verifica se ele não tem itens no carrinho
             var itenscarrinho = await carrinho.GetCarrinho();
             if (itenscarrinho?.Count() <= 0)
@@ -51,7 +35,8 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             }
             //Envia o carrinho pro checkout
             var (QtdItens, Subtotal) = await carrinho.GetQtdETotalCarrinho();
-            return View(new Pedido { Carrinhos = itenscarrinho, IdUsuario = User.Identity.GetUserId(), Subtotal = Subtotal });
+            return View(new Pedido { Endereco = new Endereco { Logradouro = new Logradouro { Bairro = new Bairro { Cidade = new Cidade { Estados = await estado.GetAll() } } } },
+                Carrinhos = itenscarrinho, IdUsuario = User.Identity.GetUserId(), Subtotal = Subtotal });
         }
 
         [HttpPost]
@@ -80,6 +65,14 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
                 return View();
             }
             return View(pedido);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> PostFrete(string cep)
+        {
+            var carrinhos = await carrinho.GetCarrinho();
+            string valor = await MetodosAPI.GetFreteFromCarrinhoAsync(carrinhos, cep);
+            return Json(new { result = true, frete = valor });
         }
     }
 }

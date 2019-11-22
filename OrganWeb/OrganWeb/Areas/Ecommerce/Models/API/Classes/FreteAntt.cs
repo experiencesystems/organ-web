@@ -20,17 +20,14 @@ namespace OrganWeb.Areas.Ecommerce.Models.API.Classes
         [JsonProperty("DistanciaKM")]
         public long DistanciaKm { get; set; }
 
-        [JsonProperty("PossuiRetorno")]
-        public long PossuiRetorno { get; set; }
-
         [JsonProperty("ValorFrete")]
         public double ValorFrete { get; set; }
 
-        [JsonProperty("ValorFreteABCAM")]
-        public double ValorFreteAbcam { get; set; }
+        [JsonProperty("CargaLotacao")]
+        public long CargaLotacao { get; set; }
 
-        [JsonProperty("CargaRetorno")]
-        public string CargaRetorno { get; set; }
+        [JsonProperty("CargaLotacaoStr")]
+        public object CargaLotacaoStr { get; set; }
     }
 
     public partial class FreteAntt

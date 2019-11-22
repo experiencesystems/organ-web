@@ -1,5 +1,6 @@
 ﻿using OrganWeb.Areas.Ecommerce.Models.API.Classes;
 using OrganWeb.Areas.Ecommerce.Models.API.Classes.Bing;
+using OrganWeb.Areas.Ecommerce.Models.Vendas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,31 @@ namespace OrganWeb.Areas.Ecommerce.Models.API
 {
     public static class MetodosAPI
     {
+        public static async Task<string> GetFreteFromCarrinhoAsync(List<Carrinho> carrinhos, string CEPEntrega)
+        {
+            var fretes = new List<double>();
+            double subtotais = 0;
+            foreach (var carrinho in carrinhos)
+            {
+                var valor = await GetValorDoFrete(carrinho.Anuncio.Anunciante.CEP, CEPEntrega);
+                fretes.Add(valor.ValorFrete);
+                subtotais += carrinho.Anuncio.Produto.ValorUnit * carrinho.Qtd;
+            }
+            string mensagem = "";
+            if (carrinhos.Count > 1)
+                mensagem = "Valores de frete: \n";
+            else
+                mensagem = "Valor do frete: \n";
+            double valores = 0;
+            foreach (var valor in fretes)
+            {
+                valores += valor;
+                mensagem += "R$" + Math.Round(valor, 2, MidpointRounding.ToEven) + "\n";
+            }
+            mensagem += "Total com o frete: R$" + Math.Round(valores + subtotais, 2, MidpointRounding.ToEven);
+            return mensagem;
+        }
+
         public static async Task<FreteAntt> GetValorDoFrete(string ceporigem, string cepdestino)
         {
             EnderecoJson origin = await GetAddress(ceporigem);
@@ -18,7 +44,8 @@ namespace OrganWeb.Areas.Ecommerce.Models.API
             QueryCoordinates coordinatesorigin = await GetCoordinates(GenerateUri(origin));
             QueryCoordinates coordinatesdestination = await GetCoordinates(GenerateUri(destination));
             var distancematrix = await PostDistance(GenerateJsonBody(coordinatesorigin, coordinatesdestination));
-            return await ValorDoFrete(GetDistance(distancematrix));
+            var aa = await ValorDoFrete(GetDistance(distancematrix));
+            return aa;
         }
 
         public static double GetDistance(DistanceMatrix distanceMatrix)
@@ -151,7 +178,7 @@ namespace OrganWeb.Areas.Ecommerce.Models.API
             HttpResponseMessage response = new HttpResponseMessage();
             using (var httpClient = new HttpClient { BaseAddress = baseAddress })
             {
-                using (var content = new StringContent("TipoCargaEnum=0&TotalEixo=2&DistanciaKM=" + Convert.ToInt16(distancia) + "&PossuiRetorno=1", System.Text.Encoding.UTF8, "application/x-www-form-urlencoded"))
+                using (var content = new StringContent("TipoCargaEnum=4&TotalEixo=2&DistanciaKM=" + Convert.ToInt16(distancia) + "&CargaLotacao=0", System.Text.Encoding.UTF8, "application/x-www-form-urlencoded"))
                 {
                     using (response = await httpClient.PostAsync("", content))
                     {

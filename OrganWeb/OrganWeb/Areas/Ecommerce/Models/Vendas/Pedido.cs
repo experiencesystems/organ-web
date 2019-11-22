@@ -33,25 +33,29 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
 
         [Required]
         [ForeignKey("Endereco")]
+        [Display(Name = "CEP")]
         [RegularExpression(@"[0-9]{5}[\d]{3}", ErrorMessage = "Digite um CEP válido somente com números")]
         [StringLength(8, MinimumLength = 8)]
         public string CEPEntrega { get; set; }
 
         [Required]
+        [Display(Name = "Número")]
         public int NumEntrega { get; set; }
 
         [StringLength(50)]
+        [Display(Name = "Complemento")]
         public string CompEntrega { get; set; }
 
         [NotMapped]
         public virtual Anuncio Anuncio { get; set; }
         public virtual Endereco.Endereco Endereco { get; set; }
         public virtual ApplicationUser Usuario { get; set; }
-        [NotMapped]
-        public List<Carrinho> Carrinhos { get; set; }
 
         [NotMapped]
         public double Subtotal { get; set; }
+
+        [NotMapped]
+        public List<Carrinho> Carrinhos { get; set; }
 
         [NotMapped]
         public readonly List<SelectListItem> StatusPedido = new List<SelectListItem>()

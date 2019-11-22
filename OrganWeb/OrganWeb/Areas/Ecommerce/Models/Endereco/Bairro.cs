@@ -15,6 +15,7 @@ namespace OrganWeb.Areas.Ecommerce.Models.Endereco
         public int Id { get; set; }
 
         [Required]
+        [Display(Name = "Bairro")]
         [StringLength(30, MinimumLength = 5)]
         public string Nome { get; set; }
 

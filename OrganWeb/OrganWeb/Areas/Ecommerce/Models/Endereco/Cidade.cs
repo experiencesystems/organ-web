@@ -15,13 +15,18 @@ namespace OrganWeb.Areas.Ecommerce.Models.Endereco
         public int Id { get; set; }
 
         [Required]
+        [Display(Name = "Cidade")]
         [StringLength(30, MinimumLength = 5)]
         public string Nome { get; set; }
 
         [Required]
         [ForeignKey("Estado")]
+        [Display(Name = "Estado")]
         public int IdEstado { get; set; }
 
         public virtual Estado Estado { get; set; }
+
+        [NotMapped]
+        public List<Estado> Estados { get; set; }
     }
 }
