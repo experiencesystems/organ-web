@@ -1,4 +1,5 @@
 ﻿using OrganWeb.Areas.Sistema.Models.Administrativo;
+using OrganWeb.Areas.Sistema.Models.Funcionarios;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,6 @@ namespace OrganWeb.Areas.Sistema.Models.ViewModels
     {
         public IEnumerable<Area> Areas { get; set; }
         public IEnumerable<Solo> Solos { get; set; }
-        public IEnumerable<VwFuncionario> VwFuncionarios { get; set; }
+        public IEnumerable<VwFuncionario> Funcionarios { get; set; }
     }
 }

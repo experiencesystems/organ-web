@@ -37,7 +37,6 @@ namespace OrganWeb.Areas.Sistema.Models.zBanco
         public DbSet<FuncControle> FuncControles { get; set; }
         
         // FUNCIONÁRIO
-        public DbSet<Cargo> Cargos { get; set; }
         public DbSet<TelFunc> TelFuncs { get; set; }
         public DbSet<Funcionario> Funcionarios { get; set; }
 
@@ -74,10 +73,6 @@ namespace OrganWeb.Areas.Sistema.Models.zBanco
 
             // MAPEAMENTO DOS NOMES
 
-            modelBuilder.Entity<Cargo>()
-                .Property(t => t.Nome)
-                .HasColumnName("Cargo");
-
             modelBuilder.Entity<Categoria>()
                 .Property(t => t.Nome)
                 .HasColumnName("Categoria");
@@ -97,6 +92,10 @@ namespace OrganWeb.Areas.Sistema.Models.zBanco
             modelBuilder.Entity<VwFornecedor>()
                 .Property(t => t.RazaoSocial)
                 .HasColumnName("Razão Social");
+
+            modelBuilder.Entity<VwFuncionario>()
+                .Property(t => t.Funcao)
+                .HasColumnName("Função");
 
             modelBuilder.Entity<VwPragaOrDoenca>()
                 .Property(t => t.Areas)

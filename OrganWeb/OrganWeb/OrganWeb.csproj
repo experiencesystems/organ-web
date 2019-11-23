@@ -291,7 +291,6 @@
     <Compile Include="Areas\Sistema\Models\Controles\Controle.cs" />
     <Compile Include="Areas\Sistema\Models\Controles\FuncControle.cs" />
     <Compile Include="Areas\Sistema\Models\Controles\ItensControle.cs" />
-    <Compile Include="Areas\Sistema\Models\Funcionarios\Cargo.cs" />
     <Compile Include="Areas\Sistema\Models\Funcionarios\Funcionario.cs" />
     <Compile Include="Areas\Sistema\Models\Funcionarios\TelFunc.cs" />
     <Compile Include="Areas\Sistema\Models\Praga_e_Doenca\AreaPD.cs" />
@@ -531,6 +530,7 @@
     <Content Include="Areas\Sistema\Views\Controle\Detalhes.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Shared\_PartialLogin.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Carrinho\SumarioCarrinho.cshtml" />
+    <Content Include="Areas\Sistema\Views\Funcionario\Create.cshtml" />
     <None Include="Properties\PublishProfiles\organweb - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\organweb - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />

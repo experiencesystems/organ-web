@@ -14,7 +14,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
     {
         private TipoTel tipotel = new TipoTel();
         private Telefone telefone = new Telefone();
-        private Cargo cargo = new Cargo();
         private DDD ddd = new DDD();
         private Funcionario funcionario = new Funcionario();
         private VwFuncionario vwfuncionario = new VwFuncionario();
@@ -45,7 +44,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 {
                     Tipo = model.Telefone.TipoTel.Tipo
                 };
-
                 tipotel.Add(tipotel);
                 await tipotel.Save();
 
@@ -55,23 +53,27 @@ namespace OrganWeb.Areas.Sistema.Controllers
                     IdDDD = model.Telefone.IdDDD,
                     IdTipo = tipotel.Id
                 };
-
                 telefone.Add(telefone);
                 await telefone.Save();
 
-                //TODO: trocar depois pra cargo int
+                model.Status = true;
+                model.Add(model);
+                await model.Save();
 
-                funcionario = new Funcionario
+                var telfunc = new TelFunc
                 {
-                    IdCargo = cargo.Id,
-                    Status = true
+                    IdFunc = funcionario.Id,
+                    IdTelefone = telefone.Id
                 };
+                telfunc.Add(telfunc);
+                await telfunc.Save();
 
                 funcionario.Add(funcionario);
                 await funcionario.Save();
 
                 return RedirectToAction("Index");
             }
+            funcionario.Telefone.DDDs = await ddd.GetAll();
             return View(funcionario);
         }
 
@@ -86,7 +88,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return HttpNotFound();
             }
-
             return View(vwfuncionario);
         }
 
@@ -101,7 +102,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return HttpNotFound();
             }
-
             return View(funcionario);
         }
 
@@ -115,6 +115,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 await funcionario.Save();
                 return RedirectToAction("Index");
             }
+            funcionario.Telefone.DDDs = await ddd.GetAll();
             return View(funcionario);
         }
 
@@ -129,7 +130,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return HttpNotFound();
             }
-
             return View(vwfuncionario);
         }
 

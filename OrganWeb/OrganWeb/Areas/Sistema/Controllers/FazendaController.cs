@@ -1,4 +1,5 @@
 ﻿using OrganWeb.Areas.Sistema.Models.Administrativo;
+using OrganWeb.Areas.Sistema.Models.Funcionarios;
 using OrganWeb.Areas.Sistema.Models.ViewModels;
 using OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa;
 using System;
@@ -14,7 +15,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
     {   //TODO: mais de uma colheita
         private Solo solo = new Solo();
         private ViewFazenda vwFazenda = new ViewFazenda();
-        private VwFuncionario vwFuncionario = new VwFuncionario();
+        private VwFuncionario funcionario = new VwFuncionario();
         private Area area = new Area();
 
         public async Task<ActionResult> Index()
@@ -22,7 +23,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
             vwFazenda = new ViewFazenda()
             {
                 Areas = await area.GetAll(),
-                VwFuncionarios = await vwFuncionario.GetAll(),
+                Funcionarios = await funcionario.GetAll(),
                 Solos = await solo.GetAll()
             };
             return View(vwFazenda);
