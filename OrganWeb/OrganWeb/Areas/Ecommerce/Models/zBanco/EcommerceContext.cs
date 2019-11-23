@@ -25,7 +25,6 @@ namespace OrganWeb.Areas.Ecommerce.Models.zBanco
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<Avaliacao> Avaliacaos { get; set; }
         public DbSet<Comentario> Comentarios { get; set; }
-        public DbSet<Resposta> Respostas { get; set; }
         public DbSet<Venda> Vendas { get; set; }
         public DbSet<Entrega> Entregas { get; set; }
         public DbSet<Pacote> Pacotes { get; set; }
@@ -71,20 +70,6 @@ namespace OrganWeb.Areas.Ecommerce.Models.zBanco
             modelBuilder.Entity<Comentario>()
                 .Property(t => t.Valor)
                 .HasColumnName("Comentario");
-
-            modelBuilder.Entity<Resposta>().HasKey(vf => new { vf.IdComentario, vf.IdResposta });
-
-            modelBuilder.Entity<Resposta>()
-                    .HasRequired(m => m.Comentario)
-                    .WithMany(t => t.Respostas)
-                    .HasForeignKey(m => m.IdComentario)
-                    .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Resposta>()
-                    .HasRequired(m => m.Comentario)
-                    .WithMany(t => t.Respostas)
-                    .HasForeignKey(m => m.IdResposta)
-                    .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ApplicationUser>()
                     .ToTable("tbUsuario")

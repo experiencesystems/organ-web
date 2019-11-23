@@ -45,13 +45,47 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
         {
             if (ModelState.IsValid)
             {
-                pedido.Status = 1;
+                pedido.Status = 0;
                 pedido.Data = DateTime.Today;
+
+                var cep = new Endereco()
+                {
+                    CEP = pedido.CEPEntrega
+                };
+                cep.Add(cep);
+                await cep.Save();
+
+                var cidade = new Cidade()
+                {
+                    Nome = pedido.Endereco.Logradouro.Bairro.Cidade.Nome,
+                    IdEstado = pedido.Endereco.Logradouro.Bairro.Cidade.IdEstado
+                };
+                cidade.Add(cidade);
+                await cidade.Save();
+
+                var bairro = new Bairro()
+                {
+                    Nome = pedido.Endereco.Logradouro.Bairro.Nome,
+                    IdCidade = cidade.Id
+                };
+                bairro.Add(bairro);
+                await bairro.Save();
+
+                var rua = new Logradouro()
+                {
+                    CEP = cep.CEP,
+                    Nome = pedido.Endereco.Logradouro.Nome,
+                    IdBairro = bairro.Id
+                };
+                rua.Add(rua);
+                await rua.Save();
+
                 foreach (var item in pedido.Carrinhos)
                 {
                     pedido.Add(pedido);
                     await pedido.Save();
-                    //TODO: colocar campos de endereço no pedido
+                    //TODO: arrumar pedido de acordo com anuncio
+                    //TODO: colocar dados do pagamento aqui
                     pedidoAnuncio = new PedidoAnuncio
                     {
                         IdAnuncio = item.IdAnuncio,

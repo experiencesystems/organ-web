@@ -1,5 +1,5 @@
 use dbOrgan;
-
+/*https://web.archive.org/web/20130509230922/http://dev.mysql.com/tech-resources/articles/mysql-storedprocedures.pdf*/
 DELIMITER $
     
 drop procedure if exists spInsertEstoque$
@@ -141,22 +141,6 @@ DELIMITER ;
 
 use dbEcommerce;
 DELIMITER $
-drop function if exists spNota$
-create function spNota(IdAn int)
-	returns double DETERMINISTIC
-begin
-	declare nota, notas, tot int;
-    
-    if(exists(select * from tbAvaliacao where IdAnuncio = IdAn)) then
-		set notas = (select sum(Nota) from tbAvaliacao where ((IdAnuncio = IdAn) and (Nota is not null)));
-        set tot = (select count(*) from tbAvaliação where (IdAnuncio = IdAn));
-        set nota = notas/tot;
-	else
-		set nota = 0;
-	end if;
-    return nota;
-end$
-
 drop function if exists spIsAn$
 create function spIsAn(IdU nvarchar(128))
 	returns boolean DETERMINISTIC
@@ -168,8 +152,8 @@ begin
 	else
 	 set resp = false;
 	end if;
-	returns resp;
-end
+	return resp;
+end$ 
 
 drop function if exists spUsuario$
 create function spUsuario(IdU nvarchar(128))
@@ -182,6 +166,6 @@ begin
 	else
 		set nome = (select `UserName` from tbUsuario where Id = IdU);
 	end if;
-    returns nome;
+    return nome;
 end$
 DELIMITER ;

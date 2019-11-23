@@ -87,19 +87,18 @@ create table tbAnunciante(
 )engine = innodb;
 alter table tbAnunciante add constraint FKAnuncianteUsuario foreign key(IdUsuario) references tbUsuario(`Id`);
 
-drop table if exists tbEndereco;
 create table tbEndereco(
 	CEP char(8),
-	 constraint PKLocalizacao primary key (CEP),
-	IdRua int not null
+	 constraint PKLocalizacao primary key (CEP)
 )engine = innodb;
 
 drop table if exists tbLogradouro;
 create table tbLogradouro(
 	Id int auto_increment,
 	 constraint PKRua primary key (Id),
-	Logradouro varchar(40) not null,
-	IdBairro int not null
+	Logradouro varchar(80) not null,
+	IdBairro int not null,
+	CEP char(8) not null
 )engine = innodb;
 
 drop table if exists tbBairro;
@@ -128,8 +127,8 @@ create table tbEstado(
 
 alter table tbCidade add constraint FKCidadeEstado foreign key(IdEstado) references tbEstado(Id);
 alter table tbBairro add constraint FKBairroCidade foreign key(IdCidade) references tbCidade(Id);
-alter table tbLogradouro add constraint FKRuaBairro foreign key(IdBairro) references tbBairro(Id);
-alter table tbEndereco add constraint FKEnderecoRua foreign key(IdRua) references tbLogradouro(Id);
+alter table tbLogradouro add constraint FKRuaBairro foreign key(IdBairro) references tbBairro(Id),
+						 add constraint FKRuaCEP foreign key(CEP) references tbEndereco(CEP);
 
 alter table tbAnunciante add constraint FKAnuncianteEndereco foreign key(CEP) references tbEndereco(CEP);
 
@@ -161,12 +160,14 @@ create table tbAnuncio(
 	Foto blob,
 	Quantidade double not null,
 	Desconto decimal(5,2) default 0,
+	DuracaoDesc int default 0,
 	IdProduto int not null,
 	IdAnunciante nvarchar(128) not null,
-    `Data` datetime default current_timestamp 
+    `Data` datetime default current_timestamp ,
+    LimiteParcela int default 1
 )engine = innodb;
 alter table tbAnuncio add constraint FKAnuncioProduto foreign key(IdProduto) references tbProduto(Id),
-					  add constraint FKAnuncioAnunciante foreign key(IdAnunciante) references tbAnunciante(IdUsuario);
+					  add constraint FKAnuncioAnunciante foreign key(IdAnunciante) references tbAnunciante(IdUsuario);  
 
 drop table if exists tbWishlist;
 create table tbWishList(
@@ -201,15 +202,6 @@ create table tbComentario(
 )engine = innodb;
 alter table tbComentario add constraint FKComentarioAnuncio foreign key(IdAnuncio) references tbAnuncio(Id),
 						 add constraint FKComentarioUsuario foreign key(IdUsuario) references tbUsuario(Id);
-
-drop table if exists tbResposta;
-create table tbResposta (
-    IdComentario int not null,
-    IdResposta int not null,
-    constraint PKResposta primary key (IdComentario , IdResposta)
-)  engine=innodb;
-alter table tbResposta add constraint FKRespostaComentario foreign key(IdComentario) references tbComentario(Id),
-					   add constraint FKResposta foreign key(IdResposta) references tbComentario(Id);
 
 drop table if exists tbCarrinho;
 create table tbCarrinho(
@@ -263,7 +255,7 @@ create table tbPagamento(
 	VlParcela double not null,
 	Tipo int not null 
 )engine = innodb;
-alter table tbPedido add constraint add constraint FKPedidoPagamento foreign key(IdPagamento) references tbPagamento(Id);
+alter table tbPedido add constraint FKPedidoPagamento foreign key(IdPagamento) references tbPagamento(Id);
 
 drop table if exists tbVenda;
 create table tbVenda(

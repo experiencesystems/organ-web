@@ -34,6 +34,5 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
 
         public virtual Anuncio Anuncio { get; set; }
         public virtual ApplicationUser Usuario { get; set; }
-        public virtual List<Resposta> Respostas { get; set; }
     }
 }

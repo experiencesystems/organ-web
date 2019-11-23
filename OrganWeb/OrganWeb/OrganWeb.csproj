@@ -250,7 +250,6 @@
     <Compile Include="Areas\Ecommerce\Models\Vendas\PedidoAnuncio.cs" />
     <Compile Include="Areas\Ecommerce\Models\Vendas\PedidoVenda.cs" />
     <Compile Include="Areas\Ecommerce\Models\Vendas\Produto.cs" />
-    <Compile Include="Areas\Ecommerce\Models\Vendas\Resposta.cs" />
     <Compile Include="Areas\Ecommerce\Models\Vendas\Venda.cs" />
     <Compile Include="Areas\Ecommerce\Models\Vendas\Wishlist.cs" />
     <Compile Include="Areas\Ecommerce\Models\ViewModels\CarrinhoViewModel.cs" />

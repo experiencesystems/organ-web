@@ -27,12 +27,13 @@ insert into tbEstado(Estado, UF) values("São Paulo", "SP"),
 									("Sergipe", "SE"),
 									("Tocantins", "TO");
 
-insert into tbCidade(Cidade, IdEstado) values("Osasco", 1);
-insert into tbBairro(Bairro, IdCidade) values("Vila Yara (Real)", 1);
-insert into tbLogradouro(Logradouro, IdBairro) values("Rua das Flores", 1),
-													 ("Rua das Árvores", 1);
-insert into tbEndereco(CEP, IdRua) values("00000000", 1),
-										 ("11111111", 2);
+insert into tbCidade(Cidade, IdEstado) values("Cuiabá", 12);
+insert into tbBairro(Bairro, IdCidade) values("Baú", 1);
+insert into tbEndereco(CEP) values("78008105"),
+								  ("78008000");
+										 
+insert into tbLogradouro(Logradouro, IdBairro, CEP) values("Avenida Bosque da Saúde - até 161/162", 1, "78008105"),
+														  ("Avenida Historiador Rubens de Mendonça - até 1250 - lado par", 1, "78008000");
                                          
 insert into tbUsuario(`Id`, `Email`, `ConfirmacaoEmail`, `SenhaHash`, `CarimboSeguranca`, `UserName`, Foto, CPF, Assinatura)
 values('02719894-e4a9-46c8-999e-ba942abd5f8f', 'milenamonteiro@gmail.com', 0, 
@@ -50,8 +51,8 @@ values('02719894-e4a9-46c8-999e-ba942abd5f8f', 'milenamonteiro@gmail.com', 0,
 insert into tbDadosBancarios(NomeTitular, CVV, Banco, NumCartao, Validade, IdUsuario) values("João Meu Pai", 1111, 1, 11111111111111111, '01/01/01', '02719894-e4a9-46c8-999e-ba942abd5f8f');
 
        
-insert into tbAnunciante(IdUsuario, NomeFazenda, NumEnd, CEP) values('02719894-e4a9-46c8-999e-ba942abd5f8g', 'Experience Farms', 1, "00000000"),
-																	('02719894-e4a9-46c8-999e-ba942abd5f8h', 'Fazenda Triste', 2, "00000000");
+insert into tbAnunciante(IdUsuario, NomeFazenda, NumEnd, CEP) values('02719894-e4a9-46c8-999e-ba942abd5f8g', 'Experience Farms', 1, "78008105"),
+																	('02719894-e4a9-46c8-999e-ba942abd5f8h', 'Fazenda Triste', 2, "78008000");
 
 insert into tbUM value('a', 'A');
 insert into tbProduto(ValorUnit, UM, Nome, Categoria) values(5.25, 'a', 'Semente de Soja', 1),
@@ -70,28 +71,31 @@ insert into tbComentario(Comentario, IdAnuncio, IdUsuario) values('Espero poder 
 
 insert into tbComentario(Comentario, IdAnuncio, IdUsuario) values('Também!', 4, '02719894-e4a9-46c8-999e-ba942abd5f8h');
 
-insert into tbResposta values(1, 2);
+insert into tbComentario(Comentario, IdAnuncio, IdUsuario) values('Então compra!', 1, '02719894-e4a9-46c8-999e-ba942abd5f8f');
 
 insert into tbCarrinho values('02719894-e4a9-46c8-999e-ba942abd5f8f', 1, 1),
 							 ('02719894-e4a9-46c8-999e-ba942abd5f8f', 2, 2),
 							 ('02719894-e4a9-46c8-999e-ba942abd5f8f', 3, 1);
-                             
-insert into tbPedido (IdUsuario, ValFrete, CEPEntrega, NumEntrega) values('02719894-e4a9-46c8-999e-ba942abd5f8f', 3.00, "11111111", 1),
-																		 ('02719894-e4a9-46c8-999e-ba942abd5f8f', 3.25, "11111111", 7);
 
-insert into tbPedidoAnuncio values(1, 1, 1),
+
+insert into tbPagamento(QtdParcelas, VlParcela, Tipo) value(2, 11.00, 1);     
+                        
+insert into tbPedido (IdUsuario, ValFrete, CEPEntrega, NumEntrega, IdPagamento) values('02719894-e4a9-46c8-999e-ba942abd5f8f', 3.00, "78008000", 1, 1),
+																					  ('02719894-e4a9-46c8-999e-ba942abd5f8f', 3.25, "78008000", 7, 1);
+                                                                                                                                                                  
+
+insert into tbPedidoAnuncio(IdPedido, IdAnuncio, Qtd) values(1, 1, 1),
 								  (1, 2, 2),
                                   (2, 3, 1);
                                   
 update tbPedido set `Status` = 1 where Id = 1;
 
-insert into tbPagamento(QtdParcelas, VlParcela, Tipo) value(2, 11.00, 1);
-
-insert into tbVenda(IdPagamento, IdPedido) value(1, 1);
+insert into tbVenda(IdPedido) value(1);
 
 insert into tbAvaliacao value(1, '02719894-e4a9-46c8-999e-ba942abd5f8f', true, 4);
 
 insert into tbComentario(Comentario, IdAnuncio, IdUsuario) values('Adorei a Soja, super veganaaaa!', 1, '02719894-e4a9-46c8-999e-ba942abd5f8f');
+
 
        
 

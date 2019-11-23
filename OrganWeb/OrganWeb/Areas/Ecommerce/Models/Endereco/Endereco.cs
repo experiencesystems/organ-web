@@ -16,10 +16,7 @@ namespace OrganWeb.Areas.Ecommerce.Models.Endereco
         [StringLength(8, MinimumLength = 8)]
         public string CEP { get; set; }
 
-        [Required]
-        [ForeignKey("Logradouro")]
-        public int IdRua { get; set; }
-
-        public virtual Logradouro Logradouro { get; set; }
+        [NotMapped]
+        public Logradouro Logradouro { get; set; }
     }
 }

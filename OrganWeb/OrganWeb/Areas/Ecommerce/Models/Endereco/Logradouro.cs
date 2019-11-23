@@ -23,6 +23,13 @@ namespace OrganWeb.Areas.Ecommerce.Models.Endereco
         [ForeignKey("Bairro")]
         public int IdBairro { get; set; }
 
+        [Required]
+        [ForeignKey("FKCep")]
+        [StringLength(8, MinimumLength = 8)]
+        [RegularExpression(@"[0-9]{5}[\d]{3}", ErrorMessage = "Digite um CEP válido somente com números")]
+        public string CEP { get; set; }
+
         public virtual Bairro Bairro { get; set; }
+        public virtual Endereco FKCep { get; set; }
     }
 }
