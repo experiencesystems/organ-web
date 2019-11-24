@@ -44,7 +44,10 @@ namespace OrganWeb.Areas.Sistema.Models
         public string GetAreaPlantios(Plantio plantio, List<AreaPlantio> areaPlantios)
         {
             List<string> nomes = areaPlantios.Where(x => x.Plantio.Id == plantio.Id).Select(a => a.Area.Nome).ToList();
-            return string.Join(", ", nomes.Select(x => x.ToString()).ToArray());
+           //if (nomes.Count > 1)
+                return string.Join(", ", nomes.Select(x => x.ToString()).ToArray());
+            //else
+               // return nomes.First();
         }
 
         private double ProgressoPlantio(Plantio plantio)

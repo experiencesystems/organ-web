@@ -1,0 +1,30 @@
+﻿@model OrganWeb.Areas.Sistema.Models.ViewModels.ViewVendas
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Vendas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <tr>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Pedidos)
+    {
+        <tr>
+            <td>
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+Página @(Model.Pedidos.PageCount < Model.Pedidos.PageNumber ? 0 : Model.Pedidos.PageNumber) de @Model.Pedidos.PageCount
+
+@Html.PagedListPager(Model.Pedidos, pagep => Url.Action("Index",
+new { pagep }), new PagedListRenderOptions
+{
+LiElementClasses = new string[] { "pagination page-item p1" }
+})

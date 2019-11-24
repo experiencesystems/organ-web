@@ -23,15 +23,15 @@
                             <i class="icon-star2"></i>
                             <i class="icon-star_border"></i>
                         </div>
-                        <a class="review-link" href="#">10 Review(s) | Add your review</a>
+                        <a class="review-link" href="#">10 Avaliações | Avalie o produto</a>
                     </div>
                     <div>
-                        <h3 class="product-price">R$100,00</h3>
-                        <span class="product-size">/ SACA 50 KG</span>
+                        <h3 class="product-price">R$ @Html.DisplayFor(model => model.Produto.ValorUnit)</h3>
+                        <span class="product-size">/@Html.DisplayFor(model => model.Produto.UnidadeMedida.Desc)</span>
                     </div>
-                    <a><i class="icon-room"></i>Sorriso, MT</a>
+                    <a><i class="icon-room"></i>@Html.DisplayFor(model => model.Anunciante.Endereco.Logradouro.Bairro.Cidade.Nome), @Html.DisplayFor(model => model.Anunciante.Endereco.Logradouro.Bairro.Cidade.Estado.UF)</a>
                     <p>@Html.DisplayFor(model => model.Desc)</p>
-                    <p>@Html.DisplayFor(model => model.Desconto)</p>
+                    <p>@Html.DisplayFor(model => model.Desconto) %</p>
                     <div class="row">
                         <div class="input-group col-md-6 mb-3">
                             <span class="input-group-btn mr-2">
@@ -56,16 +56,16 @@
                         </div>
                         <div class="w-100"></div>
                         <div class="col-md-12">
-                            <p style="color: #000;">600 kg available</p>
+                            <p style="color: #000;">@Html.DisplayFor(model => model.Quantidade) @Html.DisplayFor(model => model.Produto.UnidadeMedida.Desc) disponíveis</p>
                         </div>
                     </div>
                     <ul class="product-btns">
                         <li><a href="#"><i class="mdi mdi-heart-outline"></i> add to wishlist</a></li>
-                       <!--<li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>-->
+                        <!--<li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>-->
                     </ul>
                     <ul class="product-links">
                         <li>Categoria:</li>
-                        <li><a href="#">Semente</a></li>
+                        <li><a href="#">@Html.DisplayFor(model => model.Produto.Categoria)</a></li>
                     </ul>
                 </div>
                 <!-- /Product details -->
@@ -91,10 +91,10 @@
                             <!-- Tab panes -->
                             <div class="tab-content tabs card-block">
                                 <div class="tab-pane active" id="home1" role="tabpanel">
-                                    <p class="m-0">1. This is Photoshop's version of Lorem IpThis is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean mas Cum sociis natoque penatibus et magnis dis.....</p>
+                                    <p class="m-0">@Html.DisplayFor(model => model.Desc)</p>
                                 </div>
                                 <div class="tab-pane" id="profile1" role="tabpanel">
-                                    <p class="m-0">2.Cras consequat in enim ut efficitur. Nulla posuere elit quis auctor interdum praesent sit amet nulla vel enim amet. Donec convallis tellus neque, et imperdiet felis amet.</p>
+                                    <p class="m-0">@Html.DisplayFor(model => model.Anunciante.NomeFazenda)</p>
                                 </div>
                             </div>
                         </div>
@@ -120,12 +120,21 @@
                             </ul>
                             <!-- Tab panes -->
                             <div class="tab-content tabs card-block">
-                                <div class="tab-pane active" id="pergunta" role="tabpanel">
+                                <div class="tab-pane active" id="comentario" role="tabpanel">
                                     <!-- Review Form -->
+                                    <div id="comentario-form">
+                                        <form class="comentario-form">
+                                            <br />
+                                            <textarea class="input" placeholder="Comentário" id="txt-comentario"></textarea>
+                                            <button class="primary-btn" id="btn-comentario">Enviar</button>
+                                        </form>
+                                    </div>
+                                    <!-- /Review Form -->
+                                </div>
+                                <div class="tab-pane" id="analise" role="tabpanel">
                                     <div id="review-form">
                                         <form class="review-form">
-                                            <input class="input" type="text" placeholder="Nome">
-                                            <input class="input" type="email" placeholder="Email">
+                                            <br />
                                             <textarea class="input" placeholder="Comentário"></textarea>
                                             <div class="input-rating">
                                                 <span>Avaliação: </span>
@@ -137,13 +146,9 @@
                                                     <input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
                                                 </div>
                                             </div>
-                                            <button class="primary-btn">Submit</button>
+                                            <button class="primary-btn">Enviar</button>
                                         </form>
                                     </div>
-                                    <!-- /Review Form -->
-                                </div>
-                                <div class="tab-pane" id="analise" role="tabpanel">
-                                    <p class="m-0">2.Cras consequat in enim ut efficitur. Nulla posuere elit quis auctor interdum praesent sit amet nulla vel enim amet. Donec convallis tellus neque, et imperdiet felis amet.</p>
                                 </div>
                             </div>
                         </div>

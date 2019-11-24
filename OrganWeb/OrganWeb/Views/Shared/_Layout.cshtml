@@ -96,7 +96,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/Home/Index">
                             <i class="far fa-window-maximize menu-icon"></i>
-                            <span class="menu-title">Dashboard</span>
+                            <span class="menu-title">Início</span>
                         </a>
                     </li>
 
@@ -141,6 +141,12 @@
                             <span class="menu-title">Ecommerce</span>
                             <i class="menu-arrow"></i>
                         </a>
+                        <div class="collapse" id="comercios">
+                            <ul class="nav flex-column sub-menu">
+                                <li><a href="#">@Html.ActionLink("Painel de vendas", "Index", "Vendas", new { area = "Sistema" }, new { @class = "" })</a></li>
+                                <li><a href="#">@Html.ActionLink("Acessar o ecommerce", "Index", "Loja", new { area = "Ecommerce" }, new { @class = "" })</a></li>
+                            </ul>
+                        </div>
                     </li>
 
                 </ul>

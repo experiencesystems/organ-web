@@ -1,4 +1,5 @@
 ﻿using OrganWeb.Areas.Ecommerce.Models.Vendas;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace OrganWeb.Areas.Sistema.Models.ViewModels
 {
     public class ViewVendas
     {
-        public List<Venda> Vendas { get; set; }
-        public List<Pedido> Pedidos { get; set; }
+        public IPagedList<Venda> Vendas { get; set; }
+        public IPagedList<Pedido> Pedidos { get; set; }
     }
 }

@@ -15,12 +15,14 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private Pedido pedido = new Pedido();
         private Venda venda = new Venda();
 
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? pagep, int? pagev)
         {//TODO: filtro de pedido e venda por status, pagedlist
+            int pagepedido = pagep ?? 1;
+            int pagevenda = pagev ?? 1;
             var select = new ViewVendas
             {
-                Pedidos = await pedido.GetPedidosAnunciante(),
-                Vendas = await venda.GetVendasDoAnunciante()
+                Pedidos = await pedido.GetPedidosAnunciante(pagepedido),
+                Vendas = await venda.GetVendasDoAnunciante(pagevenda)
             };
             return View();
         }

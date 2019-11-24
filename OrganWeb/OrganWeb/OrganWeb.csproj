@@ -216,6 +216,7 @@
     <Compile Include="Areas\Ecommerce\Controllers\AccountController.cs" />
     <Compile Include="Areas\Ecommerce\Controllers\AnuncioController.cs" />
     <Compile Include="Areas\Ecommerce\Controllers\CarrinhoController.cs" />
+    <Compile Include="Areas\Ecommerce\Controllers\ComentarioController.cs" />
     <Compile Include="Areas\Ecommerce\Controllers\HomeController.cs" />
     <Compile Include="Areas\Ecommerce\Controllers\LojaController.cs" />
     <Compile Include="Areas\Ecommerce\Controllers\PedidoController.cs" />
@@ -258,6 +259,7 @@
     <Compile Include="Areas\Ecommerce\Models\zRepositories\AnuncioRepository.cs" />
     <Compile Include="Areas\Ecommerce\Models\zRepositories\AvaliacaoRepository.cs" />
     <Compile Include="Areas\Ecommerce\Models\zRepositories\CarrinhoRepository.cs" />
+    <Compile Include="Areas\Ecommerce\Models\zRepositories\ComentarioRepository.cs" />
     <Compile Include="Areas\Ecommerce\Models\zRepositories\PedidoRepository.cs" />
     <Compile Include="Areas\Ecommerce\Models\zRepositories\VendaRepository.cs" />
     <Compile Include="Areas\Ecommerce\Models\zRepositories\WishlistRepository.cs" />
@@ -532,6 +534,7 @@
     <Content Include="Areas\Ecommerce\Views\Carrinho\SumarioCarrinho.cshtml" />
     <Content Include="Areas\Sistema\Views\Funcionario\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Colheita\RepeteColheita.cshtml" />
+    <Content Include="Areas\Sistema\Views\Vendas\Index.cshtml" />
     <None Include="Properties\PublishProfiles\organweb - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\organweb - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -614,11 +617,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Ecommerce\Views\Comentario\" />
     <Folder Include="Areas\Ecommerce\Views\Home\" />
     <Folder Include="Areas\Ecommerce\Views\Venda\" />
-    <Folder Include="Areas\Sistema\Views\Financeiro\" />
     <Folder Include="Areas\Sistema\Views\Shared\" />
-    <Folder Include="Areas\Sistema\Views\Vendas\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
