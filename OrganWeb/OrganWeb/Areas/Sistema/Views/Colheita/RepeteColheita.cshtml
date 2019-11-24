@@ -19,13 +19,17 @@
             <dt>Nome do plantio</dt>
             <dd>@Html.DisplayFor(model => model.Plantio.Nome)</dd>
             <dt>Iniciado em:</dt>
-            <dd>@Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.Plantio.DataInicio))<dd>
+            <dd>@Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.Plantio.DataInicio))
+            <dd>
             <dt>Término previsto para:</dt>
-            <dd>@Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.Plantio.DataColheita))<dd>
+            <dd>@Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.Plantio.DataColheita))
+            <dd>
             <dt>Sistema:</dt>
-            <dd>@ViewBag.Sistema<dd>
+            <dd>@Html.DisplayFor(model => model.Plantio.Sistemas.Where(x => x.Value == model.Plantio.Sistema.ToString()).First().Text)
+            <dd>
             <dt>Período:</dt>
-            <dd>@ViewBag.Periodo<dd>
+            <dd>@Html.DisplayFor(model => model.Plantio.Periodos.Where(x => x.Value == model.Plantio.TipoPlantio.ToString()).First().Text)
+            <dd>
         </dl>
 
         <div class="form-group">
@@ -33,6 +37,14 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Data, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Plantio.DataColheita, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Plantio.DataColheita, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Plantio.DataColheita, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -61,10 +73,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Produto.Desc, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Produto.ValorUnit, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Produto.Desc, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Produto.Desc, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Produto.ValorUnit, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Produto.ValorUnit, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -75,23 +87,13 @@
                 @Html.ValidationMessageFor(model => model.Produto.Estoque.Qtd, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.Produto.Estoque.UM, htmlAttributes: new { @class = "control-label col-md-4" })
-            <div class="col-md-12">
-                @Html.DropDownListFor(model => model.Produto.Estoque.UM, Model.Produto.Estoque.UnidadesDeMedida, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.LabelFor(model => model.Produto.Estoque.UM, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Produto.Estoque.UM, new SelectList(Model.Produto.Estoque.Unidades, "Id", "Desc"))
                 @Html.ValidationMessageFor(model => model.Produto.Estoque.UM, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Produto.Estoque.ValorUnit, htmlAttributes: new { @class = "control-label col-md-4" })
-            <div class="col-md-12">
-                @Html.EditorFor(model => model.Produto.Estoque.ValorUnit, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Produto.Estoque.ValorUnit, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -99,7 +101,3 @@
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Voltar", "Index")
-</div>

@@ -80,7 +80,6 @@
                                 </div>
                             </div>
                         </div>
-                    }
                         <div class="modal fade" id="modalColheita" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
@@ -93,12 +92,17 @@
                                         Deseja futuramente colher novamente este plantio?
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary align-left" data-dismiss="modal">Não</button>
-                                        <button type="button" class="btn btn-primary">Sim</button>
+                                        <input type="button" class="btn btn-secondary align-left"
+                                               value="Não"
+                                               onclick="location.href='@Url.Action("CriarColheita", "Colheita", new { id = item.Id, again = false })'" />
+                                        <input type="button" class="btn btn-primary"
+                                               value="Sim"
+                                               onclick="location.href='@Url.Action("CriarColheita", "Colheita", new { id = item.Id, again = true })'" />
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    }
                 </div>
             </div>
         </div>

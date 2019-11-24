@@ -450,7 +450,7 @@
     <Content Include="Areas\Sistema\Views\Area\Detalhes.cshtml" />
     <Content Include="Areas\Sistema\Views\Area\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Area\Index.cshtml" />
-    <Content Include="Areas\Sistema\Views\Colheita\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Colheita\Colheita.cshtml" />
     <Content Include="Areas\Sistema\Views\Colheita\Detalhes.cshtml" />
     <Content Include="Areas\Sistema\Views\Colheita\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Colheita\Index.cshtml" />
@@ -531,6 +531,7 @@
     <Content Include="Areas\Ecommerce\Views\Shared\_PartialLogin.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Carrinho\SumarioCarrinho.cshtml" />
     <Content Include="Areas\Sistema\Views\Funcionario\Create.cshtml" />
+    <Content Include="Areas\Sistema\Views\Colheita\RepeteColheita.cshtml" />
     <None Include="Properties\PublishProfiles\organweb - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\organweb - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />

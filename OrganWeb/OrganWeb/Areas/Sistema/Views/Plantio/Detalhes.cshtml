@@ -24,5 +24,5 @@
     <dd>@Html.DisplayFor(model => model.Sistemas.Where(x => x.Value == model.Sistema.ToString()).First().Text)</dd>
 
     @Html.LabelFor(model => model.Periodos, new { htmlAttributes = new { @class = "form-control" } })
-    <dd>@Html.DisplayFor(model => model.Sistemas.Where(x => x.Value == model.Sistema.ToString()).First().Text)</dd>
+    <dd>@Html.DisplayFor(model => model.Periodos.Where(x => x.Value == model.TipoPlantio.ToString()).First().Text)</dd>
 </dl>

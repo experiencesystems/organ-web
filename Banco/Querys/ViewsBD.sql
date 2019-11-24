@@ -57,7 +57,7 @@ create view vwFornecedor as
             inner join
         vwTelefone T on T.Id = TF.IdTelefone
     group by F.Id); 
-
+    
 drop view if exists vwFuncionario;
 create view vwFuncionario as
     (select 
@@ -433,7 +433,7 @@ select
     A.Nome `Anúncio`,
     C.Qtd `Quantidade adicionada`
 from tbCarrinho C
-	inner join tbAnuncio A on A.Id = C.IdAnuncio
+	inner join tbAnuncio A on A.Id = C.IdAnuncio);
 
 drop view if exists vwVenda;
 create view vwVenda as(

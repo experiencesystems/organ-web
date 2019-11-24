@@ -78,7 +78,7 @@ Id int auto_increment,
  constraint PKEstoque primary key(Id),
 Qtd double not null,
 UM varchar(6),
-IdFornecedor int not null
+IdFornecedor int
 )engine = InnoDB;
 alter table tbEstoque add constraint FKEstoqueFornecedor foreign key(IdFornecedor) references tbFornecedor(Id),
   add constraint FKEstoqueUM foreign key(UM) references tbUM(Id);

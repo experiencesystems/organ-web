@@ -28,8 +28,7 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
         [ForeignKey("UnidadeMedida")]
         [Display(Name = "Unidade de medida")]
         public string UM { get; set; }
-
-        [Required]
+        
         [ForeignKey("Fornecedor")]
         public int IdFornecedor { get; set; }
 

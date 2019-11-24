@@ -1,4 +1,5 @@
-﻿using OrganWeb.Areas.Sistema.Models.Armazenamento;
+﻿using OrganWeb.Areas.Sistema.Models.API;
+using OrganWeb.Areas.Sistema.Models.Armazenamento;
 using OrganWeb.Areas.Sistema.Models.Safras;
 using System;
 using System.Collections.Generic;
@@ -16,40 +17,48 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private Plantio plantio = new Plantio();
         private Produto produto = new Produto();
         private Estoque estoque = new Estoque();
+        private ListarUnidades unmd = new ListarUnidades();
+        private UnidadeCadastro uncd = new UnidadeCadastro();
 
         public async Task<ActionResult> Index()
         {
             return View(await colheita.GetAll());
         }
 
-        public async Task<ActionResult> Create(int? id) //recebe o id do plantio
+        public async Task<ActionResult> CriarColheita(int? id, bool? again) //recebe o id do plantio
         {
-            if (id == null)
+            if (id == null || again == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            bool dnv = again ?? false;
             plantio = await plantio.GetByID(id);
             if (plantio == null)
             {
                 return HttpNotFound();
             }
+            var responseModel = await unmd.GetListarUnidades();
             colheita = new Colheita()
             {
                 IdPlantio = plantio.Id,
                 Produto = new Produto()
                 {
                     Estoque = new Estoque()
+                    {
+                        Unidades = responseModel.UnidadeCadastros
+                    }
                 },
                 Plantio = plantio
             };
-            ViewBag.Sistema = colheita.Plantio.Sistemas.Where(x => x.Value == colheita.Plantio.Sistema.ToString()).First().Text;
-            ViewBag.Periodo = colheita.Plantio.Periodos.Where(x => x.Value == colheita.Plantio.TipoPlantio.ToString()).First().Text;
-            return View(colheita);
+            if (dnv)
+                return View("RepeteColheita", colheita);
+            else
+                return View("Colheita", colheita);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Colheita colheita)
+        public async Task<ActionResult> Colheita(Colheita colheita)
         {
             plantio = await plantio.GetByID(colheita.IdPlantio);
             if (plantio.DataInicio > colheita.Data)
@@ -76,8 +85,54 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 colheita.Add(colheita);
                 await colheita.Save();
 
+                plantio.Delete(plantio.Id);
+                await plantio.Save();
+
                 return RedirectToAction("Index");
             }
+            var responseModel = await unmd.GetListarUnidades();
+            colheita.Produto.Estoque.Unidades = responseModel.UnidadeCadastros;
+            return View(colheita);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RepeteColheita(Colheita colheita)
+        {
+            plantio = await plantio.GetByID(colheita.IdPlantio);
+            if (plantio.DataInicio > colheita.Data)
+            {
+                ModelState.AddModelError("", "Insira uma data de colheita posterior à de início do plantio.");
+                return View(colheita);
+            }
+            if (ModelState.IsValid)
+            {
+                plantio.DataColheita = colheita.Plantio.DataColheita;
+                plantio.DataInicio = colheita.Data;
+                plantio.Update(plantio);
+                await plantio.Save();
+
+                estoque = colheita.Produto.Estoque;
+                estoque.Add(estoque);
+                await estoque.Save();
+
+                produto = colheita.Produto;
+                produto.IdEstoque = estoque.Id;
+                produto.Estoque = null;
+                estoque = null;
+                produto.Add(produto);
+                await produto.Save();
+
+                colheita.IdProd = produto.IdEstoque;
+                colheita.Produto = null;
+                produto = null;
+                colheita.Add(colheita);
+                await colheita.Save();
+
+                return RedirectToAction("Index");
+            }
+            var responseModel = await unmd.GetListarUnidades();
+            colheita.Produto.Estoque.Unidades = responseModel.UnidadeCadastros;
             return View(colheita);
         }
 
@@ -92,8 +147,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Sistema = colheita.Plantio.Sistemas.Where(x => x.Value == colheita.Plantio.Sistema.ToString()).First().Text;
-            ViewBag.Periodo = colheita.Plantio.Periodos.Where(x => x.Value == colheita.Plantio.TipoPlantio.ToString()).First().Text;
             return View(colheita);
         }
 

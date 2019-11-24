@@ -16,6 +16,7 @@ namespace OrganWeb.Areas.Sistema.Models.Safras
         public int Id { get; set; }
 
         [Required]
+        [Display(Name = "Data desta colheita")]
         [DataType(DataType.Date, ErrorMessage = "Data em formato inválido"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Data { get; set; }
         

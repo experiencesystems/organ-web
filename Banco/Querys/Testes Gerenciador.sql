@@ -41,7 +41,7 @@ insert into tbItensPlantio values(1, 1, 1);
 
 insert into tbSolo(Nome, Tipo) values('Arenoso', 1), ('Vermelho', 1);
 
-insert into tbArea(Nome,  IdSolo) values('Area1', 1), ('Area2', 1), ('Area3', 2);  
+insert into tbArea(Nome,  IdSolo) values('Area1', 1), ('Area2', 1), ('Area3', 2), ('Area4', 2), ('Area5', 2);  
 
 insert into tbAreaPlantio values(1, 1, 1), (1, 2, 1);
 
@@ -54,3 +54,5 @@ insert into tbControlePD values(1, 1), (2,2);
 insert into tbAreaPD values(true, 2, 1), (true, 3, 2);
 
 insert into tbItensControle values(0.25, 1, 4), (0.25, 2, 4);
+
+select*from tbcolheita
