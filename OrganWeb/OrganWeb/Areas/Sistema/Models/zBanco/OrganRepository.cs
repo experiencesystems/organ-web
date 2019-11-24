@@ -62,6 +62,10 @@ namespace OrganWeb.Areas.Sistema.Models.zBanco
                 string errorMessages = string.Join("; ", ex.EntityValidationErrors.SelectMany(x => x.ValidationErrors).Select(x => x.PropertyName + ": " + x.ErrorMessage));
                 throw new DbEntityValidationException(errorMessages);
             }
+            catch (Exception e)
+            {
+
+            }
         }
 
         public void Update(T entity)

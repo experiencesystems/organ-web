@@ -14,12 +14,10 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
         [Key]
         [ForeignKey("Estoque")]
         public int IdEstoque { get; set; }
-
-        [Required]
-        public double ValorUnit { get; set; }
-
-        [Required]
-        public int Quantidade { get; set; }
+        
+        [StringLength(100)]
+        [Display(Name = "Descrição")]
+        public string Desc { get; set; }
 
         [Required]
         [Display(Name = "Produto")]

@@ -4,7 +4,7 @@
 @Scripts.Render("~/bundles/jqueryval")
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("RepeteColheita", "Colheita", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -14,6 +14,7 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         @Html.HiddenFor(model => model.IdPlantio)
+        @Html.HiddenFor(model => model.Plantio.Nome)
 
         <dl class="dl-horizontal">
             <dt>Nome do plantio</dt>
@@ -41,7 +42,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Plantio.DataColheita, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="Plantio_DataColheita">Data da próxima colheita</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Plantio.DataColheita, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Plantio.DataColheita, "", new { @class = "text-danger" })
@@ -73,18 +74,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Produto.ValorUnit, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Produto.Desc, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Produto.ValorUnit, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Produto.ValorUnit, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Produto.Estoque.Qtd, htmlAttributes: new { @class = "control-label col-md-4" })
-            <div class="col-md-12">
-                @Html.EditorFor(model => model.Produto.Estoque.Qtd, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Produto.Estoque.Qtd, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Produto.Desc, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Produto.Desc, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">

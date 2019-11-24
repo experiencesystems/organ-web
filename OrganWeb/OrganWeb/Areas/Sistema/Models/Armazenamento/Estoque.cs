@@ -30,7 +30,7 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
         public string UM { get; set; }
         
         [ForeignKey("Fornecedor")]
-        public int IdFornecedor { get; set; }
+        public int? IdFornecedor { get; set; }
 
         public virtual UnidadeCadastro UnidadeMedida { get; set; }
 

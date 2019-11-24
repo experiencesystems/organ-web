@@ -60,15 +60,33 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Colheita(Colheita colheita)
         {
+            ListarUnidades responseModel = new ListarUnidades();
             plantio = await plantio.GetByID(colheita.IdPlantio);
-            if (plantio.DataInicio > colheita.Data)
+              if (plantio.DataInicio > colheita.Data)
             {
                 ModelState.AddModelError("", "Insira uma data de colheita posterior à de início do plantio.");
+                responseModel = await unmd.GetListarUnidades();
+                colheita.Produto.Estoque.Unidades = responseModel.UnidadeCadastros;
+                colheita.Plantio = plantio;
                 return View(colheita);
             }
             if (ModelState.IsValid)
             {
+                responseModel = await unmd.GetListarUnidades();
+                colheita.Produto.Estoque.Unidades = responseModel.UnidadeCadastros;
+                if (await unmd.GetByID(colheita.Produto.Estoque.UM) == null)
+                {
+                    colheita.Produto.Estoque.Unidades = responseModel.UnidadeCadastros;
+                    uncd = new UnidadeCadastro()
+                    {
+                        Id = colheita.Produto.Estoque.UM,
+                        Desc = colheita.Produto.Estoque.Unidades.Where(x => x.Id == colheita.Produto.Estoque.UM).Select(x => x.Desc).FirstOrDefault().ToString()
+                    };
+                    unmd.Add(uncd);
+                    await unmd.Save();
+                }
                 estoque = colheita.Produto.Estoque;
+                estoque.Qtd = Convert.ToDouble(colheita.QtdTotal);
                 estoque.Add(estoque);
                 await estoque.Save();
 
@@ -90,8 +108,9 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
                 return RedirectToAction("Index");
             }
-            var responseModel = await unmd.GetListarUnidades();
+            responseModel = await unmd.GetListarUnidades();
             colheita.Produto.Estoque.Unidades = responseModel.UnidadeCadastros;
+            colheita.Plantio = plantio;
             return View(colheita);
         }
 
@@ -99,20 +118,46 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RepeteColheita(Colheita colheita)
         {
+            ListarUnidades responseModel = new ListarUnidades();
             plantio = await plantio.GetByID(colheita.IdPlantio);
-            if (plantio.DataInicio > colheita.Data)
+            if (plantio.DataInicio > colheita.Data || plantio.DataColheita < colheita.Data)
             {
                 ModelState.AddModelError("", "Insira uma data de colheita posterior à de início do plantio.");
+                responseModel = await unmd.GetListarUnidades();
+                colheita.Produto.Estoque.Unidades = responseModel.UnidadeCadastros;
+                colheita.Plantio = plantio;
+                return View(colheita);
+            }
+            if (colheita.QtdPerdas > colheita.QtdTotal)
+            {
+                ModelState.AddModelError("", "A quantidade de perdas deve ser menor ou igual a quantidade total de itens colhidos.");
+                responseModel = await unmd.GetListarUnidades();
+                colheita.Produto.Estoque.Unidades = responseModel.UnidadeCadastros;
+                colheita.Plantio = plantio;
                 return View(colheita);
             }
             if (ModelState.IsValid)
             {
+                responseModel = await unmd.GetListarUnidades();
+                colheita.Produto.Estoque.Unidades = responseModel.UnidadeCadastros;
+                if (await unmd.GetByID(colheita.Produto.Estoque.UM) == null)
+                {
+                    colheita.Produto.Estoque.Unidades = responseModel.UnidadeCadastros;
+                    uncd = new UnidadeCadastro()
+                    {
+                        Id = colheita.Produto.Estoque.UM,
+                        Desc = colheita.Produto.Estoque.Unidades.Where(x => x.Id == colheita.Produto.Estoque.UM).Select(x => x.Desc).FirstOrDefault().ToString()
+                    };
+                    unmd.Add(uncd);
+                    await unmd.Save();
+                }
                 plantio.DataColheita = colheita.Plantio.DataColheita;
                 plantio.DataInicio = colheita.Data;
                 plantio.Update(plantio);
                 await plantio.Save();
 
                 estoque = colheita.Produto.Estoque;
+                estoque.Qtd = Convert.ToDouble(colheita.QtdTotal);
                 estoque.Add(estoque);
                 await estoque.Save();
 
@@ -131,8 +176,9 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
                 return RedirectToAction("Index");
             }
-            var responseModel = await unmd.GetListarUnidades();
+            responseModel = await unmd.GetListarUnidades();
             colheita.Produto.Estoque.Unidades = responseModel.UnidadeCadastros;
+            colheita.Plantio = plantio;
             return View(colheita);
         }
 
