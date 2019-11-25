@@ -84,9 +84,7 @@ insert into tbPedido (IdUsuario, ValFrete, CEPEntrega, NumEntrega, IdPagamento) 
 																					  ('02719894-e4a9-46c8-999e-ba942abd5f8f', 3.25, "78008000", 7, 1);
                                                                                                                                                                   
 
-insert into tbPedidoAnuncio(IdPedido, IdAnuncio, Qtd) values(1, 1, 1),
-								  (1, 2, 2),
-                                  (2, 3, 1);
+insert into tbPedidoAnuncio(IdPedido, IdAnuncio, Qtd) values(1, 1, 1), (1, 2, 2), (2, 3, 1);
                                   
 update tbPedido set `Status` = 1 where Id = 1;
 

@@ -40,11 +40,12 @@ create view vwTelefone as(
     from
         tbTelefone T
             inner join
-        tbTipoTel Ti on Ti.Id = T.IdTipo); 
+        tbTipoTel Ti on Ti.Id = T.IdTipo
+	group by T.Id); 
 
 drop view if exists vwFornecedor;
-create view vwFornecedor as
-    (select 
+create view vwFornecedor as(
+	select 
         F.Id,
         F.Nome `Razão Social`,
         F.Email `Email`,
@@ -52,106 +53,115 @@ create view vwFornecedor as
             separator '; ') `Telefones`
     from
         tbFornecedor F
-            inner join
+            left join
         tbTelForn TF on F.Id = TF.IdForn
-            inner join
+            left join
         vwTelefone T on T.Id = TF.IdTelefone
     group by F.Id); 
     
 drop view if exists vwFuncionario;
-create view vwFuncionario as
-    (select 
+create view vwFuncionario as(
+	select 
         F.Id,
         F.Nome,
         F.Funcao `Função`,
-        group_concat(T.Telefone
+        group_concat(ifnull(T.Telefone, 'Sem Telefone')
             separator '; ') `Telefones`,
-        F.Email
+        F.Email,
+        case 
+			when F.`Status` = true then 'Ativo'
+            else 'Demitido'
+		end as `Situação`
     from
         tbFuncionario F
-            inner join
+            left join
         tbTelFunc TF on F.Id = TF.IdFunc
-            inner join
+            left join
         vwTelefone T on T.Id = TF.IdTelefone
-    where
-        F.`Status` = true); 
-  
+    group by F.Id
+);
 
-drop view if exists vwItems;
+drop view if exists vwItems; 
 create view vwItems as(
 	select 
         S.IdEstoque `Id`,
         S.Nome `Item`,
         E.Qtd `Quantidade`,
         U.`Desc` `Unidade de Medida`,
-        S.`Desc` `Descrição`,
+        ifnull(S.`Desc`, 'Sem Descrição') `Descrição`,
         'Semente' `Categoria`,
-        F.`Razão Social` `Fornecedor`,
+        ifnull(F.`Razão Social`, 'Sem fornecedor') `Fornecedor`,
         'Semente' `Tipo`
     from
-        tbEstoque E
+        tbSemente S 
             inner join
-        tbSemente S on E.Id = S.IdEstoque
-            inner join
+		tbEstoque E on E.Id = S.IdEstoque
+            left join
         vwFornecedor F on E.IdFornecedor = F.Id
             inner join
-        tbUM U on E.UM = U.Id)
+        tbUM U on E.UM = U.Id
+	group by `Id`
+)
 union(
 	select 
         I.IdEstoque,
         I.Nome,
         E.Qtd,
         U.`Desc`,
-        I.`Desc`,
+        ifnull(I.`Desc`, 'Sem Descrição'),
         I.Categoria,
-        F.`Razão Social`,
+        ifnull(F.`Razão Social`, 'Sem Fornecedor'),
         'Insumo' `Tipo`
     from
-        tbEstoque E
+        tbInsumo I 
             inner join
-        tbInsumo I on E.Id = I.IdEstoque
-            inner join
+        tbEstoque E on E.Id = I.IdEstoque
+            left join
         vwFornecedor F on E.IdFornecedor = F.Id
             inner join
-        tbUM U on E.UM = U.Id)
+        tbUM U on E.UM = U.Id
+	group by I.IdEstoque
+)
 union(
 	select 
         M.IdEstoque,
         M.Nome,
         E.Qtd,
         U.`Desc`,
-        M.`Desc`,
+        ifnull(M.`Desc`, 'Sem Descrição'),
         M.Tipo,
-        F.`Razão Social`,
+        ifnull(F.`Razão Social`, 'Sem Fornecedor'),
         'Máquina' `Tipo`
     from
         tbMaquina M
             inner join
         tbEstoque E on M.IdEstoque = E.Id
-            inner join
+            left join
         vwFornecedor F on E.IdFornecedor = F.Id
             inner join
-        tbUM U on E.UM = U.Id)
+        tbUM U on E.UM = U.Id
+	order by M.IdEstoque
+)
 union(
 	select 
         P.IdEstoque,
         P.Nome,
         E.Qtd,
         U.`Desc`,
-        P.`Desc`,
+        ifnull(P.`Desc`, 'Sem Descrição'),
         'Produto',
-        F.`Razão Social`,
+        ifnull(F.`Razão Social`, 'Sem Fornecedor'),
         'Produto' `Tipo`
     from
         tbProduto P
             inner join
         tbEstoque E on P.IdEstoque = E.Id
-            inner join
+            left join
         vwFornecedor F on E.IdFornecedor = F.Id
             inner join
         tbUM U on E.UM = U.Id
-)order by `Id`;
-
+	group by P.IdEstoque
+)order by `Id`; 
 
 drop view if exists vwControle;
 create view vwControle as(
@@ -165,21 +175,64 @@ create view vwControle as(
         ifnull(c.`Desc`, 'Sem Descrição') `Descrição`,
         c.Efic `Eficiência(%)`,
         c.NumLiberacoes `Número de Liberações`,
-        group_concat(distinct p.Nome
-            separator ', ') `Pragas/Doenças`,
-        group_concat(distinct concat(i.Item, ' - ', ic.QtdUsada)
-            separator ', ') `Itens Usados - Quantidade`
+        group_concat(distinct p.Id separator ', ') `IdPD`,
+        group_concat(distinct p.Nome separator ', ') `Pragas/Doenças`,
+        ifnull(group_concat(distinct (concat (i.Item, ' - ', ic.QtdUsada)) separator ', '), 'Nenhum Item Usado') `Itens Usados - Quantidade`,
+        group_concat(distinct(ifnull(F.Nome, 'Sem Funcionários')) separator ',') `Funcionários Participantes`
     from
         tbControle c
-            inner join
+            left join
+		tbFuncControle FC on c.Id = FC.IdControle
+			left join
+		tbFuncionario F on FC.IdFunc = F.Id
+			inner join
         tbControlePD cpd on c.Id = cpd.IdControle
             inner join
         tbPragaOrDoenca p on cpd.IdPD = p.Id
-            inner join
+            left join
         tbItensControle ic on c.Id = ic.IdControle
-            inner join
+            left join
         vwItems i on ic.IdEstoque = i.Id
-    group by c.Id , c.`Status`);
+    group by c.Id, c.`Status`);
+
+drop view if exists vwHistorico;
+create view vwHistorico as(
+select date_format(HE.DataAlteracao, '%e/%m/%y às %H:%i') `Data de Alteração`, HE.Id, HE.IdEstoque `Id do Item`, ifnull(I.`Item`, 'Item Excluído') `Nome do Item`,
+ ifnull(HE.QtdAntiga, '0') `Quantidade Antiga`, `Desc` `Descrição de Alteração`
+ from tbHistEstoque HE
+	left join 
+ vwItems I on HE.IdEstoque = I.Id
+ group by Id
+ order by `Data de Alteração` desc
+);
+
+drop view if exists vwPlantio;
+create view vwPlantio as(
+	select P.Id,
+		   P.Nome `Plantio`,
+		   P.Sistema `Sistema`,
+           P.TipoPlantio `Tipo`,
+           date_format(P.DataInicio, '%d/%m/%y') `Data de Início`,
+           date_format(P.DataColheita, '%d/%m/%y') `Data Prevista pra Colheita`,
+           group_concat(distinct(A.Nome) separator ',') `Áreas`,
+           group_concat(distinct(concat(I.Item)) separator ',') `Itens Usados`,
+           group_concat(distinct(ifnull(F.Nome, 'Sem Funcionários')) separator ',') `Funcionários Participantes`
+	from
+		tbPlantio P
+			left join
+		tbFuncPlantio FC on P.Id = FC.IdPlantio
+			left join 
+		tbFuncionario F on FC.IdFunc = F.Id
+			inner join
+		tbAreaPlantio AP on P.Id = AP.IdPlantio
+			inner join 
+		tbArea A on AP.IdArea = A.Id
+			inner join 
+		tbItensPlantio IP on P.Id = IP.IdPlantio
+			inner join
+		vwItems I on IP.IdEstoque = I.Id
+	group by P.Id
+);
 
 DELIMITER $
 drop trigger if exists trgInsertHistorico$
@@ -193,20 +246,15 @@ insert into tbHistEstoque(`Desc`, IdEstoque) values('Novo Item', NEW.Id);
 
 end$
 
-DELIMITER $
+DELIMITER $ 
 drop trigger if exists trgUpdateHistorico$
 create trigger trgUpdateHistorico after update
 on tbEstoque
 for each row
 begin   
-declare cat, nome varchar(30);
-declare forn, descs varchar(50);
+declare descs varchar(50);
 
 call spVerQtd(NEW.Qtd);
-
-set cat = (select `Categoria` from vwItems where `Id` = OLD.Id);
-set nome = (select `Item` from vwItems where `Id` = OLD.Id);
-set forn = (select `Nome` from tbFornecedor where `Id` = OLD.IdFornecedor);
 
 if(exists(select IdEstoque from tbItensPlantio where IdEstoque = NEW.Id order by IdEstoque desc limit 1)) then
 	set descs = 'Item utilizado no plantio';
@@ -215,8 +263,8 @@ elseif(exists(select IdEstoque from tbItensControle where IdEstoque = NEW.Id ord
 else set descs = 'Item Alterado';
 end if;
 
-insert into tbHistEstoque(QtdAntiga, UMAntiga, FornAntigo, `Desc`, IdEstoque, CategoriaAntiga, NomeAntigo)
-				   values(OLD.Qtd, OLD.UM, forn, descs, OLD.Id, cat, nome);
+insert into tbHistEstoque(QtdAntiga, `Desc`, IdEstoque)
+				   values(OLD.Qtd, descs, OLD.Id);
 
 end$
 
@@ -226,20 +274,12 @@ create trigger trgDeleteHistorico before delete
 on tbEstoque
 for each row
 begin   
-
-declare cat, nome varchar(30);
-declare forn varchar(50);
-
-set cat = (select `Categoria` from vwItems where `Id` = OLD.Id);
-set nome = (select `Item` from vwItems where `Id` = OLD.Id);
-set forn = (select `Nome` from tbFornecedor where `Id` = OLD.IdFornecedor);
-
 if(OLD.Qtd = 0)
 	then
 		set FOREIGN_KEY_CHECKS=0;
 
-		insert into tbHistEstoque(QtdAntiga, UMAntiga, FornAntigo, `Desc`, IdEstoque, CategoriaAntiga, NomeAntigo)
-		   values(OLD.Qtd, OLD.UM, forn, 'Item Excluido', OLD.Id, cat, nome);
+		insert into tbHistEstoque(QtdAntiga, `Desc`, IdEstoque)
+		   values(OLD.Qtd, 'Item Excluido', OLD.Id);
 	else
 		SIGNAL SQLSTATE '45002'
 			SET MESSAGE_TEXT = 'Quantidade diferente de zero.';
@@ -266,7 +306,7 @@ begin
 set FOREIGN_KEY_CHECKS=0;
 
 insert into tbHistPlantio(Id, Nome)
-				   values(OLD.Id, OLD.Nome);
+		   values(OLD.Id, OLD.Nome);
 
 end$
 
@@ -279,17 +319,6 @@ for each row
 begin   
 set FOREIGN_KEY_CHECKS=1;
 end$
-DELIMITER ;
-
-
-drop view if exists vwHistorico;
-create view vwHistorico as(
-select Id, IdEstoque `Id do Item`, ifnull(NomeAntigo, '-') `Nome do Item`, ifnull(CategoriaAntiga, '-') `Categoria`,
-   ifnull(FornAntigo, '-') `Fornecedor`, ifnull(QtdAntiga, '-') `Quantidade`, ifnull(UMAntiga, '-') `Unidade de Medida`,
-   DataAlteracao `Data de Alteração`, `Desc` `Descrição de Alteração`
- from tbHistEstoque
- order by `Data de Alteração` desc
-);
 
 DELIMITER $
 drop trigger if exists trgItensPlantio$

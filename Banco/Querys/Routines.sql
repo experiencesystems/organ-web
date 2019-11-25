@@ -137,8 +137,6 @@ END IF;
 END$
 DELIMITER ;
 
-
-
 use dbEcommerce;
 DELIMITER $
 drop function if exists spIsAn$

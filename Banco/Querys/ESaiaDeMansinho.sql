@@ -265,12 +265,8 @@ create table tbHistEstoque(
 Id int auto_increment,
  constraint PKHistEstoque primary key(Id),
 QtdAntiga double,
-NomeAntigo varchar(30),
-CategoriaAntiga varchar(15),
-UMAntiga varchar(6),
 DataAlteracao datetime default current_timestamp,
 `Desc` varchar(50),
-IdEstoque int,
-FornAntigo varchar(50)
+IdEstoque int
 )engine = InnoDB;
 alter table tbHistEstoque add constraint FKHistEstoque foreign key(IdEstoque) references tbEstoque(Id)

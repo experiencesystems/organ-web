@@ -15,9 +15,9 @@ insert into tbFuncionario(Nome, Funcao, Email) value('Mirena', 1, 'milenamonteir
 
 insert into tbTelFunc value(1,1);
 
-insert into tbFornecedor(Nome, Email) value('Expereince Systems', 'moreexpsystems@gmail.com');
+insert into tbFornecedor(Nome, Email) value('Experience Systems', 'moreexpsystems@gmail.com');
 
-insert into tbTelForn value(1,2);
+insert into tbTelForn value(1,2); 
 
 insert into tbUM value('a', 'A');
 
@@ -29,10 +29,10 @@ insert into tbInsumo(IdEstoque, Nome, Categoria) values(2, "CresceForte", 1), (3
 
 insert into tbEstoque(Qtd,UM, IdFornecedor) values(5, 'a', 1), (6, 'a', 1); -- Id 5 e 6
 insert into tbMaquina(IdEstoque, Nome, Tipo, Montadora) values(5,'TratorX', 1, 'MaquinasBoas'), (6,'ColhedeiraY', 2, 'MaquinasRuins e Caras');
-  
+
 insert into tbPlantio(Nome, Sistema, DataColheita, DataInicio, TipoPlantio) values('Plantio de Soja', 1, '01/01/01', '01/01/01', 1);
   
-insert into tbEstoque(Qtd, UM, IdFornecedor) values(3, 'a', 1);
+insert into tbEstoque(Qtd, UM) values(3, 'a'); 
 insert into tbProduto(IdEstoque, Nome) value(7, 'Soja');
 
 insert into tbColheita(`Data`, QtdPerdas, QtdTotal, IdPlantio, IdProd) values('01/01/01',  1, 4, 1, 7);
@@ -54,5 +54,3 @@ insert into tbControlePD values(1, 1), (2,2);
 insert into tbAreaPD values(true, 2, 1), (true, 3, 2);
 
 insert into tbItensControle values(0.25, 1, 4), (0.25, 2, 4);
-
-select*from tbcolheita
