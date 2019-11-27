@@ -22,6 +22,7 @@ namespace OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque
         public double Eficiencia { get; set; }
         [Display(Name = "Liberações")]
         public int Liberacoes { get; set; }
+        public int IdPD { get; set; }
         public string Nome { get; set; }
         public string Itens { get; set; }
     }

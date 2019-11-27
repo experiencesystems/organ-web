@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Data.Entity;
 using PagedList;
+using PagedList.EntityFramework;
 
 namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
 {

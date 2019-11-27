@@ -22,7 +22,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         
         public async Task<ActionResult> Index()
         {
-            return View(await plantio.GetPlantiosIncompletos());
+            return View(await plantio.GetPlantios());
         }
 
         public async Task<ActionResult> Detalhes(int? id)

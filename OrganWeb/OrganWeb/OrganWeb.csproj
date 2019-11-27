@@ -267,6 +267,7 @@
     <Compile Include="Areas\Sistema\Controllers\AreaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\ColheitaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\ControleController.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewsBanco\Estoque\VwPlantio.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Areas\Sistema\Controllers\EstoqueController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FazendaController.cs" />

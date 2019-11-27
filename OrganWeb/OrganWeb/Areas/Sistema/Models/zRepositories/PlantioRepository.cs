@@ -7,61 +7,42 @@ using OrganWeb.Areas.Sistema.Models.Safras;
 using System.Threading.Tasks;
 using OrganWeb.Areas.Sistema.Models.Administrativo;
 using OrganWeb.Areas.Sistema.Models.zBanco;
+using OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque;
 
 namespace OrganWeb.Areas.Sistema.Models
 {
     public class PlantioRepository : OrganRepository<Plantio>
     {
-        private List<Plantio> Plantios = new List<Plantio>();
-        private List<Colheita> Colheitas = new List<Colheita>();
-        private List<AreaPlantio> AreaPlantios = new List<AreaPlantio>();
+        private List<VwPlantio> Plantios = new List<VwPlantio>();
 
         public async Task<List<Plantio>> GetPlantios()
         {
-            Plantios = await GetAll();
-            Colheitas = await new Colheita().GetAll();
-            AreaPlantios = await new AreaPlantio().GetAll();
+            Plantios = await new VwPlantio().GetAll();
             return Plantios.Select((p) => new Plantio
             {
                 Porcentagem = ProgressoPlantio(p),
                 Id = p.Id,
-                Nome = p.Nome,
+                Nome = p.Plantio,
                 Sistema = p.Sistema,
-                TipoPlantio = p.TipoPlantio,
-                DataInicio = p.DataInicio,
-                DataColheita = p.DataColheita,
-                NomeAreas = GetAreaPlantios(p, AreaPlantios)
+                TipoPlantio = p.Tipo,
+                DataInicio = p.Inicio,
+                DataColheita = p.Colheita,
+                NomeAreas = p.Areas
             }).ToList();
         }
 
-        public async Task<List<Plantio>> GetPlantiosIncompletos()
-        {
-            Plantios = await GetPlantios();
-            Plantios.RemoveAll(p => Colheitas.Any(c => c.IdPlantio == p.Id));
-            return Plantios;
-        }
-
-        public string GetAreaPlantios(Plantio plantio, List<AreaPlantio> areaPlantios)
-        {
-            List<string> nomes = areaPlantios.Where(x => x.Plantio.Id == plantio.Id).Select(a => a.Area.Nome).ToList();
-           //if (nomes.Count > 1)
-                return string.Join(", ", nomes.Select(x => x.ToString()).ToArray());
-            //else
-               // return nomes.First();
-        }
-
-        private double ProgressoPlantio(Plantio plantio)
+        private double ProgressoPlantio(VwPlantio plantio)
         {
             DateTime hoje = DateTime.Today;
             int diasAgoracomeco = 0;
             try
             {
                 //agora - começo
-                if (hoje > plantio.DataInicio)
-                    diasAgoracomeco = hoje.Subtract(plantio.DataInicio).Days;
+                if (hoje > plantio.Inicio)
+                    diasAgoracomeco = hoje.Subtract(plantio.Inicio).Days;
 
                 //fim - começo
-                int diasFimcomeco = plantio.DataColheita.Subtract(plantio.DataInicio).Days;
+                int diasFimcomeco = plantio.Colheita.Subtract(plantio.Colheita).Days;
 
                 int progresso = ((100 * diasAgoracomeco) / diasFimcomeco);
 

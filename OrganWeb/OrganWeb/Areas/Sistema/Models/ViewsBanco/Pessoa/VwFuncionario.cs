@@ -18,6 +18,7 @@ namespace OrganWeb.Areas.Sistema.Models.ViewsBanco.Pessoa
         public string Funcao { get; set; }
         public string Telefones { get; set; }
         public string Email { get; set; }
+        public string Situacao { get; set; }
 
         [NotMapped]
         public readonly List<SelectListItem> Cargos = new List<SelectListItem>()

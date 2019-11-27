@@ -60,6 +60,7 @@ namespace OrganWeb.Areas.Sistema.Models.zBanco
         public DbSet<VwPragaOrDoenca> VwPragaOrDoencas { get; set; }
         public DbSet<VwHistorico> VwHistoricos { get; set; }
         public DbSet<VwControle> VwControles { get; set; }
+        public DbSet<VwPlantio> VwPlantios { get; set; }
 
         // TELEFONE
         public DbSet<Telefone.Telefone> Telefones { get; set; }
@@ -96,6 +97,10 @@ namespace OrganWeb.Areas.Sistema.Models.zBanco
             modelBuilder.Entity<VwFuncionario>()
                 .Property(t => t.Funcao)
                 .HasColumnName("Função");
+
+            modelBuilder.Entity<VwFuncionario>()
+                .Property(t => t.Situacao)
+                .HasColumnName("Situação");
 
             modelBuilder.Entity<VwPragaOrDoenca>()
                 .Property(t => t.Areas)
@@ -138,16 +143,32 @@ namespace OrganWeb.Areas.Sistema.Models.zBanco
                 .HasColumnName("Nome do Item");
 
             modelBuilder.Entity<VwHistorico>()
-                .Property(t => t.UnidadeMedida)
-                .HasColumnName("Unidade de Medida");
-
-            modelBuilder.Entity<VwHistorico>()
                 .Property(t => t.DataAlteracao)
                 .HasColumnName("Data de Alteração");
 
             modelBuilder.Entity<VwHistorico>()
                 .Property(t => t.Descricao)
                 .HasColumnName("Descrição de Alteração");
+
+            modelBuilder.Entity<VwPlantio>()
+                .Property(t => t.Inicio)
+                .HasColumnName("Data de Início");
+
+            modelBuilder.Entity<VwPlantio>()
+                .Property(t => t.Colheita)
+                .HasColumnName("Data Prevista pra Colheita");
+
+            modelBuilder.Entity<VwPlantio>()
+                .Property(t => t.Areas)
+                .HasColumnName("Áreas");
+
+            modelBuilder.Entity<VwPlantio>()
+                .Property(t => t.Itens)
+                .HasColumnName("Itens Usados");
+
+            modelBuilder.Entity<VwPlantio>()
+                .Property(t => t.Funcionarios)
+                .HasColumnName("Funcionários Participantes");
         }
 
         public static OrganContext Create()
