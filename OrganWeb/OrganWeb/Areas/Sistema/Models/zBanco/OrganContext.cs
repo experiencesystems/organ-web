@@ -34,7 +34,7 @@ namespace OrganWeb.Areas.Sistema.Models.zBanco
         public DbSet<Controle> Controles { get; set; }
         public DbSet<ItensControle> ItensControles { get; set; }
         public DbSet<FuncControle> FuncControles { get; set; }
-        
+
         // FUNCIONÁRIO
         public DbSet<TelFunc> TelFuncs { get; set; }
         public DbSet<Funcionario> Funcionarios { get; set; }
@@ -73,6 +73,28 @@ namespace OrganWeb.Areas.Sistema.Models.zBanco
             base.OnModelCreating(modelBuilder);
 
             // MAPEAMENTO DOS NOMES
+            /*Dataa date,
+            QntPerdas double,
+            QntTot double,
+            UnM varchar(6),
+            Nome1 varchar(30),
+            `Desc1` varchar(100),
+            IdPlant int,
+            Stats int,
+            IdCol int
+            modelBuilder.Entity<Colheita>()
+                .MapToStoredProcedures(s => s
+                .Insert(u => u.HasName("spInsertColheita")
+                    .Parameter(b => b.Data, "Dataa")
+                    .Parameter(b => b.QtdPerdas, "QntPerdas")
+                    .Parameter(b => b.QtdTotal, "QntTot")
+                    .Parameter(b => b.Produto.Estoque.UM, "UnM")
+                    .Parameter(b => b.Produto.Nome, "Nome1")
+                    .Parameter(b => b.Produto.Desc, "Desc1")
+                    .Parameter(b => b.IdPlantio, "IdPlant")
+                    .Parameter(b => b.Status, "Stats")
+                    .Parameter(b => b.Id, "IdCol")
+                ));*/
 
             modelBuilder.Entity<DDD>()
                 .Property(t => t.Valor)

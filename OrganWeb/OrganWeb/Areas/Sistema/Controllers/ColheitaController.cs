@@ -54,9 +54,15 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 Plantio = plantio
             };
             if (dnv)
+            {
+                colheita.Status = true;
                 return View("RepeteColheita", colheita);
+            }
             else
+            {
+                colheita.Status = false;
                 return View("Colheita", colheita);
+            }
         }
 
         [HttpPost]
@@ -65,9 +71,17 @@ namespace OrganWeb.Areas.Sistema.Controllers
         {
             ListarUnidades responseModel = new ListarUnidades();
             plantio = await plantio.GetByID(colheita.IdPlantio);
-              if (plantio.DataInicio > colheita.Data)
+            if (plantio.DataInicio > colheita.Data)
             {
                 ModelState.AddModelError("", "Insira uma data de colheita posterior à de início do plantio.");
+                responseModel = await unmd.GetListarUnidades();
+                colheita.Produto.Estoque.Unidades = responseModel.UnidadeCadastros;
+                colheita.Plantio = plantio;
+                return View(colheita);
+            }
+            if (colheita.QtdPerdas > colheita.QtdTotal)
+            {
+                ModelState.AddModelError("", "A quantidade de perdas deve ser menor ou igual a quantidade total de itens colhidos.");
                 responseModel = await unmd.GetListarUnidades();
                 colheita.Produto.Estoque.Unidades = responseModel.UnidadeCadastros;
                 colheita.Plantio = plantio;
