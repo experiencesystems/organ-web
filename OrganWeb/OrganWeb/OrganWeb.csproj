@@ -267,6 +267,7 @@
     <Compile Include="Areas\Sistema\Controllers\AreaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\ColheitaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\ControleController.cs" />
+    <Compile Include="Areas\Sistema\Models\ViewsBanco\Estoque\VwColheita.cs" />
     <Compile Include="Areas\Sistema\Models\ViewsBanco\Estoque\VwPlantio.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -455,8 +456,6 @@
     <Content Include="Areas\Sistema\Views\Area\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Area\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Colheita\Colheita.cshtml" />
-    <Content Include="Areas\Sistema\Views\Colheita\Detalhes.cshtml" />
-    <Content Include="Areas\Sistema\Views\Colheita\Editar.cshtml" />
     <Content Include="Areas\Sistema\Views\Colheita\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Controle\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Estoque\Create.cshtml" />

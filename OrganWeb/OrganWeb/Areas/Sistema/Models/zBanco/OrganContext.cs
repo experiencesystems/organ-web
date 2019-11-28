@@ -60,6 +60,7 @@ namespace OrganWeb.Areas.Sistema.Models.zBanco
         public DbSet<VwHistorico> VwHistoricos { get; set; }
         public DbSet<VwControle> VwControles { get; set; }
         public DbSet<VwPlantio> VwPlantios { get; set; }
+        public DbSet<VwColheita> VwColheitas { get; set; }
 
         // TELEFONE
         public DbSet<Telefone.Telefone> Telefones { get; set; }
@@ -168,6 +169,26 @@ namespace OrganWeb.Areas.Sistema.Models.zBanco
             modelBuilder.Entity<VwPlantio>()
                 .Property(t => t.Funcionarios)
                 .HasColumnName("Funcionários Participantes");
+
+            modelBuilder.Entity<VwColheita>()
+                .Property(t => t.DataColheita)
+                .HasColumnName("Data da Colheita");
+
+            modelBuilder.Entity<VwColheita>()
+                .Property(t => t.Situacao)
+                .HasColumnName("Situação da Colheita");
+
+            modelBuilder.Entity<VwColheita>()
+                .Property(t => t.QtdColhida)
+                .HasColumnName("Quantidade Colhida");
+
+            modelBuilder.Entity<VwColheita>()
+                .Property(t => t.QtdPerdida)
+                .HasColumnName("Quantidade Perdida");
+
+            modelBuilder.Entity<VwColheita>()
+                .Property(t => t.QtdTotal)
+                .HasColumnName("Quantidade Total");
         }
 
         public static OrganContext Create()
