@@ -268,6 +268,7 @@
     <Compile Include="Areas\Sistema\Controllers\ColheitaController.cs" />
     <Compile Include="Areas\Sistema\Controllers\ControleController.cs" />
     <Compile Include="Areas\Sistema\Models\ViewsBanco\Estoque\VwPlantio.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Areas\Sistema\Controllers\EstoqueController.cs" />
     <Compile Include="Areas\Sistema\Controllers\FazendaController.cs" />
@@ -283,7 +284,6 @@
     <Compile Include="Areas\Sistema\Models\Administrativo\Area.cs" />
     <Compile Include="Areas\Sistema\Models\Administrativo\Solo.cs" />
     <Compile Include="Areas\Sistema\Models\API\ListarUnidades.cs" />
-    <Compile Include="Areas\Sistema\Models\Armazenamento\Categoria.cs" />
     <Compile Include="Areas\Sistema\Models\Armazenamento\Estoque.cs" />
     <Compile Include="Areas\Sistema\Models\Armazenamento\Fornecedor.cs" />
     <Compile Include="Areas\Sistema\Models\Armazenamento\HistoricoEstoque.cs" />
@@ -412,13 +412,14 @@
     <Content Include="Areas\Sistema\Views\web.config" />
     <Content Include="Areas\Ecommerce\Views\web.config" />
     <Content Include="Imagens\accross-devices.png" />
-    <Content Include="Imagens\admin.jpg" />
+    <Content Include="Imagens\admin.png" />
     <Content Include="Imagens\bg_3.jpg" />
     <Content Include="Imagens\icon2.ico" />
     <Content Include="Imagens\icone.png" />
     <Content Include="Imagens\logo.png" />
     <Content Include="Imagens\milho.png" />
     <Content Include="Imagens\miniview-1.jpg" />
+    <Content Include="Imagens\registro.png" />
     <Content Include="Scripts\aos.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />

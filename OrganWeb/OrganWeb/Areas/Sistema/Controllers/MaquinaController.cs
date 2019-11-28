@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
+    [Authorize]
     public class MaquinaController : Controller
     {
         private Maquina maquina = new Maquina();
@@ -96,10 +97,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return HttpNotFound();
             }
-            var responseModel = await unmd.GetListarUnidades();
             maquina.Estoque = new Estoque
             {
-                Unidades = responseModel.UnidadeCadastros,
                 Fornecedores = await new Fornecedor().GetAll()
             };
             return View(maquina);
@@ -109,23 +108,10 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Editar(Maquina maquina)
         {
-            var responseModel = await unmd.GetListarUnidades();
-            maquina.Estoque.Unidades = responseModel.UnidadeCadastros;
             if (ModelState.IsValid)
             {
                 maquina.Update(maquina);
                 await maquina.Save();
-                if (await unmd.GetByID(maquina.Estoque.UM) == null)
-                {
-                    maquina.Estoque.Unidades = responseModel.UnidadeCadastros;
-                    uncd = new UnidadeCadastro()
-                    {
-                        Id = maquina.Estoque.UM,
-                        Desc = maquina.Estoque.Unidades.Where(x => x.Id == maquina.Estoque.UM).Select(x => x.Desc).FirstOrDefault().ToString()
-                    };
-                    unmd.Add(uncd);
-                    await unmd.Save();
-                }
                 estoque.Update(maquina.Estoque);
                 await estoque.Save();
                 return RedirectToAction("Index", "Estoque");

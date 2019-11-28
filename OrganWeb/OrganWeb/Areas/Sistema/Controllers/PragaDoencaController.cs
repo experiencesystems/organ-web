@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
+    [Authorize]
     public class PragaDoencaController : Controller
     {
         private Area area = new Area();

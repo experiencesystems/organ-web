@@ -1,4 +1,5 @@
 ﻿using OrganWeb.Areas.Ecommerce.Models.zBanco;
+using OrganWeb.Areas.Ecommerce.Models.zRepositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +10,7 @@ using System.Web;
 namespace OrganWeb.Areas.Ecommerce.Models.Vendas
 {
     [Table("tbPedidoAnuncio")]
-    public class PedidoAnuncio : EcommerceRepository<PedidoAnuncio>
+    public class PedidoAnuncio : PedidoAnuncioRepository
     {
         [Key, Column(Order = 1)]
         [ForeignKey("Pedido")]

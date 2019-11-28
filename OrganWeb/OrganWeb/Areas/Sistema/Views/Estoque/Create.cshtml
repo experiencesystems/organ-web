@@ -33,11 +33,11 @@
         </div>
         <div class="form-group">
             <div class="col">
-                @Html.LabelFor(model => model.IdCategoria, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Categoria, htmlAttributes: new { @class = "control-label col-md-2" })
             </div>
             <div class="col">
-                @Html.DropDownListFor(model => model.IdCategoria, new SelectList(Model.Categorias, "Id", "Nome"))
-                @Html.ValidationMessageFor(model => model.IdCategoria, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.Categoria, Model.TiposInsumo)
+                @Html.ValidationMessageFor(model => model.Categoria, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">

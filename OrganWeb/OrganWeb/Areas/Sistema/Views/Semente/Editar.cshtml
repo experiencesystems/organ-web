@@ -38,8 +38,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Estoque.UM, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Estoque.UM, new SelectList(Model.Estoque.Unidades, "Id", "Desc"))
-                @Html.ValidationMessageFor(model => model.Estoque.UM, "", new { @class = "text-danger" })
+                @Html.DisplayFor(model => model.Estoque.UnidadeMedida.Desc)
             </div>
         </div>
         <div class="form-group">

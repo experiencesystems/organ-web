@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
+    [Authorize]
     public class ColheitaController : Controller
     {
         private Colheita colheita = new Colheita();

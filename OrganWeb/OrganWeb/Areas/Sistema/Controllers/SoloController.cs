@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
+    [Authorize]
     public class SoloController : Controller
     {
         private Solo solo = new Solo();

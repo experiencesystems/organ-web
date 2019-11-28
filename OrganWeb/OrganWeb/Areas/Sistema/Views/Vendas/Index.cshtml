@@ -8,14 +8,19 @@
 
 <table class="table">
     <tr>
-        <th></th>
+        <th>Anúncio</th>
+        <th>Quantidade</th>
+        <th>Valor do frete</th>
+        <th>Status</th>
     </tr>
 
     @foreach (var item in Model.Pedidos)
     {
         <tr>
-            <td>
-            </td>
+            <td>@Html.DisplayFor(model => item.Anuncio.Nome)</td>
+            <td>@Html.DisplayFor(model => item.Qtd)</td>
+            <td>@Html.DisplayFor(model => item.Pedido.ValFrete)</td>
+            <td>@Html.DisplayFor(model => item.Pedido.Status)</td>
         </tr>
     }
 

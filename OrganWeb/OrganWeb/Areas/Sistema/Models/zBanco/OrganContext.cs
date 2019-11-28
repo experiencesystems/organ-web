@@ -22,7 +22,6 @@ namespace OrganWeb.Areas.Sistema.Models.zBanco
         public DbSet<Solo> Solos { get; set; }
 
         // ARMAZENAMENTO
-        public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Estoque> Estoques { get; set; }
         public DbSet<TelForn> TelForns { get; set; }
         public DbSet<Fornecedor> Fornecedors { get; set; }
@@ -74,17 +73,9 @@ namespace OrganWeb.Areas.Sistema.Models.zBanco
 
             // MAPEAMENTO DOS NOMES
 
-            modelBuilder.Entity<Categoria>()
-                .Property(t => t.Nome)
-                .HasColumnName("Categoria");
-
             modelBuilder.Entity<DDD>()
                 .Property(t => t.Valor)
                 .HasColumnName("DDD");
-
-            modelBuilder.Entity<Categoria>()
-                .Property(t => t.Nome)
-                .HasColumnName("Categoria");
 
             modelBuilder.Entity<PragaOrDoenca>()
                 .Property(t => t.PD)
@@ -145,6 +136,14 @@ namespace OrganWeb.Areas.Sistema.Models.zBanco
             modelBuilder.Entity<VwHistorico>()
                 .Property(t => t.DataAlteracao)
                 .HasColumnName("Data de Alteração");
+
+            modelBuilder.Entity<VwHistorico>()
+                .Property(t => t.QtdAntiga)
+                .HasColumnName("Quantidade Antiga");
+
+            modelBuilder.Entity<VwHistorico>()
+                .Property(t => t.QtdAtual)
+                .HasColumnName("Quantidade Atual");
 
             modelBuilder.Entity<VwHistorico>()
                 .Property(t => t.Descricao)

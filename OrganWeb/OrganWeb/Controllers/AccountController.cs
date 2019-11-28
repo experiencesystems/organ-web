@@ -14,7 +14,7 @@ using OrganWeb.Areas.Ecommerce.Models.Usuarios;
 using OrganWeb.Areas.Ecommerce.Models.zBanco;
 using OrganWeb.Areas.Sistema.Models.Telefone;
 
-namespace OrganWeb.Areas.Ecommerce.Controllers
+namespace OrganWeb.Controllers
 {
     [Authorize]
     public class AccountController : Controller
@@ -208,12 +208,9 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 string userId = User.Identity.GetUserId();
-                // to get the user details to load user Image    
-                var bdUsers = HttpContext.GetOwinContext().Get<EcommerceContext>();
-                var userImage = bdUsers.Users.Where(x => x.Id == userId).FirstOrDefault();
-                if (userImage.Foto == null)
+                if (userId == null)
                 {
-                    string fileName = HttpContext.Server.MapPath(@"~/Imagens/admin.png");
+                    string fileName = HttpContext.Server.MapPath(@"~/Images/admin.png");
 
                     byte[] imageData = null;
                     FileInfo fileInfo = new FileInfo(fileName);
@@ -223,12 +220,16 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
                     imageData = br.ReadBytes((int)imageFileLength);
 
                     return File(imageData, "image/png");
+
                 }
+                // to get the user details to load user Image    
+                var bdUsers = HttpContext.GetOwinContext().Get<EcommerceContext>();
+                var userImage = bdUsers.Users.Where(x => x.Id == userId).FirstOrDefault();
                 return new FileContentResult(userImage.Foto, "image/jpeg");
             }
             else
             {
-                string fileName = HttpContext.Server.MapPath(@"~/Imagens/admin.png");
+                string fileName = HttpContext.Server.MapPath(@"~/Images/admin.png");
                 byte[] imageData = null;
                 FileInfo fileInfo = new FileInfo(fileName);
                 long imageFileLength = fileInfo.Length;

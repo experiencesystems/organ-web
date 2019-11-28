@@ -16,8 +16,9 @@ namespace OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque
         public int Id { get; set; }
         public int IdItem { get; set; }
         public string Nome { get; set; }
-        public string Quantidade { get; set; }
-        public DateTime DataAlteracao { get; set; }
+        public double QtdAntiga { get; set; }
+        public double QtdAtual { get; set; }
+        public string DataAlteracao { get; set; }
         public string Descricao { get; set; }
     }
 }

@@ -10,9 +10,11 @@ using System.Web.Mvc;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
+    [Authorize]
     public class VendasController : Controller
     {
         private Pedido pedido = new Pedido();
+        private PedidoAnuncio pedidoAnuncio = new PedidoAnuncio();
         private Venda venda = new Venda();
 
         public async Task<ActionResult> Index(int? pagep, int? pagev)
@@ -21,7 +23,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
             int pagevenda = pagev ?? 1;
             var select = new ViewVendas
             {
-                Pedidos = await pedido.GetPedidosAnunciante(pagepedido),
+                Pedidos = await pedidoAnuncio.GetPedidosAnunciante(pagepedido),
                 Vendas = await venda.GetVendasDoAnunciante(pagevenda)
             };
             return View();

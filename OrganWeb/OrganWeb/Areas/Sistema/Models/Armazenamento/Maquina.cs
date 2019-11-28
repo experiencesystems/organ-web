@@ -35,7 +35,7 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
         public UnidadeCadastro Unini { get; set; }
 
         [NotMapped]
-        public readonly List<SelectListItem> Tipos = new List<SelectListItem>()
+        public readonly List<SelectListItem> TiposMaquina = new List<SelectListItem>()
             {
             new SelectListItem() { Text = "Semeadoras", Value = "1" },
             new SelectListItem() { Text = "Plantadoras", Value = "2" },

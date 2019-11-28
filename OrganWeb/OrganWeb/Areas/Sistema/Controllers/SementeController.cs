@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
+    [Authorize]
     public class SementeController : Controller
     {
         private Semente semente = new Semente();
@@ -91,8 +92,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return HttpNotFound();
             }
-            var responseModel = await unmd.GetListarUnidades();
-            semente.Estoque.Unidades = responseModel.UnidadeCadastros;
             semente.Estoque.Fornecedores = await new Fornecedor().GetAll();
             return View(semente);
         }
@@ -101,23 +100,10 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Editar(Semente semente)
         {
-            var responseModel = await unmd.GetListarUnidades();
-            semente.Estoque.Unidades = responseModel.UnidadeCadastros;
             if (ModelState.IsValid)
             {
                 semente.Update(semente);
                 await semente.Save();
-                if (await unmd.GetByID(semente.Estoque.UM) == null)
-                {
-                    semente.Estoque.Unidades = responseModel.UnidadeCadastros;
-                    uncd = new UnidadeCadastro()
-                    {
-                        Id = semente.Estoque.UM,
-                        Desc = semente.Estoque.Unidades.Where(x => x.Id == semente.Estoque.UM).Select(x => x.Desc).FirstOrDefault().ToString()
-                    };
-                    unmd.Add(uncd);
-                    await unmd.Save();
-                }
                 estoque.Update(semente.Estoque);
                 await estoque.Save();
                 return RedirectToAction("Index", "Estoque");
