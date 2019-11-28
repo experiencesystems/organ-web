@@ -124,15 +124,6 @@ DataInicio date not null,
 TipoPlantio int not null
 )engine = InnoDB;
 
-drop table if exists tbHistPlantio;
-create table tbHistPlantio(
-	Id int,
-     constraint PKHistPlantio primary key(Id),
-	Nome varchar(50) not null,
-    DataAlteracao datetime default current_timestamp,
-    `Desc` varchar(30) default 'Item Deletado'
-)engine = InnoDB;
-
 drop table if exists tbSolo;
 create table tbSolo(
 Id int auto_increment,
@@ -166,10 +157,11 @@ alter table tbAreaPlantio add constraint FKAreaPlantioPlantio foreign key(IdPlan
 
 drop table if exists tbItensPlantio;
 create table tbItensPlantio(
+a int auto_increment,
 QtdUsada double not null,
 IdPlantio int not null,
 IdEstoque int not null,
- constraint PKItensPlantio primary key(IdPlantio, IdEstoque)
+ constraint PKItensPlantio primary key(a)
 )engine = InnoDB;
 alter table tbItensPlantio add constraint FKItensPlantioPlantio foreign key(IdPlantio) references tbPlantio(Id),
    add constraint FKItensPlantioEstoque foreign key(IdEstoque) references tbEstoque(Id);
@@ -191,6 +183,7 @@ QtdPerdas double not null default 0,
 QtdTotal double not null,
 IdPlantio int not null,
 IdProd int not null,
+`Status` bool not null,
  constraint PKColheita primary key(Id)
 )engine = InnoDB;
 alter table tbColheita add constraint FKColheitaPlantio foreign key(IdPlantio) references tbPlantio(Id),
@@ -217,10 +210,11 @@ NumLiberacoes int not null,
 
 drop table if exists tbItensControle;
 create table tbItensControle(
+a int auto_increment,
 QtdUsada double not null,
 IdControle int not null,
 IdEstoque int not null,
- constraint PKItensControle primary key(IdControle, IdEstoque)
+ constraint PKItensControle primary key(a)
 )engine = InnoDB;
 alter table tbItensControle add constraint FKItensControleControle foreign key(IdControle) references tbControle(Id),
 add constraint FKItensControleEstoque foreign key(IdEstoque) references tbEstoque(Id);

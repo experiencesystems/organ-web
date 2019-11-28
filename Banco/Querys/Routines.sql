@@ -1,12 +1,12 @@
 use dbOrgan;
 /*https://web.archive.org/web/20130509230922/http://dev.mysql.com/tech-resources/articles/mysql-storedprocedures.pdf*/
-DELIMITER $
     
+DELIMITER $ 
 drop procedure if exists spInsertEstoque$
 create procedure spInsertEstoque(
 in
 	Qnt double,
-    UnM int
+    UnM varchar(6)
 )
 begin
 	if Qnt < 0 then
@@ -18,11 +18,12 @@ begin
     end if;
 end$
     
+DELIMITER $ 
 drop procedure if exists spInsertSemente$
 create procedure spInsertSemente(
 in 
 	Qnt double,
-    UnM int,
+    UnM varchar(6),
 	Nome1 varchar(30),
     `Desc1` varchar(100)
 )
@@ -42,11 +43,12 @@ begin
 	end if;
 end$
 
+DELIMITER $ 
 drop procedure if exists spInsertMaquina$
 create procedure spInsertMaquina(
 in 
 	Qnt double,
-    UnM int,
+    UnM varchar(6),
     Nome1 varchar(30),
     Tipo1 int,
     Montadora1 varchar(50),
@@ -69,11 +71,12 @@ begin
 	end if;
 end$
 
+DELIMITER $ 
 drop procedure if exists spInsertInsumo$
 create procedure spInsertInsumo(
 in 
 	Qnt double,
-    UnM int,
+    UnM varchar(6),
     Nome1 varchar(30),
     `Desc1` varchar(100),
     Categoria1 int
@@ -92,11 +95,12 @@ begin
 	end if;
 end$
 
+DELIMITER $ 
 drop procedure if exists spInsertProduto$
 create procedure spInsertProduto(
 in 
 	Qnt double,
-    UnM int,
+    UnM varchar(6),
     Nome1 varchar(30),
     `Desc1` varchar(100)
 )
@@ -115,6 +119,37 @@ begin
 	end if;
 end$
 
+DELIMITER $ 
+drop procedure if exists spInsertColheita$
+create procedure spInsertColheita(
+in 
+	Dataa date,
+	QntPerdas double,
+    QntTot double,
+    UnM varchar(6),
+    Nome1 varchar(30),
+    `Desc1` varchar(100),
+    IdPlant int,
+    Stats int,
+    IdCol int    
+)
+begin
+    declare qnt double;
+    declare col int;
+    
+    set qnt = (QntTot - QntPerdas);
+    if(isnull(IdCol)) then
+		call spInsertProduto(qnt, UnM, Nome1, `Desc1`);
+		
+		set col = (select IdEstoque from tbProduto order by IdEstoque desc limit 1);
+	else
+		set col = (select IdEstoque from tbProduto where IdEstoque = IdCol);
+    end if;
+    
+	insert into tbColheita(`Data`, QtdPerdas, QtdTotal, IdPlantio, IdProd, `Status`) value(Dataa, QntPerdas, QntTot, IdPlant, col, Stats);
+end$
+
+DELIMITER $ 
 drop procedure if exists spVerQtd$
 CREATE PROCEDURE spVerQtd (IN qtd double)
 BEGIN
@@ -123,7 +158,8 @@ SIGNAL SQLSTATE '45000'
    SET MESSAGE_TEXT = 'Valor menor que zero!';
 END IF;
 END$
- 
+
+DELIMITER $ 
 drop procedure if exists spCertQtd$
 CREATE PROCEDURE spCertQtd (IN qtd double, IdE int)
 BEGIN
