@@ -36,23 +36,25 @@ insert into tbLogradouro(Logradouro, IdBairro, CEP) values("Avenida Bosque da Sa
 														  ("Avenida Historiador Rubens de Mendonça - até 1250 - lado par", 1, "78008000");
                                          
 insert into tbUsuario(`Id`, `Email`, `ConfirmacaoEmail`, `SenhaHash`, `CarimboSeguranca`, `UserName`, Foto, CPF, Assinatura)
-values('02719894-e4a9-46c8-999e-ba942abd5f8f', 'milenamonteiro@gmail.com', 0, 
+values('02719894-e4a9-46c8-999e-ba942abd5f8f', 'jessica@gmail.com', 0, 
 	   'AKM33xpM5jcwZ/ojFJuuWBOvPQOiROAQmhfZwupekFSTAGpmW5+O7iPmj7cUuM/r6w==',
-	   '1a38cc85-3bd4-400b-9fd6-39f7c6a99a52', 'Mirena',  LOAD_FILE("/error.gif"), 11111111111, 4),
+	   '1a38cc85-3bd4-400b-9fd6-39f7c6a99a52', 'Jéssica',  LOAD_FILE("/error.gif"), 11111111111, 4),
        
-	   ('02719894-e4a9-46c8-999e-ba942abd5f8g', 'moreexpsystems@gmail.com', 0,
+	   ('02719894-e4a9-46c8-999e-ba942abd5f8g', 'expfarms@gmail.com', 0,
 	   'AKM33xpM5jcwZ/ojFJuuWBOvPQOiROAQmhfZwupekFSTAGpmW5+O7iPmj7cUuM/r6w==',
-	   'e7aac8f8-7c92-44fb-9850-5f0fb0024c9a', 'Empresinha', LOAD_FILE("/error.gif"), 11111111112, 1),
+	   'e7aac8f8-7c92-44fb-9850-5f0fb0024c9a', 'Experience Farms', LOAD_FILE("/error.gif"), 11111111112, 1),
        
-	   ('02719894-e4a9-46c8-999e-ba942abd5f8h', 'anuncio@a.com', 0,
+	   ('02719894-e4a9-46c8-999e-ba942abd5f8h', 'fazendinha@a.com', 0,
 	   'AKM33xpM5jcwZ/ojFJuuWBOvPQOiROAQmhfZwupekFSTAGpmW5+O7iPmj7cUuM/r6w==',
-	   '1a38cc85-3bd4-400b-9850-5f0fb0024c9a', 'Fazendinha', LOAD_FILE("/error.gif"), 11111111113, 1);
+	   '1a38cc85-3bd4-400b-9850-5f0fb0024c9a', 'Fazendinha', LOAD_FILE("/error.gif"), 11111111113, 3);
 
 insert into tbDadosBancarios(NomeTitular, CVV, Banco, NumCartao, Validade, IdUsuario) values("João Meu Pai", 1111, 1, 11111111111111111, '01/01/01', '02719894-e4a9-46c8-999e-ba942abd5f8f');
 
        
-insert into tbAnunciante(IdUsuario, NomeFazenda, NumEnd, CEP) values('02719894-e4a9-46c8-999e-ba942abd5f8g', 'Experience Farms', 1, "78008105"),
-																	('02719894-e4a9-46c8-999e-ba942abd5f8h', 'Fazenda Triste', 2, "78008000");
+insert into tbAnunciante(IdUsuario, NomeFazenda, NumEnd, CEP, NomeBanco) values('02719894-e4a9-46c8-999e-ba942abd5f8g', 'Experience Farms', 1, "78008105", 'dbOrgan'),
+																			   ('02719894-e4a9-46c8-999e-ba942abd5f8h', 'Fazenda Triste', 2, "78008000", 'dbOrgan 1');
+select * from vwDadosBancarios;
+select * from vwAnunciante;
 
 insert into tbUM value('a', 'A');
 insert into tbProduto(ValorUnit, UM, Nome, Categoria) values(5.25, 'a', 'Semente de Soja', 1),
@@ -64,6 +66,10 @@ insert into tbAnuncio(Nome, `Desc`, `Status`, Foto, IdProduto, IdAnunciante, Qua
 		  ('Milhão Bão', 'ESSE MILHO É TRANSGêNICO, MAS IDAÍ, COMPRA!', true, load_file("/error.gif"), 1, '02719894-e4a9-46c8-999e-ba942abd5f8g', 1),
 		  ('Pá da Boa', 'PENSA NUMA PÁ BOA, É ESSA, COMPRA!', true, load_file("/error.gif"), 2, '02719894-e4a9-46c8-999e-ba942abd5f8h', 1),
           ('Pá da Boa', 'PENSA DUAS PÁ BOA, SÃO ESSAS, COMPRA!', true, load_file("/error.gif"), 2, '02719894-e4a9-46c8-999e-ba942abd5f8h', 2);
+
+insert into tbAnuncio(Nome, `Desc`, `Status`, Foto, IdProduto, IdAnunciante, Quantidade, Desconto, DuracaoDesc, DataDesc)
+	values('Soja', 'É a sim!', true, load_file("/error.gif"), 1, '02719894-e4a9-46c8-999e-ba942abd5f8g', 2, 10, 1, '19/11/27 17:00');          
+select * from vwAnuncio;
           
 insert into tbWishList value('02719894-e4a9-46c8-999e-ba942abd5f8f', 4);
 

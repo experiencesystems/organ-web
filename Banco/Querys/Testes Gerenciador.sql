@@ -49,10 +49,10 @@ insert into tbSemente(IdEstoque, Nome) values(2, "Semente de Milho");
 update tbEstoque set Qtd = 4 where Id = 1;
 
 insert into tbEstoque(Qtd, UM, IdFornecedor) values(1, 'a', 3), (2, 'a', 1), (5, 'a', 3);
-insert into tbInsumo(IdEstoque, Nome, Categoria) values(3, "CresceForte", 1), (4, "Pá", 2), (5, "Inseticida", 3);
+insert into tbInsumo(IdEstoque, Nome, Categoria) values(3, "CresceForte", 6), (4, "Pá", 2), (5, "Inseticida", 9);
 
 insert into tbEstoque(Qtd,UM, IdFornecedor) values(5, 'a', 2), (6, 'a', 2);
-insert into tbMaquina(IdEstoque, Nome, Tipo, Montadora) values(6,'Adubex', 1, 'Adubadora'), (7,'Semotors', 2, 'Semeadora');
+insert into tbMaquina(IdEstoque, Nome, Tipo, Montadora) values(6,'Adubex', 4, 'AdubadoraX'), (7,'Semotors', 1, 'SemeadoraX');
 
 update tbEstoque set Qtd = 0 where Id = 7;
 delete from tbMaquina where IdEstoque = 7;
@@ -78,12 +78,12 @@ insert into tbItensPlantio(QtdUsada, IdPlantio, IdEstoque) value(0.05, 3, 3);
 insert into tbItensPlantio(QtdUsada, IdPlantio, IdEstoque) value(1, 3, 6);
 insert into tbAreaPlantio(IdPlantio, IdArea, Densidade) values(3, 4, 1), (3, 5, 1);
 
-select * from vwPlantio; 
+select * from vwPlantio; use dborgan;
 
 -- -				 (datacolehita, qtdperda, qtdtotal, unidade de medida, nome do produo, descrica do produto, idplantio, status colheita, idcolheita)
 call spInsertColheita('01/01/01', 1, 4, 'a', 'Soja', null, 1, true, null);
-call spInsertColheita('19/02/01', 1, 8, 'a', 'Milho', 'Milho Transgênico', 4, true, null);
-call spInsertColheita('19/02/01', 0, 4, 'a', 'Soja', null, 4, false, 9);
+call spInsertColheita('19/02/01', 1, 8, 'a', 'Milho', 'Milho Transgênico', 3, true, null);
+call spInsertColheita('19/02/01', 0, 4, 'a', 'Soja', null, 2, false, 9);
 select * from vwColheita; 
 
 insert into tbControle(`Status`, Efic, NumLiberacoes, `Data`) values(true, 100, 2, '01/01/01'), (true, 50, 3, '01/01/01');

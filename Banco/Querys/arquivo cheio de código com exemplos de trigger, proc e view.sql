@@ -1,4 +1,62 @@
 /*
+begin 
+		declare dtini, dtfim datetime;
+        declare dia, ida, idm int;
+--         declare done bool default false;
+--         declare cur cursor for select DataDesc, DuracaoDesc from tbAnuncio; -- cursor ta setado pra cada id na tbanuncio onde desconto > 0
+--         declare continue handler for not found set done = true; -- se o cursor não achar mais nada ele seta done pra true
+--         
+--         open cur; -- abre o cursor
+		set ida = (select Id from tbAnuncio order by Id limit 1);
+        set idm = (select max(id) from tbAnuncio);
+        loopa : loop -- abre looping
+-- 			fetch cur into dtini, dia; -- coloca o id dentro da variavale ida
+            if (ida = idm) then -- diz quando fechar o looping, qnd done for true q só acontece quando ele não acha mais nada
+				leave loopa; -- sai do loop
+			end if;
+            -- código que verifica se a data de desconto já foi
+            
+            set dtini = (select DataDesc from tbAnuncio where Id = ida);
+            set dia = (select DuracaoDesc from tbAnuncio where Id = ida);
+            set dtfim = date_add(dtini, interval dia day);
+            
+            if(dtfim <= now()) then
+				update tbAnuncio set Desconto = 0, DuracaoDesc = 0, DataDesc = null where Id = ida;
+            end if;
+            
+            set ida = ida + 1;
+		end loop loopa; -- fim do loop
+--         close cur; -- fim do cursor
+	END$
+
+set global event_scheduler=on;
+
+last_insert_id()
+
+SELECT * FROM tabela WHERE DataValidade <= DATE_SUB(now(), INTERVAL 30 DAY) - VENCERAM
+SELECT * FROM tabela WHERE DataValidade <= DATE_ADD(now(), INTERVAL 30 DAY) - VÃO VENCER
+CREATE
+    [DEFINER = { user | CURRENT_USER }]
+    EVENT
+    [IF NOT EXISTS]
+    event_name
+    ON SCHEDULE schedule
+    [ON COMPLETION [NOT] PRESERVE]
+    [ENABLE | DISABLE | DISABLE ON SLAVE]
+    [COMMENT 'comment']
+    DO event_body;
+
+schedule:
+    AT timestamp [+ INTERVAL interval] ...
+  | EVERY interval
+    [STARTS timestamp [+ INTERVAL interval] ...]
+    [ENDS timestamp [+ INTERVAL interval] ...]
+
+interval:
+    quantity {YEAR | QUARTER | MONTH | DAY | HOUR | MINUTE |
+              WEEK | SECOND | YEAR_MONTH | DAY_HOUR | DAY_MINUTE |
+              DAY_SECOND | HOUR_MINUTE | HOUR_SECOND | MINUTE_SECOND}
+
 create table tbFazenda(
 	Id int auto_increment,
      constraint PKFazenda primary key (Id),

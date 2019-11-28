@@ -263,7 +263,7 @@ create view vwPlantio as(
 drop view if exists vwColheita;
 create view vwColheita as(
 	select c.Id `Id`,
-		   date_format(c.`Data`, '%e/%m/%y às %H:%i') `Data da Colheita`,
+		   date_format(c.`Data`, '%e/%m/%y') `Data da Colheita`,
            case
 				when c.`Status` = true then 'Normal'
 				else 'Final'
@@ -280,6 +280,8 @@ create view vwColheita as(
 	tbPlantio pr on c.IdPlantio = pr.Id
 		inner join
 	tbProduto p on c.IdProd = p.IdEstoque
+	group by Id
+    order by Id desc
 );
 
 
@@ -370,14 +372,16 @@ on tbColheita
 for each row
 begin   
 if (NEW.`Status` = false) then
+	begin
 	set FOREIGN_KEY_CHECKS = 0;
-    delete from tbPlantio where Id = NEW.IdPlantio;
+    delete from tbPlantio where Id = NEW.IdPedido;
+	set FOREIGN_KEY_CHECKS = 1;
+    end;
 end if;
 
 if(exists(select * from tbColheita where IdProd = NEW.IdProd)) then
 	update tbEstoque set Qtd = (Qtd + (NEW.QtdTotal - NEW.QtdPerdas)) where Id = NEW.IdProd;
 end if;
-	set FOREIGN_KEY_CHECKS=1;
 end$
 
 DELIMITER $
@@ -468,29 +472,65 @@ select E.CEP,  R.Logradouro `Rua`, concat(B.Bairro,' - ', C.Cidade,'/', Es.UF) `
 	inner join tbEstado Es on C.IdEstado = Es.Id
 ); 
 
+drop view if exists vwUsuario;
+create view vwDadosBancarios as(
+select d.Id,
+	   u.`UserName` `Nome do Usuário`,
+       d.NomeTitular `Titular do Cartão`,
+       d.CVV `CVV`,
+       d.NumCartao `Número do Cartão`,
+       d.Validade `Validade`,
+       d.Banco `Banco`
+ from tbDadosBancarios d
+	inner join tbUsuario u on d.IdUsuario = u.Id
+);
+
+drop view if exists vwAnunciante;
+create view vwAnunciante as(
+select a.IdUsuario `Id`,
+	   u.UserName `Nome do Usuário`,
+       u.Foto `Foto do Perfil`,
+       u.CPF `CPF`,
+       u.Email `Email`,
+	   a.NomeFazenda `Nome da Fazenda`,
+       a.FotoFazenda `Foto da Fazenda`,
+       concat(E.Rua,', ', a.NumEnd,' - ', ifnull(a.CompEnd, 'Sem Complemento'),' - ',E.BCE,' - ',E.CEP) `Endereço da fazenda`,
+       case
+		when u.Assinatura = 1 then 'Mensal'
+        when u.Assinatura = 2 then 'Semestral'
+        when u.Assinatura = 3 then 'Anual'
+        else 'Inválido! - Anunciante sem o Organ!'
+        end as `Tipo de Assinatura`
+ from tbAnunciante a
+	inner join vwEndereco E on a.CEP = E.CEP
+	inner join tbUsuario u on a.IdUsuario = u.Id
+group by a.IdUsuario
+);
+
 drop view if exists vwAnuncio;
 create view vwAnuncio as(
 select 
 	A.Id `Id`,
     A.Nome `Anúncio`,
     A.Foto `Foto`,
-    A.`Data` `Data de Postagem`,
+    A.`Data` `Data de Postagem`, 
     A.Id `IdAnuncio`,
     AN.NomeFazenda `Anunciante`,
     concat(E.Rua,', ', AN.NumEnd,' - ', ifnull(AN.CompEnd, 'Sem Complemento'),' - ',E.BCE,' - ',E.CEP) `Endereço do Anunciante`,
     A.`Desc` `Descrição`,
-    A.Desconto `Desconto(%)`,
+    concat(A.Desconto, '%') `Desconto`,
     A.DuracaoDesc `Duração do Desconto(Em Dias)`,
     P.Nome `Produto`,
     concat(A.Quantidade, ' ', P.UM ) `Quantidade`,
     (P.ValorUnit * A.Quantidade) `Preço`,
     P.Categoria `Categoria`,
-    ifnull((select count(`Like`) from tbAvaliacao where IdAnuncio = A.Id), '0') `Likes`,
+    spLike(A.Id) `Likes`,
     A.LimiteParcela `Limite de Parcelamento`
 from tbAnuncio A
 	inner join tbProduto P on P.Id = A.IdProduto
     inner join tbAnunciante AN on AN.IdUsuario = A.IdAnunciante
     inner join vwEndereco E on E.CEP = AN.CEP
+    left join tbAvaliacao av on A.Id = av.IdAnuncio
 ); 
 
 drop view if exists vwPedido;

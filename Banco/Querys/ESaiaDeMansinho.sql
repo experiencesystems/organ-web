@@ -121,7 +121,8 @@ Nome varchar(50) not null,
 Sistema int not null,
 DataColheita date not null,
 DataInicio date not null,
-TipoPlantio int not null
+TipoPlantio int not null,
+`Status` bool default true
 )engine = InnoDB;
 
 drop table if exists tbSolo;

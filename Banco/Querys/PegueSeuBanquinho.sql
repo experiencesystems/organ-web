@@ -25,7 +25,7 @@ drop table if exists tbUsuario;
 create table tbUsuario (
 	`Id` nvarchar(128)  not null ,
 	Foto mediumblob,
-	Assinatura int not null,
+	Assinatura int default 4,
 	CPF numeric(11) not null,
 	 constraint UQUsuarioCPF unique(CPF),
 	`Email` varchar(100) ,-- !
@@ -80,6 +80,7 @@ create table tbAnunciante(
 	IdUsuario nvarchar(128) not null,
      constraint PKAnunciante primary key(IdUsuario),
     NomeFazenda varchar(50) not null,
+    FotoFazenda mediumblob,
     NomeBanco varchar(50),
     NumEnd int not null,
     CompEnd varchar(50),
@@ -159,8 +160,9 @@ create table tbAnuncio(
 	`Status` bool default true,
 	Foto blob,
 	Quantidade double not null,
-	Desconto decimal(5,2) default 0,
+	Desconto int default 0, 
 	DuracaoDesc int default 0,
+    DataDesc datetime,
 	IdProduto int not null,
 	IdAnunciante nvarchar(128) not null,
     `Data` datetime default current_timestamp ,
