@@ -10,6 +10,6 @@ namespace OrganWeb.Areas.Sistema.Models.ViewModels
     public class ViewVendas
     {
         public IPagedList<Venda> Vendas { get; set; }
-        public IPagedList<Pedido> Pedidos { get; set; }
+        public IPagedList<PedidoAnuncio> Pedidos { get; set; }
     }
 }

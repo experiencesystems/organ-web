@@ -15,6 +15,7 @@ using OrganWeb.Areas.Sistema.Models.Telefone;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
+    [Authorize]
     public class FornecedorController : Controller
     {
         private TipoTel tipotel = new TipoTel();

@@ -20,11 +20,11 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
+    [Authorize]
     public class EstoqueController : Controller
     {
         private Insumo insumo = new Insumo();
         private Estoque estoque = new Estoque();
-        private Categoria categoria = new Categoria();
         private VwItems vwItems = new VwItems();
         private ListarUnidades listarUnidades = new ListarUnidades();
         private UnidadeCadastro unidadeCadastro = new UnidadeCadastro();
@@ -115,8 +115,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 {
                     Unidades = responseModel.UnidadeCadastros,
                     Fornecedores = await new Fornecedor().GetAll()
-                },
-                Categorias = await categoria.GetAll()
+                }
             };
             return View(insumo);
         }
@@ -139,7 +138,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 return RedirectToAction("Index");
             }
             var ums = await listarUnidades.GetListarUnidades();
-            insumo.Categorias = await categoria.GetAll();
             return View(insumo);
         }//TODO: máscara nos campos
 
@@ -193,9 +191,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 return HttpNotFound();
             }
-            insumo.Categorias = await categoria.GetAll();
-            var responseModel = await unmd.GetListarUnidades();
-            insumo.Estoque.Unidades = responseModel.UnidadeCadastros;
             insumo.Estoque.Fornecedores = await new Fornecedor().GetAll();
             return View(insumo);
         }
@@ -206,26 +201,12 @@ namespace OrganWeb.Areas.Sistema.Controllers
         {
             if (ModelState.IsValid)
             {
-                var responseModel = await unmd.GetListarUnidades();
-                insumo.Estoque.Unidades = responseModel.UnidadeCadastros;
                 insumo.Update(insumo);
                 await insumo.Save();
-                if (await unmd.GetByID(insumo.Estoque.UM) == null)
-                {
-                    insumo.Estoque.Unidades = responseModel.UnidadeCadastros;
-                    uncd = new UnidadeCadastro()
-                    {
-                        Id = insumo.Estoque.UM,
-                        Desc = insumo.Estoque.Unidades.Where(x => x.Id == insumo.Estoque.UM).Select(x => x.Desc).FirstOrDefault().ToString()
-                    };
-                    unmd.Add(uncd);
-                    await unmd.Save();
-                }
                 estoque.Update(insumo.Estoque);
                 await estoque.Save();
                 return RedirectToAction("Index");
             }
-            insumo.Categorias = await categoria.GetAll();
             insumo.Estoque.Fornecedores = await new Fornecedor().GetAll();
             return View(insumo);
         }

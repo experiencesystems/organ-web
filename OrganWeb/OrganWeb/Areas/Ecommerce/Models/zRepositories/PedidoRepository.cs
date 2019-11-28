@@ -10,16 +10,18 @@ using PagedList;
 
 namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
 {
-    public class PedidoRepository : EcommerceRepository<Pedido>
+    public class PedidoAnuncioRepository : EcommerceRepository<PedidoAnuncio>
     {
-        public async Task<IPagedList<Pedido>> GetPedidosAnunciante(int page)
+        public async Task<IPagedList<PedidoAnuncio>> GetPedidosAnunciante(int page)
         {
-            return await DbSet.Where(x => x.Anuncio.IdAnunciante == HttpContext.Current.User.Identity.GetUserId()).OrderBy(p => p.Id).ToPagedListAsync(page, 10);
+            string id = HttpContext.Current.User.Identity.GetUserId();
+            return await DbSet.Include(e => e.Anuncio).Include(o => o.Pedido).Where(x => x.Anuncio.IdAnunciante == id).OrderBy(p => p.Anuncio.Id).ToPagedListAsync(page, 10);
         }
 
-        public async Task<IPagedList<Pedido>> GetPedidosCliente(int page)
+        public async Task<IPagedList<PedidoAnuncio>> GetPedidosCliente(int page)
         {
-            return await DbSet.Where(x => x.IdUsuario == HttpContext.Current.User.Identity.GetUserId()).OrderBy(p => p.Id).ToPagedListAsync(page, 10);
+            string id = HttpContext.Current.User.Identity.GetUserId();
+            return await DbSet.Include(e => e.Anuncio).Include(o => o.Pedido).Where(x => x.Pedido.IdUsuario == id).OrderBy(p => p.Anuncio.Id).ToPagedListAsync(page, 10);
         }
     }
 }

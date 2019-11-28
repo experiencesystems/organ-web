@@ -57,17 +57,31 @@
                                 <tbody>
                                     @foreach (var item in Model.VwItems)
                                     {
-                                        <tr>
-                                            <td>@Html.DisplayFor(modelItem => item.Item)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Quantidade) @Html.DisplayFor(modelItem => item.UnidadeMedida)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Categoria)</td>
-                                            <td>
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.Item)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Quantidade) @Html.DisplayFor(modelItem => item.UnidadeMedida)</td>
+                                        @switch (item.Tipo)
+                                        {
+                                            case ("Insumo"):
+                                                <td>@Html.DisplayFor(modelItem => item.TiposInsumo.Where(x => x.Value == item.Categoria.ToString()).First().Text)</td>
+                                                break;
+                                            case ("Produto"):
+                                                <td>@Html.DisplayFor(modelItem => item.Categoria)</td>
+                                                break;
+                                            case ("Máquina"):
+                                                <td>@Html.DisplayFor(modelItem => item.TiposMaquina.Where(x => x.Value == item.Categoria.ToString()).First().Text)</td>
+                                                break;
+                                            case ("Semente"):
+                                                <td>@Html.DisplayFor(modelItem => item.Categoria)</td>
+                                                break;
+                                        }
+                                        <td>
 
-                                                <a class="popup btn" href="@Url.Action("Detalhes", "Estoque", new { id = item.Id, tipo = item.Tipo  })"><div class="itemback"><i class="item fa fa-info"></i></div></a>
-                                                <a class="popup btn" href="@Url.Action("Editar", "Estoque", new { id = item.Id, tipo = item.Tipo })"><div class="itemback"><i class="item far fa-edit"></i></div></a>
-                                                <a class="popup btn" href="@Url.Action("Excluir", "Estoque", new { id = item.Id, tipo = item.Tipo })"><div class="itemback"><i class="item far fa-trash-alt"></i></div></a>
-                                            </td>
-                                        </tr>
+                                            <a class="popup btn" href="@Url.Action("Detalhes", "Estoque", new { id = item.Id, tipo = item.Tipo  })"><div class="itemback"><i class="item fa fa-info"></i></div></a>
+                                            <a class="popup btn" href="@Url.Action("Editar", "Estoque", new { id = item.Id, tipo = item.Tipo })"><div class="itemback"><i class="item far fa-edit"></i></div></a>
+                                            <a class="popup btn" href="@Url.Action("Excluir", "Estoque", new { id = item.Id, tipo = item.Tipo })"><div class="itemback"><i class="item far fa-trash-alt"></i></div></a>
+                                        </td>
+                                    </tr>
                                     }
                                 </tbody>
                             </table>
@@ -106,21 +120,23 @@
                         <table class="table-hover">
                             <thead class="thead-title">
                                 <tr>
-                                    <th scope="col">Descrição</th>
                                     <th scope="col">Data</th>
+                                    <th scope="col">Descrição</th>
                                     <th scope="col">Nome</th>
-                                    <th scope="col">Quantidade</th>
+                                    <th scope="col">Qtd antiga</th>
+                                    <th scope="col">Qtd atual</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model.VwHistoricos)
                                 {
-                                    <tr>
-                                        <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.DataAlteracao)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Quantidade) @Html.DisplayFor(modelItem => item.UnidadeMedida)</td>
-                                    </tr>
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.DataAlteracao)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.QtdAntiga)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.QtdAtual)</td>
+                                </tr>
                                 }
                             </tbody>
                         </table>

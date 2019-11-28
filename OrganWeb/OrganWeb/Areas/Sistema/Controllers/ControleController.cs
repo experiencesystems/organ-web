@@ -14,6 +14,7 @@ using System.Data.Entity;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
+    [Authorize]
     public class ControleController : Controller
     {
         private Controle controle = new Controle();

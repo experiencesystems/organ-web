@@ -1,6 +1,7 @@
 ﻿using OrganWeb.Areas.Sistema.Models.API;
 using OrganWeb.Areas.Sistema.Models.Armazenamento;
 using OrganWeb.Areas.Sistema.Models.Safras;
+using OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,11 @@ using System.Web.Mvc;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
+    [Authorize]
     public class ColheitaController : Controller
     {
         private Colheita colheita = new Colheita();
+        private VwColheita vwcolheita = new VwColheita();
         private Plantio plantio = new Plantio();
         private Produto produto = new Produto();
         private Estoque estoque = new Estoque();
@@ -22,7 +25,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
 
         public async Task<ActionResult> Index()
         {
-            return View(await colheita.GetAll());
+            return View(await vwcolheita.GetAll());
         }
 
         public async Task<ActionResult> CriarColheita(int? id, bool? again) //recebe o id do plantio
@@ -51,9 +54,15 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 Plantio = plantio
             };
             if (dnv)
+            {
+                colheita.Status = true;
                 return View("RepeteColheita", colheita);
+            }
             else
+            {
+                colheita.Status = false;
                 return View("Colheita", colheita);
+            }
         }
 
         [HttpPost]
@@ -62,9 +71,17 @@ namespace OrganWeb.Areas.Sistema.Controllers
         {
             ListarUnidades responseModel = new ListarUnidades();
             plantio = await plantio.GetByID(colheita.IdPlantio);
-              if (plantio.DataInicio > colheita.Data)
+            if (plantio.DataInicio > colheita.Data)
             {
                 ModelState.AddModelError("", "Insira uma data de colheita posterior à de início do plantio.");
+                responseModel = await unmd.GetListarUnidades();
+                colheita.Produto.Estoque.Unidades = responseModel.UnidadeCadastros;
+                colheita.Plantio = plantio;
+                return View(colheita);
+            }
+            if (colheita.QtdPerdas > colheita.QtdTotal)
+            {
+                ModelState.AddModelError("", "A quantidade de perdas deve ser menor ou igual a quantidade total de itens colhidos.");
                 responseModel = await unmd.GetListarUnidades();
                 colheita.Produto.Estoque.Unidades = responseModel.UnidadeCadastros;
                 colheita.Plantio = plantio;
@@ -179,55 +196,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
             responseModel = await unmd.GetListarUnidades();
             colheita.Produto.Estoque.Unidades = responseModel.UnidadeCadastros;
             colheita.Plantio = plantio;
-            return View(colheita);
-        }
-
-        public async Task<ActionResult> Detalhes(int? id, int? id2)
-        {
-            if (id == null || id2 == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            colheita = await colheita.GetByID(id, id2);
-            if (colheita == null)
-            {
-                return HttpNotFound();
-            }
-            return View(colheita);
-        }
-
-        public async Task<ActionResult> Editar(int? id, int? id2)
-        {
-            if (id == null || id2 == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            colheita = await colheita.GetByID(id, id2);
-            if (colheita == null)
-            {
-                return HttpNotFound();
-            }
-            return View(colheita);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Editar(Colheita colheita)
-        {
-            if (ModelState.IsValid)
-            {
-                estoque = colheita.Produto.Estoque;
-                estoque.Update(estoque);
-                await estoque.Save();
-
-                produto = colheita.Produto;
-                produto.Update(produto);
-                await produto.Save();
-
-                colheita.Update(colheita);
-                await colheita.Save();
-                return RedirectToAction("Index");
-            }
             return View(colheita);
         }
     }

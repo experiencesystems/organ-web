@@ -9,8 +9,8 @@
         @Html.LabelFor(model => model.Desc, new { htmlAttributes = new { @class = "form-control" } })
         <dd>@Html.DisplayFor(model => model.Desc, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } })</dd>
     }
-    @Html.LabelFor(model => model.Categoria.Nome, new { htmlAttributes = new { @class = "form-control" } })
-    <dd>@Html.DisplayFor(model => model.Categoria.Nome, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } })</dd>
+    @Html.LabelFor(model => model.Categoria, new { htmlAttributes = new { @class = "form-control" } })
+    <dd>@Html.DisplayFor(model => model.TiposInsumo.Where(x => x.Value == model.Categoria.ToString()).First().Text, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } })</dd>
 
     @Html.LabelFor(model => model.Estoque.Qtd, new { htmlAttributes = new { @class = "form-control" } })
     <dd>@Html.DisplayFor(model => model.Estoque.Qtd, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } }) @Html.DisplayFor(model => model.Estoque.UM, new { htmlAttributes = new { @disabled = "disabled", @class = "campodis" } })</dd>

@@ -22,7 +22,6 @@ namespace OrganWeb.Areas.Sistema.Models.zBanco
         public DbSet<Solo> Solos { get; set; }
 
         // ARMAZENAMENTO
-        public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Estoque> Estoques { get; set; }
         public DbSet<TelForn> TelForns { get; set; }
         public DbSet<Fornecedor> Fornecedors { get; set; }
@@ -35,7 +34,7 @@ namespace OrganWeb.Areas.Sistema.Models.zBanco
         public DbSet<Controle> Controles { get; set; }
         public DbSet<ItensControle> ItensControles { get; set; }
         public DbSet<FuncControle> FuncControles { get; set; }
-        
+
         // FUNCIONÁRIO
         public DbSet<TelFunc> TelFuncs { get; set; }
         public DbSet<Funcionario> Funcionarios { get; set; }
@@ -61,6 +60,7 @@ namespace OrganWeb.Areas.Sistema.Models.zBanco
         public DbSet<VwHistorico> VwHistoricos { get; set; }
         public DbSet<VwControle> VwControles { get; set; }
         public DbSet<VwPlantio> VwPlantios { get; set; }
+        public DbSet<VwColheita> VwColheitas { get; set; }
 
         // TELEFONE
         public DbSet<Telefone.Telefone> Telefones { get; set; }
@@ -73,18 +73,32 @@ namespace OrganWeb.Areas.Sistema.Models.zBanco
             base.OnModelCreating(modelBuilder);
 
             // MAPEAMENTO DOS NOMES
-
-            modelBuilder.Entity<Categoria>()
-                .Property(t => t.Nome)
-                .HasColumnName("Categoria");
+            /*Dataa date,
+            QntPerdas double,
+            QntTot double,
+            UnM varchar(6),
+            Nome1 varchar(30),
+            `Desc1` varchar(100),
+            IdPlant int,
+            Stats int,
+            IdCol int
+            modelBuilder.Entity<Colheita>()
+                .MapToStoredProcedures(s => s
+                .Insert(u => u.HasName("spInsertColheita")
+                    .Parameter(b => b.Data, "Dataa")
+                    .Parameter(b => b.QtdPerdas, "QntPerdas")
+                    .Parameter(b => b.QtdTotal, "QntTot")
+                    .Parameter(b => b.Produto.Estoque.UM, "UnM")
+                    .Parameter(b => b.Produto.Nome, "Nome1")
+                    .Parameter(b => b.Produto.Desc, "Desc1")
+                    .Parameter(b => b.IdPlantio, "IdPlant")
+                    .Parameter(b => b.Status, "Stats")
+                    .Parameter(b => b.Id, "IdCol")
+                ));*/
 
             modelBuilder.Entity<DDD>()
                 .Property(t => t.Valor)
                 .HasColumnName("DDD");
-
-            modelBuilder.Entity<Categoria>()
-                .Property(t => t.Nome)
-                .HasColumnName("Categoria");
 
             modelBuilder.Entity<PragaOrDoenca>()
                 .Property(t => t.PD)
@@ -147,6 +161,14 @@ namespace OrganWeb.Areas.Sistema.Models.zBanco
                 .HasColumnName("Data de Alteração");
 
             modelBuilder.Entity<VwHistorico>()
+                .Property(t => t.QtdAntiga)
+                .HasColumnName("Quantidade Antiga");
+
+            modelBuilder.Entity<VwHistorico>()
+                .Property(t => t.QtdAtual)
+                .HasColumnName("Quantidade Atual");
+
+            modelBuilder.Entity<VwHistorico>()
                 .Property(t => t.Descricao)
                 .HasColumnName("Descrição de Alteração");
 
@@ -169,6 +191,26 @@ namespace OrganWeb.Areas.Sistema.Models.zBanco
             modelBuilder.Entity<VwPlantio>()
                 .Property(t => t.Funcionarios)
                 .HasColumnName("Funcionários Participantes");
+
+            modelBuilder.Entity<VwColheita>()
+                .Property(t => t.DataColheita)
+                .HasColumnName("Data da Colheita");
+
+            modelBuilder.Entity<VwColheita>()
+                .Property(t => t.Situacao)
+                .HasColumnName("Situação da Colheita");
+
+            modelBuilder.Entity<VwColheita>()
+                .Property(t => t.QtdColhida)
+                .HasColumnName("Quantidade Colhida");
+
+            modelBuilder.Entity<VwColheita>()
+                .Property(t => t.QtdPerdida)
+                .HasColumnName("Quantidade Perdida");
+
+            modelBuilder.Entity<VwColheita>()
+                .Property(t => t.QtdTotal)
+                .HasColumnName("Quantidade Total");
         }
 
         public static OrganContext Create()

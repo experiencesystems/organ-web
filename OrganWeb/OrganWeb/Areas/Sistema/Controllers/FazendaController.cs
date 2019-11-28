@@ -11,8 +11,9 @@ using System.Web.Mvc;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
+    [Authorize]
     public class FazendaController : Controller
-    {   //TODO: mais de uma colheita
+    {   
         private Solo solo = new Solo();
         private ViewFazenda vwFazenda = new ViewFazenda();
         private VwFuncionario funcionario = new VwFuncionario();

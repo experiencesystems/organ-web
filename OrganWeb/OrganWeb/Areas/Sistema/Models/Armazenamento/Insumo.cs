@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Mvc;
 
 namespace OrganWeb.Areas.Sistema.Models.Armazenamento
 {
@@ -25,12 +26,25 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
         public string Desc { get; set; }
 
         [Required]
-        [ForeignKey("Categoria")]
-        public int IdCategoria { get; set; }
+        public int Categoria { get; set; }
 
-        public virtual Categoria Categoria { get; set; }
         public virtual Estoque Estoque { get; set; }
-
-        public IEnumerable<Categoria> Categorias { get; set; }
+        
+        [NotMapped]
+        public readonly List<SelectListItem> TiposInsumo = new List<SelectListItem>()
+            {
+            new SelectListItem() { Text = "Eimoletos (ex. arado)", Value = "1" },
+            new SelectListItem() { Text = "Ferramenta", Value = "2" },
+            new SelectListItem() { Text = "Equipamentos (bomba, tubulação, aspersores)", Value = "3" },
+            new SelectListItem() { Text = "Insetos de uso agrícola", Value = "4" },
+            new SelectListItem() { Text = "Esterco", Value = "5" },
+            new SelectListItem() { Text = "Fertilizantes orgânicos", Value = "6" },
+            new SelectListItem() { Text = "Microorganismos de uso agrícola", Value = "7" },
+            new SelectListItem() { Text = "Adubação verde", Value = "8" },
+            new SelectListItem() { Text = "Defensivos", Value = "9" },
+            new SelectListItem() { Text = "Fungicidas", Value = "10" },
+            new SelectListItem() { Text = "Herbicidas", Value = "11" },
+            new SelectListItem() { Text = "Fertilizantes químicos", Value = "12" }
+            };
     }
 }

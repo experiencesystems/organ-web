@@ -33,6 +33,9 @@ namespace OrganWeb.Areas.Sistema.Models.Safras
         [ForeignKey("Produto")]
         public int IdProd { get; set; }
 
+        [Required]
+        public bool Status { get; set; }
+
         public virtual Produto Produto { get; set; }
         public virtual Plantio Plantio { get; set; }
     }

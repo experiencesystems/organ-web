@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OrganWeb.Areas.Sistema.Models.Safras.Colheita>
+﻿@model IEnumerable<OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque.VwColheita>
 
 @{
     ViewBag.Title = "Index";
@@ -8,32 +8,50 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Data)
+            @Html.DisplayNameFor(model => model.DataColheita)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.QtdPerdas)
+            @Html.DisplayNameFor(model => model.Situacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Produto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QtdColhida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QtdPerdida)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.QtdTotal)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Plantio)
+        </th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Data)
+            @Html.DisplayFor(modelItem => item.DataColheita)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.QtdPerdas)
+            @Html.DisplayFor(modelItem => item.Situacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Produto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QtdColhida)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QtdPerdida)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.QtdTotal)
         </td>
         <td>
-            @Html.ActionLink("Editar", "Editar", new { id=item.IdPlantio }) |
-            @Html.ActionLink("Detalhes", "Detalhes", new { id = item.IdPlantio }) |
-            @Html.ActionLink("Excluir", "Excluir", new { id = item.IdPlantio })
+            @Html.DisplayFor(modelItem => item.Plantio)
         </td>
     </tr>
 }
