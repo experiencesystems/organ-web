@@ -1,6 +1,7 @@
 ﻿body {
-	margin:  0;
+    margin: 0;
     background: #fbfbfb;
+    font-family: "Dubai", sans-serif;
 }
 .page-content {
 	width: 100%;
@@ -15,7 +16,6 @@
 .form-v7-content  {
 	width: 75%;
 	margin: 55px 0;
-	font-family: 'Open Sans', sans-serif;
 	position: relative;
 	display: flex;
 	display: -webkit-flex;
@@ -116,7 +116,6 @@
     width: 100%;
     background: none;
     color: red;
-    font-family: 'Open Sans', sans-serif;
     font-weight: 700;
 }
 .form-v7-content .form-detail .form-row label.error::after {
@@ -137,7 +136,10 @@
 .form-v7-content .form-detail .input-text {
 	margin-bottom: 28px;
 }
-.form-v7-content .form-detail input {
+.form-v7-content .form-detail input[type='checkbox']  {
+    border: 1px solid #ccc;
+}
+.form-v7-content .form-detail input[type='text'], [type='password'] {
 	width: 100%;
     padding: 5px 15px 10px 15px;
     border: 2px solid transparent;
@@ -145,9 +147,9 @@
     -moz-appearance: unset;
     -webkit-appearance: unset;
     outline: none;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Dubai', sans-serif;
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 400;
     color: #333;
     box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -234,4 +236,7 @@
 a {
     color: #2bb33e;
     text-decoration: none;
+}
+.logo-reg {
+    margin: 10px auto;
 }
