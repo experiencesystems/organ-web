@@ -5,57 +5,61 @@
     Layout = "~/Views/Shared/_LayoutEcommerce.cshtml";
 }
 
-@if (!Request.IsAuthenticated)
-{
-    <br />
-    <h6>É necessário fazer login para salvar anúncios!</h6>
-    <div>
-        @Html.ActionLink("Login", "Login", "Account", new { Area = "Ecommerce" }, new { returnUrl = this.Request.RawUrl })
-    </div>
-    return;
-}
+<div class="container">
+    @if (!Request.IsAuthenticated)
+    {
+        <br />
+        <h6>É necessário fazer login para salvar anúncios!</h6>
+        <div>
+            @Html.ActionLink("Login", "Login", "Account", new { Area = "Ecommerce" }, new { returnUrl = this.Request.RawUrl })
+        </div>
+        return;
+    }
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Anúncio</th>
-            <th>Preço</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <br>
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <td>@item.Anuncio.Nome</td>
-                <td>@item.Anuncio.Produto.ValorUnit</td>
+                <th>Anúncio</th>
+                <th>Preço</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Anuncio.Nome</td>
+                    <td>@item.Anuncio.Produto.ValorUnit</td>
+                    <td>
+                        @using (Ajax.BeginForm("RemoverDaWishlist", new { idAnuncio = item.IdAnuncio }, new AjaxOptions { HttpMethod = "POST" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input class="btn" type="submit" value="Remover"/>
+                        }
+                        @*<a class="btn fa fa-minus fa-small" value="@item.IdAnuncio"><i class="btn fa fa-minus fa-small"></i><span class="tooltipp" value="Remover da lista de desejos"></span></a>*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr style="border:0">
                 <td>
-                    @using (Ajax.BeginForm("RemoverDaWishlist", new { idAnuncio = item.IdAnuncio }, new AjaxOptions { HttpMethod = "POST" }))
+                    @using (Html.BeginForm("ApagarWishlist", "Wishlist", FormMethod.Post))
                     {
-                        @Html.AntiForgeryToken()
-                        <input type="submit" value="Remover" />
+                        @Html.AntiForgeryToken();
+                        <button class="btn btn-link text-dark" type="submit"><i class="fa fa-times"></i><span class="tooltipp" value="Limpar lista de desejos"></span></button>
                     }
-                    @*<a class="btn fa fa-minus fa-small" value="@item.IdAnuncio"><i class="btn fa fa-minus fa-small"></i><span class="tooltipp" value="Remover da lista de desejos"></span></a>*@
                 </td>
             </tr>
-        }
-    </tbody>
-    <tfoot>
-        <tr style="border:0">
-            <td>
-                @using (Html.BeginForm("ApagarWishlist", "Wishlist", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken();
-                    <button class="btn btn-link text-dark" type="submit"><i class="fa fa-times"></i><span class="tooltipp" value="Limpar lista de desejos"></span></button>
-                }
-            </td>
-        </tr>
-    </tfoot>
-</table><br />
-<div>
-    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
-    @Html.PagedListPager(Model, page => Url.Action("Index",
-    new { page }), new PagedListRenderOptions
-     {
-     LiElementClasses = new string[] { "pagination page-item p1" }
-     })
+        </tfoot>
+    </table><br />
+    <div>
+        Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page }), new PagedListRenderOptions
+         {
+         LiElementClasses = new string[] { "pagination page-item p1" }
+         })
+    </div>
 </div>

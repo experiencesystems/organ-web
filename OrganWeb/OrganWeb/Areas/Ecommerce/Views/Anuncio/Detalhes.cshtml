@@ -6,156 +6,156 @@
 }
 
 <div class="container">
-    <div class="row">
-        <div class="col-7">
-            <div class="details">
+    <div class="content md-margin-top-50px">
+        <div class="sumary-product single-layout">
+
+            <div class="media">
+                <ul class="biolife-carousel slider-for" data-slick='{"arrows":false,"dots":false,"slidesMargin":30,"slidesToShow":1,"slidesToScroll":1,"fade":true,"asNavFor":".slider-nav"}'>
+                    <li><img src="~/Imagens/ecommerce/miniview-1.jpg" alt="" width="500" height="500"></li>
+                </ul>
             </div>
-        </div>
-        <div class="col-5">
-            <div class="details">
+
+            <div class="product-attribute">
                 <div class="product-details">
-                    <h2 class="product-name">@Html.DisplayFor(model => model.Nome)</h2>
+                    <h3 class="title">@Html.DisplayFor(model => model.Nome)</h3>
                     <div>
-                        <div class="product-rating">
-                            <i class="icon-star2"></i>
-                            <i class="icon-star2"></i>
-                            <i class="icon-star2"></i>
-                            <i class="icon-star2"></i>
-                            <i class="icon-star_border"></i>
+                        <div class="rating">
+                            <p>
+                                <span>
+                                    <i class="mdi mdi-star"></i>
+                                    <i class="mdi mdi-star"></i>
+                                    <i class="mdi mdi-star"></i>
+                                    <i class="mdi mdi-star"></i>
+                                    <i class="mdi mdi-star-outline"></i>
+                                </span>
+                            </p>
+                            <span class="review-count">(10 Avaliações)</span>
+                            <b class="category">@Html.DisplayFor(model => model.Produto.Categoria)</b>
                         </div>
-                        <a class="review-link" href="#">10 Avaliações | Avalie o produto</a>
                     </div>
-                    <div>
-                        <h3 class="product-price">R$ @Html.DisplayFor(model => model.Produto.ValorUnit)</h3>
-                        <span class="product-size">/@Html.DisplayFor(model => model.Produto.UnidadeMedida.Desc)</span>
+                    <p class="excerpt">@Html.DisplayFor(model => model.Desc)</p>
+                    <div class="price">
+                        <ins><span class="price-amount"><span class="currencySymbol">R$</span>@Html.DisplayFor(model => model.Produto.ValorUnit)</span></ins>
+                        <del><span class="price-amount"><span class="currencySymbol">R$</span>@Html.DisplayFor(model => model.Produto.UnidadeMedida.Desc)</span></del>
                     </div>
                     <a><i class="icon-room"></i>@Html.DisplayFor(model => model.Anunciante.Endereco.Logradouro.Bairro.Cidade.Nome), @Html.DisplayFor(model => model.Anunciante.Endereco.Logradouro.Bairro.Cidade.Estado.UF)</a>
-                    <p>@Html.DisplayFor(model => model.Desc)</p>
+
                     <p>@Html.DisplayFor(model => model.Desconto) %</p>
                     <div class="row">
-                        <div class="input-group col-md-6 mb-3">
-                            <span class="input-group-btn mr-2">
-                                <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
-                                    <i class="mdi mdi-minus"></i>
-                                </button>
-                            </span>
-                            <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
-                            <span class="input-group-btn ml-2">
-                                <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
-                                    <i class="mdi mdi-plus"></i>
-                                </button>
-                            </span>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <select name="" id="" class="form-control">
-                                <option value="">Pequeno</option>
-                                <option value="">Médio</option>
-                                <option value="">Grande</option>
-                                <option value="">Muito grande</option>
-                            </select>
-                        </div>
                         <div class="w-100"></div>
                         <div class="col-md-12">
                             <p style="color: #000;">@Html.DisplayFor(model => model.Quantidade) @Html.DisplayFor(model => model.Produto.UnidadeMedida.Desc) disponíveis</p>
                         </div>
                     </div>
-                    <ul class="product-btns">
-                        <li><a href="#"><i class="mdi mdi-heart-outline"></i> add to wishlist</a></li>
-                        <!--<li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>-->
-                    </ul>
-                    <ul class="product-links">
-                        <li>Categoria:</li>
-                        <li><a href="#">@Html.DisplayFor(model => model.Produto.Categoria)</a></li>
-                    </ul>
                 </div>
                 <!-- /Product details -->
             </div>
-        </div>
-    </div> <!--row-->
-    <div class="row">
-        <div class="col-8">
-            <div class="details">
-                <div class="card-block">
-                    <!-- Row start -->
-                    <div class="row">
-                        <div class="col">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs  tabs" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="tab" href="#home1" role="tab">Descrição do produto</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#profile1" role="tab">Detalhes do anunciante</a>
-                                </li>
-                            </ul>
-                            <!-- Tab panes -->
-                            <div class="tab-content tabs card-block">
-                                <div class="tab-pane active" id="home1" role="tabpanel">
-                                    <p class="m-0">@Html.DisplayFor(model => model.Desc)</p>
-                                </div>
-                                <div class="tab-pane" id="profile1" role="tabpanel">
-                                    <p class="m-0">@Html.DisplayFor(model => model.Anunciante.NomeFazenda)</p>
-                                </div>
-                            </div>
-                        </div>
+            <div class="action-form">
+                <div class="quantity-box">
+                    <span class="title">Quantidade:</span>
+                    <div class="qty-input">
+                        <input type="text" name="qty12554" value="1" data-max_value="20" data-min_value="1" data-step="1">
+                        <a href="#" class="qty-btn btn-up"><i class="fa fa-caret-up" aria-hidden="true"></i></a>
+                        <a href="#" class="qty-btn btn-down"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
                     </div>
-                    <!-- Row end -->
+                </div>
+                <div class="total-price-contain">
+                    <span class="title">Preço total:</span>
+                    <p class="price">R$000,00</p>
+                </div>
+                <div class="buttons">
+                    <a href="#" class="btn add-to-cart-btn">Adicionar no carrinho</a>
+                    <p class="pull-row">
+                        <a href="#" class="btn wishlist-btn">Lista de desejo</a>
+                    </p>
+                </div>
+                <div class="location-shipping-to">
+                    <span class="title">Tamanho:</span>
+                    <select name="shipping_to" class="country">
+                        <option value="-1">Selecione o tamanho</option>
+                        <option value="">Pequeno</option>
+                        <option value="">Médio</option>
+                        <option value="">Grande</option>
+                        <option value="">Muito grande</option>
+                    </select>
+                </div>
+                <div class="acepted-payment-methods">
+                    <ul class="payment-methods">
+                        <li><img src="assets/images/card1.jpg" alt="" width="51" height="36"></li>
+                        <li><img src="assets/images/card2.jpg" alt="" width="51" height="36"></li>
+                        <li><img src="assets/images/card3.jpg" alt="" width="51" height="36"></li>
+                        <li><img src="assets/images/card4.jpg" alt="" width="51" height="36"></li>
+                    </ul>
                 </div>
             </div>
+
         </div>
-        <div class="col-4">
-            <div class="details">
-                <div class="card-block">
-                    <!-- Row start -->
-                    <div class="row">
-                        <div class="col">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs  tabs" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="tab" href="#pergunta" role="tab">Perguntas</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#analise" role="tab">Análises</a>
-                                </li>
-                            </ul>
-                            <!-- Tab panes -->
-                            <div class="tab-content tabs card-block">
-                                <div class="tab-pane active" id="comentario" role="tabpanel">
-                                    <!-- Review Form -->
-                                    <div id="comentario-form">
-                                        <form class="comentario-form">
-                                            <br />
-                                            <textarea class="input" placeholder="Comentário" id="txt-comentario"></textarea>
-                                            <button class="primary-btn" id="btn-comentario">Enviar</button>
-                                        </form>
-                                    </div>
-                                    <!-- /Review Form -->
+            <div class="product-tabs single-layout biolife-tab-contain">
+                <div class="details">
+                        <!-- Row start -->
+                        <div class="row">
+                            <div class="col">
+                                <!-- Nav tabs -->
+                                <div class="tab-head">
+                                    <ul class="nav nav-tabs tabs" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" data-toggle="tab" href="#home1" role="tab">Descrição do produto</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#profile1" role="tab">Detalhes do anunciante</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#pergunta" role="tab">Perguntas</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#analise" role="tab">Análises</a>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <div class="tab-pane" id="analise" role="tabpanel">
-                                    <div id="review-form">
-                                        <form class="review-form">
-                                            <br />
-                                            <textarea class="input" placeholder="Comentário"></textarea>
-                                            <div class="input-rating">
-                                                <span>Avaliação: </span>
-                                                <div class="stars">
-                                                    <input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
-                                                    <input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
-                                                    <input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
-                                                    <input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
-                                                    <input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
+                                    <!-- Tab panes -->
+                                <div class="tab-content tabs card-block">
+                                    <div class="tab-pane active" id="home1" role="tabpanel">
+                                        <p class="m-0">@Html.DisplayFor(model => model.Desc)</p>
+                                    </div>
+                                    <div class="tab-pane" id="profile1" role="tabpanel">
+                                        <p class="m-0">@Html.DisplayFor(model => model.Anunciante.NomeFazenda)</p>
+                                    </div>
+                                    <div class="tab-pane" id="pergunta" role="tabpanel">
+                                        <!-- Review Form -->
+                                        <div id="comentario-form">
+                                            <form class="comentario-form">
+                                                <br />
+                                                <textarea class="input" placeholder="Comentário" id="txt-comentario"></textarea>
+                                                <button class="primary-btn" id="btn-comentario">Enviar</button>
+                                            </form>
+                                        </div>
+                                        <!-- /Review Form -->
+                                    </div>
+                                    <div class="tab-pane" id="analise" role="tabpanel">
+                                        <div id="review-form">
+                                            <form class="review-form">
+                                                <br />
+                                                <textarea class="input" placeholder="Comentário"></textarea>
+                                                <div class="input-rating">
+                                                    <span>Avaliação: </span>
+                                                    <div class="stars">
+                                                        <input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
+                                                        <input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
+                                                        <input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
+                                                        <input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
+                                                        <input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <button class="primary-btn">Enviar</button>
-                                        </form>
+                                                <button class="primary-btn">Enviar</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
+                                </div>
                             </div>
-                        </div>
+                        <!-- Row end -->
                     </div>
-                    <!-- Row end -->
                 </div>
             </div>
-        </div>
-    </div> <!--row-->
-</div>
+        </div> <!--row-->
+    </div>

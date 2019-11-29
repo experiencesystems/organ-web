@@ -13,18 +13,103 @@
     <title>Ecommerce</title>
 </head>
 <body>
-    <!--PRODUTOS-->
-    <!-- Products tab & slick -->
-    <div class="container">
-        <div class="row">
-            <!-- product -->
 
+    <!--Main slide-->
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="~/Imagens/ecommerce/slide3.jpg" alt="Primeiro Slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="~/Imagens/ecommerce/slide3.jpg" alt="Segundo Slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="~/Imagens/ecommerce/slide3.jpg" alt="Terceiro Slide">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Anterior</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Próximo</span>
+        </a>
+    </div>
+
+    <div class="tr-promotion">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="promotion" style="background-image: url(~/Imagens/ecommerce/);">
+                        <div class="promotion-info">
+                            <h1>Frutas <span>frescas</span></h1>
+                            <p>Donec fringilla, erat et mper eleifend, justo quam.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="promotion" style="background-image: url(images/bg/promotion2.png);">
+                        <div class="promotion-info">
+                            <h1>Máquinas <span>eficientes</span></h1>
+                            <p>Donec fringilla, erat et mper eleifend, justo quam.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="promotion" style="background-image: url(images/bg/promotion3.png);">
+                        <div class="promotion-info">
+                            <h1>Grãos de<span>qualidade</span></h1>
+                            <p>Donec fringilla, erat et mper eleifend, justo quam.</p>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </div><!-- /.tr-promotion -->
+    <!--Info-->
+    <div class="container">
+        <div class="biolife-service type01 biolife-service__type01">
+            <ul class="services-list">
+                <li>
+                    <div class="service-inner">
+                        <a class="srv-name" href="#">Seguro</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="service-inner">
+                        <a class="srv-name" href="#"><i class="mdi mdi-truck-check-outline"></i>Rápido</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="service-inner">
+                        <a class="srv-name" href="#"><i class="mdi mdi-security-lock"></i>Simples</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--Info-->
+    <!--PRODUTOS-->
+    <div class="container">
+        <div class="biolife-title-box">
+            <span class="promotion-info">Últimos adicionados</span>
+            <h3 class="main-title">Novidades</h3>
+        </div>
+        <div class="row">
+
+            <!-- product -->
             @foreach (var item in Model)
             {
                 <div class="col-md-6 col-lg-3">
                     <div class="product">
                         <div class="product-img">
-                            <img src="~/Imagens/milho.png" alt="">
+                            <img src="~/Imagens/ecommerce/miniview-1.jpg" alt="">
                             <div class="product-label">
                                 @if (item.Desconto > 0)
                                 {
@@ -82,5 +167,222 @@
             }
         </div>
     </div>
+    <br>
+    <!--PRODUTOS-->
+    <!---->
+    <div class="tr-cta section-padding section-bg-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="cta-image">
+                        <img src="~/Imagens/ecommerce/banner_prod.jpg" alt="Image" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="cta-info">
+                        <h1>Ofertas especiais</h1>
+                        <h2>Desconto de 50%</h2>
+                        <h3>pedidos acima de R$1000</h3>
+                        <ul class="countdown global-list">
+                            <li>
+                                <span class="days">00</span>
+                                <p>dias</p>
+                            </li>
+                            <li>
+                                <span class="hours">00</span>
+                                <p>horas</p>
+                            </li>
+                            <li>
+                                <span class="minutes">00</span>
+                                <p>minutos</p>
+                            </li>
+                            <li>
+                                <span class="seconds">00</span>
+                                <p>segundos</p>
+                            </li>
+                        </ul><!-- countdown -->
+                        <a href="#" class="btn btn-primary"><span><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> </span>Shop Now</a>
+                    </div>
+                </div>
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </div>
+    <!-- /.tr-cta -->
+    <br><br>
+    <!---->
+    <div class="tr-products products-two popup-two section-padding">
+        <div class="container">
+            <div class="biolife-title-box">
+                <span class="promotion-info">Mais visitados</span>
+                <h3 class="main-title">Populares</h3>
+            </div>
+            <div class="product-slider">
+                <div class="products">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="product">
+                                <a href="shop-details.html">
+                                    <span class="row">
+                                        <span class="col-md-5">
+                                            <span class="product-image">
+                                                <img src="~/Imagens/ecommerce/miniview-1.jpg" alt="Image" class="img-fluid">
+                                            </span>
+                                        </span>
+                                        <span class="col-md-7">
+                                            <span class="product-title">Cenoura <strong>Tomato</strong></span>
+                                            <span class="price"><del>$15.00</del>$12.00</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </div><!-- /.product -->
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="product">
+                                <a href="shop-details.html">
+                                    <span class="row">
+                                        <span class="col-md-5">
+                                            <span class="product-image">
+                                                <img src="~/Imagens/ecommerce/miniview-1.jpg" alt="Image" class="img-fluid">
+                                            </span>
+                                        </span>
+                                        <span class="col-md-7">
+                                            <span class="product-title">Cenoura <strong>orgânica</strong></span>
+                                            <span class="price"><del>$15.00</del>R$12.00</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </div><!-- /.product -->
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="product">
+                                <a href="shop-details.html">
+                                    <span class="row">
+                                        <span class="col-md-5">
+                                            <span class="product-image">
+                                                <img src="~/Imagens/ecommerce/miniview-1.jpg" alt="Image" class="img-fluid">
+                                            </span>
+                                        </span>
+                                        <span class="col-md-7">
+                                            <span class="product-title">Cenoura <strong>Onion</strong></span>
+                                            <span class="price"><del>R$15.00</del>R$12.00</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </div><!-- /.product -->
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="product">
+                                <a href="shop-details.html">
+                                    <span class="row">
+                                        <span class="col-md-5">
+                                            <span class="product-image">
+                                                <img src="~/Imagens/ecommerce/miniview-1.jpg" alt="Image" class="img-fluid">
+                                            </span>
+                                        </span>
+                                        <span class="col-md-7">
+                                            <span class="product-title">Cenoura <strong>Cherry</strong></span>
+                                            <span class="price"><del>R$15.00</del>R$12.00</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </div><!-- /.product -->
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="product">
+                                <a href="shop-details.html">
+                                    <span class="row">
+                                        <span class="col-md-5">
+                                            <span class="product-image">
+                                                <img src="~/Imagens/ecommerce/miniview-1.jpg" alt="Image" class="img-fluid">
+                                            </span>
+                                        </span>
+                                        <span class="col-md-7">
+                                            <span class="product-title">Cenoura <strong>Cabbage</strong></span>
+                                            <span class="price"><del>R$15.00</del>R$12.00</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </div><!-- /.product -->
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="product">
+                                <a href="shop-details.html">
+                                    <span class="row">
+                                        <span class="col-md-5">
+                                            <span class="product-image">
+                                                <img src="~/Imagens/ecommerce/miniview-1.jpg" alt="Image" class="img-fluid">
+                                            </span>
+                                        </span>
+                                        <span class="col-md-7">
+                                            <span class="product-title">Cenoura <strong>Pumpkin</strong></span>
+                                            <span class="price"><del>R$15.00</del>R$12.00</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </div><!-- /.product -->
+                        </div>
+                    </div><!-- /.row -->
+                </div><!-- /.products -->
+                <div class="products">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="product">
+                                <a href="shop-details.html">
+                                    <span class="row">
+                                        <span class="col-md-5">
+                                            <span class="product-image">
+                                                <img src="~/Imagens/ecommerce/miniview-1.jpg" alt="Image" class="img-fluid">
+                                            </span>
+                                        </span>
+                                        <span class="col-md-7">
+                                            <span class="product-title">Cenoura <strong>Tomato</strong></span>
+                                            <span class="price"><del>R$15.00</del>R$12.00</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </div><!-- /.product -->
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="product">
+                                <a href="shop-details.html">
+                                    <span class="row">
+                                        <span class="col-md-5">
+                                            <span class="product-image">
+                                                <img src="~/Imagens/ecommerce/miniview-1.jpg" alt="Image" class="img-fluid">
+                                            </span>
+                                        </span>
+                                        <span class="col-md-7">
+                                            <span class="product-title">Cenoura <strong>orgânica</strong></span>
+                                            <span class="price"><del>R$15.00</del>R$12.00</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </div><!-- /.product -->
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="product">
+                                <a href="shop-details.html">
+                                    <span class="row">
+                                        <span class="col-md-5">
+                                            <span class="product-image">
+                                                <img src="~/Imagens/ecommerce/miniview-1.jpg" alt="Image" class="img-fluid">
+                                            </span>
+                                        </span>
+                                        <span class="col-md-7">
+                                            <span class="product-title">Cenoura <strong>orgânica</strong></span>
+                                            <span class="price"><del>R$15.00</del>R$12.00</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </div><!-- /.product -->
+                        </div>
+
+                    </div><!-- /.row -->
+                </div><!-- /.products -->
+            </div><!-- /.product-slider -->
+
+        </div><!-- /.container -->
+    </div><!-- /.tr-products -->
+    <!--Block 06: Products-->
 </body>
 </html>

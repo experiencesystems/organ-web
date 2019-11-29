@@ -3,90 +3,94 @@
     ViewBag.Title = "Carrinho";
     Layout = "~/Views/Shared/_LayoutEcommerce.cshtml";
 }
-<h2>Carrinho <i class="fa fa-shopping-cart" aria-hidden="true"></i> </h2>
 
-@if (!Request.IsAuthenticated)
-{
-    <br />
-    <h6>Faça login para adicionar itens ao carrinho!</h6>
-    <div>
-        @Html.ActionLink("Login", "Login", "Account", new { Area = "Ecommerce" }, new { returnUrl = this.Request.RawUrl })
-    </div>
-    return;
-}
+<div class="container">
+    <br>
+    <h2>Carrinho <i class="fa fa-shopping-cart" aria-hidden="true"></i> </h2>
 
-@if (Model.ItensTotal <= 0)
-{
-    <br />
-    <h6>Seu carrinho está vazio!</h6>
-    return;
-}
+    @if (!Request.IsAuthenticated)
+    {
+        <br />
+        <h6>Faça login para adicionar itens ao carrinho!</h6>
+        <div>
+            @Html.ActionLink("Login", "Login", "Account", new { Area = "Ecommerce" }, new { returnUrl = this.Request.RawUrl })
+        </div>
+        return;
+    }
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Anúncio</th>
-            <th>Quantidade</th>
-            <th>Preço</th>
-            <th>Subtotal</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Carrinhos)
-        {
+    @if (Model.ItensTotal <= 0)
+    {
+        <br />
+        <h6>Seu carrinho está vazio!</h6>
+        return;
+    }
+
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <td>@item.Anuncio.Nome</td>
+                <th>Anúncio</th>
+                <th>Quantidade</th>
+                <th>Preço</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Carrinhos)
+            {
+                <tr>
+                    <td>@item.Anuncio.Nome</td>
+                    <td>
+                        @using (Ajax.BeginForm("AddAoCarrinho", new { idAnuncio = item.IdAnuncio }, new AjaxOptions { HttpMethod = "POST" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="submit" value="Adicionar" />
+                        }
+                        @if (item.Qtd > 0)
+                        {
+                            <span style="padding:1px 10px">@item.Qtd</span>
+                        }
+                        @using (Ajax.BeginForm("RemoverDoCarrinho", new { idAnuncio = item.IdAnuncio }, new AjaxOptions { HttpMethod = "POST" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            if (item.Qtd > 1)
+                            {
+                                <input type="submit" value="Remover" />
+                            }
+                            else
+                            {
+                                <input type="submit" value="Remover anúncio do carrinho" />
+                            }
+                        }
+                    </td>
+                    <td>@item.Anuncio.Produto.ValorUnit.ToString("c")</td>
+                    <td>@((item.Anuncio.Produto.ValorUnit * item.Qtd).ToString("c"))</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">Total: </td>
+                <td>@Model.ValorTotal.ToString("c")</td>
+            </tr>
+            <tr style="border:0">
                 <td>
-                    @using (Ajax.BeginForm("AddAoCarrinho", new { idAnuncio = item.IdAnuncio }, new AjaxOptions { HttpMethod = "POST" }))
+                    @using (Html.BeginForm("ApagarCarrinho", "Carrinho", FormMethod.Post))
                     {
-                        @Html.AntiForgeryToken()
-                        <input type="submit" value="Adicionar" />
-                    }
-                    @if (item.Qtd > 0)
-                    {
-                        <span style="padding:1px 10px">@item.Qtd</span>
-                    }
-                    @using (Ajax.BeginForm("RemoverDoCarrinho", new { idAnuncio = item.IdAnuncio }, new AjaxOptions { HttpMethod = "POST" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        if (item.Qtd > 1)
-                        {
-                            <input type="submit" value="Remover" />
-                        }
-                        else
-                        {
-                            <input type="submit" value="Remover anúncio do carrinho" />
-                        }
+                        @Html.AntiForgeryToken();
+                        <button class="btn btn-link text-dark" asp-action="ApagarCarrinho">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                            Limpar carrinho
+                        </button>
                     }
                 </td>
-                <td>@item.Anuncio.Produto.ValorUnit.ToString("c")</td>
-                <td>@((item.Anuncio.Produto.ValorUnit * item.Qtd).ToString("c"))</td>
+                <td colspan="2"></td>
+                <td class="text-center">
+                    <a class="btn buy-now-btn float-right" asp-action="checkout" asp-controller="order">
+                        <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                        Realizar pedido
+                    </a>
+                </td>
             </tr>
-        }
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="3">Total: </td>
-            <td>@Model.ValorTotal.ToString("c")</td>
-        </tr>
-        <tr style="border:0">
-            <td>
-                @using (Html.BeginForm("ApagarCarrinho", "Carrinho", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken();
-                    <button class="btn btn-link text-dark" asp-action="ApagarCarrinho">
-                        <i class="fa fa-times" aria-hidden="true"></i>
-                        Limpar carrinho
-                    </button>
-                }
-            </td>
-            <td colspan="2"></td>
-            <td class="text-center">
-                <a class="btn buy-now-btn float-right" asp-action="checkout" asp-controller="order">
-                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                    Realizar pedido
-                </a>
-            </td>
-        </tr>
-    </tfoot>
-</table>
+        </tfoot>
+    </table>
+</div>
