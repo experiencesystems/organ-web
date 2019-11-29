@@ -47,6 +47,11 @@ values('02719894-e4a9-46c8-999e-ba942abd5f8f', 'jessica@gmail.com', 0,
 	   ('02719894-e4a9-46c8-999e-ba942abd5f8h', 'fazendinha@a.com', 0,
 	   'AKM33xpM5jcwZ/ojFJuuWBOvPQOiROAQmhfZwupekFSTAGpmW5+O7iPmj7cUuM/r6w==',
 	   '1a38cc85-3bd4-400b-9850-5f0fb0024c9a', 'Fazendinha', LOAD_FILE("/error.gif"), 11111111113, 3);
+       
+insert into `AspNetRoles` (`Id`, `Name`) value ('02719894-e4a9-46c8-999e-ba942abd5f8u', 'Admin');
+
+insert into `AspNetUserRoles` (`UserId`, `RoleId`) values ('02719894-e4a9-46c8-999e-ba942abd5f8g', '02719894-e4a9-46c8-999e-ba942abd5f8u'),
+														  ('02719894-e4a9-46c8-999e-ba942abd5f8h', '02719894-e4a9-46c8-999e-ba942abd5f8u');
 
 insert into tbDadosBancarios(NomeTitular, CVV, Banco, NumCartao, Validade, IdUsuario) values("João Meu Pai", 1111, 1, 11111111111111111, '01/01/01', '02719894-e4a9-46c8-999e-ba942abd5f8f');
 

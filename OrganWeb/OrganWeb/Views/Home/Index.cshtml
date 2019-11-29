@@ -1,421 +1,380 @@
 ﻿@{
-    ViewBag.Title = "Início";
+    ViewBag.Title = "Portal";
+    Layout = null;
 }
 
-<div class="main-body">
-    <div class="row">
-        <!--Resumos-->
-        <div class="col-xl-3 col-md-6">
-            <div class="card bg-c-green update-card">
-                <div class="card-block">
-                    <div class="row align-items-end">
-                        <div class="col-8">
-                            <label class="text-white">Hoje</label>
-                            <h4 class="text-white">+290</h4>
-                            <h6 class="text-white m-b-0">Visualizações</h6>
-                        </div>
-                        <div class="col-4 text-right">
-                            <canvas id="update-chart-2" height="50"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-md-6">
-            <div class="card update-card">
-                <div class="card-block">
-                    <div class="row align-items-end">
-                        <div class="col-8">
-                            <label>Esta semana</label>
-                            <h4>+550</h4>
-                            <h6>Novos pedidos</h6>
-                        </div>
-                        <div class="col-4 text-right">
-                            <canvas id="update-chart-2" height="50"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-md-6">
-            <div class="card update-card">
-                <div class="card-block">
-                    <div class="row align-items-end">
-                        <div class="col-8">
-                            <label>Aumento</label>
-                            <h4>+20%</h4>
-                            <h6>Vendas</h6>
-                        </div>
-                        <div class="col-4 text-right">
-                            <canvas id="update-chart-2" height="50"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-md-6">
-            <div class="card update-card">
-                <div class="card-block">
-                    <div class="row align-items-end">
-                        <div class="col-8">
-                            <label>Este mês</label>
-                            <h4>+15%</h4>
-                            <h6>Usuários cadastrados</h6>
-                        </div>
-                        <div class="col-4 text-right">
-                            <canvas id="update-chart-2" height="50"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Vendas gráfico-->
-        <div class="col-xl-8 col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="card-title box-title">Vendas</h6>
-                    <div class="card-header-right">
-                        <ul class="list-unstyled card-option">
-                            <li><i class="ti-minus minimize-card"></i></li>
-                            <li><i class="icon-refresh"></i></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="card-content">
-                        <div id="chartdiv" style="height:300px"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-4 col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="card-title box-title">Clima</h6>
-                    <div class="card-header-right">
-                        <ul class="list-unstyled card-option">
-                            <li><i class="ti-minus minimize-card"></i></li>
-                            <li><i class="icon-refresh"></i></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="card-content">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--Cotações-->
-        <div class="col-xl-4 col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="card-title box-title">Cotação</h6>
-                    <div class="card-header-right">
-                        <ul class="list-unstyled card-option">
-                            <li><i class="ti-minus minimize-card"></i></li>
-                            <li><i class="icon-refresh"></i></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="card-content">
-                        <iframe src="https://br.widgets.investing.com/live-commodities?theme=darkTheme&pairs=8832,8917,8918,8916,8891,8915" width="100%" height="450" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0"></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--Mapa-->
-        <div class="col-xl-8 col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="card-title box-title">Mapa</h6>
-                    <div class="card-header-right">
-                        <ul class="list-unstyled card-option">
-                            <li><i class="ti-minus minimize-card"></i></li>
-                            <li><i class="icon-refresh"></i></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="card-content">
-                        <div id="map" style="width: 100%; height: 455px; border: 1px solid #ccc"></div>
-                    </div> <!-- /.card-body -->
-                </div><!-- /.card -->
-            </div>
-        </div>
-        <!--Fim mapa-->
-    </div>
-</div> <!--Fim right side-->
-
-<script src="https://www.amcharts.com/lib/4/core.js"></script>
-<script src="https://www.amcharts.com/lib/4/charts.js"></script>
-<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
-
-<script>
-    var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-        osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib }),
-        map = new L.Map('map', { center: new L.LatLng(-23.5489, -46.6388), zoom: 15 }),
-        drawnItems = L.featureGroup().addTo(map);
-
-    L.control.layers({
-        "osm": osm.addTo(map),
-        "google": L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
-            attribution: 'google'
-        })
-    }, { 'drawlayer': drawnItems }, { position: 'topright', collapsed: false }).addTo(map);
-
-    map.addControl(new L.Control.Draw({
-        edit: {
-            featureGroup: drawnItems,
-            poly: {
-                allowIntersection: false
-            }
-        },
-        draw: {
-            polygon: {
-                allowIntersection: false,
-                showArea: true
-            }
-        }
-    }));
-
-    // Truncate value based on number of decimals
-    var _round = function (num, len) {
-        return Math.round(num * (Math.pow(10, len))) / (Math.pow(10, len));
-    };
-    // Helper method to format LatLng object (x.xxxxxx, y.yyyyyy)
-    var strLatLng = function (latlng) {
-        return "(" + _round(latlng.lat, 6) + ", " + _round(latlng.lng, 6) + ")";
-    };
-
-    // Generate popup content based on layer type
-    // - Returns HTML string, or null if unknown object
-    var getPopupContent = function (layer) {
-        // Marker - add lat/long
-        if (layer instanceof L.Marker || layer instanceof L.CircleMarker) {
-            return strLatLng(layer.getLatLng());
-            // Circle - lat/long, radius
-        } else if (layer instanceof L.Circle) {
-            var center = layer.getLatLng(),
-                radius = layer.getRadius();
-            return "Center: " + strLatLng(center) + "<br />"
-                + "Radius: " + _round(radius, 2) + " m";
-            // Rectangle/Polygon - area
-        } else if (layer instanceof L.Polygon) {
-            var latlngs = layer._defaultShape ? layer._defaultShape() : layer.getLatLngs(),
-                area = L.GeometryUtil.geodesicArea(latlngs);
-            return "Area: " + L.GeometryUtil.readableArea(area, true);
-            // Polyline - distance
-        } else if (layer instanceof L.Polyline) {
-            var latlngs = layer._defaultShape ? layer._defaultShape() : layer.getLatLngs(),
-                distance = 0;
-            if (latlngs.length < 2) {
-                return "Distance: N/A";
-            } else {
-                for (var i = 0; i < latlngs.length - 1; i++) {
-                    distance += latlngs[i].distanceTo(latlngs[i + 1]);
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Organ</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/portal.css">
+    <link rel="stylesheet" href="~/Content/fixed.css">
+    <link rel="icon" type="imagem/ico" href="~/Imagens/portal/icon2.ico" />
+    <!-- SCROLL SUAVE -->
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <!-- FIM SCROLL SUAVE -->
+    <!-- SCROLL SUAVE -->
+    <script>jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top}, 600);
+	   });
+	});</script>
+    <!-- FIM SCROLL SUAVE -->
+</head>
+<body data-spy="scroll" data-target="#navbarResponsive">
+    <!--Home-->
+    <div id="Home">
+        <!--Nav-->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand scroll" href="#home"><img src="~/Imagens/logo.png"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav mx-auto order-0">
+                    <li class="nav-item">
+                        <a class="nav-link scroll" href="#diferencial">Por que nós?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link scroll" href="#sobre">Funcionalidades</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link scroll" href="#precos">Planos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link scroll" href="#comofunciona">Como funciona</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link scroll" href="#contato">Contato</a>
+                    </li>
+                </ul>
+                @if (Request.IsAuthenticated)
+                {
+                    <a class="btn btn-outline-success my-2 my-sm-0 entrar black" href="/Sistema">Acessar o Organ</a>
+                    <a class="btn btn-outline-success my-2 my-sm-0 registrar black" href="/Ecommerce">Acessar o ecommerce</a>
                 }
-                return "Distance: " + _round(distance, 2) + " m";
-            }
-        }
-        return null;
-    };
-
-    // Object created - bind popup to layer, add to feature group
-    map.on(L.Draw.Event.CREATED, function (event) {
-        var layer = event.layer;
-        var content = getPopupContent(layer);
-        if (content !== null) {
-            layer.bindPopup(content);
-        }
-        drawnItems.addLayer(layer);
-    });
-
-    // Object(s) edited - update popups
-    map.on(L.Draw.Event.EDITED, function (event) {
-        var layers = event.layers,
-            content = null;
-        layers.eachLayer(function (layer) {
-            content = getPopupContent(layer);
-            if (content !== null) {
-                layer.setPopupContent(content);
-            }
-        });
-    });
-</script>
-<!-- Chart code -->
-<script>
-    am4core.ready(function () {
-        // Themes begin
-        am4core.useTheme(am4themes_animated);
-        // Themes end
-        // Create chart instance
-
-        var chart = am4core.create("chartdiv", am4charts.XYChart);
-        // Add data
-        chart.data = [{
-            "date": "2013-01-16",
-            "market1": 71,
-            "market2": 75,
-            "sales1": 5,
-            "sales2": 8
-        }, {
-            "date": "2013-01-17",
-            "market1": 74,
-            "market2": 78,
-            "sales1": 4,
-            "sales2": 6
-        }, {
-            "date": "2013-01-18",
-            "market1": 78,
-            "market2": 88,
-            "sales1": 5,
-            "sales2": 2
-        }, {
-            "date": "2013-01-19",
-            "market1": 85,
-            "market2": 89,
-            "sales1": 8,
-            "sales2": 9
-        }, {
-            "date": "2013-01-20",
-            "market1": 82,
-            "market2": 89,
-            "sales1": 9,
-            "sales2": 6
-        }, {
-            "date": "2013-01-21",
-            "market1": 83,
-            "market2": 85,
-            "sales1": 3,
-            "sales2": 5
-        }, {
-            "date": "2013-01-22",
-            "market1": 88,
-            "market2": 92,
-            "sales1": 5,
-            "sales2": 7
-        }, {
-            "date": "2013-01-23",
-            "market1": 85,
-            "market2": 90,
-            "sales1": 7,
-            "sales2": 6
-        }, {
-            "date": "2013-01-24",
-            "market1": 85,
-            "market2": 91,
-            "sales1": 9,
-            "sales2": 5
-        }, {
-            "date": "2013-01-25",
-            "market1": 80,
-            "market2": 84,
-            "sales1": 5,
-            "sales2": 8
-        }, {
-            "date": "2013-01-26",
-            "market1": 87,
-            "market2": 92,
-            "sales1": 4,
-            "sales2": 8
-        }, {
-            "date": "2013-01-27",
-            "market1": 84,
-            "market2": 87,
-            "sales1": 3,
-            "sales2": 4
-        }, {
-            "date": "2013-01-28",
-            "market1": 83,
-            "market2": 88,
-            "sales1": 5,
-            "sales2": 7
-        }, {
-            "date": "2013-01-29",
-            "market1": 84,
-            "market2": 87,
-            "sales1": 5,
-            "sales2": 8
-        }, {
-            "date": "2013-01-30",
-            "market1": 81,
-            "market2": 85,
-            "sales1": 4,
-            "sales2": 7
-        }];
-
-        // Create axes
-        var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-        //dateAxis.renderer.grid.template.location = 0;
-        //dateAxis.renderer.minGridDistance = 30;
-        var valueAxis1 = chart.yAxes.push(new am4charts.ValueAxis());
-        valueAxis1.title.text = "Sales";
-        var valueAxis2 = chart.yAxes.push(new am4charts.ValueAxis());
-        valueAxis2.title.text = "Market Days";
-        valueAxis2.renderer.opposite = true;
-        valueAxis2.renderer.grid.template.disabled = true;
-        // Create series
-        var series1 = chart.series.push(new am4charts.ColumnSeries());
-        series1.dataFields.valueY = "sales1";
-        series1.dataFields.dateX = "date";
-        series1.yAxis = valueAxis1;
-        series1.name = "Custo por ha.";
-        series1.tooltipText = "{name}\n[bold font-size: 17]R${valueY}M[/]";
-        series1.fill = am4core.color("#09b76b");
-        series1.strokeWidth = 0;
-        series1.clustered = false;
-        series1.columns.template.width = am4core.percent(40);
-
-        var series2 = chart.series.push(new am4charts.ColumnSeries());
-        series2.dataFields.valueY = "sales2";
-        series2.dataFields.dateX = "date";
-        series2.yAxis = valueAxis1;
-        series2.name = "Lucro por ha.";
-        series2.tooltipText = "{name}\n[bold font-size: 17]R${valueY}M[/]";
-        series2.fill = am4core.color("#07814c");
-        series2.strokeWidth = 0;
-        series2.clustered = false;
-        series2.toBack();
-
-        var series3 = chart.series.push(new am4charts.LineSeries());
-        series3.dataFields.valueY = "market1";
-        series3.dataFields.dateX = "date";
-        series3.name = "Produtividade";
-        series3.strokeWidth = 2;
-        series3.tensionX = 0.7;
-        series3.yAxis = valueAxis2;
-        series3.stroke = am4core.color("#FDD835");
-        series3.tooltipText = "{name}\n[bold font-size: 17]{valueY}[/]";
-
-        var bullet3 = series3.bullets.push(new am4charts.CircleBullet());
-        bullet3.circle.radius = 3;
-        bullet3.circle.strokeWidth = 2;
-        bullet3.circle.fill = am4core.color("#fff");
-
-        var series4 = chart.series.push(new am4charts.LineSeries());
-        series4.dataFields.valueY = "market2";
-        series4.dataFields.dateX = "date";
-        series4.name = "Perdas";
-        series4.strokeWidth = 2;
-        series4.tensionX = 0.7;
-        series4.yAxis = valueAxis2;
-        series4.tooltipText = "{name}\n[bold font-size: 17]{valueY}[/]";
-        series4.stroke = am4core.color("#e84118");
-        series4.strokeDasharray = "3,3";
-
-        var bullet4 = series4.bullets.push(new am4charts.CircleBullet());
-        bullet4.circle.radius = 3;
-        bullet4.circle.strokeWidth = 2;
-        bullet4.circle.fill = am4core.color("#fff");
-
-        // Add cursor
-        chart.cursor = new am4charts.XYCursor();
-
-        // Add legend
-        chart.legend = new am4charts.Legend();
-        chart.legend.position = "top";
-
-    }); // end am4core.ready()
-</script>
+                else
+                {
+                    <a class="btn btn-outline-success my-2 my-sm-0 entrar black" href="@Url.Action("Login", "Account", new { returnUrl = "/Sistema" })">Entrar</a>
+                    <a class="btn btn-outline-success my-2 my-sm-0 registrar black" href="/Account/Register">Registrar-se</a>
+                }
+            </div>
+        </nav>
+        <!--FimNav-->
+        <!--Principal-->
+        <div class="landing" id="home">
+            <div class="home-wrap">
+                <div class="home-inner">
+                </div>
+            </div>
+        </div>
+        <div class="homeimg">
+            <img src="~/Imagens/portal/homeimg.png">
+        </div>
+        <div class="caption text-left">
+            <h1>O software agro que você precisa.</h1>
+            <h3>O que faltava está aqui. A administração de seu agronegócio nunca foi tão fácil e eficiente.</h3>
+            <a class="btn btn-outline-light btn-lg" href="#portfolio">Conheça agora</a>
+        </div>
+        <!--FimPrincipal-->
+    </div>
+    <!--FimHome-->
+    <!--PorqueNos-->
+    <div id="diferencial" class="offset">
+        <div class="jumbotron">
+            <div class="narrow text-center">
+                <div class="col-12">
+                    <h4 class="heading text-left">Nosso diferencial</h4>
+                    <h3 class="heading text-left">Por que nós?</h3>
+                </div>
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <div class="feature">
+                            <i class="fas fa-circle fa-7x" data-fa-transform="shrink-1 up-3"></i>
+                            <h3>Moderno</h3>
+                            <p>Nós implementamos o que há de mais novo na tecnologia para o seu alcance.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature">
+                            <i class="fas fa-circle fa-7x" data-fa-transform="shrink-1 up-3"></i>
+                            <h3>Prático</h3>
+                            <p>Rápido, fácil, sem complicações. Não perca tempo em tarefas simples.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature">
+                            <i class="fas fa-circle fa-7x" data-fa-transform="shrink-1 up-3"></i>
+                            <h3>Eficiente</h3>
+                            <p>Soluções que realmente te auxiliam na administração de seu agronegócio.</p>
+                        </div>
+                    </div>
+                </div> <!--row-->
+            </div> <!--narrow-->
+        </div> <!--jumbotron-->
+    </div>
+    <!--PorqueNos-->
+    <!--Funcionalidades-->
+    <div id="servico" class="offset">
+        <div class="fixed-background">
+            <h1 class="citafunc text-left">Os melhores resultados para sua safra.</h1>
+            <div class="row dark text-center">
+                <div class="container func">
+                    <!--<div class="row"></div>-->
+                    <div class="col col-md-10">
+                        <h2 class="titlefunc text-left">O software</h2>
+                        <p class="text-left">
+                            O sistema Organ é voltado para a agricultura, e permite
+                            responder à possibilidade de controle de plantio, registrando
+                            todo o manejo da cultura. Além de atender às necessidades de
+                            estoque e um controle organizado da entrada e saída de informações.
+                            Facilitando o gerenciamento de uma safra.
+                        </p>
+                    </div>
+                    <div class="col col-md-auto funcimg"><img src="~/Imagens/portal/tela.png"></div>
+                </div> <!--row-->
+                <div class="fixed-wrap">
+                    <!--background-->
+                    <div class="fixed"></div>
+                </div>
+            </div> <!--container-->
+        </div> <!--row-->
+    </div> <!--fixedbg-->
+    <!--FimFuncionalidades-->
+    <!--Sobre-->
+    <div id="sobre" class="offset">
+        <div class="row">
+            <div class="col-md-10 narrow text-center">
+                <div class="sidebar">
+                    <div class="col-12">
+                        <h4 class="heading text-right">Soluções eficientes</h4>
+                        <h3 class="heading text-right">Funcionalidades</h3>
+                        <h4 class="text-right">Estime seu lucro e compare gastos</h4>
+                        <p class="text-right">Entenda a origem de cada despesa, comparando custo-benefício para nunca ficar para trás.</p>
+                        <h4 class="text-right">Controle sua produção e tarefas</h4>
+                        <p class="text-right">Acompanhe o estoque, utilização de insumos, produtividade e faça o rateio por área utilizada.</p>
+                        <h4 class="text-right">Controle sua produção e tarefas</h4>
+                        <p class="text-right">Receba notificações sempre que a cotação chegar ao valor ideal e tenha acesso completo ao nosso ecommerce.</p>
+                        <h4 class="text-right">Facilite o contato entre a equipe</h4>
+                        <p class="text-right">Crie salas de conversa para decisões rápidas, além de entregar tarefas para seus funcionários de forma prática.</p>
+                    </div>
+                </div>
+                <div class="citacao">
+                    <blockquote class="text-justify">
+                        <i class="fas fa-quote-left"></i>
+                        Estamos mais técnicos nas decisões, usando
+                        os dados que temos na palma da mão.
+                        Resumindo: deixando o coração na gaveta
+                        e encarando o negócio sem piedade. <h6 class="text-right">- Mairo Melo, cliente</h6>
+                    </blockquote>
+                    <a class="btn btn-outline-light btn-lg" href="#">Conheça nosso e-commerce</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--FimSobre-->
+    <!--Planos-->
+    <div id="precos" class="offset"></div>
+    <div class="jumbotron">
+        <div class="col-12 text-center">
+            <h4 class="heading">Nossos preços</h4>
+            <h3 class="heading">Planos disponiveis</h3>
+        </div>
+        <div id="generic_price_table">
+            <section>
+                <div class="row justify-content-md-center">
+                    <div class="col-md-3">
+                        <div class="generic_content clearfix">
+                            <div class="generic_head_price clearfix">
+                                <div class="generic_head_content clearfix">
+                                    <div class="head_bg"></div>
+                                    <div class="head">
+                                        <span>Mensal</span>
+                                    </div>
+                                </div>
+                                <div class="generic_price_tag clearfix">
+                                    <span class="price">
+                                        <span class="sign">R$</span>
+                                        <span class="currency">250</span>
+                                        <span class="month">/mês</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="generic_feature_list">
+                                <ul>
+                                    <li>Implantação gratuita</li>
+                                    <li>Gerenciamento de 2 fazendas</li>
+                                    <li>Número máximo de 5 usuários</li>
+                                    <li>E-commerce</li>
+                                    <li>Módulos básicos</li>
+                                    <li>Suporte de segunda a sexta</li>
+                                </ul>
+                            </div>
+                            <div class="generic_price_btn clearfix">
+                                <a class="" href="">Experimentar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="generic_content active clearfix">
+                            <div class="generic_head_price clearfix">
+                                <div class="generic_head_content clearfix">
+                                    <div class="head_bg"></div>
+                                    <div class="head">
+                                        <span>Anual</span>
+                                    </div>
+                                </div>
+                                <div class="generic_price_tag clearfix">
+                                    <span class="price">
+                                        <span class="currency">Orçamento</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="generic_feature_list">
+                                <ul>
+                                    <li>Implantação gratuita</li>
+                                    <li>Gerenciamento ilimitado de fazendas</li>
+                                    <li>Número ilimitado de usuários</li>
+                                    <li>E-commerce</li>
+                                    <li>Todos os módulos disponíveis + Aplicativo</li>
+                                    <li>Suporte 24 horas</li>
+                                </ul>
+                            </div>
+                            <div class="generic_price_btn clearfix">
+                                <a class="" href="">Experimentar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="generic_content clearfix">
+                            <div class="generic_head_price clearfix">
+                                <div class="generic_head_content clearfix">
+                                    <div class="head_bg"></div>
+                                    <div class="head">
+                                        <span>Semestral</span>
+                                    </div>
+                                </div>
+                                <div class="generic_price_tag clearfix">
+                                    <span class="price">
+                                        <span class="sign">R$</span>
+                                        <span class="currency">200</span>
+                                        <span class="month">/mês</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="generic_feature_list">
+                                <ul>
+                                    <li>Implantação gratuita</li>
+                                    <li>Gerenciamento de 5 fazendas</li>
+                                    <li>Número máximo de 10 usuários</li>
+                                    <li>E-commerce</li>
+                                    <li>Módulos básicos + financeiro</li>
+                                    <li>Suporte 24 horas</li>
+                                </ul>
+                            </div>
+                            <div class="generic_price_btn clearfix">
+                                <a class="" href="">Experimentar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </section>
+    </div>
+    <!--Fim Planos-->
+    <!--PassoAPasso-->
+    <div id="comofunciona" class="offset">
+        <div class="fixed-background">
+            <h1 class="citaconect text-left">Permaneça sempre conectado</h1>
+            <p class="descconect">Com o Organ é possível acessar suas informações de qualquer lugar.</p>
+            <div class="row dark text-center">
+                <div class="container func">
+                    <div class="row">
+                        <div class="col col-md-6">
+                            <ul class="passos">
+                                <li class="index">Visita</li>
+                                <li class="descricao">Um de nossos representantes autorizados visita sua fazenda para demonstração do software.</li>
+                                <li class="index">Contrato</li>
+                                <li class="descricao">Após a visita, o fechamento do contrato comercial com valores, obrigações e de ambas as partes é elaborado.</li>
+                                <li class="index">Instalação</li>
+                                <li class="descricao">Os equipamentos serão analisados e preparados para a implantação do software Organ.</li>
+                                <li class="index">Pronto</li>
+                                <li class="descricao">Seu sistema está disponível e pronto para receber os dados do seu negócio!</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-auto conectimg">
+                            <img src="~/Imagens/portal/conectado.jpg">
+                        </div>
+                    </div> <!--row-->
+                    <div class="fixed-wrap">
+                        <!--background-->
+                        <div class="fixed2"></div>
+                    </div>
+                </div> <!--container-->
+            </div> <!--row-->
+        </div> <!--fixedbg-->
+    </div>
+    <!--FimPassoAPasso-->
+    <!--Contato-->
+    <div id="contato" class="offset">
+        <div class="narrow text-center">
+            <div class="col-12">
+                <h4 class="heading">Fale conosco</h4>
+                <h3 class="heading">Entre em contato</h3>
+            </div>
+        </div> <!--narrow-->
+        <footer>
+            <div class="row text-center">
+                <div class="col-md-2 empresa">
+                    Desenvolvido por Experience Systems
+                </div>
+                <div class="col-md-8 col-12">
+                    <div class="panel text-left">
+                        <fieldset>
+                            <form>
+                                <h5>Nome</h5>
+                                <input type="text" placeholder="Seu nome" required />
+                                <br /><br />
+                                <h5>Email</h5>
+                                <input type="email" placeholder="Seu email" required />
+                                <br /><br />
+                                <h5>Assunto</h5>
+                                <input type="text" placeholder="Tipo de assunto" required />
+                                <br /><br />
+                                <h5>Mensagem</h5>
+                                <textarea placeholder="Digite sua mensagem" cols="30" rows="5" required></textarea>
+                                <br /><br />
+                                <input type="submit" value="Enviar" id="botao" onclick="Verificar()" />
+                            </form>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="rodape">
+                <hr class="socket text-center">&copy Copyright 2017 – 2019 Experience Systems. Todos os direitos reservados.
+            </div>
+        </footer>
+    </div>
+    <!--FimContato-->
+    <!--- Script Source Files -->
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
+    <script type="text/javascript">// Scrolling Effect
+			$(window).on("scroll", function() {
+				if($(window).scrollTop()) {
+					$('nav').addClass('black');
+				}
+				else {
+					$('nav').removeClass('black');
+				}
+			})</script>
+    <!--- End of Script Source Files -->
+</body>
+</html>

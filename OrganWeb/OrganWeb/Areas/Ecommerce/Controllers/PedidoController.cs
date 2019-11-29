@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using OrganWeb.Areas.Ecommerce.Models.API;
 using OrganWeb.Areas.Ecommerce.Models.Endereco;
+using OrganWeb.Areas.Ecommerce.Models.Financeiro;
 
 namespace OrganWeb.Areas.Ecommerce.Controllers
 {
@@ -80,12 +81,16 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
                 rua.Add(rua);
                 await rua.Save();
 
+                var pagamento = pedido.Pagamento;
+                pagamento.Add(pagamento);
+
+                pedido.IdPagamento = pagamento.Id;
+
                 foreach (var item in pedido.Carrinhos)
                 {
                     pedido.Add(pedido);
                     await pedido.Save();
                     //TODO: arrumar pedido de acordo com anuncio
-                    //TODO: colocar dados do pagamento aqui
                     pedidoAnuncio = new PedidoAnuncio
                     {
                         IdAnuncio = item.IdAnuncio,

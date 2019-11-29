@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class FazendaController : Controller
     {   
         private Solo solo = new Solo();

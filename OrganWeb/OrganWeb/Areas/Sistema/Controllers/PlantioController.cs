@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class PlantioController : Controller
     {
         private Plantio plantio = new Plantio();

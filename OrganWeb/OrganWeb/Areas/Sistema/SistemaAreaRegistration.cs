@@ -17,7 +17,7 @@ namespace OrganWeb.Areas.Sistema
             context.MapRoute(
                 "Sistema_default",
                 "Sistema/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional },
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                 new[] { "OrganWeb.Areas.Sistema.Controllers" }
             );
         }

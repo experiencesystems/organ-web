@@ -14,7 +14,7 @@ using OrganWeb.Areas.Ecommerce.Models.Usuarios;
 using OrganWeb.Areas.Ecommerce.Models.zBanco;
 using OrganWeb.Areas.Sistema.Models.Telefone;
 
-namespace OrganWeb.Controllers
+namespace OrganWeb.Areas.Ecommerce.Controllers
 {
     [Authorize]
     public class AccountController : Controller
@@ -92,7 +92,8 @@ namespace OrganWeb.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    if (user.Assinatura != 4) return RedirectToLocal("/Sistema");
+                    else return RedirectToLocal("/Ecommerce");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -208,9 +209,12 @@ namespace OrganWeb.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 string userId = User.Identity.GetUserId();
-                if (userId == null)
+                // to get the user details to load user Image    
+                var bdUsers = HttpContext.GetOwinContext().Get<EcommerceContext>();
+                var userImage = bdUsers.Users.Where(x => x.Id == userId).FirstOrDefault();
+                if (userImage.Foto == null)
                 {
-                    string fileName = HttpContext.Server.MapPath(@"~/Images/admin.png");
+                    string fileName = HttpContext.Server.MapPath(@"~/Imagens/admin.png");
 
                     byte[] imageData = null;
                     FileInfo fileInfo = new FileInfo(fileName);
@@ -220,16 +224,12 @@ namespace OrganWeb.Controllers
                     imageData = br.ReadBytes((int)imageFileLength);
 
                     return File(imageData, "image/png");
-
                 }
-                // to get the user details to load user Image    
-                var bdUsers = HttpContext.GetOwinContext().Get<EcommerceContext>();
-                var userImage = bdUsers.Users.Where(x => x.Id == userId).FirstOrDefault();
                 return new FileContentResult(userImage.Foto, "image/jpeg");
             }
             else
             {
-                string fileName = HttpContext.Server.MapPath(@"~/Images/admin.png");
+                string fileName = HttpContext.Server.MapPath(@"~/Imagens/admin.png");
                 byte[] imageData = null;
                 FileInfo fileInfo = new FileInfo(fileName);
                 long imageFileLength = fileInfo.Length;

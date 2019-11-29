@@ -15,7 +15,7 @@ using OrganWeb.Areas.Sistema.Models.Telefone;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class FornecedorController : Controller
     {
         private TipoTel tipotel = new TipoTel();

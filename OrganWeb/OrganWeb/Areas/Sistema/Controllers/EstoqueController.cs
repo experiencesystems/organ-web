@@ -20,7 +20,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class EstoqueController : Controller
     {
         private Insumo insumo = new Insumo();
@@ -210,7 +210,5 @@ namespace OrganWeb.Areas.Sistema.Controllers
             insumo.Estoque.Fornecedores = await new Fornecedor().GetAll();
             return View(insumo);
         }
-
-        //todo: tentar excluir insumo
     }
 }

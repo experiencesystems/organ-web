@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNet.Identity.Owin;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace OrganWeb.Controllers
+namespace OrganWeb.Areas.Sistema.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class HomeController : Controller
     {
         public ActionResult Index()

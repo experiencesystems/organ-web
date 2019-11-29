@@ -1,4 +1,5 @@
-﻿using OrganWeb.Areas.Ecommerce.Models.Usuarios;
+﻿using OrganWeb.Areas.Ecommerce.Models.Financeiro;
+using OrganWeb.Areas.Ecommerce.Models.Usuarios;
 using OrganWeb.Areas.Ecommerce.Models.zBanco;
 using OrganWeb.Areas.Ecommerce.Models.zRepositories;
 using System;
@@ -26,7 +27,6 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
 
         [Required]
         public int Status { get; set; }
-        //TODO: lista de status pedido
 
         [Required]
         public double ValFrete { get; set; }
@@ -42,6 +42,10 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
         [Display(Name = "Número")]
         public int NumEntrega { get; set; }
 
+        [Required]
+        [ForeignKey("Pagamento")]
+        public int IdPagamento { get; set; }
+
         [StringLength(50)]
         [Display(Name = "Complemento")]
         public string CompEntrega { get; set; }
@@ -50,6 +54,7 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
         public virtual Anuncio Anuncio { get; set; }
         public virtual Endereco.Endereco Endereco { get; set; }
         public virtual ApplicationUser Usuario { get; set; }
+        public virtual Pagamento Pagamento { get; set; }
 
         [NotMapped]
         public double Subtotal { get; set; }

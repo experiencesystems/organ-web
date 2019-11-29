@@ -14,7 +14,7 @@ using System.Data.Entity;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class ControleController : Controller
     {
         private Controle controle = new Controle();
@@ -33,8 +33,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         {
             return RedirectToAction("Index", "PragaDoenca");
         }
-         /* TODO: testar controller controle
-         */
+
         public async Task<ActionResult> Create()
         {
             var itens = await vwItems.GetAll();
@@ -107,7 +106,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
             return View(model);
         }
         
-        //TODO: views editar excluir controle
         public async Task<ActionResult> Detalhes(int? id)
         {
             if (id == null)
@@ -140,7 +138,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Editar(Controle controle)
         {
-            //TODO: testar editar controle
             if (ModelState.IsValid) {
                 controle.Update(controle);
                 await controle.Save();
@@ -166,7 +163,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
         [HttpPost, ActionName("Excluir")]
         public async Task<ActionResult> ExcluirConfirmado(Controle controle)
         {
-            //TODO: testar excluir controle
             controle.Delete(controle.Id);
             await controle.Save();
             return RedirectToAction("Index");

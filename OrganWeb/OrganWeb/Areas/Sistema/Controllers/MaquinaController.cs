@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class MaquinaController : Controller
     {
         private Maquina maquina = new Maquina();
