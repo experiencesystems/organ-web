@@ -1,6 +1,7 @@
 ﻿@model OrganWeb.Areas.Ecommerce.Models.Usuarios.LoginViewModel
 
 @{
+    ViewBag.Title = "Login";
     Layout = null;
 }
 <!DOCTYPE html>
@@ -10,54 +11,64 @@
     <meta name="viewport" content="width=device-width" />
     <title>Login</title>
     @Styles.Render("~/Content/bootstrap.css")
-    @Styles.Render("~/Content/Site.css")
+    @Styles.Render("~/Content/registro.css")
 </head>
-<body>
-    <div class="form-horizontal float-left col-6"></div>
-    <div class="form-group">
-        <img src="~/Imagens/logo.png" class="img-fluid" alt="Logo" />
+<body class="form-v7">
+    <div class="col logo-reg">
+        <img src="~/Imagens/logo.png" alt="form">
     </div>
-    <div class="row">
-        <div class="form-group float-left col-6">
-            <img src="~/Imagens/accross-devices.png" class="img-responsive col-10" alt="Imagem Aleatória" />
-        </div>
-        <div class="form-horizontal float-right col-6">
-            <h4 class="body-title text-center col-10">Bem vindo(a) de volta!</h4>
-            <h6 class="body-title text-center text-secondary col-10">Entre para acessar o Organ</h6>
-            @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+    <div class="page-content">
+        <div class="form-v7-content">
+
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-detail", role = "form", enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
-                @Html.ValidationSummary("", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control col-6", @placeholder = "Email" } })
+                /*@Html.ValidationSummary("", new { @class = "text-danger" })*/
+
+                <p class="text-1">Bem vindo(a) de volta!</p>
+                <br>
+                <div class="form-row">
+                    @Html.LabelFor(model => model.Email, new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.Email, new { @class = "input-text" })
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                 </div>
-                <div class="form-group">
-                    <div class="col-10">
-                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control col-6", @placeholder = "Senha" } })
-                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                    </div>
+                <br>
+                <div class="form-row">
+                    @Html.LabelFor(model => model.Password, new { @class = "form-label" })
+                    @Html.PasswordFor(model => model.Password, new { @class = "input-text" })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                 </div>
-                <div class="form-group">
-                    <div class="col-10 row">
-                        <div class="checkbox col-6">
-                            @Html.EditorFor(model => model.RememberMe) @Html.LabelFor(model => model.RememberMe, new { @class = "col-6 text-left" })
-                            @Html.ValidationMessageFor(model => model.RememberMe, "", new { @class = "col-6 text-danger" })
-                        </div>
-                        @Html.ActionLink("Esqueceu a Senha?", "ForgotPassword", new { @class = "col-6 text-right" })
+                <div class="form-row">
+                    <div class="col-9">
+                        @Html.ActionLink("Esqueceu a Senha?", "ForgotPassword", new { htmlAttributes = new { @class = "form-label" } })
                     </div>
+                    <div class="col-3">
+                        @Html.CheckBoxFor(model => model.RememberMe, new { @class = "form-check-input" })
+                        @Html.LabelFor(model => model.RememberMe, new { htmlAttributes = new { @class = "text-left" } })
+                        @Html.ValidationMessageFor(model => model.RememberMe, "", new { @class = "text-danger" })
+                    </div>
+
                 </div>
-                <div class="form-group">
-                    <div class="col-10  text-center">
-                        <input type="submit" value="Entrar" class="mx-xl-5 text-center" />
-                    </div>
+                <div class="form-row-last">
+                    <input type="submit" name="register" class="register" value="Login">
+                    <p>ou<a href="/Ecommerce/Account/registro">Registre-se</a></p>
                 </div>
             }
+            <div class="form-left">
+                <img src="~/Imagens/login.png" alt="form">
+                <!--<p class="text-2">Termos de uso</p>-->
+            </div>
         </div>
     </div>
+
     @section Scripts {
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/jqueryval")
     }
 </body>
 </html>
+
+
+
+
+

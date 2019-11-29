@@ -17,22 +17,26 @@
 
 </head>
 <body class="form-v7">
+    <div class="col logo-reg">
+        <img src="~/Imagens/logo.png" alt="form">
+    </div>
     <div class="page-content">
         <div class="form-v7-content">
             <div class="form-left">
                 <img src="~/Imagens/registro.png" alt="form">
-                <p class="text-2">Termos de uso</p>
+                <!--<p class="text-2">Termos de uso</p>-->
             </div>
             @using (Html.BeginForm("Registro", "Account", FormMethod.Post, new { @class = "form-detail", role = "form", enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
 
-                @Html.ValidationSummary("", new { @class = "text-danger" })
+                /*@Html.ValidationSummary("", new { @class = "text-danger" })*/
                 <p class="text-1">Seja bem-vindo ao Organ ecommerce!</p>
-                <div class="form-row">
+                <br>
+                <!--<div class="form-row">
                     @Html.LabelFor(m => m.Foto, new { @class = "form-label" })
                     <input type="file" name="Foto" id="fileUpload" accept=".png,.jpg,.jpeg" />
-                </div>
+                </div>-->
                 <div class="form-row">
                     <div class="col-6">
                         @Html.LabelFor(m => m.UserName, new { @class = "form-label" })
@@ -62,8 +66,8 @@
                     </div>
                 </div>
                 <div class="form-row-last">
-                    <input type="submit" name="register" class="register" value="Registrar-se">
-                    <p>ou<a href="#">Faça o login</a></p>
+                    <input type="submit" name="register" class="register" value="Registre-se">
+                    <p>ou<a href="/Ecommerce/Account/Login">Faça o login</a></p>
                 </div>
             }
         </div>
