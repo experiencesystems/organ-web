@@ -104,5 +104,3 @@ insert into tbAvaliacao value(1, '02719894-e4a9-46c8-999e-ba942abd5f8f', 'Melhor
 insert into tbComentario(Comentario, IdAnuncio, IdUsuario) values('Adorei a Soja, super veganaaaa!', 1, '02719894-e4a9-46c8-999e-ba942abd5f8f');
 
 
-       
-

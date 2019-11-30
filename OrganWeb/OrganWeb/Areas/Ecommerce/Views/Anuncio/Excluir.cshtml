@@ -1,6 +1,7 @@
 ﻿@model OrganWeb.Areas.Ecommerce.Models.Vendas.Anuncio
 
 @{
+    ViewBag.Title = "Excluir anúncio";
     Layout = null;
 }
 
@@ -34,11 +35,11 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Produto.Quantidade)
+                @Html.DisplayNameFor(model => model.Quantidade)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Produto.Quantidade)
+                @Html.DisplayFor(model => model.Quantidade)
             </dd>
 
             <dt>
@@ -72,7 +73,7 @@
             @Html.AntiForgeryToken()
             @Html.HiddenFor(model => model.Id)
             @Html.HiddenFor(model => model.IdProduto)
-            @Html.HiddenFor(model => model.IdUsuario)
+            @Html.HiddenFor(model => model.Anunciante.IdUsuario)
             <div class="form-actions no-color">
                 <input type="submit" value="Delete" class="btn btn-default" /> |
                 @Html.ActionLink("Voltar para o anúncio", "Detalhes", new { id = Model.Id })

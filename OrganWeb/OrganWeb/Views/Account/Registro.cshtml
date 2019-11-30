@@ -1,6 +1,5 @@
 ﻿@model OrganWeb.Areas.Ecommerce.Models.Usuarios.RegisterViewModel
 @{
-    ViewBag.Title = "Registre-se";
     Layout = null;
 }
 
@@ -8,6 +7,7 @@
 
 <html>
 <head>
+    <title>Registre-se</title>
 
     <meta charset='utf-8' />
     <meta name="viewport" content="width=device-width" />
@@ -30,13 +30,14 @@
             {
                 @Html.AntiForgeryToken()
 
-                /*@Html.ValidationSummary("", new { @class = "text-danger" })*/
+                @Html.ValidationSummary("", new { @class = "text-danger" })
                 <p class="text-1">Seja bem-vindo ao Organ ecommerce!</p>
                 <br>
-                <!--<div class="form-row">
+                <div class="form-row">
                     @Html.LabelFor(m => m.Foto, new { @class = "form-label" })
                     <input type="file" name="Foto" id="fileUpload" accept=".png,.jpg,.jpeg" />
-                </div>-->
+                </div>
+                <br />
                 <div class="form-row">
                     <div class="col-6">
                         @Html.LabelFor(m => m.UserName, new { @class = "form-label" })

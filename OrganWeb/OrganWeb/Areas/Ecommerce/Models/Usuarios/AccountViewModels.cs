@@ -96,6 +96,70 @@ namespace OrganWeb.Areas.Ecommerce.Models.Usuarios
         public string ConfirmPassword { get; set; }
     }
 
+    public class RegisterOrganViewModel
+    {
+        public byte[] Foto { get; set; }
+
+        [Required]
+        public int Assinatura { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Nome da Fazenda")]
+        public string NomeFazenda { get; set; }
+
+        [Required]
+        [Display(Name = "Usuário")]
+        public string UserName { get; set; }
+
+        [Required]
+        [RegularExpression(@"([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})", ErrorMessage = "Digite um CPF válido!")]
+        public long CPF { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "O/A {0} deve ter no mínimo {2} caracteres.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Senha")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirmar Senha")]
+        [Compare("Password", ErrorMessage = "A senha e a senha de confirmação não correspondem.")]
+        public string ConfirmPassword { get; set; }
+
+        [RegularExpression(@"[0-9]{5}[\d]{3}", ErrorMessage = "Digite um CEP válido somente com números")]
+        [StringLength(8, MinimumLength = 8)]
+        public string CEP { get; set; }
+
+        [Required(AllowEmptyStrings = false)]
+        [StringLength(40)]
+        public string Rua { get; set; }
+
+        [Required]
+        [Display(Name = "Número")]
+        public int Numero { get; set; }
+
+        [StringLength(20)]
+        public string Complemento { get; set; }
+
+        [Required(AllowEmptyStrings = false)]
+        [StringLength(30)]
+        public string Bairro { get; set; }
+
+        [Required(AllowEmptyStrings = false)]
+        [StringLength(30)]
+        public string Cidade { get; set; }
+
+        [Required]
+        public int Estado { get; set; }
+
+        public List<Estado> Estados { get; set; }
+    }
+
     public class ResetPasswordViewModel
     {
         [Required]

@@ -467,7 +467,6 @@
     <Content Include="Areas\Sistema\Views\Area\Create.cshtml" />
     <Content Include="Areas\Sistema\Views\Area\Detalhes.cshtml" />
     <Content Include="Areas\Sistema\Views\Area\Editar.cshtml" />
-    <Content Include="Areas\Sistema\Views\Area\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Colheita\Colheita.cshtml" />
     <Content Include="Areas\Sistema\Views\Colheita\Index.cshtml" />
     <Content Include="Areas\Sistema\Views\Controle\Create.cshtml" />
@@ -616,6 +615,7 @@
     <Content Include="Areas\Sistema\Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Shared\_LayoutEcommerce.cshtml" />
+    <Content Include="Views\Account\RegistroOrgan.cshtml" />
     <None Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>

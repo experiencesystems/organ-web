@@ -14,9 +14,9 @@ namespace OrganWeb.Areas.Ecommerce.Models.Endereco
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         [Display(Name = "Cidade")]
-        [StringLength(30, MinimumLength = 5)]
+        [StringLength(30)]
         public string Nome { get; set; }
 
         [Required]

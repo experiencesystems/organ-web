@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using OrganWeb.Areas.Ecommerce.Models.Endereco;
 using OrganWeb.Areas.Ecommerce.Models.Financeiro;
 using OrganWeb.Areas.Ecommerce.Models.Usuarios;
+using OrganWeb.Areas.Ecommerce.Models.Vendas;
 using OrganWeb.Areas.Ecommerce.Models.zBanco;
 using OrganWeb.Areas.Sistema.Models.Telefone;
 
@@ -18,7 +19,7 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
 {
     [Authorize]
     public class AccountController : Controller
-    {//TODO: refazer registro
+    {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -71,6 +72,12 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
         public ActionResult Registro()
         {
             return View();
+        }
+
+        [AllowAnonymous]
+        public async Task<ActionResult> RegistroOrgan()
+        {
+            return View(new RegisterOrganViewModel { Estados = await new Estado().GetAll() });
         }
 
         //
@@ -152,7 +159,6 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             }
         }
 
-
         //
         // POST: /Account/Registro
         [HttpPost]
@@ -201,10 +207,112 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirmar sua conta", "Confirme sua conta clicando <a href=\"" + callbackUrl + "\">aqui</a>");
 
-                    return RedirectToAction("Index", "Loja");
+                    return RedirectToAction("Index", "Loja", new { area = "Ecommerce" });
                 }
                 AddErrors(result);
             }
+            return View(model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegistroOrgan([Bind(Exclude = "Foto")]RegisterOrganViewModel model)
+        {
+            ApplicationUser user = new ApplicationUser();
+            var allUsers = new EcommerceContext().Users.Where(x => x.CPF == model.CPF).ToList();
+            if (await UserManager.FindByNameAsync(model.UserName) != null)
+            {
+                ModelState.AddModelError(string.Empty, "Esse nome de usuário já foi escolhido!");
+            }
+            if (await new EcommerceContext().Users.Where(x => x.CPF == model.CPF).FirstOrDefaultAsync() != null)
+            {
+                ModelState.AddModelError(string.Empty, "Esse CPF já foi cadastrado!");
+            }
+            if (ModelState.IsValid)
+            {
+                byte[] imageData = null;
+                if (Request.Files.Count > 0)
+                {
+                    HttpPostedFileBase poImgFile = Request.Files["Foto"];
+                    using (var binary = new BinaryReader(poImgFile.InputStream))
+                    {
+                        imageData = binary.ReadBytes(poImgFile.ContentLength);
+                    }
+                }
+                user = new ApplicationUser
+                {
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    Assinatura = model.Assinatura,
+                    Foto = imageData,
+                    CPF = model.CPF
+                };
+
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await UserManager.AddToRoleAsync(user.Id, "Admin");
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    var cep = await new Endereco().GetByID(model.CEP);
+                    if (cep == null)
+                    {
+                        cep = new Endereco()
+                        {
+                            CEP = model.CEP
+                        };
+                        cep.Add(cep);
+                        await cep.Save();
+                    }
+
+                    var cidade = new Cidade()
+                    {
+                        Nome = model.Cidade,
+                        IdEstado = model.Estado
+                    };
+                    cidade.Add(cidade);
+                    await cidade.Save();
+
+                    var bairro = new Bairro()
+                    {
+                        Nome = model.Bairro,
+                        IdCidade = cidade.Id
+                    };
+                    bairro.Add(bairro);
+                    await bairro.Save();
+
+                    var rua = new Logradouro()
+                    {
+                        CEP = cep.CEP,
+                        Nome = model.Rua,
+                        IdBairro = bairro.Id
+                    };
+                    rua.Add(rua);
+                    await rua.Save();
+
+                    var anunciante = new Anunciante()
+                    {
+                        CEP = model.CEP,
+                        CompEnd = model.Complemento,
+                        IdUsuario = user.Id,
+                        NomeFazenda = model.NomeFazenda,
+                        NomeBanco = "dborgan"+user.Id,
+                        NumEnd = model.Numero
+                    };
+
+
+                    // Para obter mais informações sobre como habilitar a confirmação da conta e redefinição de senha, visite https://go.microsoft.com/fwlink/?LinkID=320771
+                    // Enviar um email com este link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirmar sua conta", "Confirme sua conta clicando <a href=\"" + callbackUrl + "\">aqui</a>");
+
+                    return RedirectToAction("Index", "Home", new { area = "Sistema" });
+                }
+                AddErrors(result);
+            }
+            model.Estados = await new Estado().GetAll();
             return View(model);
         }
 

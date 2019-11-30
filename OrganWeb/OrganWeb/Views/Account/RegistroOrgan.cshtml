@@ -1,0 +1,148 @@
+﻿@model OrganWeb.Areas.Ecommerce.Models.Usuarios.RegisterOrganViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Registre-se</title>
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width" />
+
+    @Styles.Render("~/Content/bootstrap.css")
+    @Styles.Render("~/Content/registro.css")
+
+</head>
+<body class="form-v7">
+    <div class="col logo-reg">
+        <img src="~/Imagens/logo.png" alt="form">
+    </div>
+    <div class="page-content">
+        <div class="form-v7-content">
+            <div class="form-left">
+                <img src="~/Imagens/registro.png" alt="form">
+                <!--<p class="text-2">Termos de uso</p>-->
+            </div>
+            @using (Html.BeginForm("RegistroOrgan", "Account", FormMethod.Post, new { @class = "form-detail", role = "form", enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <p class="text-1">Seja bem-vindo ao Organ!</p>
+                <br>
+                <p><a href="/Ecommerce/Account/Registro">Clique aqui  para se registrar somente no ecommerce</a></p>
+                <br>
+
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="form-row">
+                    @Html.LabelFor(m => m.Assinatura, new { @class = "form-label" })
+                    <div class="col-6">
+                        <br />
+                        @Html.RadioButtonFor(model => model.Assinatura, "1", new { @class = "with-gap" })
+                        <label for="1">Mensal</label>
+                        <br />
+                        @Html.RadioButtonFor(model => model.Assinatura, "2", new { @class = "with-gap" })
+                        <label for="2">Semestral</label>
+                        <br />
+                        @Html.RadioButtonFor(model => model.Assinatura, "3", new { @class = "with-gap" })
+                        <label for="3">Anual</label>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Assinatura, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-row">
+                    @Html.LabelFor(m => m.Foto, new { @class = "form-label" })
+                    <input type="file" name="Foto" id="fileUpload" accept=".png,.jpg,.jpeg" />
+                </div>
+                <br />
+                <div class="form-row">
+                    @Html.LabelFor(m => m.NomeFazenda, new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.NomeFazenda, new { @class = "input-text" })
+                    @Html.ValidationMessageFor(model => model.NomeFazenda, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-row">
+                    <div class="col-6">
+                        @Html.LabelFor(m => m.UserName, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "input-text" })
+                    </div>
+                    <div class="col-6">
+                        @Html.LabelFor(m => m.CPF, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.CPF, new { @class = "input-text" })
+                        @Html.ValidationMessageFor(model => model.CPF, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-row">
+                    @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.Email, new { @class = "input-text" })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-row">
+                    <div class="col-6">
+                        @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+                        @Html.PasswordFor(m => m.Password, new { @class = "input-text" })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-6">
+                        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "form-label" })
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "input-text" })
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-row">
+                    @Html.LabelFor(model => model.CEP, htmlAttributes: new { @class = "form-label" })
+                    @Html.EditorFor(model => model.CEP, new { htmlAttributes = new { @class = "input-text" } })
+                    @Html.ValidationMessageFor(model => model.CEP, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-row">
+                    @Html.LabelFor(model => model.Rua, htmlAttributes: new { @class = "form-label" })
+                    @Html.EditorFor(model => model.Rua, new { htmlAttributes = new { @class = "input-text" } })
+                    @Html.ValidationMessageFor(model => model.Rua, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-row">
+                    @Html.LabelFor(model => model.Complemento, htmlAttributes: new { @class = "form-label" })
+                    @Html.EditorFor(model => model.Complemento, new { htmlAttributes = new { @class = "input-text" } })
+                    @Html.ValidationMessageFor(model => model.Complemento, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-row">
+                    <div class="col-6">
+                        @Html.LabelFor(model => model.Numero, htmlAttributes: new { @class = "form-label" })
+                        @Html.EditorFor(model => model.Numero, new { htmlAttributes = new { @class = "input-text" } })
+                        @Html.ValidationMessageFor(model => model.Numero, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-6">
+                        @Html.LabelFor(model => model.Bairro, htmlAttributes: new { @class = "form-label" })
+                        @Html.EditorFor(model => model.Bairro, new { htmlAttributes = new { @class = "input-text" } })
+                        @Html.ValidationMessageFor(model => model.Bairro, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-6">
+                        @Html.LabelFor(model => model.Cidade, htmlAttributes: new { @class = "form-label" })
+                        @Html.EditorFor(model => model.Cidade, new { htmlAttributes = new { @class = "input-text" } })
+                        @Html.ValidationMessageFor(model => model.Cidade, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-6">
+                        @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "form-label" })
+                        @Html.DropDownListFor(model => model.Estado, new SelectList(Model.Estados, "Id", "UF"), new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div id="paypal-button-container"></div>
+                <div class="form-row-last">
+                    <input type="submit" name="register" class="register" value="Registre-se">
+                    <p>ou<a href="/Ecommerce/Account/Login">Faça o login</a></p>
+                </div>
+            }
+        </div>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+        <script src="https://www.paypal.com/sdk/js?client-id=SB_CLIENT_ID"></script>
+    }
+
+</body>
+</html>

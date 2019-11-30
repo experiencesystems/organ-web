@@ -33,3 +33,32 @@ new { pagep }), new PagedListRenderOptions
 {
 LiElementClasses = new string[] { "pagination page-item p1" }
 })
+
+<table class="table">
+    <tr>
+        <th>Data</th>
+        <th>Anúncio</th>
+        <th>Valor do frete</th>
+        <th>Status</th>
+    </tr>
+
+    @foreach (var item in Model.Vendas)
+    {
+    <tr>
+        <td>@Html.DisplayFor(model => item.Data)</td>
+        <td>@Html.DisplayFor(model => item.Pedido.Anuncio.Nome)</td>
+        <td>@Html.DisplayFor(model => item.Pedido.ValFrete)</td>
+        <td>@Html.DisplayFor(model => item.Pedido.Status)</td>
+    </tr>
+    }
+
+</table>
+<br />
+Página @(Model.Vendas.PageCount < Model.Vendas.PageNumber ? 0 : Model.Vendas.PageNumber) de @Model.Vendas.PageCount
+
+@Html.PagedListPager(Model.Vendas, pagep => Url.Action("Index",
+new { pagep }), new PagedListRenderOptions
+{
+LiElementClasses = new string[] { "pagination page-item p1" }
+})
+
