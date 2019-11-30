@@ -3240,3 +3240,756 @@ body.open-mobile-search .header-area.layout-02{
 .biolife-cart-info .icon-qty-combine .qty {
     background-color: #e73918;
 }
+
+/*------*/
+.product-tabs.single-layout .tab-head .tabs{
+    display: block;
+    padding: 9px 0;
+    margin: 0;
+    font-size: 0;
+    line-height: 0;
+    border-bottom: 2px  solid #e6e6e6;
+}
+.product-tabs.single-layout .tab-head .tabs li{
+    display: inline-block;
+    list-style: none;
+}
+.product-tabs.single-layout .tab-head .tabs li:not(:last-child){
+    margin-right: 43px;
+}
+.product-tabs.single-layout .tab-head .tabs li a{
+    color: #bbbbbb;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+    -webkit-transition: all 350ms ease;
+    -moz-transition: all 350ms ease;
+    -o-transition: all 350ms ease;
+    transition: all 350ms ease;
+    position: relative;
+}
+.product-tabs.single-layout .tab-head .tabs li a::before{
+    content: '';
+    position: absolute;
+    height: 3px;
+    width: 0;
+    display: block;
+    bottom: -4px;
+    left: 0;
+    -webkit-transition: all 550ms ease;
+    -moz-transition: all 550ms ease;
+    -o-transition: all 550ms ease;
+    transition: all 550ms ease;
+}
+.product-tabs.single-layout .tab-head .tabs li a:hover{
+    color: #222222;
+}
+.product-tabs.single-layout .tab-head .tabs li.active a{
+    font-weight: 700;
+    color: #222222;
+}
+.product-tabs.single-layout .tab-head .tabs li.active a::before{
+    width: 127px;
+}
+.product-tabs.single-layout .tab-content{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+.product-tabs.single-layout .tab-content .tab-contain{
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    visibility: hidden;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    border-color: #ffffff;
+    padding-top: 28px;
+    border-bottom: 1px solid #e6e6e6;
+    padding-bottom: 52px;
+}
+.product-tabs.single-layout .tab-content .tab-contain.review-tab{
+    padding-top: 33px;
+}
+.product-tabs.single-layout .tab-content .tab-contain.active{
+    visibility: visible;
+    opacity: 1;
+    filter: alpha(opacity=100);
+    position: static;
+}
+.product-tabs .tab-content p{
+    font-size: 15px;
+    line-height: 24px;
+    color: #666666;
+}
+.product-tabs .tab-content .desc-expand{
+    display: block;
+    margin-top: 26px;
+}
+.product-tabs .tab-content .desc-expand .title{
+    font-size: 15px;
+    line-height: 24px;
+    color: #333333;
+    margin: 0;
+    font-weight: 600;
+}
+.product-tabs .tab-content .desc-expand ul{
+    padding: 0;
+    margin: 16px 0 0;
+    font-size: 0;
+    line-height: 0;
+    display: block;
+}
+.product-tabs .tab-content .desc-expand ul li{
+    list-style: none;
+    display: block;
+    font-size: 14px;
+    line-height: 24px;
+    color: #666666;
+    padding-left: 13px;
+    position: relative;
+}
+.product-tabs .tab-content .desc-expand ul li::before{
+    content: "\f111";
+    font-family: 'FontAwesome', sans-serif;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-size: 7px;
+    line-height: 1;
+    color: #666666;
+    position: absolute;
+    top: 9px;
+    left: 0
+}
+.product-tabs .addtional-info-tab table p{
+    margin: 0;
+}
+.product-tabs .review-form-wrapper{
+    display: inline-block;
+    width: 100%;
+    padding-top: 17px;
+}
+.product-tabs .review-form-wrapper .title{
+    font-size: 14px;
+    color: #222222;
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+}
+.accodition-tab>ul{
+    padding: 0;
+}
+.accodition-tab>ul>li{
+    list-style: none;
+    display: block;
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+.accodition-tab>ul>li>.content{
+    padding: 10px 10px 15px;
+    display: none;
+}
+.accodition-tab>ul>li>.title{
+    color: #333;
+    font-weight: 600;
+    font-size: 16px;
+    position: relative;
+    cursor: help;
+}
+.accodition-tab>ul>li>.title::before{
+    content: '';
+    width: 10px;
+    height: 2px;
+    background-color: #444444;
+    position: absolute;
+    display: inline-block;
+    top: 14px;
+    left: -15px;
+}
+.accodition-tab>ul>li>.title::after{
+    content: '';
+    height: 10px;
+    width: 2px;
+    background-color: #444444;
+    position: absolute;
+    display: inline-block;
+    top: 10px;
+    left: -11px;
+}
+.accodition-tab>ul>li.active>.title::after{
+    content: none;
+}
+.comment-form-rating{
+    display: block;
+    margin: 7px 0 10px;
+}
+.comment-form-rating label{
+    font-size: 14px;
+    line-height: 30px;
+    color: #222222;
+    display: inline-block;
+    margin: 0;
+}
+.comment-form-rating .stars span,
+.comment-form-rating .stars{
+    display: inline-block;
+    margin: 0;
+    font-size: 0;
+    line-height: 0;
+}
+.comment-form-rating .stars{
+    margin-left: 5px;
+}
+.comment-form-rating .stars span a{
+    font-size: 15px;
+    line-height: 1;
+    color: #666666;
+    display: inline-block;
+    padding: 1px;
+    -webkit-transition: color 350ms ease;
+    -moz-transition: color 350ms ease;
+    -o-transition: color 350ms ease;
+    transition: color 350ms ease;
+}
+.comment-form-rating .stars span.rated a{
+    color: #ffbc53;
+}
+.comment-form-rating .stars span a.selected ~ a{
+    color: #666666;
+}
+.comment-form-rating .stars span:hover a{
+    color: #ffbc53 !important;
+}
+.comment-form-rating .stars span a:hover ~ a{
+    color: #666666 !important;
+}
+.review-form-wrapper .form-row{
+    display: inline-block;
+    float: left;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.review-form-wrapper .wide-half{
+    width: calc( 50% - 15px );
+}
+.review-form-wrapper .wide-half:nth-last-child(odd){
+    margin-left: 30px;
+}
+.review-form-wrapper .form-row textarea,
+.review-form-wrapper .form-row input{
+    font-size: 14px;
+    display: inline-block;
+    width: 100%;
+    border: 1px solid #e6e6e6;
+    color: #444444;
+    padding: 9px 14px 8px;
+    line-height: 1;
+    background-color: #ffffff;
+}
+.review-form-wrapper .form-row input{
+    height: 45px;
+}
+.review-form-wrapper .form-row textarea{
+    height: 140px;
+}
+.review-form-wrapper .form-row button[type=submit]{
+    font-size: 14px;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 700;
+    border: none;
+    outline: none;
+    border-radius: 9999px;
+    min-width: 162px;
+    text-align: center;
+    padding: 10px 20px;
+}
+.review-form-wrapper .form-row button[type=submit]:hover{
+    background-color: #444444;
+}
+.review-tab #comments{
+    display: block;
+    clear: both;
+    border-top: 2px solid #f1f1f1;
+    margin-top: 39px;
+}
+.review-tab #comments .commentlist{
+    padding: 0;
+}
+.review-tab #comments .commentlist>li{
+    list-style: none;
+    display: block;
+    border-bottom: 1px solid #f1f1f1;
+    padding-top: 20px;
+    padding-bottom: 26px;
+}
+.review-tab #comments .comment-content .comment-in{
+    display: block;
+    margin: 1px 0 0;
+}
+.review-tab #comments .comment-content .comment-in .post-name{
+    font-size: 18px;
+    line-height: 30px;
+    color: #222222;
+    font-weight: 600;
+    display: inline-block;
+}
+.review-tab #comments .comment-content .comment-in .post-date{
+    font-size: 15px;
+    line-height: 30px;
+    color: #666666;
+    display: inline-block;
+    float: right;
+}
+.review-tab #comments .comment-content .author{
+    font-size: 16px;
+    line-height: 1;
+    color: #666666;
+    margin: 2px 0 25px;
+}
+.review-tab #comments .comment-content .author b{
+    color: #333333;
+    font-weight: 600;
+}
+.review-tab #comments .comment-content .comment-text{
+    font-size: 15px;
+    color: #666666;
+    line-height: 18px;
+}
+.review-tab #comments .comment-review-form .title{
+    font-size: 15px;
+    line-height: 30px;
+    color: #333333;
+    font-weight: 600;
+    display: block;
+    margin: 0;
+}
+.review-tab #comments .comment-review-form .actions{
+    padding: 0;
+    font-size: 0;
+    line-height: 0;
+    margin-top: 17px;
+}
+.review-tab #comments .comment-review-form .actions li{
+    list-style: none;
+    display: block;
+}
+.review-tab #comments .comment-review-form .actions li a{
+    font-size: 14px;
+    line-height: 30px;
+    display: inline-block;
+    color: #666666;
+}
+.review-tab #comments .comment-review-form .actions li a i{
+    margin-right: 7px;
+}
+.rating-info{
+    max-width: 370px;
+}
+.product-tabs .rating-info .index{
+    display: block;
+    font-size: 14px;
+    color: #666666;
+    margin-bottom: 4px;
+}
+.rating-info .index .rating{
+    color: #222222;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 1;
+    display: inline-block;
+    margin-right: 6px;
+}
+.rating-info .see-all{
+    font-size: 15px;
+    color: #666666;
+    display: block;
+    margin: 0;
+}
+.rating-info .options{
+    padding: 0;
+    font-size: 0;
+    line-height: 0;
+    margin: 13px 0 0;
+}
+.rating-info .options li{
+    list-style: none;
+    display: block;
+    font-size: 14px;
+    line-height: 30px;
+    color: #333333;
+}
+.rating-info .options li .detail-for{
+    display: table;
+    width: 100%;
+}
+.rating-info .options li .detail-for .option-name,
+.rating-info .options li .detail-for .progres,
+.rating-info .options li .detail-for .number{
+    display: table-cell;
+    vertical-align: middle;
+}
+.rating-info .options li .detail-for .option-name{
+    width: 49px;
+    padding-left: 2px;
+    text-align: left;
+}
+.rating-info .options li .detail-for .number{
+    width: 39px;
+    text-align: center;
+}
+.rating-info .options .detail-for .line-100percent{
+    display: inline-block;
+    width: 100%;
+    font-size: 0;
+    line-height: 0;
+    border-radius: 9999px;
+    background-color: #f5f5f5;
+    overflow: hidden;
+}
+.rating-info .options .detail-for .line-100percent .percent{
+    height: 9px;
+    display: inline-block;
+    background-color: #ffdd5a;
+    border-radius: 9999px;
+}
+.rating-info .rating .star-rating > span::before,
+.rating-info .rating .star-rating::before{
+    font-size: 20px;
+    letter-spacing: 4px;
+}
+.single-layout.product-related-box{
+    margin-top: 60px;
+    margin-bottom: 50px;
+}
+.product-related-box ul{
+    padding: 0;
+    margin: 0;
+    clear: both;
+}
+.product-related-box .biolife-title-box{
+    margin-bottom: 31px;
+}
+.biolife-title-box{
+    text-align: center;
+}
+.biolife-title-box .biolife-icon{
+    display: inline-block;
+    margin: 0;
+    font-size: 35px;
+}
+.biolife-title-box .subtitle{
+    display: block;
+    margin: 6px 0 0;
+    font-size: 15px;
+    color: #666666;
+    line-height: 1;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+}
+.biolife-title-box .main-title{
+    font-size: 30px;
+    font-weight: 700;
+    color: #222222;
+    display: block;
+    margin: 12px 0 0;
+    line-height: 1;
+}
+.biolife-title-box.style-02 .subtitle{
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: block;
+    margin: 0;
+    line-height: 1;
+    font-style: normal;
+}
+.biolife-title-box.style-02 .main-title{
+    font-weight: 700;
+    line-height: 1;
+    display: block;
+    margin: 4px 0 0;
+    font-size: 40px;
+    color: #222222;
+}
+.biolife-title-box.style-02 .desc{
+    font-size: 15px;
+    color: #666666;
+    font-family: 'Playfair Display', sans-serif;
+    font-style: italic;
+    display: inline-block;
+    line-height: 18px;
+    margin: 12px 0 0;
+    max-width: 415px;
+}
+.biolife-title-box.link-all{
+    text-align: left;
+}
+.biolife-title-box.link-all .main-title{
+    font-size: 40px;
+    color: #222222;
+    display: inline-block;
+    line-height: 1;
+    margin: 0;
+}
+.biolife-title-box.link-all .blog-link{
+    display: inline-block;
+    float: right;
+    font-size: 14px;
+    color: #666666;
+    line-height: 1;
+    margin: 17px 0 0;
+    text-transform: uppercase;
+    font-weight: 700;
+    position: relative;
+}
+.biolife-title-box.link-all .blog-link::after{
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    height: 2px;
+    border-top: 1px solid #dfdfdf;
+    border-bottom: 1px solid #bcbcbc;
+}
+.biolife-title-box.slim-item .subtitle{
+    margin: 0;
+}
+.biolife-title-box.slim-item .main-title{
+    margin-top: 6px;
+}
+.biolife-title-box_in-countdown{
+    text-align: left;
+    padding: 13px 18px 6px;
+}
+.biolife-title-box_in-countdown .title{
+    display: block;
+    margin: 0;
+    font-size: 20px;
+    color: #000000;
+    font-weight: 700;
+    line-height: 1;
+}
+.rating .star-rating{
+    display: inline-block;
+    margin: 0;
+    overflow: hidden;
+    line-height: 24px;
+    position: relative;
+}
+.rating .star-rating > span::before,
+.rating .star-rating::before{
+    display: inline-block;
+    float: left;
+    font-family: FontAwesome, sans-serif;
+    content: "\f006\f006\f006\f006\f006";
+    font-size: 15px;
+    color: #666666;
+    letter-spacing: 3px
+}
+.rating .star-rating > span{
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    bottom: 0;
+}
+.rating .star-rating > span::before{
+    color: #ffbc53;
+}
+
+/* 1.7 Custom Tab */
+[data-tab-group] {
+    display: none;
+}
+[data-tab-group].active {
+    display: block;
+}
+.tab-content.no-padding > .tab-pane {
+  padding: 0; 
+}
+.tab-content > .tab-pane {
+  line-height: 28px;
+}
+.tab-content > .tab-pane {
+  padding: 10px 0;
+  line-height: 24px; 
+}
+.tab-bordered .tab-pane {
+  padding: 15px;
+  border: 1px solid #ededed;
+  margin-top: -1px; 
+}
+/*Comentários*/
+.post-comments{
+    clear: both;
+    display: block;
+}
+.post-comments .cmt-title{
+    font-size: 23px;
+    line-height: 1;
+    font-weight: 700;
+    color: #222222;
+    margin: 48px 0 0;
+}
+.post-comments .cmt-title sup{
+    font-size: 60%;
+    color: #aaaaaa;
+    font-weight: 600;
+}
+.post-comments .comment-form{
+    margin-top: 46px;
+}
+.post-comments .comment-form .form-row{
+    margin: 0;
+    display: block;
+    position: relative;
+    font-size: 0;
+    line-height: 0;
+}
+.post-comments .comment-form .form-row+.form-row:not(.last-btns){
+    margin-top: 20px;
+}
+.post-comments .comment-form .form-row input,
+.post-comments .comment-form .form-row textarea{
+    display: inline-block;
+    width: 100%;
+    border: 2px solid #e6e6e6;
+    font-size: 14px;
+    padding: 11px 13px;
+    line-height: 24px;
+}
+.post-comments .comment-form .form-row textarea{
+    padding: 39px 13px 11px 84px;
+    height: 188px;
+}
+.post-comments .comment-form .form-row .current-author{
+    font-size: 0;
+    line-height: 0;
+    display: inline-block;
+    position: absolute;
+    top: 32px;
+    left: 31px;
+    z-index: 2;
+}
+.post-comments .form-row.last-btns{
+    direction: rtl;
+    border-bottom: 2px solid #e6e6e6;
+    border-left: 2px solid #e6e6e6;
+    border-right: 2px solid #e6e6e6;
+    padding: 17px 19px 18px;
+}
+.post-comments .form-row.last-btns .btn{
+    display: inline-block;
+    border: none;
+    font-size: 18px;
+    line-height: 24px;
+    color: #888888;
+    outline: none;
+    box-shadow: none;
+}
+.post-comments .form-row.last-btns .btn-sumit{
+    font-size: 14px;
+    color: #ffffff;
+    border-radius: 9999px;
+    font-weight: 700;
+    min-width: 180px;
+    text-align: center;
+    padding: 10px;
+    text-transform: uppercase;
+}
+.post-comments .form-row.last-btns .btn-sumit:hover{
+    background-color: #444444;
+}
+.post-comments  .comment-list{
+    display: block;
+    clear: both;
+    margin-top: 50px;
+}
+.post-comments  .comment-list ol{
+    padding: 0;
+    margin: 0;
+}
+.post-comments  .comment-list ol li{
+    display: block;
+    list-style: none;
+}
+.post-comments  .wrap-post-comment .author-contact{
+    font-size: 15px;
+    font-weight: 700;
+    color: #333333;
+    line-height: 30px;
+}
+.post-comments  .wrap-post-comment .author-contact img{
+    margin-right: 6px;
+    display: inline-block;
+    float: left;
+}
+.post-comments  .wrap-post-comment .cmt-time{
+    display: inline-block;
+    font-size: 14px;
+    line-height: 30px;
+    color: #aaaaaa;
+    margin-left: 23px;
+}
+.post-comments  .wrap-post-comment .cmt-content{
+    margin-top: 12px;
+}
+.post-comments  .wrap-post-comment .cmt-content p{
+    font-size: 15px;
+    line-height: 24px;
+    color: #666666;
+    display: block;
+    margin: 0;
+}
+.post-comments  .wrap-post-comment .cmt-fooot{
+    display: block;
+    font-size: 0;
+    line-height: 0;
+    margin: 16px 0 0;
+}
+.post-comments  .wrap-post-comment .cmt-fooot .btn{
+    display: inline-block;
+    color: #aaaaaa;
+    padding: 0;
+    border-radius: 0;
+    border: none;
+    font-size: 14px;
+    line-height: 30px;
+    margin-right: 19px;
+}
+.post-comments  .wrap-post-comment .cmt-fooot .btn i{
+    font-size: 18px;
+    margin-right: 9px;
+}
+.post-comments .wrap-post-comment .cmt-inner{
+    margin-top: 40px;
+    padding-bottom: 22px;
+}
+.post-comments.lever-0>li>.wrap-post-comment>.cmt-inner{
+    border-bottom: 2px solid #e6e6e6;
+}
+.post-comments .comment-list ol.lever-1{
+    padding-left: 59px;
+}
+.post-comments .comment-list .biolife-panigations-block{
+    margin-top: 31px;
+}
+.blog-page.page-contain{
+    padding-top: 40px;
+}
+.blog-page .post-item .post-content .post-name a{
+    font-weight: 700;
+}
+.rounded-circle {
+    border-radius: 50px;
+}
