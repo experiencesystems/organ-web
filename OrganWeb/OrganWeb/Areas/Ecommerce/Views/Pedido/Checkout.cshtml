@@ -5,6 +5,7 @@
 
 @{
     Layout = "~/Views/Shared/_LayoutEcommerce.cshtml";
+    ViewBag.Title = "Pedido";
 }
 
 @if (!Request.IsAuthenticated)
@@ -29,6 +30,7 @@
     {
         @Html.AntiForgeryToken()
 
+        @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.Data)
         @Html.HiddenFor(model => model.Status)
         @Html.HiddenFor(model => model.IdUsuario)

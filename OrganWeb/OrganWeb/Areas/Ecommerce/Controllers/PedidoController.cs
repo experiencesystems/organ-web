@@ -46,17 +46,26 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
         {
             pedido.Carrinhos = await carrinho.GetCarrinho();
             pedido.IdUsuario = User.Identity.GetUserId();
-            if (ModelState.IsValid)
-            {
-                pedido.Status = 1;
-                pedido.Data = DateTime.Today;
+            pedido.Status = 1;
+            pedido.Data = DateTime.Today;
+            pedido.Endereco.CEP = pedido.CEPEntrega;
+            pedido.Endereco.Logradouro.CEP = pedido.CEPEntrega;
 
-                var cep = new Endereco()
+            ModelState.Remove("Endereco.CEP");
+            ModelState.Remove("Endereco.Logradouro.CEP");
+
+            if (ModelState.IsValid)
+            {   //todo: verificar se o cep existe antes de inserilo
+                var cep = await new Endereco().GetByID(pedido.CEPEntrega);
+                if (cep == null)
                 {
-                    CEP = pedido.CEPEntrega
-                };
-                cep.Add(cep);
-                await cep.Save();
+                    cep = new Endereco()
+                    {
+                        CEP = pedido.CEPEntrega
+                    };
+                    cep.Add(cep);
+                    await cep.Save();
+                }
 
                 var cidade = new Cidade()
                 {
@@ -97,6 +106,7 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
                     {
                         var valorfrete = await MetodosAPI.GetValorDoFrete(carrito.Anuncio.Anunciante.CEP, pedido.CEPEntrega);
                         pedido.ValFrete = valorfrete.ValorFrete;
+                        pedido.Endereco = null;
                         pedido.Add(pedido);
                         await pedido.Save();
                         pedidoAnuncio = new PedidoAnuncio
@@ -112,7 +122,9 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
                 ModelState.Clear();
                 return View();
             }
-            //manda o estado dnv aqui
+            var (QtdItens, Subtotal) = await carrinho.GetQtdETotalCarrinho();
+            pedido.Endereco.Logradouro.Bairro.Cidade.Estados = await estado.GetAll();
+            pedido.Subtotal = Subtotal;
             return View(pedido);
         }
 

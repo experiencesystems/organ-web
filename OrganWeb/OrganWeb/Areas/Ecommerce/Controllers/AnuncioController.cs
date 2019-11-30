@@ -88,6 +88,8 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             {
                 return HttpNotFound();
             }
+            anuncio.Comentarios = await new Comentario().GetComentarios(anuncio);
+            anuncio.Avaliacoes = await new Avaliacao().GetAvaliacoes(anuncio);
             return View(anuncio);
         }
 

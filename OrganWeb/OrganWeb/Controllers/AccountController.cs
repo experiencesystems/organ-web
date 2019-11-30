@@ -92,9 +92,10 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    if (returnUrl == "") { 
-                    if (user.Assinatura != 4) return RedirectToLocal("/Sistema");
-                    else return RedirectToLocal("/Ecommerce");
+                    if (returnUrl == "")
+                    {
+                        if (user.Assinatura != 4) return RedirectToLocal("/Sistema");
+                        else return RedirectToLocal("/Ecommerce");
                     }
                     else { return RedirectToLocal(returnUrl); }
                 case SignInStatus.LockedOut:
@@ -241,6 +242,25 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
                 imageData = br.ReadBytes((int)imageFileLength);
                 return File(imageData, "image/png");
             }
+        }
+
+        public FileContentResult FotoDoUsuario(string id)
+        {
+            var user = UserManager.FindById(id);
+            if (user.Foto == null)
+            {
+                string fileName = HttpContext.Server.MapPath(@"~/Imagens/admin.png");
+
+                byte[] imageData = null;
+                FileInfo fileInfo = new FileInfo(fileName);
+                long imageFileLength = fileInfo.Length;
+                FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fs);
+                imageData = br.ReadBytes((int)imageFileLength);
+
+                return File(imageData, "image/png");
+            }
+            return new FileContentResult(user.Foto, "image/jpeg");
         }
 
         //

@@ -1,4 +1,5 @@
 ﻿using OrganWeb.Areas.Ecommerce.Models.zBanco;
+using OrganWeb.Areas.Ecommerce.Models.zRepositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +10,7 @@ using System.Web;
 namespace OrganWeb.Areas.Ecommerce.Models.Endereco
 {
     [Table("tbEndereco")]
-    public class Endereco : EcommerceRepository<Endereco>
+    public class Endereco : EnderecoRepository
     {
         [Key]
         [RegularExpression(@"[0-9]{5}[\d]{3}", ErrorMessage = "Digite um CEP válido somente com números")]

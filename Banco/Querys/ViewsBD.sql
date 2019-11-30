@@ -524,8 +524,7 @@ select
     concat(A.Quantidade, ' ', P.UM ) `Quantidade`,
     (P.ValorUnit * A.Quantidade) `Preço`,
     P.Categoria `Categoria`,
-    spLike(A.Id) `Likes`,
-    A.LimiteParcela `Limite de Parcelamento`
+    spLike(A.Id) `Likes`
 from tbAnuncio A
 	inner join tbProduto P on P.Id = A.IdProduto
     inner join tbAnunciante AN on AN.IdUsuario = A.IdAnunciante

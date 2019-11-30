@@ -52,6 +52,9 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
         public List<Avaliacao> Avaliacoes { get; set; }
 
         [NotMapped]
+        public List<Comentario> Comentarios { get; set; }
+
+        [NotMapped]
         public Avaliacao Avaliacao { get; set; }
 
         [NotMapped]

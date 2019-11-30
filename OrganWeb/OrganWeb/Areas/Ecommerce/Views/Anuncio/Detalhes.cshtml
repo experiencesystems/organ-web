@@ -66,8 +66,8 @@
                     </div>
                 </div>
                 <div class="total-price-contain">
-                    <span class="title">Preço total:</span>
-                    <p class="price">R$000,00</p>
+                    <span class="title">Preço:</span>
+                    <p class="price">R$ @Html.DisplayFor(model => model.Produto.ValorUnit)</p>
                 </div>
                 <div class="buttons">
                     <a href="#" class="btn add-to-cart-btn">Adicionar no carrinho</a>
@@ -124,44 +124,55 @@
                 <div class="tab-pane fade" id="perguntas" role="tabpanel" aria-labelledby="perguntas-tab">
                     <!--Comentários-->
                     <div class="post-comments">
-                        <h3 class="cmt-title">Perguntas<sup> (26)</sup></h3>
+                        <h3 class="cmt-title">Perguntas<sup> (@Html.DisplayFor(model => model.Comentarios.Count))</sup></h3>
 
                         <div class="comment-form">
-                            <form action="#" method="post" name="frm-post-comment">
+                            @if (Request.IsAuthenticated)
+                            {
+                                using (Ajax.BeginForm("NovoComentario", "Comentario", new { area = "Ecommerce" }, new AjaxOptions { HttpMethod = "POST" }))
+                                {
+                                        @Html.AntiForgeryToken()
+                                        @Html.Hidden("idAnuncio", Model.Id)
+                                        <p class="form-row">
+                                            @Html.TextArea("comentario", "", htmlAttributes: new { name = "txt-comment", id = "txt-comment-ath-3364", cols = "30", rows = "10", placeholder = "Mande sua dúvida" })
+                                            <a href="#" class="current-author"><img src="@Url.Action("FotoDoUsuario", "Account", new { Area = "Ecommerce" })" width="41" height="41" alt="" class="rounded-circle"></a>
+                                        </p>
+                                        <p class="form-row last-btns align-content-md-end">
+                                            <input type="submit" class="btn btn-sumit" value="Enviar pergunta" />
+                                        </p>
+                                }
+                            }
+                            else
+                            {
                                 <p class="form-row">
-                                    <textarea name="txt-comment" id="txt-comment-ath-3364" cols="30" rows="10" placeholder="Mande sua dúvida"></textarea>
-                                    <a href="#" class="current-author"><img src="~/Imagens/admin.png" width="41" height="41" alt="" class="rounded-circle"></a>
+                                    <textarea name="txt-comment" id="txt-comment-ath-3364" cols="30" rows="10" placeholder="Logue-se para enviar uma pergunta! @Html.ActionLink("Login", "Login", new { area = "", controller = "Account", returnUrl = HttpContext.Current.Request.RawUrl })"></textarea>
+                                    <a href="#" class="current-author"><img src="@Url.Action("FotoDoUsuario", "Account", new { Area = "Ecommerce" })" width="41" height="41" alt="" class="rounded-circle"></a>
                                 </p>
-                                <p class="form-row last-btns align-content-md-end">
-                                    <button type="submit" class="btn btn-sumit">Enviar pergunta</button>
-                                </p>
-                            </form>
+                            }
                         </div>
 
                         <div class="comment-list">
+                            @foreach (var comentario in Model.Comentarios)
+                            {
+                                <ol class="post-comments lever-0">
+                                    <li class="comment-elem">
+                                        <div class="wrap-post-comment">
 
-                            <ol class="post-comments lever-0">
-                                <li class="comment-elem">
-                                    <div class="wrap-post-comment">
-
-                                        <div class="cmt-inner">
-                                            <div class="auth-info">
-                                                <a href="#" class="author-contact"><img src="~/Imagens/admin.png" alt="" width="29" height="28" class="rounded-circle">Nati Huts</a>
-                                                <span class="cmt-time">Há 4 dias</span>
-                                            </div>
-                                            <div class="cmt-content">
-                                                <p>
-                                                    Se eu cozinhar esse milho, consigo plantar depois?
-                                                </p>
-                                            </div>
-                                            <div class="cmt-fooot">
-                                                <a href="#" class="btn btn-like"><i class="mdi mdi-thumb-up-outline" aria-hidden="true"></i>9</a>
-                                                <a href="#" class="btn btn-dislike"><i class="mdi mdi-thumb-down-outline" aria-hidden="true"></i>1</a>
+                                            <div class="cmt-inner">
+                                                <div class="auth-info">
+                                                    <a href="#" class="author-contact"><img src="@Url.Action("FotoDoUsuario", "Account", new { Area = "Ecommerce", id = comentario.IdUsuario })" alt="" width="29" height="28" class="rounded-circle">@Html.DisplayFor(model => comentario.Usuario.UserName)</a>
+                                                    <span class="cmt-time">@Html.DisplayFor(model => comentario.Data)</span>
+                                                </div>
+                                                <div class="cmt-content">
+                                                    <p>
+                                                        @Html.DisplayFor(model => comentario.Valor)
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-                            </ol>
+                                    </li>
+                                </ol>
+                            }
                         </div>
                     </div>
                 </div>
@@ -170,7 +181,7 @@
                         <div class="row">
                             <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
                                 <div class="rating-info">
-                                    <p class="index"><strong class="rating">4.4</strong>de 5 estrelas</p>
+                                    <p class="index"><strong class="rating">@Html.DisplayFor(model => model.Estrelas)</strong>de 5 estrelas</p>
                                     <div class="rating"><p class="star-rating"><span class="width-80percent"></span></p></div>
                                     <p class="see-all">Ver todas</p>
                                     <ul class="options">
@@ -266,45 +277,27 @@
                         </div>
                         <div id="comments">
                             <ol class="commentlist">
-                                <li class="review">
-                                    <div class="comment-container">
-                                        <div class="row">
-                                            <div class="comment-content col-lg-8 col-md-9 col-sm-8 col-xs-12">
-                                                <p class="comment-in"><span class="author"><strong>Joana Grande Gomez</strong></span><span class="post-date">01/04/2018</span></p>
-                                                <div class="rating"><p class="star-rating"><span class="width-80percent"></span></p></div>
-                                                <p class="comment-text">Tá podre, joga fora.</p>
-                                            </div>
-                                            <div class="comment-review-form col-lg-3 col-lg-offset-1 col-md-3 col-sm-4 col-xs-12">
-                                                <span class="title">Isso foi útil?</span>
-                                                <ul class="actions">
-                                                    <li><a href="#" class="btn-act like" data-type="like"><i class="fa fa-thumbs-up" aria-hidden="true"></i>Sim (100)</a></li>
-                                                    <li><a href="#" class="btn-act hate" data-type="dislike"><i class="fa fa-thumbs-down" aria-hidden="true"></i>Não (20)</a></li>
-                                                    <li><a href="#" class="btn-act report" data-type="dislike"><i class="fa fa-flag" aria-hidden="true"></i>Denunciar</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="review">
-                                    <div class="comment-container">
-                                        <div class="row">
-                                            <div class="comment-content col-lg-8 col-md-9 col-sm-8 col-xs-12">
-                                                <p class="comment-in"><span class="author"><strong>Milharina milharal</strong></span><span class="post-date">01/05/2018</span></p>
-                                                <div class="rating"><p class="star-rating"><span class="width-80percent"></span></p></div>
-                                                <p class="comment-text">Eu não gosto de milho. Nem sei porque comprei.</p>
-                                            </div>
-                                            <div class="comment-review-form col-lg-3 col-lg-offset-1 col-md-3 col-sm-4 col-xs-12">
-                                                <span class="title">Isso foi útil?</span>
-                                                <ul class="actions">
-                                                    <li><a href="#" class="btn-act like" data-type="like"><i class="fa fa-thumbs-up" aria-hidden="true"></i>Sim (100)</a></li>
-                                                    <li><a href="#" class="btn-act hate" data-type="dislike"><i class="fa fa-thumbs-down" aria-hidden="true"></i>Não (20)</a></li>
-                                                    <li><a href="#" class="btn-act report" data-type="dislike"><i class="fa fa-flag" aria-hidden="true"></i>Denunciar</a></li>
-                                                </ul>
+                                @foreach (var avaliacao in Model.Avaliacoes)
+                                {
+                                    <li class="review">
+                                        <div class="comment-container">
+                                            <div class="row">
+                                                <div class="comment-content col-lg-8 col-md-9 col-sm-8 col-xs-12">
+                                                    <p class="comment-in"><span class="author"><strong>@Html.DisplayFor(model => avaliacao.Usuario.UserName)</strong></span><span class="post-date"><!--não tem data--></span></p>
+                                                    <div class="rating"><p class="star-rating"><span class="width-80percent"></span></p></div>
+                                                    <p class="comment-text"><!--não tem texto--></p>
+                                                </div>
+                                                <div class="comment-review-form col-lg-3 col-lg-offset-1 col-md-3 col-sm-4 col-xs-12">
+                                                    <span class="title">Isso foi útil?</span>
+                                                    <ul class="actions">
+                                                        <li><a href="#" class="btn-act like" data-type="like"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Sim (@Html.DisplayFor(model => avaliacao.Like))</a></li>
+                                                        <li><a href="#" class="btn-act report" data-type="dislike"><i class="fa fa-flag" aria-hidden="true"></i> Denunciar</a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-
+                                    </li>
+                                }
                             </ol>
                         </div>
                     </div>
