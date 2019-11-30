@@ -184,7 +184,7 @@ create table tbAvaliacao(
 	IdAnuncio int not null,
 	IdUsuario nvarchar(128) not null,
 	 constraint PKAvaliacao primary key(IdAnuncio, IdUsuario),
-	`Like` bool default false,
+	`Desc` varchar(100) not null,
 	Nota int 
 ) engine = innodb;
 alter table tbAvaliacao add constraint FKAvaliacaoAnuncio foreign key(IdAnuncio) references tbAnuncio(Id),
@@ -195,8 +195,6 @@ create table tbComentario(
 	Id int auto_increment,
 	 constraint PKComentario primary key(Id),
 	`Data` datetime default current_timestamp,
-	`Like` int,
-	Deslike int,
 	Comentario varchar(100) not null,
 	IdAnuncio int not null,
 	IdUsuario nvarchar(128) not null

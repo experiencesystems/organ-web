@@ -22,7 +22,10 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
         public string IdUsuario { get; set; }
 
         public int Nota { get; set; }
-        public bool Like { get; set; }
+
+        [StringLength(100)]
+        [Required(AllowEmptyStrings = false)]
+        public string Desc { get; set; }
 
         public virtual Anuncio Anuncio { get; set; }
         public virtual ApplicationUser Usuario { get; set; }

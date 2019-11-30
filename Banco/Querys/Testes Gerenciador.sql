@@ -36,7 +36,6 @@ insert into tbTelForn value(1,4);
 insert into tbTelForn value(3,5), (3,6); 
 
 update tbFornecedor set `Status` = false where Id = 3;
-select * from vwFornecedor;
 
 insert into tbUM value('a', 'A');
 

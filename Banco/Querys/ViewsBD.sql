@@ -564,8 +564,6 @@ select
     C.Comentario `Comentário`,
     A.Id `IdAnuncio`,
     spUsuario(C.IdUsuario) `Usuário`,
-    ifnull(C.`Like`, 0) `Likes`,
-    ifnull(C.Deslike, 0) `Deslikes`,
     DATE_FORMAT(C.`Data`, '%e/%m/%y às %H:%i') `Data de Postagem`
 from tbComentario C
 	inner join tbAnuncio A on A.Id = C.IdAnuncio

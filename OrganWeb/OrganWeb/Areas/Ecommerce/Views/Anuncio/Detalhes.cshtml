@@ -131,15 +131,15 @@
                             {
                                 using (Ajax.BeginForm("NovoComentario", "Comentario", new { area = "Ecommerce" }, new AjaxOptions { HttpMethod = "POST" }))
                                 {
-                                        @Html.AntiForgeryToken()
-                                        @Html.Hidden("idAnuncio", Model.Id)
-                                        <p class="form-row">
-                                            @Html.TextArea("comentario", "", htmlAttributes: new { name = "txt-comment", id = "txt-comment-ath-3364", cols = "30", rows = "10", placeholder = "Mande sua dúvida" })
-                                            <a href="#" class="current-author"><img src="@Url.Action("FotoDoUsuario", "Account", new { Area = "Ecommerce" })" width="41" height="41" alt="" class="rounded-circle"></a>
-                                        </p>
-                                        <p class="form-row last-btns align-content-md-end">
-                                            <input type="submit" class="btn btn-sumit" value="Enviar pergunta" />
-                                        </p>
+                                    @Html.AntiForgeryToken()
+                                    @Html.Hidden("idAnuncio", Model.Id)
+                                    <p class="form-row">
+                                        @Html.TextArea("comentario", "", htmlAttributes: new { name = "txt-comment", id = "txt-comment-ath-3364", cols = "30", rows = "10", placeholder = "Mande sua dúvida" })
+                                        <a href="#" class="current-author"><img src="@Url.Action("FotoDoUsuario", "Account", new { Area = "Ecommerce" })" width="41" height="41" alt="" class="rounded-circle"></a>
+                                    </p>
+                                    <p class="form-row last-btns align-content-md-end">
+                                        <input type="submit" class="btn btn-sumit" value="Enviar pergunta" />
+                                    </p>
                                 }
                             }
                             else
@@ -161,7 +161,7 @@
                                             <div class="cmt-inner">
                                                 <div class="auth-info">
                                                     <a href="#" class="author-contact"><img src="@Url.Action("FotoDoUsuario", "Account", new { Area = "Ecommerce", id = comentario.IdUsuario })" alt="" width="29" height="28" class="rounded-circle">@Html.DisplayFor(model => comentario.Usuario.UserName)</a>
-                                                    <span class="cmt-time">@Html.DisplayFor(model => comentario.Data)</span>
+                                                    <span class="cmt-time">@Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.Data))</span>
                                                 </div>
                                                 <div class="cmt-content">
                                                     <p>
@@ -246,32 +246,34 @@
                             <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
                                 <div class="review-form-wrapper">
                                     <span class="title">Mande sua análise:</span>
-                                    <form action="#" name="frm-review" method="post">
+                                    @using (Ajax.BeginForm("NovaAvaliacao", "Avaliacao", new { area = "Ecommerce" }, new AjaxOptions { HttpMethod = "POST" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.Hidden("idAnuncio", Model.Id)
                                         <div class="comment-form-rating">
                                             <label>1. Avaliação do produto:</label>
                                             <p class="stars">
                                                 <span>
-                                                    <a class="btn-rating" data-value="star-1" href="#"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
-                                                    <a class="btn-rating" data-value="star-2" href="#"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
-                                                    <a class="btn-rating" data-value="star-3" href="#"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
-                                                    <a class="btn-rating" data-value="star-4" href="#"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
-                                                    <a class="btn-rating" data-value="star-5" href="#"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
+                                                    <i class="mdi mdi-star-outline" aria-hidden="true">@Html.RadioButton("Estrela", "1", new { @class = "btn-rating" })</i>
+                                                    <label>
+                                                        <i class="mdi mdi-star-outline" aria-hidden="true"></i>
+                                                        <input type="radio" name="Estrela" value="1" class="btn-rating" data-value="star-1" />
+                                                    
+                                                        </label>
+                                                    <a class="btn-rating" data-value="star-2"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
+                                                    <a class="btn-rating" data-value="star-3"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
+                                                    <a class="btn-rating" data-value="star-4"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
+                                                    <a class="btn-rating" data-value="star-5"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
                                                 </span>
                                             </p>
                                         </div>
-                                        <p class="form-row wide-half">
-                                            <input type="text" name="name" value="" placeholder="Nome">
-                                        </p>
-                                        <p class="form-row wide-half">
-                                            <input type="email" name="email" value="" placeholder="Email">
-                                        </p>
                                         <p class="form-row">
-                                            <textarea name="comment" id="txt-comment" cols="30" rows="10" placeholder="Mensagem"></textarea>
+                                            @Html.TextArea("comentario", "", htmlAttributes: new { name = "txt-comment", id = "txt-comment-ath-3364", cols = "30", rows = "10", placeholder = "Mensagem" })
                                         </p>
                                         <p class="form-row">
                                             <button type="submit" name="submit">Enviar</button>
                                         </p>
-                                    </form>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -285,14 +287,7 @@
                                                 <div class="comment-content col-lg-8 col-md-9 col-sm-8 col-xs-12">
                                                     <p class="comment-in"><span class="author"><strong>@Html.DisplayFor(model => avaliacao.Usuario.UserName)</strong></span><span class="post-date"><!--não tem data--></span></p>
                                                     <div class="rating"><p class="star-rating"><span class="width-80percent"></span></p></div>
-                                                    <p class="comment-text"><!--não tem texto--></p>
-                                                </div>
-                                                <div class="comment-review-form col-lg-3 col-lg-offset-1 col-md-3 col-sm-4 col-xs-12">
-                                                    <span class="title">Isso foi útil?</span>
-                                                    <ul class="actions">
-                                                        <li><a href="#" class="btn-act like" data-type="like"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Sim (@Html.DisplayFor(model => avaliacao.Like))</a></li>
-                                                        <li><a href="#" class="btn-act report" data-type="dislike"><i class="fa fa-flag" aria-hidden="true"></i> Denunciar</a></li>
-                                                    </ul>
+                                                    <p class="comment-text">@Html.DisplayFor(model => avaliacao.Desc)</p>
                                                 </div>
                                             </div>
                                         </div>

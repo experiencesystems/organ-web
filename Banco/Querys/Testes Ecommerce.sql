@@ -38,15 +38,15 @@ insert into tbLogradouro(Logradouro, IdBairro, CEP) values("Avenida Bosque da Sa
 insert into tbUsuario(`Id`, `Email`, `ConfirmacaoEmail`, `SenhaHash`, `CarimboSeguranca`, `UserName`, Foto, CPF, Assinatura)
 values('02719894-e4a9-46c8-999e-ba942abd5f8f', 'jessica@gmail.com', 0, 
 	   'AKM33xpM5jcwZ/ojFJuuWBOvPQOiROAQmhfZwupekFSTAGpmW5+O7iPmj7cUuM/r6w==',
-	   '1a38cc85-3bd4-400b-9fd6-39f7c6a99a52', 'Jéssica',  LOAD_FILE("/error.gif"), 11111111111, 4),
+	   '1a38cc85-3bd4-400b-9fd6-39f7c6a99a52', 'Jéssica',  null, 11111111111, 4),
        
 	   ('02719894-e4a9-46c8-999e-ba942abd5f8g', 'expfarms@gmail.com', 0,
 	   'AKM33xpM5jcwZ/ojFJuuWBOvPQOiROAQmhfZwupekFSTAGpmW5+O7iPmj7cUuM/r6w==',
-	   'e7aac8f8-7c92-44fb-9850-5f0fb0024c9a', 'Experience Farms', LOAD_FILE("/error.gif"), 11111111112, 1),
+	   'e7aac8f8-7c92-44fb-9850-5f0fb0024c9a', 'Experience Farms', null, 11111111112, 1),
        
 	   ('02719894-e4a9-46c8-999e-ba942abd5f8h', 'fazendinha@a.com', 0,
 	   'AKM33xpM5jcwZ/ojFJuuWBOvPQOiROAQmhfZwupekFSTAGpmW5+O7iPmj7cUuM/r6w==',
-	   '1a38cc85-3bd4-400b-9850-5f0fb0024c9a', 'Fazendinha', LOAD_FILE("/error.gif"), 11111111113, 3);
+	   '1a38cc85-3bd4-400b-9850-5f0fb0024c9a', 'Fazendinha', null, 11111111113, 3);
        
 insert into `AspNetRoles` (`Id`, `Name`) value ('02719894-e4a9-46c8-999e-ba942abd5f8u', 'Admin');
 
@@ -58,8 +58,7 @@ insert into tbDadosBancarios(NomeTitular, CVV, Banco, NumCartao, Validade, IdUsu
        
 insert into tbAnunciante(IdUsuario, NomeFazenda, NumEnd, CEP, NomeBanco) values('02719894-e4a9-46c8-999e-ba942abd5f8g', 'Experience Farms', 1, "78008105", 'dbOrgan'),
 																			   ('02719894-e4a9-46c8-999e-ba942abd5f8h', 'Fazenda Triste', 2, "78008000", 'dbOrgan 1');
-select * from vwDadosBancarios;
-select * from vwAnunciante;
+
 
 insert into tbUM value('a', 'A');
 insert into tbProduto(ValorUnit, UM, Nome, Categoria) values(5.25, 'a', 'Semente de Soja', 1),
@@ -74,7 +73,6 @@ insert into tbAnuncio(Nome, `Desc`, `Status`, Foto, IdProduto, IdAnunciante, Qua
 
 insert into tbAnuncio(Nome, `Desc`, `Status`, Foto, IdProduto, IdAnunciante, Quantidade, Desconto, DuracaoDesc, DataDesc)
 	values('Soja', 'É a sim!', true, load_file("/error.gif"), 1, '02719894-e4a9-46c8-999e-ba942abd5f8g', 2, 10, 1, '19/11/27 17:00');          
-select * from vwAnuncio;
           
 insert into tbWishList value('02719894-e4a9-46c8-999e-ba942abd5f8f', 4);
 
@@ -101,7 +99,7 @@ update tbPedido set `Status` = 1 where Id = 1;
 
 insert into tbVenda(IdPedido) value(1);
 
-insert into tbAvaliacao value(1, '02719894-e4a9-46c8-999e-ba942abd5f8f', true, 4);
+insert into tbAvaliacao value(1, '02719894-e4a9-46c8-999e-ba942abd5f8f', 'Melhor aquisição da minha vida...', 4);
 
 insert into tbComentario(Comentario, IdAnuncio, IdUsuario) values('Adorei a Soja, super veganaaaa!', 1, '02719894-e4a9-46c8-999e-ba942abd5f8f');
 
