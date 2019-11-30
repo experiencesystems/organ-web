@@ -30,11 +30,14 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
         
         public byte[] Foto { get; set; }
 
-        [Range(0.00, 100.00)]
-        [Display(Name = "Desconto (%)")]
-        public double Desconto { get; set; }
-
         public double Quantidade { get; set; }
+
+        [Range(0, 100)]
+        [Display(Name = "Desconto (%)")]
+        public int Desconto { get; set; }
+        
+        public DateTime? DataDesc { get; set; }
+        public DateTime? Data { get; set; }
 
         [ForeignKey("Produto")]
         public int IdProduto { get; set; }
@@ -53,6 +56,9 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
 
         [NotMapped]
         public int? Estrelas { get; set; }
+
+        [NotMapped]
+        public int? NumAvaliacoes { get; set; }
 
         [NotMapped]
         public double MediaAvaliacoes { get; set; }

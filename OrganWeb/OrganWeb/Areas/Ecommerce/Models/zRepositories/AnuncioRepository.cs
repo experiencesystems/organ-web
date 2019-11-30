@@ -50,5 +50,14 @@ namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
             }
             return listafinal;
         }
+
+        public async Task<Anuncio> GetAnuncio(int? id)
+        {
+            var anuncio = await GetByID(id);
+            Avaliacoes = await Avaliacao.GetAvaliacoes(anuncio);
+            anuncio.NumAvaliacoes = Avaliacoes.Count;
+            anuncio.Estrelas = await GetMediaEstrelas(anuncio);
+            return anuncio;
+        }
     }
 }

@@ -26,8 +26,6 @@ namespace OrganWeb.Areas.Ecommerce.Models.zBanco
         public DbSet<Avaliacao> Avaliacaos { get; set; }
         public DbSet<Comentario> Comentarios { get; set; }
         public DbSet<Venda> Vendas { get; set; }
-        public DbSet<Entrega> Entregas { get; set; }
-        public DbSet<Pacote> Pacotes { get; set; }
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<PedidoAnuncio> PedidoAnuncios { get; set; }
         public DbSet<PedidoVenda> PedidoVendas { get; set; }

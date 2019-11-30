@@ -92,8 +92,11 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    if (returnUrl == "") { 
                     if (user.Assinatura != 4) return RedirectToLocal("/Sistema");
                     else return RedirectToLocal("/Ecommerce");
+                    }
+                    else { return RedirectToLocal(returnUrl); }
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

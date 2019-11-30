@@ -83,7 +83,7 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            anuncio = await anuncio.GetByID(id);
+            anuncio = await anuncio.GetAnuncio(id);
             if (anuncio == null)
             {
                 return HttpNotFound();

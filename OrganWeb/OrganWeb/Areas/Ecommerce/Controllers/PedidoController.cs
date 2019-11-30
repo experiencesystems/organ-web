@@ -44,9 +44,11 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Checkout(Pedido pedido)
         {
+            pedido.Carrinhos = await carrinho.GetCarrinho();
+            pedido.IdUsuario = User.Identity.GetUserId();
             if (ModelState.IsValid)
             {
-                pedido.Status = 0;
+                pedido.Status = 1;
                 pedido.Data = DateTime.Today;
 
                 var cep = new Endereco()
@@ -83,26 +85,34 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
 
                 var pagamento = pedido.Pagamento;
                 pagamento.Add(pagamento);
+                await pagamento.Save();
 
                 pedido.IdPagamento = pagamento.Id;
 
-                foreach (var item in pedido.Carrinhos)
+                var grupoanunciantes = pedido.Carrinhos.GroupBy(a => a.Anuncio.Anunciante);
+
+                foreach (var anunciante in grupoanunciantes)
                 {
-                    pedido.Add(pedido);
-                    await pedido.Save();
-                    //TODO: arrumar pedido de acordo com anuncio
-                    pedidoAnuncio = new PedidoAnuncio
+                    foreach (var carrito in anunciante)
                     {
-                        IdAnuncio = item.IdAnuncio,
-                        IdPedido = pedido.Id
-                    };
-                    pedidoAnuncio.Add(pedidoAnuncio);
-                    await pedidoAnuncio.Save();
+                        var valorfrete = await MetodosAPI.GetValorDoFrete(carrito.Anuncio.Anunciante.CEP, pedido.CEPEntrega);
+                        pedido.ValFrete = valorfrete.ValorFrete;
+                        pedido.Add(pedido);
+                        await pedido.Save();
+                        pedidoAnuncio = new PedidoAnuncio
+                        {
+                            IdAnuncio = carrito.IdAnuncio,
+                            IdPedido = pedido.Id
+                        };
+                        pedidoAnuncio.Add(pedidoAnuncio);
+                        await pedidoAnuncio.Save();
+                    }
                 }
                 ViewBag.SuccessMessage = "Seu pedido foi efetuado com sucesso! Aguarde a confirmação do anunciante.";
                 ModelState.Clear();
                 return View();
             }
+            //manda o estado dnv aqui
             return View(pedido);
         }
 

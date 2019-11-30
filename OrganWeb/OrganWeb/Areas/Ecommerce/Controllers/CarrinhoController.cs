@@ -43,7 +43,7 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
                 return HttpNotFound();
             }
             var carrito = await carrinho.GetItemCarrinho(anuncio);
-            if (carrito.Qtd + 1 > anuncio.Quantidade)
+            if (carrito != null && carrito.Qtd + 1 > anuncio.Quantidade)
                 return RedirectToAction("Index");
             await carrinho.AddAoCarrinho(anuncio);
             return RedirectToAction("Index");

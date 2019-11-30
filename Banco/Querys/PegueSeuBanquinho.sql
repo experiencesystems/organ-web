@@ -165,8 +165,7 @@ create table tbAnuncio(
     DataDesc datetime,
 	IdProduto int not null,
 	IdAnunciante nvarchar(128) not null,
-    `Data` datetime default current_timestamp ,
-    LimiteParcela int default 1
+    `Data` datetime default current_timestamp
 )engine = innodb;
 alter table tbAnuncio add constraint FKAnuncioProduto foreign key(IdProduto) references tbProduto(Id),
 					  add constraint FKAnuncioAnunciante foreign key(IdAnunciante) references tbAnunciante(IdUsuario);  
