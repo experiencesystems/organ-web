@@ -66,8 +66,8 @@
                     </div>
                 </div>
                 <div class="total-price-contain">
-                    <span class="title">Preço:</span>
-                    <p class="price">R$@Html.DisplayFor(model => model.Produto.ValorUnit)</p>
+                    <span class="title">Preço total:</span>
+                    <p class="price">R$000,00</p>
                 </div>
                 <div class="buttons">
                     <a href="#" class="btn add-to-cart-btn">Adicionar no carrinho</a>
@@ -96,72 +96,220 @@
             </div>
 
         </div>
-            <div class="product-tabs single-layout biolife-tab-contain">
-                <div class="details">
-                        <!-- Row start -->
+
+        <div class="product-tabs single-layout biolife-tab-contain">
+            <div class="tab-head">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="descprod-tab" data-toggle="tab" href="#descprod" role="tab" aria-controls="produto" aria-selected="true">Descrição do produto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="descanun-tab" data-toggle="tab" href="#descanun" role="tab" aria-controls="anunciante" aria-selected="false">Detalhes do anunciante</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="perguntas-tab" data-toggle="tab" href="#perguntas" role="tab" aria-controls="perguntas" aria-selected="false">Perguntas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="analise-tab" data-toggle="tab" href="#analise" role="tab" aria-controls="analise" aria-selected="false">Análise</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="descprod" role="tabpanel" aria-labelledby="descprod-tab">
+                    @Html.DisplayFor(model => model.Desc)
+                </div>
+                <div class="tab-pane fade" id="descanun" role="tabpanel" aria-labelledby="descanun-tab">
+                    @Html.DisplayFor(model => model.Anunciante.NomeFazenda)
+                </div>
+                <div class="tab-pane fade" id="perguntas" role="tabpanel" aria-labelledby="perguntas-tab">
+                    <!--Comentários-->
+                    <div class="post-comments">
+                        <h3 class="cmt-title">Perguntas<sup> (26)</sup></h3>
+
+                        <div class="comment-form">
+                            <form action="#" method="post" name="frm-post-comment">
+                                <p class="form-row">
+                                    <textarea name="txt-comment" id="txt-comment-ath-3364" cols="30" rows="10" placeholder="Mande sua dúvida"></textarea>
+                                    <a href="#" class="current-author"><img src="~/Imagens/admin.png" width="41" height="41" alt="" class="rounded-circle"></a>
+                                </p>
+                                <p class="form-row last-btns align-content-md-end">
+                                    <button type="submit" class="btn btn-sumit">Enviar pergunta</button>
+                                </p>
+                            </form>
+                        </div>
+
+                        <div class="comment-list">
+
+                            <ol class="post-comments lever-0">
+                                <li class="comment-elem">
+                                    <div class="wrap-post-comment">
+
+                                        <div class="cmt-inner">
+                                            <div class="auth-info">
+                                                <a href="#" class="author-contact"><img src="~/Imagens/admin.png" alt="" width="29" height="28" class="rounded-circle">Nati Huts</a>
+                                                <span class="cmt-time">Há 4 dias</span>
+                                            </div>
+                                            <div class="cmt-content">
+                                                <p>
+                                                    Se eu cozinhar esse milho, consigo plantar depois?
+                                                </p>
+                                            </div>
+                                            <div class="cmt-fooot">
+                                                <a href="#" class="btn btn-like"><i class="mdi mdi-thumb-up-outline" aria-hidden="true"></i>9</a>
+                                                <a href="#" class="btn btn-dislike"><i class="mdi mdi-thumb-down-outline" aria-hidden="true"></i>1</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane review-tab fade" id="analise" role="tabpanel" aria-labelledby="analise-tab">
+                    <div class="container">
                         <div class="row">
-                            <div class="col">
-                                <!-- Nav tabs -->
-                                <div class="tab-head">
-                                    <ul class="nav nav-tabs tabs" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" data-toggle="tab" href="#home1" role="tab">Descrição do produto</a>
+                            <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
+                                <div class="rating-info">
+                                    <p class="index"><strong class="rating">4.4</strong>de 5 estrelas</p>
+                                    <div class="rating"><p class="star-rating"><span class="width-80percent"></span></p></div>
+                                    <p class="see-all">Ver todas</p>
+                                    <ul class="options">
+                                        <li>
+                                            <div class="detail-for">
+                                                <span class="option-name">
+                                                    <i class="mdi mdi-star" aria-hidden="true"></i>
+                                                </span>
+                                                <span class="progres">
+                                                    <span class="line-100percent"><span class="percent width-90percent"></span></span>
+                                                </span>
+                                                <span class="number">90</span>
+                                            </div>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#profile1" role="tab">Detalhes do anunciante</a>
+                                        <li>
+                                            <div class="detail-for">
+                                                <span class="option-name">
+                                                    <i class="mdi mdi-star" aria-hidden="true"></i>
+                                                </span>
+                                                <span class="progres">
+                                                    <span class="line-100percent"><span class="percent width-30percent"></span></span>
+                                                </span>
+                                                <span class="number">30</span>
+                                            </div>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#pergunta" role="tab">Perguntas</a>
+                                        <li>
+                                            <div class="detail-for">
+                                                <span class="option-name">
+                                                    <i class="mdi mdi-star" aria-hidden="true"></i>
+                                                </span>
+                                                <span class="progres">
+                                                    <span class="line-100percent"><span class="percent width-40percent"></span></span>
+                                                </span>
+                                                <span class="number">40</span>
+                                            </div>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#analise" role="tab">Análises</a>
+                                        <li>
+                                            <div class="detail-for">
+                                                <span class="option-name">
+                                                    <i class="mdi mdi-star" aria-hidden="true"></i>
+                                                </span>
+                                                <span class="progres">
+                                                    <span class="line-100percent"><span class="percent width-20percent"></span></span>
+                                                </span>
+                                                <span class="number">20</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="detail-for">
+                                                <span class="option-name">
+                                                    <i class="mdi mdi-star" aria-hidden="true"></i>
+                                                </span>
+                                                <span class="progres">
+                                                    <span class="line-100percent"><span class="percent width-10percent"></span></span>
+                                                </span>
+                                                <span class="number">10</span>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
-                                    <!-- Tab panes -->
-                                <div class="tab-content tabs card-block">
-                                    <div class="tab-pane active" id="home1" role="tabpanel">
-                                        <p class="m-0">@Html.DisplayFor(model => model.Desc)</p>
-                                    </div>
-                                    <div class="tab-pane" id="profile1" role="tabpanel">
-                                        <p class="m-0">@Html.DisplayFor(model => model.Anunciante.NomeFazenda)</p>
-                                    </div>
-                                    <div class="tab-pane" id="pergunta" role="tabpanel">
-                                        <!-- Review Form -->
-                                        <div id="comentario-form">
-                                            <form class="comentario-form">
-                                                <br />
-                                                <textarea class="input" placeholder="Comentário" id="txt-comentario"></textarea>
-                                                <button class="primary-btn" id="btn-comentario">Enviar</button>
-                                            </form>
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
+                                <div class="review-form-wrapper">
+                                    <span class="title">Mande sua análise:</span>
+                                    <form action="#" name="frm-review" method="post">
+                                        <div class="comment-form-rating">
+                                            <label>1. Avaliação do produto:</label>
+                                            <p class="stars">
+                                                <span>
+                                                    <a class="btn-rating" data-value="star-1" href="#"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
+                                                    <a class="btn-rating" data-value="star-2" href="#"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
+                                                    <a class="btn-rating" data-value="star-3" href="#"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
+                                                    <a class="btn-rating" data-value="star-4" href="#"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
+                                                    <a class="btn-rating" data-value="star-5" href="#"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
+                                                </span>
+                                            </p>
                                         </div>
-                                        <!-- /Review Form -->
-                                    </div>
-                                    <div class="tab-pane" id="analise" role="tabpanel">
-                                        <div id="review-form">
-                                            <form class="review-form">
-                                                <br />
-                                                <textarea class="input" placeholder="Comentário"></textarea>
-                                                <div class="input-rating">
-                                                    <span>Avaliação: </span>
-                                                    <div class="stars">
-                                                        <input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
-                                                        <input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
-                                                        <input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
-                                                        <input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
-                                                        <input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
-                                                    </div>
-                                                </div>
-                                                <button class="primary-btn">Enviar</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
+                                        <p class="form-row wide-half">
+                                            <input type="text" name="name" value="" placeholder="Nome">
+                                        </p>
+                                        <p class="form-row wide-half">
+                                            <input type="email" name="email" value="" placeholder="Email">
+                                        </p>
+                                        <p class="form-row">
+                                            <textarea name="comment" id="txt-comment" cols="30" rows="10" placeholder="Mensagem"></textarea>
+                                        </p>
+                                        <p class="form-row">
+                                            <button type="submit" name="submit">Enviar</button>
+                                        </p>
+                                    </form>
                                 </div>
                             </div>
-                        <!-- Row end -->
+                        </div>
+                        <div id="comments">
+                            <ol class="commentlist">
+                                <li class="review">
+                                    <div class="comment-container">
+                                        <div class="row">
+                                            <div class="comment-content col-lg-8 col-md-9 col-sm-8 col-xs-12">
+                                                <p class="comment-in"><span class="author"><strong>Joana Grande Gomez</strong></span><span class="post-date">01/04/2018</span></p>
+                                                <div class="rating"><p class="star-rating"><span class="width-80percent"></span></p></div>
+                                                <p class="comment-text">Tá podre, joga fora.</p>
+                                            </div>
+                                            <div class="comment-review-form col-lg-3 col-lg-offset-1 col-md-3 col-sm-4 col-xs-12">
+                                                <span class="title">Isso foi útil?</span>
+                                                <ul class="actions">
+                                                    <li><a href="#" class="btn-act like" data-type="like"><i class="fa fa-thumbs-up" aria-hidden="true"></i>Sim (100)</a></li>
+                                                    <li><a href="#" class="btn-act hate" data-type="dislike"><i class="fa fa-thumbs-down" aria-hidden="true"></i>Não (20)</a></li>
+                                                    <li><a href="#" class="btn-act report" data-type="dislike"><i class="fa fa-flag" aria-hidden="true"></i>Denunciar</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="review">
+                                    <div class="comment-container">
+                                        <div class="row">
+                                            <div class="comment-content col-lg-8 col-md-9 col-sm-8 col-xs-12">
+                                                <p class="comment-in"><span class="author"><strong>Milharina milharal</strong></span><span class="post-date">01/05/2018</span></p>
+                                                <div class="rating"><p class="star-rating"><span class="width-80percent"></span></p></div>
+                                                <p class="comment-text">Eu não gosto de milho. Nem sei porque comprei.</p>
+                                            </div>
+                                            <div class="comment-review-form col-lg-3 col-lg-offset-1 col-md-3 col-sm-4 col-xs-12">
+                                                <span class="title">Isso foi útil?</span>
+                                                <ul class="actions">
+                                                    <li><a href="#" class="btn-act like" data-type="like"><i class="fa fa-thumbs-up" aria-hidden="true"></i>Sim (100)</a></li>
+                                                    <li><a href="#" class="btn-act hate" data-type="dislike"><i class="fa fa-thumbs-down" aria-hidden="true"></i>Não (20)</a></li>
+                                                    <li><a href="#" class="btn-act report" data-type="dislike"><i class="fa fa-flag" aria-hidden="true"></i>Denunciar</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ol>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div> <!--row-->
-    </div>
+        </div>
+
+    </div> <!--row-->
