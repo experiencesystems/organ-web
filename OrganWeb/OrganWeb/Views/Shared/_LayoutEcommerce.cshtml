@@ -34,13 +34,12 @@
                         </div>
                         <div class="biolife-cart-info">
                             <div class="login-item">
-                                <a href="#" class="login-link"><i class="biolife-icon mdi mdi-account-outline"></i>Login/Registro</a>
+                                @Html.Partial("_LoginEcoPartial")
                             </div>
                             <div class="wishlist-block hidden-sm hidden-xs">
                                 <a href="/Ecommerce/Wishlist/Index" class="link-to">
                                     <span class="icon-qty-combine">
                                         <i class="mdi mdi-heart-outline biolife-icon"></i>
-                                        <span class="qty">0</span>
                                     </span>
                                 </a>
                             </div>
@@ -51,8 +50,6 @@
                                             <i class="mdi mdi-cart-outline biolife-icon"></i>
                                             <span class="qty">@{Html.RenderAction("SumarioCarrinho", "Carrinho");}</span>
                                         </span>
-                                        <span class="title">Meu carrinho - </span>
-                                        <span class="sub-total">R$0.00</span>
                                     </a>
                                     <div class="cart-content">
                                         <div class="cart-inner">
@@ -84,7 +81,7 @@
                                                 <a href="/Ecommerce/Carrinho/Index" class="btn view-cart">Ver carrinho</a>
                                             </p>
                                         </div>
-                                    </div>-->
+                                    </div>
                                 </div>
                             </div>
                         </div>

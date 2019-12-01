@@ -621,6 +621,7 @@
     <Content Include="Views\Account\RegistroOrgan.cshtml" />
     <None Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_LoginEcoPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

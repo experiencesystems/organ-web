@@ -1,0 +1,42 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+            <img alt="image" src="@Url.Action("FotoDoUsuario", "Account", new { Area = "Ecommerce", id = User.Identity.GetUserId() })" class="rounded-circle mr-1">
+            <div class="d-sm-none d-lg-inline-block">Olá, @Html.DisplayName(User.Identity.GetUserName())</div>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
+            <a href="#" class="dropdown-item has-icon">
+                <i class="far fa-user"></i> Perfil
+            </a>
+
+            <a href="@Url.Action("Configurações", "Index", "Manage", "routeValues: null")" class="dropdown-item has-icon">
+                <i class="fas fa-cog"></i> Configurações
+            </a>
+
+            <a href="@Url.Action("Index", "Pedidos", new { Area = "Ecommerce" })" class="dropdown-item has-icon">
+                <i class="fas fa-cog"></i> Meus pedidos
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                @Html.ActionLink("Configurações", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Configurações", @class = "dropdown-item" })
+                <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()"> Fazer logoff</a>
+            </div>
+
+            <div class="dropdown-divider"></div>
+
+            <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item has-icon text-danger">
+                <i class="fas fa-sign-out-alt"></i> Sair
+            </a>
+        </div>
+    }
+}
+else
+{
+    <a href="@Url.Action("Login", "Account", new { Area = "Ecommerce", returnUrl = this.Request.RawUrl })" class="login-link"><i class="biolife-icon mdi mdi-account-outline"></i>Login</a>
+    <a href="@Url.Action("Registro", "Account", new { Area = "Ecommerce" })" class="login-link"><i class="biolife-icon mdi mdi-account-outline"></i>Registro</a>
+}
