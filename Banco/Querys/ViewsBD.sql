@@ -223,7 +223,7 @@ create view vwControle as(
 drop view if exists vwHistorico;
 create view vwHistorico as(
 select date_format(HE.DataAlteracao, '%e/%m/%y às %H:%i') `Data de Alteração`, HE.Id, HE.IdEstoque `Id do Item`, ifnull(I.`Item`, 'Item Excluído') `Nome do Item`,
- ifnull(HE.QtdAntiga, '0') `Quantidade Antiga`,ifnull(I.`Quantidade`, '0') `Quantidade Atual`, HE.`Desc` `Descrição de Alteração`
+ ifnull(HE.QtdAntiga, '0') `Quantidade Antiga`,ifnull(I.`Quantidade`, '0') `Quantidade Atual`, ifnull(HE.`Desc`, 'Sem Descrição') `Descrição de Alteração`
  from tbHistEstoque HE
 	left join 
  vwItems I on HE.IdEstoque = I.Id
@@ -546,10 +546,9 @@ drop view if exists vwPedido;
 create view vwPedido as(
 select 
 	P.Id `Id`,
-    A.IdAnunciante `Anunciante`,
+    A.IdAnunciante `IdAnunciante`,
     A.Id `IdAnuncio`,
     A.Nome `Anúncio`,
-    P.Id `IdProduto`,
 	group_concat(distinct concat(A.Nome, ' - ', PA.Qtd)separator ', ') `Nome do Anúncio - Quantidade Pedida`,
 	sum(Pr.ValorUnit * PA.Qtd) `Valor Total s/Desconto`,
     sum((Pr.ValorUnit * PA.Qtd)-((Pr.ValORUnit * PA.Qtd)*(A.Desconto/100))) `Valor Total c/Desconto`,
@@ -608,17 +607,20 @@ select
     A.Nome `Anúncio`,
     C.Qtd `Quantidade adicionada`
 from tbCarrinho C
-	inner join tbAnuncio A on A.Id = C.IdAnuncio);
+	inner join tbAnuncio A on A.Id = C.IdAnuncio
+where C.`Status` = true
+);
 
 drop view if exists vwVenda;
 create view vwVenda as(
 select 
 	V.Id `Id`,
+    P.IdUsuario `IdCliente`,
     DATE_FORMAT(V.`Data`, '%a - %e/%m/%y às %H:%i') `Data da Venda`,
 	group_concat(distinct concat(A.Nome, ' - ', PA.Qtd)separator ', ') `Nome do Anúncio - Quantidade Pedida`,
 	(sum((Pr.ValorUnit * PA.Qtd)-((Pr.ValorUnit * PA.Qtd)*(A.Desconto/100))) + P.ValFrete) `Valor Total`,
 	concat(E.Rua,', ', P.NumEntrega,' - ', ifnull(P.CompEntrega, 'Sem Complemento'),' - ',E.BCE,' - ',E.CEP) `Endereço de Entrega`,
-    An.NomeFazenda `Anunciante`,
+    An.IdUsuario `IdAnunciante`, An.NomeFazenda `Anunciante`,
     case
 		when V.`Status` = true then 'Venda finalizada'
         else 'Venda em andamento'
@@ -657,8 +659,9 @@ on tbPedidoAnuncio
 for each row
 begin
 	declare idusu nvarchar(128);
+    declare idc int;
     set idusu = (select IdUsuario from tbPedido where Id = NEW.IdPedido);
-	delete from tbCarrinho where IdUsuario = idusu;
+	update tbCarrinho set `Status` = false where IdUsuario = idusu;
 end$
 
 DELIMITER $
@@ -676,6 +679,7 @@ DELIMITER ;
 
 DELIMITER $
 drop trigger if exists trgDeleteAnuncio$
+DELIMITER $
 create trigger trgDeleteAnuncio
 before delete
 on tbAnuncio

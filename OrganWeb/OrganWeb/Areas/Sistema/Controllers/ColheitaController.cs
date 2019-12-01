@@ -120,7 +120,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 colheita.Add(colheita);
                 await colheita.Save();
 
-                plantio.Delete(plantio.Id);
+                plantio.Status = false;
+                plantio.Update(plantio);
                 await plantio.Save();
 
                 return RedirectToAction("Index");

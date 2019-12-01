@@ -214,7 +214,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Ecommerce\Controllers\AvaliacaoController.cs" />
+    <Compile Include="Areas\Ecommerce\Models\API\ListarUnidades.cs" />
+    <Compile Include="Areas\Ecommerce\Models\ViewsBanco\VwPedido.cs" />
+    <Compile Include="Areas\Ecommerce\Models\ViewsBanco\VwVenda.cs" />
     <Compile Include="Areas\Ecommerce\Models\zRepositories\EnderecoRepository.cs" />
+    <Compile Include="Areas\Ecommerce\Models\zRepositories\UnidadeMedidaRepository.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Areas\Ecommerce\Controllers\AnuncioController.cs" />
     <Compile Include="Areas\Ecommerce\Controllers\CarrinhoController.cs" />
@@ -260,7 +264,6 @@
     <Compile Include="Areas\Ecommerce\Models\zRepositories\AvaliacaoRepository.cs" />
     <Compile Include="Areas\Ecommerce\Models\zRepositories\CarrinhoRepository.cs" />
     <Compile Include="Areas\Ecommerce\Models\zRepositories\ComentarioRepository.cs" />
-    <Compile Include="Areas\Ecommerce\Models\zRepositories\PedidoRepository.cs" />
     <Compile Include="Areas\Ecommerce\Models\zRepositories\VendaRepository.cs" />
     <Compile Include="Areas\Ecommerce\Models\zRepositories\WishlistRepository.cs" />
     <Compile Include="Areas\Sistema\Controllers\AreaController.cs" />

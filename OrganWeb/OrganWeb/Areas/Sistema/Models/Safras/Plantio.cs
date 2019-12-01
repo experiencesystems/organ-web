@@ -42,6 +42,8 @@ namespace OrganWeb.Areas.Sistema.Models.Safras
         [NotMapped]
         public string NomeAreas { get; set; }
 
+        public bool Status { get; set; }
+
         [NotMapped]
         public List<AreaPlantio> AreaPlantios { get; set; }
 

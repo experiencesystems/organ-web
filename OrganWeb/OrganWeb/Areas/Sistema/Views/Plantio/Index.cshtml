@@ -15,22 +15,12 @@
                         <div class="table-data__tool">
                             <h6 class="body-title">Plantio</h6>
                             <div class="selectdropdown">
-                                <select class="js-select2" name="property">
-                                    <option selected="selected">Todas as propriedades</option>
-                                    <option value="">Opção 1</option>
-                                    <option value="">Opção 2</option>
-                                </select>
-                                <div class="dropDownSelect2"></div>
-                            </div>
-
-                            <div class="selectdropdown">
-                                <select class="js-select2 ui dropdown" name="time">
-                                    <option selected="selected">Todos</option>
-                                    <option value="">Hoje</option>
-                                    <option value="">Essa semana</option>
-                                    <option value="">Este mês</option>
-                                </select>
-                                <div class="dropDownSelect2"></div>
+                                @using (Html.BeginForm("Index", "Plantio", FormMethod.Get))
+                                {
+                                    @Html.DropDownList("filtros", "Todos")
+                                    <input type="submit" value="Filtro" />
+                                    <div class="dropDownSelect2"></div>
+                                }
                             </div>
                         </div>
                     </div>

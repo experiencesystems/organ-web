@@ -112,7 +112,8 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
                         pedidoAnuncio = new PedidoAnuncio
                         {
                             IdAnuncio = carrito.IdAnuncio,
-                            IdPedido = pedido.Id
+                            IdPedido = pedido.Id,
+                            Qtd = carrito.Qtd
                         };
                         pedidoAnuncio.Add(pedidoAnuncio);
                         await pedidoAnuncio.Save();

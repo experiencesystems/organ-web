@@ -23,10 +23,6 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
 
         public int Nota { get; set; }
 
-        [StringLength(100)]
-        [Required(AllowEmptyStrings = false)]
-        public string Desc { get; set; }
-
         public virtual Anuncio Anuncio { get; set; }
         public virtual ApplicationUser Usuario { get; set; }
     }

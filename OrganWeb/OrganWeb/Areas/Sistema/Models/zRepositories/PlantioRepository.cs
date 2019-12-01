@@ -31,6 +31,38 @@ namespace OrganWeb.Areas.Sistema.Models
             }).ToList();
         }
 
+        public async Task<List<Plantio>> GetPlantiosAtivos()
+        {
+            Plantios = await new VwPlantio().GetAtivos();
+            return Plantios.Select((p) => new Plantio
+            {
+                Porcentagem = ProgressoPlantio(p),
+                Id = p.Id,
+                Nome = p.Plantio,
+                Sistema = p.Sistema,
+                TipoPlantio = p.Tipo,
+                DataInicio = p.Inicio,
+                DataColheita = p.Colheita,
+                NomeAreas = p.Areas
+            }).ToList();
+        }
+
+        public async Task<List<Plantio>> GetPlantiosFinalizados()
+        {
+            Plantios = await new VwPlantio().GetFinalizados();
+            return Plantios.Select((p) => new Plantio
+            {
+                Porcentagem = ProgressoPlantio(p),
+                Id = p.Id,
+                Nome = p.Plantio,
+                Sistema = p.Sistema,
+                TipoPlantio = p.Tipo,
+                DataInicio = p.Inicio,
+                DataColheita = p.Colheita,
+                NomeAreas = p.Areas
+            }).ToList();
+        }
+
         private double ProgressoPlantio(VwPlantio plantio)
         {
             DateTime hoje = DateTime.Today;

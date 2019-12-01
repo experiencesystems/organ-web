@@ -45,7 +45,28 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             var anuncios = await anuncio.GetAnuncios();
             return View(anuncios);
         }
-        
+
+        public async Task<FileContentResult> FotoDoAnuncio(int? anuncio)
+        {
+            Anuncio anuncioo = new Anuncio();
+            if(anuncio != null)
+                anuncioo = await anuncioo.GetByID(anuncio);
+            if (anuncio == null ||anuncioo.Foto == null)
+            {
+                string fileName = HttpContext.Server.MapPath(@"~/Imagens/admin.png");
+
+                byte[] imageData = null;
+                FileInfo fileInfo = new FileInfo(fileName);
+                long imageFileLength = fileInfo.Length;
+                FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fs);
+                imageData = br.ReadBytes((int)imageFileLength);
+
+                return File(imageData, "image/png");
+            }
+            return new FileContentResult(anuncioo.Foto, "image/png");
+        }
+
         public async Task<string> Detalhes()
         {
             string aa;

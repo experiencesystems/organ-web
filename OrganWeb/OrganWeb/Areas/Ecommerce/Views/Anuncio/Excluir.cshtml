@@ -2,93 +2,83 @@
 
 @{
     ViewBag.Title = "Excluir anúncio";
-    Layout = null;
+    Layout = "~/Views/Shared/_LayoutEcommerce.cshtml";
 }
 
-<!DOCTYPE html>
+<h3>Tem certeza que deseja desativar esse anúncio?</h3>
+<div>
+    <h4>Anúncio</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Excluir</title>
-</head>
-<body>
-    <h3>Tem certeza que deseja desativar esse anúncio?</h3>
-    <div>
-        <h4>Anúncio</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Nome)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Nome)
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Produto.Nome)
+        </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Produto.Nome)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Produto.Nome)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Produto.Nome)
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantidade)
+        </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Quantidade)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Quantidade)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Quantidade)
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Produto.ValorUnit)
+        </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Produto.ValorUnit)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Produto.ValorUnit)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Produto.ValorUnit)
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Desc)
+        </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Desc)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Desc)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Desc)
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Desconto)
+        </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Desconto)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Desconto)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Desconto)
-            </dd>
+    </dl>
 
-        </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.IdProduto)
+        @Html.HiddenFor(model => model.Anunciante.IdUsuario)
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Voltar para o anúncio", "Detalhes", new { id = Model.Id })
+        </div>
+    }
 
-        @using (Html.BeginForm())
+    @{
+        if (ViewBag.SuccessMessage != null)
         {
-            @Html.AntiForgeryToken()
-            @Html.HiddenFor(model => model.Id)
-            @Html.HiddenFor(model => model.IdProduto)
-            @Html.HiddenFor(model => model.Anunciante.IdUsuario)
-            <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default" /> |
-                @Html.ActionLink("Voltar para o anúncio", "Detalhes", new { id = Model.Id })
+            <div>
+                @ViewBag.SuccessMessage
+                @Html.ActionLink("Voltar para a loja", "Index", "Loja")
             </div>
         }
-
-        @{
-            if (ViewBag.SuccessMessage != null)
-            {
-                <div>
-                    @ViewBag.SuccessMessage
-                    @Html.ActionLink("Voltar para a loja", "Index", "Loja")
-                </div>
-            }
-        }
-    </div>
-</body>
-</html>
+    }
+</div>

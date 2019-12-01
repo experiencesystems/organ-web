@@ -80,7 +80,6 @@ create table tbAnunciante(
 	IdUsuario nvarchar(128) not null,
      constraint PKAnunciante primary key(IdUsuario),
     NomeFazenda varchar(50) not null,
-    FotoFazenda mediumblob,
     NomeBanco varchar(50),
     NumEnd int not null,
     CompEnd varchar(50),
@@ -207,10 +206,11 @@ create table tbCarrinho(
 	IdUsuario nvarchar(128) not null,
 	IdAnuncio int not null,
 	 constraint PKCarrinho primary key(Id),
-	Qtd int not null
+	Qtd int not null, 
+    `Status` bool default true 
 )engine = innodb;
 alter table tbCarrinho add constraint FKCarrinhoAnuncio foreign key(IdAnuncio) references tbAnuncio(Id) on delete cascade,
-					   add constraint FKCarrinhoUsuario foreign key(IdUsuario) references tbUsuario(Id);
+					   add constraint FKCarrinhoUsuario foreign key(IdUsuario) references tbUsuario(Id) on delete cascade;
 
 drop table if exists tbHistCarrinho;
 create table tbHistCarrinho(

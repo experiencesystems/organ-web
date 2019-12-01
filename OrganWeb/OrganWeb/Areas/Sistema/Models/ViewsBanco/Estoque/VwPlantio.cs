@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque
 {
@@ -21,6 +23,7 @@ namespace OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque
         public DateTime Colheita { get; set; }
         public string Areas { get; set; }
         public string Itens { get; set; }
+        public string Status { get; set; }
         public string Funcionarios { get; set; }
 
         [NotMapped]
@@ -37,5 +40,15 @@ namespace OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque
             new SelectListItem() { Text = "Safra", Value = "1" },
             new SelectListItem() { Text = "Entressafra (safrinha)", Value = "2" }
             };
+
+        public async Task<List<VwPlantio>> GetAtivos()
+        {
+            return await DbSet.Where(x => x.Status.Equals("Ativo")).ToListAsync();
+        }
+
+        public async Task<List<VwPlantio>> GetFinalizados()
+        {
+            return await DbSet.Where(x => x.Status.Equals("Finalizado")).ToListAsync();
+        }
     }
 }

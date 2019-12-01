@@ -35,7 +35,8 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
         [Range(0, 100)]
         [Display(Name = "Desconto (%)")]
         public int Desconto { get; set; }
-        
+
+        public int? DuracaoDesc { get; set; }        
         public DateTime? DataDesc { get; set; }
         public DateTime? Data { get; set; }
 

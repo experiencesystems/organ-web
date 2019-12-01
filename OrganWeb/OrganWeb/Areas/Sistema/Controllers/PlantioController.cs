@@ -21,8 +21,27 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private Area area = new Area();
         private Semente semente = new Semente();
         
-        public async Task<ActionResult> Index()
+        [HttpGet]
+        public async Task<ActionResult> Index(string filtros)
         {
+            var listaFiltros = new List<string>
+            {
+                "Ativos",
+                "Finalizados"
+            };
+            ViewBag.filtros = new SelectList(listaFiltros);
+            if (!String.IsNullOrWhiteSpace(filtros))
+            {
+                switch (filtros)
+                {
+                    case "Finalizados":
+                        return View(await plantio.GetPlantiosFinalizados());
+                    case "Ativos":
+                        return View(await plantio.GetPlantiosAtivos());
+                    default:
+                        return View(await plantio.GetPlantios());
+                }                
+            }
             return View(await plantio.GetPlantios());
         }
 

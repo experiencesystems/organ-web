@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using OrganWeb.Areas.Ecommerce.Models.Vendas;
-using OrganWeb.Areas.Sistema.Models.API;
+using OrganWeb.Areas.Ecommerce.Models.API;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
         private Produto produto = new Produto();
         private Anuncio anuncio = new Anuncio();
         private ListarUnidades unmd = new ListarUnidades();
+        private UnidadeCadastro uncd = new UnidadeCadastro();
         private ApplicationUserManager _userManager;
 
         public AnuncioController()
@@ -58,21 +60,46 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Novo(Anuncio anuncio)
+        public async Task<ActionResult> Novo([Bind(Exclude = "Foto")]Anuncio anuncio)
         {
+            unmd = await unmd.GetListarUnidades();
             if (ModelState.IsValid)
             {
-                produto.Add(anuncio.Produto);
-                await produto.Save();
+                byte[] imageData = null;
+                if (Request.Files.Count > 0)
+                {
+                    HttpPostedFileBase poImgFile = Request.Files["Foto"];
+                    using (var binary = new BinaryReader(poImgFile.InputStream))
+                    {
+                        imageData = binary.ReadBytes(poImgFile.ContentLength);
+                    }
+                    anuncio.Foto = imageData;
+                }
+                anuncio.Data = DateTime.Today;
+                if (await unmd.GetByID(anuncio.Produto.UM) == null)
+                {
+                    anuncio.Produto.Unidades = unmd.UnidadeCadastros;
+                    uncd = new UnidadeCadastro()
+                    {
+                        Id = anuncio.Produto.UM,
+                        Desc = anuncio.Produto.Unidades.Where(x => x.Id == anuncio.Produto.UM).Select(x => x.Desc).FirstOrDefault().ToString()
+                    };
+                    uncd.Add(uncd);
+                    await uncd.Save();
+                }
+                anuncio.Produto.Add(anuncio.Produto);
+                await anuncio.Produto.Save();
 
                 anuncio.Status = true;
-                anuncio.IdProduto = produto.Id;
+                anuncio.IdProduto = anuncio.Produto.Id;
                 anuncio.IdAnunciante = User.Identity.GetUserId();
                 anuncio.Add(anuncio);
                 await anuncio.Save();
 
                 return RedirectToAction("Detalhes", new { id = anuncio.Id });
             }
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            anuncio.Anunciante = new Anunciante { Usuario = user };
             anuncio.Produto.Unidades = unmd.UnidadeCadastros;
             return View(anuncio);
         }
@@ -111,10 +138,23 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Editar(Anuncio anuncio)
+        public async Task<ActionResult> Editar([Bind(Exclude = "Foto")]Anuncio anuncio)
         {
             if (ModelState.IsValid)
             {
+                if (anuncio.Foto != null)
+                {
+                    byte[] imageData = null;
+                    if (Request.Files.Count > 0)
+                    {
+                        HttpPostedFileBase poImgFile = Request.Files["Foto"];
+                        using (var binary = new BinaryReader(poImgFile.InputStream))
+                        {
+                            imageData = binary.ReadBytes(poImgFile.ContentLength);
+                        }
+                    }
+                    anuncio.Foto = imageData;
+                }
                 anuncio.Update(anuncio);
                 await anuncio.Save();
                 if (await unmd.GetByID(anuncio.Produto.UM) == null)
@@ -164,6 +204,24 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             ViewBag.SuccessMessage = "Seu anúncio " + anuncio.Nome + " foi desativado.";
             ModelState.Clear();
             return View();
+        }
+
+        public FileContentResult FotoDoAnuncio(Anuncio anuncio)
+        {
+            if (anuncio.Foto == null)
+            {
+                string fileName = HttpContext.Server.MapPath(@"~/Imagens/admin.png");
+
+                byte[] imageData = null;
+                FileInfo fileInfo = new FileInfo(fileName);
+                long imageFileLength = fileInfo.Length;
+                FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fs);
+                imageData = br.ReadBytes((int)imageFileLength);
+
+                return File(imageData, "image/png");
+            }
+            return new FileContentResult(anuncio.Foto, "image/jpeg");
         }
     }
 }

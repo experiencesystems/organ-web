@@ -3,6 +3,8 @@ using OrganWeb.Areas.Ecommerce.Models.Endereco;
 using OrganWeb.Areas.Ecommerce.Models.Financeiro;
 using OrganWeb.Areas.Ecommerce.Models.Usuarios;
 using OrganWeb.Areas.Ecommerce.Models.Vendas;
+using OrganWeb.Areas.Ecommerce.Models.ViewsBanco;
+using OrganWeb.Areas.Ecommerce.Models.API;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -30,6 +32,8 @@ namespace OrganWeb.Areas.Ecommerce.Models.zBanco
         public DbSet<PedidoAnuncio> PedidoAnuncios { get; set; }
         public DbSet<PedidoVenda> PedidoVendas { get; set; }
         public DbSet<HistCarrinho> HistCarrinhos { get; set; }
+        public DbSet<VwPedido> VwPedidos { get; set; }
+        public DbSet<UnidadeCadastro> UnidadeCadastros { get; set; }
 
         // FINANCEIRO
         public DbSet<DadosBancario> DadosBancarios { get; set; }
@@ -101,6 +105,62 @@ namespace OrganWeb.Areas.Ecommerce.Models.zBanco
             modelBuilder.Entity<IdentityUserClaim>()
                 .Property(t => t.ClaimValue)
                 .HasColumnName("ValorClaim");
+
+            modelBuilder.Entity<VwPedido>()
+                .Property(t => t.Anuncio)
+                .HasColumnName("Anúncio");
+
+            modelBuilder.Entity<VwPedido>()
+                .Property(t => t.NomeAnuncioQtd)
+                .HasColumnName("Nome do Anúncio - Quantidade Pedida");
+
+            modelBuilder.Entity<VwPedido>()
+                .Property(t => t.ValorTotalsDesconto)
+                .HasColumnName("Valor Total s/Desconto");
+
+            modelBuilder.Entity<VwPedido>()
+                .Property(t => t.ValorTotalcDesconto)
+                .HasColumnName("Valor Total c/Desconto");
+
+            modelBuilder.Entity<VwPedido>()
+                .Property(t => t.Comprador)
+                .HasColumnName("Comprador - CPF");
+
+            modelBuilder.Entity<VwPedido>()
+                .Property(t => t.Endereco)
+                .HasColumnName("Endereço de Entrega");
+
+            modelBuilder.Entity<VwPedido>()
+                .Property(t => t.ValorFrete)
+                .HasColumnName("Valor do Frete");
+
+            modelBuilder.Entity<VwPedido>()
+                .Property(t => t.Situacao)
+                .HasColumnName("Situação do Pedido");
+
+            modelBuilder.Entity<VwPedido>()
+                .Property(t => t.Data)
+                .HasColumnName("Data do Pedido");
+
+            modelBuilder.Entity<VwVenda>()
+                .Property(t => t.Data)
+                .HasColumnName("Data da Venda");
+
+            modelBuilder.Entity<VwVenda>()
+                .Property(t => t.NomeAnuncio)
+                .HasColumnName("Nome do Anúncio - Quantidade Pedida");
+
+            modelBuilder.Entity<VwVenda>()
+                .Property(t => t.ValorTotal)
+                .HasColumnName("Valor Total");
+
+            modelBuilder.Entity<VwVenda>()
+                .Property(t => t.Endereco)
+                .HasColumnName("Endereço de Entrega");
+
+            modelBuilder.Entity<VwVenda>()
+                .Property(t => t.Situacao)
+                .HasColumnName("Situação da Venda");
         }
 
         public static EcommerceContext Create()

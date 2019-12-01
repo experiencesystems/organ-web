@@ -1,4 +1,5 @@
 ﻿using OrganWeb.Areas.Ecommerce.Models.Vendas;
+using OrganWeb.Areas.Ecommerce.Models.ViewsBanco;
 using OrganWeb.Areas.Sistema.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -13,20 +14,27 @@ namespace OrganWeb.Areas.Sistema.Controllers
     [Authorize(Roles = "Admin")]
     public class VendasController : Controller
     {
-        private Pedido pedido = new Pedido();
+        private VwPedido pedido = new VwPedido();
         private PedidoAnuncio pedidoAnuncio = new PedidoAnuncio();
-        private Venda venda = new Venda();
+        private VwVenda venda = new VwVenda();
 
         public async Task<ActionResult> Index(int? pagep, int? pagev)
         {//TODO: filtro de pedido e venda por status, pagedlist
             int pagepedido = pagep ?? 1;
             int pagevenda = pagev ?? 1;
-            var select = new ViewVendas
+            try
             {
-                Pedidos = await pedidoAnuncio.GetPedidosAnunciante(pagepedido),
-                Vendas = await venda.GetVendasDoAnunciante(pagevenda)
-            };
-            return View();
+                var select = new ViewVendas
+                {
+                    Pedidos = await pedido.GetPedidosAnunciante(pagepedido),
+                    Vendas = await venda.GetVendasAnunciante(pagevenda)
+                };
+                return View(select);
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
         }
 
         public async Task<ActionResult> AceitarPedido(int? idPedido)

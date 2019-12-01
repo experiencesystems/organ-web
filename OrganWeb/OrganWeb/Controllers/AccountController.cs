@@ -316,44 +316,21 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             return View(model);
         }
 
-        public FileContentResult FotoDoUsuario()
+        public FileContentResult FotoDoUsuario(string id)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                string userId = User.Identity.GetUserId();
-                // to get the user details to load user Image    
-                var bdUsers = HttpContext.GetOwinContext().Get<EcommerceContext>();
-                var userImage = bdUsers.Users.Where(x => x.Id == userId).FirstOrDefault();
-                if (userImage.Foto == null)
-                {
-                    string fileName = HttpContext.Server.MapPath(@"~/Imagens/admin.png");
-
-                    byte[] imageData = null;
-                    FileInfo fileInfo = new FileInfo(fileName);
-                    long imageFileLength = fileInfo.Length;
-                    FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-                    BinaryReader br = new BinaryReader(fs);
-                    imageData = br.ReadBytes((int)imageFileLength);
-
-                    return File(imageData, "image/png");
-                }
-                return new FileContentResult(userImage.Foto, "image/jpeg");
-            }
-            else
+            if(id == null)
             {
                 string fileName = HttpContext.Server.MapPath(@"~/Imagens/admin.png");
+
                 byte[] imageData = null;
                 FileInfo fileInfo = new FileInfo(fileName);
                 long imageFileLength = fileInfo.Length;
                 FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
                 BinaryReader br = new BinaryReader(fs);
                 imageData = br.ReadBytes((int)imageFileLength);
+
                 return File(imageData, "image/png");
             }
-        }
-
-        public FileContentResult FotoDoUsuario(string id)
-        {
             var user = UserManager.FindById(id);
             if (user.Foto == null)
             {
@@ -368,7 +345,7 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
 
                 return File(imageData, "image/png");
             }
-            return new FileContentResult(user.Foto, "image/jpeg");
+            return new FileContentResult(user.Foto, "image/png");
         }
 
         //

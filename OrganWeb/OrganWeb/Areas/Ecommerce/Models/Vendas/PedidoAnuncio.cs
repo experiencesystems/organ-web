@@ -10,7 +10,7 @@ using System.Web;
 namespace OrganWeb.Areas.Ecommerce.Models.Vendas
 {
     [Table("tbPedidoAnuncio")]
-    public class PedidoAnuncio : PedidoAnuncioRepository
+    public class PedidoAnuncio : EcommerceRepository<PedidoAnuncio>
     {
         [Key, Column(Order = 1)]
         [ForeignKey("Pedido")]

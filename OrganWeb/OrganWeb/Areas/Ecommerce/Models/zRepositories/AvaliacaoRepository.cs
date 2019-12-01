@@ -15,5 +15,15 @@ namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
         {
             return await DbSet.Include(a => a.Anuncio).Include(u => u.Usuario).Where(x => x.IdAnuncio == anuncio.Id).ToListAsync();
         }
+
+        public async Task<Avaliacao> GetByID(string usuario, int? anuncio)
+        {
+            return await DbSet.Include(a => a.Anuncio).Include(u => u.Usuario).Where(x => x.IdAnuncio == anuncio && x.IdUsuario == usuario).FirstOrDefaultAsync();
+        }
+
+        public async void Delete(string usuario, int anuncio)
+        {
+            DbSet.Remove(await GetByID(usuario, anuncio));
+        }
     }
 }

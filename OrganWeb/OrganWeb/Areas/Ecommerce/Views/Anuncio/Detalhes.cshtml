@@ -11,7 +11,7 @@
 
             <div class="media">
                 <ul class="biolife-carousel slider-for" data-slick='{"arrows":false,"dots":false,"slidesMargin":30,"slidesToShow":1,"slidesToScroll":1,"fade":true,"asNavFor":".slider-nav"}'>
-                    <li><img src="~/Imagens/ecommerce/miniview-1.jpg" alt="" width="500" height="500"></li>
+                    <li><img src="@Url.Action("FotoDoAnuncio", "Loja", new { Area = "Ecommerce", anuncio = Model.Id })" alt="" width="500" height="500"></li>
                 </ul>
             </div>
 
@@ -287,7 +287,7 @@
                                                 <div class="comment-content col-lg-8 col-md-9 col-sm-8 col-xs-12">
                                                     <p class="comment-in"><span class="author"><strong>@Html.DisplayFor(model => avaliacao.Usuario.UserName)</strong></span><span class="post-date"><!--não tem data--></span></p>
                                                     <div class="rating"><p class="star-rating"><span class="width-80percent"></span></p></div>
-                                                    <p class="comment-text">@Html.DisplayFor(model => avaliacao.Desc)</p>
+                                                    <p class="comment-text"></p>
                                                 </div>
                                             </div>
                                         </div>

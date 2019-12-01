@@ -1,16 +1,15 @@
 ﻿using Newtonsoft.Json;
-using OrganWeb.Areas.Sistema.Models.API;
-using OrganWeb.Areas.Sistema.Models.zBanco;
+using OrganWeb.Areas.Ecommerce.Models.API;
 using RestSharp;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Data.Entity;
-using System.Collections.Generic;
+using OrganWeb.Areas.Ecommerce.Models.zBanco;
 
-namespace OrganWeb.Areas.Sistema.Models.zRepositories
+namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
 {
-    public class UnidadeMedidaRepository : OrganRepository<UnidadeCadastro>
+    public class UnidadeMedidaRepository : EcommerceRepository<UnidadeCadastro>
     {
         public async Task<ListarUnidades> GetListarUnidades()
         {

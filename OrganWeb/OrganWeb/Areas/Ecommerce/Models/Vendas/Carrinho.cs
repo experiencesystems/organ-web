@@ -26,6 +26,8 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
         [Display(Name = "Quantidade")]
         public int Qtd { get; set; }
 
+        public bool Status { get; set; }
+
         public virtual Anuncio Anuncio { get; set; }
         public virtual ApplicationUser Usuario { get; set; } = new ApplicationUser();
 
