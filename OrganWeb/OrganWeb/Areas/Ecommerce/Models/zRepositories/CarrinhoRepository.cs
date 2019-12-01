@@ -25,7 +25,7 @@ namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
                 id = HttpContext.Current.User.Identity.GetUserId();
             }
 
-            return await DbSet.Include(a => a.Anuncio).Include(u => u.Usuario).Where(x => x.IdUsuario == id).ToListAsync();
+            return await DbSet.Include(a => a.Anuncio).Include(u => u.Usuario).Where(x => x.IdUsuario == id && x.Status == true).ToListAsync();
         }
 
         public async Task<Carrinho> GetItemCarrinho(Anuncio anuncio)
@@ -33,7 +33,7 @@ namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
             try
             {
                 string id = HttpContext.Current.User.Identity.GetUserId();
-                return await DbSet.Include(a => a.Anuncio).Include(u => u.Usuario).Where(x => x.IdAnuncio == anuncio.Id && x.IdUsuario == id).AsNoTracking().FirstOrDefaultAsync();
+                return await DbSet.Include(a => a.Anuncio).Include(u => u.Usuario).Where(x => x.IdAnuncio == anuncio.Id && x.IdUsuario == id && x.Status == true).AsNoTracking().FirstOrDefaultAsync();
             }
             catch (Exception e)
             {
@@ -57,7 +57,8 @@ namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
             foreach (var item in carrinho)
             {
                 DbSet.Attach(item);
-                DbSet.Remove(item);
+                item.Status = false;
+                _context.Entry(item).State = EntityState.Modified;
                 await Save();
             }
             carrinho = null;
@@ -86,7 +87,8 @@ namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
                     IdAnuncio = anuncio.Id,
                     IdUsuario = HttpContext.Current.User.Identity.GetUserId(),
                     Qtd = qtd,
-                    Usuario = manager.FindById(HttpContext.Current.User.Identity.GetUserId())
+                    Usuario = manager.FindById(HttpContext.Current.User.Identity.GetUserId()),
+                    Status = true
                 };
                 Add(carrinho);
             }
@@ -98,7 +100,9 @@ namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
             if (carrinho.Qtd <= 0)
             {
                 DbSet.Attach(carrinho);
-                DbSet.Remove(carrinho);
+                carrinho.Status = false;
+                _context.Entry(carrinho).State = EntityState.Modified;
+                await Save();
             }
             SaveSync();
             return await Task.FromResult(carrinho.Qtd);

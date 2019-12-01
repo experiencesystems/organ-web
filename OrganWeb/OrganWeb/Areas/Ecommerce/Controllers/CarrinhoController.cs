@@ -74,7 +74,7 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
         public async Task<ActionResult> SumarioCarrinho()
         {
             (int QtdItens, double ValorTotal) = await carrinho.GetQtdETotalCarrinho();
-
+            ViewData["Valor"] = ValorTotal;
             ViewData["CartCount"] = QtdItens;
             return PartialView("SumarioCarrinho");
         }
