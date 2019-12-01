@@ -6,98 +6,85 @@
 
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
 
-<div class="main-body">
-    <div class="row">
-        <div class="col">
-            <div class="tablecontainer">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="table-data__tool">
-                            <h6 class="body-title">Plantio</h6>
-                            <div class="selectdropdown">
-                                @using (Html.BeginForm("Index", "Plantio", FormMethod.Get))
-                                {
-                                    @Html.DropDownList("filtros", "Todos")
-                                    <input type="submit" value="Filtro" />
-                                    <div class="dropDownSelect2"></div>
-                                }
+<div class="tablecontainer">
+    <div class="section-header">
+        <h1>Plantio</h1>
+        <div class="section-header-breadcrumb">
+            @using (Html.BeginForm("Index", "Plantio", FormMethod.Get))
+            {
+                @Html.DropDownList("filtros", "Todos")
+                <input type="submit" value="Filtro" />
+                <div class="dropDownSelect2"></div>
+            }
+            <a class="popup btn btn-primary btn-add" href="/Sistema/Plantio/Create">Novo plantio</a>
+        </div>
+    </div>
+    <div class="section-body">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-xl-3 col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4><strong> @Html.DisplayFor(model => item.Nome) </strong></h4>
+                            <div class="card-header-form">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalColheita">
+                                    Colher
+                                </button>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-6">
-                        <p class="card-text">
-                            <a class="popup btn btn-add" href="/Sistema/Plantio/Create">Novo plantio</a>
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    @foreach (var item in Model)
-                    {
-                        <div class="col-xl-3 col-md-8">
-                            <div class="card">
-                                <div class="card-header">
-                                    @Html.DisplayFor(model => item.Nome) -
-                                    <a class="popup btn" href="@Url.Action("Detalhes", "Plantio", new { id = item.Id })">Detalhes</a>
-                                </div>
-                                <div class="card-header-right">
-                                    <ul class="list-unstyled card-option">
-                                        <li><i class="ti-minus minimize-card"></i></li>
-                                        <li><i class="icon-refresh"></i></li>
-                                    </ul>
-                                </div>
+                        <div class="card-body">
+                            @Html.DisplayFor(model => item.NomeAreas)
+                            <div class="card-content">
                                 <div class="card-body">
-                                    @Html.DisplayFor(model => item.NomeAreas)
-                                    <div class="card-content">
-                                        <div class="card-body">
-                                            <div class="progress mx-auto" data-value='@Html.DisplayFor(model => item.Porcentagem)'>
-                                                <span class="progress-left">
-                                                    <span class="progress-bar border-primary"></span>
-                                                </span>
-                                                <span class="progress-right">
-                                                    <span class="progress-bar border-primary"></span>
-                                                </span>
-                                                <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
-                                                    <div class="h2 font-weight-bold">@Html.DisplayFor(model => item.Porcentagem)<sup class="small">%</sup></div>
-                                                </div>
-                                            </div>
+                                    <div class="progress mx-auto" data-value='@Html.DisplayFor(model => item.Porcentagem)'>
+                                        <span class="progress-left">
+                                            <span class="progress-bar border-primary"></span>
+                                        </span>
+                                        <span class="progress-right">
+                                            <span class="progress-bar border-primary"></span>
+                                        </span>
+                                        <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                                            <div class="h2 font-weight-bold">@Html.DisplayFor(model => item.Porcentagem)<sup class="small">%</sup></div>
                                         </div>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalColheita">
-                                            Colher
-                                        </button>
-                                        <a class="popup btn" href="@Url.Action("Editar", "Plantio", new { id = item.Id })"><div class="itemback"><i class="item far fa-edit"></i></div></a>
-                                        <a class="popup btn" href="@Url.Action("Excluir", "Plantio", new { id = item.Id })"><div class="itemback"><i class="item far fa-trash-alt"></i></div></a>
                                     </div>
                                 </div>
+                                <center>
+                                    <a class="popup btn" href="@Url.Action("Detalhes", "Plantio", new { id = item.Id })"><div class="itemback"><i class="item fa fa-info"></i></div></a>
+                                    <a class="popup btn" href="@Url.Action("Editar", "Plantio", new { id = item.Id })"><div class="itemback"><i class="item far fa-edit"></i></div></a>
+                                    <a class="popup btn" href="@Url.Action("Excluir", "Plantio", new { id = item.Id })"><div class="itemback"><i class="item far fa-trash-alt"></i></div></a>
+                                </center>
                             </div>
                         </div>
-                        <div class="modal fade" id="modalColheita" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Deseja futuramente colher novamente este plantio?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <input type="button" class="btn btn-secondary align-left"
-                                               value="Não"
-                                               onclick="location.href='@Url.Action("CriarColheita", "Colheita", new { id = item.Id, again = false })'" />
-                                        <input type="button" class="btn btn-primary"
-                                               value="Sim"
-                                               onclick="location.href='@Url.Action("CriarColheita", "Colheita", new { id = item.Id, again = true })'" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    }
+                    </div>
                 </div>
-            </div>
+                <div class="modal fade" id="modalColheita" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Deseja futuramente colher novamente este plantio?
+                            </div>
+                            <div class="modal-footer">
+                                <input type="button" class="btn btn-secondary align-left"
+                                       value="Não"
+                                       onclick="location.href='@Url.Action("CriarColheita", "Colheita", new { id = item.Id, again = false })'" />
+                                <input type="button" class="btn btn-primary"
+                                       value="Sim"
+                                       onclick="location.href='@Url.Action("CriarColheita", "Colheita", new { id = item.Id, again = true })'" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </div>
+
 <!-- ========== NÃO TIRA O PROGRESSCIRCLE.JS ======== -->
 <environment include="Development">
     <script src="~/Scripts/progressCircle.js" asp-append-version="true" defer></script>
@@ -108,7 +95,6 @@
 </environment>
 <!-- ========== NÃO TIRA O PROGRESSCIRCLE.JS ======== -->
 @section Scripts {
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.0.5/dist/jBox.all.min.js"></script>

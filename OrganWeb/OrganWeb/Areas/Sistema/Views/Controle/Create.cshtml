@@ -1,7 +1,5 @@
 ﻿@model OrganWeb.Areas.Sistema.Models.ViewModels.CreateControleViewModel
 
-<html>
-<body>
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -129,9 +127,4 @@
         </div>
     }
 
-
-    @Scripts.Render("~/bundles/jquery")
     <script src="~/Scripts/btndinamico.js"></script>
-
-</body>
-</html>

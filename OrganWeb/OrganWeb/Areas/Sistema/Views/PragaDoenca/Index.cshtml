@@ -7,37 +7,25 @@
 
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
 
-<div class="main-body">
-    <div class="row">
-        <div class="col">
-            <div class="tablecontainer">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="table-data__tool">
-                            <h6 class="body-title">Controle de pragas e doenças</h6>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <p class="card-text">
-                            <a class="popup btn btn-add" href="/Sistema/PragaDoenca/Create">Nova praga/doença</a>
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
+<section class="section">
+    <div class="tablecontainer">
+        <div class="section-header">
+            <h1>Controle de pragas e doenças</h1>
+        </div>
+        <div class="section-body">
+            <div class="row">
 
-                    <div class="card table-card col">
+                <div class="col-12">
+                    <div class="card">
                         <div class="card-header">
-                            <h6 class="card-title box-title">Doenças e pragas</h6>
-                            <div class="card-header-right">
-                                <ul class="list-unstyled card-option">
-                                    <li><i class="ti-minus minimize-card"></i></li>
-                                    <li><i class="icon-refresh"></i></li>
-                                </ul>
+                            <h4>Pragas e doenças</h4>
+                            <div class="card-header-form">
+                                <a class="popup btn btn-primary btn-add" href="/Sistema/PragaDoenca/Create">Nova praga/doença</a>
                             </div>
                         </div>
-                        <div class="card-block">
+                        <div class="card-body p-0">
                             <div class="table-responsive">
-                                <table class="table-hover">
+                                <table class="table table-hover table-striped">
                                     <tr>
                                         <th>Nome</th>
                                         <th>Tipo</th>
@@ -47,54 +35,49 @@
                                     </tr>
                                     @foreach (var item in Model.PragaOrDoencas)
                                     {
-                                    <tr>
-                                        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Tipo)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Areas)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                                        <td>
-                                        <td>
-                                            <a class="popup btn" href="@Url.Action("Detalhes", "PragaDoenca", new { id = item.Id })"><div class="itemback"><i class="item fa fa-info"></i></div></a>
-                                            <a class="popup btn" href="@Url.Action("Editar", "PragaDoenca", new { id = item.Id})"><div class="itemback"><i class="item far fa-edit"></i></div></a>
-                                            <a class="popup btn" href="@Url.Action("Excluir", "PragaDoenca", new { id = item.Id})"><div class="itemback"><i class="item far fa-trash-alt"></i></div></a>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Tipo)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Areas)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                                            <td>
+                                                <a class="popup btn" href="@Url.Action("Detalhes", "PragaDoenca", new { id = item.Id })"><div class="itemback"><i class="item fa fa-info"></i></div></a>
+                                                <a class="popup btn" href="@Url.Action("Editar", "PragaDoenca", new { id = item.Id})"><div class="itemback"><i class="item far fa-edit"></i></div></a>
+                                                <a class="popup btn" href="@Url.Action("Excluir", "PragaDoenca", new { id = item.Id})"><div class="itemback"><i class="item far fa-trash-alt"></i></div></a>
+                                            </td>
+                                        </tr>
                                     }
                                 </table>
 
-                                <br />
-                                <div>
-                                    Página @(Model.PragaOrDoencas.PageCount < Model.PragaOrDoencas.PageNumber ? 0 : Model.PragaOrDoencas.PageNumber) de @Model.PragaOrDoencas.PageCount
-                                    @Html.PagedListPager(Model.PragaOrDoencas, pagedoenca => Url.Action("Index",
-                                    new { pagedoenca }), new PagedListRenderOptions
-                                     {
-                                     LiElementClasses = new string[] { "pagination page-item p1" }
-                                     })
+                                <div class="card-footer text-center">
+                                    <nav class="d-inline-block">
+                                        Página @(Model.PragaOrDoencas.PageCount < Model.PragaOrDoencas.PageNumber ? 0 : Model.PragaOrDoencas.PageNumber) de @Model.PragaOrDoencas.PageCount
+                                        @Html.PagedListPager(Model.PragaOrDoencas, pagedoenca => Url.Action("Index",
+                                        new { pagedoenca }), new PagedListRenderOptions
+                                         {
+                                         LiElementClasses = new string[] { "pagination page-item page-link text-center p1" }
+                                         })
+                                    </nav>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
+            </div>
 
-                    <div class="card table-card col">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
                         <div class="card-header">
-                            <h6 class="card-title box-title">Controles</h6>
-                            <p class="card-text">
-                                <a class="popup btn btn-add" href="/Sistema/Controle/Create">Novo controle</a>
-                            </p>
-                            <div class="card-header-right">
-                                <ul class="list-unstyled card-option">
-                                    <li><i class="ti-minus minimize-card"></i></li>
-                                    <li><i class="icon-refresh"></i></li>
-                                </ul>
-                                    
+                            <h4>Controles</h4>
+                            <div class="card-header-form">
+                                <a class="popup btn btn-primary btn-add" href="/Sistema/Controle/Create">Novo controle</a>
                             </div>
                         </div>
-                        <div class="card-block">
+                        <div class="card-body p-0">
                             <div class="table-responsive">
-                                <table class="table-hover">
+                                <table class="table table-hover table-striped">
                                     <tr>
                                         <th>Data</th>
                                         <th>Nome</th>
@@ -120,15 +103,15 @@
                                     }
                                 </table>
 
-                                <br />
-                                <br />
-                                <div>
-                                    Página @(Model.Controles.PageCount < Model.Controles.PageNumber ? 0 : Model.Controles.PageNumber) de @Model.Controles.PageCount
-                                    @Html.PagedListPager(Model.Controles, pagecont => Url.Action("Index",
-                                    new { pagecont }), new PagedListRenderOptions
-                                     {
-                                     LiElementClasses = new string[] { "pagination page-item p1" }
-                                     })
+                                <div class="card-footer text-center">
+                                    <nav class="d-inline-block">
+                                        Página @(Model.Controles.PageCount < Model.Controles.PageNumber ? 0 : Model.Controles.PageNumber) de @Model.Controles.PageCount
+                                        @Html.PagedListPager(Model.Controles, pagecont => Url.Action("Index",
+                                        new { pagecont }), new PagedListRenderOptions
+                                         {
+                                         LiElementClasses = new string[] { "pagination page-item page-link text-center p1" }
+                                         })
+                                    </nav>
                                 </div>
                             </div>
                         </div>
@@ -137,10 +120,10 @@
             </div>
         </div>
     </div>
-</div>
+</section>
+
 
 @section Scripts {
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.0.5/dist/jBox.all.min.js"></script>
