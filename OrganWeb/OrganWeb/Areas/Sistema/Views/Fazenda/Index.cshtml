@@ -1,157 +1,151 @@
 ﻿@model OrganWeb.Areas.Sistema.Models.ViewModels.ViewFazenda
 
 @{
+
     ViewBag.Title = "Fazenda";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="main-body">
-    <div class="row">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="card-title box-title">Áreas</h6>
-                    <div class="card-header-right">
-                        <ul class="list-unstyled card-option">
-                            <li><i class="ti-minus minimize-card"></i></li>
-                            <li><i class="icon-refresh"></i></li>
-                        </ul>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+
+<section class="section">
+    <div class="tablecontainer">
+        <div class="section-header">
+            <h1>Fazenda</h1>
+        </div>
+        <div class="section-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Áreas</h4>
+                            <div class="card-header-form">
+                                <a class="popup btn btn-primary btn-lg btn-block btn-icon-split" href="/Sistema/Area/Create">Nova área</a>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped">
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Disponibilidade</th>
+                                        <th>Tamanho</th>
+                                        <th>Tipo de solo</th>
+                                        <th></th>
+                                    </tr>
+
+                                    @foreach (var item in Model.Areas)
+                                    {
+                                        <tr>
+                                            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Disponibilidades.Where(x => x.Value == item.Disp.ToString()).First().Text)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Tamanho) ha</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Solo.Nome)</td>
+                                            <td>
+                                                <a class="popup btn" href="@Url.Action("Detalhes", "Area", new { id = item.Id })"><div class="itemback"><i class="item fa fa-info"></i></div></a>
+                                                <a class="popup btn" href="@Url.Action("Editar", "Area", new { id = item.Id})"><div class="itemback"><i class="item far fa-edit"></i></div></a>
+                                                <a class="popup btn" href="@Url.Action("Excluir", "Area", new { id = item.Id})"><div class="itemback"><i class="item far fa-trash-alt"></i></div></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="card-content">
-                        <div class="card-content">
-                            <div class="tablecontainer">
-                                <a class="popup btn btn-add" href="/Sistema/Area/Create" style="margin-bottom:20px; margin-top:20px;">Nova área</a>
-                            </div>
-                            <table class="table">
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Disponibilidade</th>
-                                    <th>Tamanho</th>
-                                    <th>Tipo de solo</th>
-                                    <th></th>
-                                </tr>
+            </div>
 
-                                @foreach (var item in Model.Areas)
-                                {
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Solos</h4>
+                            <div class="card-header-form">
+                                <a class="popup btn btn-primary btn-lg btn-block btn-icon-split" href="/Sistema/Solo/Create">Novo solo</a>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped">
                                     <tr>
-                                        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Disponibilidades.Where(x => x.Value == item.Disp.ToString()).First().Text)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Tamanho) ha</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Solo.Nome)</td>
-                                        <td>
-                                            @Html.ActionLink("Editar", "Editar", "Area", new { id = item.Id }, null) |
-                                            @Html.ActionLink("Detalhes", "Detalhes", "Area", new { id = item.Id }, null) |
-                                            @Html.ActionLink("Excluir", "Excluir", "Area", new { id = item.Id }, null)
-                                        </td>
+                                        <th>Nome</th>
+                                        <th>Tipo</th>
+                                        <th>Incidência solar</th>
+                                        <th>Incidência do vento</th>
+
+                                        <th></th>
                                     </tr>
-                                }
-                            </table>
+
+                                    @foreach (var item in Model.Solos)
+                                    {
+                                        <tr>
+                                            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Tipos.Where(x => x.Value == item.Tipo.ToString()).First().Text)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.IncSolar) %</td>
+                                            <td>@Html.DisplayFor(modelItem => item.IncVento) %</td>
+                                            <td>
+                                                <a class="popup btn" href="@Url.Action("Detalhes", "Solo", new { id = item.Id })"><div class="itemback"><i class="item fa fa-info"></i></div></a>
+                                                <a class="popup btn" href="@Url.Action("Editar", "Solo", new { id = item.Id})"><div class="itemback"><i class="item far fa-edit"></i></div></a>
+                                                <a class="popup btn" href="@Url.Action("Excluir", "Solo", new { id = item.Id})"><div class="itemback"><i class="item far fa-trash-alt"></i></div></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Funcionários</h4>
+                            <div class="card-header-form">
+                                <a class="popup btn btn-primary btn-lg btn-block btn-icon-split" href="/Sistema/Funcionario/Create">Novo funcionário</a>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped">
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Função</th>
+                                        <th>Telefone</th>
+                                        <th>Email</th>
+                                        <th></th>
+                                    </tr>
+
+                                    @foreach (var item in Model.Funcionarios)
+                                    {
+                                        <tr>
+                                            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Cargos.Where(x => x.Value == item.Funcao.ToString()).First().Text)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Telefones)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                            <td>
+                                                <a class="popup btn" href="@Url.Action("Detalhes", "Funcionario", new { id = item.Id })"><div class="itemback"><i class="item fa fa-info"></i></div></a>
+                                                <a class="popup btn" href="@Url.Action("Editar", "Funcionario", new { id = item.Id})"><div class="itemback"><i class="item far fa-edit"></i></div></a>
+                                                <a class="popup btn" href="@Url.Action("Excluir", "Funcionario", new { id = item.Id})"><div class="itemback"><i class="item far fa-trash-alt"></i></div></a>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</section>
 
-    <div class="row">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="card-title box-title">Tipos de solo</h6>
-                    <div class="card-header-right">
-                        <ul class="list-unstyled card-option">
-                            <li><i class="ti-minus minimize-card"></i></li>
-                            <li><i class="icon-refresh"></i></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="card-content">
-                        <div class="card-content">
-                            <div class="tablecontainer">
-                                <a class="popup btn btn-add" href="/Sistema/Solo/Create" style="margin-bottom:20px; margin-top:20px;">Novo tipo de solo</a>
-                            </div>
-                            <table class="table">
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Tipo</th>
-                                    <th>Incidência solar</th>
-                                    <th>Incidência do vento</th>
-                                    <th>Acidez</th>
-                                    <th></th>
-                                </tr>
-
-                                @foreach (var item in Model.Solos)
-                                {
-                                    <tr>
-                                        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Tipos.Where(x => x.Value == item.Tipo.ToString()).First().Text)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.IncSolar) %</td>
-                                        <td>@Html.DisplayFor(modelItem => item.IncVento) %</td>
-                                        <td>
-                                            @Html.ActionLink("Editar", "Editar", "Solo", new { id = item.Id }, null) |
-                                            @Html.ActionLink("Detalhes", "Detalhes", "Solo", new { id = item.Id }, null) |
-                                            @Html.ActionLink("Excluir", "Excluir", "Solo", new { id = item.Id }, null)
-                                        </td>
-                                    </tr>
-                                }
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="card-title box-title">Funcionários</h6>
-                    <div class="card-header-right">
-                        <ul class="list-unstyled card-option">
-                            <li><i class="ti-minus minimize-card"></i></li>
-                            <li><i class="icon-refresh"></i></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="card-content">
-                        <div class="card-content">
-                            <div class="tablecontainer">
-                                <a class="popup btn btn-add" href="/Sistema/Funcionario/Create" style="margin-bottom:20px; margin-top:20px;">Novo funcionário</a>
-                            </div>
-                            <table class="table">
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Função</th>
-                                    <th>Telefone</th>
-                                    <th>Email</th>
-                                    <th></th>
-                                </tr>
-
-                                @foreach (var item in Model.Funcionarios)
-                                {
-                                    <tr>
-                                        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Cargos.Where(x => x.Value == item.Funcao.ToString()).First().Text)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Telefones)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                                        <td>
-                                            @Html.ActionLink("Editar", "Editar", "Funcionario", new { id = item.Id }, null) |
-                                            @Html.ActionLink("Detalhes", "Detalhes", "Funcionario", new { id = item.Id }, null) |
-                                            @Html.ActionLink("Excluir", "Excluir", "Funcionario", new { id = item.Id }, null)
-                                        </td>
-                                    </tr>
-                                }
-
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@section Scripts {
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.0.5/dist/jBox.all.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/modalui.js"></script>
+}
