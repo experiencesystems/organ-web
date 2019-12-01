@@ -8,7 +8,6 @@
 
 
     <link rel="stylesheet" href="~/Content/bootstrap.css">
-    <link rel="stylesheet" href="~/Content/magnific-popup.css">
     <link rel="stylesheet" href="~/Content/jquery-ui.css">
 
     @Scripts.Render("~/bundles/fontawesome")
@@ -18,7 +17,105 @@
 </head>
 <body>
 
-    <div class="site-wrap">
+    <!-- HEADER -->
+    <header id="header" class="header-area style-01 layout-03">
+        <div class="header-bottom hidden-sm hidden-xs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2 col-md-3">
+                        <a href="/Ecommerce" class="biolife-logo"><img src="~/Imagens/logo.png" alt="biolife logo" width="135" height="34"></a>
+                    </div>
+                    <div class="col-lg-10 col-md-9 padding-top-2px">
+                        <div class="header-search-bar layout-01">
+                            <form action="#" class="form-search" name="desktop-seacrh" method="get">
+                                <input type="text" name="s" class="input-text" value="" placeholder="Procurar">
+                                <button type="submit" class="btn-submit"><i class="biolife-icon mdi mdi-find-replace"></i></button>
+                            </form>
+                        </div>
+                        <div class="biolife-cart-info">
+                            <div class="login-item">
+                                <a href="#" class="login-link"><i class="biolife-icon mdi mdi-account-outline"></i>Login/Registro</a>
+                            </div>
+                            <div class="wishlist-block hidden-sm hidden-xs">
+                                <a href="/Ecommerce/Wishlist/Index" class="link-to">
+                                    <span class="icon-qty-combine">
+                                        <i class="mdi mdi-heart-outline biolife-icon"></i>
+                                        <span class="qty">0</span>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="minicart-block">
+                                <div class="minicart-contain">
+                                    <a href="javascript:void(0)" class="link-to">
+                                        <span class="icon-qty-combine">
+                                            <i class="mdi mdi-cart-outline biolife-icon"></i>
+                                            <span class="qty">@{Html.RenderAction("SumarioCarrinho", "Carrinho");}</span>
+                                        </span>
+                                        <span class="title">Meu carrinho - </span>
+                                        <span class="sub-total">R$0.00</span>
+                                    </a>
+                                    <div class="cart-content">
+                                        <div class="cart-inner">
+                                            <!--<ul class="products">
+                                                <li>
+                                                    <div class="minicart-item">
+                                                        <div class="thumb">
+                                                            <a href="#"><img src="assets/images/minicart/pr-01.jpg" width="90" height="90" alt="National Fresh"></a>
+                                                        </div>
+                                                        <div class="left-info">
+                                                            <div class="product-title"><a href="#" class="product-name">National Fresh Fruit</a></div>
+                                                            <div class="price">
+                                                                <ins><span class="price-amount"><span class="currencySymbol">£</span>85.00</span></ins>
+                                                                <del><span class="price-amount"><span class="currencySymbol">£</span>95.00</span></del>
+                                                            </div>
+                                                            <div class="qty">
+                                                                <label for="cart[id123][qty]">Qty:</label>
+                                                                <input type="number" class="input-qty" name="cart[id123][qty]" id="cart[id123][qty]" value="1" disabled>
+                                                            </div>
+                                                        </div>
+                                                        <div class="action">
+                                                            <a href="#" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                            <a href="#" class="remove"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>-->
+                                            <p class="btn-control">
+                                                <a href="/Ecommerce/Carrinho/Index" class="btn view-cart">Ver carrinho</a>
+                                            </p>
+                                        </div>
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Begin Header Bottom Area -->
+        <div class="menu-bottom header-sticky d-none d-lg-block d-xl-block">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="hb-menu">
+                            <nav>
+                                <ul>
+                                    <li>@Html.ActionLink("Início", "Index", "Loja")</li>
+                                    <li><a href="#">Categorias</a></li>
+                                    <li>@Html.ActionLink("Vender", "Novo", "Anuncio")</li>
+                                    <li><a href="#">Contato</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header Bottom Menu Area End Here -->
+
+    </header>
+    <!--Header-->
+    <!--<div class="site-wrap">
         <header class="site-navbar" role="banner">
             <div class="site-navbar-top">
                 <div class="container">
@@ -47,7 +144,7 @@
                                     </li>
                                     <li><a href="#"><span class="fa fa-heart"></span></a></li>
                                     <li><a href="#"><span class="fa fa-user"></span></a></li>
-                                    <!--<i class="icon icon-room"></i><span>02548-120</span>-->
+                                    <!--<i class="icon icon-room"></i><span>02548-120</span>
                                     <li class="d-inline-block d-md-none ml-md-0"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a></li>
                                 </ul>
                             </div>
@@ -88,92 +185,36 @@
                     </ul>
                 </div>
             </nav>
-        </header>
+        </header>-->
 
-        <div>
-            @RenderBody()
-        </div>
-        <!-- FOOTER -->
-        <footer class="ftco-footer ftco-section">
-            <hr />
-            <div class="container">
-                <div class="row">
-                    <div class="mouse">
-                        <a href="#" class="mouse-icon">
-                            <div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
-                        </a>
-                    </div>
-                </div>
+    <div>
+        @RenderBody()
+    </div>
 
-                <div class="row mb-5">
-                    <div class="col-md">
-                        <div class="ftco-footer-widget mb-4">
-                            <h2 class="ftco-heading-2">Organ Ecommerce</h2>
-                            <p>Não ganhamos nem perdemos.</p>
-                            <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md">
-                        <div class="ftco-footer-widget mb-4 ml-md-5">
-                            <h2 class="ftco-heading-2">Menu</h2>
-                            <ul class="list-unstyled">
-                                <li><a href="#" class="py-2 d-block">Nome</a></li>
-                                <li><a href="#" class="py-2 d-block">Nome</a></li>
-                                <li><a href="#" class="py-2 d-block">Nome</a></li>
-                                <li><a href="#" class="py-2 d-block">Nome</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="ftco-footer-widget mb-4">
-                            <h2 class="ftco-heading-2">Help</h2>
-                            <div class="d-flex">
-                                <ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
-                                    <li><a href="#" class="py-2 d-block">Nome</a></li>
-                                    <li><a href="#" class="py-2 d-block">Nome</a></li>
-                                    <li><a href="#" class="py-2 d-block">Nome</a></li>
-                                    <li><a href="#" class="py-2 d-block">Nome</a></li>
-                                </ul>
-                                <ul class="list-unstyled">
-                                    <li><a href="#" class="py-2 d-block">FAQs</a></li>
-                                    <li><a href="#" class="py-2 d-block">Contato</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md">
-                        <div class="ftco-footer-widget mb-4">
-                            <h2 class="ftco-heading-2">Have a Questions?</h2>
-                            <div class="block-23 mb-3">
-                                <ul>
-                                    <li><span class="icon icon-map-marker"></span><span class="text">Rua</span></li>
-                                    <li><a href="#"><span class="icon icon-phone"></span><span class="text">Telefone</span></a></li>
-                                    <li><a href="#"><span class="icon icon-envelope"></span><span class="text">contato@organ.com</span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <span class="copyright">
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;
-                            <script>document.write(new Date().getFullYear());</script> Todos os direitos reservados
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        </span>
-                    </div>
+    <!-- FOOTER -->
+    <footer class="ftco-footer ftco-section">
+        <hr />
+        <div class="container">
+            <div class="row">
+                <div class="mouse">
+                    <a href="#" class="mouse-icon">
+                        <div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
+                    </a>
                 </div>
             </div>
-        </footer>
-        <!-- /FOOTER -->
 
-    </div>
-    
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <span class="copyright">
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> Todos os direitos reservados
+                    </span>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- /FOOTER -->
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     <script src="@Url.Content("~/Scripts/main.js")" type="text/javascript"></script>
