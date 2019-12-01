@@ -1,151 +1,95 @@
 ﻿@{
     ViewBag.Title = "Início";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="main-body">
-    <div class="row">
-        <!--Resumos-->
-        <div class="col-xl-3 col-md-6">
-            <div class="card bg-c-green update-card">
-                <div class="card-block">
-                    <div class="row align-items-end">
-                        <div class="col-8">
-                            <label class="text-white">Hoje</label>
-                            <h4 class="text-white">+290</h4>
-                            <h6 class="text-white m-b-0">Visualizações</h6>
-                        </div>
-                        <div class="col-4 text-right">
-                            <canvas id="update-chart-2" height="50"></canvas>
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <!-- Vendas gráfico-->
+            <div class="col-lg-8 col-md-12 col-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="card-title box-title">Vendas</h6>
+                        <div class="card-header-right">
+                            <ul class="list-unstyled card-option">
+                                <li><i class="ti-minus minimize-card"></i></li>
+                                <li><i class="icon-refresh"></i></li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-md-6">
-            <div class="card update-card">
-                <div class="card-block">
-                    <div class="row align-items-end">
-                        <div class="col-8">
-                            <label>Esta semana</label>
-                            <h4>+550</h4>
-                            <h6>Novos pedidos</h6>
-                        </div>
-                        <div class="col-4 text-right">
-                            <canvas id="update-chart-2" height="50"></canvas>
+                    <div class="card-body">
+                        <div class="card-content">
+                            <div id="chartdiv" style="height:300px"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-md-6">
-            <div class="card update-card">
-                <div class="card-block">
-                    <div class="row align-items-end">
-                        <div class="col-8">
-                            <label>Aumento</label>
-                            <h4>+20%</h4>
-                            <h6>Vendas</h6>
-                        </div>
-                        <div class="col-4 text-right">
-                            <canvas id="update-chart-2" height="50"></canvas>
+        <div class="row">
+            <div class="col-lg-4 col-md-12 col-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="card-title box-title">Clima</h6>
+                        <div class="card-header-right">
+                            <ul class="list-unstyled card-option">
+                                <li><i class="ti-minus minimize-card"></i></li>
+                                <li><i class="icon-refresh"></i></li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-md-6">
-            <div class="card update-card">
-                <div class="card-block">
-                    <div class="row align-items-end">
-                        <div class="col-8">
-                            <label>Este mês</label>
-                            <h4>+15%</h4>
-                            <h6>Usuários cadastrados</h6>
-                        </div>
-                        <div class="col-4 text-right">
-                            <canvas id="update-chart-2" height="50"></canvas>
+                    <div class="card-body">
+                        <div class="card-content">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Vendas gráfico-->
-        <div class="col-xl-8 col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="card-title box-title">Vendas</h6>
-                    <div class="card-header-right">
-                        <ul class="list-unstyled card-option">
-                            <li><i class="ti-minus minimize-card"></i></li>
-                            <li><i class="icon-refresh"></i></li>
-                        </ul>
+        <div class="row">
+            <!--Cotações-->
+            <div class="col-xl-4 col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="card-title box-title">Cotação</h6>
+                        <div class="card-header-right">
+                            <ul class="list-unstyled card-option">
+                                <li><i class="ti-minus minimize-card"></i></li>
+                                <li><i class="icon-refresh"></i></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <div class="card-content">
-                        <div id="chartdiv" style="height:300px"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-4 col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="card-title box-title">Clima</h6>
-                    <div class="card-header-right">
-                        <ul class="list-unstyled card-option">
-                            <li><i class="ti-minus minimize-card"></i></li>
-                            <li><i class="icon-refresh"></i></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="card-content">
+                    <div class="card-body">
+                        <div class="card-content">
+                            <iframe src="https://br.widgets.investing.com/live-commodities?theme=darkTheme&pairs=8832,8917,8918,8916,8891,8915" width="100%" height="450" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0"></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--Cotações-->
-        <div class="col-xl-4 col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="card-title box-title">Cotação</h6>
-                    <div class="card-header-right">
-                        <ul class="list-unstyled card-option">
-                            <li><i class="ti-minus minimize-card"></i></li>
-                            <li><i class="icon-refresh"></i></li>
-                        </ul>
+        <div class="row">
+            <!--Mapa-->
+            <div class="col-xl-8 col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="card-title box-title">Mapa</h6>
+                        <div class="card-header-right">
+                            <ul class="list-unstyled card-option">
+                                <li><i class="ti-minus minimize-card"></i></li>
+                                <li><i class="icon-refresh"></i></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <div class="card-content">
-                        <iframe src="https://br.widgets.investing.com/live-commodities?theme=darkTheme&pairs=8832,8917,8918,8916,8891,8915" width="100%" height="450" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0"></iframe>
-                    </div>
+                    <div class="card-body">
+                        <div class="card-content">
+                            <div id="map" style="width: 100%; height: 455px; border: 1px solid #ccc"></div>
+                        </div> <!-- /.card-body -->
+                    </div><!-- /.card -->
                 </div>
             </div>
+            <!--Fim mapa-->
         </div>
-        <!--Mapa-->
-        <div class="col-xl-8 col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="card-title box-title">Mapa</h6>
-                    <div class="card-header-right">
-                        <ul class="list-unstyled card-option">
-                            <li><i class="ti-minus minimize-card"></i></li>
-                            <li><i class="icon-refresh"></i></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="card-content">
-                        <div id="map" style="width: 100%; height: 455px; border: 1px solid #ccc"></div>
-                    </div> <!-- /.card-body -->
-                </div><!-- /.card -->
-            </div>
-        </div>
-        <!--Fim mapa-->
     </div>
-</div> <!--Fim right side-->
+</section>
 
 <script src="https://www.amcharts.com/lib/4/core.js"></script>
 <script src="https://www.amcharts.com/lib/4/charts.js"></script>
