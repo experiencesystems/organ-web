@@ -1,31 +1,41 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
         @Html.AntiForgeryToken()
 
-        <ul class="navbar-nav navbar-nav-right">
-            <li class="nav-item nav-profile dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-                    <img src="@Url.Action("FotoDoUsuario", "Account", new { Area = "Ecommerce" })" alt="profile" />
-                    <span class="nav-profile-name">@Html.DisplayName(User.Identity.GetUserName())</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                    @Html.ActionLink("Configurações", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Configurações", @class = "dropdown-item" })
-                    <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()"> Fazer logoff</a>
-                </div>
-            </li>
-        </ul>
-        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-            <i class="fa fa-bars"></i>
-        </button>
+        <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+            <img alt="image" src="@Url.Action("FotoDoUsuario", "Account", new { Area = "Ecommerce" })" class="rounded-circle mr-1">
+            <div class="d-sm-none d-lg-inline-block">Olá, @Html.DisplayName(User.Identity.GetUserName())</div>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
+            <a href="#" class="dropdown-item has-icon">
+                <i class="far fa-user"></i> Perfil
+            </a>
+
+            <a href="@Url.Action("Configurações", "Index", "Manage", "routeValues: null")" class="dropdown-item has-icon">
+                <i class="fas fa-cog"></i> Configurações
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                @Html.ActionLink("Configurações", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Configurações", @class = "dropdown-item" })
+                <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()"> Fazer logoff</a>
+            </div>
+
+            <div class="dropdown-divider"></div>
+
+            <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item has-icon text-danger">
+                <i class="fas fa-sign-out-alt"></i> Sair
+            </a>
+        </div>
+
     }
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Registre-se", "Registro", "Account", new { Area = "Ecommerce" }, new { })</li>
+    <ul href="#" class="d-sm-none d-lg-inline-block nav-link nav-link-lg nav-link-user">
+        <li>@Html.ActionLink("Registre-se", "Registro", "Account", new { Area = "Ecommerce" }, new { @class = "" })</li>
         <li>@Html.ActionLink("Login", "Login", "Account", new { Area = "Ecommerce" }, new { returnUrl = this.Request.RawUrl })</li>
     </ul>
 }
