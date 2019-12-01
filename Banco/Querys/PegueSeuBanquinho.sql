@@ -157,7 +157,7 @@ create table tbAnuncio(
 	Nome varchar(30) not null,
 	`Desc` varchar(100),
 	`Status` bool default true,
-	Foto blob,
+	Foto mediumblob,
 	Quantidade double not null,
 	Desconto int default 0, 
 	DuracaoDesc int default 0,

@@ -1,4 +1,5 @@
 use dbEcommerce;
+
 insert into tbEstado(Estado, UF) values("São Paulo", "SP"),
 									("Acre", "AC"),
 									("Alagoas", "AL"),
@@ -38,15 +39,15 @@ insert into tbLogradouro(Logradouro, IdBairro, CEP) values("Avenida Bosque da Sa
 insert into tbUsuario(`Id`, `Email`, `ConfirmacaoEmail`, `SenhaHash`, `CarimboSeguranca`, `UserName`, Foto, CPF, Assinatura)
 values('02719894-e4a9-46c8-999e-ba942abd5f8f', 'jessica@gmail.com', 0, 
 	   'AKM33xpM5jcwZ/ojFJuuWBOvPQOiROAQmhfZwupekFSTAGpmW5+O7iPmj7cUuM/r6w==',
-	   '1a38cc85-3bd4-400b-9fd6-39f7c6a99a52', 'Jéssica',  null, 11111111111, 4),
+	   '1a38cc85-3bd4-400b-9fd6-39f7c6a99a52', 'Jéssica',  load_file('C:\farm.jpg'), 11111111111, 4),
        
 	   ('02719894-e4a9-46c8-999e-ba942abd5f8g', 'expfarms@gmail.com', 0,
 	   'AKM33xpM5jcwZ/ojFJuuWBOvPQOiROAQmhfZwupekFSTAGpmW5+O7iPmj7cUuM/r6w==',
-	   'e7aac8f8-7c92-44fb-9850-5f0fb0024c9a', 'Experience Farms', null, 11111111112, 1),
+	   'e7aac8f8-7c92-44fb-9850-5f0fb0024c9a', 'Experience Farms', load_file('C:\farm.jpg'), 11111111112, 1),
        
 	   ('02719894-e4a9-46c8-999e-ba942abd5f8h', 'fazendinha@a.com', 0,
 	   'AKM33xpM5jcwZ/ojFJuuWBOvPQOiROAQmhfZwupekFSTAGpmW5+O7iPmj7cUuM/r6w==',
-	   '1a38cc85-3bd4-400b-9850-5f0fb0024c9a', 'Fazendinha', null, 11111111113, 3);
+	   '1a38cc85-3bd4-400b-9850-5f0fb0024c9a', 'Fazendinha', load_file('C:\farm.jpg'), 11111111113, 3);
        
 insert into `AspNetRoles` (`Id`, `Name`) value ('02719894-e4a9-46c8-999e-ba942abd5f8u', 'Admin');
 
@@ -67,15 +68,13 @@ insert into tbProduto(ValorUnit, UM, Nome, Categoria) values(5.25, 'a', 'Semente
 															(25.00, 'a', 'Pá', 2);
                                                                         
 insert into tbAnuncio(Nome, `Desc`, `Status`, Foto, IdProduto, IdAnunciante, Quantidade)
-	values('Soja da Boa', 'É UMAS SOJA NÃO TRANGÊNICA!', true, load_file("/error.gif"), 1, '02719894-e4a9-46c8-999e-ba942abd5f8g', 2),
-		  ('Milhão Bão', 'ESSE MILHO É TRANSGêNICO, MAS IDAÍ, COMPRA!', true, load_file("/error.gif"), 1, '02719894-e4a9-46c8-999e-ba942abd5f8g', 1),
-		  ('Pá da Boa', 'PENSA NUMA PÁ BOA, É ESSA, COMPRA!', true, load_file("/error.gif"), 2, '02719894-e4a9-46c8-999e-ba942abd5f8h', 1),
-          ('Pá da Boa', 'PENSA DUAS PÁ BOA, SÃO ESSAS, COMPRA!', true, load_file("/error.gif"), 2, '02719894-e4a9-46c8-999e-ba942abd5f8h', 2);
+	values('Soja da Boa', 'É UMAS SOJA NÃO TRANGÊNICA!', true, load_file('C:\farm.jpg'), 1, '02719894-e4a9-46c8-999e-ba942abd5f8g', 2),
+		  ('Milhão Bão', 'ESSE MILHO É TRANSGêNICO, MAS IDAÍ, COMPRA!', true, load_file('C:\farm.jpg'), 1, '02719894-e4a9-46c8-999e-ba942abd5f8g', 1),
+		  ('Pá da Boa', 'PENSA NUMA PÁ BOA, É ESSA, COMPRA!', true, load_file('C:\farm.jpg'), 2, '02719894-e4a9-46c8-999e-ba942abd5f8h', 1),
+          ('Pá da Boa', 'PENSA DUAS PÁ BOA, SÃO ESSAS, COMPRA!', true, load_file('C:\farm.jpg'), 2, '02719894-e4a9-46c8-999e-ba942abd5f8h', 2);
 
 insert into tbAnuncio(Nome, `Desc`, `Status`, Foto, IdProduto, IdAnunciante, Quantidade, Desconto, DuracaoDesc, DataDesc)
 	values('Soja', 'É a sim!', true, load_file("/error.gif"), 1, '02719894-e4a9-46c8-999e-ba942abd5f8g', 2, 10, 1, '19/11/27 17:00');          
-
-select * from vwAnuncio;
           
 insert into tbWishList value('02719894-e4a9-46c8-999e-ba942abd5f8f', 4);
 select * from vwWishlist;

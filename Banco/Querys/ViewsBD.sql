@@ -504,7 +504,6 @@ select a.IdUsuario `Id`,
        u.CPF `CPF`,
        u.Email `Email`,
 	   a.NomeFazenda `Nome da Fazenda`,
-       a.FotoFazenda `Foto da Fazenda`,
        concat(E.Rua,', ', a.NumEnd,' - ', ifnull(a.CompEnd, 'Sem Complemento'),' - ',E.BCE,' - ',E.CEP) `Endereço da fazenda`,
        case
 		when u.Assinatura = 1 then 'Mensal'
@@ -547,6 +546,7 @@ create view vwPedido as(
 select 
 	P.Id `Id`,
     A.IdAnunciante `IdAnunciante`,
+    An.NomeFazenda `Anunciante`,
     A.Id `IdAnuncio`,
     A.Nome `Anúncio`,
 	group_concat(distinct concat(A.Nome, ' - ', PA.Qtd)separator ', ') `Nome do Anúncio - Quantidade Pedida`,
@@ -572,6 +572,7 @@ from tbPedido P
     inner join tbPedidoAnuncio PA on PA.IdPedido = P.Id
     inner join tbAnuncio A on A.Id = PA.IdAnuncio
     inner join tbProduto Pr on Pr.Id = A.IdProduto
+    inner join tbAnunciante An on a.IdAnunciante = An.IdUsuario 
 group by P.Id
 );
 
