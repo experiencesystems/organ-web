@@ -69,7 +69,7 @@ drop table if exists tbUM;
 create table tbUM(
 Id varchar(6) not null,
  constraint PKUM primary key(Id),
-`Desc` varchar(20) not null
+`Desc` varchar(20)
 )engine = InnoDB;
 
 drop table if exists tbEstoque;

@@ -6,14 +6,18 @@ drop procedure if exists spInsertEstoque$
 create procedure spInsertEstoque(
 in
 	Qnt double,
-    UnM varchar(6)
+    UnM varchar(6),
+    Descr varchar(20)
 )
 begin
 	if Qnt < 0 then
 		signal sqlstate '45000'
 		   set message_text = 'Valor menor que zero!';
 	else
-      
+    if (not exists(select * from tbUM where Id = UnM) and not(isnull(Descr))) then
+		insert into tbUM value(UnM, Descr);
+    end if;
+    
       insert into tbEstoque(Qtd, UM) values(Qnt, UnM);
     end if;
 end$
@@ -25,7 +29,8 @@ in
 	Qnt double,
     UnM varchar(6),
 	Nome1 varchar(30),
-    `Desc1` varchar(100)
+    `Desc1` varchar(100),
+    Descr varchar(20)
 )
 begin
 	declare conta1 int;
@@ -33,7 +38,7 @@ begin
     declare idE int;
     set conta1 = (select count(*) from tbEstoque); 
         
-	call spInsertEstoque(Qnt, UnM);
+	call spInsertEstoque(Qnt, UnM, Descr);
     
     set conta2 = (select count(*) from tbEstoque); 
       
@@ -52,7 +57,8 @@ in
     Nome1 varchar(30),
     Tipo1 int,
     Montadora1 varchar(50),
-    `Desc1` varchar(100)
+    `Desc1` varchar(100),
+    Descr varchar(20)
 )
 begin
 	declare conta1 int;
@@ -60,7 +66,7 @@ begin
     declare idE int;
     set conta1 = (select count(*) from tbEstoque); 
     
-	call spInsertEstoque(Qnt, UnM);
+	call spInsertEstoque(Qnt, UnM, Descr);
     
     set conta2 = (select count(*) from tbEstoque); 
         
@@ -79,13 +85,14 @@ in
     UnM varchar(6),
     Nome1 varchar(30),
     `Desc1` varchar(100),
-    Categoria1 int
+    Categoria1 int,
+    Descr varchar(20)
 )
 begin
 	declare conta1, conta2, idE int;
     set conta1 = (select count(*) from tbEstoque); 
        
-	call spInsertEstoque(Qnt, UnM);
+	call spInsertEstoque(Qnt, UnM, Descr);
 
     set conta2 = (select count(*) from tbEstoque); 
         
@@ -102,14 +109,15 @@ in
 	Qnt double,
     UnM varchar(6),
     Nome1 varchar(30),
-    `Desc1` varchar(100)
+    `Desc1` varchar(100),
+    Descr varchar(20)
 )
 begin
     declare conta1, conta2, idE int;
         
     set conta1 = (select count(*) from tbEstoque); 
         
-	call spInsertEstoque(Qnt, UnM);
+	call spInsertEstoque(Qnt, UnM, Descr);
 
     set conta2 = (select count(*) from tbEstoque); 
         
@@ -131,22 +139,23 @@ in
     `Desc1` varchar(100),
     IdPlant int,
     Stats int,
-    IdCol int    
+    Produto int,
+    Descr varchar(20)    
 )
 begin
     declare qnt double;
-    declare col int;
+    declare prod int;
     
     set qnt = (QntTot - QntPerdas);
-    if(isnull(IdCol)) then
-		call spInsertProduto(qnt, UnM, Nome1, `Desc1`);
+    if(isnull(Produto)) then
+		call spInsertProduto(qnt, UnM, Nome1, `Desc1`, Descr);
 		
-		set col = (select IdEstoque from tbProduto order by IdEstoque desc limit 1);
+		set prod = (select IdEstoque from tbProduto order by IdEstoque desc limit 1);
 	else
-		set col = (select IdEstoque from tbProduto where IdEstoque = IdCol);
+		set prod = (select IdEstoque from tbProduto where IdEstoque = Produto);
     end if;
     
-	insert into tbColheita(`Data`, QtdPerdas, QtdTotal, IdPlantio, IdProd, `Status`) value(Dataa, QntPerdas, QntTot, IdPlant, col, Stats);
+	insert into tbColheita(`Data`, QtdPerdas, QtdTotal, IdPlantio, IdProd, `Status`) value(Dataa, QntPerdas, QntTot, IdPlant, prod, Stats);
 end$
 
 DELIMITER $ 
@@ -205,18 +214,26 @@ begin
 end$
 
 DELIMITER $
-drop function if exists spLike$
-create function spLike(IdA int)
-	returns int DETERMINISTIC
+drop function if exists isComprador$
+create function isComprador(IdUsu nvarchar(128), IdAn int)
+	returns char(3) DETERMINISTIC
 begin
-	declare likes int;
-    
-    if(exists(select * from tbAvaliacao where IdAnuncio = IdA)) then
-		set likes = (select count(`Like`) from tbAvaliacao where `Like` = true and IdAnuncio = IdA);
+	declare resp char(3);
+    declare IdP int;
+
+    if(exists(select * from tbPedido where IdUsuario = IdUsu)) then
+		set IdP = (select p.Id from tbPedido p
+					inner join tbPedidoAnuncio pa on pa.IdPedido = p.Id
+				   where p.IdUsuario = IdUsu and pa.IdAnuncio = IdAn);
+		if(exists(select * from tbVenda where IdPedido = IdP)) then
+			set resp = 'Sim';
+		else
+			set resp = 'Não';
+		end if;
 	else
-		set likes = 0;
-	end if;
-    return likes;
+		set resp = 'Não';
+    end if;
+    return resp;
 end$
 
 DELIMITER $

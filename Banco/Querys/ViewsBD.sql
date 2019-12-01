@@ -241,7 +241,11 @@ create view vwPlantio as(
            date_format(P.DataColheita, '%d/%m/%y') `Data Prevista pra Colheita`,
            group_concat(distinct(A.Nome) separator ', ') `Áreas`,
            group_concat(distinct(concat(I.Item)) separator ',') `Itens Usados`,
-           group_concat(distinct(ifnull(F.Nome, 'Sem Funcionários')) separator ', ') `Funcionários Participantes`
+           group_concat(distinct(ifnull(F.Nome, 'Sem Funcionários')) separator ', ') `Funcionários Participantes`,
+           case 
+			when P.`Status` = true then 'Ativo'
+            else 'Finalizado'
+            end as `Status`
 	from
 		tbPlantio P
 			left join
@@ -370,17 +374,24 @@ drop trigger if exists trgColheita$
 create trigger trgColheita after insert 
 on tbColheita
 for each row
-begin   
+begin
+if((select `Status` from tbPlantio where Id = NEW.IdPlantio) = true) then  
 if (NEW.`Status` = false) then
 	begin
-	set FOREIGN_KEY_CHECKS = 0;
-    delete from tbPlantio where Id = NEW.IdPedido;
-	set FOREIGN_KEY_CHECKS = 1;
+	update tbPlantio set `Status` = false where Id = NEW.IdPlantio;
+	/*
+	Se não funcionar substitui as 3 linhas acima por isso:
+	update tbPlantio set `Status` = false where Id = NEW.IdPlantio
+	*/
     end;
 end if;
 
 if(exists(select * from tbColheita where IdProd = NEW.IdProd)) then
 	update tbEstoque set Qtd = (Qtd + (NEW.QtdTotal - NEW.QtdPerdas)) where Id = NEW.IdProd;
+end if;
+else
+	SIGNAL SQLSTATE '45000'
+			SET MESSAGE_TEXT = 'Impossível realizar colheita de um plantio finalizado.';
 end if;
 end$
 
@@ -472,14 +483,14 @@ select E.CEP,  R.Logradouro `Rua`, concat(B.Bairro,' - ', C.Cidade,'/', Es.UF) `
 	inner join tbEstado Es on C.IdEstado = Es.Id
 ); 
 
-drop view if exists vwUsuario;
+drop view if exists vwDadosBancarios;
 create view vwDadosBancarios as(
 select d.Id,
 	   u.`UserName` `Nome do Usuário`,
        d.NomeTitular `Titular do Cartão`,
        d.CVV `CVV`,
        d.NumCartao `Número do Cartão`,
-       d.Validade `Validade`,
+       date_format(d.Validade, '%e/%m/%Y') `Validade`,
        d.Banco `Banco`
  from tbDadosBancarios d
 	inner join tbUsuario u on d.IdUsuario = u.Id
@@ -523,8 +534,7 @@ select
     P.Nome `Produto`,
     concat(A.Quantidade, ' ', P.UM ) `Quantidade`,
     (P.ValorUnit * A.Quantidade) `Preço`,
-    P.Categoria `Categoria`,
-    spLike(A.Id) `Likes`
+    P.Categoria `Categoria`
 from tbAnuncio A
 	inner join tbProduto P on P.Id = A.IdProduto
     inner join tbAnunciante AN on AN.IdUsuario = A.IdAnunciante
@@ -547,7 +557,15 @@ select
 	concat(U.`UserName`, '-', U.CPF) `Comprador - CPF`,
     concat(E.Rua,', ', P.NumEntrega,' - ', ifnull(P.CompEntrega, 'Sem Complemento'),' - ',E.BCE,' - ',E.CEP) `Endereço de Entrega`,
     P.ValFrete `Valor do Frete`,
-    P.`Status` `Situação do Pedido`,
+    case 
+		when P.`Status`= 1 then 'Aguardando confirmação' 
+		when P.`Status`= 2 then 'Venda Confirmada' 
+		when P.`Status`= 3 then 'Enviando para transportadora' 
+		when P.`Status`= 4 then 'Entregue'
+		when P.`Status`= 5 then 'Entrega Confirmada' 
+		when P.`Status`= 6 then 'Cancelado'
+        else 'Rejeitado'
+        end as `Situação do Pedido`,
     DATE_FORMAT(P.`Data`, '%a - %e/%m/%y') `Data do Pedido`
 from tbPedido P
 	inner join vwEndereco E on E.CEP = P.CEPEntrega
@@ -555,24 +573,37 @@ from tbPedido P
     inner join tbPedidoAnuncio PA on PA.IdPedido = P.Id
     inner join tbAnuncio A on A.Id = PA.IdAnuncio
     inner join tbProduto Pr on Pr.Id = A.IdProduto
+group by P.Id
 );
 
 drop view if exists vwComentario;
 create view vwComentario as(
 select 
-	C.Id `Id`,
+	C.Id `Id`,    
+    spUsuario(C.IdUsuario) `Usuário`,
     C.Comentario `Comentário`,
     A.Id `IdAnuncio`,
-    spUsuario(C.IdUsuario) `Usuário`,
-    DATE_FORMAT(C.`Data`, '%e/%m/%y às %H:%i') `Data de Postagem`
+    A.Nome `Anuncio`,
+    DATE_FORMAT(C.`Data`, '%e/%m/%y às %H:%i') `Data de Postagem`,
+    isComprador(C.IdUsuario, C.IdAnuncio) `Usuário comprou o produto?`
 from tbComentario C
 	inner join tbAnuncio A on A.Id = C.IdAnuncio
+);
+
+drop view if exists vwWishlist;
+create view vwWishlist as(
+select w.IdUsuario,
+	   w.IdAnuncio,
+	   ifnull(a.Nome, 'Wishlist Vazia!') `Anúncios Salvos`
+       from tbWishlist w 
+       left join tbAnuncio a
+		on a.Id = w.IdAnuncio
 );
 
 drop view if exists vwCarrinho;
 create view vwCarrinho as(
 select 
-	C.IdUsuario `Id`,
+	C.IdUsuario `IdUsuario`,
     C.IdAnuncio `IdAnuncio`,
     A.Nome `Anúncio`,
     C.Qtd `Quantidade adicionada`
@@ -583,12 +614,15 @@ drop view if exists vwVenda;
 create view vwVenda as(
 select 
 	V.Id `Id`,
-    DATE_FORMAT(V.`Data`, '%a - %e/%m/%y às %H:%i') `Data`,
+    DATE_FORMAT(V.`Data`, '%a - %e/%m/%y às %H:%i') `Data da Venda`,
 	group_concat(distinct concat(A.Nome, ' - ', PA.Qtd)separator ', ') `Nome do Anúncio - Quantidade Pedida`,
 	(sum((Pr.ValorUnit * PA.Qtd)-((Pr.ValorUnit * PA.Qtd)*(A.Desconto/100))) + P.ValFrete) `Valor Total`,
 	concat(E.Rua,', ', P.NumEntrega,' - ', ifnull(P.CompEntrega, 'Sem Complemento'),' - ',E.BCE,' - ',E.CEP) `Endereço de Entrega`,
     An.NomeFazenda `Anunciante`,
-    V.`Status`
+    case
+		when V.`Status` = true then 'Venda finalizada'
+        else 'Venda em andamento'
+        end as `Situação da Venda`
 from tbVenda V
 	inner join tbPedido P on P.Id = V.IdPedido
 	inner join vwEndereco E on E.CEP = P.CEPEntrega
@@ -624,7 +658,7 @@ for each row
 begin
 	declare idusu nvarchar(128);
     set idusu = (select IdUsuario from tbPedido where Id = NEW.IdPedido);
-	delete from tbCarrinho where ((IdAnuncio = new.IdAnuncio) and (IdUsuario = idusu));
+	delete from tbCarrinho where IdUsuario = idusu;
 end$
 
 DELIMITER $
@@ -634,8 +668,26 @@ after update
 on tbPedido
 for each row
 begin
-	if(NEW.`Status` = 1) then
+	if(NEW.`Status` = 2) then
 		insert into tbVenda(IdPedido) value(NEW.Id);
+	end if;
+end$
+DELIMITER ;
+
+DELIMITER $
+drop trigger if exists trgDeleteAnuncio$
+create trigger trgDeleteAnuncio
+before delete
+on tbAnuncio
+for each row
+begin
+declare ped int;
+	if(exists(select * from tbAnuncioPedido where IdAnuncio = OLD.Id)) then
+		set ped = (select IdPedido from tbAnuncioPedido where IdAnuncio = OLD.Id order by IdPedido desc limit 1);
+		if((select `Status` from tbPedido where Id = ped) != 1) then
+			signal sqlstate '45000'
+				set message_text = 'Existem pedidos que aguardam respota! É impossível excluir esse anúncio!';
+		end if;
 	end if;
 end$
 DELIMITER ;

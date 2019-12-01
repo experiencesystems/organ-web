@@ -56,6 +56,7 @@ insert into tbMaquina(IdEstoque, Nome, Tipo, Montadora) values(6,'Adubex', 4, 'A
 update tbEstoque set Qtd = 0 where Id = 7;
 delete from tbMaquina where IdEstoque = 7;
 delete from tbEstoque where Id = 7;
+select * from vwItems;
 
 insert into tbSolo(Nome, Tipo) values('Arenoso', 1), ('Vermelho', 1);
 
@@ -72,17 +73,18 @@ insert into tbItensPlantio(QtdUsada, IdPlantio, IdEstoque) values(1, 2, 1);
 insert into tbAreaPlantio(IdPlantio, IdArea, Densidade) values(2, 3, 1);
 
 insert into tbPlantio(Nome, Sistema, DataColheita, DataInicio, TipoPlantio) values('Plantio de Milho', 2, '19/02/01', '19/04/01', 2);
-insert into tbItensPlantio(QtdUsada, IdPlantio, IdEstoque) values(1, 3, 1);
+insert into tbItensPlantio(QtdUsada, IdPlantio, IdEstoque) values(1, 3, 2);
 insert into tbItensPlantio(QtdUsada, IdPlantio, IdEstoque) value(0.05, 3, 3);
 insert into tbItensPlantio(QtdUsada, IdPlantio, IdEstoque) value(1, 3, 6);
 insert into tbAreaPlantio(IdPlantio, IdArea, Densidade) values(3, 4, 1), (3, 5, 1);
 
-select * from vwPlantio; use dborgan;
+select * from vwPlantio;
+ use dborgan;
 
--- -				 (datacolehita, qtdperda, qtdtotal, unidade de medida, nome do produo, descrica do produto, idplantio, status colheita, idcolheita)
-call spInsertColheita('01/01/01', 1, 4, 'a', 'Soja', null, 1, true, null);
-call spInsertColheita('19/02/01', 1, 8, 'a', 'Milho', 'Milho Transgênico', 3, true, null);
-call spInsertColheita('19/02/01', 0, 4, 'a', 'Soja', null, 2, false, 9);
+-- -				 (datacolehita, qtdperda, qtdtotal, unidade de medida, nome do produto, descricão do produto, idplantio, status colheita, idproduto, Descr)
+call spInsertColheita('01/01/01', 1, 4, 'a', 'Soja', null, 1, true, null, null);
+call spInsertColheita('19/02/01', 1, 8, 'b', 'Milho', 'Milho Transgênico', 3, true, null, 'Barro');
+call spInsertColheita('19/02/01', 0, 4, 'a', 'Soja', null, 2, false, 8, null);
 select * from vwColheita; 
 
 insert into tbControle(`Status`, Efic, NumLiberacoes, `Data`) values(true, 100, 2, '01/01/01'), (true, 50, 3, '01/01/01');
@@ -96,3 +98,4 @@ insert into tbAreaPD values(true, 2, 1), (true, 3, 2);
 insert into tbItensControle(QtdUsada, IdControle, IdEstoque) values(0.25, 1, 5), (0.25, 2, 5);
 select * from vwArea;select * from vwpragaordoenca; select * from vwcontrole;
 select * from vwItems; select * from vwHistorico; 
+

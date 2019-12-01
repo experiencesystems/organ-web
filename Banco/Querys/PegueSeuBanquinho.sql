@@ -176,7 +176,7 @@ create table tbWishList(
 	IdAnuncio int not null,
 	 constraint PKWishList primary key(IdUsuario, IdAnuncio)
 )engine = innodb;
-alter table tbWishlist add constraint FKWishlistAnuncio foreign key(IdAnuncio) references tbAnuncio(Id),
+alter table tbWishlist add constraint FKWishlistAnuncio foreign key(IdAnuncio) references tbAnuncio(Id) on delete cascade,
 					   add constraint FKWishlistUsuario foreign key(IdUsuario) references tbUsuario(Id);
 
 drop table if exists tbAvaliacao;
@@ -184,7 +184,6 @@ create table tbAvaliacao(
 	IdAnuncio int not null,
 	IdUsuario nvarchar(128) not null,
 	 constraint PKAvaliacao primary key(IdAnuncio, IdUsuario),
-	`Desc` varchar(100) not null,
 	Nota int 
 ) engine = innodb;
 alter table tbAvaliacao add constraint FKAvaliacaoAnuncio foreign key(IdAnuncio) references tbAnuncio(Id),
@@ -204,12 +203,13 @@ alter table tbComentario add constraint FKComentarioAnuncio foreign key(IdAnunci
 
 drop table if exists tbCarrinho;
 create table tbCarrinho(
+	Id int auto_increment,
 	IdUsuario nvarchar(128) not null,
 	IdAnuncio int not null,
-	 constraint PKCarrinho primary key(IdUsuario, IdAnuncio),
+	 constraint PKCarrinho primary key(Id),
 	Qtd int not null
 )engine = innodb;
-alter table tbCarrinho add constraint FKCarrinhoAnuncio foreign key(IdAnuncio) references tbAnuncio(Id),
+alter table tbCarrinho add constraint FKCarrinhoAnuncio foreign key(IdAnuncio) references tbAnuncio(Id) on delete cascade,
 					   add constraint FKCarrinhoUsuario foreign key(IdUsuario) references tbUsuario(Id);
 
 drop table if exists tbHistCarrinho;
@@ -228,7 +228,7 @@ create table tbPedido(
 	 constraint PKPedido primary key(Id),
 	IdUsuario nvarchar(128) not null,
 	`Data` datetime default current_timestamp,
-	`Status` int default 0,	
+	`Status` int default 1,	
 	IdPagamento int not null,
     ValFrete double not null,
     CEPEntrega char(8) not null,
@@ -237,11 +237,12 @@ create table tbPedido(
 )engine = innodb;
 alter table tbPedido add constraint FKPedidoUsuario foreign key(IdUsuario) references tbUsuario(`Id`);
 
+drop table if exists tbPedidoAnuncio;
 create table tbPedidoAnuncio(
-	IdPedido int not null,
-    IdAnuncio int not null,
+	IdPedido int,
+    IdAnuncio int,
      constraint PKPedidoAnuncio primary key(IdPedido, IdAnuncio),
-	Qtd int not null
+	Qtd int 
 )engine = innodb;
 alter table tbPedidoAnuncio add constraint FKPedidoAnuncio foreign key(IdAnuncio) references tbAnuncio(Id),
 							add constraint FKAnuncioPedido foreign key(IdPedido) references tbPedido(Id);
