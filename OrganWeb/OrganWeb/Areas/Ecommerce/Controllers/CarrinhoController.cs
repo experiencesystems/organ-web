@@ -30,6 +30,7 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
         }
         
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddAoCarrinho(int? idAnuncio)
         {
@@ -48,7 +49,8 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             await carrinho.AddAoCarrinho(anuncio);
             return RedirectToAction("Index");
         }
-        
+
+        [Authorize]
         public async Task<ActionResult> RemoverDoCarrinho(int? idAnuncio)
         {
             if (idAnuncio == null)
@@ -63,7 +65,8 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             await carrinho.RemoverDoCarrinho(anuncio);
             return RedirectToAction("Index");
         }
-        
+
+        [Authorize]
         public async Task<ActionResult> ApagarCarrinho()
         {
             await carrinho.LimparCarrinho();

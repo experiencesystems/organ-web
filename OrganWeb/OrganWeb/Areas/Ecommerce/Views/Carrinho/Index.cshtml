@@ -13,8 +13,8 @@
         <br />
         <h6>Faça login para adicionar itens ao carrinho!</h6>
         <div>
-            @Html.ActionLink("Login", "Login", "Account", new { Area = "" }, new { returnUrl = this.Request.RawUrl })
-        </div>
+            @Html.ActionLink("Login", "Login", "Account", new { Area = "", returnUrl = this.Request.RawUrl }, new { })
+            </div>
         return;
     }
 
@@ -85,7 +85,7 @@
                 </td>
                 <td colspan="2"></td>
                 <td class="text-center">
-                    <a class="btn buy-now-btn float-right" asp-action="checkout" asp-controller="order">
+                    <a class="btn buy-now-btn float-right" href="/Ecommerce/Pedido/Checkout" asp-action="checkout" asp-controller="order">
                         <i class="fa fa-check-square-o" aria-hidden="true"></i>
                         Realizar pedido
                     </a>

@@ -37,7 +37,9 @@ insert into tbTelForn value(3,5), (3,6);
 
 update tbFornecedor set `Status` = false where Id = 3;
 
-insert into tbUM value('a', 'A');
+
+insert into tbUM value('UN', 'Unidade');
+insert into tbUM value('DZ', 'Dúzia');
 
 insert into tbEstoque(Qtd, UM, IdFornecedor) values(5, 'a', 1);
 insert into tbSemente(IdEstoque, Nome) values(1, "Semente de Soja");

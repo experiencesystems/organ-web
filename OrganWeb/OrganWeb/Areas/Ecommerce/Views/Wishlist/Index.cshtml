@@ -11,7 +11,7 @@
         <br />
         <h6>É necessário fazer login para salvar anúncios!</h6>
         <div>
-            @Html.ActionLink("Login", "Login", "Account", new { Area = "" }, new { returnUrl = this.Request.RawUrl })
+            @Html.ActionLink("Login", "Login", "Account", new { Area = "", returnUrl = this.Request.RawUrl }, new {  })
         </div>
         return;
     }
@@ -29,7 +29,7 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@Html.ActionLink(item.Anuncio.Nome, "Anuncio", "Detalhes", new { Area = "Ecommerce" }, new { id = item.IdAnuncio })</td>
+                    <td>@Html.ActionLink(item.Anuncio.Nome, "Detalhes", "Anuncio", new { Area = "Ecommerce", id = item.IdAnuncio }, new { })</td>
                     <td>@item.Anuncio.Produto.ValorUnit</td>
                     <td>
                         @using (Ajax.BeginForm("RemoverDaWishlist", new { idAnuncio = item.IdAnuncio }, new AjaxOptions { HttpMethod = "POST" }))

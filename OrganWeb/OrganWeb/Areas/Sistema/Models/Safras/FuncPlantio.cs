@@ -1,4 +1,5 @@
 ﻿using OrganWeb.Areas.Sistema.Models.Funcionarios;
+using OrganWeb.Areas.Sistema.Models.zBanco;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +10,7 @@ using System.Web;
 namespace OrganWeb.Areas.Sistema.Models.Safras
 {
     [Table("tbFuncPlantio")]
-    public class FuncPlantio
+    public class FuncPlantio : OrganRepository<FuncPlantio>
     {
         [Key, Column(Order = 1)]
         [ForeignKey("Funcionario")]

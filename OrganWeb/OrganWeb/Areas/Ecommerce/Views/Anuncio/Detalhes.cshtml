@@ -68,10 +68,36 @@
                 else
                 {
                     <div class="buttons">
-                        <a href="#" class="btn add-to-cart-btn">Adicionar no carrinho</a>
-                        <p class="pull-row">
-                            <a href="#" class="btn wishlist-btn">Lista de desejo</a>
-                        </p>
+                        @if (Request.IsAuthenticated)
+                        {
+                            using (Html.BeginForm("AddAoCarrinho", "Carrinho", new { idAnuncio = Model.Id }, FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken();
+                                <button type="submit" value="@Model.Id" class="btn add-to-cart-btn">
+                                    Adicionar ao carrinho
+                                </button>
+                            }
+                            <p class="pull-row">
+                                @using (Html.BeginForm("AddWishlist", "Wishlist", new { idAnuncio = Model.Id }, FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken();
+                                    <button type="submit" value="@Model.Id" class="btn wishlist-btn">
+                                        Lista de desejos
+                                    </button>
+                                }
+                            </p>
+                        }
+                        else
+                        {
+                            <button type="submit" value="" class="btn add-to-cart-btn">
+                                Adicionar ao carrinho
+                            </button>
+                            <p class="pull-row">
+                                <button type="submit" value="" class="btn wishlist-btn">
+                                    Lista de desejos
+                                </button>
+                            </p>
+                        }
                     </div>
                     <div class="location-shipping-to">
                         <span class="title">Tamanho:</span>

@@ -1,5 +1,6 @@
 ﻿using OrganWeb.Areas.Sistema.Models.Administrativo;
 using OrganWeb.Areas.Sistema.Models.Armazenamento;
+using OrganWeb.Areas.Sistema.Models.Funcionarios;
 using OrganWeb.Areas.Sistema.Models.Safras;
 using System;
 using System.Collections.Generic;
@@ -37,6 +38,10 @@ namespace OrganWeb.Areas.Sistema.Models.ViewModels
         public int[] IdArea { get; set; }
 
         [Required]
+        [Display(Name = "Funcionários participantes")]
+        public int[] IdFunc { get; set; }
+
+        [Required]
         [Display(Name = "Semente")]
         public int IdEstoque { get; set; }
 
@@ -45,6 +50,7 @@ namespace OrganWeb.Areas.Sistema.Models.ViewModels
 
         public IEnumerable<Area> Areas { get; set; }
         public IEnumerable<Semente> Sementes { get; set; }
+        public IEnumerable<Funcionario> Funcionarios { get; set; }
         public IEnumerable<SelectListItem> Periodos { get; set; }
         public IEnumerable<SelectListItem> Sistemas { get; set; }
     }

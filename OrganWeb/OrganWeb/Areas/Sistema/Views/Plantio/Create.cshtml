@@ -66,6 +66,16 @@
 
     <div class="form-group">
         <div class="col">
+            @Html.LabelFor(model => model.IdFunc, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col">
+            @Html.DropDownList("IdFunc", new MultiSelectList(Model.Funcionarios, "Id", "Nome"), new { multiple = "multiple", id = "funcs", @class = "campo" })
+            @Html.ValidationMessageFor(model => model.IdFunc, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col">
             @Html.LabelFor(model => model.IdEstoque, htmlAttributes: new { @class = "control-label" })
         </div>
         <div class="col">

@@ -49,12 +49,12 @@ values('02719894-e4a9-46c8-999e-ba942abd5f8f', 'jessica@gmail.com', 0,
 	   'AKM33xpM5jcwZ/ojFJuuWBOvPQOiROAQmhfZwupekFSTAGpmW5+O7iPmj7cUuM/r6w==',
 	   '1a38cc85-3bd4-400b-9850-5f0fb0024c9a', 'Fazendinha', load_file('C:\farm.jpg'), 11111111113, 3);
        
-insert into `AspNetRoles` (`Id`, `Name`) value ('02719894-e4a9-46c8-999e-ba942abd5f8u', 'Admin');
+insert into `AspNetRoles`(`Id`, `Name`) value ('02719894-e4a9-46c8-999e-ba942abd5f8u', 'Admin');
 
-insert into `AspNetUserRoles` (`UserId`, `RoleId`) values ('02719894-e4a9-46c8-999e-ba942abd5f8g', '02719894-e4a9-46c8-999e-ba942abd5f8u'),
-														  ('02719894-e4a9-46c8-999e-ba942abd5f8h', '02719894-e4a9-46c8-999e-ba942abd5f8u');
+insert into `AspNetUserRoles`(`UserId`, `RoleId`) values ('02719894-e4a9-46c8-999e-ba942abd5f8g', '02719894-e4a9-46c8-999e-ba942abd5f8u'),
+														 ('02719894-e4a9-46c8-999e-ba942abd5f8h', '02719894-e4a9-46c8-999e-ba942abd5f8u');
 
-insert into tbDadosBancarios(NomeTitular, CVV, Banco, NumCartao, Validade, IdUsuario) values("João Meu Pai", 1111, 1, 11111111111111111, '01/01/01', '02719894-e4a9-46c8-999e-ba942abd5f8f');
+insert into tbDadosBancarios(NomeTitular, CVV, Banco, NumCartao, Validade, IdUsuario) values("João Almeida", 1111, 1, 11111111111111111, '01/01/01', '02719894-e4a9-46c8-999e-ba942abd5f8f');
 
        
 insert into tbAnunciante(IdUsuario, NomeFazenda, NumEnd, CEP, NomeBanco) values('02719894-e4a9-46c8-999e-ba942abd5f8g', 'Experience Farms', 1, "78008105", 'dbOrgan'),
@@ -62,10 +62,11 @@ insert into tbAnunciante(IdUsuario, NomeFazenda, NumEnd, CEP, NomeBanco) values(
 select * from vwDadosBancarios;
 select * from vwAnunciante;
 
-insert into tbUM value('a', 'A');
-insert into tbProduto(ValorUnit, UM, Nome, Categoria) values(5.25, 'a', 'Semente de Soja', 1),
-															(5.75, 'a', 'Semente de Milho', 1),
-															(25.00, 'a', 'Pá', 2);
+insert into tbUM value('UN', 'Unidade');
+insert into tbUM value('DZ', 'Dúzia');
+insert into tbProduto(ValorUnit, UM, Nome, Categoria) values(5.25, 'UN', 'Semente de Soja', 1),
+															(5.75, 'UN', 'Semente de Milho', 1),
+															(25.00, 'UN', 'Pá', 2);
                                                                         
 insert into tbAnuncio(Nome, `Desc`, `Status`, Foto, IdProduto, IdAnunciante, Quantidade)
 	values('Soja da Boa', 'É UMAS SOJA NÃO TRANGÊNICA!', true, load_file('C:\farm.jpg'), 1, '02719894-e4a9-46c8-999e-ba942abd5f8g', 2),

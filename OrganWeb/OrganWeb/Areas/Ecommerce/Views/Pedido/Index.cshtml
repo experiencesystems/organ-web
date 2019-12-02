@@ -1,0 +1,63 @@
+﻿@model IEnumerable<OrganWeb.Areas.Ecommerce.Models.ViewsBanco.VwPedido>
+@{
+    ViewBag.Title = "Meus pedidos";
+}
+
+@if (Model.Count() == 0)
+{
+    <br />
+    <h6>Você ainda não fez nenhum pedido! Assim que realizar um você poderá acompanha-lo aqui.</h6>
+    <div>
+        @Html.ActionLink("Voltar para a loja", "Index", "Loja", new { Area = "Ecommerce" })
+    </div>
+    return;
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Data)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeAnuncioQtd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorTotalcDesconto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorFrete)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Situacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Anunciante)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeAnuncioQtd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorTotalcDesconto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorFrete)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Situacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Anunciante)
+            </td>
+        </tr>
+    }
+
+</table>

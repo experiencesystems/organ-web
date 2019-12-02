@@ -8,6 +8,8 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using PagedList;
 using PagedList.EntityFramework;
+using System.Web;
+using Microsoft.AspNet.Identity;
 
 namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
 {
@@ -87,6 +89,12 @@ namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
         public IPagedList<Anuncio> GetAnunciosFiltro(int page, string filtro, List<Anuncio> anuncios)
         {
             return anuncios.Where(x => x.Nome.IndexOf(filtro, StringComparison.OrdinalIgnoreCase) >= 0).Take(40).OrderByDescending(p => p.DataDesc).ToPagedList(page, 20);
+        }
+
+        public IPagedList<Anuncio> GetMeusAnuncios(int page, List<Anuncio> anuncios)
+        {
+            string id = HttpContext.Current.User.Identity.GetUserId();
+            return anuncios.Where(x => x.IdAnunciante == id).OrderBy(p => p.Id).ToPagedList(page, 20);
         }
     }
 }

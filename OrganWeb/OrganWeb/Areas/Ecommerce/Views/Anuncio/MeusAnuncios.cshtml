@@ -3,7 +3,7 @@
 @using PagedList.Mvc;
 @using Microsoft.AspNet.Identity
 @{
-    ViewBag.Title = "Categoria";
+    ViewBag.Title = "Meus anúncios";
     Layout = null;
 }
 
@@ -79,7 +79,7 @@
         Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
 
         @Html.PagedListPager(Model, page => Url.Action("Index",
-            new { page, cat = ViewBag.Categoria }), new PagedListRenderOptions
+            new { page }), new PagedListRenderOptions
             {
                 LiElementClasses = new string[] { "pagination page-item p1" }
             })

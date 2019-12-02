@@ -21,6 +21,7 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddWishlist(int? idAnuncio)
         {
@@ -38,6 +39,7 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RemoverDaWishlist(int? idAnuncio)
         {
@@ -55,6 +57,7 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ApagarWishlist()
         {
