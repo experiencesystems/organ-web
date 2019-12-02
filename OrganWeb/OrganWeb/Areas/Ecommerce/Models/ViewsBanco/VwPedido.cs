@@ -20,14 +20,21 @@ namespace OrganWeb.Areas.Ecommerce.Models.ViewsBanco
         public string Anunciante { get; set; }
         public string IdAnunciante { get; set; }
         public int IdAnuncio { get; set; }
+        [Display(Name = "Anúncio")]
         public string Anuncio { get; set; }
+        [Display(Name = "Anúncio e quantidade")]
         public string NomeAnuncioQtd { get; set; }
+        [Display(Name = "Valor total sem desconto")]
         public double ValorTotalsDesconto { get; set; }
+        [Display(Name = "Valor total com desconto")]
         public double ValorTotalcDesconto { get; set; }
         public string IdCliente { get; set; }
         public string Comprador { get; set; }
+        [Display(Name = "Endereço")]
         public string Endereco { get; set; }
+        [Display(Name = "Valor frete")]
         public double ValorFrete { get; set; }
+        [Display(Name = "Situação")]
         public string Situacao { get; set; }
         public string Data { get; set; }
 

@@ -14,14 +14,7 @@ namespace OrganWeb.Areas.Sistema.Models.zRepositories
     {
         public async Task<IPagedList<VwHistorico>> GetPagedAll(int page)
         {
-            try
-            {
-                return await DbSet.OrderBy(p => p.Id).ToPagedListAsync(page, 5);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            return await DbSet.OrderBy(p => p.Id).ToPagedListAsync(page, 5);
         }
     }
 }

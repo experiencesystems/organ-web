@@ -19,22 +19,43 @@ namespace OrganWeb.Areas.Sistema.Controllers
         private VwVenda venda = new VwVenda();
 
         public async Task<ActionResult> Index(int? pagep, int? pagev)
-        {//TODO: filtro de pedido e venda por status, pagedlist
+        {
             int pagepedido = pagep ?? 1;
             int pagevenda = pagev ?? 1;
-            try
+            var select = new ViewVendas
             {
-                var select = new ViewVendas
-                {
-                    Pedidos = await pedido.GetPedidosAnunciante(pagepedido),
-                    Vendas = await venda.GetVendasAnunciante(pagevenda)
-                };
-                return View(select);
-            }
-            catch(Exception e)
+                Pedidos = await pedido.GetPedidosAnunciante(pagepedido),
+                Vendas = await venda.GetVendasAnunciante(pagevenda)
+            };
+            return View(select);
+        }
+
+        public async Task<ActionResult> Detalhes(int? id)
+        {
+            if (id == null)
             {
-                throw e;
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            venda = await venda.GetByID(id);
+            if (venda == null)
+            {
+                return HttpNotFound();
+            }
+            return View(venda);
+        }
+
+        public async Task<ActionResult> Pedido(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            pedido = await pedido.GetByID(id);
+            if (pedido == null)
+            {
+                return HttpNotFound();
+            }
+            return View(pedido);
         }
 
         public async Task<ActionResult> AceitarPedido(int? idPedido)

@@ -1,0 +1,59 @@
+﻿@model OrganWeb.Areas.Ecommerce.Models.ViewsBanco.VwVenda
+@{ 
+    ViewBag.Title = "Venda";
+}
+<div>
+    <h4>Venda</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeAnuncio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeAnuncio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorTotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorTotal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Endereco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Endereco)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Anunciante)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Anunciante)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Situacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Situacao)
+        </dd>
+
+    </dl>
+</div>
