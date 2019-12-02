@@ -306,3 +306,31 @@
         </div>
 
     </div> <!--row-->
+    @section Scripts
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var button = document.getElementById('valorcepe');
+                button.addEventListener('click', function () {
+                    var cepe = document.getElementById('cepe').value;
+                    var check = $(".cepe").val();
+                    if (check != "") {
+                        $.ajax({
+                            url: '@Url.Action("PostFrete", "Pedido")',
+                            type: "POST",
+                            cache: false,
+                            data: { "cep": cepe },
+                            success: function (data) {
+                                if (data.result == true)
+                                {
+                                    $("p").html(data.frete);
+                                } else {
+                                    alert('Não foi possível completar seu pedido.');
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
+    }

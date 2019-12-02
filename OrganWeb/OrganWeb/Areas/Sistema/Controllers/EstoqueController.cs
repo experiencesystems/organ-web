@@ -79,7 +79,15 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 textoPesquisa = filtros;
             }
 
-            var itens = await vwItems.GetAll();
+            List<VwItems> itens = new List<VwItems>();
+            try
+            {
+                itens = await vwItems.GetAll();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
 
             viewestoque = new ViewEstoque()
             {
@@ -102,7 +110,6 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 viewestoque.VwItems = itens.Where(x => x.Tipo == filtros).ToPagedList(pagina, 5);
             }
-
             return View(viewestoque);
         }
 

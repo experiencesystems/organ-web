@@ -219,7 +219,7 @@ create view vwControle as(
             left join
         vwItems i on ic.IdEstoque = i.Id
     group by c.Id, c.`Status`);
-
+    
 drop view if exists vwHistorico;
 create view vwHistorico as(
 select date_format(HE.DataAlteracao, '%e/%m/%y às %H:%i') `Data de Alteração`, HE.Id, HE.IdEstoque `Id do Item`, ifnull(I.`Item`, 'Item Excluído') `Nome do Item`,
@@ -227,7 +227,7 @@ select date_format(HE.DataAlteracao, '%e/%m/%y às %H:%i') `Data de Alteração`
  from tbHistEstoque HE
 	left join 
  vwItems I on HE.IdEstoque = I.Id
- group by Id
+ group by Id, I.Item, I.Quantidade
  order by `Data de Alteração` desc
 );
 

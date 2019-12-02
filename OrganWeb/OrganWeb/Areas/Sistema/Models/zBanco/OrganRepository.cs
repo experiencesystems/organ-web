@@ -55,7 +55,7 @@ namespace OrganWeb.Areas.Sistema.Models.zBanco
         {
             try
             {
-               await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
             catch (DbEntityValidationException ex)
             {

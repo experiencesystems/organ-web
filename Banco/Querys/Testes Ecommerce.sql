@@ -77,7 +77,6 @@ insert into tbAnuncio(Nome, `Desc`, `Status`, Foto, IdProduto, IdAnunciante, Qua
 	values('Soja', 'É a sim!', true, load_file("/error.gif"), 1, '02719894-e4a9-46c8-999e-ba942abd5f8g', 2, 10, 1, '19/11/27 17:00');          
           
 insert into tbWishList value('02719894-e4a9-46c8-999e-ba942abd5f8f', 4);
-select * from vwWishlist;
 
 insert into tbComentario(Comentario, IdAnuncio, IdUsuario) values('Espero poder comprar essas pás', 4, '02719894-e4a9-46c8-999e-ba942abd5f8f');
 
