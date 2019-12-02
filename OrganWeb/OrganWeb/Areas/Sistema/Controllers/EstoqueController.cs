@@ -146,7 +146,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
             }
             var ums = await listarUnidades.GetListarUnidades();
             return View(insumo);
-        }//TODO: máscara nos campos
+        }
 
         public async Task<ActionResult> Detalhes(int? id, string tipo)
         {
