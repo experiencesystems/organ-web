@@ -596,6 +596,7 @@
     <Content Include="Areas\Ecommerce\Views\Loja\Pesquisa.cshtml" />
     <Content Include="Areas\Sistema\Views\Vendas\Detalhes.cshtml" />
     <Content Include="Areas\Sistema\Views\Vendas\Pedido.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\Pedido\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\organweb - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\organweb - Web Deploy.pubxml" />
@@ -670,8 +671,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Ecommerce\Views\Avaliacao\" />
-    <Folder Include="Areas\Ecommerce\Views\Comentario\" />
     <Folder Include="Areas\Ecommerce\Views\Home\" />
     <Folder Include="Areas\Ecommerce\Views\Venda\" />
     <Folder Include="Areas\Sistema\Views\Shared\" />

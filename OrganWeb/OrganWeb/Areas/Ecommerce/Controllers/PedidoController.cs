@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using OrganWeb.Areas.Ecommerce.Models.API;
 using OrganWeb.Areas.Ecommerce.Models.Endereco;
 using OrganWeb.Areas.Ecommerce.Models.Financeiro;
+using OrganWeb.Areas.Ecommerce.Models.ViewsBanco;
 
 namespace OrganWeb.Areas.Ecommerce.Controllers
 {
@@ -20,11 +21,13 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
         private Estado estado = new Estado();
         private PedidoAnuncio pedidoAnuncio = new PedidoAnuncio();
 
-        public ActionResult Index()
+        [Authorize]
+        public async Task<ActionResult> Index()
         {
-            return View();
+            return View(await new VwPedido().GetPedidosCliente());
         }
 
+        [Authorize]
         public async Task<ActionResult> Checkout()
         {
             //Verifica se ele não tem itens no carrinho
@@ -46,6 +49,7 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Checkout(Pedido pedido)
         {

@@ -62,7 +62,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 await semente.Save();
                 semente.Dispose();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Estoque");
             }
             return View(semente);
         }
