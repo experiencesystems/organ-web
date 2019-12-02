@@ -76,21 +76,6 @@ namespace OrganWeb.Areas.Sistema.Models
             int diasAgoracomeco = 0;
             try
             {
-                /*
-                 data_colheita1 = reader["data_colheita"].ToString();
-                        data_inicio1 = reader["data_inicio"].ToString();
-                        DateTime hoje = DateTime.Today;
-
-                        //agora - começo
-                        TimeSpan agoracomeco = (hoje.Subtract(Convert.ToDateTime(data_inicio1)));
-                        int diasAgoracomeco = agoracomeco.Days;
-
-                        //fim - começo
-                        TimeSpan fimcomeco = (Convert.ToDateTime(data_colheita1).Subtract(Convert.ToDateTime(data_inicio1)));
-                        int diasFimcomeco = fimcomeco.Days;
-
-                        //progressBar.Value = (int)((now - start).TotalHours / (end - start).TotalHours);
-                 */
                 //agora - começo
                 if (hoje > plantio.Inicio)
                     diasAgoracomeco = hoje.Subtract(plantio.Inicio).Days;
