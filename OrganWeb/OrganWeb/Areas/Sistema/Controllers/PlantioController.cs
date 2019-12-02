@@ -26,6 +26,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
         {
             var listaFiltros = new List<string>
             {
+                "Todos",
                 "Ativos",
                 "Finalizados"
             };
@@ -147,6 +148,18 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 };
                 itemcrplantio.Add(itemcrplantio);
                 await itemcrplantio.Save();
+
+                foreach (var area in IdArea)
+                {
+                    var areap = new AreaPlantio
+                    {
+                        IdArea = area,
+                        Densidade = 1,
+                        IdPlantio = pl.Id
+                    };
+                    areap.Add(areap);
+                    await areap.Save();
+                }
 
                 return RedirectToAction("Index");
             }

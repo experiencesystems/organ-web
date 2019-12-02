@@ -17,7 +17,14 @@ namespace OrganWeb.Areas.Sistema.Models
 
         public async Task<List<Plantio>> GetPlantios()
         {
-            Plantios = await new VwPlantio().GetAll();
+            try
+            {
+                Plantios = await new VwPlantio().GetAll();
+            }
+            catch (Exception e)
+            {
+
+            }
             return Plantios.Select((p) => new Plantio
             {
                 Porcentagem = ProgressoPlantio(p),
@@ -69,21 +76,36 @@ namespace OrganWeb.Areas.Sistema.Models
             int diasAgoracomeco = 0;
             try
             {
+                /*
+                 data_colheita1 = reader["data_colheita"].ToString();
+                        data_inicio1 = reader["data_inicio"].ToString();
+                        DateTime hoje = DateTime.Today;
+
+                        //agora - começo
+                        TimeSpan agoracomeco = (hoje.Subtract(Convert.ToDateTime(data_inicio1)));
+                        int diasAgoracomeco = agoracomeco.Days;
+
+                        //fim - começo
+                        TimeSpan fimcomeco = (Convert.ToDateTime(data_colheita1).Subtract(Convert.ToDateTime(data_inicio1)));
+                        int diasFimcomeco = fimcomeco.Days;
+
+                        //progressBar.Value = (int)((now - start).TotalHours / (end - start).TotalHours);
+                 */
                 //agora - começo
                 if (hoje > plantio.Inicio)
                     diasAgoracomeco = hoje.Subtract(plantio.Inicio).Days;
 
                 //fim - começo
-                int diasFimcomeco = plantio.Colheita.Subtract(plantio.Colheita).Days;
+                int diasFimcomeco = plantio.Colheita.Subtract(plantio.Inicio).Days;
 
-                int progresso = ((100 * diasAgoracomeco) / diasFimcomeco);
+                int progresso = (100 * diasAgoracomeco / diasFimcomeco);
 
-                if (progresso > 100)
+                if (progresso > 100 || progresso < 0)
                     return 100;
 
                 return progresso;
             }
-            catch
+            catch (Exception e)
             {
                 return 100;
             }

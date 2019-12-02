@@ -19,7 +19,11 @@ namespace OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque
         public string Plantio { get; set; }
         public int Sistema { get; set; }
         public int Tipo { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Inicio { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Colheita { get; set; }
         public string Areas { get; set; }
         public string Itens { get; set; }

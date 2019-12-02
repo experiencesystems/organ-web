@@ -23,7 +23,7 @@ namespace OrganWeb.Areas.Ecommerce.Models.Vendas
 
         [Required]
         [Display(Name = "Descrição")]
-        [StringLength(100, MinimumLength = 10)]
+        [StringLength(100, MinimumLength = 2)]
         public string Desc { get; set; }
         
         public bool Status { get; set; }
