@@ -720,200 +720,6 @@ select option{
 }
 .ftco-footer-social li a:hover { color: #000000; }
 
-/*MENU*/
-.menu-bottom {
-    background: #f7f7f7;
-    text-align: center;
-}
-.header-bottom {
-    background: #f7f7f7;
-    text-align: center;
-}
-.hb-menu > nav > ul {
-	position: relative;
-}
-.hb-menu nav > ul > li {
-    display: inline-block;
-    position: relative;
-    padding-right: 40px;
-}
-.hb-menu nav > ul > li > a {
-	display: flex;
-	color: #242424;
-	text-transform: uppercase;
-	font-size: 14px;
-	line-height: 35px;
-	font-weight: 500;
-	padding: 8px 0;
-}
-.hb-menu-2 nav > ul > li > a {
-	display: flex;
-	color: #242424;
-	text-transform: uppercase;
-	font-size: 14px;
-	line-height: 35px;
-	font-weight: 500;
-	padding: 8px 0;
-}
-.hb-menu nav > ul > li:hover > a, 
-.hb-menu nav > ul > li:hover > a::after {
-	color: #249700;
-}
-.hb-menu nav > ul > li > a::after {
-	content: "\f107";
-	position: absolute;
-	top: 8px;
-	right: 15px;
-	font-family: fontawesome;
-	font-size: 18px;
-	transition: all 0.3s ease-in-out;
-	color: #242424;
-}
-.hb-menu nav > ul > li:nth-child(n+5) > a::after {
-	content: none;
-}
-.hb-menu nav > ul > li:hover  a::after {
-	transform: rotate(180deg);
-}
-.ht-menu > li .ht-currency-trigger span::after,
-.ht-menu > li .ht-language-trigger span::after,
-.hm-minicart-trigger .item-text::after {
-	content: "\f106";
-	float: right;
-	font-weight: 400;
-	font-size: 18px;
-	font-family: fontawesome;
-	color: #242424;
-	transition: all 0.3s ease-in-out;
-}
-.ht-menu > li .ht-setting-trigger span::after, 
-.ht-menu > li .ht-currency-trigger span::after, 
-.ht-menu > li .ht-language-trigger span::after, 
-.hm-minicart-trigger .item-text::after {
-	content: "\f107";
-	font-size: 14px;
-	color: #a4a4a4;
-	margin-left: 5px;
-	font-family: fontawesome;
-}
-.hm-minicart-trigger .item-text::after {
-	color: #fff;
-} 
-.ht-menu > li .ht-setting-trigger.is-active span::after, 
-.ht-menu > li .ht-currency-trigger.is-active span::after, 
-.ht-menu > li .ht-language-trigger.is-active span::after,
-.hm-minicart-trigger.is-active .item-text::after {
-	transform: rotate(-180deg);
-}
-.megamenu {
-	background: #ffffff;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-pack: justify;
-	-ms-flex-pack: justify;
-	justify-content: space-between;
-	padding: 30px 15px;
-	-webkit-transition: all .3s ease-in-out 0s;
-	-o-transition: all .3s ease-in-out 0s;
-	transition: all .3s ease-in-out 0s;
-	visibility: hidden;
-	opacity: 0;
-	-webkit-transform: translateY(30px);
-	-ms-transform: translateY(30px);
-	transform: translateY(30px);
-	z-index: 0;
-	position: absolute;
-	left: 100%;
-	right: auto;
-	top: 0;
-	-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, .1);
-	box-shadow: 0 0 5px rgba(0, 0, 0, .1);
-}
-.megamenu > li {
-	padding: 0 20px;
-	min-width: 250px;
-	border-right: 1px solid #ebebeb;
-}
-.megamenu > li:first-child {
-	padding-left: 5px;
-}
-.megamenu > li:last-child, .megamenu-static-holder .hb-megamenu > li:last-child {
-	border-right: none;
-}
-.megamenu > li > a {
-	padding: 8px 0 5px;
-	display: block;
-	margin-bottom: 10px;
-	color: #1e1e1e;
-	font-weight: 500;
-	font-size: 14px;
-	transition: all 0.3s ease-in-out;
-}
-.megamenu-static-holder ul li ul li.active a, 
-.dropdown-holder ul li ul li.active a {
-	color: #fed700;
-}
-.megamenu-holder .megamenu > li > a:hover, 
-.megamenu-holder .megamenu li ul li a:hover,
-.megamenu-static-holder .megamenu > li > a:hover, 
-.megamenu-static-holder .megamenu li ul li a:hover {
-	color: #fed700; /**/
-}
-.megamenu-holder .megamenu li ul li a, .megamenu-static-holder .megamenu li ul li a {
-	color: #7e7e7e;
-	font-size: 14px;
-	padding: 7px 0;
-	display: block
-}
-.megamenu-holder .megamenu.is-visible, .megamenu-static-holder .megamenu.is-visible {
-	-webkit-transform: scaleY(1);
-	-ms-transform: scaleY(1);
-	transform: scaleY(1);
-	visibility: visible;
-	z-index: 1;
-}
-.megamenu-holder:hover > .megamenu, .megamenu-static-holder:hover > .megamenu {
-	visibility: visible;
-	opacity: 1;
-	-webkit-transform: translateY(0);
-	-ms-transform: translateY(0);
-	transform: translateY(0)
-}
-/*Header Bottom Megamenu*/
-.hb-menu nav > ul > li:nth-child(4) {
-	margin-right: -20px;
-}
-.megamenu-static-holder {
-	position: static !important;
-}
-.megamenu-static-holder .hb-megamenu, .megamenu-holder .hb-megamenu {
-	background-image: url(images/menu/li-bg-menu.jpg);
-	background-size: cover;
-	background-position: top;
-	background-repeat: no-repeat;
-	top: auto;
-	left: 0;
-	z-index: 99;
-	width: 100%;
-}
-.megamenu-holder .hb-megamenu {
-	width: auto;
-	background-size: auto;
-	background-position: inherit;
-}
-.megamenu-static-holder .hb-megamenu > li {
-	width: 25%;
-	border-right: 1px solid #ebebeb;
-	padding: 25px;
-}
-.megamenu-static-holder .hb-megamenu > li:first-child {
-	padding-left: 10px;
-}
-.hb-menu nav > ul > .megamenu-static-holder > a::after {
-	position: static;
-	margin: -1px 0 0 10px;
-}
 /*HEADER*/
 @media (min-width: 769px) {
     .container {
@@ -4330,3 +4136,243 @@ body.open-mobile-search .header-area.layout-02{
     border: 1px solid #000;
 }
 /*---MENU---*/
+/*Header Bottom Menu*/
+.header-bottom {
+		background: #ededed;
+}
+.hb-menu > nav > ul {
+		position: relative;
+        text-align: center;
+}
+.hb-menu nav > ul > li {
+		display: inline-block;
+		position: relative;
+		padding-right: 40px;
+		transition: all 0.3s ease-in-out;
+}
+.hb-menu nav > ul > li > a {
+	display: flex;
+	color: #131313;
+	text-transform: uppercase;
+	font-size: 14px;
+	line-height: 35px;
+	font-weight: 600;
+	padding: 8px 0;
+    
+}
+.hb-menu-2 nav > ul > li > a {
+	display: flex;
+	color: #242424;
+	text-transform: uppercase;
+	font-size: 14px;
+	line-height: 35px;
+	font-weight: 500;
+	padding: 8px 0;
+}
+.hb-menu nav > ul > li:hover > a, 
+.hb-menu nav > ul > li:hover > a::after {
+		color: #22b500;
+}
+.hb-menu nav > ul > li > a::after {
+	content: "\f107";
+	position: absolute;
+	top: 8px;
+	right: 15px;
+	font-family: fontawesome;
+	font-size: 18px;
+	transition: all 0.3s ease-in-out;
+	color: #242424;
+}
+.hb-menu nav > ul > li:nth-child(n+5) > a::after {
+	content: none;
+}
+.hb-menu nav > ul > li:hover  a::after {
+	transform: rotate(180deg);
+}
+.ht-menu > li .ht-currency-trigger span::after,
+.ht-menu > li .ht-language-trigger span::after,
+.hm-minicart-trigger .item-text::after {
+	content: "\f106";
+	float: right;
+	font-weight: 400;
+	font-size: 18px;
+	font-family: fontawesome;
+	color: #242424;
+	transition: all 0.3s ease-in-out;
+}
+.ht-menu > li:hover .ht-currency-trigger span,
+.ht-menu > li:hover .ht-currency-trigger span::after, 
+.ht-menu > li:hover .ht-language-trigger span,
+.ht-menu > li:hover .ht-language-trigger span::after {
+	color: #fed700;
+}
+.ht-menu > li .ht-setting-trigger span::after, 
+.ht-menu > li .ht-currency-trigger span::after, 
+.ht-menu > li .ht-language-trigger span::after, 
+.hm-minicart-trigger .item-text::after {
+	content: "\f107";
+	font-size: 14px;
+	color: #a4a4a4;
+	margin-left: 5px;
+	font-family: fontawesome;
+}
+.hm-minicart-trigger .item-text::after {
+	color: #fff;
+} 
+.ht-menu > li .ht-setting-trigger.is-active span::after, 
+.ht-menu > li .ht-currency-trigger.is-active span::after, 
+.ht-menu > li .ht-language-trigger.is-active span::after,
+.hm-minicart-trigger.is-active .item-text::after {
+	transform: rotate(-180deg);
+}
+.megamenu-static-holder ul li ul li.active a, 
+.dropdown-holder ul li ul li.active a {
+	color: #fed700;
+}
+.megamenu-holder .megamenu > li > a:hover, 
+.megamenu-holder .megamenu li ul li a:hover,
+.megamenu-static-holder .megamenu > li > a:hover, 
+.megamenu-static-holder .megamenu li ul li a:hover {
+	color: #fed700;
+}
+.megamenu-holder .megamenu li ul li a, .megamenu-static-holder .megamenu li ul li a {
+	color: #7e7e7e;
+	font-size: 14px;
+	padding: 7px 0;
+	display: block
+}
+.megamenu-holder .megamenu.is-visible, .megamenu-static-holder .megamenu.is-visible {
+	-webkit-transform: scaleY(1);
+	-ms-transform: scaleY(1);
+	transform: scaleY(1);
+	visibility: visible;
+	z-index: 1;
+}
+.megamenu-holder:hover > .megamenu, .megamenu-static-holder:hover > .megamenu {
+	visibility: visible;
+	opacity: 1;
+	-webkit-transform: translateY(0);
+	-ms-transform: translateY(0);
+	transform: translateY(0)
+}
+/*Header Bottom Megamenu*/
+.hb-menu nav > ul > li:nth-child(4) {
+	margin-right: -20px;
+}
+.megamenu-static-holder {
+	position: static !important;
+}
+.megamenu-static-holder .hb-megamenu, .megamenu-holder .hb-megamenu {
+	background-size: cover;
+	background-position: top;
+	background-repeat: no-repeat;
+	top: auto;
+	left: 0;
+	z-index: 99;
+	width: 100%;
+}
+.megamenu-holder .hb-megamenu {
+	width: auto;
+	background-size: auto;
+	background-position: inherit;
+}
+.megamenu-static-holder .hb-megamenu > li {
+	width: 25%;
+	border-right: 1px solid #ebebeb;
+	padding: 25px;
+}
+.megamenu-static-holder .hb-megamenu > li:first-child {
+	padding-left: 10px;
+}
+.hb-menu nav > ul > .megamenu-static-holder > a::after {
+	position: static;
+	margin: -1px 0 0 10px;
+}
+/*Sticky*/
+.header-sticky.sticky {
+	background: rgba(254,215,0,.8);
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+	-webkit-transition: all 300ms ease-in 0s;
+	transition: all 300ms ease-in 0s;
+	z-index: 1049;
+}
+.sticky {
+		-webkit-animation: 800ms ease-in-out 0s normal none 1 running slideInDown;
+		animation: 800ms ease-in-out 0s normal none 1 running slideInDown;
+}
+/*Header Bottom Dropdown Menu*/
+.hb-menu nav > ul > li > ul.hb-dropdown {
+    background: #ededed;
+    opacity: 0;
+    padding: 20px 0;
+    position: absolute;
+    top: 100%;
+    transform: scaleY(0);
+    transform-origin: 0 0 0;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out 0s;
+    width: 220px;
+    z-index: 99;
+    border-radius: 3px;
+    text-decoration: none;
+}
+.hb-menu nav ul > li:hover > ul.hb-dropdown {
+		opacity: 1;
+		transform: scaleY(1);
+		visibility: visible;
+		top: 100%;
+}
+.hb-menu nav ul > li > ul.hb-dropdown > li {
+		position: relative;
+		transition: all 0.3s ease-in-out;
+}
+.hb-menu nav ul > li > ul.hb-dropdown > li > a {
+	color: #000;
+	display: block;
+    font-weight: 500;
+	padding: 6px 20px;
+	transition: all 0.3s ease-in-out 0s;
+}
+.hb-menu nav ul > li > ul.hb-dropdown > li.active > a {
+		color: #00c50b;
+}
+.hb-menu nav ul > li > ul.hb-dropdown > li > a:hover {
+	color: #6fc564;
+}
+/*Header Bottom Sub Dropdown Menu*/
+.hb-menu nav > ul > li > ul > li > ul.hb-sub-dropdown {
+	left: 100%;
+	position: absolute;
+	background: #fff;
+	width: 250px;
+	opacity: 0;
+	visibility: hidden;
+	top: 100%;
+	transition: all 0.3s ease-in-out;
+}
+.hb-menu nav > ul > li > ul > li:hover > ul.hb-sub-dropdown {
+	opacity: 1;
+	visibility: visible;
+	top: 0;
+}
+.hb-menu nav ul > li > ul.hb-dropdown > li.sub-dropdown-holder::after {
+	content: "\f107";
+	font-family: fontawesome;
+	position: absolute;
+	right: 25px;
+	top: 5px;
+	transition: all 0.3s ease-in-out;
+	color: #242424;
+}
+.hb-menu nav ul > li > ul.hb-dropdown > li.sub-dropdown-holder:hover::after {
+		transform: rotate(-90deg);
+		color: #fed700;
+}
+.hb-menu nav ul > li > ul.hb-dropdown > li.sub-dropdown-holder > ul > li > a {
+		display: block;
+		padding: 6px 20px;
+}
+.hb-menu nav ul > li > ul.hb-dropdown > li.sub-dropdown-holder:hover > a {	color: #fed700; }
