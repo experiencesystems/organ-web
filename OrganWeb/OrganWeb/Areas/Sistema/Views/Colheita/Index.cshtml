@@ -5,55 +5,75 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.DataColheita)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Situacao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Produto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.QtdColhida)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.QtdPerdida)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.QtdTotal)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Plantio)
-        </th>
-    </tr>
+<section class="section">
+    <div class="section-header">
+        <h1>Colheita</h1>
+    </div>
+    <div class="section-body">
+        <div class="tablecontainer">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped">
+                                        <tr>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.DataColheita)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Situacao)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Produto)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.QtdColhida)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.QtdPerdida)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.QtdTotal)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Plantio)
+                                            </th>
+                                        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.DataColheita)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Situacao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Produto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QtdColhida)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QtdPerdida)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.QtdTotal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Plantio)
-        </td>
-    </tr>
-}
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.DataColheita)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Situacao)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Produto)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.QtdColhida)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.QtdPerdida)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.QtdTotal)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Plantio)
+                                                </td>
+                                            </tr>
+                                        }
 
-</table>
+                                    </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
