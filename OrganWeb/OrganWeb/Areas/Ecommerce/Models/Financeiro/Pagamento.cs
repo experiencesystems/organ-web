@@ -15,7 +15,7 @@ namespace OrganWeb.Areas.Ecommerce.Models.Financeiro
         [Key]
         public int Id { get; set; }
         
-        [Display(Name = "Quantidade de parcelas")] //TODO: ver se esse int? não da problema TESTA ISSO MILENA
+        [Display(Name = "Quantidade de parcelas")]
         public int? QtdParcelas { get; set; }
 
         [Required]

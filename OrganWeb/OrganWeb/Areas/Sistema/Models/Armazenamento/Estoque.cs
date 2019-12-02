@@ -22,8 +22,7 @@ namespace OrganWeb.Areas.Sistema.Models.Armazenamento
         [Required]
         [Display(Name = "Quantidade")]
         public double Qtd { get; set; }
-
-        [Required]
+        
         [StringLength(6)]
         [ForeignKey("UnidadeMedida")]
         [Display(Name = "Unidade de medida")]

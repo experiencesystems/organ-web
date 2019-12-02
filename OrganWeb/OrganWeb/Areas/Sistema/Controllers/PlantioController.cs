@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using OrganWeb.Areas.Sistema.Models.ViewModels;
 using OrganWeb.Areas.Sistema.Models.Administrativo;
 using System.Threading.Tasks;
+using OrganWeb.Areas.Sistema.Models.Funcionarios;
 
 namespace OrganWeb.Areas.Sistema.Controllers
 {
@@ -99,15 +100,16 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 Areas = await area.AreasDisponiveis(),
                 Sementes = await semente.GetAll(),
                 Sistemas = plantio.Sistemas,
-                Periodos = plantio.Periodos
+                Periodos = plantio.Periodos,
+                Funcionarios = await new Funcionario().GetAll()
             };
             return View(view);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(CreatePlantioViewModel crplantio, int[] IdArea, int Sistema, int Tipo)
-        {//TODO: mudar colocar qnt usada no plantio e densidade na area
+        public async Task<ActionResult> Create(CreatePlantioViewModel crplantio, int[] IdArea, int Sistema, int Tipo, int[] IdFunc)
+        {
             if (crplantio.Inicio > crplantio.Colheita)
             {
                 ModelState.AddModelError(string.Empty, "Insira uma data de início anterior a da colheita.");
@@ -115,6 +117,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 crplantio.Sementes = await semente.GetAll();
                 crplantio.Sistemas = plantio.Sistemas;
                 crplantio.Periodos = plantio.Periodos;
+                crplantio.Funcionarios = await new Funcionario().GetAll();
                 return View(crplantio);
             }
             semente = await semente.GetByID(crplantio.IdEstoque);
@@ -125,6 +128,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 crplantio.Sementes = await semente.GetAll();
                 crplantio.Sistemas = plantio.Sistemas;
                 crplantio.Periodos = plantio.Periodos;
+                crplantio.Funcionarios = await new Funcionario().GetAll();
                 return View(crplantio);
             }
             else if (ModelState.IsValid)
@@ -161,6 +165,17 @@ namespace OrganWeb.Areas.Sistema.Controllers
                     await areap.Save();
                 }
 
+                foreach (var func in IdFunc)
+                {
+                    var funcp = new FuncPlantio
+                    {
+                        IdFunc = func,
+                        IdPlantio = pl.Id
+                    };
+                    funcp.Add(funcp);
+                    await funcp.Save();
+                }
+
                 return RedirectToAction("Index");
             }
 
@@ -169,6 +184,7 @@ namespace OrganWeb.Areas.Sistema.Controllers
             crplantio.Sementes = await semente.GetAll();
             crplantio.Sistemas = plantio.Sistemas;
             crplantio.Periodos = plantio.Periodos;
+            crplantio.Funcionarios = await new Funcionario().GetAll();
             return View(crplantio);
         }
 

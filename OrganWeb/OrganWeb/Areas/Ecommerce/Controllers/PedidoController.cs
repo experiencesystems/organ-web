@@ -64,7 +64,7 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             ModelState.Remove("Endereco.Logradouro.CEP");
 
             if (ModelState.IsValid)
-            {   //todo: verificar se o cep existe antes de inserilo
+            {   
                 var cep = await new Endereco().GetByID(pedido.CEPEntrega);
                 if (cep == null)
                 {
