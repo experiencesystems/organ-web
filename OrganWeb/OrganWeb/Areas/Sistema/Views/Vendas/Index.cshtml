@@ -14,7 +14,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Titulo</h4>
+                        <h4>Pedidos efetuados</h4>
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
@@ -24,16 +24,20 @@
                                     <th>Anúncio - quantidade pedida</th>
                                     <th>Valor do frete</th>
                                     <th>Situação</th>
+                                    <th></th>
                                 </tr>
 
                                 @foreach (var item in Model.Pedidos)
                                 {
-                                    <tr>
-                                        <td>@Html.DisplayFor(model => item.Data)</td>
-                                        <td>@Html.DisplayFor(model => item.NomeAnuncioQtd)</td>
-                                        <td>@Html.DisplayFor(model => item.ValorFrete)</td>
-                                        <td>@Html.DisplayFor(model => item.Situacao)</td>
-                                    </tr>
+                                <tr>
+                                    <td>@Html.DisplayFor(model => item.Data)</td>
+                                    <td>@Html.DisplayFor(model => item.NomeAnuncioQtd)</td>
+                                    <td>@Html.DisplayFor(model => item.ValorFrete)</td>
+                                    <td>@Html.DisplayFor(model => item.Situacao)</td>
+                                    <td>
+                                        <a class="popup btn" href="@Url.Action("Pedido", "Vendas", new { id = item.Id })"><div class="itemback"><i class="item fa fa-info"></i></div></a>
+                                    </td>
+                                </tr>
                                 }
 
                             </table>
@@ -59,7 +63,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Titulo</h4>
+                        <h4>Vendas efetuados</h4>
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
@@ -70,6 +74,7 @@
                                     <th>Valor total</th>
                                     <th>Valor do frete</th>
                                     <th>Situação</th>
+                                    <th></th>
                                 </tr>
 
                                 @foreach (var item in Model.Vendas)
@@ -79,6 +84,9 @@
                                         <td>@Html.DisplayFor(model => item.NomeAnuncio)</td>
                                         <td>@Html.DisplayFor(model => item.ValorTotal)</td>
                                         <td>@Html.DisplayFor(model => item.Situacao)</td>
+                                        <td>
+                                            <a class="popup btn" href="@Url.Action("Detalhes", "Vendas", new { id = item.Id })"><div class="itemback"><i class="item fa fa-info"></i></div></a>
+                                        </td>
                                     </tr>
                                 }
 
