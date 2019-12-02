@@ -36,8 +36,13 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             }
             //Envia o carrinho pro checkout
             var (QtdItens, Subtotal) = await carrinho.GetQtdETotalCarrinho();
-            return View(new Pedido { Endereco = new Endereco { Logradouro = new Logradouro { Bairro = new Bairro { Cidade = new Cidade { Estados = await estado.GetAll() } } } },
-                Carrinhos = itenscarrinho, IdUsuario = User.Identity.GetUserId(), Subtotal = Subtotal });
+            return View(new Pedido
+            {
+                Endereco = new Endereco { Logradouro = new Logradouro { Bairro = new Bairro { Cidade = new Cidade { Estados = await estado.GetAll() } } } },
+                Carrinhos = itenscarrinho,
+                IdUsuario = User.Identity.GetUserId(),
+                Subtotal = Subtotal
+            });
         }
 
         [HttpPost]
@@ -98,11 +103,11 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
 
                 pedido.IdPagamento = pagamento.Id;
 
-                var grupoanunciantes = pedido.Carrinhos.GroupBy(a => a.Anuncio.Anunciante);
+                var grupoanunciantes = pedido.Carrinhos.GroupBy(p => p.Anuncio.Anunciante, p => p, (key, c) => new { Anunciante = key, pedido.Carrinhos });
 
                 foreach (var anunciante in grupoanunciantes)
                 {
-                    foreach (var carrito in anunciante)
+                    foreach (var carrito in anunciante.Carrinhos.Where(x => x.Anuncio.Anunciante == anunciante.Anunciante))
                     {
                         var valorfrete = await MetodosAPI.GetValorDoFrete(carrito.Anuncio.Anunciante.CEP, pedido.CEPEntrega);
                         pedido.ValFrete = valorfrete.ValorFrete;

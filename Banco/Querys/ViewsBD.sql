@@ -1,5 +1,7 @@
 use dbOrgan; 
--- MUDAR VALOR DOS NOMES Das( DATas( PRA PORTUGUESSET lc_time_names = 'pt_BR'; 
+-- MUDAR VALOR DOS NOMES Das( DATas( PRA PORTUGUESSET 
+
+set lc_time_names = 'pt_BR'; 
 
 drop view if exists vwPragaOrDoenca ;
 create view vwPragaOrDoenca as(
@@ -573,7 +575,7 @@ from tbPedido P
     inner join tbAnuncio A on A.Id = PA.IdAnuncio
     inner join tbProduto Pr on Pr.Id = A.IdProduto
     inner join tbAnunciante An on a.IdAnunciante = An.IdUsuario 
-group by P.Id
+group by P.Id, A.IdAnunciante, A.Id, E.Rua, E.BCE
 );
 
 drop view if exists vwComentario;
@@ -634,6 +636,7 @@ from tbVenda V
     inner join tbAnuncio A on A.Id = PA.IdAnuncio
     inner join tbProduto Pr on Pr.Id = A.IdProduto
     inner join tbAnunciante An on An.IdUsuario = A.IdAnunciante
+group by v.Id, A.IdAnunciante, E.Rua, E.BCE
 );
 
 DELIMITER $

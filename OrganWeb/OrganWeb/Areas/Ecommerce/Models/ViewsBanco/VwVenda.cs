@@ -31,8 +31,15 @@ namespace OrganWeb.Areas.Ecommerce.Models.ViewsBanco
 
         public async Task<IPagedList<VwVenda>> GetVendasAnunciante(int page)
         {
-            string id = HttpContext.Current.User.Identity.GetUserId();
-            return await DbSet.Where(x => x.IdAnunciante == id).OrderBy(p => p.Id).ToPagedListAsync(page, 10);
+            try
+            {
+                string id = HttpContext.Current.User.Identity.GetUserId();
+                return await DbSet.Where(x => x.IdAnunciante == id).OrderBy(p => p.Id).ToPagedListAsync(page, 10);
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
         }
     }
 }
