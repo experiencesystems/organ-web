@@ -553,6 +553,7 @@
     <Content Include="Areas\Sistema\Views\Colheita\RepeteColheita.cshtml" />
     <Content Include="Areas\Sistema\Views\Vendas\Index.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Loja\Categoria.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\Loja\Pesquisa.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\organweb - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\organweb - Web Deploy.pubxml" />

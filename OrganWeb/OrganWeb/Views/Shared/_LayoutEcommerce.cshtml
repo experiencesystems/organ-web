@@ -27,10 +27,11 @@
                     </div>
                     <div class="col-lg-10 col-md-9 padding-top-2px">
                         <div class="header-search-bar layout-01">
-                            <form action="#" class="form-search" name="desktop-seacrh" method="get">
-                                <input type="text" name="s" class="input-text" value="" placeholder="Procurar">
+                            @using (Html.BeginForm("Pesquisa", "Loja", FormMethod.Get))
+                            {
+                                @Html.TextBox("s", null, new { @class = "input-text", @placeholder = "Procurar" })
                                 <button type="submit" class="btn-submit"><i class="biolife-icon mdi mdi-find-replace"></i></button>
-                            </form>
+                            }
                         </div>
                         <div class="biolife-cart-info">
                             <div class="login-item">

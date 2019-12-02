@@ -41,6 +41,13 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             }
         }
 
+        public async Task<ActionResult> Pesquisa(int? page, string s)
+        {
+            int pagina = page ?? 1;
+            var anuncios = await anuncio.GetAnuncios();
+            return View(anuncio.GetAnunciosFiltro(pagina, s, anuncios));
+        }
+
         public async Task<ActionResult> Index(int? pagedesc, int? pagenovos)
         {
             int pagecdesc = pagedesc ?? 1;
