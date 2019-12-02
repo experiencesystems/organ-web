@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.Owin;
 using OrganWeb.Areas.Ecommerce.Models;
 using OrganWeb.Areas.Ecommerce.Models.Vendas;
+using OrganWeb.Areas.Ecommerce.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -40,10 +41,17 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             }
         }
 
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? pagedesc, int? pagenovos)
         {
+            int pagecdesc = pagedesc ?? 1;
+            int pagenovo = pagenovos ?? 1;
             var anuncios = await anuncio.GetAnuncios();
-            return View(anuncios);
+            var view = new ViewLoja
+            {
+                AnunciosComDesconto = anuncio.GetAnunciosEmPromocao(pagecdesc, anuncios),
+                AnunciosRecentes = anuncio.GetAnunciosRecentes(pagenovo, anuncios)
+            };
+            return View(view);
         }
 
         public async Task<FileContentResult> FotoDoAnuncio(int? anuncio)

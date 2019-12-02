@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using PagedList;
+using PagedList.EntityFramework;
 
 namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
 {
@@ -58,6 +60,16 @@ namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
             anuncio.NumAvaliacoes = Avaliacoes.Count;
             anuncio.Estrelas = await GetMediaEstrelas(anuncio);
             return anuncio;
+        }
+
+        public IPagedList<Anuncio> GetAnunciosRecentes(int page, List<Anuncio> anuncios)
+        {
+            return anuncios.OrderByDescending(p => p.Data).Take(40).ToPagedList(page, 10);
+        }
+
+        public IPagedList<Anuncio> GetAnunciosEmPromocao(int page, List<Anuncio> anuncios)
+        {
+            return anuncios.Where(x => x.Desconto > 0).Take(40).OrderByDescending(p => p.DataDesc).ToPagedList(page, 10);
         }
     }
 }

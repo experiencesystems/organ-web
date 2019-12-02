@@ -215,6 +215,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Ecommerce\Controllers\AvaliacaoController.cs" />
     <Compile Include="Areas\Ecommerce\Models\API\ListarUnidades.cs" />
+    <Compile Include="Areas\Ecommerce\Models\ViewModels\ViewLoja.cs" />
     <Compile Include="Areas\Ecommerce\Models\ViewsBanco\VwPedido.cs" />
     <Compile Include="Areas\Ecommerce\Models\ViewsBanco\VwVenda.cs" />
     <Compile Include="Areas\Ecommerce\Models\zRepositories\EnderecoRepository.cs" />
