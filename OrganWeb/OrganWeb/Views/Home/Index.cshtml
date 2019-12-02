@@ -58,8 +58,8 @@
                 @if (Request.IsAuthenticated)
                 {
                     <a class="btn btn-outline-success my-2 my-sm-0 entrar black" href="/Sistema">Acessar o Organ</a>
-                    <a class="btn btn-outline-success my-2 my-sm-0 registrar black" href="/Ecommerce">Acessar o ecommerce</a>
-                    using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                    <a class="btn btn-outline-success  my-sm-0 registrar black" href="/Ecommerce">Acessar o ecommerce</a>
+                    using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "btn my-2 my-sm-0 sair white" }))
                     {
                         @Html.AntiForgeryToken()
                         <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()"> Fazer logoff</a>
