@@ -64,12 +64,29 @@ namespace OrganWeb.Areas.Ecommerce.Models.zRepositories
 
         public IPagedList<Anuncio> GetAnunciosRecentes(int page, List<Anuncio> anuncios)
         {
-            return anuncios.OrderByDescending(p => p.Data).Take(40).ToPagedList(page, 10);
+            return anuncios.OrderByDescending(p => p.Data).Take(40).ToPagedList(page, 12);
         }
 
         public IPagedList<Anuncio> GetAnunciosEmPromocao(int page, List<Anuncio> anuncios)
         {
-            return anuncios.Where(x => x.Desconto > 0).Take(40).OrderByDescending(p => p.DataDesc).ToPagedList(page, 10);
+            return anuncios.Where(x => x.Desconto > 0).Take(40).OrderByDescending(p => p.DataDesc).ToPagedList(page, 12);
+        }
+
+        // Filtros
+
+        public IPagedList<Anuncio> GetAnunciosCategoria(int page, int categoria, List<Anuncio> anuncios)
+        {
+            return anuncios.Where(x => x.Produto.Categoria == categoria).Take(40).OrderByDescending(p => p.DataDesc).ToPagedList(page, 20);
+        }
+
+        public IPagedList<Anuncio> GetAnunciosCategoriaFiltro(int page, int categoria, string filtro, List<Anuncio> anuncios)
+        {
+            return anuncios.Where(x => x.Produto.Categoria == categoria && (x.Nome.IndexOf(filtro, StringComparison.OrdinalIgnoreCase) >= 0)).Take(40).OrderByDescending(p => p.DataDesc).ToPagedList(page, 20);
+        }
+
+        public IPagedList<Anuncio> GetAnunciosFiltro(int page, string filtro, List<Anuncio> anuncios)
+        {
+            return anuncios.Where(x => x.Nome.IndexOf(filtro, StringComparison.OrdinalIgnoreCase) >= 0).Take(40).OrderByDescending(p => p.DataDesc).ToPagedList(page, 20);
         }
     }
 }

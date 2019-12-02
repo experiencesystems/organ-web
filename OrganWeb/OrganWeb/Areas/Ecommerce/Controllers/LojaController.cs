@@ -75,24 +75,12 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             return new FileContentResult(anuncioo.Foto, "image/png");
         }
 
-        public async Task<string> Detalhes()
+        public async Task<ActionResult> Categoria(int? page, int cat)
         {
-            string aa;
-            var baseAddress = new Uri("http://api.frenet.com.br/");
-
-            using (var httpClient = new HttpClient { BaseAddress = baseAddress })
-            {
-
-                httpClient.DefaultRequestHeaders.TryAddWithoutValidation("accept", "application/json");
-
-                httpClient.DefaultRequestHeaders.TryAddWithoutValidation("token", "EFB53FBBRF4CAR4EDARB177R7F076B125EE8");
-
-                using (var response = await httpClient.GetAsync("CEP/Address/05314000"))
-                {
-                    aa = await response.Content.ReadAsStringAsync();
-                }
-            }
-            return aa;
+            int pagina = page ?? 1;
+            var anuncios = await anuncio.GetAnuncios();
+            ViewBag.Categoria = cat;
+            return View(anuncio.GetAnunciosCategoria(pagina, cat, anuncios));
         }
     }
 }
