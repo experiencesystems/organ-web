@@ -15,6 +15,7 @@ namespace OrganWeb.Areas.Sistema.Models.Telefone
         public int Id { get; set; }
 
         [Required]
+        [Display(Name = "Tipo: casa, fixo, celular, etc")]
         [StringLength(15, MinimumLength = 1)]
         public string Tipo { get; set; }
     }

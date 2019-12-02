@@ -16,6 +16,7 @@ namespace OrganWeb.Areas.Sistema.Models.Telefone
         public int Id { get; set; }
 
         [Required]
+        [Display(Name = "Número")]
         public int Numero { get; set; }
         
         [Required]
@@ -24,6 +25,7 @@ namespace OrganWeb.Areas.Sistema.Models.Telefone
 
         [Required]
         [ForeignKey("DDD")]
+        [Display(Name = "DDD")]
         public int IdDDD { get; set; }
 
         public virtual TipoTel TipoTel { get; set; }

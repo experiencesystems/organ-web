@@ -33,7 +33,7 @@ namespace OrganWeb.Areas.Ecommerce.Models.API
                 valores += valor;
                 mensagem += "R$" + Math.Round(valor, 2, MidpointRounding.ToEven) + "\n";
             }
-            mensagem += "Total com o frete: R$" + Math.Round(valores + subtotais, 2, MidpointRounding.ToEven);
+            mensagem += "<br/> Total com o frete: R$" + Math.Round(valores + subtotais, 2, MidpointRounding.ToEven);
             return mensagem;
         }
 

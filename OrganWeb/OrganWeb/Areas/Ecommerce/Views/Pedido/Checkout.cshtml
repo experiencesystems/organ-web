@@ -11,15 +11,15 @@
 
 <div class="content md-margin-top-50px">
 
-@if (!Request.IsAuthenticated)
-{
-    <br />
-    <h6>Faça login para finalizar sua compra!</h6>
-    <div>
-        @Html.ActionLink("Login", "Login", "Account", new { Area = "", returnUrl = this.Request.RawUrl }, new { })
-    </div>
-    return;
-}
+    @if (!Request.IsAuthenticated)
+    {
+        <br />
+        <h6>Faça login para finalizar sua compra!</h6>
+        <div>
+            @Html.ActionLink("Login", "Login", "Account", new { Area = "", returnUrl = this.Request.RawUrl }, new { })
+        </div>
+        return;
+    }
 
     <!-- SECTION -->
     <div class="section">
@@ -144,20 +144,18 @@
                                 </div>
                             </div>
                         </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.CEPEntrega, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col input-group">
-                                    @Html.EditorFor(model => model.CEPEntrega, new { htmlAttributes = new { @class = "form-control", @id = "cepe" } })
-                                    @Html.ValidationMessageFor(model => model.CEPEntrega, "", new { @class = "text-danger" })
-                                    <input class="btn" type="button" id="valorcepe" value="Calcular valor do frete" />
-                                </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CEPEntrega, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col input-group">
+                                @Html.EditorFor(model => model.CEPEntrega, new { htmlAttributes = new { @class = "form-control", @id = "cepe" } })
+                                @Html.ValidationMessageFor(model => model.CEPEntrega, "", new { @class = "text-danger" })
+                                <input class="btn" type="button" id="valorcepe" value="Calcular valor do frete" />
                             </div>
-                            <strong><p></p></strong>
                         </div>
+                        <strong><p></p></strong>
+                    </div>
                 </div>
             }
-
-
 
             <div class="col-md-7">
                 @if (ViewBag.SuccessMessage != null)
@@ -179,8 +177,8 @@
     </div>
 </div>
 
-    @section Scripts {
-        <script type="text/javascript">
+@section Scripts {
+    <script type="text/javascript">
             $(document).ready(function () {
                 var button = document.getElementById('valorcepe');
                 button.addEventListener('click', function () {
@@ -204,5 +202,5 @@
                     }
                 });
             });
-        </script>
-    }
+    </script>
+}
