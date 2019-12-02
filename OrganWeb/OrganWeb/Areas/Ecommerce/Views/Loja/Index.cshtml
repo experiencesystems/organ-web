@@ -104,7 +104,7 @@
         </div>
 
         <div class="row">
-            
+
             <!-- product -->
             @foreach (var item in Model.AnunciosRecentes)
             {
@@ -112,10 +112,10 @@
                     <div class="product">
                         <a href="@Url.Action("Detalhes", "Anuncio", new { id = item.Id })" class="img-prod">
                             <img src="@Url.Action("FotoDoAnuncio", "Loja", new { Area = "Ecommerce", anuncio = item.Id })" alt="">
-                                @if (item.Desconto > 0)
-                                {
-                                    <span class="status">-@Html.DisplayFor(modelItem => item.Desconto)%</span>
-                                }
+                            @if (item.Desconto > 0)
+                            {
+                                <span class="status">-@Html.DisplayFor(modelItem => item.Desconto)%</span>
+                            }
                             <div class="overlay"></div>
                         </a>
                         <div class="text py-3 pb-4 px-3 text-center">
@@ -141,7 +141,7 @@
                                         double valornovo = Math.Round(item.Produto.ValorUnit - ((item.Produto.ValorUnit * item.Desconto) / 100), 2, MidpointRounding.ToEven);
 
                                         <p class="price"><span class="mr-2 price-dc">R$ @Html.DisplayFor(modelItem => item.Produto.ValorUnit)</span><span class="price-sale">R$ @valornovo</span></p>
-                                    
+
                                     }
                                     else
                                     {
@@ -150,7 +150,7 @@
                                                 R$ @Html.DisplayFor(modelItem => item.Produto.ValorUnit)
                                             </span>
                                         </p>
-                                        }
+                                    }
                                 </div>
                             </div>
                             <div class="bottom-area d-flex px-3">
@@ -178,16 +178,23 @@
                     </div>
                 </div>
                 <!-- /product -->
-             }
+            }
         </div>
-        <br />
-        Página @(Model.AnunciosRecentes.PageCount < Model.AnunciosRecentes.PageNumber ? 0 : Model.AnunciosRecentes.PageNumber) de @Model.AnunciosRecentes.PageCount
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="site-block-27">
+                    <ul>
+                        Página @(Model.AnunciosRecentes.PageCount < Model.AnunciosRecentes.PageNumber ? 0 : Model.AnunciosRecentes.PageNumber) de @Model.AnunciosRecentes.PageCount
 
-        @Html.PagedListPager(Model.AnunciosRecentes, pagenovos => Url.Action("Index",
-            new { pagenovos }), new PagedListRenderOptions
-            {
-                LiElementClasses = new string[] { "pagination page-item p1" }
-            })
+                        @Html.PagedListPager(Model.AnunciosRecentes, pagenovos => Url.Action("Index",
+                            new { pagenovos }), new PagedListRenderOptions
+                            {
+                                LiElementClasses = new string[] { "pagination page-item p1" }
+                            })
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     <br>
     <!--PRODUTOS-->
@@ -243,34 +250,19 @@
                     <div class="row">
                         @foreach (var item in Model.AnunciosComDesconto)
                         {
-                            <div class="col-md-6 col-lg-3">
+                            <div class="col-md-6 col-lg-3 ftco-animate">
                                 <div class="product">
-                                    <div class="product-img">
+                                    <a href="@Url.Action("Detalhes", "Anuncio", new { id = item.Id })" class="img-prod">
                                         <img src="@Url.Action("FotoDoAnuncio", "Loja", new { Area = "Ecommerce", anuncio = item.Id })" alt="">
-                                        <div class="product-label">
-                                            @if (item.Desconto > 0)
-                                            {
-                                                <span class="sale">-@Html.DisplayFor(modelItem => item.Desconto)%</span>
-                                            }
-                                        </div>
-                                    </div>
-                                    <div class="product-body">
-                                        <p class="product-category">@Html.DisplayFor(model => item.Produto.Categorias.Where(x => x.Value == item.Produto.Categoria.ToString()).First().Text)</p>
-                                        <h3 class="product-name"><a href="#">@Html.DisplayFor(modelItem => item.Nome)<br /><i class="icon-room"></i>@Html.DisplayFor(modelItem => item.Anunciante.Endereco.Logradouro.Bairro.Cidade.Nome) - @Html.DisplayFor(modelItem => item.Anunciante.Endereco.Logradouro.Bairro.Cidade.Estado.UF)</a></h3>
                                         @if (item.Desconto > 0)
                                         {
-                                            double valornovo = Math.Round(item.Produto.ValorUnit - ((item.Produto.ValorUnit * item.Desconto) / 100), 2, MidpointRounding.ToEven);
-                                            <h4 class="product-price">
-                                                R$ @valornovo
-                                                <del class="product-old-price">R$ @Html.DisplayFor(modelItem => item.Produto.ValorUnit)</del>
-                                            </h4>
+                                            <span class="status">-@Html.DisplayFor(modelItem => item.Desconto)%</span>
                                         }
-                                        else
-                                        {
-                                            <h4 class="product-price">
-                                                R$ @Html.DisplayFor(modelItem => item.Produto.ValorUnit)
-                                            </h4>
-                                        }
+                                        <div class="overlay"></div>
+                                    </a>
+                                    <div class="text py-3 pb-4 px-3 text-center">
+                                        <p class="product-category">@Html.DisplayFor(model => item.Produto.Categorias.Where(x => x.Value == item.Produto.Categoria.ToString()).First().Text)</p>
+                                        <h3 class="product-name"><a href="#">@Html.DisplayFor(modelItem => item.Nome)<br /><i class="icon-room"></i>@Html.DisplayFor(modelItem => item.Anunciante.Endereco.Logradouro.Bairro.Cidade.Nome) - @Html.DisplayFor(modelItem => item.Anunciante.Endereco.Logradouro.Bairro.Cidade.Estado.UF)</a></h3>
                                         <div class="product-rating">
                                             @for (var i = 1; i <= item.Estrelas; i++)
                                             {
@@ -284,18 +276,45 @@
                                                 }
                                             }
                                         </div>
-                                        <div class="product-btns">
-                                            @using (Html.BeginForm("AddWishlist", "Wishlist", new { idAnuncio = item.Id }, FormMethod.Post))
-                                            {
-                                                @Html.AntiForgeryToken();
-                                                <button class="add-to-wishlist" type="submit" value="@item.Id"><i class="mdi mdi-cards-heart"></i><span class="tooltipp" value="Adicionar na lista de desejos"></span></button>
-                                            }
-                                            @using (Html.BeginForm("AddAoCarrinho", "Carrinho", new { idAnuncio = item.Id }, FormMethod.Post))
-                                            {
-                                                @Html.AntiForgeryToken();
-                                                <button class="add-to-compare" type="submit" value="@item.Id"><i class="mdi mdi-cart-plus"></i><span class="tooltipp" value="Adicionar no carrinho"></span></button>
-                                            }
-                                            <a class="quick-view" href="@Url.Action("Detalhes", "Anuncio", new { id = item.Id })"><i class="mdi mdi-information-outline"></i><span class="tooltipp" value="Detalhes"></span></a>
+                                        <div class="d-flex">
+                                            <div class="pricing">
+                                                @if (item.Desconto > 0)
+                                                {
+                                                    double valornovo = Math.Round(item.Produto.ValorUnit - ((item.Produto.ValorUnit * item.Desconto) / 100), 2, MidpointRounding.ToEven);
+
+                                                    <p class="price"><span class="mr-2 price-dc">R$ @Html.DisplayFor(modelItem => item.Produto.ValorUnit)</span><span class="price-sale">R$ @valornovo</span></p>
+
+                                                }
+                                                else
+                                                {
+                                                    <p class="price">
+                                                        <span class="price-sale">
+                                                            R$ @Html.DisplayFor(modelItem => item.Produto.ValorUnit)
+                                                        </span>
+                                                    </p>
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="bottom-area d-flex px-3">
+                                            <div class="m-auto d-flex">
+                                                @using (Html.BeginForm("AddWishlist", "Wishlist", new { idAnuncio = item.Id }, FormMethod.Post))
+                                                {
+                                                    @Html.AntiForgeryToken();
+                                                    <button type="submit" value="@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                                        <span><i class="mdi mdi-cards-heart"></i></span>
+                                                    </button>
+                                                }
+                                                @using (Html.BeginForm("AddAoCarrinho", "Carrinho", new { idAnuncio = item.Id }, FormMethod.Post))
+                                                {
+                                                    @Html.AntiForgeryToken();
+                                                    <button type="submit" value="@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                                        <span><i class="mdi mdi-cart-plus"></i></span>
+                                                    </button>
+                                                }
+                                                <a href="@Url.Action("Detalhes", "Anuncio", new { id = item.Id })" class="heart d-flex justify-content-center align-items-center ">
+                                                    <span><i class="mdi mdi-information-outline"></i></span>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -303,14 +322,22 @@
                             <!-- /product -->
                         }
                     </div><!-- /.row -->
-                    <br />
-                    Página @(Model.AnunciosRecentes.PageCount < Model.AnunciosRecentes.PageNumber ? 0 : Model.AnunciosRecentes.PageNumber) de @Model.AnunciosRecentes.PageCount
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <div class="site-block-27">
+                                <ul>
+                                    Página @(Model.AnunciosRecentes.PageCount < Model.AnunciosRecentes.PageNumber ? 0 : Model.AnunciosRecentes.PageNumber) de @Model.AnunciosRecentes.PageCount
 
-                    @Html.PagedListPager(Model.AnunciosRecentes, pagedesc => Url.Action("Index",
-                        new { pagedesc }), new PagedListRenderOptions
-                        {
-                            LiElementClasses = new string[] { "pagination page-item p1" }
-                        })
+                                    @Html.PagedListPager(Model.AnunciosRecentes, pagedesc => Url.Action("Index",
+                                        new { pagedesc }), new PagedListRenderOptions
+                                        {
+                                            LiElementClasses = new string[] { "pagination page-item p1" }
+                                        })
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
                 </div><!-- /.products -->
             </div><!-- /.product-slider -->
 
