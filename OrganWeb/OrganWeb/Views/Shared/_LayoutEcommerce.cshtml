@@ -22,43 +22,43 @@
         <div class="header-bottom hidden-sm hidden-xs">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-2 col-md-3">
-                        <a href="/Ecommerce" class="biolife-logo"><img src="~/Imagens/logo.png" alt="biolife logo" width="135" height="34"></a>
-                    </div>
-                    <div class="col-lg-10 col-md-9 padding-top-2px">
-                        <div class="header-search-bar layout-01">
-                            @using (Html.BeginForm("Pesquisa", "Loja", FormMethod.Get))
-                            {
-                                @Html.TextBox("s", null, new { @class = "input-text", @placeholder = "Procurar" })
-                                <button type="submit" class="btn-submit"><i class="biolife-icon mdi mdi-find-replace"></i></button>
-                            }
+                        <div class="col-lg-2 col-md-3">
+                            <a href="/Ecommerce" class="biolife-logo"><img src="~/Imagens/logo.png" alt="biolife logo" width="135" height="34"></a>
                         </div>
-                        <div class="biolife-cart-info">
-                            <div class="wishlist-block hidden-sm hidden-xs">
-                                <a href="/Ecommerce/Wishlist/Index" class="link-to">
-                                    <span class="icon-qty-combine">
-                                        <i class="mdi mdi-heart-outline biolife-icon"></i>
-                                    </span>
-                                </a>
+                        <div class="col-lg-10 col-md-9 padding-top-2px">
+                            <div class="header-search-bar layout-01">
+                                @using (Html.BeginForm("Pesquisa", "Loja", FormMethod.Get))
+                                {
+                                    @Html.TextBox("s", null, new { @class = "input-text", @placeholder = "Procurar" })
+                                    <button type="submit" class="btn-submit"><i class="biolife-icon mdi mdi-find-replace"></i></button>
+                                }
                             </div>
-                            <div class="minicart-block">
-                                <div class="minicart-contain">
-                                    <a href="/Ecommerce/Carrinho/Index" class="link-to">
+                            <div class="biolife-cart-info">
+                                <div class="wishlist-block hidden-sm hidden-xs">
+                                    <a href="/Ecommerce/Wishlist/Index" class="link-to">
                                         <span class="icon-qty-combine">
-                                            <i class="mdi mdi-cart-outline biolife-icon"></i>
-                                            <span class="qty">@{Html.RenderAction("SumarioCarrinho", "Carrinho");}
+                                            <i class="mdi mdi-heart-outline biolife-icon"></i>
+                                        </span>
                                     </a>
                                 </div>
-                            </div>
-                            <div class="login-item minicart-contain hidden-sm hidden-xs">
-                                <nav class="navbar navbar-expand-lg main-navbar">
-                                    @Html.Partial("_LoginEcoPartial")
-                                </nav>
+                                <div class="minicart-block">
+                                    <div class="minicart-contain">
+                                        <a href="/Ecommerce/Carrinho/Index" class="link-to">
+                                            <span class="icon-qty-combine">
+                                                <i class="mdi mdi-cart-outline biolife-icon"></i>
+                                                <span class="qty">@{Html.RenderAction("SumarioCarrinho", "Carrinho");}
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="login-item minicart-contain hidden-sm hidden-xs">
+                                    <nav class="navbar navbar-expand-lg main-navbar">
+                                        @Html.Partial("_LoginEcoPartial")
+                                    </nav>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
         <!-- Begin Header Bottom Area -->
         <div class="menu-bottom header-sticky d-none d-lg-block d-xl-block">
@@ -69,7 +69,7 @@
                             <nav>
                                 <ul>
                                     <li>@Html.ActionLink("Início", "Index", "Loja")</li>
-                                    <li><a href="#">Categorias</a></li>
+                                    <li><a href="#">Categoria</a></li>
                                     <li>@Html.ActionLink("Vender", "Novo", "Anuncio")</li>
                                     <li><a href="#">Contato</a></li>
                                 </ul>

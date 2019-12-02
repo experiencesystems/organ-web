@@ -8,157 +8,177 @@
     ViewBag.Title = "Pedido";
 }
 
-@if (!Request.IsAuthenticated)
-{
-    <br />
-    <h6>Faça login para finalizar sua compra!</h6>
-    <div>
-        @Html.ActionLink("Login", "Login", "Account", new { area = "" }, new { returnUrl = this.Request.RawUrl })
-    </div>
-    return;
-}
-
-
-@if (ViewBag.SuccessMessage != null)
-{
-    <div>
-        @ViewBag.SuccessMessage
-        @Html.ActionLink("Acompanhe seu pedido", "Index", "Pedido")
-    </div>
-    return;
-}
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Checkout</title>
-</head>
-<body>
-    @using (Html.BeginForm())
+<div class="content md-margin-top-50px">
+    @if (!Request.IsAuthenticated)
     {
-        @Html.AntiForgeryToken()
-
-        @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.Data)
-        @Html.HiddenFor(model => model.Status)
-        @Html.HiddenFor(model => model.IdUsuario)
-        @Html.HiddenFor(model => model.IdPagamento)
-
-        <div class="form-horizontal">
-            <h4>Pedido</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Anuncio.Produto.Nome)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Anuncio.Produto.ValorUnit)
-                    </th>
-                    <th>
-                        Quantidade
-                    </th>
-                    <th></th>
-                </tr>
-                @foreach (var item in Model.Carrinhos)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Anuncio.Produto.Nome)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Anuncio.Produto.ValorUnit)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Qtd)
-                        </td>
-                    </tr>
-                }
-            </table>
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.Subtotal)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Subtotal)
-                </dd>
-            </dl>
-            <div class="form-group">
-                @Html.LabelFor(model => model.CEPEntrega, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.CEPEntrega, new { htmlAttributes = new { @class = "form-control", @id = "cepe" } })
-                    @Html.ValidationMessageFor(model => model.CEPEntrega, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <input type="button" id="valorcepe" value="Calcular valor do frete" />
-            <p></p>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Endereco.Logradouro.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Endereco.Logradouro.Nome, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Endereco.Logradouro.Nome, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.NumEntrega, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.NumEntrega, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.NumEntrega, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.CompEntrega, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.CompEntrega, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.CompEntrega, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Endereco.Logradouro.Bairro.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Endereco.Logradouro.Bairro.Nome, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Endereco.Logradouro.Bairro.Nome, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Endereco.Logradouro.Bairro.Cidade.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Endereco.Logradouro.Bairro.Cidade.Nome, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Endereco.Logradouro.Bairro.Cidade.Nome, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Endereco.Logradouro.Bairro.Cidade.IdEstado, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.Endereco.Logradouro.Bairro.Cidade.IdEstado, new SelectList(Model.Endereco.Logradouro.Bairro.Cidade.Estados, "Id", "UF"), new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Endereco.Logradouro.Bairro.Cidade.IdEstado, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Pagamento.QtdParcelas, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Pagamento.QtdParcelas, new { htmlAttributes = new { @class = "form-control", @min = "1", @max = "10" } })
-                    @Html.ValidationMessageFor(model => model.NumEntrega, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Criar pedido" class="btn btn-default" />
-                </div>
-            </div>
+        <br />
+        <h6>Faça login para finalizar sua compra!</h6>
+        <div>
+            @Html.ActionLink("Login", "Login", "Account", new { area = "" }, new { returnUrl = this.Request.RawUrl })
         </div>
+        return;
     }
 
-    <div>
-        @Html.ActionLink("Voltar ao carrinho", "Index", "Carrinho")
-    </div>
+    <!-- SECTION -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
 
-    @section Scripts
-    {
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.Data)
+                @Html.HiddenFor(model => model.Status)
+                @Html.HiddenFor(model => model.IdUsuario)
+                @Html.HiddenFor(model => model.IdPagamento)
+                <div class="row">
+
+                    <div class="col-md-7">
+                        <div class="billing-details">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Endereco.Logradouro.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col">
+                                    @Html.EditorFor(model => model.Endereco.Logradouro.Nome, new { htmlAttributes = new { @class = "form-control txt-input" } })
+                                    @Html.ValidationMessageFor(model => model.Endereco.Logradouro.Nome, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.NumEntrega, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col">
+                                    @Html.EditorFor(model => model.NumEntrega, new { htmlAttributes = new { @class = "form-control col" } })
+                                    @Html.ValidationMessageFor(model => model.NumEntrega, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Endereco.Logradouro.Bairro.Cidade.IdEstado, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col">
+                                    @Html.DropDownListFor(model => model.Endereco.Logradouro.Bairro.Cidade.IdEstado, new SelectList(Model.Endereco.Logradouro.Bairro.Cidade.Estados, "Id", "UF"), new { @class = "dropdowncheck col" })
+                                    @Html.ValidationMessageFor(model => model.Endereco.Logradouro.Bairro.Cidade.IdEstado, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CompEntrega, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col">
+                                    @Html.EditorFor(model => model.CompEntrega, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.CompEntrega, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Endereco.Logradouro.Bairro.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col">
+                                    @Html.EditorFor(model => model.Endereco.Logradouro.Bairro.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Endereco.Logradouro.Bairro.Nome, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Endereco.Logradouro.Bairro.Cidade.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col">
+                                    @Html.EditorFor(model => model.Endereco.Logradouro.Bairro.Cidade.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Endereco.Logradouro.Bairro.Cidade.Nome, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Pagamento.QtdParcelas, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col">
+                                    @Html.EditorFor(model => model.Pagamento.QtdParcelas, new { htmlAttributes = new { @class = "form-control", @min = "1", @max = "10" } })
+                                    @Html.ValidationMessageFor(model => model.NumEntrega, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Criar pedido" class="btn btn-default" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5 order-details">
+                        <div class="section-title text-center">
+                            <h3 class="title">Pedido</h3>
+                        </div>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="order-summary">
+                            <div class="order-col">
+                                <div>
+                                    <strong>
+                                        @Html.DisplayNameFor(model => model.Anuncio.Produto.Nome)
+                                    </strong>
+                                </div>
+                                <div>
+                                    <strong>
+                                        @Html.DisplayNameFor(model => model.Anuncio.Produto.ValorUnit)
+                                    </strong>
+                                </div>
+                                <div>
+                                    <strong>Quantidade</strong>
+                                </div>
+                            </div>
+                            @foreach (var item in Model.Carrinhos)
+                            {
+                                <div class="order-products">
+                                    <div class="order-col">
+                                        <div>@Html.DisplayFor(modelItem => item.Anuncio.Produto.Nome)</div>
+                                        <div>@Html.DisplayFor(modelItem => item.Anuncio.Produto.ValorUnit)</div>
+                                        <div>@Html.DisplayFor(modelItem => item.Qtd)</div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="order-summary">
+                            <div class="order-col">
+                                <div>
+                                    <strong>
+                                        @Html.DisplayNameFor(model => model.Subtotal)
+                                    </strong>
+                                </div>
+                                <div>
+                                    <strong class="order-total">
+                                        @Html.DisplayFor(model => model.Subtotal)
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CEPEntrega, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col input-group">
+                                    @Html.EditorFor(model => model.CEPEntrega, new { htmlAttributes = new { @class = "form-control", @id = "cepe" } })
+                                    @Html.ValidationMessageFor(model => model.CEPEntrega, "", new { @class = "text-danger" })
+                                    <input class="btn" type="button" id="valorcepe" value="Calcular valor do frete" />
+                                </div>
+                            </div>
+                            <strong><p></p></strong>
+                        </div>
+                </div>
+            }
+
+
+
+            <div class="col-md-7">
+                @if (ViewBag.SuccessMessage != null)
+                {
+                    <div>
+                        @ViewBag.SuccessMessage
+                        @Html.ActionLink("Acompanhe seu pedido", "Index", "Pedido")
+                    </div>
+                    return;
+                }
+
+            </div>
+
+            <div>
+                @Html.ActionLink("Voltar ao carrinho", "Index", "Carrinho")
+            </div>
+        </div>
+
+    </div>
+</div>
+
+    @section Scripts {
         <script type="text/javascript">
             $(document).ready(function () {
                 var button = document.getElementById('valorcepe');
@@ -185,5 +205,3 @@
             });
         </script>
     }
-</body>
-</html>
