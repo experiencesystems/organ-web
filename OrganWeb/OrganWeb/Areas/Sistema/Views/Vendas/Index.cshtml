@@ -5,66 +5,100 @@
     ViewBag.Title = "Vendas";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<section class="section">
+    <div class="section-header">
+        <h1>Vendas</h1>
+    </div>
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Titulo</h4>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped">
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Anúncio - quantidade pedida</th>
+                                    <th>Valor do frete</th>
+                                    <th>Situação</th>
+                                </tr>
 
-<table class="table">
-    <tr>
-        <th>Data</th>
-        <th>Anúncio - quantidade pedida</th>
-        <th>Valor do frete</th>
-        <th>Situação</th>
-    </tr>
+                                @foreach (var item in Model.Pedidos)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(model => item.Data)</td>
+                                        <td>@Html.DisplayFor(model => item.NomeAnuncioQtd)</td>
+                                        <td>@Html.DisplayFor(model => item.ValorFrete)</td>
+                                        <td>@Html.DisplayFor(model => item.Situacao)</td>
+                                    </tr>
+                                }
 
-    @foreach (var item in Model.Pedidos)
-    {
-        <tr>
-            <td>@Html.DisplayFor(model => item.Data)</td>
-            <td>@Html.DisplayFor(model => item.NomeAnuncioQtd)</td>
-            <td>@Html.DisplayFor(model => item.ValorFrete)</td>
-            <td>@Html.DisplayFor(model => item.Situacao)</td>
-            <td>
-                <a class="popup btn" href="@Url.Action("Pedido", "Vendas", new { id = item.Id })"><div class="itemback"><i class="item fa fa-info"></i></div></a>
-            </td>
-        </tr>
-    }
+                            </table>
 
-</table>
-<br />
-Página @(Model.Pedidos.PageCount < Model.Pedidos.PageNumber ? 0 : Model.Pedidos.PageNumber) de @Model.Pedidos.PageCount
+                            <div class="card-footer text-center">
+                                <nav class="d-inline-block">
+                                    Página @(Model.Pedidos.PageCount < Model.Pedidos.PageNumber ? 0 : Model.Pedidos.PageNumber) de @Model.Pedidos.PageCount
 
-@Html.PagedListPager(Model.Pedidos, pagep => Url.Action("Index",
-new { pagep }), new PagedListRenderOptions
-{
-LiElementClasses = new string[] { "pagination page-item p1" }
-})
+                                    @Html.PagedListPager(Model.Pedidos, pagep => Url.Action("Index",
+                                    new { pagep }), new PagedListRenderOptions
+                                    {
+                                    LiElementClasses = new string[] { "pagination page-item page-link text-center p1" }
+                                    })
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<table class="table">
-    <tr>
-        <th>Data</th>
-        <th>Anúncio</th>
-        <th>Valor total</th>
-        <th>Situação</th>
-    </tr>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Titulo</h4>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped">
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Anúncio</th>
+                                    <th>Valor total</th>
+                                    <th>Valor do frete</th>
+                                    <th>Situação</th>
+                                </tr>
 
-    @foreach (var item in Model.Vendas)
-    {
-        <tr>
-            <td>@Html.DisplayFor(model => item.Data)</td>
-            <td>@Html.DisplayFor(model => item.NomeAnuncio)</td>
-            <td>@Html.DisplayFor(model => item.ValorTotal)</td>
-            <td>@Html.DisplayFor(model => item.Situacao)</td>
-            <td>
-                <a class="popup btn" href="@Url.Action("Detalhes", "Vendas", new { id = item.Id })"><div class="itemback"><i class="item fa fa-info"></i></div></a>
-            </td>
-        </tr>
-    }
+                                @foreach (var item in Model.Vendas)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(model => item.Data)</td>
+                                        <td>@Html.DisplayFor(model => item.NomeAnuncio)</td>
+                                        <td>@Html.DisplayFor(model => item.ValorTotal)</td>
+                                        <td>@Html.DisplayFor(model => item.Situacao)</td>
+                                    </tr>
+                                }
 
-</table>
-<br />
-Página @(Model.Vendas.PageCount < Model.Vendas.PageNumber ? 0 : Model.Vendas.PageNumber) de @Model.Vendas.PageCount
+                            </table>
 
-@Html.PagedListPager(Model.Vendas, pagep => Url.Action("Index",
-new { pagep }), new PagedListRenderOptions
-{
-LiElementClasses = new string[] { "pagination page-item p1" }
-})
+                            <div class="card-footer text-center">
+                                <nav class="d-inline-block">
+                                    Página @(Model.Vendas.PageCount < Model.Vendas.PageNumber ? 0 : Model.Vendas.PageNumber) de @Model.Vendas.PageCount
 
+                                    @Html.PagedListPager(Model.Vendas, pagep => Url.Action("Index",
+                                    new { pagep }), new PagedListRenderOptions
+                                    {
+                                    LiElementClasses = new string[] { "pagination page-item page-link text-center p1" }
+                                    })
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
