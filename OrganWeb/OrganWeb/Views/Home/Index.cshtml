@@ -18,12 +18,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
     <!-- FIM SCROLL SUAVE -->
     <!-- SCROLL SUAVE -->
-    <script>jQuery(document).ready(function($) {
-		$(".scroll").click(function(event){
-			event.preventDefault();
-			$('html,body').animate({scrollTop:$(this.hash).offset().top}, 600);
-	   });
-	});</script>
+    <script>
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 600);
+            });
+        });</script>
     <!-- FIM SCROLL SUAVE -->
 </head>
 <body data-spy="scroll" data-target="#navbarResponsive">
@@ -58,6 +59,11 @@
                 {
                     <a class="btn btn-outline-success my-2 my-sm-0 entrar black" href="/Sistema">Acessar o Organ</a>
                     <a class="btn btn-outline-success my-2 my-sm-0 registrar black" href="/Ecommerce">Acessar o ecommerce</a>
+                    using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()"> Fazer logoff</a>
+                    }
                 }
                 else
                 {
@@ -80,7 +86,8 @@
         <div class="caption text-left">
             <h1>O software agro que você precisa.</h1>
             <h3>O que faltava está aqui. A administração de seu agronegócio nunca foi tão fácil e eficiente.</h3>
-            <a class="btn btn-outline-light btn-lg" href="#portfolio">Conheça agora</a>
+            <a class="btn btn-outline-light btn-lg" href="#sobre">Conheça o Organ</a>
+            <a class="btn btn-outline-light btn-lg" href="/Ecommerce">Acesse o ecommerce</a>
         </div>
         <!--FimPrincipal-->
     </div>
@@ -105,7 +112,7 @@
                         <div class="feature">
                             <i class="fas fa-circle fa-7x" data-fa-transform="shrink-1 up-3"></i>
                             <h3>Prático</h3>
-                            <p>Rápido, fácil, sem complicações. Não perca tempo em tarefas simples.</p>
+                            <p>Rápido, fácil, sem complicações.Não perca tempo em tarefas simples.</p>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -132,19 +139,21 @@
                         <p class="text-left">
                             O sistema Organ é voltado para a agricultura, e permite
                             responder à possibilidade de controle de plantio, registrando
-                            todo o manejo da cultura. Além de atender às necessidades de
+                            todo o manejo da cultura.Além de atender às necessidades de
                             estoque e um controle organizado da entrada e saída de informações.
                             Facilitando o gerenciamento de uma safra.
                         </p>
                     </div>
-                    <div class="col col-md-auto funcimg"><img src="~/Imagens/portal/tela.png"></div>
-                </div> <!--row-->
-                <div class="fixed-wrap">
-                    <!--background-->
-                    <div class="fixed"></div>
-                </div>
-            </div> <!--container-->
-        </div> <!--row-->
+                    <div class="col col-md-auto funcimg">
+                        <img src="~/Imagens/portal/tela.png"></ div >
+                    </div> <!--row-->
+                    <div class="fixed-wrap">
+                        <!--background-->
+                        <div class="fixed"></div>
+                    </div>
+                </div> <!--container-->
+            </div> <!--row-->
+        </div> <!--fixedbg-->
     </div> <!--fixedbg-->
     <!--FimFuncionalidades-->
     <!--Sobre-->
@@ -173,7 +182,7 @@
                         Resumindo: deixando o coração na gaveta
                         e encarando o negócio sem piedade. <h6 class="text-right">- Mairo Melo, cliente</h6>
                     </blockquote>
-                    <a class="btn btn-outline-light btn-lg" href="#">Conheça nosso e-commerce</a>
+                    <a class="btn btn-outline-light btn-lg" href="/Ecommerce">Conheça nosso e-commerce</a>
                 </div>
             </div>
         </div>
@@ -284,8 +293,8 @@
                         </div>
                     </div>
                 </div>
+            </section>
         </div>
-        </section>
     </div>
     <!--Fim Planos-->
     <!--PassoAPasso-->
@@ -363,18 +372,20 @@
     </div>
     <!--FimContato-->
     <!--- Script Source Files -->
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js">
+    </script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
-    <script type="text/javascript">// Scrolling Effect
-			$(window).on("scroll", function() {
-				if($(window).scrollTop()) {
-					$('nav').addClass('black');
-				}
-				else {
-					$('nav').removeClass('black');
-				}
-			})</script>
+    <script type="text/javascript">
+        // Scrolling Effect
+        $(window).on("scroll", function () {
+            if ($(window).scrollTop()) {
+                $('nav').addClass('black');
+            }
+            else {
+                $('nav').removeClass('black');
+            }
+        })</script>
     <!--- End of Script Source Files -->
 </body>
 </html>

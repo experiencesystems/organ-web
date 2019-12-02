@@ -243,34 +243,41 @@
                             </div>
                             <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
                                 <div class="review-form-wrapper">
-                                    <span class="title">Mande sua análise:</span>
-                                    @using (Ajax.BeginForm("NovaAvaliacao", "Avaliacao", new { area = "Ecommerce" }, new AjaxOptions { HttpMethod = "POST" }))
+                                    @if (Request.IsAuthenticated && Model.Avaliacoes.Where(x => x.IdUsuario == User.Identity.GetUserId()).ToList().Count > 0)
                                     {
-                                        @Html.AntiForgeryToken()
-                                        @Html.Hidden("idAnuncio", Model.Id)
-                                        <div class="comment-form-rating">
-                                            <label>1. Avaliação do produto:</label>
-                                            <p class="stars">
-                                                <span>
-                                                    <i class="mdi mdi-star-outline" aria-hidden="true">@Html.RadioButton("Estrela", "1", new { @class = "btn-rating" })</i>
-                                                    <label>
-                                                        <i class="mdi mdi-star-outline" aria-hidden="true"></i>
-                                                        <input type="radio" name="Estrela" value="1" class="btn-rating" data-value="star-1" />
+                                        <span class="title">Sua análise: @Model.Avaliacoes.Where(x => x.IdUsuario == User.Identity.GetUserId()).FirstOrDefault().Nota / 5</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="title">Mande sua análise:</span>
+                                        using (Ajax.BeginForm("NovaAvaliacao", "Avaliacao", new { area = "Ecommerce" }, new AjaxOptions { HttpMethod = "POST" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.Hidden("idAnuncio", Model.Id)
+                                            <div class="comment-form-rating">
+                                                <label>1. Avaliação do produto:</label>
+                                                <p class="stars">
+                                                    <span>
+                                                        <i class="mdi mdi-star-outline" aria-hidden="true">@Html.RadioButton("Estrela", "1", new { @class = "btn-rating" })</i>
+                                                        <label>
+                                                            <i class="mdi mdi-star-outline" aria-hidden="true"></i>
+                                                            <input type="radio" name="Estrela" value="1" class="btn-rating" data-value="star-1" />
 
-                                                    </label>
-                                                    <a class="btn-rating" data-value="star-2"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
-                                                    <a class="btn-rating" data-value="star-3"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
-                                                    <a class="btn-rating" data-value="star-4"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
-                                                    <a class="btn-rating" data-value="star-5"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
-                                                </span>
+                                                        </label>
+                                                        <a class="btn-rating" data-value="star-2"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
+                                                        <a class="btn-rating" data-value="star-3"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
+                                                        <a class="btn-rating" data-value="star-4"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
+                                                        <a class="btn-rating" data-value="star-5"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                            <p class="form-row">
+                                                @Html.TextArea("comentario", "", htmlAttributes: new { name = "txt-comment", id = "txt-comment-ath-3364", cols = "30", rows = "10", placeholder = "Mensagem" })
                                             </p>
-                                        </div>
-                                        <p class="form-row">
-                                            @Html.TextArea("comentario", "", htmlAttributes: new { name = "txt-comment", id = "txt-comment-ath-3364", cols = "30", rows = "10", placeholder = "Mensagem" })
-                                        </p>
-                                        <p class="form-row">
-                                            <button type="submit" name="submit">Enviar</button>
-                                        </p>
+                                            <p class="form-row">
+                                                <button type="submit" name="submit">Enviar</button>
+                                            </p>
+                                        }
                                     }
                                 </div>
                             </div>
