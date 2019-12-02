@@ -166,14 +166,14 @@
                                     {
                                         using (Html.BeginForm("AddWishlist", "Wishlist", new { idAnuncio = item.Id }, FormMethod.Post))
                                         {
-                                            Html.AntiForgeryToken();
+                                            @Html.AntiForgeryToken();
                                             <button type="submit" value="@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
                                                 <span><i class="mdi mdi-cards-heart"></i></span>
                                             </button>
                                         }
                                         using (Html.BeginForm("AddAoCarrinho", "Carrinho", new { idAnuncio = item.Id }, FormMethod.Post))
                                         {
-                                            Html.AntiForgeryToken();
+                                            @Html.AntiForgeryToken();
                                             <button type="submit" value="@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
                                                 <span><i class="mdi mdi-cart-plus"></i></span>
                                             </button>
@@ -317,14 +317,14 @@
                                                 {
                                                     using (Html.BeginForm("AddWishlist", "Wishlist", new { idAnuncio = item.Id }, FormMethod.Post))
                                                     {
-                                                        Html.AntiForgeryToken();
+                                                        @Html.AntiForgeryToken();
                                                         <button type="submit" value="@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
                                                             <span><i class="mdi mdi-cards-heart"></i></span>
                                                         </button>
                                                     }
                                                     using (Html.BeginForm("AddAoCarrinho", "Carrinho", new { idAnuncio = item.Id }, FormMethod.Post))
                                                     {
-                                                        Html.AntiForgeryToken();
+                                                        @Html.AntiForgeryToken();
                                                         <button type="submit" value="@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
                                                             <span><i class="mdi mdi-cart-plus"></i></span>
                                                         </button>
