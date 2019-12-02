@@ -597,6 +597,7 @@
     <Content Include="Areas\Sistema\Views\Vendas\Detalhes.cshtml" />
     <Content Include="Areas\Sistema\Views\Vendas\Pedido.cshtml" />
     <Content Include="Areas\Ecommerce\Views\Pedido\Index.cshtml" />
+    <Content Include="Areas\Ecommerce\Views\Anuncio\MeusAnuncios.cshtml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\organweb - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\organweb - Web Deploy.pubxml" />

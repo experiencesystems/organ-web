@@ -42,6 +42,14 @@ namespace OrganWeb.Areas.Ecommerce.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> MeusAnuncios(int? page)
+        {
+            int pagina = page ?? 1;
+            var anuncios = await anuncio.GetAll();
+            return View(anuncio.GetMeusAnuncios(pagina, anuncios));
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> NovoDeEstoque(string Nome, double Qtd)

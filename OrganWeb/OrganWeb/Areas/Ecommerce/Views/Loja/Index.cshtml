@@ -297,23 +297,32 @@
                                         </div>
                                         <div class="bottom-area d-flex px-3">
                                             <div class="m-auto d-flex">
-                                                @using (Html.BeginForm("AddWishlist", "Wishlist", new { idAnuncio = item.Id }, FormMethod.Post))
+                                                @if (Request.IsAuthenticated && item.Anunciante.IdUsuario == User.Identity.GetUserId())
                                                 {
-                                                    @Html.AntiForgeryToken();
-                                                    <button type="submit" value="@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                                        <span><i class="mdi mdi-cards-heart"></i></span>
-                                                    </button>
+                                                    <a href="@Url.Action("Detalhes", "Anuncio", new { id = item.Id })" class="heart d-flex justify-content-center align-items-center ">
+                                                        <span><i class="mdi mdi-information-outline"></i></span>
+                                                    </a>
                                                 }
-                                                @using (Html.BeginForm("AddAoCarrinho", "Carrinho", new { idAnuncio = item.Id }, FormMethod.Post))
+                                                else
                                                 {
-                                                    @Html.AntiForgeryToken();
-                                                    <button type="submit" value="@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                                        <span><i class="mdi mdi-cart-plus"></i></span>
-                                                    </button>
+                                                    @using (Html.BeginForm("AddWishlist", "Wishlist", new { idAnuncio = item.Id }, FormMethod.Post))
+                                                    {
+                                                        @Html.AntiForgeryToken();
+                                                        <button type="submit" value="@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                                            <span><i class="mdi mdi-cards-heart"></i></span>
+                                                        </button>
+                                                    }
+                                                    @using (Html.BeginForm("AddAoCarrinho", "Carrinho", new { idAnuncio = item.Id }, FormMethod.Post))
+                                                    {
+                                                        @Html.AntiForgeryToken();
+                                                        <button type="submit" value="@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                                            <span><i class="mdi mdi-cart-plus"></i></span>
+                                                        </button>
+                                                    }
+                                                    <a href="@Url.Action("Detalhes", "Anuncio", new { id = item.Id })" class="heart d-flex justify-content-center align-items-center ">
+                                                        <span><i class="mdi mdi-information-outline"></i></span>
+                                                    </a>
                                                 }
-                                                <a href="@Url.Action("Detalhes", "Anuncio", new { id = item.Id })" class="heart d-flex justify-content-center align-items-center ">
-                                                    <span><i class="mdi mdi-information-outline"></i></span>
-                                                </a>
                                             </div>
                                         </div>
                                     </div>
