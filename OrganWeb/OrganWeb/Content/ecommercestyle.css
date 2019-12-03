@@ -59,6 +59,7 @@ a:hover { text-decoration: none; }
   top: 0;
   letter-spacing: .05em; 
   background: #069200;
+  color: #fff;
 }
 
 .btn:hover, .btn:active, .btn:focus {
@@ -68,7 +69,7 @@ a:hover { text-decoration: none; }
 .btn.btn-secondary {
     background-color: #e6e7e9;
     border-color: #e6e7e9;
-    color: #000; }
+    color: #fff; }
 .btn.btn-sm {
     font-size: 14px !important;
     padding: 10px 20px !important; }
