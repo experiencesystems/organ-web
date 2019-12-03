@@ -897,17 +897,17 @@ table tr:hover .table-links {
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;
-    background-color: #6777ef;
+    background-color: #47c363;
 }
 
 .nav-pills .nav-item .nav-link {
-    color: #6777ef;
+    color: #47c363;
     padding-left: 15px !important;
     padding-right: 15px !important;
 }
 
     .nav-pills .nav-item .nav-link:hover {
-        background-color: #f6f7fe;
+        background-color: #fafef6;
     }
 
     .nav-pills .nav-item .nav-link.active {
@@ -923,7 +923,7 @@ table tr:hover .table-links {
 
 .nav .nav-item .nav-link .ion, .nav .nav-item .nav-link .fas, .nav .nav-item .nav-link .far, .nav .nav-item .nav-link .fab, .nav .nav-item .nav-link .fal {
     margin-right: 3px;
-    font-size: 12px;
+    font-size: 13px;
 }
 /* 3.10 Pagination */
 .page-item .page-link {
@@ -1930,12 +1930,12 @@ h6 .badge {
     }
 
     .dropdown-menu a {
-        font-size: 13px;
+        font-size: 15px;
     }
 
     .dropdown-menu .dropdown-title {
         text-transform: uppercase;
-        font-size: 10px;
+        font-size: 15px;
         letter-spacing: 1.5px;
         font-weight: 700;
         color: #191d21 !important;
@@ -3012,7 +3012,7 @@ body.sidebar-mini .main-sidebar .sidebar-menu > li {
                 top: 50%;
                 right: 20px;
                 transform: translate(0, -50%);
-                font-size: 12px;
+                font-size: 15px;
                 transition: all .5s;
             }
 
@@ -3021,7 +3021,7 @@ body.sidebar-mini .main-sidebar .sidebar-menu li:hover > ul.dropdown-menu {
 }
 
     body.sidebar-mini .main-sidebar .sidebar-menu li:hover > ul.dropdown-menu li:hover > a {
-        background-color: #fcfcfd;
+        background-color: #fcfdfc;
     }
 
     body.sidebar-mini .main-sidebar .sidebar-menu li:hover > ul.dropdown-menu li .dropdown-menu {
@@ -3085,7 +3085,7 @@ body.layout-2 .main-sidebar {
         }
 
         body.layout-2 .main-sidebar .sidebar-menu li a:hover {
-            color: #6777ef;
+            color: #47c363;
             background-color: transparent;
         }
 
@@ -3305,8 +3305,8 @@ body.layout-3 .main-footer {
 
         .main-sidebar .sidebar-menu li.menu-header {
             padding: 3px 15px;
-            color: #a1a8ae;
-            font-size: 10px;
+            color: #696d71;
+            font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 1.3px;
             font-weight: 600;
@@ -3350,7 +3350,7 @@ body.layout-3 .main-footer {
             }
 
         .main-sidebar .sidebar-menu li.active a {
-            color: #6777ef;
+            color: #47c363;
             font-weight: 600;
             background-color: #f8f8f8;
         }
@@ -3398,12 +3398,12 @@ body.layout-3 .main-footer {
             }
 
                 .main-sidebar .sidebar-menu li ul.dropdown-menu li a:hover {
-                    color: #6777ef;
+                    color: #47c363;
                     background-color: inherit;
                 }
 
             .main-sidebar .sidebar-menu li ul.dropdown-menu li.active > a {
-                color: #6777ef;
+                color: #47c363;
                 font-weight: 600;
             }
 

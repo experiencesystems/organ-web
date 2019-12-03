@@ -8,8 +8,22 @@
     ViewBag.Title = "Pedido";
 }
 
+<div class="hero-wrap hero-bread">
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2">Início /</span><span class="mr-2">Pedido</span></p>
+                <h1 class="mb-0 bread">Pedido</h1>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="content md-margin-top-50px">
+<<<<<<< HEAD
+=======
+
+>>>>>>> 60eb51b4126ea0f1cc9abe6e5a1d2bfff2f6db2e
     <div class="col-md-7">
         @if (ViewBag.SuccessMessage != null)
         {
@@ -19,7 +33,13 @@
             </div>
             return;
         }
+<<<<<<< HEAD
     </div>
+=======
+
+    </div>
+
+>>>>>>> 60eb51b4126ea0f1cc9abe6e5a1d2bfff2f6db2e
     @if (!Request.IsAuthenticated)
     {
         <br />
@@ -165,6 +185,10 @@
                     </div>
                 </div>
             }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 60eb51b4126ea0f1cc9abe6e5a1d2bfff2f6db2e
             <div>
                 @Html.ActionLink("Voltar ao carrinho", "Index", "Carrinho")
             </div>
