@@ -38,13 +38,13 @@ namespace OrganWeb.Areas.Sistema.Controllers
                 {
                     case "Finalizados":
                         return View(await plantio.GetPlantiosFinalizados());
-                    case "Ativos":
-                        return View(await plantio.GetPlantiosAtivos());
-                    default:
+                    case "Todos":
                         return View(await plantio.GetPlantios());
+                    default:
+                        return View(await plantio.GetPlantiosAtivos());
                 }                
             }
-            return View(await plantio.GetPlantios());
+            return View(await plantio.GetPlantiosAtivos());
         }
 
         public async Task<ActionResult> Detalhes(int? id)

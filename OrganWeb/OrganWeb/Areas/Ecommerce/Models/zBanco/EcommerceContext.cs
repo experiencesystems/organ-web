@@ -16,7 +16,7 @@ namespace OrganWeb.Areas.Ecommerce.Models.zBanco
     [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class EcommerceContext : IdentityDbContext<ApplicationUser>
     {
-        public EcommerceContext() : base("Server=SG-Organ-1627-master.servers.mongodirector.com;Database=dbEcommerce;Uid=sgroot;Password=&qqRvKycZGFH3s6i;", throwIfV1Schema: false) { }
+        public EcommerceContext() : base("name=EcommerceContext", throwIfV1Schema: false) { }
 
         // ECOMMERCE
         // ANUNCIO

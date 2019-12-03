@@ -119,7 +119,7 @@
                                 <div class="pricing">
                                     @if (item.Desconto > 0)
                                     {
-                                        double valornovo = Math.Round(item.Produto.ValorUnit - ((item.Produto.ValorUnit * item.Desconto) / 100), 2, MidpointRounding.ToEven);
+                                        double valornovo = Math.Round(item.Produto.ValorUnit - ((item.Produto.ValorUnit * item.Desconto ?? 0) / 100), 2, MidpointRounding.ToEven);
 
                                         <p class="price"><span class="mr-2 price-dc">R$ @Html.DisplayFor(modelItem => item.Produto.ValorUnit)</span><span class="price-sale">R$ @valornovo</span></p>
 
@@ -289,7 +289,7 @@
                                                 <div class="pricing">
                                                     @if (item.Desconto > 0)
                                                     {
-                                                        double valornovo = Math.Round(item.Produto.ValorUnit - ((item.Produto.ValorUnit * item.Desconto) / 100), 2, MidpointRounding.ToEven);
+                                                        double valornovo = Math.Round(item.Produto.ValorUnit - ((item.Produto.ValorUnit * item.Desconto ?? 0) / 100), 2, MidpointRounding.ToEven);
 
                                                         <p class="price"><span class="mr-2 price-dc">R$ @Html.DisplayFor(modelItem => item.Produto.ValorUnit)</span><span class="price-sale">R$ @valornovo</span></p>
 

@@ -14,7 +14,7 @@ namespace OrganWeb.Areas.Sistema.Models.zBanco
     [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class OrganContext : DbContext
     {
-        public OrganContext() : base("Server=SG-Organ-1627-master.servers.mongodirector.com;Database=dborgan;Uid=sgroot;Password=&qqRvKycZGFH3s6i;") { }
+        public OrganContext() : base("name=OrganContext") { }
 
         // SISTEMA
         // ADMINISTRATIVO
