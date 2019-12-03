@@ -1,7 +1,5 @@
 use dbOrgan; 
--- MUDAR VALOR DOS NOMES Das( DATas( PRA PORTUGUESSET 
-
-set lc_time_names = 'pt_BR'; 
+-- MUDAR VALOR DOS NOMES Das( DATas( PRA PORTUGUESSET lc_time_names = 'pt_BR'; 
 
 drop view if exists vwPragaOrDoenca ;
 create view vwPragaOrDoenca as(
@@ -221,15 +219,15 @@ create view vwControle as(
             left join
         vwItems i on ic.IdEstoque = i.Id
     group by c.Id, c.`Status`);
-    
+
 drop view if exists vwHistorico;
 create view vwHistorico as(
 select date_format(HE.DataAlteracao, '%e/%m/%y às %H:%i') `Data de Alteração`, HE.Id, HE.IdEstoque `Id do Item`, ifnull(I.`Item`, 'Item Excluído') `Nome do Item`,
- ifnull(HE.QtdAntiga, '0') `Quantidade Antiga`,ifnull(I.`Quantidade`, '0') `Quantidade Atual`, ifnull(HE.`Desc`, 'Sem Descrição') `Descrição de Alteração`
+ ifnull(HE.QtdAntiga, '0') `Quantidade Antiga`,ifnull(I.`Quantidade`, '0') `Quantidade Atual`, HE.`Desc` `Descrição de Alteração`
  from tbHistEstoque HE
 	left join 
  vwItems I on HE.IdEstoque = I.Id
- group by Id, I.Item, I.Quantidade
+ group by Id
  order by `Data de Alteração` desc
 );
 
@@ -239,8 +237,8 @@ create view vwPlantio as(
 		   P.Nome `Plantio`,
 		   P.Sistema `Sistema`,
            P.TipoPlantio `Tipo`,
-           P.DataInicio `Data de Início`,
-		   P.DataColheita `Data Prevista pra Colheita`,
+           date_format(P.DataInicio, '%d/%m/%y') `Data de Início`,
+           date_format(P.DataColheita, '%d/%m/%y') `Data Prevista pra Colheita`,
            group_concat(distinct(A.Nome) separator ', ') `Áreas`,
            group_concat(distinct(concat(I.Item)) separator ',') `Itens Usados`,
            group_concat(distinct(ifnull(F.Nome, 'Sem Funcionários')) separator ', ') `Funcionários Participantes`,
@@ -506,6 +504,7 @@ select a.IdUsuario `Id`,
        u.CPF `CPF`,
        u.Email `Email`,
 	   a.NomeFazenda `Nome da Fazenda`,
+       a.FotoFazenda `Foto da Fazenda`,
        concat(E.Rua,', ', a.NumEnd,' - ', ifnull(a.CompEnd, 'Sem Complemento'),' - ',E.BCE,' - ',E.CEP) `Endereço da fazenda`,
        case
 		when u.Assinatura = 1 then 'Mensal'
@@ -547,10 +546,10 @@ drop view if exists vwPedido;
 create view vwPedido as(
 select 
 	P.Id `Id`,
-    A.IdAnunciante `IdAnunciante`,
-    An.NomeFazenda `Anunciante`,
+    A.IdAnunciante `Anunciante`,
     A.Id `IdAnuncio`,
     A.Nome `Anúncio`,
+    P.Id `IdProduto`,
 	group_concat(distinct concat(A.Nome, ' - ', PA.Qtd)separator ', ') `Nome do Anúncio - Quantidade Pedida`,
 	sum(Pr.ValorUnit * PA.Qtd) `Valor Total s/Desconto`,
     sum((Pr.ValorUnit * PA.Qtd)-((Pr.ValORUnit * PA.Qtd)*(A.Desconto/100))) `Valor Total c/Desconto`,
@@ -574,8 +573,7 @@ from tbPedido P
     inner join tbPedidoAnuncio PA on PA.IdPedido = P.Id
     inner join tbAnuncio A on A.Id = PA.IdAnuncio
     inner join tbProduto Pr on Pr.Id = A.IdProduto
-    inner join tbAnunciante An on a.IdAnunciante = An.IdUsuario 
-group by P.Id, A.IdAnunciante, A.Id, E.Rua, E.BCE
+group by P.Id
 );
 
 drop view if exists vwComentario;
@@ -610,20 +608,17 @@ select
     A.Nome `Anúncio`,
     C.Qtd `Quantidade adicionada`
 from tbCarrinho C
-	inner join tbAnuncio A on A.Id = C.IdAnuncio
-where C.`Status` = true
-);
+	inner join tbAnuncio A on A.Id = C.IdAnuncio);
 
 drop view if exists vwVenda;
 create view vwVenda as(
 select 
 	V.Id `Id`,
-    P.IdUsuario `IdCliente`,
     DATE_FORMAT(V.`Data`, '%a - %e/%m/%y às %H:%i') `Data da Venda`,
 	group_concat(distinct concat(A.Nome, ' - ', PA.Qtd)separator ', ') `Nome do Anúncio - Quantidade Pedida`,
 	(sum((Pr.ValorUnit * PA.Qtd)-((Pr.ValorUnit * PA.Qtd)*(A.Desconto/100))) + P.ValFrete) `Valor Total`,
 	concat(E.Rua,', ', P.NumEntrega,' - ', ifnull(P.CompEntrega, 'Sem Complemento'),' - ',E.BCE,' - ',E.CEP) `Endereço de Entrega`,
-    An.IdUsuario `IdAnunciante`, An.NomeFazenda `Anunciante`,
+    An.NomeFazenda `Anunciante`,
     case
 		when V.`Status` = true then 'Venda finalizada'
         else 'Venda em andamento'
@@ -636,7 +631,6 @@ from tbVenda V
     inner join tbAnuncio A on A.Id = PA.IdAnuncio
     inner join tbProduto Pr on Pr.Id = A.IdProduto
     inner join tbAnunciante An on An.IdUsuario = A.IdAnunciante
-group by v.Id, A.IdAnunciante, E.Rua, E.BCE
 );
 
 DELIMITER $
@@ -663,9 +657,8 @@ on tbPedidoAnuncio
 for each row
 begin
 	declare idusu nvarchar(128);
-    declare idc int;
     set idusu = (select IdUsuario from tbPedido where Id = NEW.IdPedido);
-	update tbCarrinho set `Status` = false where IdUsuario = idusu;
+	delete from tbCarrinho where IdUsuario = idusu;
 end$
 
 DELIMITER $
@@ -683,7 +676,6 @@ DELIMITER ;
 
 DELIMITER $
 drop trigger if exists trgDeleteAnuncio$
-DELIMITER $
 create trigger trgDeleteAnuncio
 before delete
 on tbAnuncio
