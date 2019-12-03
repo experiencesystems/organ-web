@@ -1,7 +1,7 @@
 -- IMAGEM NO BANCO http://www.linhadecodigo.com.br/artigo/100/blob-fields-in-mysql-databases.aspx
-drop database if exists dbOrgan;
-create database dbOrgan;
-use dbOrgan;
+drop database if exists dborgan;
+create database dborgan;
+use dborgan;
 
 drop table if exists tbTelefone;
 create table tbTelefone(

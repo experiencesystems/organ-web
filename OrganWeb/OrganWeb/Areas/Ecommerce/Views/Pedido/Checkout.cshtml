@@ -19,7 +19,6 @@
 </div>
 
 <div class="content md-margin-top-50px">
-
     <div class="col-md-7">
         @if (ViewBag.SuccessMessage != null)
         {
@@ -29,6 +28,7 @@
             </div>
             return;
         }
+    </div>
 
     </div>
 
@@ -177,14 +177,12 @@
                     </div>
                 </div>
             }
-
             <div>
                 @Html.ActionLink("Voltar ao carrinho", "Index", "Carrinho")
             </div>
         </div>
 
     </div>
-</div>
 
 @section Scripts {
     <script type="text/javascript">

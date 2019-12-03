@@ -10,7 +10,7 @@ using System.Web;
 
 namespace OrganWeb.Areas.Ecommerce.Models.Vendas
 {
-    [Table("tbWishlist")]
+    [Table("tbWishList")]
     public class Wishlist : WishlistRepository
     {
         [Key, Column(Order = 1)]
