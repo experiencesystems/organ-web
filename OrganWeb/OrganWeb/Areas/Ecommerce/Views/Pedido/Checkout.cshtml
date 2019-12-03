@@ -10,7 +10,16 @@
 
 
 <div class="content md-margin-top-50px">
-
+    <div class="col-md-7">
+        @if (ViewBag.SuccessMessage != null)
+        {
+            <div>
+                @ViewBag.SuccessMessage
+                @Html.ActionLink("Acompanhe seu pedido", "Index", "Pedido")
+            </div>
+            return;
+        }
+    </div>
     @if (!Request.IsAuthenticated)
     {
         <br />
@@ -156,19 +165,6 @@
                     </div>
                 </div>
             }
-
-            <div class="col-md-7">
-                @if (ViewBag.SuccessMessage != null)
-                {
-                    <div>
-                        @ViewBag.SuccessMessage
-                        @Html.ActionLink("Acompanhe seu pedido", "Index", "Pedido")
-                    </div>
-                    return;
-                }
-
-            </div>
-
             <div>
                 @Html.ActionLink("Voltar ao carrinho", "Index", "Carrinho")
             </div>

@@ -59,8 +59,7 @@ insert into tbDadosBancarios(NomeTitular, CVV, Banco, NumCartao, Validade, IdUsu
        
 insert into tbAnunciante(IdUsuario, NomeFazenda, NumEnd, CEP, NomeBanco) values('02719894-e4a9-46c8-999e-ba942abd5f8g', 'Experience Farms', 1, "78008105", 'dbOrgan'),
 																			   ('02719894-e4a9-46c8-999e-ba942abd5f8h', 'Fazenda Triste', 2, "78008000", 'dbOrgan 1');
-select * from vwDadosBancarios;
-select * from vwAnunciante;
+
 
 insert into tbUM value('UN', 'Unidade');
 insert into tbUM value('DZ', 'Dúzia');
@@ -85,13 +84,13 @@ insert into tbComentario(Comentario, IdAnuncio, IdUsuario) values('Também!', 4,
 
 insert into tbComentario(Comentario, IdAnuncio, IdUsuario) values('Então compra!', 4, '02719894-e4a9-46c8-999e-ba942abd5f8f');
 
-select * from vwComentario;
+
 
 insert into tbCarrinho(IdUsuario, IdAnuncio, Qtd) values('02719894-e4a9-46c8-999e-ba942abd5f8f', 1, 1),
 														('02719894-e4a9-46c8-999e-ba942abd5f8f', 2, 2),
 														('02719894-e4a9-46c8-999e-ba942abd5f8f', 3, 1);
 
-select * from vwCarrinho;
+
 
 insert into tbPagamento(QtdParcelas, VlParcela, Tipo) value(2, 11.00, 1);     
                         
@@ -102,16 +101,10 @@ insert into tbPedidoAnuncio(IdPedido, IdAnuncio, Qtd) values(1, 1, 1);
 insert into tbPedidoAnuncio(IdPedido, IdAnuncio, Qtd) values(1, 2, 2);
 insert into tbPedidoAnuncio(IdPedido, IdAnuncio, Qtd) values(2, 3, 1);
 
-select * from vwPedido;
-select * from vwCarrinho; 
                                   
 update tbPedido set `Status` = 2 where Id = 1;
-select * from vwPedido;
-select * from vwVenda;
 
 insert into tbAvaliacao value(1, '02719894-e4a9-46c8-999e-ba942abd5f8f', 4);
 
 insert into tbComentario(Comentario, IdAnuncio, IdUsuario) values('Adorei a Soja, super veganaaaa!', 1, '02719894-e4a9-46c8-999e-ba942abd5f8f');
-select * from vwAnuncio;
-select * from vwComentario;
 

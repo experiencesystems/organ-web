@@ -1,4 +1,4 @@
-use dbOrgan;
+use dborgan;
 insert into tbTipoTel(Tipo) values("Fixo"), ("Celular");
 
 insert into tbDDD(DDD) values(11), (12), (13), (14), (15), (16), (17), (18), (19), (21), (22), (24), (27), (28), (31), (32), (33), (34),
@@ -41,18 +41,18 @@ update tbFornecedor set `Status` = false where Id = 3;
 insert into tbUM value('UN', 'Unidade');
 insert into tbUM value('DZ', 'Dúzia');
 
-insert into tbEstoque(Qtd, UM, IdFornecedor) values(5, 'a', 1);
+insert into tbEstoque(Qtd, UM, IdFornecedor) values(5, 'UN', 1);
 insert into tbSemente(IdEstoque, Nome) values(1, "Semente de Soja");
 update tbEstoque set Qtd = Qtd+2 where Id = 1;
 
-insert into tbEstoque(Qtd, UM, IdFornecedor) values(7, 'a', 3); 
+insert into tbEstoque(Qtd, UM, IdFornecedor) values(7, 'UN', 3); 
 insert into tbSemente(IdEstoque, Nome) values(2, "Semente de Milho");
 update tbEstoque set Qtd = 4 where Id = 1;
 
-insert into tbEstoque(Qtd, UM, IdFornecedor) values(1, 'a', 3), (2, 'a', 1), (5, 'a', 3);
+insert into tbEstoque(Qtd, UM, IdFornecedor) values(1, 'UN', 3), (2, 'UN', 1), (5, 'UN', 3);
 insert into tbInsumo(IdEstoque, Nome, Categoria) values(3, "CresceForte", 6), (4, "Pá", 2), (5, "Inseticida", 9);
 
-insert into tbEstoque(Qtd,UM, IdFornecedor) values(5, 'a', 2), (6, 'a', 2);
+insert into tbEstoque(Qtd,UM, IdFornecedor) values(5, 'UN', 2), (6, 'UN', 2);
 insert into tbMaquina(IdEstoque, Nome, Tipo, Montadora) values(6,'Adubex', 4, 'AdubadoraX'), (7,'Semotors', 1, 'SemeadoraX');
 
 update tbEstoque set Qtd = 0 where Id = 7;
@@ -80,13 +80,11 @@ insert into tbItensPlantio(QtdUsada, IdPlantio, IdEstoque) value(0.05, 3, 3);
 insert into tbItensPlantio(QtdUsada, IdPlantio, IdEstoque) value(1, 3, 6);
 insert into tbAreaPlantio(IdPlantio, IdArea, Densidade) values(3, 4, 1), (3, 5, 1);
 
-select * from vwPlantio;
- use dborgan;
 
 -- -				 (datacolehita, qtdperda, qtdtotal, unidade de medida, nome do produto, descricão do produto, idplantio, status colheita, idproduto, Descr)
-call spInsertColheita('01/01/01', 1, 4, 'a', 'Soja', null, 1, true, null, null);
-call spInsertColheita('19/02/01', 1, 8, 'b', 'Milho', 'Milho Transgênico', 3, true, null, 'Barro');
-call spInsertColheita('19/02/01', 0, 4, 'a', 'Soja', null, 2, false, 8, null);
+call spInsertColheita('01/01/01', 1, 4, 'UN', 'Soja', null, 1, true, null, null);
+call spInsertColheita('19/02/01', 1, 8, 'UN', 'Milho', 'Milho Transgênico', 3, true, null, 'Barro');
+call spInsertColheita('19/02/01', 0, 4, 'UN', 'Soja', null, 2, false, 8, null);
 select * from vwColheita; 
 
 insert into tbControle(`Status`, Efic, NumLiberacoes, `Data`) values(true, 100, 2, '01/01/01'), (true, 50, 3, '01/01/01');
@@ -98,6 +96,3 @@ insert into tbControlePD values(1, 1), (2,2);
 insert into tbAreaPD values(true, 2, 1), (true, 3, 2);
 
 insert into tbItensControle(QtdUsada, IdControle, IdEstoque) values(0.25, 1, 5), (0.25, 2, 5);
-select * from vwArea;select * from vwpragaordoenca; select * from vwcontrole;
-select * from vwItems; select * from vwHistorico; 
-
