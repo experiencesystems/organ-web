@@ -461,7 +461,9 @@
     <Content Include="Imagens\ecommerce\banner_prod.jpg" />
     <Content Include="Imagens\ecommerce\milho.png" />
     <Content Include="Imagens\ecommerce\miniview-1.jpg" />
+    <Content Include="Imagens\ecommerce\prod_prin.png" />
     <Content Include="Imagens\ecommerce\slide3.jpg" />
+    <Content Include="Imagens\ecommerce\slide5.jpg" />
     <Content Include="Imagens\icon2.ico" />
     <Content Include="Imagens\icone.png" />
     <Content Include="Imagens\login.png" />

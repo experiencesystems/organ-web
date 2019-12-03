@@ -4,337 +4,335 @@
     ViewBag.Title = "Detalhes";
     Layout = "~/Views/Shared/_LayoutEcommerce.cshtml";
 }
-
-<div class="container">
-    <div class="content md-margin-top-50px">
-        <div class="sumary-product single-layout">
-
-            <div class="media">
-                <ul class="biolife-carousel slider-for" data-slick='{"arrows":false,"dots":false,"slidesMargin":30,"slidesToShow":1,"slidesToScroll":1,"fade":true,"asNavFor":".slider-nav"}'>
-                    <li><img src="@Url.Action("FotoDoAnuncio", "Loja", new { Area = "Ecommerce", anuncio = Model.Id })" alt="" width="500" height="500"></li>
-                </ul>
-            </div>
-
-            <div class="product-attribute">
-                <div class="product-details">
-                    <h3 class="title">@Html.DisplayFor(model => model.Nome)</h3>
-                    <div>
-                        <div class="rating">
-                            <p>
-                                <span>
-                                    @for (var i = 1; i <= Model.Estrelas; i++)
-                                    {
-                                        <i class="mdi mdi-star"></i>
-                                    }
-                                    @if (Model.Estrelas < 5)
-                                    {
-                                        for (var i = 1; i <= (5 - Model.Estrelas); i++)
-                                        {
-                                            <i class="mdi mdi-star-outline"></i>
-                                        }
-                                    }
-                                    <span class="review-count">(@Html.DisplayFor(model => Model.NumAvaliacoes) Avaliações)</span>
-                                </span>
-                            </p>
-                            <b class="category">@Html.DisplayFor(model => model.Produto.Categorias.Where(x => x.Value == model.Produto.Categoria.ToString()).First().Text)</b>
-                            <br />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="w-100"></div>
-                    </div>
-                </div>
-                <!-- /Product details -->
-            </div>
-            <div class="action-form">
-                <div class="quantity-box">
-                    <span class="title">Quantidade:</span>
-                    <div class="qty-input">
-                        <input type="text" name="qty12554" value="1" data-max_value="20" data-min_value="1" data-step="1">
-                        <a href="#" class="qty-btn btn-up"><i class="fa fa-caret-up" aria-hidden="true"></i></a>
-                        <a href="#" class="qty-btn btn-down"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <p style="color: #000;">@Html.DisplayFor(model => model.Quantidade) @Html.DisplayFor(model => model.Produto.UnidadeMedida.Desc) disponíveis</p>
-                </div>
-                <div class="total-price-contain">
-                    <span class="title">Preço:</span>
-                    <p class="price">R$ @Html.DisplayFor(model => model.Produto.ValorUnit)</p>
-                </div>
-                @if (Request.IsAuthenticated && Model.Anunciante.IdUsuario == User.Identity.GetUserId())
-                {
-                }
-                else
-                {
-                    <div class="buttons">
-                        @if (Request.IsAuthenticated)
-                        {
-                            using (Html.BeginForm("AddAoCarrinho", "Carrinho", new { idAnuncio = Model.Id }, FormMethod.Post))
-                            {
-                                @Html.AntiForgeryToken();
-                                <button type="submit" value="@Model.Id" class="btn add-to-cart-btn">
-                                    Adicionar ao carrinho
-                                </button>
-                            }
-                            <p class="pull-row">
-                                @using (Html.BeginForm("AddWishlist", "Wishlist", new { idAnuncio = Model.Id }, FormMethod.Post))
-                                {
-                                    @Html.AntiForgeryToken();
-                                    <button type="submit" value="@Model.Id" class="btn wishlist-btn">
-                                        Lista de desejos
-                                    </button>
-                                }
-                            </p>
-                        }
-                        else
-                        {
-                            <button type="submit" value="" class="btn add-to-cart-btn">
-                                Adicionar ao carrinho
-                            </button>
-                            <p class="pull-row">
-                                <button type="submit" value="" class="btn wishlist-btn">
-                                    Lista de desejos
-                                </button>
-                            </p>
-                        }
-                    </div>
-                    <div class="location-shipping-to">
-                        <span class="title">Tamanho:</span>
-                        <select name="shipping_to" class="country">
-                            <option value="-1">Selecione o tamanho</option>
-                            <option value="">Pequeno</option>
-                            <option value="">Médio</option>
-                            <option value="">Grande</option>
-                            <option value="">Muito grande</option>
-                        </select>
-                    </div>
-                    <div class="acepted-payment-methods">
-                        <ul class="payment-methods">
-                            <li><img src="assets/images/card1.jpg" alt="" width="51" height="36"></li>
-                            <li><img src="assets/images/card2.jpg" alt="" width="51" height="36"></li>
-                            <li><img src="assets/images/card3.jpg" alt="" width="51" height="36"></li>
-                            <li><img src="assets/images/card4.jpg" alt="" width="51" height="36"></li>
-                        </ul>
-                    </div>
-                }
-            </div>
-        </div>
-        <br />
-        <div class="product-tabs single-layout biolife-tab-contain">
-            <div class="tab-head">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="descprod-tab" data-toggle="tab" href="#descprod" role="tab" aria-controls="produto" aria-selected="true">Descrição do produto</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="descanun-tab" data-toggle="tab" href="#descanun" role="tab" aria-controls="anunciante" aria-selected="false">Detalhes do anunciante</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="perguntas-tab" data-toggle="tab" href="#perguntas" role="tab" aria-controls="perguntas" aria-selected="false">Perguntas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="analise-tab" data-toggle="tab" href="#analise" role="tab" aria-controls="analise" aria-selected="false">Análise</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="descprod" role="tabpanel" aria-labelledby="descprod-tab">
-                    @Html.DisplayFor(model => model.Desc)
-                </div>
-                <div class="tab-pane fade" id="descanun" role="tabpanel" aria-labelledby="descanun-tab">
-                    @Html.DisplayFor(model => model.Anunciante.NomeFazenda)
-                </div>
-                <div class="tab-pane fade" id="perguntas" role="tabpanel" aria-labelledby="perguntas-tab">
-                    <!--Comentários-->
-                    <div class="post-comments">
-                        <h3 class="cmt-title">Perguntas<sup> (@Html.DisplayFor(model => model.Comentarios.Count))</sup></h3>
-
-                        <div class="comment-form">
-                            @if (Request.IsAuthenticated)
-                            {
-                                using (Ajax.BeginForm("NovoComentario", "Comentario", new { area = "Ecommerce" }, new AjaxOptions { HttpMethod = "POST" }))
-                                {
-                                    @Html.AntiForgeryToken()
-                                    @Html.Hidden("idAnuncio", Model.Id)
-                                    <p class="form-row">
-                                        @Html.TextArea("comentario", "", htmlAttributes: new { name = "txt-comment", id = "txt-comment-ath-3364", cols = "30", rows = "10", placeholder = "Mande sua dúvida" })
-                                        <a href="#" class="current-author"><img src="@Url.Action("FotoDoUsuario", "Account", new { Area = "Ecommerce" })" width="41" height="41" alt="" class="rounded-circle"></a>
-                                    </p>
-                                    <p class="form-row last-btns align-content-md-end">
-                                        <input type="submit" class="btn btn-sumit" value="Enviar pergunta" />
-                                    </p>
-                                }
-                            }
-                            else
-                            {
-                                <p class="form-row">
-                                    <textarea name="txt-comment" id="txt-comment-ath-3364" cols="30" rows="10" placeholder="Logue-se para enviar uma pergunta! @Html.ActionLink("Login", "Login", new { area = "", controller = "Account", returnUrl = HttpContext.Current.Request.RawUrl })"></textarea>
-                                    <a href="#" class="current-author"><img src="@Url.Action("FotoDoUsuario", "Account", new { Area = "Ecommerce" })" width="41" height="41" alt="" class="rounded-circle"></a>
-                                </p>
-                            }
-                        </div>
-
-                        <div class="comment-list">
-                            @foreach (var comentario in Model.Comentarios)
-                            {
-                                <ol class="post-comments lever-0">
-                                    <li class="comment-elem">
-                                        <div class="wrap-post-comment">
-
-                                            <div class="cmt-inner">
-                                                <div class="auth-info">
-                                                    <a href="#" class="author-contact"><img src="@Url.Action("FotoDoUsuario", "Account", new { Area = "Ecommerce", id = comentario.IdUsuario })" alt="" width="29" height="28" class="rounded-circle">@Html.DisplayFor(model => comentario.Usuario.UserName)</a>
-                                                    <span class="cmt-time">@Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.Data))</span>
-                                                </div>
-                                                <div class="cmt-content">
-                                                    <p>
-                                                        @Html.DisplayFor(model => comentario.Valor)
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ol>
-                            }
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane review-tab fade" id="analise" role="tabpanel" aria-labelledby="analise-tab">
+<div class="cart-content">
+    <div class="cart-sections">
+        <section class="cart-section">
+            <div class="cart-list">
+                <div class="cart-list-item">
                     <div class="container">
-                        <div class="row">
-                            <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
-                                <div class="rating-info">
-                                    <p class="index"><strong class="rating">@Html.DisplayFor(model => model.Estrelas)</strong>de 5 estrelas</p>
-                                    <div class="rating"><p class="star-rating"><span class="width-80percent"></span></p></div>
-                                    <p class="see-all">Ver todas</p>
-                                    <ul class="options">
-                                        <li>
-                                            <div class="detail-for">
-                                                <span class="option-name">
-                                                    <i class="mdi mdi-star" aria-hidden="true"></i>
-                                                </span>
-                                                <span class="progres">
-                                                    <span class="line-100percent"><span class="percent width-90percent"></span></span>
-                                                </span>
-                                                <span class="number">90</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="detail-for">
-                                                <span class="option-name">
-                                                    <i class="mdi mdi-star" aria-hidden="true"></i>
-                                                </span>
-                                                <span class="progres">
-                                                    <span class="line-100percent"><span class="percent width-30percent"></span></span>
-                                                </span>
-                                                <span class="number">30</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="detail-for">
-                                                <span class="option-name">
-                                                    <i class="mdi mdi-star" aria-hidden="true"></i>
-                                                </span>
-                                                <span class="progres">
-                                                    <span class="line-100percent"><span class="percent width-40percent"></span></span>
-                                                </span>
-                                                <span class="number">40</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="detail-for">
-                                                <span class="option-name">
-                                                    <i class="mdi mdi-star" aria-hidden="true"></i>
-                                                </span>
-                                                <span class="progres">
-                                                    <span class="line-100percent"><span class="percent width-20percent"></span></span>
-                                                </span>
-                                                <span class="number">20</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="detail-for">
-                                                <span class="option-name">
-                                                    <i class="mdi mdi-star" aria-hidden="true"></i>
-                                                </span>
-                                                <span class="progres">
-                                                    <span class="line-100percent"><span class="percent width-10percent"></span></span>
-                                                </span>
-                                                <span class="number">10</span>
-                                            </div>
-                                        </li>
+                        <div class="content md-margin-top-50px">
+                            <div class="sumary-product single-layout">
+
+                                <div class="media">
+                                    <ul class="biolife-carousel slider-for" data-slick='{"arrows":false,"dots":false,"slidesMargin":30,"slidesToShow":1,"slidesToScroll":1,"fade":true,"asNavFor":".slider-nav"}'>
+                                        <li><img src="@Url.Action("FotoDoAnuncio", "Loja", new { Area = "Ecommerce", anuncio = Model.Id })" alt="" width="500" height="500"></li>
                                     </ul>
                                 </div>
-                            </div>
-                            <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
-                                <div class="review-form-wrapper">
-                                    @if (Request.IsAuthenticated && Model.Avaliacoes.Where(x => x.IdUsuario == User.Identity.GetUserId()).ToList().Count > 0)
+
+                                <div class="product-attribute">
+                                    <div class="product-details">
+                                        <h3 class="title">@Html.DisplayFor(model => model.Nome)</h3>
+                                        <div>
+                                            <div class="rating">
+                                                <p>
+                                                    <span>
+                                                        @for (var i = 1; i <= Model.Estrelas; i++)
+                                                        {
+                                                            <i class="mdi mdi-star"></i>
+                                                        }
+                                                        @if (Model.Estrelas < 5)
+                                                        {
+                                                            for (var i = 1; i <= (5 - Model.Estrelas); i++)
+                                                            {
+                                                                <i class="mdi mdi-star-outline"></i>
+                                                            }
+                                                        }
+                                                        <span class="review-count">(@Html.DisplayFor(model => Model.NumAvaliacoes) Avaliações)</span>
+                                                    </span>
+                                                </p>
+                                                <b class="category">@Html.DisplayFor(model => model.Produto.Categorias.Where(x => x.Value == model.Produto.Categoria.ToString()).First().Text)</b>
+                                                <br />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="w-100"></div>
+                                        </div>
+                                    </div>
+                                    <!-- /Product details -->
+                                </div>
+                                <div class="action-form">
+                                    <div class="quantity-box">
+                                        <span class="title">Quantidade:</span>
+                                        <div class="qty-input">
+                                            <input type="text" name="qty12554" value="1" data-max_value="20" data-min_value="1" data-step="1">
+                                            <a href="#" class="qty-btn btn-up"><i class="fa fa-caret-up" aria-hidden="true"></i></a>
+                                            <a href="#" class="qty-btn btn-down"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <p style="color: #000;">@Html.DisplayFor(model => model.Quantidade) @Html.DisplayFor(model => model.Produto.UnidadeMedida.Desc) disponíveis</p>
+                                    </div>
+                                    <div class="total-price-contain">
+                                        <span class="title">Preço:</span>
+                                        <p class="price">R$ @Html.DisplayFor(model => model.Produto.ValorUnit)</p>
+                                    </div>
+                                    @if (Request.IsAuthenticated && Model.Anunciante.IdUsuario == User.Identity.GetUserId())
                                     {
-                                        <span class="title">Sua análise: @Model.Avaliacoes.Where(x => x.IdUsuario == User.Identity.GetUserId()).FirstOrDefault().Nota / 5</span>
                                     }
                                     else
                                     {
-                                        <span class="title">Mande sua análise:</span>
-                                        using (Ajax.BeginForm("NovaAvaliacao", "Avaliacao", new { area = "Ecommerce" }, new AjaxOptions { HttpMethod = "POST" }))
-                                        {
-                                            @Html.AntiForgeryToken()
-                                            @Html.Hidden("idAnuncio", Model.Id)
-                                            <div class="comment-form-rating">
-                                                <label>1. Avaliação do produto:</label>
-                                                <p class="stars">
-                                                    <span>
-                                                        <i class="mdi mdi-star-outline" aria-hidden="true">@Html.RadioButton("Estrela", "1", new { @class = "btn-rating" })</i>
-                                                        <label>
-                                                            <i class="mdi mdi-star-outline" aria-hidden="true"></i>
-                                                            <input type="radio" name="Estrela" value="1" class="btn-rating" data-value="star-1" />
+                                        <div class="buttons">
+                                            @if (Request.IsAuthenticated)
+                                            {
+                                                using (Html.BeginForm("AddAoCarrinho", "Carrinho", new { idAnuncio = Model.Id }, FormMethod.Post))
+                                                {
+                                                    @Html.AntiForgeryToken();
+                                                    <button type="submit" value="@Model.Id" class="btn add-to-cart-btn">
+                                                        Adicionar ao carrinho
+                                                    </button>
+                                                }
+                                                <p class="pull-row">
+                                                    @using (Html.BeginForm("AddWishlist", "Wishlist", new { idAnuncio = Model.Id }, FormMethod.Post))
+                                                    {
+                                                        @Html.AntiForgeryToken();
 
-                                                        </label>
-                                                        <a class="btn-rating" data-value="star-2"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
-                                                        <a class="btn-rating" data-value="star-3"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
-                                                        <a class="btn-rating" data-value="star-4"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
-                                                        <a class="btn-rating" data-value="star-5"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
-                                                    </span>
+                                                        <button type="submit" value="@Model.Id" class="btn add-to-cart-btn">
+                                                            Lista de desejos
+                                                        </button>
+                                                    }
                                                 </p>
-                                            </div>
-                                            <p class="form-row">
-                                                @Html.TextArea("comentario", "", htmlAttributes: new { name = "txt-comment", id = "txt-comment-ath-3364", cols = "30", rows = "10", placeholder = "Mensagem" })
-                                            </p>
-                                            <p class="form-row">
-                                                <button type="submit" name="submit">Enviar</button>
-                                            </p>
-                                        }
+                                            }
+                                            else
+                                            {
+                                                <button type="submit" value="" class="btn add-to-cart-btn">
+                                                    Adicionar ao carrinho
+                                                </button>
+                                                
+                                                <p class="pull-row">
+                                                    <button type="submit" value="" class="btn wishlist-btn">
+                                                        Lista de desejos
+                                                    </button>
+                                                </p>
+                                            }
+                                        </div>
+                                        <div class="location-shipping-to">
+                                            <span class="title">CEP:</span>
+                                            <input type="text" name="qty12554" value="1" data-max_value="20" data-min_value="1" data-step="1">
+                                        </div>
                                     }
                                 </div>
                             </div>
-                        </div>
-                        <div id="comments">
-                            <ol class="commentlist">
-                                @foreach (var avaliacao in Model.Avaliacoes)
-                                {
-                                    <li class="review">
-                                        <div class="comment-container">
-                                            <div class="row">
-                                                <div class="comment-content col-lg-8 col-md-9 col-sm-8 col-xs-12">
-                                                    <p class="comment-in"><span class="author"><strong>@Html.DisplayFor(model => avaliacao.Usuario.UserName)</strong></span><span class="post-date"><!--não tem data--></span></p>
-                                                    <div class="rating"><p class="star-rating"><span class="width-80percent"></span></p></div>
-                                                    <p class="comment-text"></p>
-                                                </div>
+                            <br />
+                            <div class="product-tabs single-layout biolife-tab-contain">
+                                <div class="tab-head">
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="descprod-tab" data-toggle="tab" href="#descprod" role="tab" aria-controls="produto" aria-selected="true">Descrição do produto</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="descanun-tab" data-toggle="tab" href="#descanun" role="tab" aria-controls="anunciante" aria-selected="false">Detalhes do anunciante</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="perguntas-tab" data-toggle="tab" href="#perguntas" role="tab" aria-controls="perguntas" aria-selected="false">Perguntas</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="analise-tab" data-toggle="tab" href="#analise" role="tab" aria-controls="analise" aria-selected="false">Análise</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="descprod" role="tabpanel" aria-labelledby="descprod-tab">
+                                        @Html.DisplayFor(model => model.Desc)
+                                    </div>
+                                    <div class="tab-pane fade" id="descanun" role="tabpanel" aria-labelledby="descanun-tab">
+                                        @Html.DisplayFor(model => model.Anunciante.NomeFazenda)
+                                    </div>
+                                    <div class="tab-pane fade" id="perguntas" role="tabpanel" aria-labelledby="perguntas-tab">
+                                        <!--Comentários-->
+                                        <div class="post-comments">
+                                            <h3 class="cmt-title">Perguntas<sup> (@Html.DisplayFor(model => model.Comentarios.Count))</sup></h3>
+
+                                            <div class="comment-form">
+                                                @if (Request.IsAuthenticated)
+                                                {
+                                                    using (Ajax.BeginForm("NovoComentario", "Comentario", new { area = "Ecommerce" }, new AjaxOptions { HttpMethod = "POST" }))
+                                                    {
+                                                        @Html.AntiForgeryToken()
+                                                        @Html.Hidden("idAnuncio", Model.Id)
+                                                        <p class="form-row">
+                                                            @Html.TextArea("comentario", "", htmlAttributes: new { name = "txt-comment", id = "txt-comment-ath-3364", cols = "30", rows = "10", placeholder = "Mande sua dúvida" })
+                                                            <a href="#" class="current-author"><img src="@Url.Action("FotoDoUsuario", "Account", new { Area = "Ecommerce" })" width="41" height="41" alt="" class="rounded-circle"></a>
+                                                        </p>
+                                                        <p class="form-row last-btns align-content-md-end">
+                                                            <input type="submit" class="btn btn-sumit" value="Enviar pergunta" />
+                                                        </p>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <p class="form-row">
+                                                        <textarea name="txt-comment" id="txt-comment-ath-3364" cols="30" rows="10" placeholder="Logue-se para enviar uma pergunta! @Html.ActionLink("Login", "Login", new { area = "", controller = "Account", returnUrl = HttpContext.Current.Request.RawUrl })"></textarea>
+                                                        <a href="#" class="current-author"><img src="@Url.Action("FotoDoUsuario", "Account", new { Area = "Ecommerce" })" width="41" height="41" alt="" class="rounded-circle"></a>
+                                                    </p>
+                                                }
+                                            </div>
+
+                                            <div class="comment-list">
+                                                @foreach (var comentario in Model.Comentarios)
+                                                {
+                                                    <ol class="post-comments lever-0">
+                                                        <li class="comment-elem">
+                                                            <div class="wrap-post-comment">
+
+                                                                <div class="cmt-inner">
+                                                                    <div class="auth-info">
+                                                                        <a href="#" class="author-contact"><img src="@Url.Action("FotoDoUsuario", "Account", new { Area = "Ecommerce", id = comentario.IdUsuario })" alt="" width="29" height="28" class="rounded-circle">@Html.DisplayFor(model => comentario.Usuario.UserName)</a>
+                                                                        <span class="cmt-time">@Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.Data))</span>
+                                                                    </div>
+                                                                    <div class="cmt-content">
+                                                                        <p>
+                                                                            @Html.DisplayFor(model => comentario.Valor)
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ol>
+                                                }
                                             </div>
                                         </div>
-                                    </li>
-                                }
-                            </ol>
+                                    </div>
+                                    <div class="tab-pane review-tab fade" id="analise" role="tabpanel" aria-labelledby="analise-tab">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
+                                                    <div class="rating-info">
+                                                        <p class="index"><strong class="rating">@Html.DisplayFor(model => model.Estrelas)</strong>de 5 estrelas</p>
+                                                        <div class="rating"><p class="star-rating"><span class="width-80percent"></span></p></div>
+                                                        <p class="see-all">Ver todas</p>
+                                                        <ul class="options">
+                                                            <li>
+                                                                <div class="detail-for">
+                                                                    <span class="option-name">
+                                                                        <i class="mdi mdi-star" aria-hidden="true"></i>
+                                                                    </span>
+                                                                    <span class="progres">
+                                                                        <span class="line-100percent"><span class="percent width-90percent"></span></span>
+                                                                    </span>
+                                                                    <span class="number">90</span>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="detail-for">
+                                                                    <span class="option-name">
+                                                                        <i class="mdi mdi-star" aria-hidden="true"></i>
+                                                                    </span>
+                                                                    <span class="progres">
+                                                                        <span class="line-100percent"><span class="percent width-30percent"></span></span>
+                                                                    </span>
+                                                                    <span class="number">30</span>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="detail-for">
+                                                                    <span class="option-name">
+                                                                        <i class="mdi mdi-star" aria-hidden="true"></i>
+                                                                    </span>
+                                                                    <span class="progres">
+                                                                        <span class="line-100percent"><span class="percent width-40percent"></span></span>
+                                                                    </span>
+                                                                    <span class="number">40</span>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="detail-for">
+                                                                    <span class="option-name">
+                                                                        <i class="mdi mdi-star" aria-hidden="true"></i>
+                                                                    </span>
+                                                                    <span class="progres">
+                                                                        <span class="line-100percent"><span class="percent width-20percent"></span></span>
+                                                                    </span>
+                                                                    <span class="number">20</span>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="detail-for">
+                                                                    <span class="option-name">
+                                                                        <i class="mdi mdi-star" aria-hidden="true"></i>
+                                                                    </span>
+                                                                    <span class="progres">
+                                                                        <span class="line-100percent"><span class="percent width-10percent"></span></span>
+                                                                    </span>
+                                                                    <span class="number">10</span>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
+                                                    <div class="review-form-wrapper">
+                                                        @if (Request.IsAuthenticated && Model.Avaliacoes.Where(x => x.IdUsuario == User.Identity.GetUserId()).ToList().Count > 0)
+                                                        {
+                                                            <span class="title">Sua análise: @Model.Avaliacoes.Where(x => x.IdUsuario == User.Identity.GetUserId()).FirstOrDefault().Nota / 5</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="title">Mande sua análise:</span>
+                                                            using (Ajax.BeginForm("NovaAvaliacao", "Avaliacao", new { area = "Ecommerce" }, new AjaxOptions { HttpMethod = "POST" }))
+                                                            {
+                                                                @Html.AntiForgeryToken()
+                                                                @Html.Hidden("idAnuncio", Model.Id)
+                                                                <div class="comment-form-rating">
+                                                                    <label>1. Avaliação do produto:</label>
+                                                                    <p class="stars">
+                                                                        <span>
+                                                                            <i class="mdi mdi-star-outline" aria-hidden="true">@Html.RadioButton("Estrela", "1", new { @class = "btn-rating" })</i>
+                                                                            <label>
+                                                                                <i class="mdi mdi-star-outline" aria-hidden="true"></i>
+                                                                                <input type="radio" name="Estrela" value="1" class="btn-rating" data-value="star-1" />
+
+                                                                            </label>
+                                                                            <a class="btn-rating" data-value="star-2"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
+                                                                            <a class="btn-rating" data-value="star-3"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
+                                                                            <a class="btn-rating" data-value="star-4"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
+                                                                            <a class="btn-rating" data-value="star-5"><i class="mdi mdi-star-outline" aria-hidden="true"></i></a>
+                                                                        </span>
+                                                                    </p>
+                                                                </div>
+                                                                <p class="form-row">
+                                                                    @Html.TextArea("comentario", "", htmlAttributes: new { name = "txt-comment", id = "txt-comment-ath-3364", cols = "30", rows = "10", placeholder = "Mensagem" })
+                                                                </p>
+                                                                <p class="form-row">
+                                                                    <button type="submit" name="submit">Enviar</button>
+                                                                </p>
+                                                            }
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="comments">
+                                                <ol class="commentlist">
+                                                    @foreach (var avaliacao in Model.Avaliacoes)
+                                                    {
+                                                        <li class="review">
+                                                            <div class="comment-container">
+                                                                <div class="row">
+                                                                    <div class="comment-content col-lg-8 col-md-9 col-sm-8 col-xs-12">
+                                                                        <p class="comment-in"><span class="author"><strong>@Html.DisplayFor(model => avaliacao.Usuario.UserName)</strong></span><span class="post-date"><!--não tem data--></span></p>
+                                                                        <div class="rating"><p class="star-rating"><span class="width-80percent"></span></p></div>
+                                                                        <p class="comment-text"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    }
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-                </div>
+               </div>
             </div>
-        </div>
-
-    </div> <!--row-->
-    @section Scripts
+        </section>
+    </div>
+</div>
+@section Scripts
     {
-        <script type="text/javascript">
+    <script type="text/javascript">
             $(document).ready(function () {
                 var button = document.getElementById('valorcepe');
                 button.addEventListener('click', function () {
@@ -358,5 +356,5 @@
                     }
                 });
             });
-        </script>
-    }
+    </script>
+}

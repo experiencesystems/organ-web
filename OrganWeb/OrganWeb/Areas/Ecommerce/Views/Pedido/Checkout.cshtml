@@ -8,8 +8,30 @@
     ViewBag.Title = "Pedido";
 }
 
+<div class="hero-wrap hero-bread">
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2">Início /</span><span class="mr-2">Pedido</span></p>
+                <h1 class="mb-0 bread">Pedido</h1>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="content md-margin-top-50px">
+
+    <div class="col-md-7">
+        @if (ViewBag.SuccessMessage != null)
+        {
+            <div>
+                @ViewBag.SuccessMessage
+                @Html.ActionLink("Acompanhe seu pedido", "Index", "Pedido")
+            </div>
+            return;
+        }
+
+    </div>
 
     @if (!Request.IsAuthenticated)
     {
@@ -156,18 +178,6 @@
                     </div>
                 </div>
             }
-
-            <div class="col-md-7">
-                @if (ViewBag.SuccessMessage != null)
-                {
-                    <div>
-                        @ViewBag.SuccessMessage
-                        @Html.ActionLink("Acompanhe seu pedido", "Index", "Pedido")
-                    </div>
-                    return;
-                }
-
-            </div>
 
             <div>
                 @Html.ActionLink("Voltar ao carrinho", "Index", "Carrinho")

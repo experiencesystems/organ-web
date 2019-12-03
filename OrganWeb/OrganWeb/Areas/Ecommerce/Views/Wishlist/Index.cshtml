@@ -5,6 +5,17 @@
     Layout = "~/Views/Shared/_LayoutEcommerce.cshtml";
 }
 
+<div class="hero-wrap hero-bread">
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2">Início /</span><span class="mr-2">Lista de desejos</span></p>
+                <h1 class="mb-0 bread">Lista de desejos</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     @if (!Request.IsAuthenticated)
     {
@@ -20,46 +31,49 @@
     <table class="table table-striped">
         <thead>
             <tr>
+                <th></th>
                 <th>Anúncio</th>
                 <th>Preço</th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@Html.ActionLink(item.Anuncio.Nome, "Detalhes", "Anuncio", new { Area = "Ecommerce", id = item.IdAnuncio }, new { })</td>
-                    <td>@item.Anuncio.Produto.ValorUnit</td>
                     <td>
                         @using (Ajax.BeginForm("RemoverDaWishlist", new { idAnuncio = item.IdAnuncio }, new AjaxOptions { HttpMethod = "POST" }))
                         {
                             @Html.AntiForgeryToken()
-                            <input class="btn" type="submit" value="Remover"/>
+                            <button class="btn" type="submit">
+                                <i class="mdi mdi-close"></i>
+                            </button>
                         }
                         @*<a class="btn fa fa-minus fa-small" value="@item.IdAnuncio"><i class="btn fa fa-minus fa-small"></i><span class="tooltipp" value="Remover da lista de desejos"></span></a>*@
                     </td>
+                    <td>@Html.ActionLink(item.Anuncio.Nome, "Detalhes", "Anuncio", new { Area = "Ecommerce", id = item.IdAnuncio }, new { })</td>
+                    <td>@item.Anuncio.Produto.ValorUnit</td>
                 </tr>
             }
         </tbody>
-        <tfoot>
-            <tr style="border:0">
-                <td>
+    </table>
                     @using (Html.BeginForm("ApagarWishlist", "Wishlist", FormMethod.Post))
                     {
                         @Html.AntiForgeryToken();
-                        <button class="btn btn-link text-dark" type="submit"><i class="fa fa-times"></i><span class="tooltipp" value="Limpar lista de desejos"></span></button>
+                    <button class="btn btn-link text-dark" type="submit"><i class="fa fa-times"></i>Limpar lista de desejos</button>
                     }
-                </td>
-            </tr>
-        </tfoot>
-    </table><br />
-    <div>
-        Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
-        @Html.PagedListPager(Model, page => Url.Action("Index",
-        new { page }), new PagedListRenderOptions
-         {
-         LiElementClasses = new string[] { "pagination page-item p1" }
-         })
-    </div>
-</div>
+
+            <div>
+                <div class="col-md-12 text-center">
+                    <div class="site-block-27">
+
+                        <ul>
+                            Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+                            @Html.PagedListPager(Model, page => Url.Action("Index",
+                            new { page }), new PagedListRenderOptions
+                             {
+                             LiElementClasses = new string[] { "pagination page-item p1" }
+                             })
+                        </ul>
+                    </div>
+                </div>
+            </div>

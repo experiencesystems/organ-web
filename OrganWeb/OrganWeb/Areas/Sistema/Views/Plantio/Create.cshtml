@@ -1,5 +1,6 @@
 ﻿@model OrganWeb.Areas.Sistema.Models.ViewModels.CreatePlantioViewModel
 
+<div class="container">
 <h4 class="modal-title">Cadastrar plantio</h4>
 @using (Html.BeginForm("Create", "Plantio", FormMethod.Post))
 {
@@ -94,8 +95,11 @@
         </div>
     </div>
 
-    <button type="submit" class="btn btn-addmodal" data-save="ajax-modal">Adicionar</button>
+    <br>
+    <button type="submit" class="btn btn-primary btn-add" data-save="ajax-modal">Adicionar</button>
+    <br>
 }
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

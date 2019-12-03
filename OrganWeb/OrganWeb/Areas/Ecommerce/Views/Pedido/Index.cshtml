@@ -1,63 +1,76 @@
 ﻿@model IEnumerable<OrganWeb.Areas.Ecommerce.Models.ViewsBanco.VwPedido>
 @{
     ViewBag.Title = "Meus pedidos";
+    Layout = "~/Views/Shared/_LayoutEcommerce.cshtml";
 }
 
-@if (Model.Count() == 0)
-{
-    <br />
-    <h6>Você ainda não fez nenhum pedido! Assim que realizar um você poderá acompanha-lo aqui.</h6>
-    <div>
-        @Html.ActionLink("Voltar para a loja", "Index", "Loja", new { Area = "Ecommerce" })
+<div class="hero-wrap hero-bread">
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2">Início /</span><span class="mr-2">Pedidos</span></p>
+                <h1 class="mb-0 bread">Meus pedidos</h1>
+            </div>
+        </div>
     </div>
-    return;
-}
+</div>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Data)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NomeAnuncioQtd)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ValorTotalcDesconto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ValorFrete)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Situacao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Anunciante)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
+<div class="container md-margin-top-50px">
+    @if (Model.Count() == 0)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomeAnuncioQtd)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ValorTotalcDesconto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ValorFrete)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Situacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Anunciante)
-            </td>
-        </tr>
+        <br />
+        <h6>Você ainda não fez nenhum pedido! Assim que realizar um você poderá acompanha-lo aqui.</h6>
+        <div>
+            @Html.ActionLink("Voltar para a loja", "Index", "Loja", new { Area = "Ecommerce" })
+        </div>
+        return;
     }
 
-</table>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeAnuncioQtd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorTotalcDesconto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorFrete)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Situacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Anunciante)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeAnuncioQtd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorTotalcDesconto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorFrete)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Situacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Anunciante)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

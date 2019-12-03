@@ -5,100 +5,107 @@
     Layout = "~/Views/Shared/_LayoutEcommerce.cshtml";
 }
 
-<div class="container">
-    @if (!Request.IsAuthenticated || Model.Anunciante.Usuario == null)
-    {
-        <br />
-        <h6>Faça login para criar um anúncio!</h6>
-        <div>
-            @Html.ActionLink("Login", "Login", new { area = "", controller = "Account", returnUrl = HttpContext.Current.Request.RawUrl })
-        </div>
-        return;
-    }
-
-    @if (Request.IsAuthenticated && Model.Anunciante.Usuario.Assinatura == 4)
-    {
-        <br />
-        <h6>Você precisa ter uma conta no Organ Web para criar anúncios!</h6>
-        <div>
-            Adquira o Organ Web agora mesmo! @Html.ActionLink("Registre-se", "Registro", "Account")
-        </div>
-        return;
-    }
-    <br />
-    @using (Html.BeginForm("Novo", "Anuncio", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.IdProduto)
-        <div class="form-horizontal">
-            <h4 class="main-title">Novo anúncio</h4>
-            <br />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Foto, new { @class = "form-label" })
-                <input type="file" name="Foto" id="fileUpload" accept=".png,.jpg,.jpeg" />
-                @Html.ValidationMessageFor(model => model.Foto, "", new { @class = "text-danger" })
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Produto.Categoria, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.Produto.Categoria, Model.Produto.Categorias, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Produto.Categoria, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Produto.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Produto.Nome, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Produto.Nome, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Produto.ValorUnit, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Produto.ValorUnit, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Produto.ValorUnit, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Quantidade, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Quantidade, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Produto.UM, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.Produto.UM, new SelectList(Model.Produto.Unidades, "Id", "Desc"), new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Produto.UM, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Desc, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Desc, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Desc, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
+<div class="hero-wrap hero-bread">
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2">Início /</span><span class="mr-2">Anúncio</span></p>
+                <h1 class="mb-0 bread">Novo Anúncio</h1>
             </div>
         </div>
-    }
-
-    <div>
-        @Html.ActionLink("Voltar", "Index", "Loja")
     </div>
 </div>
+
+<div class="container">
+                        @if (!Request.IsAuthenticated || Model.Anunciante.Usuario == null)
+                        {
+                            <br />
+                            <h6>Faça login para criar um anúncio!</h6>
+                            <div>
+                                @Html.ActionLink("Login", "Login", new { area = "", controller = "Account", returnUrl = HttpContext.Current.Request.RawUrl })
+                            </div>
+                            return;
+                        }
+
+                        @if (Request.IsAuthenticated && Model.Anunciante.Usuario.Assinatura == 4)
+                        {
+                            <br />
+                            <h6>Você precisa ter uma conta no Organ Web para criar anúncios!</h6>
+                            <div>
+                                Adquira o Organ Web agora mesmo! @Html.ActionLink("Registre-se", "Registro", "Account")
+                            </div>
+                            return;
+                        }
+                        <br />
+                        @using (Html.BeginForm("Novo", "Anuncio", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(model => model.IdProduto)
+                            <div class="form-horizontal">
+                                <br />
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col">
+                                        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Foto, new { @class = "control-label col-md-2" })
+                                    <input type="file" name="Foto" id="fileUpload" accept=".png,.jpg,.jpeg" />
+                                    @Html.ValidationMessageFor(model => model.Foto, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Produto.Categoria, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col">
+                                        @Html.DropDownListFor(model => model.Produto.Categoria, Model.Produto.Categorias, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Produto.Categoria, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Produto.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col">
+                                        @Html.EditorFor(model => model.Produto.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Produto.Nome, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Produto.ValorUnit, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col">
+                                        @Html.EditorFor(model => model.Produto.ValorUnit, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Produto.ValorUnit, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Quantidade, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col">
+                                        @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Quantidade, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Produto.UM, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col">
+                                        @Html.DropDownListFor(model => model.Produto.UM, new SelectList(Model.Produto.Unidades, "Id", "Desc"), new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Produto.UM, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Desc, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col">
+                                        @Html.EditorFor(model => model.Desc, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Desc, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Create" class="btn btn-default" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
