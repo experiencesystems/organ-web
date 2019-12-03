@@ -36,10 +36,10 @@ namespace OrganWeb.Areas.Sistema.Controllers
             {
                 switch (filtros)
                 {
-                    case "Finalizados":
-                        return View(await plantio.GetPlantiosFinalizados());
                     case "Todos":
                         return View(await plantio.GetPlantios());
+                    case "Finalizados":
+                        return View(await plantio.GetPlantiosFinalizados());
                     default:
                         return View(await plantio.GetPlantiosAtivos());
                 }                
@@ -139,7 +139,8 @@ namespace OrganWeb.Areas.Sistema.Controllers
                     DataInicio = crplantio.Inicio,
                     DataColheita = crplantio.Colheita,
                     Sistema = crplantio.Sistema,
-                    TipoPlantio = crplantio.Tipo
+                    TipoPlantio = crplantio.Tipo,
+                    Status = true
                 };
                 pl.Add(pl);
                 await pl.Save();

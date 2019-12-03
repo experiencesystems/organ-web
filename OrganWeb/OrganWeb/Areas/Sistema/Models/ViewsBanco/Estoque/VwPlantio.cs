@@ -47,12 +47,12 @@ namespace OrganWeb.Areas.Sistema.Models.ViewsBanco.Estoque
 
         public async Task<List<VwPlantio>> GetAtivos()
         {
-            return await DbSet.Where(x => x.Status.Equals("Ativo")).ToListAsync();
+            return await DbSet.Where(x => x.Status == ("Ativo")).ToListAsync();
         }
 
         public async Task<List<VwPlantio>> GetFinalizados()
         {
-            return await DbSet.Where(x => x.Status.Equals("Finalizado")).ToListAsync();
+            return await DbSet.Where(x => x.Status == ("Finalizado")).ToListAsync();
         }
     }
 }

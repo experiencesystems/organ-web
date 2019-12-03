@@ -504,7 +504,6 @@ select a.IdUsuario `Id`,
        u.CPF `CPF`,
        u.Email `Email`,
 	   a.NomeFazenda `Nome da Fazenda`,
-       a.FotoFazenda `Foto da Fazenda`,
        concat(E.Rua,', ', a.NumEnd,' - ', ifnull(a.CompEnd, 'Sem Complemento'),' - ',E.BCE,' - ',E.CEP) `Endereço da fazenda`,
        case
 		when u.Assinatura = 1 then 'Mensal'
