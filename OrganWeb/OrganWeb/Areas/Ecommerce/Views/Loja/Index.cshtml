@@ -27,12 +27,6 @@
             <div class="carousel-item active">
                 <img class="d-block w-100" src="~/Imagens/ecommerce/slide5.jpg" alt="Primeiro Slide">
             </div>
-            <div class="carousel-item">
-                <img class="d-block w-100" src="~/Imagens/ecommerce/slide5.jpg" alt="Segundo Slide">
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100" src="~/Imagens/ecommerce/slide5.jpg" alt="Terceiro Slide">
-            </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -50,8 +44,8 @@
                 <div class="col-md-4">
                     <div class="promotion" style="background-image: url(~/Imagens/ecommerce/);">
                         <div class="promotion-info">
-                            <h1>Frutas <span>frescas</span></h1>
-                            <p>Donec fringilla, erat et mper eleifend, justo quam.</p>
+                            <h1>Produtos <span>frescas</span></h1>
+                            <p>Frutas, legumes e vegetais sepados e escolhidos para serem consumidos.</p>
                         </div>
                     </div>
                 </div>
@@ -59,7 +53,7 @@
                     <div class="promotion" style="background-image: url(images/bg/promotion2.png);">
                         <div class="promotion-info">
                             <h1>Máquinas <span>eficientes</span></h1>
-                            <p>Donec fringilla, erat et mper eleifend, justo quam.</p>
+                            <p>Equipamentos potentes que possibilitam uma produção rápida e eficiente.</p>
                         </div>
                     </div>
                 </div>
@@ -67,7 +61,7 @@
                     <div class="promotion" style="background-image: url(images/bg/promotion3.png);">
                         <div class="promotion-info">
                             <h1>Grãos de<span>qualidade</span></h1>
-                            <p>Donec fringilla, erat et mper eleifend, justo quam.</p>
+                            <p>Grãos selecionados diretamente pelos melhores agricultores do país.</p>
                         </div>
                     </div>
                 </div>
@@ -186,105 +180,95 @@
 
                     </ul>
                 </div>
-                        </div>
-</div>
+            </div>
+        </div>
     </div>
     <br>
     
     <!--PRODUTOS-->
     <!---->
     <section class="section-bg-white">
-        <div class="container md-margin-top-50px">
-            <div class="biolife-title-box">
-                <span class="promotion-info">Alguma coisa</span>
-                <h3 class="main-title">Titulo</h3>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-3 col-md-3 text-md-center">
-                    <ul class="block__info-list">
-                        <li>
-                            <h3 class="block__info-title-1 block__t-1">Fresh</h3>
-                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor </p>
-                        </li>
-                        <li>
-                            <h3 class="block__info-title-1 block__t-2">Healthy</h3>
-                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor </p>
-                        </li>
-                        <li>
-                            <h3 class="block__info-title-1 block__t-3">Eco</h3>
-                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor </p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-lg-6 col-md-6 text-center">
-                    <div class="block-recom">
-                        <p class="block-recom__text">Personal recomendation of General Medical Association</p>
-                        <figure class="block-recom__img_1">
-                            <img alt="" src="~/Imagens/ecommerce/prod_prin.png">
-                        </figure>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3">
-                    <ul class="block__info-list text-right text-md-center title_t-1--position4">
-                        <li>
-                            <h3 class="block__info-title-2 block__t-4">Tasty</h3>
-                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor </p>
-                        </li>
-                        <li>
-                            <h3 class="block__info-title-2 block__t-5">Yammy</h3>
-                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor </p>
-                        </li>
-                        <li>
-                            <h3 class="block__info-title-2 block__t-6">Premium</h3>
-                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor </p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
         <br><br>
-    </section>
-        
-        <!---->
-        <div class="tr-products products-two popup-two section-padding">
             <div class="container md-margin-top-50px">
                 <div class="biolife-title-box">
-                    <span class="promotion-info">Descontos</span>
-                    <h3 class="main-title">Em promoção</h3>
+                    <span class="promotion-info">Em desconto</span>
+                    <h3 class="main-title">Promoção</h3>
                 </div>
-                <div class="product-slider">
-                    <div class="products">
-                        <div class="row">
-                            @foreach (var item in Model.AnunciosComDesconto)
-                            {
-                                <div class="col-md-6 col-lg-3 ftco-animate">
-                                    <div class="product">
-                                        <a href="@Url.Action("Detalhes", "Anuncio", new { id = item.Id })" class="img-prod">
-                                            <img src="@Url.Action("FotoDoAnuncio", "Loja", new { Area = "Ecommerce", anuncio = item.Id })" alt="">
+
+                <div class="row">
+                    @foreach (var item in Model.AnunciosComDesconto)
+                    {
+                        <div class="col-md-6 col-lg-3 ftco-animate">
+                            <div class="product">
+                                <a href="@Url.Action("Detalhes", "Anuncio", new { id = item.Id })" class="img-prod">
+                                    <img src="@Url.Action("FotoDoAnuncio", "Loja", new { Area = "Ecommerce", anuncio = item.Id })" alt="">
+                                    @if (item.Desconto > 0)
+                                    {
+                                        <span class="status">-@Html.DisplayFor(modelItem => item.Desconto)%</span>
+                                    }
+                                    <div class="overlay"></div>
+                                </a>
+                                <div class="text py-3 pb-4 px-3 text-center">
+                                    <p class="product-category">@Html.DisplayFor(model => item.Produto.Categorias.Where(x => x.Value == item.Produto.Categoria.ToString()).First().Text)</p>
+                                    <h3 class="product-name"><a href="#">@Html.DisplayFor(modelItem => item.Nome)<br /><i class="icon-room"></i>@Html.DisplayFor(modelItem => item.Anunciante.Endereco.Logradouro.Bairro.Cidade.Nome) - @Html.DisplayFor(modelItem => item.Anunciante.Endereco.Logradouro.Bairro.Cidade.Estado.UF)</a></h3>
+                                    <div class="product-rating">
+                                        @for (var i = 1; i <= item.Estrelas; i++)
+                                        {
+                                            <i class="mdi mdi-star"></i>
+                                        }
+                                        @if (item.Estrelas < 5)
+                                        {
+                                            for (var i = 1; i <= (5 - item.Estrelas); i++)
+                                            {
+                                                <i class="mdi mdi-star-outline"></i>
+                                            }
+                                        }
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="pricing">
                                             @if (item.Desconto > 0)
                                             {
-                                                <span class="status">-@Html.DisplayFor(modelItem => item.Desconto)%</span>
+                                                double valornovo = Math.Round(item.Produto.ValorUnit - ((item.Produto.ValorUnit * item.Desconto ?? 0) / 100), 2, MidpointRounding.ToEven);
+
+                                                <p class="price"><span class="mr-2 price-dc">R$ @Html.DisplayFor(modelItem => item.Produto.ValorUnit)</span><span class="price-sale">R$ @valornovo</span></p>
+
                                             }
-                                            <div class="overlay"></div>
-                                        </a>
-                                        <div class="text py-3 pb-4 px-3 text-center">
-                                            <p class="product-category">@Html.DisplayFor(model => item.Produto.Categorias.Where(x => x.Value == item.Produto.Categoria.ToString()).First().Text)</p>
-                                            <h3 class="product-name"><a href="#">@Html.DisplayFor(modelItem => item.Nome)<br /><i class="icon-room"></i>@Html.DisplayFor(modelItem => item.Anunciante.Endereco.Logradouro.Bairro.Cidade.Nome) - @Html.DisplayFor(modelItem => item.Anunciante.Endereco.Logradouro.Bairro.Cidade.Estado.UF)</a></h3>
-                                            <div class="product-rating">
-                                                @for (var i = 1; i <= item.Estrelas; i++)
+                                            else
+                                            {
+                                                <p class="price">
+                                                    <span class="price-sale">
+                                                        R$ @Html.DisplayFor(modelItem => item.Produto.ValorUnit)
+                                                    </span>
+                                                </p>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="bottom-area d-flex px-3">
+                                        <div class="m-auto d-flex">
+                                            @if (Request.IsAuthenticated && item.Anunciante.IdUsuario == User.Identity.GetUserId())
+                                            {
+                                                <a href="@Url.Action("Detalhes", "Anuncio", new { id = item.Id })" class="heart d-flex justify-content-center align-items-center ">
+                                                    <span><i class="mdi mdi-information-outline"></i></span>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                using (Html.BeginForm("AddWishlist", "Wishlist", new { idAnuncio = item.Id }, FormMethod.Post))
                                                 {
-                                                    <i class="mdi mdi-star"></i>
+                                                    @Html.AntiForgeryToken();
+                                                    <button type="submit" value="@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                                        <span><i class="mdi mdi-cards-heart"></i></span>
+                                                    </button>
                                                 }
-                                                @if (item.Estrelas < 5)
+                                                using (Html.BeginForm("AddAoCarrinho", "Carrinho", new { idAnuncio = item.Id }, FormMethod.Post))
                                                 {
-                                                    for (var i = 1; i <= (5 - item.Estrelas); i++)
-                                                    {
-                                                        <i class="mdi mdi-star-outline"></i>
-                                                    }
+                                                    @Html.AntiForgeryToken();
+                                                    <button type="submit" value="@item.Id" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                                        <span><i class="mdi mdi-cart-plus"></i></span>
+                                                    </button>
                                                 }
-                                            </div>
+
+                                            
                                             <div class="d-flex">
                                                 <div class="pricing">
                                                     @if (item.Desconto > 0)
@@ -334,33 +318,38 @@
                                                     }
                                                 </div>
                                             </div>
+
+                                                <a href="@Url.Action("Detalhes", "Anuncio", new { id = item.Id })" class="heart d-flex justify-content-center align-items-center ">
+                                                    <span><i class="mdi mdi-information-outline"></i></span>
+                                                </a>
+                                            }
                                         </div>
                                     </div>
                                 </div>
-                                <!-- /product -->
-                            }
-                        </div><!-- /.row -->
-                        <div class="row">
-                            <div class="col-md-12 text-center">
-                                <div class="site-block-27">
-                                    <ul>
-                                        Página @(Model.AnunciosRecentes.PageCount < Model.AnunciosRecentes.PageNumber ? 0 : Model.AnunciosRecentes.PageNumber) de @Model.AnunciosRecentes.PageCount
-
-                                        @Html.PagedListPager(Model.AnunciosRecentes, pagedesc => Url.Action("Index",
-                                            new { pagedesc }), new PagedListRenderOptions
-                                            {
-                                                LiElementClasses = new string[] { "pagination page-item p1" }
-                                            })
-                                    </ul>
-                                </div>
                             </div>
                         </div>
+                        <!-- /product -->
+                    }
+                </div><!-- /.row -->
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="site-block-27">
+                            <ul>
+                                Página @(Model.AnunciosRecentes.PageCount < Model.AnunciosRecentes.PageNumber ? 0 : Model.AnunciosRecentes.PageNumber) de @Model.AnunciosRecentes.PageCount
 
-                    </div><!-- /.products -->
-                </div><!-- /.product-slider -->
+                                @Html.PagedListPager(Model.AnunciosRecentes, pagedesc => Url.Action("Index",
+                                    new { pagedesc }), new PagedListRenderOptions
+                                    {
+                                        LiElementClasses = new string[] { "pagination page-item p1" }
+                                    })
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
-            </div><!-- /.container -->
-        </div><!-- /.tr-products -->
-        <!--Block 06: Products-->
+            </div>
+        <br><br>
+    </section>
+        
 </body>
 </html>

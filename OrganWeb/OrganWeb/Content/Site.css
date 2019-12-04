@@ -15,6 +15,9 @@
     font-weight: normal;
     font-style: normal;
 }
+.main-content {
+    color: #000;
+}
 
 .btn:focus,
 .btn:active,
@@ -877,7 +880,7 @@ table tr:hover .table-links {
 
 /* 3.9 Nav */
 .nav-tabs .nav-item .nav-link {
-    color: #6777ef;
+    color: #47c363;
 }
 
     .nav-tabs .nav-item .nav-link.active {
@@ -913,7 +916,7 @@ table tr:hover .table-links {
     .nav-pills .nav-item .nav-link.active {
         box-shadow: 0 2px 6px #acb5f6;
         color: #fff;
-        background-color: #6777ef;
+        background-color: #47c363;
     }
 
     .nav-pills .nav-item .nav-link .badge {
@@ -927,26 +930,26 @@ table tr:hover .table-links {
 }
 /* 3.10 Pagination */
 .page-item .page-link {
-    color: #6777ef;
+    color: #47c363;
     border-radius: 3px;
     margin: 0 3px;
 }
 
 .page-item.active .page-link {
-    background-color: #6777ef;
+    background-color: #47c363;
     border-color: #6777ef;
 }
 
 .page-item.disabled .page-link {
     border-color: transparent;
     background-color: #f9fafe;
-    color: #6777ef;
+    color: #ffffff;
     opacity: .6;
 }
 
 .page-link {
     border-color: transparent;
-    background-color: #f9fafe;
+    background-color: #f2f2f2;
     font-weight: 600;
 }
 
@@ -1881,7 +1884,7 @@ h6 .badge {
 
             .nav-collapse .navbar-nav .nav-item .nav-link {
                 background-color: #fff;
-                color: #6c757d;
+                color: #000;
             }
 
                 .nav-collapse .navbar-nav .nav-item .nav-link:hover {
@@ -2783,6 +2786,7 @@ pre {
     padding-right: 35px;
 }
 
+
 @media (max-width: 575.98px) {
     .section .section-title {
         font-size: 14px;
@@ -2863,6 +2867,7 @@ pre {
     top: 0;
     height: 100%;
     width: 250px;
+    color: #000;
     background-color: #fff;
     z-index: 880;
     left: 0;
@@ -3263,6 +3268,7 @@ body.layout-3 .main-footer {
     text-align: center;
     height: 60px;
     line-height: 60px;
+    color: #000;
 }
 
     .main-sidebar .sidebar-brand.sidebar-brand-sm {
@@ -3479,7 +3485,7 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu > li.active > a {
         transform: translateY(-50%);
         height: 25px;
         width: 4px;
-        background-color: #6777ef;
+        background-color: #47c363;
     }
 
 body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-menu li a {

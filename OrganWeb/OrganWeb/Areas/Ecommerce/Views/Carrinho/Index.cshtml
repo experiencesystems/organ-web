@@ -57,7 +57,7 @@
                                     @Html.AntiForgeryToken()
 
                                     <span class="input-group-btn ml-2">
-                                        <button type="submit">
+                                        <button class="btn" type="submit">
                                             <i class="mdi mdi-plus"></i>
                                         </button>
                                     </span>
@@ -72,7 +72,7 @@
                                     if (item.Qtd > 1)
                                     {
                                         <span class="input-group-btn ml-2">
-                                            <button type="submit">
+                                            <button class="btn" type="submit">
                                                 <i class="mdi mdi-minus"></i>
                                             </button>
                                         </span>
@@ -80,7 +80,7 @@
                                     else
                                     {
                                         <span class="input-group-btn ml-2">
-                                            <button type="submit">
+                                            <button class="btn" type="submit">
                                                 <i class="mdi mdi-close"></i>
                                             </button>
                                         </span>
@@ -103,7 +103,7 @@
                         @using (Html.BeginForm("ApagarCarrinho", "Carrinho", FormMethod.Post))
                         {
                             @Html.AntiForgeryToken();
-                            <button class="btn btn-link text-dark" asp-action="ApagarCarrinho">
+                            <button class="btn" asp-action="ApagarCarrinho">
                                 <i class="fa fa-times" aria-hidden="true"></i>
                                 Limpar carrinho
                             </button>

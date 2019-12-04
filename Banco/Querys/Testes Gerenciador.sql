@@ -71,24 +71,24 @@ insert into tbSolo(Nome, Tipo, IncVento, IncSolar) values('Arenoso', 1, 0.01, 0.
 
 insert into tbArea(Nome,  IdSolo) values('Área 1', 3), ('Área 2', 1), ('Área 3', 2), ('Área 4', 3), ('Área 5', 2), ('Área 6', 1), ('Área 7', 3), ('Área 8', 2);
 
-insert into tbPlantio(Nome, Sistema, DataColheita, DataInicio, TipoPlantio) values('Plantio de Soja', 1, str_to_date('02/11/2019', '%d/%m/%Y'), str_to_date('01/10/2019', '%d/%m/%Y'), 1);
+insert into tbPlantio(Nome, Sistema, DataInicio, DataColheita, TipoPlantio) values('Plantio de Soja', 1, str_to_date('02/11/2019', '%d/%m/%Y'), str_to_date('01/10/2019', '%d/%m/%Y'), 1);
 insert into tbItensPlantio(QtdUsada, IdPlantio, IdEstoque) values(1, 1, 1);
 insert into tbItensPlantio(QtdUsada, IdPlantio, IdEstoque) value(1, 1, 6);
 insert into tbAreaPlantio(IdPlantio, IdArea, Densidade) values(1, 1, 1);
 
-insert into tbPlantio(Nome, Sistema, DataColheita, DataInicio, TipoPlantio) values('Plantio de Melancia', 1, str_to_date('02/11/2019', '%d/%m/%Y'), str_to_date('01/10/2019', '%d/%m/%Y'), 1);
+insert into tbPlantio(Nome, Sistema, DataInicio, DataColheita, TipoPlantio) values('Plantio de Melancia', 1, str_to_date('02/11/2019', '%d/%m/%Y'), str_to_date('01/10/2019', '%d/%m/%Y'), 1);
 insert into tbItensPlantio(QtdUsada, IdPlantio, IdEstoque) values(1, 1, 4);
 insert into tbItensPlantio(QtdUsada, IdPlantio, IdEstoque) value(0.75, 1, 3);
 insert into tbItensPlantio(QtdUsada, IdPlantio, IdEstoque) value(1, 1, 6);
 insert into tbAreaPlantio(IdPlantio, IdArea, Densidade) values(2, 1, 1);
 
-insert into tbPlantio(Nome, Sistema, DataColheita, DataInicio, TipoPlantio) values('Plantio de Milho', 2, str_to_date('29/11/2019', '%d/%m/%Y'), str_to_date('04/12/2019', '%d/%m/%Y'), 2);
+insert into tbPlantio(Nome, Sistema, DataInicio, DataColheita, TipoPlantio) values('Plantio de Milho', 2, str_to_date('29/11/2019', '%d/%m/%Y'), str_to_date('04/12/2019', '%d/%m/%Y'), 2);
 insert into tbItensPlantio(QtdUsada, IdPlantio, IdEstoque) values(1, 3, 2);
 insert into tbItensPlantio(QtdUsada, IdPlantio, IdEstoque) value(0.05, 3, 5);
 insert into tbItensPlantio(QtdUsada, IdPlantio, IdEstoque) value(1, 3, 8);
 insert into tbAreaPlantio(IdPlantio, IdArea, Densidade) values(3, 4, 1), (3, 5, 1);
 
-insert into tbPlantio(Nome, Sistema, DataColheita, DataInicio, TipoPlantio) values('Plantio de Abóbora ', 3, str_to_date('01/12/2019', '%d/%m/%Y'), str_to_date('05/12/2019', '%d/%m/%Y'), 2);
+insert into tbPlantio(Nome, Sistema, DataInicio, DataColheita, TipoPlantio) values('Plantio de Abóbora ', 3, str_to_date('01/12/2019', '%d/%m/%Y'), str_to_date('05/12/2019', '%d/%m/%Y'), 2);
 insert into tbItensPlantio(QtdUsada, IdPlantio, IdEstoque) values(1, 3, 3);
 insert into tbItensPlantio(QtdUsada, IdPlantio, IdEstoque) value(1, 3, 8);
 insert into tbAreaPlantio(IdPlantio, IdArea, Densidade) values(4, 4, 1), (4, 5, 1);

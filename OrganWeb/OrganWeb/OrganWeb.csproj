@@ -464,6 +464,8 @@
     <Content Include="Imagens\ecommerce\prod_prin.png" />
     <Content Include="Imagens\ecommerce\slide3.jpg" />
     <Content Include="Imagens\ecommerce\slide5.jpg" />
+    <Content Include="Imagens\ecommerce\slide6.png" />
+    <Content Include="Imagens\ecommerce\slide7.jpg" />
     <Content Include="Imagens\icon2.ico" />
     <Content Include="Imagens\icone.png" />
     <Content Include="Imagens\login.png" />

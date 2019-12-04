@@ -25,7 +25,7 @@
                 <h3 class="product-name"><a href="#">@Html.DisplayFor(modelItem => item.Nome)<br /><i class="icon-room"></i>@Html.DisplayFor(modelItem => item.Anunciante.Endereco.Logradouro.Bairro.Cidade.Nome) - @Html.DisplayFor(modelItem => item.Anunciante.Endereco.Logradouro.Bairro.Cidade.Estado.UF)</a></h3>
                 @if (item.Desconto > 0)
                 {
-                    double valornovo = Math.Round(item.Produto.ValorUnit - ((item.Produto.ValorUnit * item.Desconto) / 100), 2, MidpointRounding.ToEven);
+                    double valornovo = Math.Round(item.Produto.ValorUnit - ((item.Produto.ValorUnit * item.Desconto??0) / 100), 2, MidpointRounding.ToEven);
                     <h4 class="product-price">
                         R$ @valornovo
                         <del class="product-old-price">R$ @Html.DisplayFor(modelItem => item.Produto.ValorUnit)</del>

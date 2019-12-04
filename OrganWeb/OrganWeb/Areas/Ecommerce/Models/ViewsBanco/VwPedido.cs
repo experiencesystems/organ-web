@@ -27,7 +27,7 @@ namespace OrganWeb.Areas.Ecommerce.Models.ViewsBanco
         [Display(Name = "Valor total sem desconto")]
         public double ValorTotalsDesconto { get; set; }
         [Display(Name = "Valor total com desconto")]
-        public double ValorTotalcDesconto { get; set; }
+        public double? ValorTotalcDesconto { get; set; }
         public string IdCliente { get; set; }
         public string Comprador { get; set; }
         [Display(Name = "Endereço")]
