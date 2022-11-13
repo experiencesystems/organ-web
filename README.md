@@ -15,7 +15,7 @@ O Organ Web é um sistema web gerenciador de agronegócio integrado a um ecommer
 
 O Organ Web é o nosso trabalho de conclusão de curso do técnico em informática da ETEC Professor Basilides de Godoy, desenvolvido em 2019. Tivemos o objetivo de implementar todas as funções de seu precursor [Organ Desktop](https://github.com/experiencesystems/organ) em um sistema web, e integrá-lo a um ecommerce.
 <br/><br/><p align="center">
-<img align="center" width="905" height="428" src="https://i.postimg.cc/43K4pHRm/equipe.png">
+<img align="center" src="https://i.postimg.cc/43K4pHRm/equipe.png">
 </p>
 
 ## Imagens
